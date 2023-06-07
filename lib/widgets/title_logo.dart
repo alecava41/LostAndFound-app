@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+
+Widget titleLogoVertical() {
+  return Column(
+    children: [
+      Image.asset(
+        'assets/images/logo-removebg-preview.png', // Replace with your image path
+        width: 200,
+        height: 200,
+      ),
+      SizedBox(height: 20), // Add some spacing between the image and text
+      const Text(
+        "Lost&Found",
+        style: TextStyle(fontSize: 40),
+      ),
+      const SizedBox(height: 40),
+    ],
+  );
+}
+
+Widget titleLogoHorizontal(){
+  return Row(
+      children: [
+        Image.asset(
+          'assets/images/logo-removebg-preview.png', // Replace with your image path
+          width: 90,
+          height: 90,
+        ),
+        const SizedBox(width: 10), // Add some spacing between the image and text
+        const Text(
+          "Lost&Found",
+          style: TextStyle(fontSize: 40),
+        ),
+      ],
+    );
+}

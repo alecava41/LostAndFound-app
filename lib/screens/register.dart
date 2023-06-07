@@ -1,49 +1,3 @@
-// import 'package:flutter/material.dart';
-// class RegisterScreen extends StatelessWidget {
-//   // This is a String for the sake of an example.
-//   // You can use any type you want.
-//   final String data;
-
-//   RegisterScreen({
-//     Key? key,
-//     required this.data,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Routing App'),
-//         //automaticallyImplyLeading: false,
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisSize: MainAxisSize.min,
-//           children: <Widget>[
-//             Text(
-//               'Second Page',
-//               style: TextStyle(fontSize: 50),
-//             ),
-//             Text(
-//               data,
-//               style: TextStyle(fontSize: 20),
-//             ),
-//             ElevatedButton(
-//               child: Text('Go to second'),
-//               onPressed: () {
-//                 // Pushing a route directly, WITHOUT using a named route
-//                 Navigator.of(context).pushNamed(
-//                   '/',
-//                   arguments: 'Hello there from the first page!',
-//                 );
-//               },
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -70,17 +24,25 @@ class _RegisterScreen extends State<RegisterScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           iconTheme: IconThemeData(color: Colors.red),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pushNamed(
+                '/',
+              );
+            },
+          ),
         ),
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.all(24),
+            margin: const EdgeInsets.all(24),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _header(context),
-                SizedBox(height: 80),
+                const SizedBox(height: 80),
                 _inputField(context),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 _signup(context),
               ],
             ),
@@ -105,7 +67,7 @@ class _RegisterScreen extends State<RegisterScreen> {
             prefixIcon: Icon(Icons.person),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         TextField(
           decoration: InputDecoration(
             hintText: "Surname",
@@ -117,7 +79,7 @@ class _RegisterScreen extends State<RegisterScreen> {
             prefixIcon: Icon(Icons.person),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         TextField(
           decoration: InputDecoration(
             hintText: "Email address",
@@ -129,7 +91,7 @@ class _RegisterScreen extends State<RegisterScreen> {
             prefixIcon: Icon(Icons.mail),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         TextFormField(
           decoration: InputDecoration(
             hintText: "Password",
@@ -148,16 +110,16 @@ class _RegisterScreen extends State<RegisterScreen> {
           ),
           obscureText: _obscureText,
         ),
-        SizedBox(height: 60),
+        const SizedBox(height: 60),
         ElevatedButton(
           onPressed: () {},
-          child: Text(
+          style: ElevatedButton.styleFrom(
+            shape: const StadiumBorder(),
+            padding: const EdgeInsets.symmetric(vertical: 16),
+          ),
+          child: const Text(
             "Sing In",
             style: TextStyle(fontSize: 20),
-          ),
-          style: ElevatedButton.styleFrom(
-            shape: StadiumBorder(),
-            padding: EdgeInsets.symmetric(vertical: 16),
           ),
         ),
       ],
@@ -168,14 +130,14 @@ class _RegisterScreen extends State<RegisterScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("Have an account already? "),
+        const Text("Have an account already? "),
         TextButton(
           onPressed: () {
             Navigator.of(context).pushNamed(
-              '/',
+              '/login',
             );
           },
-          child: Text(
+          child: const Text(
             "Sign In!",
             style: TextStyle(
               decoration: TextDecoration.underline,
@@ -195,7 +157,7 @@ class _RegisterScreen extends State<RegisterScreen> {
           height: 90,
         ),
         SizedBox(width: 10), // Add some spacing between the image and text
-        Text(
+        const Text(
           "Lost&Found",
           style: TextStyle(fontSize: 40),
         ),
