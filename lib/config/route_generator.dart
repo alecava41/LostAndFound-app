@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/screens/home.dart';
+import 'package:lost_and_found/screens/inbox.dart';
 import 'package:lost_and_found/screens/login.dart';
 import 'package:lost_and_found/screens/register.dart';
 import 'package:lost_and_found/screens/tutorial.dart';
@@ -10,15 +12,15 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => InfoScreen());
+        return MaterialPageRoute(builder: (_) => HomeScreen());
       case '/register':
         return MaterialPageRoute(
           builder: (_) => RegisterScreen());
       case '/login':
         return MaterialPageRoute(builder: (_) => LoginScreen());
-        // If args is not of the correct type, return an error page.
-        // You can also throw an exception while in development.
-        return _errorRoute();
+      case '/inbox':
+        return MaterialPageRoute(builder: (_) => InboxScreen());
+
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();
