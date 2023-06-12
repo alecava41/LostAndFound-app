@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/widgets/carousel_item.dart';
 import 'package:lost_and_found/widgets/title_logo.dart';
 
@@ -46,7 +47,7 @@ class _InfoScreenState extends State<InfoScreen> {
       width: isActive ? 24.0 : 16.0,
       decoration: BoxDecoration(
         color:
-            isActive ? const Color.fromARGB(197, 29, 143, 116) : Colors.black,
+            isActive ? PersonalizedColor.mainColor : Colors.black,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
@@ -125,12 +126,11 @@ class _InfoScreenState extends State<InfoScreen> {
       style: ElevatedButton.styleFrom(
         shape: const StadiumBorder(),
         padding: const EdgeInsets.symmetric(vertical: 16),
-        backgroundColor: Color.fromARGB(255, 28, 136, 111) ,
+        backgroundColor: PersonalizedColor.mainColor,
       ),
       child: const Text(
         "Sing Up",
         style: TextStyle(fontSize: 20, color: Colors.white),
-        
       ),
     );
   }

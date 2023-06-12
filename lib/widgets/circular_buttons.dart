@@ -5,40 +5,37 @@ class ClickableCircularButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback onPressed;
 
-  const ClickableCircularButton({
+  const ClickableCircularButton({super.key, 
     required this.icon,
     required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        width: 60,
-        height: 60,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-        ),
+  return Container(
+    width: 60,
+    height: 60,
+    decoration: const BoxDecoration(
+      shape: BoxShape.circle,
+      color: Colors.white,
+    ),
+    child: Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(30),
         child: Center(
-          child: Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-            ),
             child: Center(
               child: Icon(
                 icon,
                 size: 30,
                 color: PersonalizedColor.mainColor,
-              ),
             ),
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
+
 }

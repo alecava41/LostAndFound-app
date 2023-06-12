@@ -13,76 +13,88 @@ class HomeScreenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 50, 20, 50),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "Home",
-                    style: TextStyle(fontSize: 40),
-                  ),
-                  Row(
-                    children: [
-                      ClickableCircularButton(
-                        icon: Icons.notifications,
-                        onPressed: () {
-                          print("Hey");
-                        },
-                      ),
-                      const SizedBox(
-                        width: 25,
-                      ),
-                      ClickableCircularButton(
-                        icon: Icons.search,
-                        onPressed: () {
-                          print("Hey");
-                        },
-                      ),
-                    ],
-                  )
-                ],
-              ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 50, 20, 50),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Home",
+                  style: TextStyle(fontSize: 40),
+                ),
+                Row(
+                  children: [
+                    ClickableCircularButton(
+                      icon: Icons.notifications,
+                      onPressed: () {
+                        print("Hey");
+                      },
+                    ),
+                    const SizedBox(
+                      width: 25,
+                    ),
+                    ClickableCircularButton(
+                      icon: Icons.search,
+                      onPressed: () {
+                        print("Hey");
+                      },
+                    ),
+                  ],
+                )
+              ],
             ),
-            const Text(
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(20, 0, 0, 10),
+            child: Text(
               "Your lost items",
               style: TextStyle(fontSize: 25),
             ),
-            const SizedBox(
-              height: 8,
-            ),
-            Container(
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 0, 25),
+            child: Container(
               height: 240,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: lostItems,
-              ),
+              child: lostItems.isNotEmpty
+                  ? ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: lostItems,
+                    )
+                  : const Center(
+                      child: Text(
+                      "You have no lost item inserted yet :)",
+                      style: TextStyle(fontSize: 20),
+                    )),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Text(
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(20, 0, 0, 10),
+            child: Text(
               "Your found items",
               style: TextStyle(fontSize: 25),
             ),
-            const SizedBox(
-              height: 8,
-            ),
-            Container(
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+            child: Container(
               height: 240,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: foundItems,
-              ),
+              child: foundItems.isNotEmpty
+                  ? ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: foundItems,
+                    )
+                  : const Center(
+                      child: Text(
+                      "You have no find item inserted yet :)",
+                      style: TextStyle(fontSize: 20),
+                    )),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

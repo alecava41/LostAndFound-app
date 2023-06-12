@@ -3,7 +3,6 @@ import 'package:lost_and_found/screens/home.dart';
 import 'package:lost_and_found/screens/inbox.dart';
 import 'package:lost_and_found/screens/login.dart';
 import 'package:lost_and_found/screens/register.dart';
-import 'package:lost_and_found/screens/tutorial.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/screens/pages/home_page.dart';
+import 'package:lost_and_found/screens/pages/search_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
 import '../widgets/card.dart';
@@ -69,26 +70,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedTab = 0;
+  var _findItems = findItems;
+  var _lostItems = lostItems;
 
-  // ignore: prefer_final_fields
-  List _pages = [
-    HomeScreenPage(
-      lostItems: lostItems,
-      foundItems: findItems,
-    ),
-    const Center(
-      child: Text("About"),
-    ),
-    const Center(
-      child: Text("Products"),
-    ),
-    const Center(
-      child: Text("Contact"),
-    ),
-    const Center(
-      child: Text("Settings"),
-    ),
-  ];
+  bool _foundChecked = false;
+  bool _lostChecked = false;
 
   _changeTab(int index) {
     setState(() {
@@ -96,18 +82,76 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  _refreshLostItems(newFindItems) {
+    setState(() {
+      _findItems = newFindItems;
+    });
+  }
+
+  _refreshFindItems(newLostItems) {
+    setState(() {
+      _lostItems = newLostItems;
+    });
+  }
+
+  Future<void> _refreshPage() async {
+    // Simulate an asynchronous operation for page refreshing
+    await Future.delayed(Duration(seconds: 2));
+    print("Berlusca");
+    List<CustomCard> li = [];
+    List<CustomCard> fi = [];
+    _refreshFindItems(li);
+    _refreshLostItems(fi);
+  }
+
   @override
   Widget build(BuildContext context) {
+    // ignore: prefer_final_fields
+    List pages = [
+      RefreshIndicator(
+        onRefresh: _refreshPage,
+        child: HomeScreenPage(
+          lostItems: _lostItems,
+          foundItems: _findItems,
+        ),
+      ),
+      SearchScreenPage(
+          foundChecked: _foundChecked,
+          lostChecked: _lostChecked,
+          range: 2,
+          address: "Via Trieste 65, Padova",
+          category: "Smartphone",
+          date: "April 2021",
+          onFoundCheckedChanged: (value) => {
+                setState(() {
+                  _foundChecked = !_foundChecked;
+                })
+              },
+          onLostCheckedChanged: (value) => {
+                setState(() {
+                  _lostChecked = !_lostChecked;
+                })
+              }),
+      const Center(
+        child: Text("Products"),
+      ),
+      const Center(
+        child: Text("Contact"),
+      ),
+      const Center(
+        child: Text("Settings"),
+      ),
+    ];
     return SafeArea(
         child: Scaffold(
       backgroundColor: Color.fromRGBO(240, 243, 248, 1),
-      body: _pages[_selectedTab],
+      body: pages[_selectedTab],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,
         onTap: (index) => _changeTab(index),
         selectedItemColor: PersonalizedColor.mainColor,
         unselectedItemColor: Colors.grey,
-        items: [
+        items: const [
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.home,
