@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/utils/colors.dart';
+import 'package:lost_and_found/widgets/select_position_button.dart';
 
 class SearchScreenPage extends StatelessWidget {
   final bool foundChecked;
@@ -75,87 +76,6 @@ class SearchScreenPage extends StatelessWidget {
                 ],
               )
             ],
-          ),
-        ),
-        const Divider(
-          color: Colors.grey,
-          thickness: 1,
-          height: 0,
-        ),
-      ],
-    );
-
-    var position = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Divider(
-          color: Colors.grey,
-          thickness: 1,
-          height: 0,
-        ),
-        Ink(
-          color: Colors.white,
-          child: InkWell(
-            onTap: () => {print("Bellaciao")},
-            borderRadius: BorderRadius.circular(0),
-            child: Container(
-              height: 140,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Position",
-                          style: TextStyle(fontSize: 25),
-                        ),
-                        const Text(
-                            "e.g. where the item has been found or lost"),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.location_on,
-                              color: PersonalizedColor.mainColor,
-                              size: 40,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  address == ""
-                                      ? "Position not chosen yet"
-                                      : address,
-                                  style: const TextStyle(
-                                      color: PersonalizedColor.mainColor,
-                                      fontSize: 15),
-                                ),
-                                if (range > 0)
-                                  Text(
-                                    "within $range km",
-                                    style: const TextStyle(
-                                        color: PersonalizedColor.mainColor),
-                                  )
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  const Icon(
-                    Icons.chevron_right,
-                    size: 50,
-                  ),
-                ],
-              ),
-            ),
           ),
         ),
         const Divider(
@@ -316,7 +236,7 @@ class SearchScreenPage extends StatelessWidget {
           ),
           checkBoxes,
           const SizedBox(height: 40),
-          position,
+          SelectPositionButton(address: address, range: range, onTap: ()=> {print("Ciao")}),
           const SizedBox(height: 40),
           categorySection,
           const SizedBox(height: 40),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/screens/home.dart';
 import 'package:lost_and_found/screens/inbox.dart';
+import 'package:lost_and_found/screens/insert_item.dart';
 import 'package:lost_and_found/screens/login.dart';
 import 'package:lost_and_found/screens/register.dart';
 
@@ -11,7 +12,7 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => HomeScreen());
+        return MaterialPageRoute(builder: (_) => InsertItemScreen());
       case '/register':
         return MaterialPageRoute(
           builder: (_) => RegisterScreen());
