@@ -77,9 +77,15 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _lostChecked = false;
 
   _changeTab(int index) {
-    setState(() {
-      _selectedTab = index;
-    });
+    if (index == 2) {
+      Navigator.of(context).pushNamed(
+        '/insert',
+      );
+    } else {
+      setState(() {
+        _selectedTab = index;
+      });
+    }
   }
 
   _refreshLostItems(newFindItems) {

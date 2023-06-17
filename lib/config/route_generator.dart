@@ -12,7 +12,7 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => InsertItemScreen());
+        return MaterialPageRoute(builder: (_) => HomeScreen());
       case '/register':
         return MaterialPageRoute(
           builder: (_) => RegisterScreen());
@@ -20,6 +20,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case '/inbox':
         return MaterialPageRoute(builder: (_) => InboxScreen());
+      case '/insert':
+        return MaterialPageRoute(builder: (_) => InsertItemScreen());
 
       default:
         // If there is no such named route in the switch statement, e.g. /third

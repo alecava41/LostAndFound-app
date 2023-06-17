@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/utils/colors.dart';
+import 'package:lost_and_found/widgets/check_boxes_form.dart';
+import 'package:lost_and_found/widgets/select_category_form.dart';
+import 'package:lost_and_found/widgets/select_date_form.dart';
 import 'package:lost_and_found/widgets/select_position_button.dart';
 
 class SearchScreenPage extends StatelessWidget {
@@ -86,120 +89,6 @@ class SearchScreenPage extends StatelessWidget {
       ],
     );
 
-    var categorySection = InkWell(
-      onTap: () => {print("DAje ROMa")},
-      child: Column(
-        children: [
-          const Divider(
-            color: Colors.grey,
-            thickness: 1,
-            height: 0,
-          ),
-          Ink(
-            color: Colors.white,
-            child: InkWell(
-              onTap: () => {print("DAje ROMa")},
-              borderRadius: BorderRadius.circular(0),
-              child: Container(
-                height: 65,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "Category",
-                        style: TextStyle(fontSize: 25),
-                      ),
-                      Row(
-                        children: [
-                          if (category != "")
-                            Text(
-                              "$category",
-                              style: const TextStyle(
-                                  fontSize: 15,
-                                  color: PersonalizedColor.mainColor),
-                            ),
-                          const Icon(
-                            Icons.chevron_right,
-                            size: 50,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const Divider(
-            color: Colors.grey,
-            thickness: 1,
-            height: 0,
-          ),
-        ],
-      ),
-    );
-
-    var dateSection = Column(
-      children: [
-        const Divider(
-          color: Colors.grey,
-          thickness: 1,
-          height: 0,
-        ),
-        Ink(
-          color: Colors.white,
-          child: InkWell(
-            onTap: () => {print("DAje ROMa")},
-            borderRadius: BorderRadius.circular(0),
-            child: Container(
-              height: 65,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Date",
-                          style: TextStyle(fontSize: 25),
-                        ),
-                        Text("e.g. date of uploading")
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        if (date != "")
-                          Text(
-                            "After $date",
-                            style: const TextStyle(
-                                fontSize: 15,
-                                color: PersonalizedColor.mainColor),
-                          ),
-                        const Icon(
-                          Icons.chevron_right,
-                          size: 50,
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        const Divider(
-          color: Colors.grey,
-          thickness: 1,
-          height: 0,
-        ),
-      ],
-    );
-
     var showResultsButton = Row(
       mainAxisSize: MainAxisSize.max,
       children: [
@@ -234,13 +123,23 @@ class SearchScreenPage extends StatelessWidget {
               style: TextStyle(fontSize: 40),
             ),
           ),
-          checkBoxes,
+          PersonalizedCheckBoxesForm(
+            foundChecked: foundChecked,
+            lostChecked: lostChecked,
+            onFoundCheckedChanged: onFoundCheckedChanged,
+            onLostCheckedChanged: onLostCheckedChanged,
+          ),
           const SizedBox(height: 40),
-          SelectPositionButton(address: address, range: range, onTap: ()=> {print("Ciao")}),
+          SelectPositionButton(
+              address: address, range: range, onTap: () => {print("Ciao")}),
           const SizedBox(height: 40),
-          categorySection,
+          CategorySelectionForm(onTap: () {}, selectedCategory: "Qui"),
           const SizedBox(height: 40),
-          dateSection,
+          DataSelectionForm(
+              labelText: "Date",
+              subLabelText: "e.g. date of upload",
+              selectedData: date,
+              onTap: () {}),
           const SizedBox(height: 40),
           showResultsButton
         ],
