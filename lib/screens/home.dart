@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Color.fromRGBO(240, 243, 248, 1),
+      backgroundColor: PersonalizedColor.backGroundColor,
       body: pages[_selectedTab],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,

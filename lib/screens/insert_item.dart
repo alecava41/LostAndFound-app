@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lost_and_found/screens/select_category.dart';
+import 'package:lost_and_found/widgets/confirm_exit_dialog.dart';
 import 'package:lost_and_found/widgets/insert_string_form.dart';
+import 'package:lost_and_found/widgets/media_selection_dialog.dart';
 import 'package:lost_and_found/widgets/radio_buttons_form.dart';
 import 'package:lost_and_found/widgets/select_category_form.dart';
 import 'package:lost_and_found/widgets/select_position_button.dart';
@@ -22,176 +25,6 @@ class _InsertItemScreenState extends State<InsertItemScreen> {
   String insertedQuestion = '';
   String categorySelected = '';
   final ImagePicker picker = ImagePicker();
-  //we can upload image from camera or from gallery based on parameter
-  Future getImage(ImageSource media) async {
-    var img = await picker.pickImage(source: media);
-
-    setState(() {
-      image = img;
-    });
-  }
-
-  //show popup dialog
-  void myAlert() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            title: Text('Please choose media to select'),
-            content: Container(
-              
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: PersonalizedColor.mainColor
-                    ),
-                    //if user click this button, user can upload image from gallery
-                    onPressed: () {
-                      Navigator.pop(context);
-                      getImage(ImageSource.gallery);
-                    },
-                    child: const Row(
-                      children: [
-                        Icon(Icons.image),
-                        Text('From Gallery'),
-                      ],
-                    ),
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: PersonalizedColor.mainColor
-                    ),
-                    //if user click this button. user can upload image from camera
-                    onPressed: () {
-                      Navigator.pop(context);
-                      getImage(ImageSource.camera);
-                    },
-                    child: Row(
-                      children: [
-                        Icon(Icons.camera),
-                        Text('From Camera'),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
-  void handleTitleInserted(String string) {
-    setState(() {
-      insertedTitle = string;
-    });
-  }
-
-  void handleQuestionInserted(String string) {
-    setState(() {
-      insertedTitle = string;
-    });
-  }
-
-  void onUploadPhoto() {
-    myAlert();
-  }
-
-  void onDeletePhoto() {
-    setState(() {
-      image = null;
-    });
-  }
-
-  void onChangedRadioButtonsValue(int? value) {
-    setState(() {
-      selectedFoundOrLost = value;
-    });
-  }
-
-  void handleBackButtonPressed() {
-    if (somethingChecked()) {
-      showDialogExit(context);
-    } else {
-      Navigator.pop(context);
-    }
-  }
-
-  bool somethingChecked() {
-    if (image != null ||
-        insertedTitle != '' ||
-        insertedQuestion != '' ||
-        categorySelected != '' ||
-        selectedFoundOrLost != 1) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  final _divider = const Divider(
-    color: Colors.grey,
-    thickness: 1,
-    height: 0,
-  );
-
-  showDialogExit(context) => showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Confirm Exit'),
-            content: const Text(
-                'Exiting the insertion will delete your current progress. Are you sure you want to exit?'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context); // Close the dialog
-                },
-                child: const Text(
-                  'Cancel',
-                  style: TextStyle(color: PersonalizedColor.mainColor),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context); // Close the dialog
-                  Navigator.pop(context); // Pop the current route
-                },
-                child: const Text(
-                  'Yes',
-                  style: TextStyle(color: PersonalizedColor.mainColor),
-                ),
-              ),
-            ],
-          );
-        },
-      );
-
-  var uploadButton = Row(
-    mainAxisSize: MainAxisSize.max,
-    children: [
-      Expanded(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: ElevatedButton(
-            onPressed: () => {print("Item uploaded")},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: PersonalizedColor.mainColor,
-              shape: const StadiumBorder(),
-              padding: const EdgeInsets.symmetric(vertical: 16),
-            ),
-            child: const Text(
-              "Upload",
-              style: TextStyle(fontSize: 20, color: Colors.white),
-            ),
-          ),
-        ),
-      )
-    ],
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -206,6 +39,7 @@ class _InsertItemScreenState extends State<InsertItemScreen> {
       },
       child: SafeArea(
           child: Scaffold(
+        backgroundColor: PersonalizedColor.backGroundColor,
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
@@ -261,7 +95,7 @@ class _InsertItemScreenState extends State<InsertItemScreen> {
               height: 10,
             ),
             CategorySelectionForm(
-                onTap: () {}, selectedCategory: categorySelected),
+                onTap: onCategorySelection, selectedCategory: categorySelected),
             const SizedBox(
               height: 40,
             ),
@@ -274,4 +108,144 @@ class _InsertItemScreenState extends State<InsertItemScreen> {
       )),
     );
   }
+
+  void onCategorySelection() {
+    navigateToCategorySelection(context);
+  }
+
+  Future<void> navigateToCategorySelection(BuildContext context) async {
+    final selectedCategory = await Navigator.push<String>(
+      context,
+      MaterialPageRoute(builder: (context) => const CategorySelectionScreen()),
+    );
+
+    if (selectedCategory != null) {
+      setState(() {
+        categorySelected = selectedCategory;
+      });
+    }
+  }
+
+  //we can upload image from camera or from gallery based on parameter
+  Future getImage(ImageSource media) async {
+    var img = await picker.pickImage(source: media);
+
+    setState(() {
+      image = img;
+    });
+  }
+
+  void onTapGallery() {
+    Navigator.pop(context);
+    getImage(ImageSource.gallery);
+  }
+
+  void onTapCamera() {
+    Navigator.pop(context);
+    getImage(ImageSource.camera);
+  }
+
+  void onConfirm() {
+    Navigator.pop(context);
+    Navigator.pop(context);
+  }
+
+  void onCancel() {
+    Navigator.pop(context);
+  }
+
+  //show choose media dialog
+  void myAlert() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return MediaSelectionDialog(
+              onTapGallery: onTapGallery, onTapCamera: onTapCamera);
+        });
+  }
+
+  // Confirm exit dialog
+  showDialogExit(context) => showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmExitDialog(onConfirm: onConfirm, onCancel: onCancel);
+        },
+      );
+
+  void handleTitleInserted(String string) {
+    setState(() {
+      insertedTitle = string;
+    });
+  }
+
+  void handleQuestionInserted(String string) {
+    setState(() {
+      insertedTitle = string;
+    });
+  }
+
+  void onUploadPhoto() {
+    myAlert();
+  }
+
+  void onDeletePhoto() {
+    setState(() {
+      image = null;
+    });
+  }
+
+  void onChangedRadioButtonsValue(int? value) {
+    setState(() {
+      selectedFoundOrLost = value;
+    });
+  }
+
+  void handleBackButtonPressed() {
+    if (somethingChecked()) {
+      showDialogExit(context);
+    } else {
+      Navigator.pop(context);
+    }
+  }
+
+  bool somethingChecked() {
+    if (image != null ||
+        insertedTitle != '' ||
+        insertedQuestion != '' ||
+        categorySelected != '' ||
+        selectedFoundOrLost != 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  final _divider = const Divider(
+    color: Colors.grey,
+    thickness: 1,
+    height: 0,
+  );
+
+  var uploadButton = Row(
+    mainAxisSize: MainAxisSize.max,
+    children: [
+      Expanded(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ElevatedButton(
+            onPressed: () => {print("Item uploaded")},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: PersonalizedColor.mainColor,
+              shape: const StadiumBorder(),
+              padding: const EdgeInsets.symmetric(vertical: 16),
+            ),
+            child: const Text(
+              "Upload",
+              style: TextStyle(fontSize: 20, color: Colors.white),
+            ),
+          ),
+        ),
+      )
+    ],
+  );
 }
