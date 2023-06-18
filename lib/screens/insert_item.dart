@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lost_and_found/screens/select_category.dart';
 import 'package:lost_and_found/widgets/confirm_exit_dialog.dart';
 import 'package:lost_and_found/widgets/insert_string_form.dart';
 import 'package:lost_and_found/widgets/media_selection_dialog.dart';
@@ -95,7 +94,7 @@ class _InsertItemScreenState extends State<InsertItemScreen> {
               height: 10,
             ),
             CategorySelectionForm(
-                onTap: onCategorySelection, selectedCategory: categorySelected),
+                onTap: (value) => onCategorySelection(value), selectedCategory: categorySelected),
             const SizedBox(
               height: 40,
             ),
@@ -109,21 +108,10 @@ class _InsertItemScreenState extends State<InsertItemScreen> {
     );
   }
 
-  void onCategorySelection() {
-    navigateToCategorySelection(context);
-  }
-
-  Future<void> navigateToCategorySelection(BuildContext context) async {
-    final selectedCategory = await Navigator.push<String>(
-      context,
-      MaterialPageRoute(builder: (context) => const CategorySelectionScreen()),
-    );
-
-    if (selectedCategory != null) {
-      setState(() {
-        categorySelected = selectedCategory;
-      });
-    }
+  void onCategorySelection(value) {
+    setState(() {
+      categorySelected = value;
+    });
   }
 
   //we can upload image from camera or from gallery based on parameter

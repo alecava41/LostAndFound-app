@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/widgets/check_boxes_form.dart';
 import 'package:lost_and_found/widgets/select_category_form.dart';
@@ -14,6 +15,8 @@ class SearchScreenPage extends StatelessWidget {
   final String date;
   final ValueChanged<bool?>? onFoundCheckedChanged;
   final ValueChanged<bool?>? onLostCheckedChanged;
+  final ValueChanged<DateTime?> onDataPicked;
+  final ValueChanged<String> onSelectCategory;
 
   const SearchScreenPage({
     super.key,
@@ -25,70 +28,12 @@ class SearchScreenPage extends StatelessWidget {
     required this.date,
     required this.onFoundCheckedChanged,
     required this.onLostCheckedChanged,
+    required this.onDataPicked,
+    required this.onSelectCategory
   });
 
   @override
   Widget build(BuildContext context) {
-    var checkBoxes = Column(
-      children: [
-        const Divider(
-          color: Colors.grey,
-          thickness: 1,
-          height: 0,
-        ),
-        Container(
-          height: 90,
-          color: Colors.white,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Padding(
-                padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-                child: Text(
-                  'Search items:',
-                  style: TextStyle(fontSize: 25),
-                ),
-              ),
-              Row(
-                children: [
-                  Row(
-                    children: [
-                      Checkbox(
-                        activeColor: PersonalizedColor.mainColor,
-                        value: foundChecked,
-                        onChanged: onFoundCheckedChanged,
-                      ),
-                      const Text(
-                        'Found',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 60),
-                  Row(
-                    children: [
-                      Checkbox(
-                        activeColor: PersonalizedColor.mainColor,
-                        value: lostChecked,
-                        onChanged: onLostCheckedChanged,
-                      ),
-                      const Text('Lost', style: TextStyle(fontSize: 18)),
-                    ],
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
-        const Divider(
-          color: Colors.grey,
-          thickness: 1,
-          height: 0,
-        ),
-      ],
-    );
-
     var showResultsButton = Row(
       mainAxisSize: MainAxisSize.max,
       children: [
@@ -133,13 +78,28 @@ class SearchScreenPage extends StatelessWidget {
           SelectPositionButton(
               address: address, range: range, onTap: () => {print("Ciao")}),
           const SizedBox(height: 40),
-          CategorySelectionForm(onTap: () {}, selectedCategory: "Qui"),
+          CategorySelectionForm(onTap: (value) => {onSelectCategory(value)}, selectedCategory: category),
           const SizedBox(height: 40),
           DataSelectionForm(
-              labelText: "Date",
-              subLabelText: "e.g. date of upload",
-              selectedData: date,
-              onTap: () {}),
+            labelText: "Date",
+            subLabelText: "e.g. date of upload",
+            selectedData: date,
+            onTap: () async {
+              var pickedDate = await DatePicker.showSimpleDatePicker(
+                context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(1984),
+                lastDate: DateTime.now(),
+                dateFormat: "MMMM-yyyy",
+                locale: DateTimePickerLocale.en_us,
+                looping: false,
+                reverse: true,
+              );
+              if (pickedDate != null) {
+                onDataPicked(pickedDate);
+              }
+            },
+          ),
           const SizedBox(height: 40),
           showResultsButton
         ],

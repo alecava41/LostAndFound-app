@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lost_and_found/screens/pages/home_page.dart';
 import 'package:lost_and_found/screens/pages/search_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
+import 'package:lost_and_found/utils/utility.dart';
 
 import '../widgets/card.dart';
 
@@ -72,7 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedTab = 0;
   var _findItems = findItems;
   var _lostItems = lostItems;
-
+  DateTime? date;
+  String category = "";
   bool _foundChecked = false;
   bool _lostChecked = false;
 
@@ -122,22 +124,24 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       SearchScreenPage(
-          foundChecked: _foundChecked,
-          lostChecked: _lostChecked,
-          range: 2,
-          address: "Via Trieste 65, Padova",
-          category: "Smartphone",
-          date: "April 2021",
-          onFoundCheckedChanged: (value) => {
-                setState(() {
-                  _foundChecked = !_foundChecked;
-                })
-              },
-          onLostCheckedChanged: (value) => {
-                setState(() {
-                  _lostChecked = !_lostChecked;
-                })
-              }),
+        foundChecked: _foundChecked,
+        lostChecked: _lostChecked,
+        range: 2,
+        address: "Via Trieste 65, Padova",
+        category: category,
+        date: date != null ? "${Utility.getMonth(date!.month)} ${date!.year}" : "",
+        onFoundCheckedChanged: (value) => {
+          setState(() {
+            _foundChecked = !_foundChecked;
+          })
+        },
+        onLostCheckedChanged: (value) => {
+          setState(() {
+            _lostChecked = !_lostChecked;
+          })
+        },
+        onDataPicked: (value) => onDataPicked(value), onSelectCategory: (String value) => onSelectCategory(value),
+      ),
       const Center(
         child: Text("Products"),
       ),
@@ -171,5 +175,16 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     ));
+  }
+
+  void onDataPicked(value) {
+    setState(() {
+      date = value;
+    });
+  }
+  void onSelectCategory(value){
+    setState(() {
+      category = value;
+    });
   }
 }

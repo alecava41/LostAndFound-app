@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
 
+import '../screens/select_category.dart';
 import '../utils/colors.dart';
 
 class CategorySelectionForm extends StatelessWidget {
-  final VoidCallback onTap;
+  final ValueChanged<String> onTap;
   final String selectedCategory;
 
   const CategorySelectionForm({super.key, 
     required this.onTap,
     required this.selectedCategory,
   });
+
+  Future<void> navigateToCategorySelection(BuildContext context) async {
+    final selectedCategory = await Navigator.push<String>(
+      context,
+      MaterialPageRoute(builder: (context) => const CategorySelectionScreen()),
+    );
+
+    if (selectedCategory != null) {
+      onTap(selectedCategory);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +35,9 @@ class CategorySelectionForm extends StatelessWidget {
         Material(
           color: Colors.white,
           child: InkWell(
-            onTap: onTap,
+            onTap: () => {
+              navigateToCategorySelection(context)
+            },
             borderRadius: BorderRadius.circular(0),
             child: Container(
               height: 65,
