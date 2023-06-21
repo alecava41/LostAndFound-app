@@ -1,3 +1,5 @@
+import 'package:geolocator/geolocator.dart';
+
 class Utility {
   static String getMonth(int month) {
     switch (month) {
@@ -28,5 +30,35 @@ class Utility {
       default:
         return '';
     }
+  }
+
+  static Future<Position> getUserLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Check if location services are enabled
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are disabled, handle accordingly.
+      return Future.error('Location services are disabled.');
+    }
+
+    // Check if location permission is granted
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      // Location permission is denied, handle accordingly.
+      permission = await Geolocator.requestPermission();
+      if (permission != LocationPermission.whileInUse &&
+          permission != LocationPermission.always) {
+        // Location permission is permanently denied, handle accordingly.
+        return Future.error('Location permission is permanently denied.');
+      }
+    }
+
+    // Get the current position (latitude and longitude)
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+    return position;
   }
 }
