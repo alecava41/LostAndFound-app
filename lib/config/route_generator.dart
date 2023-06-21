@@ -4,6 +4,7 @@ import 'package:lost_and_found/screens/inbox.dart';
 import 'package:lost_and_found/screens/insert_item.dart';
 import 'package:lost_and_found/screens/login.dart';
 import 'package:lost_and_found/screens/register.dart';
+import 'package:lost_and_found/screens/select_position.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -12,7 +13,7 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => HomeScreen());
+        return MaterialPageRoute(builder: (_) => SelectPositionScreen());
       case '/register':
         return MaterialPageRoute(
           builder: (_) => RegisterScreen());
