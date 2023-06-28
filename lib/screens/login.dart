@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          iconTheme: const IconThemeData(color: Colors.red),
+          iconTheme: const IconThemeData(color: Colors.black),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
@@ -104,7 +104,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   _loginButton() {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context).pushNamed(
+              '/home',
+            );
+      },
       style: ElevatedButton.styleFrom(
         shape: const StadiumBorder(),
         padding: const EdgeInsets.symmetric(vertical: 16),

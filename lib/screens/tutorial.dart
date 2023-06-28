@@ -120,7 +120,7 @@ class _InfoScreenState extends State<InfoScreen> {
     return ElevatedButton(
       onPressed: () {
         Navigator.of(context).pushNamed(
-          '/login',
+          '/register',
         );
       },
       style: ElevatedButton.styleFrom(

@@ -23,7 +23,7 @@ class _RegisterScreen extends State<RegisterScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          iconTheme: IconThemeData(color: Colors.red),
+          iconTheme: IconThemeData(color: Colors.black),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
@@ -112,7 +112,11 @@ class _RegisterScreen extends State<RegisterScreen> {
         ),
         const SizedBox(height: 60),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed(
+              '/home',
+            );
+          },
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
             padding: const EdgeInsets.symmetric(vertical: 16),
