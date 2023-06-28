@@ -44,6 +44,14 @@ dependencies:
   permission_handler: ^10.3.0
   geolocator: ^9.0.2
   flutter_map_animations: ^0.4.1
+  dartz: ^0.10.1
+  equatable: ^2.0.0
+  retrofit: ^4.0.1
+  dio: ^5.2.1
+  built_value: ^8.6.1
+  json_annotation: ^4.8.1
+  json_serializable: ^6.7.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -54,6 +62,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+
+  retrofit_generator: ^7.0.1
+  build_runner: ^2.4.5
+  built_value_generator: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
