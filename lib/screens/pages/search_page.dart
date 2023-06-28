@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/widgets/check_boxes_form.dart';
 import 'package:lost_and_found/widgets/select_category_form.dart';
@@ -9,7 +10,6 @@ import 'package:lost_and_found/widgets/select_position_button.dart';
 class SearchScreenPage extends StatelessWidget {
   final bool foundChecked;
   final bool lostChecked;
-  final int range;
   final String address;
   final String category;
   final String date;
@@ -17,18 +17,19 @@ class SearchScreenPage extends StatelessWidget {
   final ValueChanged<bool?>? onLostCheckedChanged;
   final ValueChanged<DateTime?> onDataPicked;
   final ValueChanged<String> onSelectCategory;
+  final ValueChanged<LatLng> onSelectPosition;
 
   const SearchScreenPage({
     super.key,
     required this.foundChecked,
     required this.lostChecked,
-    required this.range,
     required this.address,
     required this.category,
     required this.date,
     required this.onFoundCheckedChanged,
     required this.onLostCheckedChanged,
     required this.onDataPicked,
+    required this.onSelectPosition,
     required this.onSelectCategory
   });
 
@@ -76,7 +77,7 @@ class SearchScreenPage extends StatelessWidget {
           ),
           const SizedBox(height: 40),
           SelectPositionButton(
-              address: address, range: range, onTap: () => {print("Ciao")}),
+              address: address, onTap: (value) => onSelectPosition(value)),
           const SizedBox(height: 40),
           CategorySelectionForm(onTap: (value) => {onSelectCategory(value)}, selectedCategory: category),
           const SizedBox(height: 40),

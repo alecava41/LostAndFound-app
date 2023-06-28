@@ -1,5 +1,9 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:lost_and_found/screens/select_position.dart';
 import 'package:lost_and_found/widgets/confirm_exit_dialog.dart';
 import 'package:lost_and_found/widgets/insert_string_form.dart';
 import 'package:lost_and_found/widgets/media_selection_dialog.dart';
@@ -24,6 +28,7 @@ class _InsertItemScreenState extends State<InsertItemScreen> {
   String insertedQuestion = '';
   String categorySelected = '';
   final ImagePicker picker = ImagePicker();
+  LatLng? selectedPosition;
 
   @override
   Widget build(BuildContext context) {
@@ -89,12 +94,17 @@ class _InsertItemScreenState extends State<InsertItemScreen> {
             const SizedBox(
               height: 10,
             ),
-            SelectPositionButton(address: "address", range: 2, onTap: () {}),
+            SelectPositionButton(
+                address: (selectedPosition != null
+                    ? "${selectedPosition?.latitude.toString()}, ${selectedPosition?.longitude.toString()}"
+                    : ""),
+                onTap: (value) => onPositionSelection(value)),
             const SizedBox(
               height: 10,
             ),
             CategorySelectionForm(
-                onTap: (value) => onCategorySelection(value), selectedCategory: categorySelected),
+                onTap: (value) => onCategorySelection(value),
+                selectedCategory: categorySelected),
             const SizedBox(
               height: 40,
             ),
@@ -236,4 +246,10 @@ class _InsertItemScreenState extends State<InsertItemScreen> {
       )
     ],
   );
+
+  onPositionSelection(value) {
+    setState(() {
+      selectedPosition = value;
+    });
+  }
 }

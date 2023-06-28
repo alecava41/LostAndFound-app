@@ -15,11 +15,13 @@ class SelectPositionScreen extends StatefulWidget {
   State<SelectPositionScreen> createState() => _SelectPositionScreenState();
 }
 
-class _SelectPositionScreenState extends State<SelectPositionScreen> with TickerProviderStateMixin{
+class _SelectPositionScreenState extends State<SelectPositionScreen>
+    with TickerProviderStateMixin {
   LatLng? markerPosition = LatLng(51.509364, -0.128928);
   LatLng center = LatLng(51.509364, -0.128928);
-  
-  late final AnimatedMapController mapController = AnimatedMapController(vsync: this, duration: const Duration(milliseconds: 3000));
+
+  late final AnimatedMapController mapController = AnimatedMapController(
+      vsync: this, duration: const Duration(milliseconds: 3000));
 
   Future<void> requestLocationPermission() async {
     PermissionStatus status = await Permission.location.request();
@@ -40,7 +42,14 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
       minimum: EdgeInsets.zero,
       child: Scaffold(
           appBar: AppBar(
-            title: Text("Select the position"),
+            iconTheme: const IconThemeData(color: Colors.black),
+            title: const Text(
+              "Select the position",
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
+            backgroundColor: Colors.white,
           ),
           body: Stack(
             children: [
@@ -114,12 +123,18 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                             onPressed: () async {
                               await requestLocationPermission();
                               mapController.animatedZoomOut();
-                              var newMarkerPosition = await Utility.getUserLocation();
-                              
+                              var newMarkerPosition =
+                                  await Utility.getUserLocation();
+
                               setState(() {
-                                markerPosition = LatLng(newMarkerPosition.latitude, newMarkerPosition.longitude);
+                                markerPosition = LatLng(
+                                    newMarkerPosition.latitude,
+                                    newMarkerPosition.longitude);
                               });
-                              mapController.centerOnPoint(LatLng(newMarkerPosition.latitude, newMarkerPosition.longitude), zoom: 10);
+                              mapController.centerOnPoint(
+                                  LatLng(newMarkerPosition.latitude,
+                                      newMarkerPosition.longitude),
+                                  zoom: 10);
                             },
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -137,10 +152,10 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              // Add button functionality here
+                              Navigator.pop(context, markerPosition);
                             },
                             child: Text('Choose this position'),
-                          )
+                          ),
                         ],
                       ),
                     ),

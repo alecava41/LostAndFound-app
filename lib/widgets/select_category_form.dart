@@ -35,8 +35,8 @@ class CategorySelectionForm extends StatelessWidget {
         Material(
           color: Colors.white,
           child: InkWell(
-            onTap: () => {
-              navigateToCategorySelection(context)
+            onTap: () async => {
+              await navigateToCategorySelection(context)
             },
             borderRadius: BorderRadius.circular(0),
             child: Container(

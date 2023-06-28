@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/screens/pages/home_page.dart';
 import 'package:lost_and_found/screens/pages/search_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
@@ -77,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String category = "";
   bool _foundChecked = false;
   bool _lostChecked = false;
+  LatLng? selectedPosition;
 
   _changeTab(int index) {
     if (index == 2) {
@@ -126,8 +128,8 @@ class _HomeScreenState extends State<HomeScreen> {
       SearchScreenPage(
         foundChecked: _foundChecked,
         lostChecked: _lostChecked,
-        range: 2,
-        address: "Via Trieste 65, Padova",
+        address: (selectedPosition != null? "${selectedPosition?.latitude.toString()}, ${selectedPosition?.longitude.toString()}" :""),
+        onSelectPosition: (value) => onSelectPosition(value),
         category: category,
         date: date != null ? "${Utility.getMonth(date!.month)} ${date!.year}" : "",
         onFoundCheckedChanged: (value) => {
@@ -185,6 +187,12 @@ class _HomeScreenState extends State<HomeScreen> {
   void onSelectCategory(value){
     setState(() {
       category = value;
+    });
+  }
+  
+  onSelectPosition(LatLng value) {
+    setState(() {
+      selectedPosition = value;
     });
   }
 }

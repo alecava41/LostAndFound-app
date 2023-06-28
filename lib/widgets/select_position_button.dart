@@ -1,18 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:latlong2/latlong.dart';
 
+import '../screens/select_position.dart';
 import '../utils/colors.dart';
 
-class SelectPositionButton extends StatelessWidget {
+class SelectPositionButton extends StatefulWidget {
   final String address;
-  final int range;
-  final VoidCallback onTap;
+  final ValueChanged<LatLng> onTap;
 
   const SelectPositionButton({
     Key? key,
     required this.address,
-    required this.range,
     required this.onTap,
   }) : super(key: key);
+
+  @override
+  State<SelectPositionButton> createState() => _SelectPositionButtonState();
+}
+
+class _SelectPositionButtonState extends State<SelectPositionButton> {
+  LatLng? selectedPosition;
+
+    Future<void> navigateToSelectPosition(BuildContext context) async {
+    final selectedPos = await Navigator.push<LatLng>(
+      context,
+      MaterialPageRoute(builder: (context) => const SelectPositionScreen()),
+    );
+    if (selectedPos != null) {
+      setState(() {
+        selectedPosition = selectedPos;
+      });
+      widget.onTap(selectedPos);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +47,7 @@ class SelectPositionButton extends StatelessWidget {
         Ink(
           color: Colors.white,
           child: InkWell(
-            onTap: onTap,
+            onTap: () async => await navigateToSelectPosition(context),
             borderRadius: BorderRadius.circular(0),
             child: Container(
               height: 140,
@@ -44,7 +64,8 @@ class SelectPositionButton extends StatelessWidget {
                           "Position",
                           style: TextStyle(fontSize: 25),
                         ),
-                        const Text("e.g. where the item has been found or lost"),
+                        const Text(
+                            "e.g. where the item has been found or lost"),
                         const SizedBox(
                           height: 20,
                         ),
@@ -55,24 +76,13 @@ class SelectPositionButton extends StatelessWidget {
                               color: PersonalizedColor.mainColor,
                               size: 40,
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  address == ""
-                                      ? "Position not chosen yet"
-                                      : address,
-                                  style: const TextStyle(
-                                      color: PersonalizedColor.mainColor,
-                                      fontSize: 15),
-                                ),
-                                if (range > 0)
-                                  Text(
-                                    "within $range km",
-                                    style: const TextStyle(
-                                        color: PersonalizedColor.mainColor),
-                                  ),
-                              ],
+                            Text(
+                              widget.address == ""
+                                  ? "Position not chosen yet"
+                                  : widget.address,
+                              style: const TextStyle(
+                                  color: PersonalizedColor.mainColor,
+                                  fontSize: 15),
                             ),
                           ],
                         ),
