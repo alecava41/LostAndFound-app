@@ -1,9 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:lost_and_found/screens/select_position.dart';
 import 'package:lost_and_found/widgets/confirm_exit_dialog.dart';
 import 'package:lost_and_found/widgets/insert_string_form.dart';
 import 'package:lost_and_found/widgets/media_selection_dialog.dart';

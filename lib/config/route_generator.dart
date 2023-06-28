@@ -14,7 +14,7 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
+        return MaterialPageRoute(builder: (_) => const SelectPositionScreen());
       case '/register':
         return MaterialPageRoute(
           builder: (_) => RegisterScreen());

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/utils/utility.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SelectPositionScreen extends StatefulWidget {
   const SelectPositionScreen({super.key});
@@ -17,26 +14,143 @@ class SelectPositionScreen extends StatefulWidget {
 
 class _SelectPositionScreenState extends State<SelectPositionScreen>
     with TickerProviderStateMixin {
-  LatLng? markerPosition = LatLng(51.509364, -0.128928);
-  LatLng center = LatLng(51.509364, -0.128928);
+  LatLng? markerPosition = const LatLng(43.102107520506756, 12.349117446797067);
+  LatLng center = const LatLng(43.102107520506756, 12.349117446797067);
 
   late final AnimatedMapController mapController = AnimatedMapController(
       vsync: this, duration: const Duration(milliseconds: 3000));
 
-  Future<void> requestLocationPermission() async {
+  Future<PermissionStatus> requestLocationPermission() async {
     PermissionStatus status = await Permission.location.request();
-    if (status.isGranted) {
-      // Location permission granted, you can now access the device's location.
-    } else if (status.isDenied) {
-      // Location permission denied, show a dialog or message explaining why the permission is needed.
-    } else if (status.isPermanentlyDenied) {
-      // Location permission denied permanently, open app settings so the user can grant the permission manually.
-      openAppSettings();
-    }
+
+    return status;
   }
+
 
   @override
   Widget build(BuildContext context) {
+    var chooseCurrentPositionButton = TextButton(
+      onPressed: () async {
+        var isConnected = await Utility.checkInternetConnectivity();
+        var permission = await requestLocationPermission();
+        if (permission.isGranted && isConnected) {
+          mapController.animatedZoomOut();
+          var newMarkerPosition = await Utility.getUserLocation();
+
+          setState(() {
+            markerPosition =
+                LatLng(newMarkerPosition.latitude, newMarkerPosition.longitude);
+          });
+          mapController.centerOnPoint(
+              LatLng(newMarkerPosition.latitude, newMarkerPosition.longitude),
+              zoom: 10);
+        }
+        if (permission.isDenied) {
+          // ignore: use_build_context_synchronously
+          showLocationPermissionDeniedDialog(context);
+        }
+        if (permission.isPermanentlyDenied) {
+          // ignore: use_build_context_synchronously
+          showLocationPermissionPermanentlyDeniedDialog(context);
+        }
+      },
+      child: const Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.navigation,
+            size: 30,
+          ),
+          SizedBox(width: 8.0),
+          Text(
+            'Use my current location',
+            style: TextStyle(
+              decoration: TextDecoration.underline,
+              fontSize: 18,
+            ),
+          ),
+        ],
+      ),
+    );
+
+    var chooseThisPositionButton = ElevatedButton(
+        onPressed: () {
+          Navigator.pop(context, markerPosition);
+        },
+        style: ElevatedButton.styleFrom(
+          shape: const StadiumBorder(),
+          padding: const EdgeInsets.all(16),
+        ),
+        child: const Text(
+          'Choose this position',
+          style: TextStyle(fontSize: 20),
+        ));
+
+    var buttonsBox = Row(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: 200.0,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20.0),
+              topRight: Radius.circular(20.0),
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              chooseCurrentPositionButton,
+              const SizedBox(
+                height: 30,
+              ),
+              chooseThisPositionButton,
+            ],
+          ),
+        ),
+      ],
+    );
+
+    var flutterMap = FlutterMap(
+      mapController: mapController.mapController,
+      options: MapOptions(
+        interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
+        center: center,
+        zoom: 5.5,
+        onPositionChanged: (MapPosition position, bool gesture) {
+          // Update marker position based on the map center
+          setState(() {
+            markerPosition =
+                LatLng(position.center!.latitude, position.center!.longitude);
+          });
+        },
+      ),
+      children: [
+        TileLayer(
+          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          userAgentPackageName: 'com.example.app',
+        ),
+        MarkerLayer(
+          markers: [
+            Marker(
+              width: 200.0,
+              height: 200.0,
+              point: markerPosition!,
+              builder: (ctx) => const Icon(
+                Icons.location_on,
+                color: Color.fromRGBO(47, 122, 106, 1),
+                weight: 10,
+                size: 80,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+
     return SafeArea(
       top: false,
       minimum: EdgeInsets.zero,
@@ -59,111 +173,56 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
                     height: MediaQuery.of(context).size.height,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 150),
-                      child: FlutterMap(
-                        mapController: mapController.mapController,
-                        options: MapOptions(
-                          interactiveFlags:
-                              InteractiveFlag.all & ~InteractiveFlag.rotate,
-                          center: center,
-                          zoom: 9.2,
-                          onPositionChanged:
-                              (MapPosition position, bool gesture) {
-                            // Update marker position based on the map center
-                            setState(() {
-                              markerPosition = LatLng(position.center!.latitude,
-                                  position.center!.longitude);
-                            });
-                          },
-                        ),
-                        children: [
-                          TileLayer(
-                            urlTemplate:
-                                'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                            userAgentPackageName: 'com.example.app',
-                          ),
-                          MarkerLayer(
-                            markers: [
-                              Marker(
-                                width: 200.0,
-                                height: 200.0,
-                                point: markerPosition!,
-                                builder: (ctx) => const Icon(
-                                  Icons.location_on,
-                                  color: Color.fromRGBO(47, 122, 106, 1),
-                                  weight: 10,
-                                  size: 80,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                      child: flutterMap,
                     ),
                   ),
                 ],
               ),
-              Positioned(
-                bottom: 0.0,
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 200.0,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20.0),
-                          topRight: Radius.circular(20.0),
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          TextButton(
-                            onPressed: () async {
-                              await requestLocationPermission();
-                              mapController.animatedZoomOut();
-                              var newMarkerPosition =
-                                  await Utility.getUserLocation();
-
-                              setState(() {
-                                markerPosition = LatLng(
-                                    newMarkerPosition.latitude,
-                                    newMarkerPosition.longitude);
-                              });
-                              mapController.centerOnPoint(
-                                  LatLng(newMarkerPosition.latitude,
-                                      newMarkerPosition.longitude),
-                                  zoom: 10);
-                            },
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.navigation),
-                                SizedBox(width: 8.0),
-                                Text(
-                                  'Use my current location',
-                                  style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.pop(context, markerPosition);
-                            },
-                            child: Text('Choose this position'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              Positioned(bottom: 0.0, child: buttonsBox)
             ],
           )),
+    );
+  }
+
+  void showLocationPermissionDeniedDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Location Permissions Denied'),
+          content: const Text(
+              'Location permissions are required to use your current location.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void showLocationPermissionPermanentlyDeniedDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Location Permissions Permanently Denied'),
+          content: const Text(
+              'Location permissions are required to use your current location. Please go to app settings and enable location permissions.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Close'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
