@@ -14,6 +14,10 @@ class _RegisterScreen extends State<RegisterScreen> {
   String email = "";
   String password = "";
   String password2 = "";
+  String errorMessageUsername = "";
+  String errorMessageEmail = "";
+  String errorPassword = "";
+  String errorPassword2 = "";
 
   void _toggle() {
     setState(() {
@@ -86,11 +90,11 @@ class _RegisterScreen extends State<RegisterScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        TextField(
-          onChanged: (value) => setState(() {
-            username = value;
-          }),
+        TextFormField(
+          onChanged: (value) => onUsernameChange(value),
           decoration: InputDecoration(
+            errorText:
+                errorMessageUsername.isEmpty ? null : errorMessageUsername,
             hintText: "Username",
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(18),
@@ -101,11 +105,10 @@ class _RegisterScreen extends State<RegisterScreen> {
           ),
         ),
         const SizedBox(height: 10),
-        TextField(
-          onChanged: (value) => setState(() {
-            email = value.trim();
-          }),
+        TextFormField(
+          onChanged: (value) => onEmailChange(value),
           decoration: InputDecoration(
+            errorText: errorMessageEmail.isEmpty ? null : errorMessageEmail,
             hintText: "Email address",
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(18),
@@ -117,7 +120,9 @@ class _RegisterScreen extends State<RegisterScreen> {
         ),
         const SizedBox(height: 10),
         TextFormField(
+          onChanged: (value) => onPasswordChange(value),
           decoration: InputDecoration(
+            errorText: errorPassword.isEmpty ? null : errorPassword,
             prefixIcon: const Icon(Icons.lock),
             hintText: "Password",
             border: OutlineInputBorder(
@@ -137,7 +142,9 @@ class _RegisterScreen extends State<RegisterScreen> {
         ),
         const SizedBox(height: 10),
         TextFormField(
+          onChanged: (value) => onPassword2Change(value),
           decoration: InputDecoration(
+            errorText: errorPassword2.isEmpty ? null : errorPassword2,
             prefixIcon: const Icon(Icons.lock),
             hintText: "Confirm password",
             border: OutlineInputBorder(
@@ -157,13 +164,9 @@ class _RegisterScreen extends State<RegisterScreen> {
         ),
         const SizedBox(height: 60),
         ElevatedButton(
-          onPressed: () {
-            if (checkInputFields()) {
-              Navigator.of(context).pushNamed(
-                '/home',
-              );
-            }
-          },
+          onPressed: inputFiedsHaveErrors() || !inputFieldsAreFilled()
+              ? null
+              : () => onSingUpPressed(),
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
             padding: const EdgeInsets.symmetric(vertical: 16),
@@ -250,12 +253,12 @@ class _RegisterScreen extends State<RegisterScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Username not valid'),
-          content: Column(
+          content: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('A valid username must follow these rules:'),
-              const SizedBox(height: 8),
+              Text('A valid username must follow these rules:'),
+              SizedBox(height: 8),
               Text('• Number of characters between 6 and 12.'),
               Text('• Only contains alphanumeric characters.')
             ],
@@ -279,12 +282,12 @@ class _RegisterScreen extends State<RegisterScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Invalid Password'),
-          content: Column(
+          content: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('A valid password must follow these rules:'),
-              const SizedBox(height: 8),
+              Text('A valid password must follow these rules:'),
+              SizedBox(height: 8),
               Text('• Minimum 8 characters.'),
               Text('• At least one letter.'),
               Text('• At least one number.'),
@@ -342,6 +345,89 @@ class _RegisterScreen extends State<RegisterScreen> {
           ],
         );
       },
+    );
+  }
+
+  onUsernameChange(String value) {
+    if (isValidUsername(value)) {
+      setState(() {
+        username = value;
+        errorMessageUsername = "";
+      });
+    } else {
+      setState(() {
+        errorMessageUsername =
+            "Invalid username. \n • Must be 6 to 12 characters long. \n • Must contain only alphanumeric characters.";
+      });
+    }
+  }
+
+  onEmailChange(String value) {
+    if (isValidEmail(value)) {
+      setState(() {
+        email = value;
+        errorMessageEmail = "";
+      });
+    } else {
+      setState(() {
+        errorMessageEmail = "Email address provided is not in a valid format.";
+      });
+    }
+  }
+
+  onPasswordChange(String value) {
+    if (isValidPassword(value)) {
+      setState(() {
+        password = value;
+        errorPassword = "";
+      });
+    } else {
+      setState(() {
+        errorPassword =
+            "Invalid password. Password must contain: \n • Minimum 8 characters. \n • At least one letter. \n • At least one number.";
+      });
+    }
+  }
+
+  onPassword2Change(String value) {
+    if(arePasswordsEqual(password, value)) {
+      setState(() {
+      password2 = value;
+      errorPassword2 = "";
+    });
+    }
+    else{
+      setState(() {
+        errorPassword2 = "The passwords you entered do not match.";
+      });
+    }
+  }
+
+  bool inputFiedsHaveErrors() {
+    if (errorMessageUsername.isNotEmpty ||
+        errorMessageEmail.isNotEmpty ||
+        errorPassword.isNotEmpty ||
+        errorPassword2.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool inputFieldsAreFilled() {
+    if (username.isEmpty ||
+        email.isEmpty ||
+        password.isEmpty ||
+        password2.isEmpty) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  onSingUpPressed() {
+    Navigator.of(context).pushNamed(
+      '/home',
     );
   }
 }
