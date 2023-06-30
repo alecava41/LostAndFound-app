@@ -1,6 +1,9 @@
+import 'dart:async';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/utils/utility.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -14,18 +17,43 @@ class SelectPositionScreen extends StatefulWidget {
 
 class _SelectPositionScreenState extends State<SelectPositionScreen>
     with TickerProviderStateMixin {
+  late StreamSubscription subscription;
+  bool isDeviceConnected = false;
+  bool isAlertSet = false;
   LatLng? markerPosition = const LatLng(43.102107520506756, 12.349117446797067);
   LatLng center = const LatLng(43.102107520506756, 12.349117446797067);
 
   late final AnimatedMapController mapController = AnimatedMapController(
       vsync: this, duration: const Duration(milliseconds: 3000));
 
+  @override
+  void initState() {
+    getConnectivity();
+    super.initState();
+  }
+
+  getConnectivity() =>
+      subscription = Connectivity().onConnectivityChanged.listen(
+        (ConnectivityResult result) async {
+          isDeviceConnected = await InternetConnectionChecker().hasConnection;
+          if (!isDeviceConnected && isAlertSet == false) {
+            showConnectionLostAllert();
+            setState(() => isAlertSet = true);
+          }
+        },
+      );
+
+  @override
+  void dispose() {
+    subscription.cancel();
+    super.dispose();
+  }
+
   Future<PermissionStatus> requestLocationPermission() async {
     PermissionStatus status = await Permission.location.request();
 
     return status;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -219,6 +247,33 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
                 Navigator.of(context).pop();
               },
               child: const Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  showConnectionLostAllert() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('No Connection'),
+          content: const Text('Please check your internet connectivity'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context, 'Cancel');
+                setState(() => isAlertSet = false);
+                isDeviceConnected =
+                    await InternetConnectionChecker().hasConnection;
+                if (!isDeviceConnected && !isAlertSet) {
+                  showConnectionLostAllert();
+                  setState(() => isAlertSet = true);
+                }
+              },
+              child: const Text('OK'),
             ),
           ],
         );
