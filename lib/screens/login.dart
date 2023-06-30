@@ -10,6 +10,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _obscureText = true;
+  String email = "";
+  String password = "";
 
   void _toggle() {
     setState(() {
@@ -26,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
           elevation: 0,
           iconTheme: const IconThemeData(color: Colors.black),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.of(context).pushNamed(
                 '/',
@@ -68,6 +70,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   _inputEmailField() {
     return TextField(
+      onChanged: (value) => setState(() {
+        email = value;
+      }),
       decoration: InputDecoration(
         hintText: "Email address",
         border: OutlineInputBorder(
@@ -82,6 +87,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   _inputPasswordField() {
     return TextFormField(
+      onChanged: (value) => setState(() {
+        password = value;
+      }),
       decoration: InputDecoration(
         hintText: "Password",
         border: OutlineInputBorder(
@@ -105,9 +113,13 @@ class _LoginScreenState extends State<LoginScreen> {
   _loginButton() {
     return ElevatedButton(
       onPressed: () {
-        Navigator.of(context).pushNamed(
-              '/home',
-            );
+        if (email == "admin" && password == "admin") {
+          Navigator.of(context).pushNamed(
+            '/home',
+          );
+        } else {
+          showCredentialErrorDialog();
+        }
       },
       style: ElevatedButton.styleFrom(
         shape: const StadiumBorder(),
@@ -143,6 +155,26 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  showCredentialErrorDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Incorrect Credentials'),
+          content: const Text('Please check your username and password.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
