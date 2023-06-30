@@ -126,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: const EdgeInsets.symmetric(vertical: 16),
       ),
       child: const Text(
-        "Sing In",
+        "Sign In",
         style: TextStyle(fontSize: 20),
       ),
     );

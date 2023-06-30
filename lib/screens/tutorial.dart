@@ -109,7 +109,7 @@ class _InfoScreenState extends State<InfoScreen> {
         backgroundColor: Colors.white,
       ),
       child: const Text(
-        "Sing In",
+        "Sign In",
         style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 28, 136, 111)),
         
       ),
