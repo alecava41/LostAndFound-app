@@ -107,10 +107,11 @@ class _InfoScreenState extends State<InfoScreen> {
         shape: const StadiumBorder(),
         padding: const EdgeInsets.symmetric(vertical: 16),
         backgroundColor: Colors.white,
+        side: const BorderSide(color: PersonalizedColor.mainColor, width: 0.5),
       ),
       child: const Text(
         "Sing In",
-        style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 28, 136, 111)),
+        style: TextStyle(fontSize: 20, color: PersonalizedColor.mainColor),
         
       ),
     );
