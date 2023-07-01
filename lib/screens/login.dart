@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/widgets/title_logo.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -112,13 +113,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   _loginButton() {
     return ElevatedButton(
-      onPressed: () {
+      onPressed: email.isEmpty || password.isEmpty? null :()  {
         if (email == "admin" && password == "admin") {
+          showLoggingInSnackBar();
           Navigator.of(context).pushNamed(
             '/home',
           );
         } else {
-          showCredentialErrorDialog();
+          showWrongCredentialSnackBar();
         }
       },
       style: ElevatedButton.styleFrom(
@@ -175,6 +177,27 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
         );
       },
+    );
+  }
+
+  // Gestire eventuali errori
+  showWrongCredentialSnackBar() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        padding: EdgeInsets.all(30),
+        backgroundColor: Colors.red,
+        content: Text('Invalid credentials. Please try again.', style: TextStyle(fontSize: 20),),
+      ),
+    );
+  }
+
+  showLoggingInSnackBar() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        padding: EdgeInsets.all(30),
+        backgroundColor: PersonalizedColor.mainColor,
+        content: Text('Logging In', style: TextStyle(fontSize: 20),),
+      ),
     );
   }
 }
