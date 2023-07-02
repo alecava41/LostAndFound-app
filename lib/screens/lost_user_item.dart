@@ -3,14 +3,14 @@ import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/widgets/image_item.dart';
 import 'package:lost_and_found/widgets/info_item.dart';
 
-class FoundUserItemScreen extends StatelessWidget {
+class LostUserItemScreen extends StatelessWidget {
   final String? image;
   final String title;
   final String position;
   final String date;
   final String category;
 
-  const FoundUserItemScreen({
+  const LostUserItemScreen({
     Key? key,
     required this.image,
     required this.title,
@@ -79,7 +79,7 @@ class FoundUserItemScreen extends StatelessWidget {
                 position: position,
                 date: date,
                 category: category,
-                isFound: true,
+                isFound: false,
               ),
               const Divider(
                 color: Colors.grey,

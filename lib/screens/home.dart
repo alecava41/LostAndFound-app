@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:lost_and_found/screens/lost_geric_item.dart';
+import 'package:lost_and_found/screens/lost_user_item.dart';
 import 'package:lost_and_found/screens/pages/home_page.dart';
 import 'package:lost_and_found/screens/pages/search_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
@@ -37,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const FoundUserItem(
+                    builder: (context) => const FoundUserItemScreen(
                       image: "assets/images/key.png",
                       title: "Home key",
                       position: "Via Trieste 65, Padova",
@@ -51,7 +53,19 @@ class _HomeScreenState extends State<HomeScreen> {
           imagePath: "assets/images/occhiali.png",
           text: "Glasses",
           nclaims: 1,
-          onTap: () => {print("CIAO")}),
+          onTap: () => {Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LostGenericItemScreen(
+                      image: null,
+                      title: "Home key",
+                      position: "Via Trieste 65, Padova",
+                      date: "15/05/2023",
+                      category: "Keys",
+                      user: "Maria",
+                    ),
+                  ),
+                )}),
       CustomCard(
           imagePath: "assets/images/portafoglio.png",
           text: "Wallet",
@@ -74,7 +88,18 @@ class _HomeScreenState extends State<HomeScreen> {
         text: "Iphone 12",
         nclaims: 0,
         onTap: () {
-          print("HEY");
+          Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LostUserItemScreen(
+                      image: "assets/images/iphone.png",
+                      title: "Iphone 12",
+                      position: "Via Trieste 65, Padova",
+                      date: "15/05/2023",
+                      category: "Smartphone",
+                    ),
+                  ),
+                );
         },
       ),
       CustomCard(
