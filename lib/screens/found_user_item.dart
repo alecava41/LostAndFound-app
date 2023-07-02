@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/widgets/image_item.dart';
 import 'package:lost_and_found/widgets/info_item.dart';
 
 class FoundUserItem extends StatelessWidget {
-  final String? image = null;
-  final String noImagePath = "assets/images/occhiali.png";
-  final title = "Iphone 12";
-  final position = "Via Trieste 65, Padova";
-  final date = "15/05/2023";
-  final category = "Smartphone";
+  final String? image;
+  final String title;
+  final String position;
+  final String date;
+  final String category;
 
-  const FoundUserItem({super.key});
+  const FoundUserItem({
+    Key? key,
+    required this.image,
+    required this.title,
+    required this.position,
+    required this.date,
+    required this.category,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,7 @@ class FoundUserItem extends StatelessWidget {
         backgroundColor: PersonalizedColor.backGroundColor,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: const IconThemeData(color: Colors.black),
           actions: [
             PopupMenuButton<String>(
               iconSize: 30,
@@ -61,23 +66,29 @@ class FoundUserItem extends StatelessWidget {
           ],
         ),
         body: SingleChildScrollView(
-            child: Column(
-          children: [
-            ImageItem(imagePath: image,),
-            _divider,
-            InfoItem(title: title, position: position, date: date, category: category),
-            _divider
-          ],
-        )
+          child: Column(
+            children: [
+              ImageItem(imagePath: image),
+              const Divider(
+                color: Colors.grey,
+                thickness: 1,
+                height: 0,
+              ),
+              InfoItem(
+                title: title,
+                position: position,
+                date: date,
+                category: category,
+              ),
+              const Divider(
+                color: Colors.grey,
+                thickness: 1,
+                height: 0,
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
-
-  final _divider = const Divider(
-    color: Colors.grey,
-    thickness: 1,
-    height: 0,
-  );
-
 }

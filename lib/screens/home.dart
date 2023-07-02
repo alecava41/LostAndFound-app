@@ -6,62 +6,7 @@ import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/utils/utility.dart';
 
 import '../widgets/card.dart';
-
-var lostItems = [
-  CustomCard(
-      imagePath: "assets/images/iphone.png",
-      text: "Iphone 12",
-      nclaims: 0,
-      onTap: () => {print("CIAO")}),
-  CustomCard(
-      imagePath: "assets/images/airpods.png",
-      text: "AirPods Pro",
-      nclaims: 0,
-      onTap: () => {print("CIAO")}),
-  CustomCard(
-      imagePath: "assets/images/portafoglio.png",
-      text: "Brown Wallet",
-      nclaims: 0,
-      onTap: () => {print("CIAO")}),
-  CustomCard(
-      imagePath: "assets/images/iphone.png",
-      text: "Iphone 12",
-      nclaims: 0,
-      onTap: () => {print("CIAO")}),
-  CustomCard(
-      imagePath: "assets/images/portafoglio.png",
-      text: "Wallet",
-      nclaims: 0,
-      onTap: () => {print("CIAO")}),
-];
-
-var findItems = [
-  CustomCard(
-      imagePath: "assets/images/key.png",
-      text: "Home key",
-      nclaims: 2,
-      onTap: () => {print("CIAO")}),
-  CustomCard(
-      imagePath: "assets/images/occhiali.png",
-      text: "Glasses",
-      nclaims: 1,
-      onTap: () => {print("CIAO")}),
-  CustomCard(
-      imagePath: "assets/images/portafoglio.png",
-      text: "Wallet",
-      nclaims: 0,
-      onTap: () => {print("CIAO")}),
-  CustomCard(
-      imagePath: "assets/images/iphone.png",
-      text: "Iphone 1222222222222222",
-      nclaims: 1,
-      onTap: () => {print("CIAO")}),
-  CustomCard(
-      imagePath: "assets/images/airpods.png",
-      text: "AirPods Pro",
-      nclaims: 0,
-      onTap: () => {print("CIAO")}),
-];
+import 'found_user_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -72,13 +17,90 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedTab = 0;
-  var _findItems = findItems;
-  var _lostItems = lostItems;
+  late var _findItems;
+  late var _lostItems;
   DateTime? date;
   String category = "";
   bool _foundChecked = false;
   bool _lostChecked = false;
   LatLng? selectedPosition;
+
+  @override
+  void initState() {
+    super.initState();
+    var findItems = [
+      CustomCard(
+          imagePath: "assets/images/key.png",
+          text: "Home key",
+          nclaims: 2,
+          onTap: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FoundUserItem(
+                      image: "assets/images/key.png",
+                      title: "Home key",
+                      position: "Via Trieste 65, Padova",
+                      date: "15/05/2023",
+                      category: "Keys",
+                    ),
+                  ),
+                )
+              }),
+      CustomCard(
+          imagePath: "assets/images/occhiali.png",
+          text: "Glasses",
+          nclaims: 1,
+          onTap: () => {print("CIAO")}),
+      CustomCard(
+          imagePath: "assets/images/portafoglio.png",
+          text: "Wallet",
+          nclaims: 0,
+          onTap: () => {print("CIAO")}),
+      CustomCard(
+          imagePath: "assets/images/iphone.png",
+          text: "Iphone 1222222222222222",
+          nclaims: 1,
+          onTap: () => {print("CIAO")}),
+      CustomCard(
+          imagePath: "assets/images/airpods.png",
+          text: "AirPods Pro",
+          nclaims: 0,
+          onTap: () => {print("CIAO")}),
+    ];
+    var lostItems = [
+      CustomCard(
+        imagePath: "assets/images/iphone.png",
+        text: "Iphone 12",
+        nclaims: 0,
+        onTap: () {
+          print("HEY");
+        },
+      ),
+      CustomCard(
+          imagePath: "assets/images/airpods.png",
+          text: "AirPods Pro",
+          nclaims: 0,
+          onTap: () => {print("CIAO")}),
+      CustomCard(
+          imagePath: "assets/images/portafoglio.png",
+          text: "Brown Wallet",
+          nclaims: 0,
+          onTap: () => {print("CIAO")}),
+      CustomCard(
+          imagePath: "assets/images/iphone.png",
+          text: "Iphone 12",
+          nclaims: 0,
+          onTap: () => {print("CIAO")}),
+      CustomCard(
+          imagePath: "assets/images/portafoglio.png",
+          text: "Wallet",
+          nclaims: 0,
+          onTap: () => {print("CIAO")}),
+    ];
+    _findItems = findItems;
+    _lostItems = lostItems;
+  }
 
   _changeTab(int index) {
     if (index == 2) {
@@ -128,10 +150,14 @@ class _HomeScreenState extends State<HomeScreen> {
       SearchScreenPage(
         foundChecked: _foundChecked,
         lostChecked: _lostChecked,
-        address: (selectedPosition != null? "${selectedPosition?.latitude.toString()}, ${selectedPosition?.longitude.toString()}" :""),
+        address: (selectedPosition != null
+            ? "${selectedPosition?.latitude.toString()}, ${selectedPosition?.longitude.toString()}"
+            : ""),
         onSelectPosition: (value) => onSelectPosition(value),
         category: category,
-        date: date != null ? "${Utility.getMonth(date!.month)} ${date!.year}" : "",
+        date: date != null
+            ? "${Utility.getMonth(date!.month)} ${date!.year}"
+            : "",
         onFoundCheckedChanged: (value) => {
           setState(() {
             _foundChecked = !_foundChecked;
@@ -142,7 +168,8 @@ class _HomeScreenState extends State<HomeScreen> {
             _lostChecked = !_lostChecked;
           })
         },
-        onDataPicked: (value) => onDataPicked(value), onSelectCategory: (String value) => onSelectCategory(value),
+        onDataPicked: (value) => onDataPicked(value),
+        onSelectCategory: (String value) => onSelectCategory(value),
       ),
       const Center(
         child: Text("Products"),
@@ -184,12 +211,13 @@ class _HomeScreenState extends State<HomeScreen> {
       date = value;
     });
   }
-  void onSelectCategory(value){
+
+  void onSelectCategory(value) {
     setState(() {
       category = value;
     });
   }
-  
+
   onSelectPosition(LatLng value) {
     setState(() {
       selectedPosition = value;
