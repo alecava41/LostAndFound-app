@@ -101,18 +101,27 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
       ),
     );
 
-    var chooseThisPositionButton = ElevatedButton(
-        onPressed: () {
-          Navigator.pop(context, markerPosition);
-        },
-        style: ElevatedButton.styleFrom(
-          shape: const StadiumBorder(),
-          padding: const EdgeInsets.all(16),
-        ),
-        child: const Text(
-          'Choose this position',
-          style: TextStyle(fontSize: 20),
-        ));
+    var chooseThisPositionButton = Padding(
+      padding: const EdgeInsets.all(18),
+      child: Row(
+        children: [
+          Expanded(
+            child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context, markerPosition);
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: const StadiumBorder(),
+                  padding: const EdgeInsets.symmetric(vertical: 18),
+                ),
+                child: const Text(
+                  'Choose this position',
+                  style: TextStyle(fontSize: 20),
+                )),
+          ),
+        ],
+      ),
+    );
 
     var buttonsBox = Row(
       mainAxisSize: MainAxisSize.max,
@@ -132,9 +141,6 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
             mainAxisSize: MainAxisSize.max,
             children: [
               chooseCurrentPositionButton,
-              const SizedBox(
-                height: 30,
-              ),
               chooseThisPositionButton,
             ],
           ),

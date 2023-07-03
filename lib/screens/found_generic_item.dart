@@ -4,7 +4,7 @@ import 'package:lost_and_found/widgets/circular_image_avatar.dart';
 import 'package:lost_and_found/widgets/image_item.dart';
 import 'package:lost_and_found/widgets/info_item.dart';
 
-class LostGenericItemScreen extends StatelessWidget {
+class FoundGenericItemScreen extends StatelessWidget {
   final String? image;
   final String title;
   final String position;
@@ -12,22 +12,22 @@ class LostGenericItemScreen extends StatelessWidget {
   final String category;
   final String user;
   final String userImage;
-  
-  final VoidCallback onSendMessage;
-  
-  
 
-  const LostGenericItemScreen({
-    Key? key,
-    required this.image,
-    required this.title,
-    required this.position,
-    required this.date,
-    required this.category,
-    required this.user,
-    required this.userImage,
-    required this.onSendMessage
-  }) : super(key: key);
+  final VoidCallback onSendMessage;
+  final VoidCallback onClaim;
+
+  const FoundGenericItemScreen(
+      {Key? key,
+      required this.image,
+      required this.title,
+      required this.position,
+      required this.date,
+      required this.category,
+      required this.user,
+      required this.userImage,
+      required this.onSendMessage,
+      required this.onClaim})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +129,25 @@ class LostGenericItemScreen extends StatelessWidget {
                             ),
                           ],
                         ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          children:[ Expanded(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shape: const StadiumBorder(),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 18, ),
+                              ),
+                              onPressed: onSendMessage,
+                              child: const Text(
+                                'Claim the item',
+                                style: TextStyle(fontSize: 22),
+                              ),
+                            ),
+                          ),]
+                        ),
                       ]),
                 ),
               ),
@@ -136,6 +155,9 @@ class LostGenericItemScreen extends StatelessWidget {
                 color: Colors.grey,
                 thickness: 1,
                 height: 0,
+              ),
+              const SizedBox(
+                height: 10,
               ),
             ],
           ),

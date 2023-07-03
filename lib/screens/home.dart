@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:lost_and_found/screens/found_generic_item.dart';
 import 'package:lost_and_found/screens/lost_geric_item.dart';
 import 'package:lost_and_found/screens/lost_user_item.dart';
 import 'package:lost_and_found/screens/pages/home_page.dart';
@@ -53,19 +54,24 @@ class _HomeScreenState extends State<HomeScreen> {
           imagePath: "assets/images/occhiali.png",
           text: "Glasses",
           nclaims: 1,
-          onTap: () => {Navigator.push(
+          onTap: () => {
+                Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const LostGenericItemScreen(
+                    builder: (context) => FoundGenericItemScreen(
                       image: null,
                       title: "Home key",
                       position: "Via Trieste 65, Padova",
                       date: "15/05/2023",
                       category: "Keys",
                       user: "Maria",
+                      userImage: "assets/images/occhiali.png",
+                      onSendMessage: () {},
+                      onClaim: () {},
                     ),
                   ),
-                )}),
+                )
+              }),
       CustomCard(
           imagePath: "assets/images/portafoglio.png",
           text: "Wallet",
@@ -89,17 +95,17 @@ class _HomeScreenState extends State<HomeScreen> {
         nclaims: 0,
         onTap: () {
           Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LostUserItemScreen(
-                      image: "assets/images/iphone.png",
-                      title: "Iphone 12",
-                      position: "Via Trieste 65, Padova",
-                      date: "15/05/2023",
-                      category: "Smartphone",
-                    ),
-                  ),
-                );
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LostUserItemScreen(
+                image: "assets/images/iphone.png",
+                title: "Iphone 12",
+                position: "Via Trieste 65, Padova",
+                date: "15/05/2023",
+                category: "Smartphone",
+              ),
+            ),
+          );
         },
       ),
       CustomCard(
