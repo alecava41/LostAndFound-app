@@ -5,6 +5,7 @@ import 'package:lost_and_found/screens/inbox.dart';
 import 'package:lost_and_found/screens/insert_item.dart';
 import 'package:lost_and_found/screens/login.dart';
 import 'package:lost_and_found/screens/register.dart';
+import 'package:lost_and_found/screens/search_result.dart';
 import 'package:lost_and_found/screens/select_position.dart';
 import 'package:lost_and_found/screens/tutorial.dart';
 
@@ -15,7 +16,7 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
+        return MaterialPageRoute(builder: (_) =>  SearchResultScreen( foundItems: [],));
       case '/register':
         return MaterialPageRoute(
           builder: (_) => RegisterScreen());
