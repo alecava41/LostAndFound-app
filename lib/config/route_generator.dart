@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/screens/found_user_item.dart';
 import 'package:lost_and_found/screens/home.dart';
 import 'package:lost_and_found/screens/inbox.dart';
 import 'package:lost_and_found/screens/insert_item.dart';
-import 'package:lost_and_found/features/authentication/presentation/pages/login_page.dart';
+
 import 'package:lost_and_found/features/authentication/presentation/pages/register.dart';
+import 'package:lost_and_found/screens/login.dart';
+import 'package:lost_and_found/screens/search_result.dart';
+import 'package:lost_and_found/screens/select_position.dart';
+import 'package:lost_and_found/screens/tutorial.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -12,11 +17,11 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => const LoginScreen()); // TODO: just for testing
+        return MaterialPageRoute(builder: (_) => const InfoScreen()); // TODO: just for testing
       case '/register':
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case '/login':
-        return MaterialPageRoute(builder: (_) => const LoginScreen());
+        return MaterialPageRoute(builder: (_) => LoginScreen());
       case '/home':
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case '/inbox':
