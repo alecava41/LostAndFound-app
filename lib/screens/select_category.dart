@@ -22,7 +22,7 @@ class CategorySelectionScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CategoryItem(
-              categoryName: "Smartphone ",
+              categoryName: "Smartphone",
               icon: Icons.smartphone,
               onTap: () {
                 Navigator.pop(context, "Smartphone");
@@ -50,7 +50,7 @@ class CategorySelectionScreen extends StatelessWidget {
               },
             ),
             CategoryItem(
-              categoryName: "Jewelry ",
+              categoryName: "Jewelry",
               icon: Icons.diamond,
               onTap: () {
                 Navigator.pop(context, "Jewelry ");

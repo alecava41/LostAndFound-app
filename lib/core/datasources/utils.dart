@@ -1,14 +1,18 @@
 import 'package:dio/dio.dart';
-
 import '../status/exceptions.dart';
 
-void handleError(Object obj) {
+Future<T> handleError<T>(Object obj) {
   switch (obj.runtimeType) {
     case DioException:
       final res = (obj as DioException).response;
-      final code = res?.data['error'] as int;
 
-      switch (res?.statusCode) {
+      if(res == null) {  // TODO: just for testing
+        throw Exception();
+      }
+
+      final code = res.data['error'] as int;
+
+      switch (res.statusCode) {
         case 500:
           throw InternalServerException();
         case 400:
@@ -34,9 +38,9 @@ void handleError(Object obj) {
             throw PasswordMismatchException();
           }
         default:
-          throw InternalServerException();
+          throw Exception();
       }
     default:
-      throw InternalServerException();
+      throw Exception();
   }
 }

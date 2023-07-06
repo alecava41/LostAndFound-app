@@ -1,8 +1,8 @@
-import 'package:lost_and_found/features/authentication/domain/usecases/login.dart';
+import 'package:lost_and_found/features/authentication/domain/usecases/login_use_case.dart';
 import 'package:retrofit/http.dart';
 import 'package:dio/dio.dart';
 
-import '../../domain/usecases/registration.dart';
+import '../../domain/usecases/registration_use_case.dart';
 import '../models/session_model.dart';
 
 part 'auth_client.g.dart';

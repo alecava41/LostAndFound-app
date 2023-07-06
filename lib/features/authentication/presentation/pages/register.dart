@@ -172,7 +172,7 @@ class _RegisterScreen extends State<RegisterScreen> {
             padding: const EdgeInsets.symmetric(vertical: 16),
           ),
           child: const Text(
-            "Sing Up",
+            "Sign Up",
             style: TextStyle(fontSize: 20),
           ),
         ),

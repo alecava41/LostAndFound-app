@@ -8,7 +8,7 @@ Widget titleLogoVertical() {
         width: 200,
         height: 200,
       ),
-      SizedBox(height: 20), // Add some spacing between the image and text
+      const SizedBox(height: 20), // Add some spacing between the image and text
       const Text(
         "Lost&Found",
         style: TextStyle(fontSize: 40),

@@ -5,10 +5,10 @@ import 'package:lost_and_found/features/authentication/domain/repositories/authe
 
 import '../../../../core/domain/entities/user.dart';
 
-class RegisterNewUser implements UseCase<User, RegistrationParams> {
+class RegistrationUseCase implements UseCase<User, RegistrationParams> {
   final AuthenticationRepository repository;
 
-  RegisterNewUser(this.repository);
+  RegistrationUseCase(this.repository);
 
   @override
   Future<Either<Failure, User>> call(RegistrationParams params) async {

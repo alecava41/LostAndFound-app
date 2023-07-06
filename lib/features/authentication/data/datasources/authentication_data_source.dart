@@ -1,7 +1,8 @@
-import '../../../../core/datasources/utils.dart';
+import 'package:lost_and_found/core/datasources/utils.dart';
+
 import '../../../../core/status/success.dart';
-import '../../domain/usecases/login.dart';
-import '../../domain/usecases/registration.dart';
+import '../../domain/usecases/login_use_case.dart';
+import '../../domain/usecases/registration_use_case.dart';
 import '../models/session_model.dart';
 import 'auth_client.dart';
 
@@ -14,15 +15,15 @@ abstract class AuthenticationDataSource {
 }
 
 class AuthenticationDataSourceImpl extends AuthenticationDataSource {
-  AuthClient client;
+  final AuthClient _client;
 
   AuthenticationDataSourceImpl({
-    required this.client
-  });
+    required AuthClient client
+  }) : _client = client;
 
   @override
   Future<SessionModel> login(LoginParams params) async {
-    return client.login(params).catchError(handleError);
+    return _client.login(params).catchError(handleError<SessionModel>);
   }
 
   @override

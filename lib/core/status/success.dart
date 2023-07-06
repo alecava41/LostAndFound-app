@@ -6,5 +6,5 @@ abstract class Success extends Equatable {
   List<Object> get props => [];
 }
 
-// General failures
-class AuthenticationSuccess extends Success {}
+class LoginSuccess extends Success {}
+class LogoutSuccess extends Success {}

@@ -7,12 +7,14 @@ part of 'session_model.dart';
 // **************************************************************************
 
 SessionModel _$SessionModelFromJson(Map<String, dynamic> json) => SessionModel(
-      jwt: json['jwt'] as String,
+      token: json['token'] as String,
       user: json['user'] as int,
+      expire: json['expire'] as int,
     );
 
 Map<String, dynamic> _$SessionModelToJson(SessionModel instance) =>
     <String, dynamic>{
-      'jwt': instance.jwt,
+      'token': instance.token,
       'user': instance.user,
+      'expire': instance.expire,
     };

@@ -80,7 +80,7 @@ class _InfoScreenState extends State<InfoScreen> {
               caroselItem(
                   'assets/images/report_item.png',
                   'Report a Found Item',
-                  'Notify others by reportinga found item\nthrough the app.'),
+                  'Notify others by reporting a found item\nthrough the app.'),
               caroselItem(
                   'assets/images/return_item.png',
                   'Arrange Item Return',
@@ -129,7 +129,7 @@ class _InfoScreenState extends State<InfoScreen> {
         backgroundColor: PersonalizedColor.mainColor,
       ),
       child: const Text(
-        "Sing Up",
+        "Sign Up",
         style: TextStyle(fontSize: 20, color: Colors.white),
       ),
     );
