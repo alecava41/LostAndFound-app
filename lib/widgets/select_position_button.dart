@@ -21,7 +21,7 @@ class SelectPositionButton extends StatefulWidget {
 class _SelectPositionButtonState extends State<SelectPositionButton> {
   LatLng? selectedPosition;
 
-    Future<void> navigateToSelectPosition(BuildContext context) async {
+  Future<void> navigateToSelectPosition(BuildContext context) async {
     final selectedPos = await Navigator.push<LatLng>(
       context,
       MaterialPageRoute(builder: (context) => const SelectPositionScreen()),
@@ -71,17 +71,21 @@ class _SelectPositionButtonState extends State<SelectPositionButton> {
                         ),
                         Row(
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.location_on,
-                              color: PersonalizedColor.mainColor,
+                              color: widget.address == ""
+                                  ? Colors.black
+                                  : PersonalizedColor.mainColor,
                               size: 40,
                             ),
                             Text(
                               widget.address == ""
                                   ? "Position not chosen yet"
                                   : widget.address,
-                              style: const TextStyle(
-                                  color: PersonalizedColor.mainColor,
+                              style: TextStyle(
+                                  color: widget.address == ""
+                                      ? Colors.black
+                                      : PersonalizedColor.mainColor,
                                   fontSize: 15),
                             ),
                           ],

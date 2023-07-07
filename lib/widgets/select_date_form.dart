@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_holo_date_picker/date_picker.dart';
+import 'package:flutter_holo_date_picker/i18n/date_picker_i18n.dart';
 
 import '../utils/colors.dart';
 
@@ -6,13 +8,16 @@ class DataSelectionForm extends StatelessWidget {
   final String labelText;
   final String subLabelText;
   final String selectedData;
-  final VoidCallback onTap;
+  final DateTime? startingDate;
+  final ValueChanged<DateTime> onTap;
 
-  const DataSelectionForm({super.key, 
+  const DataSelectionForm({
+    super.key,
     required this.labelText,
     required this.subLabelText,
     required this.selectedData,
     required this.onTap,
+    this.startingDate,
   });
 
   @override
@@ -27,7 +32,7 @@ class DataSelectionForm extends StatelessWidget {
         Ink(
           color: Colors.white,
           child: InkWell(
-            onTap: onTap,
+            onTap: () => onButtonTap(context),
             borderRadius: BorderRadius.circular(0),
             child: Container(
               height: 65,
@@ -76,5 +81,21 @@ class DataSelectionForm extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void onButtonTap(context) async {
+    var pickedDate = await DatePicker.showSimpleDatePicker(
+      context,
+      initialDate: startingDate ?? DateTime.now(),
+      firstDate: DateTime(1984),
+      lastDate: DateTime.now(),
+      dateFormat: "MMMM-yyyy",
+      locale: DateTimePickerLocale.en_us,
+      looping: false,
+      reverse: true,
+    );
+    if (pickedDate != null) {
+      onTap(pickedDate);
+    }
   }
 }
