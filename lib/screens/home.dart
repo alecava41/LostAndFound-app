@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/screens/found_generic_item.dart';
-import 'package:lost_and_found/screens/lost_geric_item.dart';
 import 'package:lost_and_found/screens/lost_user_item.dart';
 import 'package:lost_and_found/screens/pages/home_page.dart';
 import 'package:lost_and_found/screens/pages/search_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
-import 'package:lost_and_found/utils/utility.dart';
 
 import '../widgets/card.dart';
 import 'found_user_item.dart';
@@ -181,26 +179,18 @@ class _HomeScreenState extends State<HomeScreen> {
       SearchScreenPage(
         foundChecked: _foundChecked,
         lostChecked: _lostChecked,
+        // TODO: chiamata google per trasformare le coordinate in Via
         address: (selectedPosition != null
             ? "${selectedPosition?.latitude.toString()}, ${selectedPosition?.longitude.toString()}"
             : ""),
         onSelectPosition: (value) => onSelectPosition(value),
         category: category,
-        date: date != null
-            ? "${Utility.getMonth(date!.month)} ${date!.year}"
-            : "",
-        onFoundCheckedChanged: (value) => {
-          setState(() {
-            _foundChecked = !_foundChecked;
-          })
-        },
-        onLostCheckedChanged: (value) => {
-          setState(() {
-            _lostChecked = !_lostChecked;
-          })
-        },
+        date: date,
+        onFoundCheckedChanged: (value) => onFoundCheckedChanged(value),
+        onLostCheckedChanged: (value) => onLostCheckedChanged(value),
         onDataPicked: (value) => onDataPicked(value),
         onSelectCategory: (String value) => onSelectCategory(value),
+        onDeleteAllPressed: onDeleteFilters,
       ),
       const Center(
         child: Text("Products"),
@@ -212,6 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Text("Settings"),
       ),
     ];
+
     return SafeArea(
         child: Scaffold(
       backgroundColor: PersonalizedColor.backGroundColor,
@@ -252,6 +243,27 @@ class _HomeScreenState extends State<HomeScreen> {
   onSelectPosition(LatLng value) {
     setState(() {
       selectedPosition = value;
+    });
+  }
+
+  void onDeleteFilters() {
+    setState(() {
+      date = null;
+      _foundChecked = false;
+      _lostChecked = false;
+      selectedPosition = null;
+    });
+  }
+
+  onFoundCheckedChanged(bool? value) {
+    setState(() {
+      _foundChecked = !_foundChecked;
+    });
+  }
+
+  onLostCheckedChanged(bool? value) {
+    setState(() {
+      _lostChecked = !_lostChecked;
     });
   }
 }
