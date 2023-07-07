@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/login/login_bloc.dart';
+import '../../bloc/login/login_bloc.dart';
 
 class UserInput extends StatelessWidget {
   const UserInput({super.key});
@@ -10,7 +10,7 @@ class UserInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
       return TextFormField(
-        onChanged: (value) => {context.read<LoginBloc>().add(LoginEvent.userFieldChanged(value))},
+        onChanged: (value) => context.read<LoginBloc>().add(LoginEvent.userFieldChanged(value)),
         decoration: InputDecoration(
           hintText: "Email or Username",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: BorderSide.none),

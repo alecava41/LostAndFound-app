@@ -11,6 +11,7 @@ import 'package:lost_and_found/features/authentication/domain/usecases/login_use
 import 'package:lost_and_found/features/authentication/domain/usecases/registration_use_case.dart';
 import 'package:lost_and_found/features/authentication/presentation/bloc/login/login_bloc.dart';
 import 'package:dio_http_formatter/dio_http_formatter.dart';
+import 'package:lost_and_found/features/authentication/presentation/bloc/registration/registration_bloc.dart';
 
 import 'features/authentication/domain/usecases/logout_use_case.dart';
 
@@ -20,6 +21,7 @@ Future<void> init() async {
   // ** Feature - Authentication **
   // Bloc
   sl.registerFactory(() => LoginBloc(loginUseCase: sl()));
+  sl.registerFactory(() => RegistrationBloc(registrationUseCase: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => LoginUseCase(sl()));

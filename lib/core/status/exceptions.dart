@@ -6,7 +6,10 @@ class UserNotAuthorizedException implements Exception {}
 
 class InternalServerException implements Exception {}
 
-class DuplicateRecordException implements Exception {}
+class DuplicateRecordException implements Exception {
+  final String duplicateField;
+  DuplicateRecordException(this.duplicateField);
+}
 
 class PasswordMismatchException implements Exception {}
 

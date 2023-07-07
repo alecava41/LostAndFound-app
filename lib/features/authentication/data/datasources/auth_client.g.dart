@@ -25,7 +25,8 @@ class _AuthClient implements AuthClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = params;
+    final _data = <String, dynamic>{};
+    _data.addAll(params.toJson());
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'POST',
       headers: _headers,

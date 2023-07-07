@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../../core/status/value_failure.dart';
+import '../../../../../core/status/value_failure.dart';
 
 class LoginUserField extends Equatable {
   factory LoginUserField(String input) => LoginUserField._(_validateUserField(input));

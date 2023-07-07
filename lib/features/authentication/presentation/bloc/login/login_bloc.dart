@@ -6,9 +6,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lost_and_found/core/status/success.dart';
 
 import '../../../../../core/status/failures.dart';
-import '../../../domain/failures/login_failure.dart';
-import '../../../domain/fields/login_password.dart';
-import '../../../domain/fields/login_user.dart';
+import '../../../domain/failures/login/login_failure.dart';
+import '../../../domain/fields/login/login_password.dart';
+import '../../../domain/fields/login/login_user.dart';
 import '../../../domain/usecases/login_use_case.dart';
 
 part 'login_bloc.freezed.dart';
@@ -35,7 +35,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   void _onObscurePasswordToggled(Emitter<LoginState> emit) {
-    emit(state.copyWith(obscurePassword: !state.obscurePassword));
+    emit(state.copyWith(
+        obscurePassword: !state.obscurePassword,
+        authFailureOrSuccess: null,
+    ));
   }
 
   void _onUserFieldChanged(Emitter<LoginState> emit, String userString) {
@@ -71,7 +74,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
 
       final params =
-          LoginParams(password: state.password.value.getOrElse(() => ""), user: state.user.value.getOrElse(() => ""));
+          LoginParams(
+              password: state.password.value.getOrElse(() => ""),
+              user: state.user.value.getOrElse(() => "")
+          );
 
       final loginResponse = await _loginUseCase(params);
       loginResponse.fold(

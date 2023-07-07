@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 
-import 'package:lost_and_found/core/domain/entities/user.dart';
 import 'package:lost_and_found/core/repositories/utils.dart';
 import 'package:lost_and_found/core/status/exceptions.dart';
 
@@ -19,24 +18,26 @@ import '../../domain/repositories/authentication_repository.dart';
 import '../secure_storage/secure_storage.dart';
 
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
+  // TODO: add network connectivity check
   final AuthenticationDataSource _dataSource;
   final SecureStorage _storage;
 
   AuthenticationRepositoryImpl({
     required AuthenticationDataSource dataSource,
     required SecureStorage storage,
-  }) : _storage = storage, _dataSource = dataSource;
+  })  : _storage = storage,
+        _dataSource = dataSource;
 
   @override
   Future<Either<Failure, Success>> login(LoginParams? params) async {
     try {
-      if(await _storage.hasValidSession()) {
+      if (await _storage.hasValidSession()) {
         return Right(LoginSuccess());
       }
 
       final hasCredentials = await _storage.hasCredentials();
-      
-      if(params == null && await _storage.hasCredentials()) {
+
+      if (params == null && await _storage.hasCredentials()) {
         params = await _storage.getCredentials();
       } else if (params == null) {
         throw RecordNotFoundException();
@@ -46,13 +47,12 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       log(session.toString());
       await _storage.saveSessionInformation(session);
 
-      if(!hasCredentials) {
+      if (!hasCredentials) {
         await _storage.saveLoginInformation(params);
       }
 
       return Right(LoginSuccess());
-      
-    } on Exception catch(e) {
+    } catch (e) {
       return Left(mapExceptionToFailure(e));
     }
   }
@@ -61,13 +61,17 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   Future<Either<Failure, Success>> logout(NoParams params) async {
     await _storage.destroySession();
     await _storage.removeCredentials();
-    
+
     return Right(LogoutSuccess());
   }
 
   @override
-  Future<Either<Failure, User>> register(RegistrationParams param) {
-    // TODO: implement register
-    throw UnimplementedError();
+  Future<Either<Failure, Success>> register(RegistrationParams params) async {
+    try {
+      await _dataSource.register(params);
+      return Right(RegistrationSuccess());
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
+    }
   }
 }

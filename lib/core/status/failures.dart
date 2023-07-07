@@ -15,7 +15,10 @@ class UserNotAuthorizedFailure extends Failure {}
 
 class InternalServerFailure extends Failure {}
 
-class DuplicateRecordFailure extends Failure {}
+class DuplicateRecordFailure extends Failure {
+  final String failureField;
+  DuplicateRecordFailure(this.failureField);
+}
 
 class PasswordMismatchFailure extends Failure {}
 

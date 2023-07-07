@@ -8,8 +8,10 @@ class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+      // TODO: handle request loading
       return ElevatedButton(
-        onPressed: () { context.read<LoginBloc>().add(const LoginEvent.loginSubmitted());
+        onPressed: () {
+          context.read<LoginBloc>().add(const LoginEvent.loginSubmitted());
         },
         style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),

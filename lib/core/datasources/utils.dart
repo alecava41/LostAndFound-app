@@ -6,7 +6,7 @@ Future<T> handleError<T>(Object obj) {
     case DioException:
       final res = (obj as DioException).response;
 
-      if(res == null) {  // TODO: just for testing
+      if(res == null) {
         throw Exception();
       }
 
@@ -33,7 +33,8 @@ Future<T> handleError<T>(Object obj) {
           throw RecordNotFoundException();
         case 409:
           if (code == 2) {
-            throw DuplicateRecordException();
+            final duplicateField = res.data['info'] as String;
+            throw DuplicateRecordException(duplicateField);
           } else {
             throw PasswordMismatchException();
           }
