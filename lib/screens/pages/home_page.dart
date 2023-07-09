@@ -30,9 +30,7 @@ class HomeScreenPage extends StatelessWidget {
                   children: [
                     ClickableCircularButton(
                       icon: Icons.notifications,
-                      onPressed: () {
-                        print("Hey");
-                      },
+                      onPressed: () => onNotificationsIconPressed(context),
                     ),
                     const SizedBox(
                       width: 25,
@@ -97,5 +95,9 @@ class HomeScreenPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void onNotificationsIconPressed(context) {
+    Navigator.pushNamed(context, "/notifications");
   }
 }

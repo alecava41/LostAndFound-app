@@ -3,7 +3,7 @@ import 'package:lost_and_found/utils/colors.dart';
 
 class ClickableCircularButton extends StatelessWidget {
   final IconData icon;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const ClickableCircularButton({super.key, 
     required this.icon,

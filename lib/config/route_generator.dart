@@ -4,6 +4,7 @@ import 'package:lost_and_found/screens/inbox.dart';
 import 'package:lost_and_found/screens/insert_item.dart';
 import 'package:lost_and_found/features/authentication/presentation/pages/login_page.dart';
 import 'package:lost_and_found/features/authentication/presentation/pages/registration_page.dart';
+import 'package:lost_and_found/screens/notifications.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -23,6 +24,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const InboxScreen());
       case '/insert':
         return MaterialPageRoute(builder: (_) => const InsertItemScreen());
+      case '/notifications':
+        return MaterialPageRoute(builder: (_) => const NotificationsScreen());
 
       default:
         // If there is no such named route in the switch statement, e.g. /third
