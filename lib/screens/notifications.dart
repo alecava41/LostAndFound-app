@@ -59,20 +59,6 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           open: true,
           onTap: () => {print("GO TO ...")},
         ),
-        CustomNotification(
-          userPhotoimagePath: "assets/images/occhiali.png",
-          fromUser: "Maria",
-          notificationType: 'objfound',
-          open: true,
-          onTap: () => {print("GO TO ...")},
-        ),
-        CustomNotification(
-          userPhotoimagePath: "assets/images/occhiali.png",
-          fromUser: "Maria",
-          notificationType: 'objfound',
-          open: true,
-          onTap: () => {print("GO TO ...")},
-        ),
       ];
     });
   }
@@ -89,13 +75,41 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: RefreshIndicator(
-        onRefresh: refreshPage,
-        child: ListView.builder(
-          itemCount: notifications.length,
-          itemBuilder: (context, index) {
-            return notifications[index];
-          },
+      body: SafeArea(
+        top: false,
+        child: RefreshIndicator(
+          onRefresh: refreshPage,
+          child: notifications.isEmpty
+              ? Container(
+                  height: MediaQuery.of(context).size.height,
+                  child: const SingleChildScrollView(
+                    physics: AlwaysScrollableScrollPhysics(),
+                    child: Center(
+                      child: Column(children: [
+                        SizedBox(
+                          height: 50,
+                        ),
+                        Icon(
+                          Icons.notifications_none,
+                          size: 80,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "No notification yet",
+                          style: TextStyle(fontSize: 25),
+                        ),
+                      ]),
+                    ),
+                  ),
+                )
+              : ListView.builder(
+                  itemCount: notifications.length,
+                  itemBuilder: (context, index) {
+                    return notifications[index];
+                  },
+                ),
         ),
       ),
     );
@@ -105,14 +119,14 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     // Simulate an asynchronous operation for page refreshing
     await Future.delayed(Duration(seconds: 2));
     CustomNotification newNotificaion = CustomNotification(
-          userPhotoimagePath: "assets/images/no-image.png",
-          fromUser: "Maria",
-          notificationType: 'objfound',
-          open: false,
-          onTap: () => {print("GO TO ...")},
-        );
+      userPhotoimagePath: "assets/images/no-image.png",
+      fromUser: "Maria",
+      notificationType: 'objfound',
+      open: false,
+      onTap: () => {print("GO TO ...")},
+    );
     setState(() {
-      notifications.insert(0,newNotificaion);
+      notifications.insert(0, newNotificaion);
     });
   }
 }
