@@ -1,8 +1,10 @@
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/screens/found_generic_item.dart';
 import 'package:lost_and_found/screens/lost_user_item.dart';
 import 'package:lost_and_found/screens/pages/home_page.dart';
+import 'package:lost_and_found/screens/pages/option_page.dart';
 import 'package:lost_and_found/screens/pages/search_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
@@ -17,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedTab = 0;
+  int _selectedTab = 4;
   late var _findItems;
   late var _lostItems;
   DateTime? date;
@@ -25,6 +27,10 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _foundChecked = false;
   bool _lostChecked = false;
   LatLng? selectedPosition;
+  String userImagePath = "assets/images/no-image.png";
+  String userName = "Alessandro";
+  XFile? userImageFile;
+  
 
   @override
   void initState() {
@@ -198,9 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
       const Center(
         child: Text("Contact"),
       ),
-      const Center(
-        child: Text("Settings"),
-      ),
+      OptionScreenPage(userImagePath: userImagePath, userName: userName, onPhotoChange: onProfilePhotoChange, userImageFile: userImageFile,),
     ];
 
     return SafeArea(
@@ -264,6 +268,12 @@ class _HomeScreenState extends State<HomeScreen> {
   onLostCheckedChanged(bool? value) {
     setState(() {
       _lostChecked = !_lostChecked;
+    });
+  }
+
+  void onProfilePhotoChange(XFile? value) {
+    setState(() {
+      userImageFile = value;
     });
   }
 }

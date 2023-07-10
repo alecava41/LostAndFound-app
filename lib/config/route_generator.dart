@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/screens/change_password.dart';
 import 'package:lost_and_found/screens/home.dart';
 import 'package:lost_and_found/screens/inbox.dart';
 import 'package:lost_and_found/screens/insert_item.dart';
@@ -26,6 +27,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const InsertItemScreen());
       case '/notifications':
         return MaterialPageRoute(builder: (_) => const NotificationsScreen());
+      case '/options/changepassword':
+        return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
 
       default:
         // If there is no such named route in the switch statement, e.g. /third
