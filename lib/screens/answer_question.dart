@@ -16,6 +16,33 @@ class _AnswerQuestionScreenState extends State<AnswerQuestionScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    var sendButton = PersonalizedLargeGreenButton(
+        onPressed: userAnswer.isEmpty? null : onSendPressed,
+        text: const Text(
+          "Send",
+          style: TextStyle(fontSize: 20),
+        ));
+
+    var inputTextForm = PersonalizedFormWithTextInsertion(
+        title: "Your answer", onStringInserted: onAnswerChange, hintText: "");
+
+    var questionText = Padding(
+      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+      child: Text(
+        widget.question,
+        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ),
+    );
+
+    const explanationText = Padding(
+      padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
+      child: Text(
+        "To claim the item, please answer the following question correctly. If you can provide the correct answer, who found the item will proceed to give it back to you.",
+        style: TextStyle(fontSize: 16),
+      ),
+    );
+
     return SafeArea(
         top: false,
         child: Scaffold(
@@ -37,13 +64,7 @@ class _AnswerQuestionScreenState extends State<AnswerQuestionScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
-                  child: Text(
-                    "To claim the item, please answer the following question correctly. If you can provide the correct answer, who found the item will proceed to give it back to you.",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
+                explanationText,
                 const SizedBox(
                   height: 40,
                 ),
@@ -51,30 +72,15 @@ class _AnswerQuestionScreenState extends State<AnswerQuestionScreen> {
                   padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
                   child: Text("Question:"),
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                  child: Text(
-                    widget.question,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ),
+                questionText,
                 const SizedBox(
                   height: 20,
                 ),
-                PersonalizedFormWithTextInsertion(
-                    title: "Your answer",
-                    onStringInserted: onAnswerChange,
-                    hintText: ""),
+                inputTextForm,
                 const SizedBox(
                   height: 30,
                 ),
-                PersonalizedLargeGreenButton(
-                    onPressed: onSendPressed,
-                    text: const Text(
-                      "Send",
-                      style: TextStyle(fontSize: 20),
-                    ))
+                sendButton
               ],
             ),
           )),
