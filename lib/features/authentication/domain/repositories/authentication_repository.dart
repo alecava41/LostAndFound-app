@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:lost_and_found/core/status/failures.dart';
-import 'package:lost_and_found/core/usecases/usecase.dart';
 
+import '../../../../core/domain/usecases/usecase.dart';
 import '../../../../core/status/success.dart';
-import '../usecases/login_use_case.dart';
-import '../usecases/registration_use_case.dart';
+import '../usecases/login_usecase.dart';
+import '../usecases/registration_usecase.dart';
 
 abstract class AuthenticationRepository {
   Future<Either<Failure, Success>> register(RegistrationParams params);

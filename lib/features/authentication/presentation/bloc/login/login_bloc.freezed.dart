@@ -21,6 +21,7 @@ mixin _$LoginEvent {
     required TResult Function(String userString) userFieldChanged,
     required TResult Function(String passwordString) passwordFieldChanged,
     required TResult Function() obscurePasswordToggled,
+    required TResult Function() loginCreated,
     required TResult Function() loginSubmitted,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,6 +30,7 @@ mixin _$LoginEvent {
     TResult? Function(String userString)? userFieldChanged,
     TResult? Function(String passwordString)? passwordFieldChanged,
     TResult? Function()? obscurePasswordToggled,
+    TResult? Function()? loginCreated,
     TResult? Function()? loginSubmitted,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,6 +39,7 @@ mixin _$LoginEvent {
     TResult Function(String userString)? userFieldChanged,
     TResult Function(String passwordString)? passwordFieldChanged,
     TResult Function()? obscurePasswordToggled,
+    TResult Function()? loginCreated,
     TResult Function()? loginSubmitted,
     required TResult orElse(),
   }) =>
@@ -47,6 +50,7 @@ mixin _$LoginEvent {
     required TResult Function(_PasswordFieldChanged value) passwordFieldChanged,
     required TResult Function(_ObscurePasswordToggled value)
         obscurePasswordToggled,
+    required TResult Function(_LoginCreated value) loginCreated,
     required TResult Function(_LoginSubmitted value) loginSubmitted,
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +59,7 @@ mixin _$LoginEvent {
     TResult? Function(_UserFieldChanged value)? userFieldChanged,
     TResult? Function(_PasswordFieldChanged value)? passwordFieldChanged,
     TResult? Function(_ObscurePasswordToggled value)? obscurePasswordToggled,
+    TResult? Function(_LoginCreated value)? loginCreated,
     TResult? Function(_LoginSubmitted value)? loginSubmitted,
   }) =>
       throw _privateConstructorUsedError;
@@ -63,6 +68,7 @@ mixin _$LoginEvent {
     TResult Function(_UserFieldChanged value)? userFieldChanged,
     TResult Function(_PasswordFieldChanged value)? passwordFieldChanged,
     TResult Function(_ObscurePasswordToggled value)? obscurePasswordToggled,
+    TResult Function(_LoginCreated value)? loginCreated,
     TResult Function(_LoginSubmitted value)? loginSubmitted,
     required TResult orElse(),
   }) =>
@@ -155,6 +161,7 @@ class _$_UserFieldChanged implements _UserFieldChanged {
     required TResult Function(String userString) userFieldChanged,
     required TResult Function(String passwordString) passwordFieldChanged,
     required TResult Function() obscurePasswordToggled,
+    required TResult Function() loginCreated,
     required TResult Function() loginSubmitted,
   }) {
     return userFieldChanged(userString);
@@ -166,6 +173,7 @@ class _$_UserFieldChanged implements _UserFieldChanged {
     TResult? Function(String userString)? userFieldChanged,
     TResult? Function(String passwordString)? passwordFieldChanged,
     TResult? Function()? obscurePasswordToggled,
+    TResult? Function()? loginCreated,
     TResult? Function()? loginSubmitted,
   }) {
     return userFieldChanged?.call(userString);
@@ -177,6 +185,7 @@ class _$_UserFieldChanged implements _UserFieldChanged {
     TResult Function(String userString)? userFieldChanged,
     TResult Function(String passwordString)? passwordFieldChanged,
     TResult Function()? obscurePasswordToggled,
+    TResult Function()? loginCreated,
     TResult Function()? loginSubmitted,
     required TResult orElse(),
   }) {
@@ -193,6 +202,7 @@ class _$_UserFieldChanged implements _UserFieldChanged {
     required TResult Function(_PasswordFieldChanged value) passwordFieldChanged,
     required TResult Function(_ObscurePasswordToggled value)
         obscurePasswordToggled,
+    required TResult Function(_LoginCreated value) loginCreated,
     required TResult Function(_LoginSubmitted value) loginSubmitted,
   }) {
     return userFieldChanged(this);
@@ -204,6 +214,7 @@ class _$_UserFieldChanged implements _UserFieldChanged {
     TResult? Function(_UserFieldChanged value)? userFieldChanged,
     TResult? Function(_PasswordFieldChanged value)? passwordFieldChanged,
     TResult? Function(_ObscurePasswordToggled value)? obscurePasswordToggled,
+    TResult? Function(_LoginCreated value)? loginCreated,
     TResult? Function(_LoginSubmitted value)? loginSubmitted,
   }) {
     return userFieldChanged?.call(this);
@@ -215,6 +226,7 @@ class _$_UserFieldChanged implements _UserFieldChanged {
     TResult Function(_UserFieldChanged value)? userFieldChanged,
     TResult Function(_PasswordFieldChanged value)? passwordFieldChanged,
     TResult Function(_ObscurePasswordToggled value)? obscurePasswordToggled,
+    TResult Function(_LoginCreated value)? loginCreated,
     TResult Function(_LoginSubmitted value)? loginSubmitted,
     required TResult orElse(),
   }) {
@@ -304,6 +316,7 @@ class _$_PasswordFieldChanged implements _PasswordFieldChanged {
     required TResult Function(String userString) userFieldChanged,
     required TResult Function(String passwordString) passwordFieldChanged,
     required TResult Function() obscurePasswordToggled,
+    required TResult Function() loginCreated,
     required TResult Function() loginSubmitted,
   }) {
     return passwordFieldChanged(passwordString);
@@ -315,6 +328,7 @@ class _$_PasswordFieldChanged implements _PasswordFieldChanged {
     TResult? Function(String userString)? userFieldChanged,
     TResult? Function(String passwordString)? passwordFieldChanged,
     TResult? Function()? obscurePasswordToggled,
+    TResult? Function()? loginCreated,
     TResult? Function()? loginSubmitted,
   }) {
     return passwordFieldChanged?.call(passwordString);
@@ -326,6 +340,7 @@ class _$_PasswordFieldChanged implements _PasswordFieldChanged {
     TResult Function(String userString)? userFieldChanged,
     TResult Function(String passwordString)? passwordFieldChanged,
     TResult Function()? obscurePasswordToggled,
+    TResult Function()? loginCreated,
     TResult Function()? loginSubmitted,
     required TResult orElse(),
   }) {
@@ -342,6 +357,7 @@ class _$_PasswordFieldChanged implements _PasswordFieldChanged {
     required TResult Function(_PasswordFieldChanged value) passwordFieldChanged,
     required TResult Function(_ObscurePasswordToggled value)
         obscurePasswordToggled,
+    required TResult Function(_LoginCreated value) loginCreated,
     required TResult Function(_LoginSubmitted value) loginSubmitted,
   }) {
     return passwordFieldChanged(this);
@@ -353,6 +369,7 @@ class _$_PasswordFieldChanged implements _PasswordFieldChanged {
     TResult? Function(_UserFieldChanged value)? userFieldChanged,
     TResult? Function(_PasswordFieldChanged value)? passwordFieldChanged,
     TResult? Function(_ObscurePasswordToggled value)? obscurePasswordToggled,
+    TResult? Function(_LoginCreated value)? loginCreated,
     TResult? Function(_LoginSubmitted value)? loginSubmitted,
   }) {
     return passwordFieldChanged?.call(this);
@@ -364,6 +381,7 @@ class _$_PasswordFieldChanged implements _PasswordFieldChanged {
     TResult Function(_UserFieldChanged value)? userFieldChanged,
     TResult Function(_PasswordFieldChanged value)? passwordFieldChanged,
     TResult Function(_ObscurePasswordToggled value)? obscurePasswordToggled,
+    TResult Function(_LoginCreated value)? loginCreated,
     TResult Function(_LoginSubmitted value)? loginSubmitted,
     required TResult orElse(),
   }) {
@@ -426,6 +444,7 @@ class _$_ObscurePasswordToggled implements _ObscurePasswordToggled {
     required TResult Function(String userString) userFieldChanged,
     required TResult Function(String passwordString) passwordFieldChanged,
     required TResult Function() obscurePasswordToggled,
+    required TResult Function() loginCreated,
     required TResult Function() loginSubmitted,
   }) {
     return obscurePasswordToggled();
@@ -437,6 +456,7 @@ class _$_ObscurePasswordToggled implements _ObscurePasswordToggled {
     TResult? Function(String userString)? userFieldChanged,
     TResult? Function(String passwordString)? passwordFieldChanged,
     TResult? Function()? obscurePasswordToggled,
+    TResult? Function()? loginCreated,
     TResult? Function()? loginSubmitted,
   }) {
     return obscurePasswordToggled?.call();
@@ -448,6 +468,7 @@ class _$_ObscurePasswordToggled implements _ObscurePasswordToggled {
     TResult Function(String userString)? userFieldChanged,
     TResult Function(String passwordString)? passwordFieldChanged,
     TResult Function()? obscurePasswordToggled,
+    TResult Function()? loginCreated,
     TResult Function()? loginSubmitted,
     required TResult orElse(),
   }) {
@@ -464,6 +485,7 @@ class _$_ObscurePasswordToggled implements _ObscurePasswordToggled {
     required TResult Function(_PasswordFieldChanged value) passwordFieldChanged,
     required TResult Function(_ObscurePasswordToggled value)
         obscurePasswordToggled,
+    required TResult Function(_LoginCreated value) loginCreated,
     required TResult Function(_LoginSubmitted value) loginSubmitted,
   }) {
     return obscurePasswordToggled(this);
@@ -475,6 +497,7 @@ class _$_ObscurePasswordToggled implements _ObscurePasswordToggled {
     TResult? Function(_UserFieldChanged value)? userFieldChanged,
     TResult? Function(_PasswordFieldChanged value)? passwordFieldChanged,
     TResult? Function(_ObscurePasswordToggled value)? obscurePasswordToggled,
+    TResult? Function(_LoginCreated value)? loginCreated,
     TResult? Function(_LoginSubmitted value)? loginSubmitted,
   }) {
     return obscurePasswordToggled?.call(this);
@@ -486,6 +509,7 @@ class _$_ObscurePasswordToggled implements _ObscurePasswordToggled {
     TResult Function(_UserFieldChanged value)? userFieldChanged,
     TResult Function(_PasswordFieldChanged value)? passwordFieldChanged,
     TResult Function(_ObscurePasswordToggled value)? obscurePasswordToggled,
+    TResult Function(_LoginCreated value)? loginCreated,
     TResult Function(_LoginSubmitted value)? loginSubmitted,
     required TResult orElse(),
   }) {
@@ -498,6 +522,127 @@ class _$_ObscurePasswordToggled implements _ObscurePasswordToggled {
 
 abstract class _ObscurePasswordToggled implements LoginEvent {
   const factory _ObscurePasswordToggled() = _$_ObscurePasswordToggled;
+}
+
+/// @nodoc
+abstract class _$$_LoginCreatedCopyWith<$Res> {
+  factory _$$_LoginCreatedCopyWith(
+          _$_LoginCreated value, $Res Function(_$_LoginCreated) then) =
+      __$$_LoginCreatedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_LoginCreatedCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$_LoginCreated>
+    implements _$$_LoginCreatedCopyWith<$Res> {
+  __$$_LoginCreatedCopyWithImpl(
+      _$_LoginCreated _value, $Res Function(_$_LoginCreated) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_LoginCreated implements _LoginCreated {
+  const _$_LoginCreated();
+
+  @override
+  String toString() {
+    return 'LoginEvent.loginCreated()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_LoginCreated);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userString) userFieldChanged,
+    required TResult Function(String passwordString) passwordFieldChanged,
+    required TResult Function() obscurePasswordToggled,
+    required TResult Function() loginCreated,
+    required TResult Function() loginSubmitted,
+  }) {
+    return loginCreated();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userString)? userFieldChanged,
+    TResult? Function(String passwordString)? passwordFieldChanged,
+    TResult? Function()? obscurePasswordToggled,
+    TResult? Function()? loginCreated,
+    TResult? Function()? loginSubmitted,
+  }) {
+    return loginCreated?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userString)? userFieldChanged,
+    TResult Function(String passwordString)? passwordFieldChanged,
+    TResult Function()? obscurePasswordToggled,
+    TResult Function()? loginCreated,
+    TResult Function()? loginSubmitted,
+    required TResult orElse(),
+  }) {
+    if (loginCreated != null) {
+      return loginCreated();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UserFieldChanged value) userFieldChanged,
+    required TResult Function(_PasswordFieldChanged value) passwordFieldChanged,
+    required TResult Function(_ObscurePasswordToggled value)
+        obscurePasswordToggled,
+    required TResult Function(_LoginCreated value) loginCreated,
+    required TResult Function(_LoginSubmitted value) loginSubmitted,
+  }) {
+    return loginCreated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UserFieldChanged value)? userFieldChanged,
+    TResult? Function(_PasswordFieldChanged value)? passwordFieldChanged,
+    TResult? Function(_ObscurePasswordToggled value)? obscurePasswordToggled,
+    TResult? Function(_LoginCreated value)? loginCreated,
+    TResult? Function(_LoginSubmitted value)? loginSubmitted,
+  }) {
+    return loginCreated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UserFieldChanged value)? userFieldChanged,
+    TResult Function(_PasswordFieldChanged value)? passwordFieldChanged,
+    TResult Function(_ObscurePasswordToggled value)? obscurePasswordToggled,
+    TResult Function(_LoginCreated value)? loginCreated,
+    TResult Function(_LoginSubmitted value)? loginSubmitted,
+    required TResult orElse(),
+  }) {
+    if (loginCreated != null) {
+      return loginCreated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoginCreated implements LoginEvent {
+  const factory _LoginCreated() = _$_LoginCreated;
 }
 
 /// @nodoc
@@ -541,6 +686,7 @@ class _$_LoginSubmitted implements _LoginSubmitted {
     required TResult Function(String userString) userFieldChanged,
     required TResult Function(String passwordString) passwordFieldChanged,
     required TResult Function() obscurePasswordToggled,
+    required TResult Function() loginCreated,
     required TResult Function() loginSubmitted,
   }) {
     return loginSubmitted();
@@ -552,6 +698,7 @@ class _$_LoginSubmitted implements _LoginSubmitted {
     TResult? Function(String userString)? userFieldChanged,
     TResult? Function(String passwordString)? passwordFieldChanged,
     TResult? Function()? obscurePasswordToggled,
+    TResult? Function()? loginCreated,
     TResult? Function()? loginSubmitted,
   }) {
     return loginSubmitted?.call();
@@ -563,6 +710,7 @@ class _$_LoginSubmitted implements _LoginSubmitted {
     TResult Function(String userString)? userFieldChanged,
     TResult Function(String passwordString)? passwordFieldChanged,
     TResult Function()? obscurePasswordToggled,
+    TResult Function()? loginCreated,
     TResult Function()? loginSubmitted,
     required TResult orElse(),
   }) {
@@ -579,6 +727,7 @@ class _$_LoginSubmitted implements _LoginSubmitted {
     required TResult Function(_PasswordFieldChanged value) passwordFieldChanged,
     required TResult Function(_ObscurePasswordToggled value)
         obscurePasswordToggled,
+    required TResult Function(_LoginCreated value) loginCreated,
     required TResult Function(_LoginSubmitted value) loginSubmitted,
   }) {
     return loginSubmitted(this);
@@ -590,6 +739,7 @@ class _$_LoginSubmitted implements _LoginSubmitted {
     TResult? Function(_UserFieldChanged value)? userFieldChanged,
     TResult? Function(_PasswordFieldChanged value)? passwordFieldChanged,
     TResult? Function(_ObscurePasswordToggled value)? obscurePasswordToggled,
+    TResult? Function(_LoginCreated value)? loginCreated,
     TResult? Function(_LoginSubmitted value)? loginSubmitted,
   }) {
     return loginSubmitted?.call(this);
@@ -601,6 +751,7 @@ class _$_LoginSubmitted implements _LoginSubmitted {
     TResult Function(_UserFieldChanged value)? userFieldChanged,
     TResult Function(_PasswordFieldChanged value)? passwordFieldChanged,
     TResult Function(_ObscurePasswordToggled value)? obscurePasswordToggled,
+    TResult Function(_LoginCreated value)? loginCreated,
     TResult Function(_LoginSubmitted value)? loginSubmitted,
     required TResult orElse(),
   }) {

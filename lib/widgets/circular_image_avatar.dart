@@ -4,7 +4,7 @@ class CircularImage extends StatelessWidget {
   final String imagePath;
   final double radius;
 
-  const CircularImage({
+  const CircularImage({super.key,
     required this.imagePath,
     this.radius = 50,
   });

@@ -1,4 +1,3 @@
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -83,10 +82,5 @@ class Utility {
         );
       },
     );
-  }
-
-  static Future<bool> checkInternetConnectivity() async {
-    var connectivityResult = await Connectivity().checkConnectivity(); // TODO: use real connectivity check
-    return connectivityResult != ConnectivityResult.none;
   }
 }

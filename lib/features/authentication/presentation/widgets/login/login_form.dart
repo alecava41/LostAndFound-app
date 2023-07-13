@@ -31,6 +31,7 @@ class LoginForm extends StatelessWidget {
                                 failure.when<String>(
                                   invalidCredentials: () => 'Invalid credentials. Please try again.',
                                   serverError: () => 'Server error. Please try again later.',
+                                  networkError: () => 'No internet connection available. Check your internet connection.'
                                 ),
                                 style: const TextStyle(fontSize: 20)),
                           ),
@@ -43,7 +44,7 @@ class LoginForm extends StatelessWidget {
                             content: Text('Successful sign in'),
                           ),
                         ),
-                        Navigator.of(context).pushNamed('/home')
+                        Navigator.of(context).pushNamed('/')
                       });
             }
           },

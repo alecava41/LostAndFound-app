@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lost_and_found/widgets/card.dart';
+import 'package:lost_and_found/features/item/presentation/widgets/home/custom_card.dart';
 
 class HorizontalCardList extends StatelessWidget {
   final List<CustomCard> cards;
@@ -8,7 +8,7 @@ class HorizontalCardList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 240.0, // Specify a fixed height or adjust as needed
       child: ListView(
         scrollDirection: Axis.horizontal,

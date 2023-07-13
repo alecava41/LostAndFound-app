@@ -1,57 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
-import '../../widgets/card.dart';
+import '../features/item/presentation/widgets/home/custom_card.dart';
 import '../widgets/custom_list_view.dart';
 
 class SearchResultScreen extends StatelessWidget {
   final List<CustomCard> lostItems = [
     CustomCard(
-      imagePath: "assets/images/iphone.png",
+      id: 1,
       text: "Iphone 12",
-      nclaims: 0,
-      onTap: () {},
+      claims: 0,
+       token: '',
     ),
     CustomCard(
-        imagePath: "assets/images/airpods.png",
+        id: 1,
         text: "AirPods Pro",
-        nclaims: 0,
-        onTap: () => {print("CIAO")}),
+        claims: 0,
+         token: '',),
     CustomCard(
-        imagePath: "assets/images/portafoglio.png",
+        id: 1,
         text: "Brown Wallet",
-        nclaims: 0,
-        onTap: () => {print("CIAO")}),
+        claims: 0,
+         token: '',),
     CustomCard(
-        imagePath: "assets/images/iphone.png",
+        id: 1,
         text: "Iphone 12",
-        nclaims: 0,
-        onTap: () => {print("CIAO")}),
+        claims: 0,
+         token: '',),
     CustomCard(
-        imagePath: "assets/images/portafoglio.png",
+        id: 1,
         text: "Wallet",
-        nclaims: 0,
-        onTap: () => {print("CIAO")}),
+        claims: 0, token: '',),
     CustomCard(
-        imagePath: "assets/images/iphone.png",
+        id: 1,
         text: "Iphone 12",
-        nclaims: 0,
-        onTap: () => {print("CIAO")}),
+        claims: 0,
+         token: '',),
     CustomCard(
-        imagePath: "assets/images/portafoglio.png",
+        id: 1,
         text: "Wallet",
-        nclaims: 0,
-        onTap: () => {print("CIAO")}),
+        claims: 0,
+         token: '',),
     CustomCard(
-        imagePath: "assets/images/iphone.png",
+        id: 1,
         text: "Iphone 12",
-        nclaims: 0,
-        onTap: () => {print("CIAO")}),
+        claims: 0,
+        token: '',),
     CustomCard(
-        imagePath: "assets/images/portafoglio.png",
+        id: 1,
         text: "Wallet",
-        nclaims: 0,
-        onTap: () => {print("CIAO")}),
+        claims: 0,
+        token: '',),
   ];
   final List<CustomCard> foundItems;
 

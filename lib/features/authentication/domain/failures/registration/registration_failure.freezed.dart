@@ -21,6 +21,7 @@ mixin _$RegistrationFailure {
     required TResult Function() duplicateUsername,
     required TResult Function() duplicateEmail,
     required TResult Function() serverError,
+    required TResult Function() networkError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$RegistrationFailure {
     TResult? Function()? duplicateUsername,
     TResult? Function()? duplicateEmail,
     TResult? Function()? serverError,
+    TResult? Function()? networkError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$RegistrationFailure {
     TResult Function()? duplicateUsername,
     TResult Function()? duplicateEmail,
     TResult Function()? serverError,
+    TResult Function()? networkError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$RegistrationFailure {
     required TResult Function(_DuplicateUsernameError value) duplicateUsername,
     required TResult Function(_DuplicateEmailError value) duplicateEmail,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_NetworkError value) networkError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$RegistrationFailure {
     TResult? Function(_DuplicateUsernameError value)? duplicateUsername,
     TResult? Function(_DuplicateEmailError value)? duplicateEmail,
     TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_NetworkError value)? networkError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$RegistrationFailure {
     TResult Function(_DuplicateUsernameError value)? duplicateUsername,
     TResult Function(_DuplicateEmailError value)? duplicateEmail,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -122,6 +128,7 @@ class _$_DuplicateUsernameError implements _DuplicateUsernameError {
     required TResult Function() duplicateUsername,
     required TResult Function() duplicateEmail,
     required TResult Function() serverError,
+    required TResult Function() networkError,
   }) {
     return duplicateUsername();
   }
@@ -132,6 +139,7 @@ class _$_DuplicateUsernameError implements _DuplicateUsernameError {
     TResult? Function()? duplicateUsername,
     TResult? Function()? duplicateEmail,
     TResult? Function()? serverError,
+    TResult? Function()? networkError,
   }) {
     return duplicateUsername?.call();
   }
@@ -142,6 +150,7 @@ class _$_DuplicateUsernameError implements _DuplicateUsernameError {
     TResult Function()? duplicateUsername,
     TResult Function()? duplicateEmail,
     TResult Function()? serverError,
+    TResult Function()? networkError,
     required TResult orElse(),
   }) {
     if (duplicateUsername != null) {
@@ -156,6 +165,7 @@ class _$_DuplicateUsernameError implements _DuplicateUsernameError {
     required TResult Function(_DuplicateUsernameError value) duplicateUsername,
     required TResult Function(_DuplicateEmailError value) duplicateEmail,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_NetworkError value) networkError,
   }) {
     return duplicateUsername(this);
   }
@@ -166,6 +176,7 @@ class _$_DuplicateUsernameError implements _DuplicateUsernameError {
     TResult? Function(_DuplicateUsernameError value)? duplicateUsername,
     TResult? Function(_DuplicateEmailError value)? duplicateEmail,
     TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_NetworkError value)? networkError,
   }) {
     return duplicateUsername?.call(this);
   }
@@ -176,6 +187,7 @@ class _$_DuplicateUsernameError implements _DuplicateUsernameError {
     TResult Function(_DuplicateUsernameError value)? duplicateUsername,
     TResult Function(_DuplicateEmailError value)? duplicateEmail,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {
     if (duplicateUsername != null) {
@@ -230,6 +242,7 @@ class _$_DuplicateEmailError implements _DuplicateEmailError {
     required TResult Function() duplicateUsername,
     required TResult Function() duplicateEmail,
     required TResult Function() serverError,
+    required TResult Function() networkError,
   }) {
     return duplicateEmail();
   }
@@ -240,6 +253,7 @@ class _$_DuplicateEmailError implements _DuplicateEmailError {
     TResult? Function()? duplicateUsername,
     TResult? Function()? duplicateEmail,
     TResult? Function()? serverError,
+    TResult? Function()? networkError,
   }) {
     return duplicateEmail?.call();
   }
@@ -250,6 +264,7 @@ class _$_DuplicateEmailError implements _DuplicateEmailError {
     TResult Function()? duplicateUsername,
     TResult Function()? duplicateEmail,
     TResult Function()? serverError,
+    TResult Function()? networkError,
     required TResult orElse(),
   }) {
     if (duplicateEmail != null) {
@@ -264,6 +279,7 @@ class _$_DuplicateEmailError implements _DuplicateEmailError {
     required TResult Function(_DuplicateUsernameError value) duplicateUsername,
     required TResult Function(_DuplicateEmailError value) duplicateEmail,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_NetworkError value) networkError,
   }) {
     return duplicateEmail(this);
   }
@@ -274,6 +290,7 @@ class _$_DuplicateEmailError implements _DuplicateEmailError {
     TResult? Function(_DuplicateUsernameError value)? duplicateUsername,
     TResult? Function(_DuplicateEmailError value)? duplicateEmail,
     TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_NetworkError value)? networkError,
   }) {
     return duplicateEmail?.call(this);
   }
@@ -284,6 +301,7 @@ class _$_DuplicateEmailError implements _DuplicateEmailError {
     TResult Function(_DuplicateUsernameError value)? duplicateUsername,
     TResult Function(_DuplicateEmailError value)? duplicateEmail,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {
     if (duplicateEmail != null) {
@@ -338,6 +356,7 @@ class _$_ServerError implements _ServerError {
     required TResult Function() duplicateUsername,
     required TResult Function() duplicateEmail,
     required TResult Function() serverError,
+    required TResult Function() networkError,
   }) {
     return serverError();
   }
@@ -348,6 +367,7 @@ class _$_ServerError implements _ServerError {
     TResult? Function()? duplicateUsername,
     TResult? Function()? duplicateEmail,
     TResult? Function()? serverError,
+    TResult? Function()? networkError,
   }) {
     return serverError?.call();
   }
@@ -358,6 +378,7 @@ class _$_ServerError implements _ServerError {
     TResult Function()? duplicateUsername,
     TResult Function()? duplicateEmail,
     TResult Function()? serverError,
+    TResult Function()? networkError,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -372,6 +393,7 @@ class _$_ServerError implements _ServerError {
     required TResult Function(_DuplicateUsernameError value) duplicateUsername,
     required TResult Function(_DuplicateEmailError value) duplicateEmail,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_NetworkError value) networkError,
   }) {
     return serverError(this);
   }
@@ -382,6 +404,7 @@ class _$_ServerError implements _ServerError {
     TResult? Function(_DuplicateUsernameError value)? duplicateUsername,
     TResult? Function(_DuplicateEmailError value)? duplicateEmail,
     TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_NetworkError value)? networkError,
   }) {
     return serverError?.call(this);
   }
@@ -392,6 +415,7 @@ class _$_ServerError implements _ServerError {
     TResult Function(_DuplicateUsernameError value)? duplicateUsername,
     TResult Function(_DuplicateEmailError value)? duplicateEmail,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -403,4 +427,118 @@ class _$_ServerError implements _ServerError {
 
 abstract class _ServerError implements RegistrationFailure {
   const factory _ServerError() = _$_ServerError;
+}
+
+/// @nodoc
+abstract class _$$_NetworkErrorCopyWith<$Res> {
+  factory _$$_NetworkErrorCopyWith(
+          _$_NetworkError value, $Res Function(_$_NetworkError) then) =
+      __$$_NetworkErrorCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_NetworkErrorCopyWithImpl<$Res>
+    extends _$RegistrationFailureCopyWithImpl<$Res, _$_NetworkError>
+    implements _$$_NetworkErrorCopyWith<$Res> {
+  __$$_NetworkErrorCopyWithImpl(
+      _$_NetworkError _value, $Res Function(_$_NetworkError) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_NetworkError implements _NetworkError {
+  const _$_NetworkError();
+
+  @override
+  String toString() {
+    return 'RegistrationFailure.networkError()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_NetworkError);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() duplicateUsername,
+    required TResult Function() duplicateEmail,
+    required TResult Function() serverError,
+    required TResult Function() networkError,
+  }) {
+    return networkError();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? duplicateUsername,
+    TResult? Function()? duplicateEmail,
+    TResult? Function()? serverError,
+    TResult? Function()? networkError,
+  }) {
+    return networkError?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? duplicateUsername,
+    TResult Function()? duplicateEmail,
+    TResult Function()? serverError,
+    TResult Function()? networkError,
+    required TResult orElse(),
+  }) {
+    if (networkError != null) {
+      return networkError();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_DuplicateUsernameError value) duplicateUsername,
+    required TResult Function(_DuplicateEmailError value) duplicateEmail,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_NetworkError value) networkError,
+  }) {
+    return networkError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_DuplicateUsernameError value)? duplicateUsername,
+    TResult? Function(_DuplicateEmailError value)? duplicateEmail,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_NetworkError value)? networkError,
+  }) {
+    return networkError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_DuplicateUsernameError value)? duplicateUsername,
+    TResult Function(_DuplicateEmailError value)? duplicateEmail,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_NetworkError value)? networkError,
+    required TResult orElse(),
+  }) {
+    if (networkError != null) {
+      return networkError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NetworkError implements RegistrationFailure {
+  const factory _NetworkError() = _$_NetworkError;
 }

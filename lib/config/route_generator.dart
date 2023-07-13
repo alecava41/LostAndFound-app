@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/screens/change_password.dart';
-import 'package:lost_and_found/screens/home.dart';
 import 'package:lost_and_found/screens/inbox.dart';
 import 'package:lost_and_found/screens/insert_item.dart';
 import 'package:lost_and_found/features/authentication/presentation/pages/login_page.dart';
 import 'package:lost_and_found/features/authentication/presentation/pages/registration_page.dart';
-import 'package:lost_and_found/screens/notifications.dart';
+import 'package:lost_and_found/features/item/presentation/pages/notifications_page.dart' as notify;
+
+import '../core/presentation/home_controller/home_controller.dart';
+import '../screens/home.dart';
+
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     // Getting arguments passed in while calling Navigator.pushNamed
-    final _ = settings.arguments;
-
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => const HomeScreen()); // TODO: just for testing
+        return MaterialPageRoute(builder: (_) => const HomeControllerScreen());
       case '/register':
         return MaterialPageRoute(builder: (_) => const RegistrationScreen());
       case '/login':
@@ -26,12 +27,11 @@ class RouteGenerator {
       case '/insert':
         return MaterialPageRoute(builder: (_) => const InsertItemScreen());
       case '/notifications':
-        return MaterialPageRoute(builder: (_) => const NotificationsScreen());
-      case '/options/changepassword':
+        return MaterialPageRoute(builder: (_) => const notify.NotificationsScreen());
+      case '/options/changePassword':
         return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
-
       default:
-        // If there is no such named route in the switch statement, e.g. /third
+        // If there is no such named route in the switch statement
         return _errorRoute();
     }
   }

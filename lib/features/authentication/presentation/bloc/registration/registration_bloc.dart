@@ -11,7 +11,7 @@ import '../../../../../core/status/success.dart';
 import '../../../domain/failures/registration/registration_failure.dart';
 import '../../../domain/fields/registration/registration__confirm_password.dart';
 import '../../../domain/fields/registration/registration_password.dart';
-import '../../../domain/usecases/registration_use_case.dart';
+import '../../../domain/usecases/registration_usecase.dart';
 
 part 'registration_bloc.freezed.dart';
 
@@ -132,7 +132,8 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
                           ),
                           registrationFailureOrSuccess = Left(domainFailure)
                         },
-                    serverError: () => registrationFailureOrSuccess = Left(domainFailure))
+                    serverError: () => registrationFailureOrSuccess = Left(domainFailure),
+                    networkError: () => registrationFailureOrSuccess = Left(domainFailure))
               },
           (success) => registrationFailureOrSuccess = Right(RegistrationSuccess()));
     }
@@ -152,6 +153,8 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
         } else {
           return const RegistrationFailure.duplicateUsername();
         }
+      case NetworkFailure:
+        return const RegistrationFailure.networkError();
       default:
         return const RegistrationFailure.serverError();
     }
