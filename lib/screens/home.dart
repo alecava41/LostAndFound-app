@@ -1,12 +1,15 @@
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:lost_and_found/screens/found_generic_item.dart';
+import 'package:lost_and_found/screens/lost_user_item.dart';
 import 'package:lost_and_found/screens/pages/home_page.dart';
 import 'package:lost_and_found/screens/pages/option_page.dart';
 import 'package:lost_and_found/screens/pages/search_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
-import '../features/item/presentation/widgets/home/custom_card.dart';
+import '../widgets/card.dart';
+import 'found_user_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,8 +20,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedTab = 4;
-  List<CustomCard> _findItems = [];
-  List<CustomCard> _lostItems = [];
+  late var _findItems;
+  late var _lostItems;
   DateTime? date;
   String category = "";
   bool _foundChecked = false;
@@ -27,6 +30,112 @@ class _HomeScreenState extends State<HomeScreen> {
   String userImagePath = "assets/images/no-image.png";
   String userName = "Alessandro";
   XFile? userImageFile;
+  
+
+  @override
+  void initState() {
+    super.initState();
+    var findItems = [
+      CustomCard(
+          imagePath: "assets/images/key.png",
+          text: "Home key",
+          nclaims: 2,
+          onTap: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FoundUserItemScreen(
+                      image: "assets/images/key.png",
+                      title: "Home key",
+                      position: "Via Trieste 65, Padova",
+                      date: "15/05/2023",
+                      category: "Keys",
+                    ),
+                  ),
+                )
+              }),
+      CustomCard(
+          imagePath: "assets/images/occhiali.png",
+          text: "Glasses",
+          nclaims: 1,
+          onTap: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FoundGenericItemScreen(
+                      image: 'assets/images/iphone.png',
+                      title: "Home key",
+                      position: "Via Trieste 65, Padova",
+                      date: "15/05/2023",
+                      category: "Keys",
+                      user: "Maria",
+                      userImage: "assets/images/occhiali.png",
+                      onSendMessage: () {},
+                      onClaim: () {},
+                    ),
+                  ),
+                )
+              }),
+      CustomCard(
+          imagePath: "assets/images/portafoglio.png",
+          text: "Wallet",
+          nclaims: 0,
+          onTap: () => {print("CIAO")}),
+      CustomCard(
+          imagePath: "assets/images/iphone.png",
+          text: "Iphone 1222222222222222",
+          nclaims: 1,
+          onTap: () => {print("CIAO")}),
+      CustomCard(
+          imagePath: "assets/images/airpods.png",
+          text: "AirPods Pro",
+          nclaims: 0,
+          onTap: () => {print("CIAO")}),
+    ];
+    var lostItems = [
+      CustomCard(
+        imagePath: "assets/images/iphone.png",
+        text: "Iphone 12",
+        nclaims: 0,
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LostUserItemScreen(
+                image: "assets/images/iphone.png",
+                title: "Iphone 12",
+                position: "Via Trieste 65, Padova",
+                date: "15/05/2023",
+                category: "Smartphone",
+              ),
+            ),
+          );
+        },
+      ),
+      CustomCard(
+          imagePath: "assets/images/airpods.png",
+          text: "AirPods Pro",
+          nclaims: 0,
+          onTap: () => {print("CIAO")}),
+      CustomCard(
+          imagePath: "assets/images/portafoglio.png",
+          text: "Brown Wallet",
+          nclaims: 0,
+          onTap: () => {print("CIAO")}),
+      CustomCard(
+          imagePath: "assets/images/iphone.png",
+          text: "Iphone 12",
+          nclaims: 0,
+          onTap: () => {print("CIAO")}),
+      CustomCard(
+          imagePath: "assets/images/portafoglio.png",
+          text: "Wallet",
+          nclaims: 0,
+          onTap: () => {print("CIAO")}),
+    ];
+    _findItems = findItems;
+    _lostItems = lostItems;
+  }
 
   _changeTab(int index) {
     if (index == 2) {
@@ -54,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _refreshPage() async {
     // Simulate an asynchronous operation for page refreshing
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 2));
     print("Berlusca");
     List<CustomCard> li = [];
     List<CustomCard> fi = [];
@@ -95,12 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
       const Center(
         child: Text("Contact"),
       ),
-      OptionScreenPage(
-        userImagePath: userImagePath,
-        userName: userName,
-        onPhotoChange: onProfilePhotoChange,
-        userImageFile: userImageFile,
-      ),
+      OptionScreenPage(userImagePath: userImagePath, userName: userName, onPhotoChange: onProfilePhotoChange, userImageFile: userImageFile,),
     ];
 
     return SafeArea(
@@ -113,9 +217,14 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedItemColor: PersonalizedColor.mainColor,
         unselectedItemColor: Colors.grey,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+              ),
+              label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline_outlined), label: "Insert"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.add_circle_outline_outlined), label: "Insert"),
           BottomNavigationBarItem(icon: Icon(Icons.mail), label: "Inbox"),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],

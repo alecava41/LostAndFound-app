@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/widgets/circular_image_avatar.dart';
+import 'package:lost_and_found/widgets/image_dialog_image.dart';
 import 'package:lost_and_found/widgets/image_item.dart';
 import 'package:lost_and_found/widgets/info_item.dart';
 
 class FoundGenericItemScreen extends StatelessWidget {
-  final String? image;
+  final String image;
   final String title;
   final String position;
   final String date;
@@ -90,9 +91,12 @@ class FoundGenericItemScreen extends StatelessWidget {
                             Flexible(
                               child: Row(
                                 children: [
-                                  CircularImage(
-                                    imagePath: userImage,
-                                    radius: 40,
+                                  ImageDialogWidget(
+                                    userImagePath: userImage,
+                                    child: CircularImage(
+                                      imagePath: userImage,
+                                      radius: 40,
+                                    ),
                                   ),
                                   const SizedBox(
                                     width: 5,

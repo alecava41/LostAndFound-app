@@ -11,7 +11,6 @@ class PersonalizedFormWithTextInsertion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
       color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
@@ -20,7 +19,7 @@ class PersonalizedFormWithTextInsertion extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(title),
-            SizedBox(height: 10),
+            const SizedBox(height: 2),
             PersonalizedTextField(onStringInserted: onStringInserted, hintText: hintText,),
           ],
         ),

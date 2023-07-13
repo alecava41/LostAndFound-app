@@ -4,7 +4,7 @@ import 'package:lost_and_found/widgets/image_item.dart';
 import 'package:lost_and_found/widgets/info_item.dart';
 
 class FoundUserItemScreen extends StatelessWidget {
-  final String? image;
+  final String image;
   final String title;
   final String position;
   final String date;

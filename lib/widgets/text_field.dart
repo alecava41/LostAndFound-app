@@ -13,6 +13,8 @@ class PersonalizedTextField extends StatelessWidget {
     return TextField(
       cursorColor: PersonalizedColor.mainColor,
       onChanged: onStringInserted,
+      minLines: 1,
+      maxLines: 4,
       decoration: InputDecoration(
           hintText: hintText,
           focusedBorder: const UnderlineInputBorder(

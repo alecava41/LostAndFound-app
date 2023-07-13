@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../utils/colors.dart';
 
 class PersonalizedLargeGreenButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Widget text;
 
   const PersonalizedLargeGreenButton({super.key, 
