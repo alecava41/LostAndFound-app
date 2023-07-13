@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => FoundGenericItemScreen(
-                      image: null,
+                      image: 'assets/images/iphone.png',
                       title: "Home key",
                       position: "Via Trieste 65, Padova",
                       date: "15/05/2023",

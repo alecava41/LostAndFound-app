@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/screens/answer_claim.dart';
 import 'package:lost_and_found/screens/answer_question.dart';
 import 'package:lost_and_found/screens/change_password.dart';
 import 'package:lost_and_found/screens/home.dart';
@@ -15,7 +16,8 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) =>  AnswerQuestionScreen(question: "Are there any scratches on the device screen?If so where?",)); // TODO: just for testing
+        return MaterialPageRoute(
+            builder: (_) => HomeScreen()); // TODO: just for testing
       case '/register':
         return MaterialPageRoute(builder: (_) => const RegistrationScreen());
       case '/login':

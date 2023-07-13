@@ -16,9 +16,8 @@ class _AnswerQuestionScreenState extends State<AnswerQuestionScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     var sendButton = PersonalizedLargeGreenButton(
-        onPressed: userAnswer.isEmpty? null : onSendPressed,
+        onPressed: userAnswer.isEmpty ? null : onSendPressed,
         text: const Text(
           "Send",
           style: TextStyle(fontSize: 20),
@@ -49,7 +48,7 @@ class _AnswerQuestionScreenState extends State<AnswerQuestionScreen> {
           backgroundColor: Colors.white,
           appBar: AppBar(
             title: const Text(
-              "Answer the question",
+              "Claim item",
               style: TextStyle(color: Colors.black),
             ),
             backgroundColor: Colors.white,
