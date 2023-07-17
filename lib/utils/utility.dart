@@ -33,6 +33,7 @@ class Utility {
     }
   }
 
+  // TODO can be replaced with service
   static Future<Position> getUserLocation() async {
     bool serviceEnabled;
     LocationPermission permission;

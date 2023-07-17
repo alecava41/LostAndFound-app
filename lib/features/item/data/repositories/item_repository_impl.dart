@@ -2,13 +2,16 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:lost_and_found/core/status/failures.dart';
 import 'package:lost_and_found/features/item/data/adapters/news_from_dto.dart';
+import 'package:lost_and_found/features/item/data/adapters/search_item_from_dto.dart';
 import 'package:lost_and_found/features/item/data/adapters/user_item_from_dto.dart';
 import 'package:lost_and_found/features/item/data/datasources/read_news_data_source.dart';
+import 'package:lost_and_found/features/item/domain/entities/search_item.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/domain/entities/news.dart';
 import 'package:lost_and_found/features/item/domain/repositories/item_repository.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_items_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_notifications_usecase.dart';
+import 'package:lost_and_found/features/item/domain/usecases/search_items_usecase.dart';
 
 import '../../../../core/data/repositories/utils.dart';
 import '../../../../core/data/secure_storage/secure_storage.dart';
@@ -68,6 +71,22 @@ class ItemRepositoryImpl implements ItemRepository {
         }
 
         return Right(domainNews);
+      } else {
+        return Left(NetworkFailure());
+      }
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<SearchItem>>> searchItems(SearchItemsParams params) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        final items = await _dataSource.searchItems(params);
+        final domainItems = items.map((item) => item.toDomain()).toList();
+
+        return Right(domainItems);
       } else {
         return Left(NetworkFailure());
       }

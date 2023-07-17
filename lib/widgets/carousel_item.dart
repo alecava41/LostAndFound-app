@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-Widget caroselItem(String imagePath, String title, String description) {
+Widget carouselItem(String imagePath, String title, String description) {
   return Padding(
-    padding: EdgeInsets.all(5.0),
+    padding: const EdgeInsets.all(5.0),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[

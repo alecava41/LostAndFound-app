@@ -22,7 +22,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final SecureStorage _secureStorage;
 
   HomeBloc({required GetUserItemsUseCase getUserItemsUseCase, required SecureStorage secureStorage})
-      : _getUserItemsUseCase = getUserItemsUseCase, _secureStorage = secureStorage,
+      : _getUserItemsUseCase = getUserItemsUseCase,
+        _secureStorage = secureStorage,
         super(HomeState.initial()) {
     on<HomeEvent>(
       (event, emit) async {
@@ -50,11 +51,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     emit(
       state.copyWith(
-        lostItems: lostItemsResponse.getOrElse(() => []),
-        foundItems: foundItemsResponse.getOrElse(() => []),
-        homeFailureOrSuccess: loadFailureOrSuccess,
-        token: session.token
-      ),
+          lostItems: lostItemsResponse.getOrElse(() => []),
+          foundItems: foundItemsResponse.getOrElse(() => []),
+          homeFailureOrSuccess: loadFailureOrSuccess,
+          token: session.token),
     );
   }
 

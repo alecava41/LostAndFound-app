@@ -35,7 +35,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
   //       (ConnectivityResult result) async {
   //         isDeviceConnected = await InternetConnectionChecker().hasConnection;
   //         if (!isDeviceConnected && isAlertSet == false) {
-  //           showConnectionLostAllert();
+  //           showConnectionLostAlert();
   //           setState(() => isAlertSet = true);
   //         }
   //       },
@@ -163,7 +163,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
       children: [
         TileLayer(
           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          userAgentPackageName: 'com.example.app',
+          userAgentPackageName: 'com.af.lostandfound',
         ),
         MarkerLayer(
           markers: [
@@ -201,7 +201,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
             children: [
               Stack(
                 children: [
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 150),
@@ -258,7 +258,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
     );
   }
 
-  showConnectionLostAllert() {
+  showConnectionLostAlert() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -272,7 +272,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
                 setState(() => isAlertSet = false);
                 isDeviceConnected = true; // TODO: modify
                 if (!isDeviceConnected && !isAlertSet) {
-                  showConnectionLostAllert();
+                  showConnectionLostAlert();
                   setState(() => isAlertSet = true);
                 }
               },

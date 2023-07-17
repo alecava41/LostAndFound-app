@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lost_and_found/screens/answer_claim.dart';
-import 'package:lost_and_found/screens/answer_question.dart';
 import 'package:lost_and_found/screens/change_password.dart';
 import 'package:lost_and_found/screens/home.dart';
 import 'package:lost_and_found/screens/inbox.dart';
@@ -10,7 +8,6 @@ import 'package:lost_and_found/features/authentication/presentation/pages/regist
 import 'package:lost_and_found/features/item/presentation/pages/notifications_page.dart' as notify;
 
 import '../core/presentation/home_controller/home_controller.dart';
-import '../screens/home.dart';
 
 
 class RouteGenerator {

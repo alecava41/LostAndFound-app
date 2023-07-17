@@ -88,6 +88,53 @@ class _ItemClient implements ItemClient {
     return value;
   }
 
+  @override
+  Future<List<SearchItemDto>> getItems(
+    String type,
+    String order,
+    int last,
+    double X,
+    double Y,
+    int range,
+    int category,
+    DateTime date,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'type': type,
+      r'order': order,
+      r'last': last,
+      r'X': X,
+      r'Y': Y,
+      r'range': range,
+      r'category': category,
+      r'after': date.toIso8601String(),
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<SearchItemDto>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/items',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) => SearchItemDto.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

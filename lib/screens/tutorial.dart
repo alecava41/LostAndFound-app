@@ -75,13 +75,13 @@ class _InfoScreenState extends State<InfoScreen> {
               });
             },
             children: <Widget>[
-              caroselItem('assets/images/input_item.png', 'Report a Lost Item',
+              carouselItem('assets/images/input_item.png', 'Report a Lost Item',
                   'Input the item details in the app to report it as lost.'),
-              caroselItem(
+              carouselItem(
                   'assets/images/report_item.png',
                   'Report a Found Item',
                   'Notify others by reporting a found item\nthrough the app.'),
-              caroselItem(
+              carouselItem(
                   'assets/images/return_item.png',
                   'Arrange Item Return',
                   'Connect with the finder via messaging to arrange\na safe meetup location for item return.'),

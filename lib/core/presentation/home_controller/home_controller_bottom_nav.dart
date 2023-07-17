@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_and_found/features/item/presentation/pages/search_page.dart';
 
 import '../../../features/item/presentation/pages/home_page.dart';
 import '../../../screens/pages/option_page.dart';
-import '../../../screens/pages/search_page.dart';
 import '../../../utils/colors.dart';
 import 'bloc/home_controller_bloc.dart';
 
@@ -14,20 +14,7 @@ class HomeControllerBottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     List pages = [
       const HomeScreen(),
-      SearchScreenPage(
-        foundChecked: false,
-        lostChecked: true,
-        // TODO: chiamata google per trasformare le coordinate in Via
-        address: "",
-        onSelectPosition: (value) => {},
-        category: "",
-        date: null,
-        onFoundCheckedChanged: (value) => {},
-        onLostCheckedChanged: (value) => {},
-        onDataPicked: (value) => {},
-        onSelectCategory: (String value) => {},
-        onDeleteAllPressed: () => {},
-      ),
+      const SearchScreen(),
       const Center(
         child: Text("Products"),
       ),

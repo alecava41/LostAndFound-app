@@ -7,6 +7,8 @@ import 'injection_container.dart';
 void main() async {
   await di.init();
 
+  WidgetsFlutterBinding.ensureInitialized();
+
   String initialRoute = "/login";
   final response = await sl<LoginUseCase>()(null);
   response.fold(

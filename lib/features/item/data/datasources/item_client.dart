@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
 import '../models/news/news_dto.dart';
+import '../models/search_item/search_item_dto.dart';
 import '../models/user_item/user_item_dto.dart';
 
 part 'item_client.g.dart';
@@ -21,5 +22,17 @@ abstract class ItemClient {
   Future<List<NewsDto>> getNews(
       @Path() int userId,
       @Query("last") int last,
+      );
+
+  @GET('/items')
+  Future<List<SearchItemDto>> getItems(
+      @Query("type") String type,
+      @Query("order") String order,
+      @Query("last") int last,
+      @Query("X") double X,
+      @Query("Y") double Y,
+      @Query("range") int range,
+      @Query("category") int category,
+      @Query("after") DateTime date
       );
 }
