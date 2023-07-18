@@ -61,6 +61,7 @@ dependencies:
   get_it: ^7.6.0
   dio_http_formatter: ^3.1.0
   info_popup: ^3.0.4
+  flutter_chat_ui: ^1.6.9
 
 dev_dependencies:
   flutter_test:

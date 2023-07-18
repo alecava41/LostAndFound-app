@@ -15,7 +15,7 @@ class ImageItem extends StatelessWidget {
         color: Colors.white,
         width: MediaQuery.of(context).size.width,
         height: 300,
-        child: Image(image: AssetImage(imagePath!)),
+        child: Image(image: AssetImage(imagePath)),
       ),
     );
   }

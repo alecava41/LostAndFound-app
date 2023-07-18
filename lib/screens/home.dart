@@ -1,12 +1,15 @@
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:lost_and_found/screens/chat.dart';
 import 'package:lost_and_found/screens/found_generic_item.dart';
 import 'package:lost_and_found/screens/lost_user_item.dart';
 import 'package:lost_and_found/screens/pages/home_page.dart';
+import 'package:lost_and_found/screens/pages/inbox.dart';
 import 'package:lost_and_found/screens/pages/option_page.dart';
 import 'package:lost_and_found/screens/pages/search_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
+import 'package:lost_and_found/widgets/inbox_item.dart';
 
 import '../widgets/card.dart';
 import 'found_user_item.dart';
@@ -19,7 +22,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedTab = 4;
+  int _selectedTab = 3;
   late var _findItems;
   late var _lostItems;
   DateTime? date;
@@ -30,11 +33,61 @@ class _HomeScreenState extends State<HomeScreen> {
   String userImagePath = "assets/images/no-image.png";
   String userName = "Alessandro";
   XFile? userImageFile;
-  
+  late List<InboxItem> inboxItems;
 
   @override
   void initState() {
     super.initState();
+    inboxItems = [
+      InboxItem(
+        userImagePath: "assets/images/no-image.png",
+        userName: "Maria",
+        lastMessage: "Thank you!",
+        open: true,
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ChatScreen(
+                  userTo: 'Maria',
+                  userToImage: 'assets/images/no-image.png',
+                ),
+              ));
+        },
+      ),
+      InboxItem(
+        userImagePath: "assets/images/no-image.png",
+        userName: "Maria",
+        lastMessage: "Thank you!",
+        open: false,
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ChatScreen(
+                  userTo: 'Maria',
+                  userToImage: 'assets/images/no-image.png',
+                ),
+              ));
+        },
+      ),
+      InboxItem(
+        userImagePath: "assets/images/no-image.png",
+        userName: "Maria",
+        lastMessage: "Thank you!",
+        open: true,
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ChatScreen(
+                  userTo: 'Maria',
+                  userToImage: 'assets/images/no-image.png',
+                ),
+              ));
+        },
+      )
+    ];
     var findItems = [
       CustomCard(
           imagePath: "assets/images/key.png",
@@ -201,10 +254,16 @@ class _HomeScreenState extends State<HomeScreen> {
       const Center(
         child: Text("Products"),
       ),
-      const Center(
-        child: Text("Contact"),
+      InboxScreenPage(
+        inboxItems: inboxItems,
+        onRefresh: onInboxRefresh,
       ),
-      OptionScreenPage(userImagePath: userImagePath, userName: userName, onPhotoChange: onProfilePhotoChange, userImageFile: userImageFile,),
+      OptionScreenPage(
+        userImagePath: userImagePath,
+        userName: userName,
+        onPhotoChange: onProfilePhotoChange,
+        userImageFile: userImageFile,
+      ),
     ];
 
     return SafeArea(
@@ -274,6 +333,31 @@ class _HomeScreenState extends State<HomeScreen> {
   void onProfilePhotoChange(XFile? value) {
     setState(() {
       userImageFile = value;
+    });
+  }
+
+  Future<void> onInboxRefresh() async {
+    await Future.delayed(Duration(seconds: 2));
+    setState(() {
+      inboxItems.insert(
+        0,
+        InboxItem(
+          userImagePath: "assets/images/no-image.png",
+          userName: "Maria",
+          lastMessage: "Thank you!",
+          open: false,
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ChatScreen(
+                    userTo: 'Maria',
+                    userToImage: 'assets/images/no-image.png',
+                  ),
+                ));
+          },
+        ),
+      );
     });
   }
 }
