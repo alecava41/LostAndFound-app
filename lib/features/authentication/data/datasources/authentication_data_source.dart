@@ -1,7 +1,7 @@
-import 'package:lost_and_found/core/datasources/utils.dart';
+import 'package:lost_and_found/core/data/datasources/utils.dart';
 
-import '../../domain/usecases/login_use_case.dart';
-import '../../domain/usecases/registration_use_case.dart';
+import '../../domain/usecases/login_usecase.dart';
+import '../../domain/usecases/registration_usecase.dart';
 import '../models/session_model.dart';
 import 'auth_client.dart';
 

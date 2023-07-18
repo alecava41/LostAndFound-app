@@ -52,7 +52,7 @@ class SearchScreenPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.fromLTRB(15, 25, 20, 25),
+            padding: const EdgeInsets.fromLTRB(15, 25, 20, 25),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -9,7 +9,7 @@ import '../../../../../core/status/failures.dart';
 import '../../../domain/failures/login/login_failure.dart';
 import '../../../domain/fields/login/login_password.dart';
 import '../../../domain/fields/login/login_user.dart';
-import '../../../domain/usecases/login_use_case.dart';
+import '../../../domain/usecases/login_usecase.dart';
 
 part 'login_bloc.freezed.dart';
 
@@ -26,6 +26,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
+            loginCreated: () => _onLoginCreated(emit),
             loginSubmitted: () => _onLoginSubmitted(emit),
             obscurePasswordToggled: () => _onObscurePasswordToggled(emit),
             passwordFieldChanged: (password) => _onPasswordFieldChanged(emit, password),
@@ -34,10 +35,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     );
   }
 
+  Future<void> _onLoginCreated(Emitter<LoginState> emit) async {
+    Either<LoginFailure, Success>? authFailureOrSuccess;
+
+    final loginResponse = await _loginUseCase(null);
+    loginResponse.fold((failure) => authFailureOrSuccess = Left(_mapLoginFailure(failure)),
+        (success) => authFailureOrSuccess = Right(LoginSuccess()));
+
+    emit(state.copyWith(isSubmitting: false, showErrorMessage: true, authFailureOrSuccess: authFailureOrSuccess));
+  }
+
   void _onObscurePasswordToggled(Emitter<LoginState> emit) {
     emit(state.copyWith(
-        obscurePassword: !state.obscurePassword,
-        authFailureOrSuccess: null,
+      obscurePassword: !state.obscurePassword,
+      authFailureOrSuccess: null,
     ));
   }
 
@@ -74,24 +85,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
 
       final params =
-          LoginParams(
-              password: state.password.value.getOrElse(() => ""),
-              user: state.user.value.getOrElse(() => "")
-          );
+          LoginParams(password: state.password.value.getOrElse(() => ""), user: state.user.value.getOrElse(() => ""));
 
       final loginResponse = await _loginUseCase(params);
-      loginResponse.fold(
-              (failure) => authFailureOrSuccess = Left(_mapLoginFailure(failure)),
-              (success) => authFailureOrSuccess = Right(LoginSuccess())
-      );
+      loginResponse.fold((failure) => authFailureOrSuccess = Left(_mapLoginFailure(failure)),
+          (success) => authFailureOrSuccess = Right(LoginSuccess()));
     }
 
     emit(
-      state.copyWith(
-        isSubmitting: false,
-        showErrorMessage: true,
-        authFailureOrSuccess: authFailureOrSuccess
-      ),
+      state.copyWith(isSubmitting: false, showErrorMessage: true, authFailureOrSuccess: authFailureOrSuccess),
     );
   }
 
@@ -99,6 +101,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     switch (failure.runtimeType) {
       case InternalServerFailure:
         return const LoginFailure.serverError();
+      case NetworkFailure:
+        return const LoginFailure.networkError();
       default:
         return const LoginFailure.invalidCredentials();
     }

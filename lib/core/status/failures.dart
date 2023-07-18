@@ -29,3 +29,9 @@ class AddressNotValidFailure extends Failure {}
 class ReferenceNotFoundFailure extends Failure {}
 
 class UserAccessForbiddenFailure extends Failure {}
+
+class NetworkFailure extends Failure {}
+
+class GeolocationServiceFailure extends Failure {}
+class GeolocationPermissionDeniedFailure extends Failure {}
+class GeolocationPermissionPermanentlyDeniedFailure extends Failure {}

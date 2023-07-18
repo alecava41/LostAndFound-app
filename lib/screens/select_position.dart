@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/utils/utility.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -28,20 +26,20 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
 
   @override
   void initState() {
-    getConnectivity();
+    // getConnectivity();
     super.initState();
   }
 
-  getConnectivity() =>
-      subscription = Connectivity().onConnectivityChanged.listen(
-        (ConnectivityResult result) async {
-          isDeviceConnected = await InternetConnectionChecker().hasConnection;
-          if (!isDeviceConnected && isAlertSet == false) {
-            showConnectionLostAllert();
-            setState(() => isAlertSet = true);
-          }
-        },
-      );
+  // getConnectivity() =>
+  //     subscription = Connectivity().onConnectivityChanged.listen(
+  //       (ConnectivityResult result) async {
+  //         isDeviceConnected = await InternetConnectionChecker().hasConnection;
+  //         if (!isDeviceConnected && isAlertSet == false) {
+  //           showConnectionLostAlert();
+  //           setState(() => isAlertSet = true);
+  //         }
+  //       },
+  //     );
 
   @override
   void dispose() {
@@ -59,7 +57,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
   Widget build(BuildContext context) {
     var chooseCurrentPositionButton = TextButton(
       onPressed: () async {
-        var isConnected = await Utility.checkInternetConnectivity();
+        var isConnected = true; // TODO: change with real check
         var permission = await requestLocationPermission();
         if (permission.isGranted && isConnected) {
           mapController.animatedZoomOut();
@@ -165,7 +163,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
       children: [
         TileLayer(
           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          userAgentPackageName: 'com.example.app',
+          userAgentPackageName: 'com.af.lostandfound',
         ),
         MarkerLayer(
           markers: [
@@ -203,7 +201,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
             children: [
               Stack(
                 children: [
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 150),
@@ -260,7 +258,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
     );
   }
 
-  showConnectionLostAllert() {
+  showConnectionLostAlert() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -272,10 +270,9 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
               onPressed: () async {
                 Navigator.pop(context, 'Cancel');
                 setState(() => isAlertSet = false);
-                isDeviceConnected =
-                    await InternetConnectionChecker().hasConnection;
+                isDeviceConnected = true; // TODO: modify
                 if (!isDeviceConnected && !isAlertSet) {
-                  showConnectionLostAllert();
+                  showConnectionLostAlert();
                   setState(() => isAlertSet = true);
                 }
               },

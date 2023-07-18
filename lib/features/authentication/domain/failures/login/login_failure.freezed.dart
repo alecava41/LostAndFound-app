@@ -20,18 +20,21 @@ mixin _$LoginFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() invalidCredentials,
     required TResult Function() serverError,
+    required TResult Function() networkError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? invalidCredentials,
     TResult? Function()? serverError,
+    TResult? Function()? networkError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? invalidCredentials,
     TResult Function()? serverError,
+    TResult Function()? networkError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,6 +43,7 @@ mixin _$LoginFailure {
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidCredentials,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_NetworkError value) networkError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,6 +51,7 @@ mixin _$LoginFailure {
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidCredentials,
     TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_NetworkError value)? networkError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,6 +59,7 @@ mixin _$LoginFailure {
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidCredentials,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -122,6 +128,7 @@ class _$_InvalidEmailAndPasswordCombination
   TResult when<TResult extends Object?>({
     required TResult Function() invalidCredentials,
     required TResult Function() serverError,
+    required TResult Function() networkError,
   }) {
     return invalidCredentials();
   }
@@ -131,6 +138,7 @@ class _$_InvalidEmailAndPasswordCombination
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? invalidCredentials,
     TResult? Function()? serverError,
+    TResult? Function()? networkError,
   }) {
     return invalidCredentials?.call();
   }
@@ -140,6 +148,7 @@ class _$_InvalidEmailAndPasswordCombination
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? invalidCredentials,
     TResult Function()? serverError,
+    TResult Function()? networkError,
     required TResult orElse(),
   }) {
     if (invalidCredentials != null) {
@@ -154,6 +163,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidCredentials,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_NetworkError value) networkError,
   }) {
     return invalidCredentials(this);
   }
@@ -164,6 +174,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidCredentials,
     TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_NetworkError value)? networkError,
   }) {
     return invalidCredentials?.call(this);
   }
@@ -174,6 +185,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidCredentials,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {
     if (invalidCredentials != null) {
@@ -228,6 +240,7 @@ class _$_ServerError implements _ServerError {
   TResult when<TResult extends Object?>({
     required TResult Function() invalidCredentials,
     required TResult Function() serverError,
+    required TResult Function() networkError,
   }) {
     return serverError();
   }
@@ -237,6 +250,7 @@ class _$_ServerError implements _ServerError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? invalidCredentials,
     TResult? Function()? serverError,
+    TResult? Function()? networkError,
   }) {
     return serverError?.call();
   }
@@ -246,6 +260,7 @@ class _$_ServerError implements _ServerError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? invalidCredentials,
     TResult Function()? serverError,
+    TResult Function()? networkError,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -260,6 +275,7 @@ class _$_ServerError implements _ServerError {
     required TResult Function(_InvalidEmailAndPasswordCombination value)
         invalidCredentials,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_NetworkError value) networkError,
   }) {
     return serverError(this);
   }
@@ -270,6 +286,7 @@ class _$_ServerError implements _ServerError {
     TResult? Function(_InvalidEmailAndPasswordCombination value)?
         invalidCredentials,
     TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_NetworkError value)? networkError,
   }) {
     return serverError?.call(this);
   }
@@ -280,6 +297,7 @@ class _$_ServerError implements _ServerError {
     TResult Function(_InvalidEmailAndPasswordCombination value)?
         invalidCredentials,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -291,4 +309,115 @@ class _$_ServerError implements _ServerError {
 
 abstract class _ServerError implements LoginFailure {
   const factory _ServerError() = _$_ServerError;
+}
+
+/// @nodoc
+abstract class _$$_NetworkErrorCopyWith<$Res> {
+  factory _$$_NetworkErrorCopyWith(
+          _$_NetworkError value, $Res Function(_$_NetworkError) then) =
+      __$$_NetworkErrorCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_NetworkErrorCopyWithImpl<$Res>
+    extends _$LoginFailureCopyWithImpl<$Res, _$_NetworkError>
+    implements _$$_NetworkErrorCopyWith<$Res> {
+  __$$_NetworkErrorCopyWithImpl(
+      _$_NetworkError _value, $Res Function(_$_NetworkError) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_NetworkError implements _NetworkError {
+  const _$_NetworkError();
+
+  @override
+  String toString() {
+    return 'LoginFailure.networkError()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_NetworkError);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() invalidCredentials,
+    required TResult Function() serverError,
+    required TResult Function() networkError,
+  }) {
+    return networkError();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? invalidCredentials,
+    TResult? Function()? serverError,
+    TResult? Function()? networkError,
+  }) {
+    return networkError?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? invalidCredentials,
+    TResult Function()? serverError,
+    TResult Function()? networkError,
+    required TResult orElse(),
+  }) {
+    if (networkError != null) {
+      return networkError();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidCredentials,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_NetworkError value) networkError,
+  }) {
+    return networkError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidCredentials,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_NetworkError value)? networkError,
+  }) {
+    return networkError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidCredentials,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_NetworkError value)? networkError,
+    required TResult orElse(),
+  }) {
+    if (networkError != null) {
+      return networkError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NetworkError implements LoginFailure {
+  const factory _NetworkError() = _$_NetworkError;
 }

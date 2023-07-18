@@ -32,6 +32,13 @@ class RegistrationForm extends StatelessWidget {
                             content: Text('Server error. Please try again later.', style: TextStyle(fontSize: 20)),
                           ),
                         ),
+                        networkError: () => ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                            content: Text('No internet connection available. Check your internet connection.',
+                                style: TextStyle(fontSize: 20)),
+                          ),
+                        ),
                       ),
                   (_) => {
                         ScaffoldMessenger.of(context).showSnackBar(

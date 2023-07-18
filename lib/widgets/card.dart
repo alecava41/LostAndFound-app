@@ -8,10 +8,10 @@ class CustomCard extends StatelessWidget {
 
   const CustomCard(
       {super.key,
-      required this.imagePath,
-      required this.text,
-      required this.nclaims,
-      this.onTap});
+        required this.imagePath,
+        required this.text,
+        required this.nclaims,
+        this.onTap});
 
   @override
   Widget build(BuildContext context) {

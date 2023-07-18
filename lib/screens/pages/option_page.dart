@@ -93,7 +93,7 @@ class OptionScreenPage extends StatelessWidget {
 
   void onChangePasswordTap(context) {
     Navigator.of(context).pushNamed(
-      '/options/changepassword',
+      '/options/changePassword',
     );
   }
 }

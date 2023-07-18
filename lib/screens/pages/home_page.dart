@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/card.dart';
-import '../../widgets/circular_buttons.dart';
+import '../../features/item/presentation/widgets/home/custom_card.dart';
+import '../../features/item/presentation/widgets/home/clickable_circular_button.dart';
 
 class HomeScreenPage extends StatelessWidget {
   final List<CustomCard> lostItems;
