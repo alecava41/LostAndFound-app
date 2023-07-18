@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
-import 'package:lost_and_found/features/item/presentation/widgets/home/custom_card.dart';
+import 'package:lost_and_found/features/item/presentation/widgets/home/custom_card_home.dart';
 
 class LostItemsContainer extends StatelessWidget {
   const LostItemsContainer({super.key});
@@ -27,7 +27,7 @@ class LostItemsContainer extends StatelessWidget {
                   ? ListView(
                       scrollDirection: Axis.horizontal,
                       children: state.lostItems
-                          .map((item) => CustomCard(
+                          .map((item) => CustomCardHome(
                                 id: item.id,
                                 text: item.title,
                                 claims: item.claims,

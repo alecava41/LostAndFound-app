@@ -24,7 +24,7 @@ class SearchItemsParams {
   final SearchItemOrder order;
   final SearchItemType type;
   final int category;
-  final DateTime date;
+  final DateTime? date;
 
   SearchItemsParams({
     required this.last,
@@ -46,5 +46,5 @@ enum SearchItemOrder {
 enum SearchItemType {
   found,
   lost,
-  both
+  all
 }

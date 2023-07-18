@@ -22,6 +22,7 @@ SearchItemDto _$SearchItemDtoFromJson(Map<String, dynamic> json) {
 mixin _$SearchItemDto {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
   UserDto get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +37,7 @@ abstract class $SearchItemDtoCopyWith<$Res> {
           SearchItemDto value, $Res Function(SearchItemDto) then) =
       _$SearchItemDtoCopyWithImpl<$Res, SearchItemDto>;
   @useResult
-  $Res call({int id, String title, UserDto user});
+  $Res call({int id, String title, String type, UserDto user});
 
   $UserDtoCopyWith<$Res> get user;
 }
@@ -56,6 +57,7 @@ class _$SearchItemDtoCopyWithImpl<$Res, $Val extends SearchItemDto>
   $Res call({
     Object? id = null,
     Object? title = null,
+    Object? type = null,
     Object? user = null,
   }) {
     return _then(_value.copyWith(
@@ -66,6 +68,10 @@ class _$SearchItemDtoCopyWithImpl<$Res, $Val extends SearchItemDto>
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
               as String,
       user: null == user
           ? _value.user
@@ -91,7 +97,7 @@ abstract class _$$$SearchItemDtoCopyWith<$Res>
       __$$$SearchItemDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title, UserDto user});
+  $Res call({int id, String title, String type, UserDto user});
 
   @override
   $UserDtoCopyWith<$Res> get user;
@@ -110,6 +116,7 @@ class __$$$SearchItemDtoCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? title = null,
+    Object? type = null,
     Object? user = null,
   }) {
     return _then(_$$SearchItemDto(
@@ -120,6 +127,10 @@ class __$$$SearchItemDtoCopyWithImpl<$Res>
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
               as String,
       user: null == user
           ? _value.user
@@ -133,7 +144,10 @@ class __$$$SearchItemDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$$SearchItemDto implements $SearchItemDto {
   const _$$SearchItemDto(
-      {required this.id, required this.title, required this.user});
+      {required this.id,
+      required this.title,
+      required this.type,
+      required this.user});
 
   factory _$$SearchItemDto.fromJson(Map<String, dynamic> json) =>
       _$$$SearchItemDtoFromJson(json);
@@ -143,11 +157,13 @@ class _$$SearchItemDto implements $SearchItemDto {
   @override
   final String title;
   @override
+  final String type;
+  @override
   final UserDto user;
 
   @override
   String toString() {
-    return 'SearchItemDto(id: $id, title: $title, user: $user)';
+    return 'SearchItemDto(id: $id, title: $title, type: $type, user: $user)';
   }
 
   @override
@@ -157,12 +173,13 @@ class _$$SearchItemDto implements $SearchItemDto {
             other is _$$SearchItemDto &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.user, user) || other.user == user));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, user);
+  int get hashCode => Object.hash(runtimeType, id, title, type, user);
 
   @JsonKey(ignore: true)
   @override
@@ -182,6 +199,7 @@ abstract class $SearchItemDto implements SearchItemDto {
   const factory $SearchItemDto(
       {required final int id,
       required final String title,
+      required final String type,
       required final UserDto user}) = _$$SearchItemDto;
 
   factory $SearchItemDto.fromJson(Map<String, dynamic> json) =
@@ -191,6 +209,8 @@ abstract class $SearchItemDto implements SearchItemDto {
   int get id;
   @override
   String get title;
+  @override
+  String get type;
   @override
   UserDto get user;
   @override

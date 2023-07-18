@@ -11,3 +11,5 @@ class LogoutSuccess extends Success {}
 class RegistrationSuccess extends Success {}
 class UserItemsLoadSuccess extends Success {}
 class NewsLoadSuccess extends Success {}
+class CategoryLoadSuccess extends Success {}
+class SearchSuccess extends Success {}

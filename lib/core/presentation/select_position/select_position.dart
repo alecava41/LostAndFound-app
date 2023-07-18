@@ -68,12 +68,14 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                 interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
                                 center: center,
                                 zoom: 5.5,
+                                onMapReady: () { // TODO find right place for this animation
+                                  mapController.animatedZoomOut();
+                                  mapController.centerOnPoint(LatLng(state.markerPos.latitude, state.markerPos.longitude), zoom: 10);
+                                },
                                 onPositionChanged: (MapPosition position, bool gesture) {
                                   // Update marker position based on the map center
                                   ctx.read<SelectPositionBloc>().add(SelectPositionEvent.selectedPositionChanged(
-                                      LatLng(position.center!.latitude, position.center!.longitude)
-                                  ));
-                                },
+                                      LatLng(position.center!.latitude, position.center!.longitude)));},
                               ),
                               children: [
                                 TileLayer(
@@ -126,13 +128,6 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                         ctx
                                             .read<SelectPositionBloc>()
                                             .add(const SelectPositionEvent.selectCurrentPosition());
-                                        //  mapController.animatedZoomOut();
-                                        //
-                                        // setState(() {
-                                        //   markerPosition = LatLng(state.lat, state.lon);
-                                        // });
-                                        //
-                                        //  mapController.centerOnPoint(LatLng(state.lat, state.lon), zoom: 10);
                                       } else if (!state.hasPermissions) {
                                         if (!state.isPermissionPermanentlyNegated) {
                                           // ignore: use_build_context_synchronously
@@ -141,7 +136,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                           // ignore: use_build_context_synchronously
                                           showLocationPermissionPermanentlyDeniedDialog(context);
                                         }
-                                      } else if (!state.isDeviceConnected || !state.isServiceAvailable){
+                                      } else if (!state.isDeviceConnected || !state.isServiceAvailable) {
                                         showConnectionLostAlert(state.isDeviceConnected);
                                       }
                                     },

@@ -33,6 +33,6 @@ abstract class ItemClient {
       @Query("Y") double Y,
       @Query("range") int range,
       @Query("category") int category,
-      @Query("after") DateTime date
+      @Query("after") DateTime? date
       );
 }

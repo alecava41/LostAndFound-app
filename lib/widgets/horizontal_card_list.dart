@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lost_and_found/features/item/presentation/widgets/home/custom_card.dart';
+import 'package:lost_and_found/features/item/presentation/widgets/home/custom_card_home.dart';
 
 class HorizontalCardList extends StatelessWidget {
-  final List<CustomCard> cards;
+  final List<CustomCardHome> cards;
 
   const HorizontalCardList({super.key, required this.cards});
 

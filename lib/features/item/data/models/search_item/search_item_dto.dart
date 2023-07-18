@@ -9,6 +9,7 @@ class SearchItemDto with _$SearchItemDto {
   const factory SearchItemDto({
     required int id,
     required String title,
+    required String type,
     required UserDto user
   }) = $SearchItemDto;
 

@@ -97,7 +97,7 @@ class _ItemClient implements ItemClient {
     double Y,
     int range,
     int category,
-    DateTime date,
+    DateTime? date,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -108,8 +108,9 @@ class _ItemClient implements ItemClient {
       r'Y': Y,
       r'range': range,
       r'category': category,
-      r'after': date.toIso8601String(),
+      r'after': date?.toIso8601String(),
     };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio

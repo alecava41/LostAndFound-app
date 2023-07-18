@@ -6,4 +6,7 @@ class SearchEvent with _$SearchEvent {
   const factory SearchEvent.foundCheckTriggered() = _FoundCheckTriggered;
   const factory SearchEvent.lostCheckTriggered() = _LostCheckTriggered;
   const factory SearchEvent.positionSelected(LatLng pos) = _PositionSelected;
+  const factory SearchEvent.categorySelected(int id, String category) = _CategorySelected;
+  const factory SearchEvent.dateSelected(DateTime date) = _DateSelected;
+  const factory SearchEvent.searchSubmitted() = _SearchSubmitted;
 }
