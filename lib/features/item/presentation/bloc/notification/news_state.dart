@@ -4,7 +4,7 @@ part of 'news_bloc.dart';
 class NewsState with _$NewsState {
   const factory NewsState({
     required List<News> news,
-    Either<NewsFailure, Success>? loadFailureOrSuccess,
+    Either<Failure, Success>? loadFailureOrSuccess,
     required String token,
   }) = _NewsState;
 

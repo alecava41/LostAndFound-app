@@ -25,7 +25,7 @@ class PositionRepositoryImpl implements PositionRepository {
 
         return Right(address.address);
       } else {
-        return Left(NetworkFailure());
+        return const Left(Failure.networkFailure());
       }
     } on Exception catch (e) {
       return Left(mapExceptionToFailure(e));

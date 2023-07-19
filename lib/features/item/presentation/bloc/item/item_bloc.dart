@@ -1,0 +1,56 @@
+import 'dart:async';
+
+import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:lost_and_found/core/data/secure_storage/secure_storage.dart';
+import 'package:lost_and_found/core/domain/usecases/get_address_from_position_usecase.dart';
+import 'package:lost_and_found/features/item/domain/usecases/get_item.dart';
+
+import '../../../../../core/status/success.dart';
+import '../../../../../core/status/failures.dart';
+import '../../../domain/entities/item.dart';
+
+part 'item_bloc.freezed.dart';
+
+part 'item_event.dart';
+
+part 'item_state.dart';
+
+class ItemBloc extends Bloc<ItemEvent, ItemState> {
+  final GetItemUseCase _getItemUseCase;
+  final SecureStorage _secureStorage;
+
+  ItemBloc(
+      {required GetItemUseCase getItemUseCase,
+      required SecureStorage secureStorage,
+      required GetAddressFromPositionUseCase getAddressFromPositionUseCase})
+      : _getItemUseCase = getItemUseCase,
+        _secureStorage = secureStorage,
+        super(ItemState.initial()) {
+    on<ItemEvent>(
+      (event, emit) async {
+        await event.when<FutureOr<void>>(
+          itemCreated: (id) => _onItemCreated(emit, id),
+        );
+      },
+    );
+  }
+
+  Future<void> _onItemCreated(Emitter<ItemState> emit, int id) async {
+    emit(state.copyWith(isLoading: true));
+
+    Item? item;
+    Either<Failure, Success>? request;
+
+    final itemResponse = await _getItemUseCase(GetItemParams(id: id));
+    itemResponse.fold((failure) => request = Left(failure), (it) {
+      item = it;
+      request = const Right(Success.genericSuccess());
+    });
+
+    final session = await _secureStorage.getSessionInformation();
+
+    emit(state.copyWith(isLoading: false, loadFailureOrSuccess: request, item: item, token: session.token));
+  }
+}

@@ -1,15 +1,8 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:equatable/equatable.dart';
+part 'success.freezed.dart';
 
-abstract class Success extends Equatable {
-  @override
-  List<Object> get props => [];
+@freezed
+class Success with _$Success {
+  const factory Success.genericSuccess() = _GenericSuccess;
 }
-
-class LoginSuccess extends Success {}
-class LogoutSuccess extends Success {}
-class RegistrationSuccess extends Success {}
-class UserItemsLoadSuccess extends Success {}
-class NewsLoadSuccess extends Success {}
-class CategoryLoadSuccess extends Success {}
-class SearchSuccess extends Success {}

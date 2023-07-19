@@ -5,7 +5,6 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lost_and_found/core/data/secure_storage/secure_storage.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
-import 'package:lost_and_found/features/item/domain/failures/home/home_failure.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_items_usecase.dart';
 
 import '../../../../../core/status/failures.dart';
@@ -36,16 +35,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   // TODO handle initial loading gracefully (show loading bar, then results)
 
   Future<void> _onHomeCreatedOrRefreshed(Emitter<HomeState> emit) async {
-    Either<HomeFailure, Success>? loadFailureOrSuccess;
+    Either<Failure, Success>? loadFailureOrSuccess;
 
     final foundItemsResponse = await _getUserItemsUseCase(GetUserItemsParams(type: ItemType.found, last: 0));
     final lostItemsResponse = await _getUserItemsUseCase(GetUserItemsParams(type: ItemType.lost, last: 0));
 
-    foundItemsResponse.fold((failure) => loadFailureOrSuccess = Left(_mapRequestToFailure(failure)),
-        (success) => loadFailureOrSuccess = Right(UserItemsLoadSuccess()));
+    foundItemsResponse.fold((failure) => loadFailureOrSuccess = Left(failure),
+        (success) => loadFailureOrSuccess = const Right(Success.genericSuccess()));
 
-    lostItemsResponse.fold((failure) => loadFailureOrSuccess = Left(_mapRequestToFailure(failure)),
-        (success) => loadFailureOrSuccess = Right(UserItemsLoadSuccess()));
+    lostItemsResponse.fold((failure) => loadFailureOrSuccess = Left(failure),
+        (success) => loadFailureOrSuccess = const Right(Success.genericSuccess()));
 
     final session = await _secureStorage.getSessionInformation();
 
@@ -56,14 +55,5 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           homeFailureOrSuccess: loadFailureOrSuccess,
           token: session.token),
     );
-  }
-
-  HomeFailure _mapRequestToFailure(Failure failure) {
-    switch (failure.runtimeType) {
-      case NetworkFailure:
-        return const HomeFailure.networkError();
-      default:
-        return const HomeFailure.serverError();
-    }
   }
 }

@@ -8,7 +8,6 @@ import 'package:lost_and_found/features/authentication/domain/fields/registratio
 
 import '../../../../../core/status/failures.dart';
 import '../../../../../core/status/success.dart';
-import '../../../domain/failures/registration/registration_failure.dart';
 import '../../../domain/fields/registration/registration__confirm_password.dart';
 import '../../../domain/fields/registration/registration_password.dart';
 import '../../../domain/usecases/registration_usecase.dart';
@@ -97,7 +96,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     final isPasswordFieldValid = state.password.value.isRight();
     final isConfirmPasswordFieldValid = state.confirmPassword.value.isRight();
 
-    Either<RegistrationFailure, Success>? registrationFailureOrSuccess;
+    Either<Failure, Success>? registrationFailureOrSuccess;
 
     if (isUsernameFieldValid && isPasswordFieldValid && isEmailFieldValid && isConfirmPasswordFieldValid) {
       emit(
@@ -113,50 +112,29 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
           email: state.email.value.getOrElse(() => ""));
 
       final loginResponse = await _registrationUseCase(params);
-      RegistrationFailure domainFailure;
 
-      loginResponse.fold(
-          (failure) => {
-                domainFailure = _mapRegistrationFailure(failure),
-                domainFailure.when(
-                    duplicateUsername: () => {
-                          emit(
-                            state.copyWith(
-                                username: RegistrationUsernameField(state.username.value.getOrElse(() => ""), true)),
-                          ),
-                          registrationFailureOrSuccess = Left(domainFailure)
-                        },
-                    duplicateEmail: () => {
-                          emit(
-                            state.copyWith(email: RegistrationEmailField(state.email.value.getOrElse(() => ""), true)),
-                          ),
-                          registrationFailureOrSuccess = Left(domainFailure)
-                        },
-                    serverError: () => registrationFailureOrSuccess = Left(domainFailure),
-                    networkError: () => registrationFailureOrSuccess = Left(domainFailure))
-              },
-          (success) => registrationFailureOrSuccess = Right(RegistrationSuccess()));
+      loginResponse.fold((failure) {
+        failure.maybeWhen(
+            duplicateRecordFailure: (reason) {
+              if (reason == "username") {
+                emit(
+                  state.copyWith(username: RegistrationUsernameField(state.username.value.getOrElse(() => ""), true)),
+                );
+              } else {
+                emit(
+                  state.copyWith(email: RegistrationEmailField(state.email.value.getOrElse(() => ""), true)),
+                );
+              }
+            },
+            orElse: () {});
+
+        registrationFailureOrSuccess = Left(failure);
+      }, (success) => registrationFailureOrSuccess = Right(success));
     }
 
     emit(
       state.copyWith(
           isSubmitting: false, showErrorMessage: true, registrationFailureOrSuccess: registrationFailureOrSuccess),
     );
-  }
-
-  RegistrationFailure _mapRegistrationFailure(Failure failure) {
-    switch (failure.runtimeType) {
-      case DuplicateRecordFailure:
-        final failField = (failure as DuplicateRecordFailure).failureField;
-        if (failField == 'email') {
-          return const RegistrationFailure.duplicateEmail();
-        } else {
-          return const RegistrationFailure.duplicateUsername();
-        }
-      case NetworkFailure:
-        return const RegistrationFailure.networkError();
-      default:
-        return const RegistrationFailure.serverError();
-    }
   }
 }

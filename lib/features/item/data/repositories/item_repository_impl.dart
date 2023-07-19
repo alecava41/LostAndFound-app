@@ -1,14 +1,17 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:lost_and_found/core/status/failures.dart';
+import 'package:lost_and_found/features/item/data/adapters/item_from_dto.dart';
 import 'package:lost_and_found/features/item/data/adapters/news_from_dto.dart';
 import 'package:lost_and_found/features/item/data/adapters/search_item_from_dto.dart';
 import 'package:lost_and_found/features/item/data/adapters/user_item_from_dto.dart';
 import 'package:lost_and_found/features/item/data/datasources/read_news_data_source.dart';
+import 'package:lost_and_found/features/item/domain/entities/item.dart';
 import 'package:lost_and_found/features/item/domain/entities/search_item.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/domain/entities/news.dart';
 import 'package:lost_and_found/features/item/domain/repositories/item_repository.dart';
+import 'package:lost_and_found/features/item/domain/usecases/get_item.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_items_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_notifications_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/search_items_usecase.dart';
@@ -45,7 +48,7 @@ class ItemRepositoryImpl implements ItemRepository {
 
         return Right(domainItems);
       } else {
-        return Left(NetworkFailure());
+        return const Left(Failure.networkFailure());
       }
     } on Exception catch (e) {
       return Left(mapExceptionToFailure(e));
@@ -72,7 +75,7 @@ class ItemRepositoryImpl implements ItemRepository {
 
         return Right(domainNews);
       } else {
-        return Left(NetworkFailure());
+        return const Left(Failure.networkFailure());
       }
     } on Exception catch (e) {
       return Left(mapExceptionToFailure(e));
@@ -88,7 +91,22 @@ class ItemRepositoryImpl implements ItemRepository {
 
         return Right(domainItems);
       } else {
-        return Left(NetworkFailure());
+        return const Left(Failure.networkFailure());
+      }
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Item>> getItem(GetItemParams params) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        final item = await _dataSource.getItem(params);
+
+        return Right(item.toDomain());
+      } else {
+        return const Left(Failure.networkFailure());
       }
     } on Exception catch (e) {
       return Left(mapExceptionToFailure(e));

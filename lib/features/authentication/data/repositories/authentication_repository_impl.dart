@@ -33,7 +33,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   Future<Either<Failure, Success>> login(LoginParams? params) async {
     try {
       if (await _storage.hasValidSession()) {
-        return Right(LoginSuccess());
+        return const Right(Success.genericSuccess());
       }
 
       if (await _networkInfo.isConnected) {
@@ -52,9 +52,9 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
           await _storage.saveLoginInformation(params);
         }
 
-        return Right(LoginSuccess());
+        return const Right(Success.genericSuccess());
       } else {
-        return Left(NetworkFailure());
+        return const Left(Failure.networkFailure());
       }
 
     } on Exception catch (e) {
@@ -67,7 +67,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
     await _storage.destroySession();
     await _storage.removeCredentials();
 
-    return Right(LogoutSuccess());
+    return const Right(Success.genericSuccess());
   }
 
   @override
@@ -75,9 +75,9 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
     try {
       if (await _networkInfo.isConnected) {
         await _dataSource.register(params);
-        return Right(RegistrationSuccess());
+        return const Right(Success.genericSuccess());
       } else {
-        return Left(NetworkFailure());
+        return const Left(Failure.networkFailure());
       }
     } on Exception catch (e) {
       return Left(mapExceptionToFailure(e));

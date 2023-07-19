@@ -19,9 +19,11 @@ class NewsContent extends StatelessWidget {
                       padding: const EdgeInsets.all(30),
                       backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
                       content: Text(
-                          failure.when<String>(
-                              serverError: () => 'Server error. Please try again later.',
-                              networkError: () => 'No internet connection available. Check your internet connection.'),
+                          failure.maybeWhen<String>(
+                              genericFailure: () => 'Server error. Please try again later.',
+                              networkFailure: () => 'No internet connection available. Check your internet connection.',
+                              orElse: () => 'Unknown error'
+                          ),
                           style: const TextStyle(fontSize: 20)),
                     ),
                   )

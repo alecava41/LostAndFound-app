@@ -28,7 +28,7 @@ class CategoryRepositoryImpl implements CategoryRepository {
 
         return Right(domainCategories);
       } else {
-        return Left(NetworkFailure());
+        return const Left(Failure.networkFailure());
       }
     } on Exception catch (e) {
       return Left(mapExceptionToFailure(e));

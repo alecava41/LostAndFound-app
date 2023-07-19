@@ -11,36 +11,40 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SearchBloc, SearchState>(
-        listener: (ctx, state) {
-          if (state.searchFailureOrSuccess != null) {
-            state.searchFailureOrSuccess!.fold(
-                (failure) => {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          padding: const EdgeInsets.all(30),
-                          backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
-                          content: Text(
-                              failure.when<String>(
-                                  serverError: () => 'Server error. Please try again later.',
-                                  networkError: () => 'No internet connection available. Check your internet connection.',
-                                  validationError: () => 'Choose at least the type and the interested location'),
-                              style: const TextStyle(fontSize: 20)),
-                        ),
-                      )
-                    },
-                (success) => {});
-          }
-        },
-        builder: (ctx, state) {
-          switch (state.pageState) {
-            case SearchPageState.loadingPage:
-              return const Center(child: CircularProgressIndicator(value: null,)); // TODO: modify
-            case SearchPageState.resultPage:
-              return const SearchResultScreen();
-            case SearchPageState.filterPage:
-              return const SearchOptionScreen();
-          }
-        },
+      listener: (ctx, state) {
+        if (state.searchFailureOrSuccess != null) {
+          state.searchFailureOrSuccess!.fold(
+              (failure) => {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        padding: const EdgeInsets.all(30),
+                        backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                        content: Text(
+                            failure.maybeWhen<String>(
+                                genericFailure: () => 'Server error. Please try again later.',
+                                networkFailure: () => 'No internet connection available. Check your internet connection.',
+                                validationFailure: (reason) => reason!,
+                                orElse: () => 'Unknown error'),
+                            style: const TextStyle(fontSize: 20)),
+                      ),
+                    )
+                  },
+              (success) => {});
+        }
+      },
+      builder: (ctx, state) {
+        switch (state.pageState) {
+          case SearchPageState.loadingPage:
+            return const Center(
+                child: CircularProgressIndicator(
+              value: null,
+            )); // TODO: modify
+          case SearchPageState.resultPage:
+            return const SearchResultScreen();
+          case SearchPageState.filterPage:
+            return const SearchOptionScreen();
+        }
+      },
     );
   }
 }

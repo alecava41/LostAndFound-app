@@ -1,9 +1,11 @@
 import 'package:lost_and_found/features/item/data/models/user_item/user_item_dto.dart';
+import 'package:lost_and_found/features/item/domain/usecases/get_item.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_items_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_notifications_usecase.dart';
 
 import '../../../../core/data/datasources/utils.dart';
 import '../../domain/usecases/search_items_usecase.dart';
+import '../models/item/item_dto.dart';
 import '../models/news/news_dto.dart';
 import '../models/search_item/search_item_dto.dart';
 import 'item_client.dart';
@@ -12,6 +14,7 @@ abstract class ItemDataSource {
   Future<List<UserItemDto>> getUserItems(GetUserItemsParams params, int userId);
   Future<List<NewsDto>> getUserNotifications(GetUserNotificationsParams params, int userId);
   Future<List<SearchItemDto>> searchItems(SearchItemsParams params);
+  Future<ItemDto> getItem(GetItemParams params);
 }
 
 class ItemDataSourceImpl implements ItemDataSource {
@@ -41,5 +44,10 @@ class ItemDataSourceImpl implements ItemDataSource {
       params.category,
       params.date
     ).catchError(handleError<List<SearchItemDto>>);
+  }
+
+  @override
+  Future<ItemDto> getItem(GetItemParams params) {
+    return _client.getItem(params.id).catchError(handleError<ItemDto>);
   }
 }

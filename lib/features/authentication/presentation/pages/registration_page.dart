@@ -19,7 +19,7 @@ class RegistrationScreen extends StatelessWidget {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.of(context).pushNamed(
+              Navigator.of(context).pushNamed( // TODO maybe not needed
                 '/',
               );
             },

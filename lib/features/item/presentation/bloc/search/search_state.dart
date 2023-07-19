@@ -18,7 +18,7 @@ class SearchState with _$SearchState {
 
     // Fields to handle real search
     @Default(SearchPageState.filterPage) SearchPageState pageState,
-    Either<SearchFailure, Success>? searchFailureOrSuccess,
+    Either<Failure, Success>? searchFailureOrSuccess,
   }) = _SearchState;
 
   factory SearchState.initial() => const SearchState(
