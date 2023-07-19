@@ -25,6 +25,8 @@ class CategorySelectionForm extends StatelessWidget {
     }
   }
 
+  // TODO maybe it's better to provide a quick way to remove category
+
   @override
   Widget build(BuildContext context) {
     return Column(

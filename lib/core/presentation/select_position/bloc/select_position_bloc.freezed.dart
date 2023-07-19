@@ -20,21 +20,18 @@ mixin _$SelectPositionEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() selectPositionCreated,
     required TResult Function() selectCurrentPosition,
-    required TResult Function(LatLng pos) selectedPositionChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? selectPositionCreated,
     TResult? Function()? selectCurrentPosition,
-    TResult? Function(LatLng pos)? selectedPositionChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? selectPositionCreated,
     TResult Function()? selectCurrentPosition,
-    TResult Function(LatLng pos)? selectedPositionChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -44,22 +41,18 @@ mixin _$SelectPositionEvent {
         selectPositionCreated,
     required TResult Function(_SelectCurrentPosition value)
         selectCurrentPosition,
-    required TResult Function(_SelectedPositionChanged value)
-        selectedPositionChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SelectPositionCreated value)? selectPositionCreated,
     TResult? Function(_SelectCurrentPosition value)? selectCurrentPosition,
-    TResult? Function(_SelectedPositionChanged value)? selectedPositionChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SelectPositionCreated value)? selectPositionCreated,
     TResult Function(_SelectCurrentPosition value)? selectCurrentPosition,
-    TResult Function(_SelectedPositionChanged value)? selectedPositionChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -123,7 +116,6 @@ class _$_SelectPositionCreated implements _SelectPositionCreated {
   TResult when<TResult extends Object?>({
     required TResult Function() selectPositionCreated,
     required TResult Function() selectCurrentPosition,
-    required TResult Function(LatLng pos) selectedPositionChanged,
   }) {
     return selectPositionCreated();
   }
@@ -133,7 +125,6 @@ class _$_SelectPositionCreated implements _SelectPositionCreated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? selectPositionCreated,
     TResult? Function()? selectCurrentPosition,
-    TResult? Function(LatLng pos)? selectedPositionChanged,
   }) {
     return selectPositionCreated?.call();
   }
@@ -143,7 +134,6 @@ class _$_SelectPositionCreated implements _SelectPositionCreated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? selectPositionCreated,
     TResult Function()? selectCurrentPosition,
-    TResult Function(LatLng pos)? selectedPositionChanged,
     required TResult orElse(),
   }) {
     if (selectPositionCreated != null) {
@@ -159,8 +149,6 @@ class _$_SelectPositionCreated implements _SelectPositionCreated {
         selectPositionCreated,
     required TResult Function(_SelectCurrentPosition value)
         selectCurrentPosition,
-    required TResult Function(_SelectedPositionChanged value)
-        selectedPositionChanged,
   }) {
     return selectPositionCreated(this);
   }
@@ -170,7 +158,6 @@ class _$_SelectPositionCreated implements _SelectPositionCreated {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SelectPositionCreated value)? selectPositionCreated,
     TResult? Function(_SelectCurrentPosition value)? selectCurrentPosition,
-    TResult? Function(_SelectedPositionChanged value)? selectedPositionChanged,
   }) {
     return selectPositionCreated?.call(this);
   }
@@ -180,7 +167,6 @@ class _$_SelectPositionCreated implements _SelectPositionCreated {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SelectPositionCreated value)? selectPositionCreated,
     TResult Function(_SelectCurrentPosition value)? selectCurrentPosition,
-    TResult Function(_SelectedPositionChanged value)? selectedPositionChanged,
     required TResult orElse(),
   }) {
     if (selectPositionCreated != null) {
@@ -234,7 +220,6 @@ class _$_SelectCurrentPosition implements _SelectCurrentPosition {
   TResult when<TResult extends Object?>({
     required TResult Function() selectPositionCreated,
     required TResult Function() selectCurrentPosition,
-    required TResult Function(LatLng pos) selectedPositionChanged,
   }) {
     return selectCurrentPosition();
   }
@@ -244,7 +229,6 @@ class _$_SelectCurrentPosition implements _SelectCurrentPosition {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? selectPositionCreated,
     TResult? Function()? selectCurrentPosition,
-    TResult? Function(LatLng pos)? selectedPositionChanged,
   }) {
     return selectCurrentPosition?.call();
   }
@@ -254,7 +238,6 @@ class _$_SelectCurrentPosition implements _SelectCurrentPosition {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? selectPositionCreated,
     TResult Function()? selectCurrentPosition,
-    TResult Function(LatLng pos)? selectedPositionChanged,
     required TResult orElse(),
   }) {
     if (selectCurrentPosition != null) {
@@ -270,8 +253,6 @@ class _$_SelectCurrentPosition implements _SelectCurrentPosition {
         selectPositionCreated,
     required TResult Function(_SelectCurrentPosition value)
         selectCurrentPosition,
-    required TResult Function(_SelectedPositionChanged value)
-        selectedPositionChanged,
   }) {
     return selectCurrentPosition(this);
   }
@@ -281,7 +262,6 @@ class _$_SelectCurrentPosition implements _SelectCurrentPosition {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SelectPositionCreated value)? selectPositionCreated,
     TResult? Function(_SelectCurrentPosition value)? selectCurrentPosition,
-    TResult? Function(_SelectedPositionChanged value)? selectedPositionChanged,
   }) {
     return selectCurrentPosition?.call(this);
   }
@@ -291,7 +271,6 @@ class _$_SelectCurrentPosition implements _SelectCurrentPosition {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SelectPositionCreated value)? selectPositionCreated,
     TResult Function(_SelectCurrentPosition value)? selectCurrentPosition,
-    TResult Function(_SelectedPositionChanged value)? selectedPositionChanged,
     required TResult orElse(),
   }) {
     if (selectCurrentPosition != null) {
@@ -306,157 +285,13 @@ abstract class _SelectCurrentPosition implements SelectPositionEvent {
 }
 
 /// @nodoc
-abstract class _$$_SelectedPositionChangedCopyWith<$Res> {
-  factory _$$_SelectedPositionChangedCopyWith(_$_SelectedPositionChanged value,
-          $Res Function(_$_SelectedPositionChanged) then) =
-      __$$_SelectedPositionChangedCopyWithImpl<$Res>;
-  @useResult
-  $Res call({LatLng pos});
-}
-
-/// @nodoc
-class __$$_SelectedPositionChangedCopyWithImpl<$Res>
-    extends _$SelectPositionEventCopyWithImpl<$Res, _$_SelectedPositionChanged>
-    implements _$$_SelectedPositionChangedCopyWith<$Res> {
-  __$$_SelectedPositionChangedCopyWithImpl(_$_SelectedPositionChanged _value,
-      $Res Function(_$_SelectedPositionChanged) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? pos = null,
-  }) {
-    return _then(_$_SelectedPositionChanged(
-      null == pos
-          ? _value.pos
-          : pos // ignore: cast_nullable_to_non_nullable
-              as LatLng,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_SelectedPositionChanged implements _SelectedPositionChanged {
-  const _$_SelectedPositionChanged(this.pos);
-
-  @override
-  final LatLng pos;
-
-  @override
-  String toString() {
-    return 'SelectPositionEvent.selectedPositionChanged(pos: $pos)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SelectedPositionChanged &&
-            (identical(other.pos, pos) || other.pos == pos));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, pos);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SelectedPositionChangedCopyWith<_$_SelectedPositionChanged>
-      get copyWith =>
-          __$$_SelectedPositionChangedCopyWithImpl<_$_SelectedPositionChanged>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() selectPositionCreated,
-    required TResult Function() selectCurrentPosition,
-    required TResult Function(LatLng pos) selectedPositionChanged,
-  }) {
-    return selectedPositionChanged(pos);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? selectPositionCreated,
-    TResult? Function()? selectCurrentPosition,
-    TResult? Function(LatLng pos)? selectedPositionChanged,
-  }) {
-    return selectedPositionChanged?.call(pos);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? selectPositionCreated,
-    TResult Function()? selectCurrentPosition,
-    TResult Function(LatLng pos)? selectedPositionChanged,
-    required TResult orElse(),
-  }) {
-    if (selectedPositionChanged != null) {
-      return selectedPositionChanged(pos);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_SelectPositionCreated value)
-        selectPositionCreated,
-    required TResult Function(_SelectCurrentPosition value)
-        selectCurrentPosition,
-    required TResult Function(_SelectedPositionChanged value)
-        selectedPositionChanged,
-  }) {
-    return selectedPositionChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SelectPositionCreated value)? selectPositionCreated,
-    TResult? Function(_SelectCurrentPosition value)? selectCurrentPosition,
-    TResult? Function(_SelectedPositionChanged value)? selectedPositionChanged,
-  }) {
-    return selectedPositionChanged?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SelectPositionCreated value)? selectPositionCreated,
-    TResult Function(_SelectCurrentPosition value)? selectCurrentPosition,
-    TResult Function(_SelectedPositionChanged value)? selectedPositionChanged,
-    required TResult orElse(),
-  }) {
-    if (selectedPositionChanged != null) {
-      return selectedPositionChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SelectedPositionChanged implements SelectPositionEvent {
-  const factory _SelectedPositionChanged(final LatLng pos) =
-      _$_SelectedPositionChanged;
-
-  LatLng get pos;
-  @JsonKey(ignore: true)
-  _$$_SelectedPositionChangedCopyWith<_$_SelectedPositionChanged>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 mixin _$SelectPositionState {
-  LatLng get markerPos => throw _privateConstructorUsedError;
+  LatLng get userCurrentPos => throw _privateConstructorUsedError;
   bool get isDeviceConnected => throw _privateConstructorUsedError;
   bool get isServiceAvailable => throw _privateConstructorUsedError;
   bool get hasPermissions => throw _privateConstructorUsedError;
   bool get isPermissionPermanentlyNegated => throw _privateConstructorUsedError;
+  DateTime? get lastPositionUpdate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SelectPositionStateCopyWith<SelectPositionState> get copyWith =>
@@ -470,11 +305,12 @@ abstract class $SelectPositionStateCopyWith<$Res> {
       _$SelectPositionStateCopyWithImpl<$Res, SelectPositionState>;
   @useResult
   $Res call(
-      {LatLng markerPos,
+      {LatLng userCurrentPos,
       bool isDeviceConnected,
       bool isServiceAvailable,
       bool hasPermissions,
-      bool isPermissionPermanentlyNegated});
+      bool isPermissionPermanentlyNegated,
+      DateTime? lastPositionUpdate});
 }
 
 /// @nodoc
@@ -490,16 +326,17 @@ class _$SelectPositionStateCopyWithImpl<$Res, $Val extends SelectPositionState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? markerPos = null,
+    Object? userCurrentPos = null,
     Object? isDeviceConnected = null,
     Object? isServiceAvailable = null,
     Object? hasPermissions = null,
     Object? isPermissionPermanentlyNegated = null,
+    Object? lastPositionUpdate = freezed,
   }) {
     return _then(_value.copyWith(
-      markerPos: null == markerPos
-          ? _value.markerPos
-          : markerPos // ignore: cast_nullable_to_non_nullable
+      userCurrentPos: null == userCurrentPos
+          ? _value.userCurrentPos
+          : userCurrentPos // ignore: cast_nullable_to_non_nullable
               as LatLng,
       isDeviceConnected: null == isDeviceConnected
           ? _value.isDeviceConnected
@@ -517,6 +354,10 @@ class _$SelectPositionStateCopyWithImpl<$Res, $Val extends SelectPositionState>
           ? _value.isPermissionPermanentlyNegated
           : isPermissionPermanentlyNegated // ignore: cast_nullable_to_non_nullable
               as bool,
+      lastPositionUpdate: freezed == lastPositionUpdate
+          ? _value.lastPositionUpdate
+          : lastPositionUpdate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -530,11 +371,12 @@ abstract class _$$_SelectPositionStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {LatLng markerPos,
+      {LatLng userCurrentPos,
       bool isDeviceConnected,
       bool isServiceAvailable,
       bool hasPermissions,
-      bool isPermissionPermanentlyNegated});
+      bool isPermissionPermanentlyNegated,
+      DateTime? lastPositionUpdate});
 }
 
 /// @nodoc
@@ -548,16 +390,17 @@ class __$$_SelectPositionStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? markerPos = null,
+    Object? userCurrentPos = null,
     Object? isDeviceConnected = null,
     Object? isServiceAvailable = null,
     Object? hasPermissions = null,
     Object? isPermissionPermanentlyNegated = null,
+    Object? lastPositionUpdate = freezed,
   }) {
     return _then(_$_SelectPositionState(
-      markerPos: null == markerPos
-          ? _value.markerPos
-          : markerPos // ignore: cast_nullable_to_non_nullable
+      userCurrentPos: null == userCurrentPos
+          ? _value.userCurrentPos
+          : userCurrentPos // ignore: cast_nullable_to_non_nullable
               as LatLng,
       isDeviceConnected: null == isDeviceConnected
           ? _value.isDeviceConnected
@@ -575,6 +418,10 @@ class __$$_SelectPositionStateCopyWithImpl<$Res>
           ? _value.isPermissionPermanentlyNegated
           : isPermissionPermanentlyNegated // ignore: cast_nullable_to_non_nullable
               as bool,
+      lastPositionUpdate: freezed == lastPositionUpdate
+          ? _value.lastPositionUpdate
+          : lastPositionUpdate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -583,14 +430,15 @@ class __$$_SelectPositionStateCopyWithImpl<$Res>
 
 class _$_SelectPositionState implements _SelectPositionState {
   const _$_SelectPositionState(
-      {required this.markerPos,
+      {required this.userCurrentPos,
       this.isDeviceConnected = false,
       this.isServiceAvailable = false,
       this.hasPermissions = false,
-      this.isPermissionPermanentlyNegated = false});
+      this.isPermissionPermanentlyNegated = false,
+      this.lastPositionUpdate = null});
 
   @override
-  final LatLng markerPos;
+  final LatLng userCurrentPos;
   @override
   @JsonKey()
   final bool isDeviceConnected;
@@ -603,10 +451,13 @@ class _$_SelectPositionState implements _SelectPositionState {
   @override
   @JsonKey()
   final bool isPermissionPermanentlyNegated;
+  @override
+  @JsonKey()
+  final DateTime? lastPositionUpdate;
 
   @override
   String toString() {
-    return 'SelectPositionState(markerPos: $markerPos, isDeviceConnected: $isDeviceConnected, isServiceAvailable: $isServiceAvailable, hasPermissions: $hasPermissions, isPermissionPermanentlyNegated: $isPermissionPermanentlyNegated)';
+    return 'SelectPositionState(userCurrentPos: $userCurrentPos, isDeviceConnected: $isDeviceConnected, isServiceAvailable: $isServiceAvailable, hasPermissions: $hasPermissions, isPermissionPermanentlyNegated: $isPermissionPermanentlyNegated, lastPositionUpdate: $lastPositionUpdate)';
   }
 
   @override
@@ -614,8 +465,8 @@ class _$_SelectPositionState implements _SelectPositionState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SelectPositionState &&
-            (identical(other.markerPos, markerPos) ||
-                other.markerPos == markerPos) &&
+            (identical(other.userCurrentPos, userCurrentPos) ||
+                other.userCurrentPos == userCurrentPos) &&
             (identical(other.isDeviceConnected, isDeviceConnected) ||
                 other.isDeviceConnected == isDeviceConnected) &&
             (identical(other.isServiceAvailable, isServiceAvailable) ||
@@ -625,12 +476,20 @@ class _$_SelectPositionState implements _SelectPositionState {
             (identical(other.isPermissionPermanentlyNegated,
                     isPermissionPermanentlyNegated) ||
                 other.isPermissionPermanentlyNegated ==
-                    isPermissionPermanentlyNegated));
+                    isPermissionPermanentlyNegated) &&
+            (identical(other.lastPositionUpdate, lastPositionUpdate) ||
+                other.lastPositionUpdate == lastPositionUpdate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, markerPos, isDeviceConnected,
-      isServiceAvailable, hasPermissions, isPermissionPermanentlyNegated);
+  int get hashCode => Object.hash(
+      runtimeType,
+      userCurrentPos,
+      isDeviceConnected,
+      isServiceAvailable,
+      hasPermissions,
+      isPermissionPermanentlyNegated,
+      lastPositionUpdate);
 
   @JsonKey(ignore: true)
   @override
@@ -642,14 +501,15 @@ class _$_SelectPositionState implements _SelectPositionState {
 
 abstract class _SelectPositionState implements SelectPositionState {
   const factory _SelectPositionState(
-      {required final LatLng markerPos,
+      {required final LatLng userCurrentPos,
       final bool isDeviceConnected,
       final bool isServiceAvailable,
       final bool hasPermissions,
-      final bool isPermissionPermanentlyNegated}) = _$_SelectPositionState;
+      final bool isPermissionPermanentlyNegated,
+      final DateTime? lastPositionUpdate}) = _$_SelectPositionState;
 
   @override
-  LatLng get markerPos;
+  LatLng get userCurrentPos;
   @override
   bool get isDeviceConnected;
   @override
@@ -658,6 +518,8 @@ abstract class _SelectPositionState implements SelectPositionState {
   bool get hasPermissions;
   @override
   bool get isPermissionPermanentlyNegated;
+  @override
+  DateTime? get lastPositionUpdate;
   @override
   @JsonKey(ignore: true)
   _$$_SelectPositionStateCopyWith<_$_SelectPositionState> get copyWith =>

@@ -9,4 +9,5 @@ class SearchEvent with _$SearchEvent {
   const factory SearchEvent.categorySelected(int id, String category) = _CategorySelected;
   const factory SearchEvent.dateSelected(DateTime date) = _DateSelected;
   const factory SearchEvent.searchSubmitted() = _SearchSubmitted;
+  const factory SearchEvent.showFilters() = _ShowFilters;
 }

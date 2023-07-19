@@ -33,8 +33,6 @@ class SearchScreen extends StatelessWidget {
         },
         builder: (ctx, state) {
           switch (state.pageState) {
-            case SearchPageState.searchPage:
-              return const SearchOptionScreen();
             case SearchPageState.loadingPage:
               return const Center(child: CircularProgressIndicator(value: null,)); // TODO: modify
             case SearchPageState.resultPage:

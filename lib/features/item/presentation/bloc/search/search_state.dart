@@ -17,7 +17,7 @@ class SearchState with _$SearchState {
     @Default("") String token,
 
     // Fields to handle real search
-    @Default(SearchPageState.searchPage) SearchPageState pageState,
+    @Default(SearchPageState.filterPage) SearchPageState pageState,
     Either<SearchFailure, Success>? searchFailureOrSuccess,
   }) = _SearchState;
 
@@ -33,7 +33,6 @@ class SearchState with _$SearchState {
 
 enum SearchPageState {
   loadingPage,
-  searchPage,
   resultPage,
   filterPage
 }

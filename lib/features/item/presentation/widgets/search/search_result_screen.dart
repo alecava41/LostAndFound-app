@@ -8,7 +8,7 @@ import 'custom_list_view.dart';
 class SearchResultScreen extends StatelessWidget {
   const SearchResultScreen({super.key});
 
-  // TODO add missing app bar
+  // TODO adjust page like "search filter page"
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class SearchResultScreen extends StatelessWidget {
                         shape: const StadiumBorder(),
                       ),
                       onPressed: () {
-                        // Button functionality
+                        ctx.read<SearchBloc>().add(const SearchEvent.showFilters());
                       },
                       child: const Row(
                         children: [
@@ -63,6 +63,7 @@ class SearchResultScreen extends StatelessWidget {
                                 token: state.token)
                         ).toList(),
                       ))
+                // TODO adjust case without results
                     : const Center(
                         child: Text(
                           "There are no matching items based on your parameters.",

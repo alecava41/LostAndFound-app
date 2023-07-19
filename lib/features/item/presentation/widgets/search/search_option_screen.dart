@@ -11,6 +11,8 @@ import '../../../../../core/presentation/widgets/select_position_button.dart';
 import '../../../../../utils/colors.dart';
 
 class SearchOptionScreen extends StatelessWidget {
+
+
   const SearchOptionScreen({super.key});
 
   @override
@@ -26,7 +28,7 @@ class SearchOptionScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text(
-                          "Search",
+                          "Search filters",
                           style: TextStyle(fontSize: 40),
                         ),
                         ElevatedButton(
@@ -37,7 +39,7 @@ class SearchOptionScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                           ),
                           child: const Text(
-                            "DELETE ALL", // TODO maybe reset?
+                            "DELETE ALL", // TODO maybe "reset"?
                           ),
                         ),
                       ],

@@ -26,20 +26,19 @@ class SelectPositionBloc extends Bloc<SelectPositionEvent, SelectPositionState> 
         await event.when<FutureOr<void>>(
           selectPositionCreated: () => _onSelectPositionCreated(emit),
           selectCurrentPosition: () => _onSelectCurrentPosition(emit),
-          selectedPositionChanged: (LatLng pos) => _onSelectedPositionChanged(emit, pos),
         );
       },
     );
   }
 
-  void _onSelectedPositionChanged(Emitter<SelectPositionState> emit, LatLng pos) {
-    emit(state.copyWith(markerPos: pos));
-  }
-
   Future<void> _onSelectCurrentPosition(Emitter<SelectPositionState> emit) async {
     final positionOrFailure = await _geolocationService.getGeoPosition();
     positionOrFailure.fold(
-        (failure) => {}, (pos) => emit(state.copyWith(markerPos: LatLng(pos.latitude, pos.longitude))));
+        (failure) => {},
+        (pos) => emit(state.copyWith(
+              userCurrentPos: LatLng(pos.latitude, pos.longitude),
+              lastPositionUpdate: DateTime.now(),
+            )));
   }
 
   Future<void> _onSelectPositionCreated(Emitter<SelectPositionState> emit) async {
@@ -49,8 +48,7 @@ class SelectPositionBloc extends Bloc<SelectPositionEvent, SelectPositionState> 
 
     final positionOrFailure = await _geolocationService.getGeoPosition();
     positionOrFailure.fold(
-        (failure) => (isServiceFailure, isPermissionPermanentlyDeniedFailure) =
-            _mapFailureToState(failure),
+        (failure) => (isServiceFailure, isPermissionPermanentlyDeniedFailure) = _mapFailureToState(failure),
         (success) => {});
 
     emit(state.copyWith(

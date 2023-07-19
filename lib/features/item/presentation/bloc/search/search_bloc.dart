@@ -41,9 +41,14 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           categorySelected: (id, category) => _onCategorySelected(emit, id, category),
           dateSelected: (date) => _onDateSelected(emit, date),
           searchSubmitted: () => _onSearchSubmit(emit),
+          showFilters: () => _onShowFilters(emit),
         );
       },
     );
+  }
+
+  void _onShowFilters(Emitter<SearchState> emit) {
+    emit(state.copyWith(pageState: SearchPageState.filterPage));
   }
 
   Future<void> _onSearchSubmit(Emitter<SearchState> emit) async {
@@ -118,37 +123,4 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     addressOrFailure.fold((failure) => {}, (address) =>
         emit(state.copyWith(address: address, pos: pos)));
   }
-
-// Future<void> _onHomeCreatedOrRefreshed(Emitter<HomeState> emit) async {
-//   Either<HomeFailure, Success>? loadFailureOrSuccess;
-//
-//   final foundItemsResponse = await _getUserItemsUseCase(GetUserItemsParams(type: ItemType.found, last: 0));
-//   final lostItemsResponse = await _getUserItemsUseCase(GetUserItemsParams(type: ItemType.lost, last: 0));
-//
-//   foundItemsResponse.fold((failure) => loadFailureOrSuccess = Left(_mapRequestToFailure(failure)),
-//           (success) => loadFailureOrSuccess = Right(UserItemsLoadSuccess()));
-//
-//   lostItemsResponse.fold((failure) => loadFailureOrSuccess = Left(_mapRequestToFailure(failure)),
-//           (success) => loadFailureOrSuccess = Right(UserItemsLoadSuccess()));
-//
-//   final session = await _secureStorage.getSessionInformation();
-//
-//   emit(
-//     state.copyWith(
-//         lostItems: lostItemsResponse.getOrElse(() => []),
-//         foundItems: foundItemsResponse.getOrElse(() => []),
-//         homeFailureOrSuccess: loadFailureOrSuccess,
-//         token: session.token
-//     ),
-//   );
-// }
-//
-// HomeFailure _mapRequestToFailure(Failure failure) {
-//   switch (failure.runtimeType) {
-//     case NetworkFailure:
-//       return const HomeFailure.networkError();
-//     default:
-//       return const HomeFailure.serverError();
-//   }
-// }
 }

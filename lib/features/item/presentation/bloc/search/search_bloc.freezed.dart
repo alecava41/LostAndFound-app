@@ -25,6 +25,7 @@ mixin _$SearchEvent {
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +37,7 @@ mixin _$SearchEvent {
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,6 +49,7 @@ mixin _$SearchEvent {
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +62,7 @@ mixin _$SearchEvent {
     required TResult Function(_CategorySelected value) categorySelected,
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +74,7 @@ mixin _$SearchEvent {
     TResult? Function(_CategorySelected value)? categorySelected,
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +86,7 @@ mixin _$SearchEvent {
     TResult Function(_CategorySelected value)? categorySelected,
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -149,6 +155,7 @@ class _$_ResetFilters implements _ResetFilters {
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
   }) {
     return resetFilters();
   }
@@ -163,6 +170,7 @@ class _$_ResetFilters implements _ResetFilters {
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
   }) {
     return resetFilters?.call();
   }
@@ -177,6 +185,7 @@ class _$_ResetFilters implements _ResetFilters {
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
     required TResult orElse(),
   }) {
     if (resetFilters != null) {
@@ -195,6 +204,7 @@ class _$_ResetFilters implements _ResetFilters {
     required TResult Function(_CategorySelected value) categorySelected,
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
   }) {
     return resetFilters(this);
   }
@@ -209,6 +219,7 @@ class _$_ResetFilters implements _ResetFilters {
     TResult? Function(_CategorySelected value)? categorySelected,
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
   }) {
     return resetFilters?.call(this);
   }
@@ -223,6 +234,7 @@ class _$_ResetFilters implements _ResetFilters {
     TResult Function(_CategorySelected value)? categorySelected,
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
     required TResult orElse(),
   }) {
     if (resetFilters != null) {
@@ -281,6 +293,7 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
   }) {
     return foundCheckTriggered();
   }
@@ -295,6 +308,7 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
   }) {
     return foundCheckTriggered?.call();
   }
@@ -309,6 +323,7 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
     required TResult orElse(),
   }) {
     if (foundCheckTriggered != null) {
@@ -327,6 +342,7 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     required TResult Function(_CategorySelected value) categorySelected,
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
   }) {
     return foundCheckTriggered(this);
   }
@@ -341,6 +357,7 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult? Function(_CategorySelected value)? categorySelected,
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
   }) {
     return foundCheckTriggered?.call(this);
   }
@@ -355,6 +372,7 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult Function(_CategorySelected value)? categorySelected,
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
     required TResult orElse(),
   }) {
     if (foundCheckTriggered != null) {
@@ -413,6 +431,7 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
   }) {
     return lostCheckTriggered();
   }
@@ -427,6 +446,7 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
   }) {
     return lostCheckTriggered?.call();
   }
@@ -441,6 +461,7 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
     required TResult orElse(),
   }) {
     if (lostCheckTriggered != null) {
@@ -459,6 +480,7 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     required TResult Function(_CategorySelected value) categorySelected,
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
   }) {
     return lostCheckTriggered(this);
   }
@@ -473,6 +495,7 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult? Function(_CategorySelected value)? categorySelected,
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
   }) {
     return lostCheckTriggered?.call(this);
   }
@@ -487,6 +510,7 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult Function(_CategorySelected value)? categorySelected,
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
     required TResult orElse(),
   }) {
     if (lostCheckTriggered != null) {
@@ -571,6 +595,7 @@ class _$_PositionSelected implements _PositionSelected {
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
   }) {
     return positionSelected(pos);
   }
@@ -585,6 +610,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
   }) {
     return positionSelected?.call(pos);
   }
@@ -599,6 +625,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
     required TResult orElse(),
   }) {
     if (positionSelected != null) {
@@ -617,6 +644,7 @@ class _$_PositionSelected implements _PositionSelected {
     required TResult Function(_CategorySelected value) categorySelected,
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
   }) {
     return positionSelected(this);
   }
@@ -631,6 +659,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult? Function(_CategorySelected value)? categorySelected,
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
   }) {
     return positionSelected?.call(this);
   }
@@ -645,6 +674,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult Function(_CategorySelected value)? categorySelected,
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
     required TResult orElse(),
   }) {
     if (positionSelected != null) {
@@ -743,6 +773,7 @@ class _$_CategorySelected implements _CategorySelected {
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
   }) {
     return categorySelected(id, category);
   }
@@ -757,6 +788,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
   }) {
     return categorySelected?.call(id, category);
   }
@@ -771,6 +803,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
     required TResult orElse(),
   }) {
     if (categorySelected != null) {
@@ -789,6 +822,7 @@ class _$_CategorySelected implements _CategorySelected {
     required TResult Function(_CategorySelected value) categorySelected,
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
   }) {
     return categorySelected(this);
   }
@@ -803,6 +837,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult? Function(_CategorySelected value)? categorySelected,
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
   }) {
     return categorySelected?.call(this);
   }
@@ -817,6 +852,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult Function(_CategorySelected value)? categorySelected,
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
     required TResult orElse(),
   }) {
     if (categorySelected != null) {
@@ -908,6 +944,7 @@ class _$_DateSelected implements _DateSelected {
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
   }) {
     return dateSelected(date);
   }
@@ -922,6 +959,7 @@ class _$_DateSelected implements _DateSelected {
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
   }) {
     return dateSelected?.call(date);
   }
@@ -936,6 +974,7 @@ class _$_DateSelected implements _DateSelected {
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
     required TResult orElse(),
   }) {
     if (dateSelected != null) {
@@ -954,6 +993,7 @@ class _$_DateSelected implements _DateSelected {
     required TResult Function(_CategorySelected value) categorySelected,
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
   }) {
     return dateSelected(this);
   }
@@ -968,6 +1008,7 @@ class _$_DateSelected implements _DateSelected {
     TResult? Function(_CategorySelected value)? categorySelected,
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
   }) {
     return dateSelected?.call(this);
   }
@@ -982,6 +1023,7 @@ class _$_DateSelected implements _DateSelected {
     TResult Function(_CategorySelected value)? categorySelected,
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
     required TResult orElse(),
   }) {
     if (dateSelected != null) {
@@ -1045,6 +1087,7 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
   }) {
     return searchSubmitted();
   }
@@ -1059,6 +1102,7 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
   }) {
     return searchSubmitted?.call();
   }
@@ -1073,6 +1117,7 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
     required TResult orElse(),
   }) {
     if (searchSubmitted != null) {
@@ -1091,6 +1136,7 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     required TResult Function(_CategorySelected value) categorySelected,
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
   }) {
     return searchSubmitted(this);
   }
@@ -1105,6 +1151,7 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     TResult? Function(_CategorySelected value)? categorySelected,
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
   }) {
     return searchSubmitted?.call(this);
   }
@@ -1119,6 +1166,7 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     TResult Function(_CategorySelected value)? categorySelected,
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
     required TResult orElse(),
   }) {
     if (searchSubmitted != null) {
@@ -1130,6 +1178,144 @@ class _$_SearchSubmitted implements _SearchSubmitted {
 
 abstract class _SearchSubmitted implements SearchEvent {
   const factory _SearchSubmitted() = _$_SearchSubmitted;
+}
+
+/// @nodoc
+abstract class _$$_ShowFiltersCopyWith<$Res> {
+  factory _$$_ShowFiltersCopyWith(
+          _$_ShowFilters value, $Res Function(_$_ShowFilters) then) =
+      __$$_ShowFiltersCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ShowFiltersCopyWithImpl<$Res>
+    extends _$SearchEventCopyWithImpl<$Res, _$_ShowFilters>
+    implements _$$_ShowFiltersCopyWith<$Res> {
+  __$$_ShowFiltersCopyWithImpl(
+      _$_ShowFilters _value, $Res Function(_$_ShowFilters) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ShowFilters implements _ShowFilters {
+  const _$_ShowFilters();
+
+  @override
+  String toString() {
+    return 'SearchEvent.showFilters()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ShowFilters);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() resetFilters,
+    required TResult Function() foundCheckTriggered,
+    required TResult Function() lostCheckTriggered,
+    required TResult Function(LatLng pos) positionSelected,
+    required TResult Function(int id, String category) categorySelected,
+    required TResult Function(DateTime date) dateSelected,
+    required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
+  }) {
+    return showFilters();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? resetFilters,
+    TResult? Function()? foundCheckTriggered,
+    TResult? Function()? lostCheckTriggered,
+    TResult? Function(LatLng pos)? positionSelected,
+    TResult? Function(int id, String category)? categorySelected,
+    TResult? Function(DateTime date)? dateSelected,
+    TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
+  }) {
+    return showFilters?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? resetFilters,
+    TResult Function()? foundCheckTriggered,
+    TResult Function()? lostCheckTriggered,
+    TResult Function(LatLng pos)? positionSelected,
+    TResult Function(int id, String category)? categorySelected,
+    TResult Function(DateTime date)? dateSelected,
+    TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
+    required TResult orElse(),
+  }) {
+    if (showFilters != null) {
+      return showFilters();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_FoundCheckTriggered value) foundCheckTriggered,
+    required TResult Function(_LostCheckTriggered value) lostCheckTriggered,
+    required TResult Function(_PositionSelected value) positionSelected,
+    required TResult Function(_CategorySelected value) categorySelected,
+    required TResult Function(_DateSelected value) dateSelected,
+    required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
+  }) {
+    return showFilters(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_FoundCheckTriggered value)? foundCheckTriggered,
+    TResult? Function(_LostCheckTriggered value)? lostCheckTriggered,
+    TResult? Function(_PositionSelected value)? positionSelected,
+    TResult? Function(_CategorySelected value)? categorySelected,
+    TResult? Function(_DateSelected value)? dateSelected,
+    TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
+  }) {
+    return showFilters?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_FoundCheckTriggered value)? foundCheckTriggered,
+    TResult Function(_LostCheckTriggered value)? lostCheckTriggered,
+    TResult Function(_PositionSelected value)? positionSelected,
+    TResult Function(_CategorySelected value)? categorySelected,
+    TResult Function(_DateSelected value)? dateSelected,
+    TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
+    required TResult orElse(),
+  }) {
+    if (showFilters != null) {
+      return showFilters(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowFilters implements SearchEvent {
+  const factory _ShowFilters() = _$_ShowFilters;
 }
 
 /// @nodoc
@@ -1383,7 +1569,7 @@ class _$_SearchState implements _SearchState {
       this.isConnected = false,
       this.hasLocationPermissions = false,
       this.token = "",
-      this.pageState = SearchPageState.searchPage,
+      this.pageState = SearchPageState.filterPage,
       this.searchFailureOrSuccess})
       : _results = results;
 
