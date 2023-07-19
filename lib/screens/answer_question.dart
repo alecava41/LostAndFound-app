@@ -88,6 +88,7 @@ class _AnswerQuestionScreenState extends State<AnswerQuestionScreen> {
 
   void onSendPressed() {
     // send the answer
+    Navigator.pop(context, userAnswer);
   }
 
   void onAnswerChange(String value) {

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/screens/answer_question.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/widgets/circular_image_avatar.dart';
 import 'package:lost_and_found/widgets/image_dialog_image.dart';
 import 'package:lost_and_found/widgets/image_item.dart';
 import 'package:lost_and_found/widgets/info_item.dart';
 
-class FoundGenericItemScreen extends StatelessWidget {
+class FoundGenericItemScreen extends StatefulWidget {
   final String image;
   final String title;
   final String position;
@@ -13,9 +14,8 @@ class FoundGenericItemScreen extends StatelessWidget {
   final String category;
   final String user;
   final String userImage;
-
-  final VoidCallback onSendMessage;
-  final VoidCallback onClaim;
+  final bool isClaimed;
+  final String claimStatus;
 
   const FoundGenericItemScreen(
       {Key? key,
@@ -26,12 +26,103 @@ class FoundGenericItemScreen extends StatelessWidget {
       required this.category,
       required this.user,
       required this.userImage,
-      required this.onSendMessage,
-      required this.onClaim})
+      required this.isClaimed,
+      required this.claimStatus})
       : super(key: key);
 
   @override
+  State<FoundGenericItemScreen> createState() => _FoundGenericItemScreenState();
+}
+
+class _FoundGenericItemScreenState extends State<FoundGenericItemScreen> {
+  late bool isClaimed = widget.isClaimed;
+  late String claimStatus = widget.claimStatus;
+
+  @override
   Widget build(BuildContext context) {
+    var claimColor = claimStatus == "ACCEPTED"
+        ? PersonalizedColor.primarySwatch.shade200
+        : widget.claimStatus == "DENIED"
+            ? Colors.red.shade400
+            : Colors.amber.shade300;
+
+    var claimText = claimStatus == "ACCEPTED"
+        ? Text(
+            "Your claim has been accepted! Now coordinate with ${widget.user} through the chat for the item's return.")
+        : claimStatus == "DENIED"
+            ? Text(
+                "Unfortunately, your claim has been denied by ${widget.user}, as the response you provided was not correct.")
+            : Text("Wait for ${widget.user} to respond to your claim.");
+
+    var claimButton = Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(children: [
+        Expanded(
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: const StadiumBorder(),
+              padding: const EdgeInsets.symmetric(
+                vertical: 18,
+              ),
+            ),
+            onPressed: () async {
+              onClaimItem(context);
+            },
+            child: const Text(
+              'Claim the item',
+              style: TextStyle(fontSize: 22),
+            ),
+          ),
+        ),
+      ]),
+    );
+
+    var claimStatusText = Padding(
+      padding: const EdgeInsets.all(8),
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: claimColor,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(
+                  Icons.connect_without_contact,
+                  size: 25,
+                ),
+                const SizedBox(width: 5),
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      const TextSpan(
+                        text: "Claim status: ",
+                        style: TextStyle(fontSize: 18, color: Colors.black),
+                      ),
+                      TextSpan(
+                        text: claimStatus,
+                        style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            claimText
+          ],
+        ),
+      ),
+    );
+
     return SafeArea(
       top: false,
       child: Scaffold(
@@ -43,19 +134,17 @@ class FoundGenericItemScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                height: 300,
-                child: ImageItem(imagePath: image)),
+              ImageItem(imagePath: widget.image),
               const Divider(
                 color: Colors.grey,
                 thickness: 1,
                 height: 0,
               ),
               InfoItem(
-                title: title,
-                position: position,
-                date: date,
-                category: category,
+                title: widget.title,
+                position: widget.position,
+                date: widget.date,
+                category: widget.category,
                 isFound: false,
               ),
               const Divider(
@@ -63,6 +152,10 @@ class FoundGenericItemScreen extends StatelessWidget {
                 thickness: 1,
                 height: 0,
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              isClaimed ? claimStatusText : claimButton,
               const SizedBox(
                 height: 20,
               ),
@@ -81,7 +174,7 @@ class FoundGenericItemScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "Lost by:",
+                          "Found by:",
                           style: TextStyle(fontSize: 20),
                         ),
                         const SizedBox(
@@ -94,9 +187,9 @@ class FoundGenericItemScreen extends StatelessWidget {
                               child: Row(
                                 children: [
                                   ImageDialogWidget(
-                                    userImagePath: userImage,
+                                    userImagePath: widget.userImage,
                                     child: CircularImage(
-                                      imagePath: userImage,
+                                      imagePath: widget.userImage,
                                       radius: 40,
                                     ),
                                   ),
@@ -108,7 +201,7 @@ class FoundGenericItemScreen extends StatelessWidget {
                                       padding: const EdgeInsets.fromLTRB(
                                           0, 0, 0, 30),
                                       child: Text(
-                                        user,
+                                        widget.user,
                                         style: const TextStyle(fontSize: 20),
                                       ),
                                     ),
@@ -130,29 +223,12 @@ class FoundGenericItemScreen extends StatelessWidget {
                               onPressed: onSendMessage,
                               child: const Text(
                                 'Send a message',
-                                style: TextStyle(fontSize: 18, color: PersonalizedColor.mainColor),
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: PersonalizedColor.mainColor),
                               ),
                             ),
                           ],
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          children:[ Expanded(
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                shape: const StadiumBorder(),
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 18, ),
-                              ),
-                              onPressed: onSendMessage,
-                              child: const Text(
-                                'Claim the item',
-                                style: TextStyle(fontSize: 22),
-                              ),
-                            ),
-                          ),]
                         ),
                       ]),
                 ),
@@ -170,5 +246,25 @@ class FoundGenericItemScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void onSendMessage() {
+    // send a message
+  }
+
+  Future<void> onClaimItem(BuildContext context) async {
+    // claim the item
+    final userAnswer = await Navigator.push<String>(
+      context,
+      MaterialPageRoute(
+          builder: (context) =>
+              const AnswerQuestionScreen(question: "This is a question")),
+    );
+    if (userAnswer != null) {
+      setState(() {
+        claimStatus = "WAITING";
+        isClaimed = true;
+      });
+    }
   }
 }

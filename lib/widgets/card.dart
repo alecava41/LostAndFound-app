@@ -8,10 +8,10 @@ class CustomCard extends StatelessWidget {
 
   const CustomCard(
       {super.key,
-        required this.imagePath,
-        required this.text,
-        required this.nclaims,
-        this.onTap});
+      required this.imagePath,
+      required this.text,
+      required this.nclaims,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -56,21 +56,28 @@ class CustomCard extends StatelessWidget {
                         height: 5,
                       ),
                       if (nclaims > 0)
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.connect_without_contact,
-                              size: 15,
-                              color: Colors.yellow,
-                            ),
-                            Text(
-                              " $nclaims new claim${nclaims > 1 ? "s" : ""}",
-                              style: const TextStyle(
-                                  fontSize: 14, color: Colors.yellow),
-                            ),
-                          ],
+                        Container(
+                          padding: const EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                            color: Colors.amber.shade300,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.connect_without_contact,
+                                size: 15,
+                              ),
+                              Text(
+                                " $nclaims new claim${nclaims > 1 ? "s" : ""}",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
                         )
                     ],
                   ),

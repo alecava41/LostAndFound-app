@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../features/item/presentation/widgets/home/clickable_circular_button.dart';
-import '../../features/item/presentation/widgets/home/custom_card_home.dart';
-
-
+import '../../widgets/card.dart';
+import '../../widgets/clickable_circular_button.dart';
 
 class HomeScreenPage extends StatelessWidget {
-  final List<CustomCardHome> lostItems;
-  final List<CustomCardHome> foundItems;
+  final List<CustomCard> lostItems;
+  final List<CustomCard> foundItems;
 
   const HomeScreenPage(
       {super.key, required this.lostItems, required this.foundItems});
@@ -39,9 +37,7 @@ class HomeScreenPage extends StatelessWidget {
                     ),
                     ClickableCircularButton(
                       icon: Icons.search,
-                      onPressed: () {
-                        print("Hey");
-                      },
+                      onPressed: () => onClaimsIconPressed(context),
                     ),
                   ],
                 )
@@ -101,5 +97,9 @@ class HomeScreenPage extends StatelessWidget {
 
   void onNotificationsIconPressed(context) {
     Navigator.pushNamed(context, "/notifications");
+  }
+
+  void onClaimsIconPressed(BuildContext context) {
+    Navigator.pushNamed(context, "/claims");
   }
 }

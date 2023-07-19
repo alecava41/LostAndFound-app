@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/screens/chat.dart';
 import 'package:lost_and_found/screens/found_generic_item.dart';
+import 'package:lost_and_found/screens/lost_geric_item.dart';
 import 'package:lost_and_found/screens/lost_user_item.dart';
 import 'package:lost_and_found/screens/pages/home_page.dart';
 import 'package:lost_and_found/screens/pages/inbox.dart';
@@ -116,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => FoundGenericItemScreen(
+                    builder: (context) =>  const FoundGenericItemScreen(
                       image: 'assets/images/iphone.png',
                       title: "Home key",
                       position: "Via Trieste 65, Padova",
@@ -124,8 +125,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       category: "Keys",
                       user: "Maria",
                       userImage: "assets/images/occhiali.png",
-                      onSendMessage: () {},
-                      onClaim: () {},
+                      isClaimed: false,
+                      claimStatus: "",
                     ),
                   ),
                 )
@@ -170,7 +171,18 @@ class _HomeScreenState extends State<HomeScreen> {
           imagePath: "assets/images/airpods.png",
           text: "AirPods Pro",
           nclaims: 0,
-          onTap: () => {print("CIAO")}),
+          onTap: () => {Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LostGenericItemScreen(
+                image: "assets/images/iphone.png",
+                title: "Iphone 12",
+                position: "Via Trieste 65, Padova",
+                date: "15/05/2023",
+                category: "Smartphone", onSendMessage: (){}, user: 'Gianni', userImage: 'assets/images/iphone.png',
+              ),
+            ),
+          )}),
       CustomCard(
           imagePath: "assets/images/portafoglio.png",
           text: "Brown Wallet",
