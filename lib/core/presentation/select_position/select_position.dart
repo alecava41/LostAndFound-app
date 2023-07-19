@@ -19,6 +19,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
   late StreamSubscription subscription;
   bool isAlertSet = false;
   LatLng center = const LatLng(43.102107520506756, 12.349117446797067);
+  LatLng markerPos = const LatLng(43.102107520506756, 12.349117446797067);
 
   late final AnimatedMapController mapController =
       AnimatedMapController(vsync: this, duration: const Duration(milliseconds: 3000));
@@ -38,7 +39,17 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
   Widget build(BuildContext context) {
     return BlocProvider<SelectPositionBloc>(
       create: (_) => sl<SelectPositionBloc>()..add(const SelectPositionEvent.selectPositionCreated()),
-      child: BlocBuilder<SelectPositionBloc, SelectPositionState>(
+      child: BlocConsumer<SelectPositionBloc, SelectPositionState>(
+        listener: (ctx, state) {
+          if (state.userCurrentPos.latitude != markerPos.latitude && state.userCurrentPos.longitude != markerPos.longitude) {
+            setState(() {
+              markerPos = state.userCurrentPos;
+            });
+
+            mapController.animatedZoomOut();
+            mapController.centerOnPoint(LatLng(markerPos.latitude, markerPos.longitude), zoom: 10);
+          }
+        },
         builder: (ctx, state) {
           return SafeArea(
             top: false,
@@ -47,7 +58,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                 appBar: AppBar(
                   iconTheme: const IconThemeData(color: Colors.black),
                   title: const Text(
-                    "Select the position",
+                    "Select position",
                     style: TextStyle(
                       color: Colors.black,
                     ),
@@ -65,16 +76,15 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                             child: FlutterMap(
                               mapController: mapController.mapController,
                               options: MapOptions(
-                                interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
-                                center: center,
-                                zoom: 5.5,
-                                onPositionChanged: (MapPosition position, bool gesture) {
-                                  // Update marker position based on the map center
-                                  ctx.read<SelectPositionBloc>().add(SelectPositionEvent.selectedPositionChanged(
-                                      LatLng(position.center!.latitude, position.center!.longitude)
-                                  ));
-                                },
-                              ),
+                                  interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
+                                  center: center,
+                                  zoom: 5.5,
+                                  onPositionChanged: (MapPosition position, bool gesture) {
+                                    // Update marker position based on the map center
+                                    setState(() {
+                                      markerPos = LatLng(position.center!.latitude, position.center!.longitude);
+                                    });
+                                  }),
                               children: [
                                 TileLayer(
                                   urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -85,7 +95,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                     Marker(
                                       width: 200.0,
                                       height: 200.0,
-                                      point: state.markerPos,
+                                      point: markerPos,
                                       builder: (ctx) => const Icon(
                                         Icons.location_on,
                                         color: Color.fromRGBO(47, 122, 106, 1),
@@ -126,13 +136,6 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                         ctx
                                             .read<SelectPositionBloc>()
                                             .add(const SelectPositionEvent.selectCurrentPosition());
-                                        //  mapController.animatedZoomOut();
-                                        //
-                                        // setState(() {
-                                        //   markerPosition = LatLng(state.lat, state.lon);
-                                        // });
-                                        //
-                                        //  mapController.centerOnPoint(LatLng(state.lat, state.lon), zoom: 10);
                                       } else if (!state.hasPermissions) {
                                         if (!state.isPermissionPermanentlyNegated) {
                                           // ignore: use_build_context_synchronously
@@ -141,7 +144,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                           // ignore: use_build_context_synchronously
                                           showLocationPermissionPermanentlyDeniedDialog(context);
                                         }
-                                      } else if (!state.isDeviceConnected || !state.isServiceAvailable){
+                                      } else if (!state.isDeviceConnected || !state.isServiceAvailable) {
                                         showConnectionLostAlert(state.isDeviceConnected);
                                       }
                                     },
@@ -170,7 +173,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                         Expanded(
                                           child: ElevatedButton(
                                               onPressed: () {
-                                                Navigator.pop(context, state.markerPos);
+                                                Navigator.pop(context, markerPos);
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 shape: const StadiumBorder(),

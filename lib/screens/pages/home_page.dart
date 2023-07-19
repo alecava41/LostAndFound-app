@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
-
 import '../../features/item/presentation/widgets/home/clickable_circular_button.dart';
-import '../../widgets/card.dart';
+import '../../features/item/presentation/widgets/home/custom_card_home.dart';
 
 
 
 class HomeScreenPage extends StatelessWidget {
-  final List<CustomCard> lostItems;
-  final List<CustomCard> foundItems;
+  final List<CustomCardHome> lostItems;
+  final List<CustomCardHome> foundItems;
 
   const HomeScreenPage(
       {super.key, required this.lostItems, required this.foundItems});

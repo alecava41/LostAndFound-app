@@ -64,6 +64,8 @@ dependencies:
   cached_network_image_platform_interface: any
   sqflite: ^2.2.8+4
   floor: ^1.4.2
+  dartx: ^1.2.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

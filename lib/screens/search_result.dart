@@ -1,58 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
-import '../features/item/presentation/widgets/home/custom_card.dart';
+import '../features/item/presentation/widgets/home/custom_card_home.dart';
 import '../widgets/custom_list_view.dart';
 
 class SearchResultScreen extends StatelessWidget {
-  final List<CustomCard> lostItems = [
-    CustomCard(
+  final List<CustomCardHome> lostItems = [
+    CustomCardHome(
       id: 1,
       text: "Iphone 12",
       claims: 0,
        token: '',
     ),
-    CustomCard(
+    CustomCardHome(
         id: 1,
         text: "AirPods Pro",
         claims: 0,
          token: '',),
-    CustomCard(
+    CustomCardHome(
         id: 1,
         text: "Brown Wallet",
         claims: 0,
          token: '',),
-    CustomCard(
+    CustomCardHome(
         id: 1,
         text: "Iphone 12",
         claims: 0,
          token: '',),
-    CustomCard(
+    CustomCardHome(
         id: 1,
         text: "Wallet",
         claims: 0, token: '',),
-    CustomCard(
+    CustomCardHome(
         id: 1,
         text: "Iphone 12",
         claims: 0,
          token: '',),
-    CustomCard(
+    CustomCardHome(
         id: 1,
         text: "Wallet",
         claims: 0,
          token: '',),
-    CustomCard(
+    CustomCardHome(
         id: 1,
         text: "Iphone 12",
         claims: 0,
         token: '',),
-    CustomCard(
+    CustomCardHome(
         id: 1,
         text: "Wallet",
         claims: 0,
         token: '',),
   ];
-  final List<CustomCard> foundItems;
+  final List<CustomCardHome> foundItems;
 
   SearchResultScreen(
       {super.key, /*required this.lostItems,*/ required this.foundItems});

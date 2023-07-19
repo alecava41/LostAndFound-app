@@ -2,13 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 
-class CustomCard extends StatelessWidget {
+class CustomCardHome extends StatelessWidget {
   final int id;
   final String text;
   final int claims;
   final String token;
 
-  const CustomCard(
+  const CustomCardHome(
       {super.key, required this.id, required this.text, required this.claims, required this.token});
 
   @override

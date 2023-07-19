@@ -6,4 +6,5 @@ part 'search_failure.freezed.dart';
 class SearchFailure with _$SearchFailure {
   const factory SearchFailure.networkError() = _NetworkError;
   const factory SearchFailure.serverError() = _ServerError;
+  const factory SearchFailure.validationError() = _ValidationError;
 }

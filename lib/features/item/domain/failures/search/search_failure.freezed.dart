@@ -20,18 +20,21 @@ mixin _$SearchFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() networkError,
     required TResult Function() serverError,
+    required TResult Function() validationError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? networkError,
     TResult? Function()? serverError,
+    TResult? Function()? validationError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? networkError,
     TResult Function()? serverError,
+    TResult Function()? validationError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$SearchFailure {
   TResult map<TResult extends Object?>({
     required TResult Function(_NetworkError value) networkError,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_ValidationError value) validationError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NetworkError value)? networkError,
     TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_ValidationError value)? validationError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NetworkError value)? networkError,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_ValidationError value)? validationError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,6 +120,7 @@ class _$_NetworkError implements _NetworkError {
   TResult when<TResult extends Object?>({
     required TResult Function() networkError,
     required TResult Function() serverError,
+    required TResult Function() validationError,
   }) {
     return networkError();
   }
@@ -123,6 +130,7 @@ class _$_NetworkError implements _NetworkError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? networkError,
     TResult? Function()? serverError,
+    TResult? Function()? validationError,
   }) {
     return networkError?.call();
   }
@@ -132,6 +140,7 @@ class _$_NetworkError implements _NetworkError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? networkError,
     TResult Function()? serverError,
+    TResult Function()? validationError,
     required TResult orElse(),
   }) {
     if (networkError != null) {
@@ -145,6 +154,7 @@ class _$_NetworkError implements _NetworkError {
   TResult map<TResult extends Object?>({
     required TResult Function(_NetworkError value) networkError,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_ValidationError value) validationError,
   }) {
     return networkError(this);
   }
@@ -154,6 +164,7 @@ class _$_NetworkError implements _NetworkError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NetworkError value)? networkError,
     TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_ValidationError value)? validationError,
   }) {
     return networkError?.call(this);
   }
@@ -163,6 +174,7 @@ class _$_NetworkError implements _NetworkError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NetworkError value)? networkError,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_ValidationError value)? validationError,
     required TResult orElse(),
   }) {
     if (networkError != null) {
@@ -216,6 +228,7 @@ class _$_ServerError implements _ServerError {
   TResult when<TResult extends Object?>({
     required TResult Function() networkError,
     required TResult Function() serverError,
+    required TResult Function() validationError,
   }) {
     return serverError();
   }
@@ -225,6 +238,7 @@ class _$_ServerError implements _ServerError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? networkError,
     TResult? Function()? serverError,
+    TResult? Function()? validationError,
   }) {
     return serverError?.call();
   }
@@ -234,6 +248,7 @@ class _$_ServerError implements _ServerError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? networkError,
     TResult Function()? serverError,
+    TResult Function()? validationError,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -247,6 +262,7 @@ class _$_ServerError implements _ServerError {
   TResult map<TResult extends Object?>({
     required TResult Function(_NetworkError value) networkError,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_ValidationError value) validationError,
   }) {
     return serverError(this);
   }
@@ -256,6 +272,7 @@ class _$_ServerError implements _ServerError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NetworkError value)? networkError,
     TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_ValidationError value)? validationError,
   }) {
     return serverError?.call(this);
   }
@@ -265,6 +282,7 @@ class _$_ServerError implements _ServerError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NetworkError value)? networkError,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_ValidationError value)? validationError,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -276,4 +294,112 @@ class _$_ServerError implements _ServerError {
 
 abstract class _ServerError implements SearchFailure {
   const factory _ServerError() = _$_ServerError;
+}
+
+/// @nodoc
+abstract class _$$_ValidationErrorCopyWith<$Res> {
+  factory _$$_ValidationErrorCopyWith(
+          _$_ValidationError value, $Res Function(_$_ValidationError) then) =
+      __$$_ValidationErrorCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ValidationErrorCopyWithImpl<$Res>
+    extends _$SearchFailureCopyWithImpl<$Res, _$_ValidationError>
+    implements _$$_ValidationErrorCopyWith<$Res> {
+  __$$_ValidationErrorCopyWithImpl(
+      _$_ValidationError _value, $Res Function(_$_ValidationError) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ValidationError implements _ValidationError {
+  const _$_ValidationError();
+
+  @override
+  String toString() {
+    return 'SearchFailure.validationError()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ValidationError);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() networkError,
+    required TResult Function() serverError,
+    required TResult Function() validationError,
+  }) {
+    return validationError();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? networkError,
+    TResult? Function()? serverError,
+    TResult? Function()? validationError,
+  }) {
+    return validationError?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? networkError,
+    TResult Function()? serverError,
+    TResult Function()? validationError,
+    required TResult orElse(),
+  }) {
+    if (validationError != null) {
+      return validationError();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_NetworkError value) networkError,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_ValidationError value) validationError,
+  }) {
+    return validationError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_NetworkError value)? networkError,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_ValidationError value)? validationError,
+  }) {
+    return validationError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_NetworkError value)? networkError,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_ValidationError value)? validationError,
+    required TResult orElse(),
+  }) {
+    if (validationError != null) {
+      return validationError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ValidationError implements SearchFailure {
+  const factory _ValidationError() = _$_ValidationError;
 }

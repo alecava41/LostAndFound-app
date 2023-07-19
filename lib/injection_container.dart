@@ -1,13 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:lost_and_found/core/data/datasources/category/category_data_source.dart';
+import 'package:lost_and_found/core/data/datasources/category/client/category_client.dart';
 import 'package:lost_and_found/core/data/datasources/position/client/position_client.dart';
 import 'package:lost_and_found/core/data/datasources/position/position_data_source.dart';
+import 'package:lost_and_found/core/data/repositories/category_repository_impl.dart';
 import 'package:lost_and_found/core/data/repositories/position_repository_impl.dart';
 import 'package:lost_and_found/core/domain/repositories/position_repository.dart';
 import 'package:lost_and_found/core/domain/usecases/get_address_from_position_usecase.dart';
+import 'package:lost_and_found/core/domain/usecases/get_categories_usecase.dart';
 import 'package:lost_and_found/core/network/network_info.dart';
 import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
+import 'package:lost_and_found/core/presentation/select_category/bloc/category_bloc.dart';
 import 'package:lost_and_found/features/authentication/data/datasources/auth_client.dart';
 import 'package:lost_and_found/features/authentication/data/datasources/authentication_data_source.dart';
 import 'package:lost_and_found/features/authentication/data/repositories/authentication_repository_impl.dart';
@@ -31,6 +36,7 @@ import 'package:lost_and_found/features/item/presentation/bloc/search/search_blo
 
 import 'core/data/datasources/http_interceptor.dart';
 import 'core/data/secure_storage/secure_storage.dart';
+import 'core/domain/repositories/category_repository.dart';
 import 'core/presentation/select_position/bloc/select_position_bloc.dart';
 import 'features/authentication/domain/usecases/logout_use_case.dart';
 
@@ -77,12 +83,15 @@ Future<void> init() async {
   // ** External - Generic **
   // Use cases
   sl.registerLazySingleton(() => GetAddressFromPositionUseCase(sl()));
+  sl.registerLazySingleton(() => GetCategoriesUseCase(sl()));
 
   // Repositories
   sl.registerLazySingleton<PositionRepository>(() => PositionRepositoryImpl(dataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<CategoryRepository>(() => CategoryRepositoryImpl(dataSource: sl(), networkInfo: sl()));
 
   // Data sources
   sl.registerLazySingleton<PositionDataSource>(() => PositionDataSourceImpl(sl()));
+  sl.registerLazySingleton<CategoryDataSource>(() => CategoryDataSourceImpl(sl()));
 
   // Storage
   sl.registerLazySingleton<SecureStorage>(() => SecureStorageImpl(sl()));
@@ -102,8 +111,10 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AuthClient(sl()));
   sl.registerLazySingleton(() => ItemClient(sl()));
   sl.registerLazySingleton(() => PositionClient(sl()));
+  sl.registerLazySingleton(() => CategoryClient(sl()));
 
   // Global BLoCs
   sl.registerFactory(() => HomeControllerBloc());
   sl.registerFactory(() => SelectPositionBloc(networkInfo: sl()));
+  sl.registerFactory(() => CategoryBloc(getCategoriesUseCase: sl()));
 }

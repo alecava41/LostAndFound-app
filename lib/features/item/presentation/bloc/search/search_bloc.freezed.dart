@@ -22,6 +22,10 @@ mixin _$SearchEvent {
     required TResult Function() foundCheckTriggered,
     required TResult Function() lostCheckTriggered,
     required TResult Function(LatLng pos) positionSelected,
+    required TResult Function(int id, String category) categorySelected,
+    required TResult Function(DateTime date) dateSelected,
+    required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +34,10 @@ mixin _$SearchEvent {
     TResult? Function()? foundCheckTriggered,
     TResult? Function()? lostCheckTriggered,
     TResult? Function(LatLng pos)? positionSelected,
+    TResult? Function(int id, String category)? categorySelected,
+    TResult? Function(DateTime date)? dateSelected,
+    TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +46,10 @@ mixin _$SearchEvent {
     TResult Function()? foundCheckTriggered,
     TResult Function()? lostCheckTriggered,
     TResult Function(LatLng pos)? positionSelected,
+    TResult Function(int id, String category)? categorySelected,
+    TResult Function(DateTime date)? dateSelected,
+    TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +59,10 @@ mixin _$SearchEvent {
     required TResult Function(_FoundCheckTriggered value) foundCheckTriggered,
     required TResult Function(_LostCheckTriggered value) lostCheckTriggered,
     required TResult Function(_PositionSelected value) positionSelected,
+    required TResult Function(_CategorySelected value) categorySelected,
+    required TResult Function(_DateSelected value) dateSelected,
+    required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +71,10 @@ mixin _$SearchEvent {
     TResult? Function(_FoundCheckTriggered value)? foundCheckTriggered,
     TResult? Function(_LostCheckTriggered value)? lostCheckTriggered,
     TResult? Function(_PositionSelected value)? positionSelected,
+    TResult? Function(_CategorySelected value)? categorySelected,
+    TResult? Function(_DateSelected value)? dateSelected,
+    TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +83,10 @@ mixin _$SearchEvent {
     TResult Function(_FoundCheckTriggered value)? foundCheckTriggered,
     TResult Function(_LostCheckTriggered value)? lostCheckTriggered,
     TResult Function(_PositionSelected value)? positionSelected,
+    TResult Function(_CategorySelected value)? categorySelected,
+    TResult Function(_DateSelected value)? dateSelected,
+    TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -128,6 +152,10 @@ class _$_ResetFilters implements _ResetFilters {
     required TResult Function() foundCheckTriggered,
     required TResult Function() lostCheckTriggered,
     required TResult Function(LatLng pos) positionSelected,
+    required TResult Function(int id, String category) categorySelected,
+    required TResult Function(DateTime date) dateSelected,
+    required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
   }) {
     return resetFilters();
   }
@@ -139,6 +167,10 @@ class _$_ResetFilters implements _ResetFilters {
     TResult? Function()? foundCheckTriggered,
     TResult? Function()? lostCheckTriggered,
     TResult? Function(LatLng pos)? positionSelected,
+    TResult? Function(int id, String category)? categorySelected,
+    TResult? Function(DateTime date)? dateSelected,
+    TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
   }) {
     return resetFilters?.call();
   }
@@ -150,6 +182,10 @@ class _$_ResetFilters implements _ResetFilters {
     TResult Function()? foundCheckTriggered,
     TResult Function()? lostCheckTriggered,
     TResult Function(LatLng pos)? positionSelected,
+    TResult Function(int id, String category)? categorySelected,
+    TResult Function(DateTime date)? dateSelected,
+    TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
     required TResult orElse(),
   }) {
     if (resetFilters != null) {
@@ -165,6 +201,10 @@ class _$_ResetFilters implements _ResetFilters {
     required TResult Function(_FoundCheckTriggered value) foundCheckTriggered,
     required TResult Function(_LostCheckTriggered value) lostCheckTriggered,
     required TResult Function(_PositionSelected value) positionSelected,
+    required TResult Function(_CategorySelected value) categorySelected,
+    required TResult Function(_DateSelected value) dateSelected,
+    required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
   }) {
     return resetFilters(this);
   }
@@ -176,6 +216,10 @@ class _$_ResetFilters implements _ResetFilters {
     TResult? Function(_FoundCheckTriggered value)? foundCheckTriggered,
     TResult? Function(_LostCheckTriggered value)? lostCheckTriggered,
     TResult? Function(_PositionSelected value)? positionSelected,
+    TResult? Function(_CategorySelected value)? categorySelected,
+    TResult? Function(_DateSelected value)? dateSelected,
+    TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
   }) {
     return resetFilters?.call(this);
   }
@@ -187,6 +231,10 @@ class _$_ResetFilters implements _ResetFilters {
     TResult Function(_FoundCheckTriggered value)? foundCheckTriggered,
     TResult Function(_LostCheckTriggered value)? lostCheckTriggered,
     TResult Function(_PositionSelected value)? positionSelected,
+    TResult Function(_CategorySelected value)? categorySelected,
+    TResult Function(_DateSelected value)? dateSelected,
+    TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
     required TResult orElse(),
   }) {
     if (resetFilters != null) {
@@ -242,6 +290,10 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     required TResult Function() foundCheckTriggered,
     required TResult Function() lostCheckTriggered,
     required TResult Function(LatLng pos) positionSelected,
+    required TResult Function(int id, String category) categorySelected,
+    required TResult Function(DateTime date) dateSelected,
+    required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
   }) {
     return foundCheckTriggered();
   }
@@ -253,6 +305,10 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult? Function()? foundCheckTriggered,
     TResult? Function()? lostCheckTriggered,
     TResult? Function(LatLng pos)? positionSelected,
+    TResult? Function(int id, String category)? categorySelected,
+    TResult? Function(DateTime date)? dateSelected,
+    TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
   }) {
     return foundCheckTriggered?.call();
   }
@@ -264,6 +320,10 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult Function()? foundCheckTriggered,
     TResult Function()? lostCheckTriggered,
     TResult Function(LatLng pos)? positionSelected,
+    TResult Function(int id, String category)? categorySelected,
+    TResult Function(DateTime date)? dateSelected,
+    TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
     required TResult orElse(),
   }) {
     if (foundCheckTriggered != null) {
@@ -279,6 +339,10 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     required TResult Function(_FoundCheckTriggered value) foundCheckTriggered,
     required TResult Function(_LostCheckTriggered value) lostCheckTriggered,
     required TResult Function(_PositionSelected value) positionSelected,
+    required TResult Function(_CategorySelected value) categorySelected,
+    required TResult Function(_DateSelected value) dateSelected,
+    required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
   }) {
     return foundCheckTriggered(this);
   }
@@ -290,6 +354,10 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult? Function(_FoundCheckTriggered value)? foundCheckTriggered,
     TResult? Function(_LostCheckTriggered value)? lostCheckTriggered,
     TResult? Function(_PositionSelected value)? positionSelected,
+    TResult? Function(_CategorySelected value)? categorySelected,
+    TResult? Function(_DateSelected value)? dateSelected,
+    TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
   }) {
     return foundCheckTriggered?.call(this);
   }
@@ -301,6 +369,10 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult Function(_FoundCheckTriggered value)? foundCheckTriggered,
     TResult Function(_LostCheckTriggered value)? lostCheckTriggered,
     TResult Function(_PositionSelected value)? positionSelected,
+    TResult Function(_CategorySelected value)? categorySelected,
+    TResult Function(_DateSelected value)? dateSelected,
+    TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
     required TResult orElse(),
   }) {
     if (foundCheckTriggered != null) {
@@ -356,6 +428,10 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     required TResult Function() foundCheckTriggered,
     required TResult Function() lostCheckTriggered,
     required TResult Function(LatLng pos) positionSelected,
+    required TResult Function(int id, String category) categorySelected,
+    required TResult Function(DateTime date) dateSelected,
+    required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
   }) {
     return lostCheckTriggered();
   }
@@ -367,6 +443,10 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult? Function()? foundCheckTriggered,
     TResult? Function()? lostCheckTriggered,
     TResult? Function(LatLng pos)? positionSelected,
+    TResult? Function(int id, String category)? categorySelected,
+    TResult? Function(DateTime date)? dateSelected,
+    TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
   }) {
     return lostCheckTriggered?.call();
   }
@@ -378,6 +458,10 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult Function()? foundCheckTriggered,
     TResult Function()? lostCheckTriggered,
     TResult Function(LatLng pos)? positionSelected,
+    TResult Function(int id, String category)? categorySelected,
+    TResult Function(DateTime date)? dateSelected,
+    TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
     required TResult orElse(),
   }) {
     if (lostCheckTriggered != null) {
@@ -393,6 +477,10 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     required TResult Function(_FoundCheckTriggered value) foundCheckTriggered,
     required TResult Function(_LostCheckTriggered value) lostCheckTriggered,
     required TResult Function(_PositionSelected value) positionSelected,
+    required TResult Function(_CategorySelected value) categorySelected,
+    required TResult Function(_DateSelected value) dateSelected,
+    required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
   }) {
     return lostCheckTriggered(this);
   }
@@ -404,6 +492,10 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult? Function(_FoundCheckTriggered value)? foundCheckTriggered,
     TResult? Function(_LostCheckTriggered value)? lostCheckTriggered,
     TResult? Function(_PositionSelected value)? positionSelected,
+    TResult? Function(_CategorySelected value)? categorySelected,
+    TResult? Function(_DateSelected value)? dateSelected,
+    TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
   }) {
     return lostCheckTriggered?.call(this);
   }
@@ -415,6 +507,10 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult Function(_FoundCheckTriggered value)? foundCheckTriggered,
     TResult Function(_LostCheckTriggered value)? lostCheckTriggered,
     TResult Function(_PositionSelected value)? positionSelected,
+    TResult Function(_CategorySelected value)? categorySelected,
+    TResult Function(_DateSelected value)? dateSelected,
+    TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
     required TResult orElse(),
   }) {
     if (lostCheckTriggered != null) {
@@ -496,6 +592,10 @@ class _$_PositionSelected implements _PositionSelected {
     required TResult Function() foundCheckTriggered,
     required TResult Function() lostCheckTriggered,
     required TResult Function(LatLng pos) positionSelected,
+    required TResult Function(int id, String category) categorySelected,
+    required TResult Function(DateTime date) dateSelected,
+    required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
   }) {
     return positionSelected(pos);
   }
@@ -507,6 +607,10 @@ class _$_PositionSelected implements _PositionSelected {
     TResult? Function()? foundCheckTriggered,
     TResult? Function()? lostCheckTriggered,
     TResult? Function(LatLng pos)? positionSelected,
+    TResult? Function(int id, String category)? categorySelected,
+    TResult? Function(DateTime date)? dateSelected,
+    TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
   }) {
     return positionSelected?.call(pos);
   }
@@ -518,6 +622,10 @@ class _$_PositionSelected implements _PositionSelected {
     TResult Function()? foundCheckTriggered,
     TResult Function()? lostCheckTriggered,
     TResult Function(LatLng pos)? positionSelected,
+    TResult Function(int id, String category)? categorySelected,
+    TResult Function(DateTime date)? dateSelected,
+    TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
     required TResult orElse(),
   }) {
     if (positionSelected != null) {
@@ -533,6 +641,10 @@ class _$_PositionSelected implements _PositionSelected {
     required TResult Function(_FoundCheckTriggered value) foundCheckTriggered,
     required TResult Function(_LostCheckTriggered value) lostCheckTriggered,
     required TResult Function(_PositionSelected value) positionSelected,
+    required TResult Function(_CategorySelected value) categorySelected,
+    required TResult Function(_DateSelected value) dateSelected,
+    required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
   }) {
     return positionSelected(this);
   }
@@ -544,6 +656,10 @@ class _$_PositionSelected implements _PositionSelected {
     TResult? Function(_FoundCheckTriggered value)? foundCheckTriggered,
     TResult? Function(_LostCheckTriggered value)? lostCheckTriggered,
     TResult? Function(_PositionSelected value)? positionSelected,
+    TResult? Function(_CategorySelected value)? categorySelected,
+    TResult? Function(_DateSelected value)? dateSelected,
+    TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
   }) {
     return positionSelected?.call(this);
   }
@@ -555,6 +671,10 @@ class _$_PositionSelected implements _PositionSelected {
     TResult Function(_FoundCheckTriggered value)? foundCheckTriggered,
     TResult Function(_LostCheckTriggered value)? lostCheckTriggered,
     TResult Function(_PositionSelected value)? positionSelected,
+    TResult Function(_CategorySelected value)? categorySelected,
+    TResult Function(_DateSelected value)? dateSelected,
+    TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
     required TResult orElse(),
   }) {
     if (positionSelected != null) {
@@ -574,17 +694,646 @@ abstract class _PositionSelected implements SearchEvent {
 }
 
 /// @nodoc
+abstract class _$$_CategorySelectedCopyWith<$Res> {
+  factory _$$_CategorySelectedCopyWith(
+          _$_CategorySelected value, $Res Function(_$_CategorySelected) then) =
+      __$$_CategorySelectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int id, String category});
+}
+
+/// @nodoc
+class __$$_CategorySelectedCopyWithImpl<$Res>
+    extends _$SearchEventCopyWithImpl<$Res, _$_CategorySelected>
+    implements _$$_CategorySelectedCopyWith<$Res> {
+  __$$_CategorySelectedCopyWithImpl(
+      _$_CategorySelected _value, $Res Function(_$_CategorySelected) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? category = null,
+  }) {
+    return _then(_$_CategorySelected(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_CategorySelected implements _CategorySelected {
+  const _$_CategorySelected(this.id, this.category);
+
+  @override
+  final int id;
+  @override
+  final String category;
+
+  @override
+  String toString() {
+    return 'SearchEvent.categorySelected(id: $id, category: $category)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CategorySelected &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.category, category) ||
+                other.category == category));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, category);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CategorySelectedCopyWith<_$_CategorySelected> get copyWith =>
+      __$$_CategorySelectedCopyWithImpl<_$_CategorySelected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() resetFilters,
+    required TResult Function() foundCheckTriggered,
+    required TResult Function() lostCheckTriggered,
+    required TResult Function(LatLng pos) positionSelected,
+    required TResult Function(int id, String category) categorySelected,
+    required TResult Function(DateTime date) dateSelected,
+    required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
+  }) {
+    return categorySelected(id, category);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? resetFilters,
+    TResult? Function()? foundCheckTriggered,
+    TResult? Function()? lostCheckTriggered,
+    TResult? Function(LatLng pos)? positionSelected,
+    TResult? Function(int id, String category)? categorySelected,
+    TResult? Function(DateTime date)? dateSelected,
+    TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
+  }) {
+    return categorySelected?.call(id, category);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? resetFilters,
+    TResult Function()? foundCheckTriggered,
+    TResult Function()? lostCheckTriggered,
+    TResult Function(LatLng pos)? positionSelected,
+    TResult Function(int id, String category)? categorySelected,
+    TResult Function(DateTime date)? dateSelected,
+    TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
+    required TResult orElse(),
+  }) {
+    if (categorySelected != null) {
+      return categorySelected(id, category);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_FoundCheckTriggered value) foundCheckTriggered,
+    required TResult Function(_LostCheckTriggered value) lostCheckTriggered,
+    required TResult Function(_PositionSelected value) positionSelected,
+    required TResult Function(_CategorySelected value) categorySelected,
+    required TResult Function(_DateSelected value) dateSelected,
+    required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
+  }) {
+    return categorySelected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_FoundCheckTriggered value)? foundCheckTriggered,
+    TResult? Function(_LostCheckTriggered value)? lostCheckTriggered,
+    TResult? Function(_PositionSelected value)? positionSelected,
+    TResult? Function(_CategorySelected value)? categorySelected,
+    TResult? Function(_DateSelected value)? dateSelected,
+    TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
+  }) {
+    return categorySelected?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_FoundCheckTriggered value)? foundCheckTriggered,
+    TResult Function(_LostCheckTriggered value)? lostCheckTriggered,
+    TResult Function(_PositionSelected value)? positionSelected,
+    TResult Function(_CategorySelected value)? categorySelected,
+    TResult Function(_DateSelected value)? dateSelected,
+    TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
+    required TResult orElse(),
+  }) {
+    if (categorySelected != null) {
+      return categorySelected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CategorySelected implements SearchEvent {
+  const factory _CategorySelected(final int id, final String category) =
+      _$_CategorySelected;
+
+  int get id;
+  String get category;
+  @JsonKey(ignore: true)
+  _$$_CategorySelectedCopyWith<_$_CategorySelected> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DateSelectedCopyWith<$Res> {
+  factory _$$_DateSelectedCopyWith(
+          _$_DateSelected value, $Res Function(_$_DateSelected) then) =
+      __$$_DateSelectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DateTime date});
+}
+
+/// @nodoc
+class __$$_DateSelectedCopyWithImpl<$Res>
+    extends _$SearchEventCopyWithImpl<$Res, _$_DateSelected>
+    implements _$$_DateSelectedCopyWith<$Res> {
+  __$$_DateSelectedCopyWithImpl(
+      _$_DateSelected _value, $Res Function(_$_DateSelected) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? date = null,
+  }) {
+    return _then(_$_DateSelected(
+      null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_DateSelected implements _DateSelected {
+  const _$_DateSelected(this.date);
+
+  @override
+  final DateTime date;
+
+  @override
+  String toString() {
+    return 'SearchEvent.dateSelected(date: $date)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DateSelected &&
+            (identical(other.date, date) || other.date == date));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, date);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DateSelectedCopyWith<_$_DateSelected> get copyWith =>
+      __$$_DateSelectedCopyWithImpl<_$_DateSelected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() resetFilters,
+    required TResult Function() foundCheckTriggered,
+    required TResult Function() lostCheckTriggered,
+    required TResult Function(LatLng pos) positionSelected,
+    required TResult Function(int id, String category) categorySelected,
+    required TResult Function(DateTime date) dateSelected,
+    required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
+  }) {
+    return dateSelected(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? resetFilters,
+    TResult? Function()? foundCheckTriggered,
+    TResult? Function()? lostCheckTriggered,
+    TResult? Function(LatLng pos)? positionSelected,
+    TResult? Function(int id, String category)? categorySelected,
+    TResult? Function(DateTime date)? dateSelected,
+    TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
+  }) {
+    return dateSelected?.call(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? resetFilters,
+    TResult Function()? foundCheckTriggered,
+    TResult Function()? lostCheckTriggered,
+    TResult Function(LatLng pos)? positionSelected,
+    TResult Function(int id, String category)? categorySelected,
+    TResult Function(DateTime date)? dateSelected,
+    TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
+    required TResult orElse(),
+  }) {
+    if (dateSelected != null) {
+      return dateSelected(date);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_FoundCheckTriggered value) foundCheckTriggered,
+    required TResult Function(_LostCheckTriggered value) lostCheckTriggered,
+    required TResult Function(_PositionSelected value) positionSelected,
+    required TResult Function(_CategorySelected value) categorySelected,
+    required TResult Function(_DateSelected value) dateSelected,
+    required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
+  }) {
+    return dateSelected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_FoundCheckTriggered value)? foundCheckTriggered,
+    TResult? Function(_LostCheckTriggered value)? lostCheckTriggered,
+    TResult? Function(_PositionSelected value)? positionSelected,
+    TResult? Function(_CategorySelected value)? categorySelected,
+    TResult? Function(_DateSelected value)? dateSelected,
+    TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
+  }) {
+    return dateSelected?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_FoundCheckTriggered value)? foundCheckTriggered,
+    TResult Function(_LostCheckTriggered value)? lostCheckTriggered,
+    TResult Function(_PositionSelected value)? positionSelected,
+    TResult Function(_CategorySelected value)? categorySelected,
+    TResult Function(_DateSelected value)? dateSelected,
+    TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
+    required TResult orElse(),
+  }) {
+    if (dateSelected != null) {
+      return dateSelected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DateSelected implements SearchEvent {
+  const factory _DateSelected(final DateTime date) = _$_DateSelected;
+
+  DateTime get date;
+  @JsonKey(ignore: true)
+  _$$_DateSelectedCopyWith<_$_DateSelected> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SearchSubmittedCopyWith<$Res> {
+  factory _$$_SearchSubmittedCopyWith(
+          _$_SearchSubmitted value, $Res Function(_$_SearchSubmitted) then) =
+      __$$_SearchSubmittedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_SearchSubmittedCopyWithImpl<$Res>
+    extends _$SearchEventCopyWithImpl<$Res, _$_SearchSubmitted>
+    implements _$$_SearchSubmittedCopyWith<$Res> {
+  __$$_SearchSubmittedCopyWithImpl(
+      _$_SearchSubmitted _value, $Res Function(_$_SearchSubmitted) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_SearchSubmitted implements _SearchSubmitted {
+  const _$_SearchSubmitted();
+
+  @override
+  String toString() {
+    return 'SearchEvent.searchSubmitted()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_SearchSubmitted);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() resetFilters,
+    required TResult Function() foundCheckTriggered,
+    required TResult Function() lostCheckTriggered,
+    required TResult Function(LatLng pos) positionSelected,
+    required TResult Function(int id, String category) categorySelected,
+    required TResult Function(DateTime date) dateSelected,
+    required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
+  }) {
+    return searchSubmitted();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? resetFilters,
+    TResult? Function()? foundCheckTriggered,
+    TResult? Function()? lostCheckTriggered,
+    TResult? Function(LatLng pos)? positionSelected,
+    TResult? Function(int id, String category)? categorySelected,
+    TResult? Function(DateTime date)? dateSelected,
+    TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
+  }) {
+    return searchSubmitted?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? resetFilters,
+    TResult Function()? foundCheckTriggered,
+    TResult Function()? lostCheckTriggered,
+    TResult Function(LatLng pos)? positionSelected,
+    TResult Function(int id, String category)? categorySelected,
+    TResult Function(DateTime date)? dateSelected,
+    TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
+    required TResult orElse(),
+  }) {
+    if (searchSubmitted != null) {
+      return searchSubmitted();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_FoundCheckTriggered value) foundCheckTriggered,
+    required TResult Function(_LostCheckTriggered value) lostCheckTriggered,
+    required TResult Function(_PositionSelected value) positionSelected,
+    required TResult Function(_CategorySelected value) categorySelected,
+    required TResult Function(_DateSelected value) dateSelected,
+    required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
+  }) {
+    return searchSubmitted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_FoundCheckTriggered value)? foundCheckTriggered,
+    TResult? Function(_LostCheckTriggered value)? lostCheckTriggered,
+    TResult? Function(_PositionSelected value)? positionSelected,
+    TResult? Function(_CategorySelected value)? categorySelected,
+    TResult? Function(_DateSelected value)? dateSelected,
+    TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
+  }) {
+    return searchSubmitted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_FoundCheckTriggered value)? foundCheckTriggered,
+    TResult Function(_LostCheckTriggered value)? lostCheckTriggered,
+    TResult Function(_PositionSelected value)? positionSelected,
+    TResult Function(_CategorySelected value)? categorySelected,
+    TResult Function(_DateSelected value)? dateSelected,
+    TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
+    required TResult orElse(),
+  }) {
+    if (searchSubmitted != null) {
+      return searchSubmitted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SearchSubmitted implements SearchEvent {
+  const factory _SearchSubmitted() = _$_SearchSubmitted;
+}
+
+/// @nodoc
+abstract class _$$_ShowFiltersCopyWith<$Res> {
+  factory _$$_ShowFiltersCopyWith(
+          _$_ShowFilters value, $Res Function(_$_ShowFilters) then) =
+      __$$_ShowFiltersCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ShowFiltersCopyWithImpl<$Res>
+    extends _$SearchEventCopyWithImpl<$Res, _$_ShowFilters>
+    implements _$$_ShowFiltersCopyWith<$Res> {
+  __$$_ShowFiltersCopyWithImpl(
+      _$_ShowFilters _value, $Res Function(_$_ShowFilters) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ShowFilters implements _ShowFilters {
+  const _$_ShowFilters();
+
+  @override
+  String toString() {
+    return 'SearchEvent.showFilters()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ShowFilters);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() resetFilters,
+    required TResult Function() foundCheckTriggered,
+    required TResult Function() lostCheckTriggered,
+    required TResult Function(LatLng pos) positionSelected,
+    required TResult Function(int id, String category) categorySelected,
+    required TResult Function(DateTime date) dateSelected,
+    required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
+  }) {
+    return showFilters();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? resetFilters,
+    TResult? Function()? foundCheckTriggered,
+    TResult? Function()? lostCheckTriggered,
+    TResult? Function(LatLng pos)? positionSelected,
+    TResult? Function(int id, String category)? categorySelected,
+    TResult? Function(DateTime date)? dateSelected,
+    TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
+  }) {
+    return showFilters?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? resetFilters,
+    TResult Function()? foundCheckTriggered,
+    TResult Function()? lostCheckTriggered,
+    TResult Function(LatLng pos)? positionSelected,
+    TResult Function(int id, String category)? categorySelected,
+    TResult Function(DateTime date)? dateSelected,
+    TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
+    required TResult orElse(),
+  }) {
+    if (showFilters != null) {
+      return showFilters();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_FoundCheckTriggered value) foundCheckTriggered,
+    required TResult Function(_LostCheckTriggered value) lostCheckTriggered,
+    required TResult Function(_PositionSelected value) positionSelected,
+    required TResult Function(_CategorySelected value) categorySelected,
+    required TResult Function(_DateSelected value) dateSelected,
+    required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
+  }) {
+    return showFilters(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_FoundCheckTriggered value)? foundCheckTriggered,
+    TResult? Function(_LostCheckTriggered value)? lostCheckTriggered,
+    TResult? Function(_PositionSelected value)? positionSelected,
+    TResult? Function(_CategorySelected value)? categorySelected,
+    TResult? Function(_DateSelected value)? dateSelected,
+    TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
+  }) {
+    return showFilters?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_FoundCheckTriggered value)? foundCheckTriggered,
+    TResult Function(_LostCheckTriggered value)? lostCheckTriggered,
+    TResult Function(_PositionSelected value)? positionSelected,
+    TResult Function(_CategorySelected value)? categorySelected,
+    TResult Function(_DateSelected value)? dateSelected,
+    TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
+    required TResult orElse(),
+  }) {
+    if (showFilters != null) {
+      return showFilters(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowFilters implements SearchEvent {
+  const factory _ShowFilters() = _$_ShowFilters;
+}
+
+/// @nodoc
 mixin _$SearchState {
+// Search parameters
   bool get foundChecked => throw _privateConstructorUsedError;
   bool get lostChecked => throw _privateConstructorUsedError;
   List<SearchItem> get results => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
   LatLng get pos => throw _privateConstructorUsedError;
-  int get category => throw _privateConstructorUsedError;
+  String get category => throw _privateConstructorUsedError;
+  int get categoryId => throw _privateConstructorUsedError;
   DateTime? get dateTime => throw _privateConstructorUsedError;
   bool get isConnected => throw _privateConstructorUsedError;
   bool get hasLocationPermissions => throw _privateConstructorUsedError;
-  String get token => throw _privateConstructorUsedError;
+  String get token =>
+      throw _privateConstructorUsedError; // Fields to handle real search
+  SearchPageState get pageState => throw _privateConstructorUsedError;
   Either<SearchFailure, Success>? get searchFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
@@ -605,11 +1354,13 @@ abstract class $SearchStateCopyWith<$Res> {
       List<SearchItem> results,
       String address,
       LatLng pos,
-      int category,
+      String category,
+      int categoryId,
       DateTime? dateTime,
       bool isConnected,
       bool hasLocationPermissions,
       String token,
+      SearchPageState pageState,
       Either<SearchFailure, Success>? searchFailureOrSuccess});
 }
 
@@ -632,10 +1383,12 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
     Object? address = null,
     Object? pos = null,
     Object? category = null,
+    Object? categoryId = null,
     Object? dateTime = freezed,
     Object? isConnected = null,
     Object? hasLocationPermissions = null,
     Object? token = null,
+    Object? pageState = null,
     Object? searchFailureOrSuccess = freezed,
   }) {
     return _then(_value.copyWith(
@@ -662,6 +1415,10 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      categoryId: null == categoryId
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
               as int,
       dateTime: freezed == dateTime
           ? _value.dateTime
@@ -679,6 +1436,10 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
+      pageState: null == pageState
+          ? _value.pageState
+          : pageState // ignore: cast_nullable_to_non_nullable
+              as SearchPageState,
       searchFailureOrSuccess: freezed == searchFailureOrSuccess
           ? _value.searchFailureOrSuccess
           : searchFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -701,11 +1462,13 @@ abstract class _$$_SearchStateCopyWith<$Res>
       List<SearchItem> results,
       String address,
       LatLng pos,
-      int category,
+      String category,
+      int categoryId,
       DateTime? dateTime,
       bool isConnected,
       bool hasLocationPermissions,
       String token,
+      SearchPageState pageState,
       Either<SearchFailure, Success>? searchFailureOrSuccess});
 }
 
@@ -726,10 +1489,12 @@ class __$$_SearchStateCopyWithImpl<$Res>
     Object? address = null,
     Object? pos = null,
     Object? category = null,
+    Object? categoryId = null,
     Object? dateTime = freezed,
     Object? isConnected = null,
     Object? hasLocationPermissions = null,
     Object? token = null,
+    Object? pageState = null,
     Object? searchFailureOrSuccess = freezed,
   }) {
     return _then(_$_SearchState(
@@ -756,6 +1521,10 @@ class __$$_SearchStateCopyWithImpl<$Res>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      categoryId: null == categoryId
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
               as int,
       dateTime: freezed == dateTime
           ? _value.dateTime
@@ -773,6 +1542,10 @@ class __$$_SearchStateCopyWithImpl<$Res>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
+      pageState: null == pageState
+          ? _value.pageState
+          : pageState // ignore: cast_nullable_to_non_nullable
+              as SearchPageState,
       searchFailureOrSuccess: freezed == searchFailureOrSuccess
           ? _value.searchFailureOrSuccess
           : searchFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -788,16 +1561,19 @@ class _$_SearchState implements _SearchState {
       {required this.foundChecked,
       required this.lostChecked,
       required final List<SearchItem> results,
-      required this.address,
+      this.address = "",
       required this.pos,
-      required this.category,
+      this.category = "",
+      required this.categoryId,
       required this.dateTime,
       this.isConnected = false,
       this.hasLocationPermissions = false,
       this.token = "",
+      this.pageState = SearchPageState.filterPage,
       this.searchFailureOrSuccess})
       : _results = results;
 
+// Search parameters
   @override
   final bool foundChecked;
   @override
@@ -811,11 +1587,15 @@ class _$_SearchState implements _SearchState {
   }
 
   @override
+  @JsonKey()
   final String address;
   @override
   final LatLng pos;
   @override
-  final int category;
+  @JsonKey()
+  final String category;
+  @override
+  final int categoryId;
   @override
   final DateTime? dateTime;
   @override
@@ -827,12 +1607,16 @@ class _$_SearchState implements _SearchState {
   @override
   @JsonKey()
   final String token;
+// Fields to handle real search
+  @override
+  @JsonKey()
+  final SearchPageState pageState;
   @override
   final Either<SearchFailure, Success>? searchFailureOrSuccess;
 
   @override
   String toString() {
-    return 'SearchState(foundChecked: $foundChecked, lostChecked: $lostChecked, results: $results, address: $address, pos: $pos, category: $category, dateTime: $dateTime, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, token: $token, searchFailureOrSuccess: $searchFailureOrSuccess)';
+    return 'SearchState(foundChecked: $foundChecked, lostChecked: $lostChecked, results: $results, address: $address, pos: $pos, category: $category, categoryId: $categoryId, dateTime: $dateTime, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, token: $token, pageState: $pageState, searchFailureOrSuccess: $searchFailureOrSuccess)';
   }
 
   @override
@@ -849,6 +1633,8 @@ class _$_SearchState implements _SearchState {
             (identical(other.pos, pos) || other.pos == pos) &&
             (identical(other.category, category) ||
                 other.category == category) &&
+            (identical(other.categoryId, categoryId) ||
+                other.categoryId == categoryId) &&
             (identical(other.dateTime, dateTime) ||
                 other.dateTime == dateTime) &&
             (identical(other.isConnected, isConnected) ||
@@ -856,6 +1642,8 @@ class _$_SearchState implements _SearchState {
             (identical(other.hasLocationPermissions, hasLocationPermissions) ||
                 other.hasLocationPermissions == hasLocationPermissions) &&
             (identical(other.token, token) || other.token == token) &&
+            (identical(other.pageState, pageState) ||
+                other.pageState == pageState) &&
             (identical(other.searchFailureOrSuccess, searchFailureOrSuccess) ||
                 other.searchFailureOrSuccess == searchFailureOrSuccess));
   }
@@ -869,10 +1657,12 @@ class _$_SearchState implements _SearchState {
       address,
       pos,
       category,
+      categoryId,
       dateTime,
       isConnected,
       hasLocationPermissions,
       token,
+      pageState,
       searchFailureOrSuccess);
 
   @JsonKey(ignore: true)
@@ -887,17 +1677,19 @@ abstract class _SearchState implements SearchState {
           {required final bool foundChecked,
           required final bool lostChecked,
           required final List<SearchItem> results,
-          required final String address,
+          final String address,
           required final LatLng pos,
-          required final int category,
+          final String category,
+          required final int categoryId,
           required final DateTime? dateTime,
           final bool isConnected,
           final bool hasLocationPermissions,
           final String token,
+          final SearchPageState pageState,
           final Either<SearchFailure, Success>? searchFailureOrSuccess}) =
       _$_SearchState;
 
-  @override
+  @override // Search parameters
   bool get foundChecked;
   @override
   bool get lostChecked;
@@ -908,7 +1700,9 @@ abstract class _SearchState implements SearchState {
   @override
   LatLng get pos;
   @override
-  int get category;
+  String get category;
+  @override
+  int get categoryId;
   @override
   DateTime? get dateTime;
   @override
@@ -917,6 +1711,8 @@ abstract class _SearchState implements SearchState {
   bool get hasLocationPermissions;
   @override
   String get token;
+  @override // Fields to handle real search
+  SearchPageState get pageState;
   @override
   Either<SearchFailure, Success>? get searchFailureOrSuccess;
   @override
