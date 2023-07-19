@@ -9,7 +9,11 @@ class CustomCardHome extends StatelessWidget {
   final String token;
 
   const CustomCardHome(
-      {super.key, required this.id, required this.text, required this.claims, required this.token});
+      {super.key,
+      required this.id,
+      required this.text,
+      required this.claims,
+      required this.token});
 
   @override
   Widget build(BuildContext context) {
@@ -38,38 +42,53 @@ class CustomCardHome extends StatelessWidget {
                         httpHeaders: {
                           "Authorization": "Bearer $token",
                         },
-                        progressIndicatorBuilder: (context, url, downloadProgress) =>
-                            CircularProgressIndicator(value: downloadProgress.progress),
-                        errorWidget: (context, url, error) => const Icon(Icons.error),
-                        imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) =>
+                                CircularProgressIndicator(
+                                    value: downloadProgress.progress),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                        imageRenderMethodForWeb:
+                            ImageRenderMethodForWeb.HttpGet,
                       ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 8, left: 18, bottom: 5, right: 18),
+                  padding: const EdgeInsets.only(
+                      top: 8, left: 18, bottom: 5, right: 18),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(text, style: const TextStyle(fontSize: 16.0), overflow: TextOverflow.ellipsis),
+                      Text(text,
+                          style: const TextStyle(fontSize: 16.0),
+                          overflow: TextOverflow.ellipsis),
                       const SizedBox(
                         height: 5,
                       ),
                       if (claims > 0)
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.connect_without_contact,
-                              size: 15,
-                              color: Colors.yellow,
-                            ),
-                            Text(
-                              " $claims claim${claims > 1 ? "s" : ""}",
-                              style: const TextStyle(fontSize: 14, color: Colors.yellow), // TODO change color
-                            ),
-                          ],
+                        Container(
+                          padding: const EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                            color: Colors.amber.shade300,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.connect_without_contact,
+                                size: 15,
+                              ),
+                              Text(
+                                " $claims new claim${claims > 1 ? "s" : ""}",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
                         )
                     ],
                   ),
