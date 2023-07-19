@@ -43,7 +43,9 @@ class FoundGenericItemScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              ImageItem(imagePath: image),
+              Container(
+                height: 300,
+                child: ImageItem(imagePath: image)),
               const Divider(
                 color: Colors.grey,
                 thickness: 1,
