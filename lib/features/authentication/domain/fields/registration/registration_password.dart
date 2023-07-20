@@ -1,25 +1,25 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../../../core/status/value_failure.dart';
+import '../../../../../core/status/failures.dart';
 
 class RegistrationPasswordField extends Equatable {
   factory RegistrationPasswordField(String input) => RegistrationPasswordField._(_validatePasswordField(input));
 
   const RegistrationPasswordField._(this.value);
 
-  final Either<ValueFailure, String> value;
+  final Either<Failure, String> value;
 
   @override
   List<Object?> get props => [value];
 }
 
-Either<ValueFailure, String> _validatePasswordField(String input) {
+Either<Failure, String> _validatePasswordField(String input) {
   const passwordRegex = r"""^.{8,30}$""";
 
   if (RegExp(passwordRegex).hasMatch(input)) {
-    return right(input);
+    return Right(input);
   } else {
-    return left(ValueFailure.invalidPasswordRegistrationInput(failedValue: input),);
+    return const Left(Failure.validationFailure("Password must contain at least 8 characters, up to 30."));
   }
 }

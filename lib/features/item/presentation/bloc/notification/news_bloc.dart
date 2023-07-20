@@ -8,7 +8,6 @@ import 'package:lost_and_found/features/item/domain/usecases/get_user_notificati
 import '../../../../../core/data/secure_storage/secure_storage.dart';
 import '../../../../../core/status/failures.dart';
 import '../../../../../core/status/success.dart';
-import '../../../domain/failures/news/news_failure.dart';
 import '../../../domain/entities/news.dart';
 
 part 'news_bloc.freezed.dart';
@@ -36,26 +35,17 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
   }
 
   Future<void> _onNewsCreatedOrRefreshed(Emitter<NewsState> emit) async {
-    Either<NewsFailure, Success>? loadFailureOrSuccess;
+    Either<Failure, Success>? loadFailureOrSuccess;
 
     final newsResponse = await _getUserNotificationsUseCase(GetUserNotificationsParams(last: 0));
 
-    newsResponse.fold((failure) => loadFailureOrSuccess = Left(_mapRequestToFailure(failure)),
-        (success) => loadFailureOrSuccess = Right(NewsLoadSuccess()));
+    newsResponse.fold((failure) => loadFailureOrSuccess = Left(failure),
+        (success) => loadFailureOrSuccess = const Right(Success.genericSuccess()));
     final session = await _secureStorage.getSessionInformation();
 
     emit(
       state.copyWith(
           loadFailureOrSuccess: loadFailureOrSuccess, news: newsResponse.getOrElse(() => []), token: session.token),
     );
-  }
-
-  NewsFailure _mapRequestToFailure(Failure failure) {
-    switch (failure.runtimeType) {
-      case NetworkFailure:
-        return const NewsFailure.networkError();
-      default:
-        return const NewsFailure.serverError();
-    }
   }
 }

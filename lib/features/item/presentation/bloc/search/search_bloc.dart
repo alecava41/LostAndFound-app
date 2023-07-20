@@ -7,9 +7,9 @@ import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/data/secure_storage/secure_storage.dart';
 import 'package:lost_and_found/core/domain/usecases/get_address_from_position_usecase.dart';
 import 'package:lost_and_found/features/item/domain/entities/search_item.dart';
-import 'package:lost_and_found/features/item/domain/failures/search/search_failure.dart';
 import 'package:lost_and_found/features/item/domain/usecases/search_items_usecase.dart';
 
+import '../../../../../core/status/failures.dart';
 import '../../../../../core/status/success.dart';
 
 part 'search_bloc.freezed.dart';
@@ -55,7 +55,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     final isTypeValid = state.foundChecked || state.lostChecked;
     final isPositionValid = state.pos != const LatLng(0, 0);
 
-    Either<SearchFailure, Success>? searchFailureOrSuccess;
+    Either<Failure, Success>? searchFailureOrSuccess;
     List<SearchItem> items = [];
     SearchPageState pageState = state.pageState;
 
@@ -77,13 +77,13 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
       // TODO error handling (must be done everywhere)
       final searchResponse = await _searchItemsUseCase(params);
-      searchResponse.fold((failure) => searchFailureOrSuccess = const Left(SearchFailure.serverError()), (searchItems) {
-        searchFailureOrSuccess = Right(SearchSuccess());
+      searchResponse.fold((failure) => searchFailureOrSuccess = Left(failure), (searchItems) {
+        searchFailureOrSuccess = const Right(Success.genericSuccess());
         items = searchItems;
         pageState = SearchPageState.resultPage;
       });
     } else {
-      searchFailureOrSuccess = const Left(SearchFailure.validationError());
+      searchFailureOrSuccess = const Left(Failure.validationFailure("Specify at least type and location."));
     }
 
     final session = await _secureStorage.getSessionInformation();

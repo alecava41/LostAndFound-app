@@ -2,23 +2,28 @@ import '../../status/exceptions.dart';
 import '../../status/failures.dart';
 
 Failure mapExceptionToFailure(Object e) {
-   switch (e.runtimeType) {
-    case MalformedRequestException: return MalformedRequestFailure();
-    case RecordNotFoundException: return RecordNotFoundFailure();
-    case UserNotAuthorizedException: return UserNotAuthorizedFailure();
-    case InternalServerException: return InternalServerFailure();
+  switch (e.runtimeType) {
+    case MalformedRequestException:
+    case UserNotAuthorizedException:
+    case UserAccessForbiddenException:
+    case AddressNotValidException:
+      return const Failure.requestFailure();
+    case RecordNotFoundException:
+    case ReferenceNotFoundException:
+      return const Failure.recordNotFoundFailure();
     case DuplicateRecordException:
       final duplicateField = (e as DuplicateRecordException).duplicateField;
       if (duplicateField.contains('username')) {
-        return DuplicateRecordFailure('username');
+        return const Failure.duplicateRecordFailure('username');
       } else {
-        return DuplicateRecordFailure('email');
+        return const Failure.duplicateRecordFailure('email');
       }
-    case PasswordMismatchException: return PasswordMismatchFailure();
-    case ValidationException: return ValidationFailure();
-    case AddressNotValidException: return AddressNotValidFailure();
-    case ReferenceNotFoundException: return RecordNotFoundFailure();
-    case UserAccessForbiddenException: return UserAccessForbiddenFailure();
-    default: return GenericFailure();
+    case PasswordMismatchException:
+      return const Failure.passwordMismatchFailure();
+    case ValidationException:
+      return const Failure.validationFailure(null);
+    default:
+      // includes InternalServerException
+      return const Failure.genericFailure();
   }
 }

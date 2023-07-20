@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
+import '../models/item/item_dto.dart';
 import '../models/news/news_dto.dart';
 import '../models/search_item/search_item_dto.dart';
 import '../models/user_item/user_item_dto.dart';
@@ -34,5 +35,10 @@ abstract class ItemClient {
       @Query("range") int range,
       @Query("category") int category,
       @Query("after") DateTime? date
+      );
+
+  @GET('/items/{itemId}')
+  Future<ItemDto> getItem(
+      @Path("itemId") int id,
       );
 }

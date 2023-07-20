@@ -18,7 +18,9 @@ class UserInput extends StatelessWidget {
           filled: true,
           prefixIcon: const Icon(Icons.person),
         ),
-        validator: (_) => state.user.value.fold((failure) => "Invalid user", (_) => null),
+        validator: (_) => state.user.value.fold(
+            (failure) => failure.maybeWhen<String?>(validationFailure: (reason) => reason, orElse: () => null),
+            (_) => null),
         autovalidateMode: state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
       );
     });

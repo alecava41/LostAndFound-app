@@ -15,8 +15,6 @@ class LostGenericItemScreen extends StatelessWidget {
   final String userImage;
   
   final VoidCallback onSendMessage;
-  
-  
 
   const LostGenericItemScreen({
     Key? key,

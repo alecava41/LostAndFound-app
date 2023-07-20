@@ -6,7 +6,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lost_and_found/core/status/success.dart';
 
 import '../../../../../core/status/failures.dart';
-import '../../../domain/failures/login/login_failure.dart';
 import '../../../domain/fields/login/login_password.dart';
 import '../../../domain/fields/login/login_user.dart';
 import '../../../domain/usecases/login_usecase.dart';
@@ -36,11 +35,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future<void> _onLoginCreated(Emitter<LoginState> emit) async {
-    Either<LoginFailure, Success>? authFailureOrSuccess;
+    Either<Failure, Success>? authFailureOrSuccess;
 
     final loginResponse = await _loginUseCase(null);
-    loginResponse.fold((failure) => authFailureOrSuccess = Left(_mapLoginFailure(failure)),
-        (success) => authFailureOrSuccess = Right(LoginSuccess()));
+    loginResponse.fold((failure) => authFailureOrSuccess = Left(failure),
+        (success) => authFailureOrSuccess = Right(success));
 
     emit(state.copyWith(isSubmitting: false, showErrorMessage: true, authFailureOrSuccess: authFailureOrSuccess));
   }
@@ -74,7 +73,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final isUserFieldValid = state.user.value.isRight();
     final isPasswordFieldValid = state.password.value.isRight();
 
-    Either<LoginFailure, Success>? authFailureOrSuccess;
+    Either<Failure, Success>? authFailureOrSuccess;
 
     if (isUserFieldValid && isPasswordFieldValid) {
       emit(
@@ -88,23 +87,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           LoginParams(password: state.password.value.getOrElse(() => ""), user: state.user.value.getOrElse(() => ""));
 
       final loginResponse = await _loginUseCase(params);
-      loginResponse.fold((failure) => authFailureOrSuccess = Left(_mapLoginFailure(failure)),
-          (success) => authFailureOrSuccess = Right(LoginSuccess()));
+      loginResponse.fold((failure) => authFailureOrSuccess = Left(failure),
+          (success) => authFailureOrSuccess = Right(success));
     }
 
     emit(
       state.copyWith(isSubmitting: false, showErrorMessage: true, authFailureOrSuccess: authFailureOrSuccess),
     );
-  }
-
-  LoginFailure _mapLoginFailure(Failure failure) {
-    switch (failure.runtimeType) {
-      case InternalServerFailure:
-        return const LoginFailure.serverError();
-      case NetworkFailure:
-        return const LoginFailure.networkError();
-      default:
-        return const LoginFailure.invalidCredentials();
-    }
   }
 }

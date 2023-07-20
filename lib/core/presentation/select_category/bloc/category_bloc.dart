@@ -40,6 +40,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     emit(state.copyWith(
         isLoading: false,
         categories: categories,
-        loadFailureOrSuccess: categoriesOrFailure.isLeft() ? Left(NetworkFailure()) : Right(CategoryLoadSuccess())));
+        loadFailureOrSuccess:
+            categoriesOrFailure.isLeft() ? const Left(Failure.networkFailure()) : const Right(Success.genericSuccess())));
   }
 }

@@ -8,7 +8,7 @@ class LoginState with _$LoginState {
     @Default(false) bool isSubmitting,
     @Default(false) bool showErrorMessage,
     @Default(true) bool obscurePassword,
-    Either<LoginFailure, Success>? authFailureOrSuccess,
+    Either<Failure, Success>? authFailureOrSuccess,
     // Unit comes from Dartz package and is equivalent to void.
   }) = _LoginState;
 

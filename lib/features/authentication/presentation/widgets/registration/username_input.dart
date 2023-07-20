@@ -18,10 +18,9 @@ class UsernameInput extends StatelessWidget {
           prefixIcon: const Icon(Icons.person),
         ),
         validator: (_) => state.username.value.fold(
-            (failure) => failure.maybeWhen<String>(
-                invalidUsernameRegistrationInput: (_) => "Username can contain letters and numbers up to 30 ?",
-                duplicateUsernameRegistrationInput: (_) => "Username already used.",
-                orElse: () => ''),
+            (failure) => failure.maybeWhen<String?>(
+                validationFailure: (reason) => reason,
+                orElse: () => null),
             (_) => null),
         autovalidateMode: state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
       );

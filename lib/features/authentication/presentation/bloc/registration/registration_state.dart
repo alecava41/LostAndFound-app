@@ -11,7 +11,7 @@ class RegistrationState with _$RegistrationState {
     @Default(false) bool showErrorMessage,
     @Default(true) bool obscurePassword,
     @Default(true) bool obscureConfirmPassword,
-    Either<RegistrationFailure, Success>? registrationFailureOrSuccess,
+    Either<Failure, Success>? registrationFailureOrSuccess,
     // Unit comes from Dartz package and is equivalent to void.
   }) = _RegistrationState;
 

@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
           iconTheme: const IconThemeData(color: Colors.black),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
-            onPressed: () { Navigator.of(context).pushNamed('/'); },
+            onPressed: () { Navigator.of(context).pushNamed('/'); }, // TODO maybe not needed
           ),
         ),
         body: BlocProvider(

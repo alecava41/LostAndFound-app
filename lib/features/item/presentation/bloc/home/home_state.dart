@@ -6,7 +6,7 @@ class HomeState with _$HomeState {
     required List<UserItem> lostItems,
     required List<UserItem> foundItems,
     required String token,
-    Either<HomeFailure, Success>? homeFailureOrSuccess,
+    Either<Failure, Success>? homeFailureOrSuccess,
     // Unit comes from Dartz package and is equivalent to void.
   }) = _HomeState;
 

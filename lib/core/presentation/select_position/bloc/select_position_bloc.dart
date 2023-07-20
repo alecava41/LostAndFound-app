@@ -62,12 +62,18 @@ class SelectPositionBloc extends Bloc<SelectPositionEvent, SelectPositionState> 
     var isServiceFailure = false;
     var isPermissionPermanentlyDenied = false;
 
-    switch (failure.runtimeType) {
-      case GeolocationServiceFailure:
-        isServiceFailure = true;
-      case GeolocationPermissionPermanentlyDeniedFailure:
-        isPermissionPermanentlyDenied = true;
-    }
+    failure.maybeWhen<void>(
+        geolocationFailure: (reason) {
+          switch (reason) {
+            case GeolocationError.serviceNotAvailable:
+              isServiceFailure = true;
+            case GeolocationError.permissionPermanentlyDenied:
+              isPermissionPermanentlyDenied = true;
+            case GeolocationError.permissionDenied:
+              {}
+          }
+        },
+        orElse: () {});
 
     return (isServiceFailure, isPermissionPermanentlyDenied);
   }

@@ -9,19 +9,19 @@ class GeoLocationService {
   Future<Either<Failure, Position>> getGeoPosition() async {
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
-    if (!serviceEnabled) return Left(GeolocationServiceFailure());
+    if (!serviceEnabled) return const Left(Failure.geolocationFailure(GeolocationError.serviceNotAvailable));
 
     var permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return Left(GeolocationPermissionDeniedFailure());
+        return const Left(Failure.geolocationFailure(GeolocationError.permissionDenied));
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      return Left(GeolocationPermissionPermanentlyDeniedFailure());
+      return const Left(Failure.geolocationFailure(GeolocationError.permissionPermanentlyDenied));
     }
 
     return Right(await Geolocator.getCurrentPosition());

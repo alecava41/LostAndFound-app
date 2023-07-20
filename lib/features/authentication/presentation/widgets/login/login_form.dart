@@ -28,16 +28,16 @@ class LoginForm extends StatelessWidget {
                             padding: const EdgeInsets.all(30),
                             backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
                             content: Text(
-                                failure.when<String>(
-                                  invalidCredentials: () => 'Invalid credentials. Please try again.',
-                                  serverError: () => 'Server error. Please try again later.',
-                                  networkError: () => 'No internet connection available. Check your internet connection.'
-                                ),
+                                failure.maybeWhen<String>(
+                                    passwordMismatchFailure: () => 'Invalid credentials. Please try again.',
+                                    genericFailure: () => 'Server error. Please try again later.',
+                                    networkFailure: () =>
+                                        'No internet connection available. Check your internet connection.',
+                                    orElse: () => "Unknown error"),
                                 style: const TextStyle(fontSize: 20)),
                           ),
                         )
                       },
-                  // TODO: navigate to homepage instead
                   (success) => {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(

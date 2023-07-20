@@ -1,37 +1,32 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-abstract class Failure extends Equatable {
-  @override
-  List<Object> get props => [];
+part 'failures.freezed.dart';
+
+@freezed
+class Failure with _$Failure {
+  // represents a generic error (not expected)
+  const factory Failure.genericFailure() = _GenericFailure;
+
+  // represents an software error on the request, could be: malformed request, user not authorized, user access forbidden, address not valid
+  const factory Failure.requestFailure() = _RequestFailure;
+
+  // represents a 404 error during a request
+  const factory Failure.recordNotFoundFailure() = _RecordNotFoundFailure;
+
+  // represents a conflict error during a request
+  const factory Failure.duplicateRecordFailure(String failureField) = _DuplicateRecordFailure;
+
+  // represent the same error while performing login
+  const factory Failure.passwordMismatchFailure() = _PasswordMismatchFailure;
+
+  // represent an error during the validation of the fields of a request or before making the request
+  const factory Failure.validationFailure(String? reason) = _ValidationFailure;
+
+  // represents a network error during a request
+  const factory Failure.networkFailure() = _NetworkFailure;
+
+  // represents an error involving the geolocation service
+  const factory Failure.geolocationFailure(GeolocationError reason) = _GeolocationFailure;
 }
 
-class GenericFailure extends Failure {}
-
-class MalformedRequestFailure extends Failure {}
-
-class RecordNotFoundFailure extends Failure {}
-
-class UserNotAuthorizedFailure extends Failure {}
-
-class InternalServerFailure extends Failure {}
-
-class DuplicateRecordFailure extends Failure {
-  final String failureField;
-  DuplicateRecordFailure(this.failureField);
-}
-
-class PasswordMismatchFailure extends Failure {}
-
-class ValidationFailure extends Failure {}
-
-class AddressNotValidFailure extends Failure {}
-
-class ReferenceNotFoundFailure extends Failure {}
-
-class UserAccessForbiddenFailure extends Failure {}
-
-class NetworkFailure extends Failure {}
-
-class GeolocationServiceFailure extends Failure {}
-class GeolocationPermissionDeniedFailure extends Failure {}
-class GeolocationPermissionPermanentlyDeniedFailure extends Failure {}
+enum GeolocationError { serviceNotAvailable, permissionDenied, permissionPermanentlyDenied }
