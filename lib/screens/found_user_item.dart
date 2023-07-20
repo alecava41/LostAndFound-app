@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/utils/colors.dart';
+import 'package:lost_and_found/widgets/claimed_item_card.dart';
 import 'package:lost_and_found/widgets/image_item.dart';
 import 'package:lost_and_found/widgets/info_item.dart';
 
@@ -10,6 +11,8 @@ class FoundUserItemScreen extends StatelessWidget {
   final String date;
   final String category;
 
+  final List<ClaimedItemCard> claims;
+
   const FoundUserItemScreen({
     Key? key,
     required this.image,
@@ -17,10 +20,55 @@ class FoundUserItemScreen extends StatelessWidget {
     required this.position,
     required this.date,
     required this.category,
+    required this.claims,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var claimsBox = Container(
+      color: Colors.white,
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.all(10),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        const Padding(
+          padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
+          child: Row(
+            children: [
+              Icon(
+                Icons.connect_without_contact,
+                size: 25,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Expanded(
+                  child: Text(
+                "Claims for this item:",
+                style: TextStyle(fontSize: 18),
+                overflow: TextOverflow.ellipsis,
+              )),
+            ],
+          ),
+        ),
+        claims.isEmpty
+            ? const Center(
+                child: Text(
+                "No claims",
+                style: TextStyle(fontSize: 18),
+              ))
+            : ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: claims.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                      child: claims[index]);
+                },
+              ),
+      ]),
+    );
+
     return SafeArea(
       top: false,
       child: Scaffold(
@@ -81,6 +129,20 @@ class FoundUserItemScreen extends StatelessWidget {
                 category: category,
                 isFound: true,
               ),
+              const Divider(
+                color: Colors.grey,
+                thickness: 1,
+                height: 0,
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const Divider(
+                color: Colors.grey,
+                thickness: 1,
+                height: 0,
+              ),
+              claimsBox,
               const Divider(
                 color: Colors.grey,
                 thickness: 1,

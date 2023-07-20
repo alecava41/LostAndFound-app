@@ -46,7 +46,7 @@ class InfoItem extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [

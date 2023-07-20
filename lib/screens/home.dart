@@ -10,11 +10,11 @@ import 'package:lost_and_found/screens/pages/inbox.dart';
 import 'package:lost_and_found/screens/pages/option_page.dart';
 import 'package:lost_and_found/screens/pages/search_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
+import 'package:lost_and_found/widgets/claimed_item_card.dart';
 import 'package:lost_and_found/widgets/inbox_item.dart';
 
 import '../widgets/card.dart';
 import 'found_user_item.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -105,6 +105,30 @@ class _HomeScreenState extends State<HomeScreen> {
                       position: "Via Trieste 65, Padova",
                       date: "15/05/2023",
                       category: "Keys",
+                      claims: [
+                        ClaimedItemCard(
+                            itemImagePath: "assets/images/key.png",
+                            itemName:
+                                "Iphone sssssssssssssssssssssssssssssssss12",
+                            userImagePath: "assets/images/key.png",
+                            user:
+                                "Gsadsaaddasdasdsadsadassdsdasdsadsacefesads"),
+                        ClaimedItemCard(
+                            itemImagePath: "assets/images/key.png",
+                            itemName: "Iphone 12",
+                            userImagePath: "assets/images/key.png",
+                            user: "Gianni"),
+                        ClaimedItemCard(
+                            itemImagePath: "assets/images/key.png",
+                            itemName: "Iphone 12",
+                            userImagePath: "assets/images/key.png",
+                            user: "Gianni"),
+                        ClaimedItemCard(
+                            itemImagePath: "assets/images/key.png",
+                            itemName: "Iphone 12",
+                            userImagePath: "assets/images/key.png",
+                            user: "Gianni")
+                      ],
                     ),
                   ),
                 )
@@ -117,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>  const FoundGenericItemScreen(
+                    builder: (context) => const FoundGenericItemScreen(
                       image: 'assets/images/iphone.png',
                       title: "Home key",
                       position: "Via Trieste 65, Padova",
@@ -171,18 +195,23 @@ class _HomeScreenState extends State<HomeScreen> {
           imagePath: "assets/images/airpods.png",
           text: "AirPods Pro",
           nclaims: 0,
-          onTap: () => {Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LostGenericItemScreen(
-                image: "assets/images/iphone.png",
-                title: "Iphone 12",
-                position: "Via Trieste 65, Padova",
-                date: "15/05/2023",
-                category: "Smartphone", onSendMessage: (){}, user: 'Gianni', userImage: 'assets/images/iphone.png',
-              ),
-            ),
-          )}),
+          onTap: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LostGenericItemScreen(
+                      image: "assets/images/iphone.png",
+                      title: "Iphone 12",
+                      position: "Via Trieste 65, Padova",
+                      date: "15/05/2023",
+                      category: "Smartphone",
+                      onSendMessage: () {},
+                      user: 'Gianni',
+                      userImage: 'assets/images/iphone.png',
+                    ),
+                  ),
+                )
+              }),
       CustomCard(
           imagePath: "assets/images/portafoglio.png",
           text: "Brown Wallet",
