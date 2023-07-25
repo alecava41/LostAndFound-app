@@ -43,7 +43,7 @@ class FoundUserItemScreen extends StatelessWidget {
               ),
               Expanded(
                   child: Text(
-                "Claims for this item:",
+                "Item claimed by:",
                 style: TextStyle(fontSize: 18),
                 overflow: TextOverflow.ellipsis,
               )),

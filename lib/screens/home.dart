@@ -107,27 +107,34 @@ class _HomeScreenState extends State<HomeScreen> {
                       category: "Keys",
                       claims: [
                         ClaimedItemCard(
-                            itemImagePath: "assets/images/key.png",
-                            itemName:
-                                "Iphone sssssssssssssssssssssssssssssssss12",
-                            userImagePath: "assets/images/key.png",
-                            user:
-                                "Gsadsaaddasdasdsadsadassdsdasdsadsacefesads"),
+                          itemImagePath: "assets/images/key.png",
+                          itemName:
+                              "Iphone sssssssssssssssssssssssssssssssss12",
+                          userImagePath: "assets/images/no-image.png",
+                          user: "Gsadsaaddasdasdsadsadassdsdasdsadsacefesads",
+                          onlyUser: true, open: true,
+                        ),
                         ClaimedItemCard(
-                            itemImagePath: "assets/images/key.png",
-                            itemName: "Iphone 12",
-                            userImagePath: "assets/images/key.png",
-                            user: "Gianni"),
+                          itemImagePath: "assets/images/key.png",
+                          itemName: "Iphone 12",
+                          userImagePath: "assets/images/key.png",
+                          user: "Gianni",
+                          onlyUser: true, open: true,
+                        ),
                         ClaimedItemCard(
-                            itemImagePath: "assets/images/key.png",
-                            itemName: "Iphone 12",
-                            userImagePath: "assets/images/key.png",
-                            user: "Gianni"),
+                          itemImagePath: "assets/images/key.png",
+                          itemName: "Iphone 12",
+                          userImagePath: "assets/images/no-image.png",
+                          user: "Gianni",
+                          onlyUser: true, open: true,
+                        ),
                         ClaimedItemCard(
-                            itemImagePath: "assets/images/key.png",
-                            itemName: "Iphone 12",
-                            userImagePath: "assets/images/key.png",
-                            user: "Gianni")
+                          itemImagePath: "assets/images/key.png",
+                          itemName: "Iphone 12",
+                          userImagePath: "assets/images/no-image.png",
+                          user: "Gianni",
+                          onlyUser: true, open: true,
+                        )
                       ],
                     ),
                   ),
@@ -280,7 +287,6 @@ class _HomeScreenState extends State<HomeScreen> {
       SearchScreenPage(
         foundChecked: _foundChecked,
         lostChecked: _lostChecked,
-        // TODO: chiamata google per trasformare le coordinate in Via
         address: (selectedPosition != null
             ? "${selectedPosition?.latitude.toString()}, ${selectedPosition?.longitude.toString()}"
             : ""),

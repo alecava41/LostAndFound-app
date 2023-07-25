@@ -7,6 +7,9 @@ class ClaimedItemCard extends StatelessWidget {
   final String itemName;
   final String userImagePath;
   final String user;
+  final bool
+      onlyUser; // if only user true, the card display only the name of the user and his profile pic
+  final bool open;
 
   const ClaimedItemCard({
     super.key,
@@ -14,6 +17,8 @@ class ClaimedItemCard extends StatelessWidget {
     required this.itemName,
     required this.userImagePath,
     required this.user,
+    required this.onlyUser,
+    required this.open,
   });
 
   @override
@@ -21,14 +26,23 @@ class ClaimedItemCard extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Material(
-        color: PersonalizedColor.primarySwatch.shade200,
+        color: !open ? PersonalizedColor.primarySwatch.shade200 : Colors.white,
         child: InkWell(
-          splashColor: PersonalizedColor.primarySwatch.shade500,
+          splashColor: !open
+              ? PersonalizedColor.primarySwatch.shade500
+              : Colors.grey.withOpacity(0.4),
           onTap: () => onTap(context),
           child: Container(
+            decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(
+        color: Colors.grey, 
+        width: 0.3, 
+      ),
+    ),
             padding: const EdgeInsets.all(5),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
                   width: 70,
@@ -36,7 +50,7 @@ class ClaimedItemCard extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image.asset(
-                      itemImagePath,
+                      onlyUser ? userImagePath : itemImagePath,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -52,23 +66,29 @@ class ClaimedItemCard extends StatelessWidget {
                         children: [
                           Flexible(
                             child: Text(
-                              itemName,
+                              onlyUser ? user : itemName,
                               style: const TextStyle(fontSize: 17),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                             ),
                           ),
-                          Text(
-                            "Claimed by: $user",
-                            style: const TextStyle(fontSize: 13),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          onlyUser
+                              ? Container()
+                              : Text(
+                                  "Claimed by: $user",
+                                  style: const TextStyle(fontSize: 13),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                         ],
                       ),
                     ),
                   ),
                 ),
+                const Icon(
+                    Icons.chevron_right,
+                    size: 50,
+                  ),
               ],
             ),
           ),
