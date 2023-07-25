@@ -221,6 +221,7 @@ abstract class _ItemCreated implements ItemEvent {
 /// @nodoc
 mixin _$ItemState {
   Item? get item => throw _privateConstructorUsedError;
+  int get userId => throw _privateConstructorUsedError;
   String get token => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Either<Failure, Success>? get loadFailureOrSuccess =>
@@ -238,6 +239,7 @@ abstract class $ItemStateCopyWith<$Res> {
   @useResult
   $Res call(
       {Item? item,
+      int userId,
       String token,
       bool isLoading,
       Either<Failure, Success>? loadFailureOrSuccess});
@@ -257,6 +259,7 @@ class _$ItemStateCopyWithImpl<$Res, $Val extends ItemState>
   @override
   $Res call({
     Object? item = freezed,
+    Object? userId = null,
     Object? token = null,
     Object? isLoading = null,
     Object? loadFailureOrSuccess = freezed,
@@ -266,6 +269,10 @@ class _$ItemStateCopyWithImpl<$Res, $Val extends ItemState>
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as Item?,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -291,6 +298,7 @@ abstract class _$$_ItemStateCopyWith<$Res> implements $ItemStateCopyWith<$Res> {
   @useResult
   $Res call(
       {Item? item,
+      int userId,
       String token,
       bool isLoading,
       Either<Failure, Success>? loadFailureOrSuccess});
@@ -308,6 +316,7 @@ class __$$_ItemStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? item = freezed,
+    Object? userId = null,
     Object? token = null,
     Object? isLoading = null,
     Object? loadFailureOrSuccess = freezed,
@@ -317,6 +326,10 @@ class __$$_ItemStateCopyWithImpl<$Res>
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as Item?,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -338,12 +351,15 @@ class __$$_ItemStateCopyWithImpl<$Res>
 class _$_ItemState implements _ItemState {
   const _$_ItemState(
       {required this.item,
+      required this.userId,
       required this.token,
       this.isLoading = true,
       this.loadFailureOrSuccess});
 
   @override
   final Item? item;
+  @override
+  final int userId;
   @override
   final String token;
   @override
@@ -354,7 +370,7 @@ class _$_ItemState implements _ItemState {
 
   @override
   String toString() {
-    return 'ItemState(item: $item, token: $token, isLoading: $isLoading, loadFailureOrSuccess: $loadFailureOrSuccess)';
+    return 'ItemState(item: $item, userId: $userId, token: $token, isLoading: $isLoading, loadFailureOrSuccess: $loadFailureOrSuccess)';
   }
 
   @override
@@ -363,6 +379,7 @@ class _$_ItemState implements _ItemState {
         (other.runtimeType == runtimeType &&
             other is _$_ItemState &&
             (identical(other.item, item) || other.item == item) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.token, token) || other.token == token) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
@@ -371,8 +388,8 @@ class _$_ItemState implements _ItemState {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, item, token, isLoading, loadFailureOrSuccess);
+  int get hashCode => Object.hash(
+      runtimeType, item, userId, token, isLoading, loadFailureOrSuccess);
 
   @JsonKey(ignore: true)
   @override
@@ -384,12 +401,15 @@ class _$_ItemState implements _ItemState {
 abstract class _ItemState implements ItemState {
   const factory _ItemState(
       {required final Item? item,
+      required final int userId,
       required final String token,
       final bool isLoading,
       final Either<Failure, Success>? loadFailureOrSuccess}) = _$_ItemState;
 
   @override
   Item? get item;
+  @override
+  int get userId;
   @override
   String get token;
   @override

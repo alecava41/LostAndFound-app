@@ -51,6 +51,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
 
     final session = await _secureStorage.getSessionInformation();
 
-    emit(state.copyWith(isLoading: false, loadFailureOrSuccess: request, item: item, token: session.token));
+    emit(state.copyWith(
+        isLoading: false, loadFailureOrSuccess: request, item: item, token: session.token, userId: session.user));
   }
 }

@@ -4,6 +4,7 @@ part of 'item_bloc.dart';
 class ItemState with _$ItemState {
   const factory ItemState({
     required Item? item,
+    required int userId,
     required String token,
     @Default(true) bool isLoading,
     Either<Failure, Success>? loadFailureOrSuccess,
@@ -11,6 +12,7 @@ class ItemState with _$ItemState {
 
   factory ItemState.initial() => const ItemState(
     item: null,
-    token: ""
+    token: "",
+    userId: 0
   );
 }

@@ -15,8 +15,11 @@ _$$ItemDto _$$$ItemDtoFromJson(Map<String, dynamic> json) => _$$ItemDto(
       user: UserDto.fromJson(json['user'] as Map<String, dynamic>),
       category: CategoryDto.fromJson(json['category'] as Map<String, dynamic>),
       claims: (json['claims'] as List<dynamic>?)
-          ?.map((e) => ClaimDto.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => ClaimReceivedDto.fromJson(e as Map<String, dynamic>))
           .toList(),
+      userClaim: json['userClaim'] == null
+          ? null
+          : ClaimSentDto.fromJson(json['userClaim'] as Map<String, dynamic>),
       position: json['position'] == null
           ? null
           : PositionDto.fromJson(json['position'] as Map<String, dynamic>),
@@ -33,6 +36,7 @@ Map<String, dynamic> _$$$ItemDtoToJson(_$$ItemDto instance) =>
       'user': instance.user,
       'category': instance.category,
       'claims': instance.claims,
+      'userClaim': instance.userClaim,
       'position': instance.position,
       'question': instance.question,
     };

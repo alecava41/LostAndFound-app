@@ -27,7 +27,8 @@ mixin _$ItemDto {
   DateTime get date => throw _privateConstructorUsedError;
   UserDto get user => throw _privateConstructorUsedError;
   CategoryDto get category => throw _privateConstructorUsedError;
-  List<ClaimDto>? get claims => throw _privateConstructorUsedError;
+  List<ClaimReceivedDto>? get claims => throw _privateConstructorUsedError;
+  ClaimSentDto? get userClaim => throw _privateConstructorUsedError;
   PositionDto? get position => throw _privateConstructorUsedError;
   String? get question => throw _privateConstructorUsedError;
 
@@ -49,12 +50,14 @@ abstract class $ItemDtoCopyWith<$Res> {
       DateTime date,
       UserDto user,
       CategoryDto category,
-      List<ClaimDto>? claims,
+      List<ClaimReceivedDto>? claims,
+      ClaimSentDto? userClaim,
       PositionDto? position,
       String? question});
 
   $UserDtoCopyWith<$Res> get user;
   $CategoryDtoCopyWith<$Res> get category;
+  $ClaimSentDtoCopyWith<$Res>? get userClaim;
   $PositionDtoCopyWith<$Res>? get position;
 }
 
@@ -79,6 +82,7 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
     Object? user = null,
     Object? category = null,
     Object? claims = freezed,
+    Object? userClaim = freezed,
     Object? position = freezed,
     Object? question = freezed,
   }) {
@@ -114,7 +118,11 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
       claims: freezed == claims
           ? _value.claims
           : claims // ignore: cast_nullable_to_non_nullable
-              as List<ClaimDto>?,
+              as List<ClaimReceivedDto>?,
+      userClaim: freezed == userClaim
+          ? _value.userClaim
+          : userClaim // ignore: cast_nullable_to_non_nullable
+              as ClaimSentDto?,
       position: freezed == position
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
@@ -139,6 +147,18 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
   $CategoryDtoCopyWith<$Res> get category {
     return $CategoryDtoCopyWith<$Res>(_value.category, (value) {
       return _then(_value.copyWith(category: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ClaimSentDtoCopyWith<$Res>? get userClaim {
+    if (_value.userClaim == null) {
+      return null;
+    }
+
+    return $ClaimSentDtoCopyWith<$Res>(_value.userClaim!, (value) {
+      return _then(_value.copyWith(userClaim: value) as $Val);
     });
   }
 
@@ -170,7 +190,8 @@ abstract class _$$$ItemDtoCopyWith<$Res> implements $ItemDtoCopyWith<$Res> {
       DateTime date,
       UserDto user,
       CategoryDto category,
-      List<ClaimDto>? claims,
+      List<ClaimReceivedDto>? claims,
+      ClaimSentDto? userClaim,
       PositionDto? position,
       String? question});
 
@@ -178,6 +199,8 @@ abstract class _$$$ItemDtoCopyWith<$Res> implements $ItemDtoCopyWith<$Res> {
   $UserDtoCopyWith<$Res> get user;
   @override
   $CategoryDtoCopyWith<$Res> get category;
+  @override
+  $ClaimSentDtoCopyWith<$Res>? get userClaim;
   @override
   $PositionDtoCopyWith<$Res>? get position;
 }
@@ -200,6 +223,7 @@ class __$$$ItemDtoCopyWithImpl<$Res>
     Object? user = null,
     Object? category = null,
     Object? claims = freezed,
+    Object? userClaim = freezed,
     Object? position = freezed,
     Object? question = freezed,
   }) {
@@ -235,7 +259,11 @@ class __$$$ItemDtoCopyWithImpl<$Res>
       claims: freezed == claims
           ? _value._claims
           : claims // ignore: cast_nullable_to_non_nullable
-              as List<ClaimDto>?,
+              as List<ClaimReceivedDto>?,
+      userClaim: freezed == userClaim
+          ? _value.userClaim
+          : userClaim // ignore: cast_nullable_to_non_nullable
+              as ClaimSentDto?,
       position: freezed == position
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
@@ -259,7 +287,8 @@ class _$$ItemDto implements $ItemDto {
       required this.date,
       required this.user,
       required this.category,
-      final List<ClaimDto>? claims,
+      final List<ClaimReceivedDto>? claims,
+      this.userClaim,
       this.position,
       this.question})
       : _claims = claims;
@@ -281,9 +310,9 @@ class _$$ItemDto implements $ItemDto {
   final UserDto user;
   @override
   final CategoryDto category;
-  final List<ClaimDto>? _claims;
+  final List<ClaimReceivedDto>? _claims;
   @override
-  List<ClaimDto>? get claims {
+  List<ClaimReceivedDto>? get claims {
     final value = _claims;
     if (value == null) return null;
     if (_claims is EqualUnmodifiableListView) return _claims;
@@ -292,13 +321,15 @@ class _$$ItemDto implements $ItemDto {
   }
 
   @override
+  final ClaimSentDto? userClaim;
+  @override
   final PositionDto? position;
   @override
   final String? question;
 
   @override
   String toString() {
-    return 'ItemDto(id: $id, title: $title, type: $type, address: $address, date: $date, user: $user, category: $category, claims: $claims, position: $position, question: $question)';
+    return 'ItemDto(id: $id, title: $title, type: $type, address: $address, date: $date, user: $user, category: $category, claims: $claims, userClaim: $userClaim, position: $position, question: $question)';
   }
 
   @override
@@ -315,6 +346,8 @@ class _$$ItemDto implements $ItemDto {
             (identical(other.category, category) ||
                 other.category == category) &&
             const DeepCollectionEquality().equals(other._claims, _claims) &&
+            (identical(other.userClaim, userClaim) ||
+                other.userClaim == userClaim) &&
             (identical(other.position, position) ||
                 other.position == position) &&
             (identical(other.question, question) ||
@@ -333,6 +366,7 @@ class _$$ItemDto implements $ItemDto {
       user,
       category,
       const DeepCollectionEquality().hash(_claims),
+      userClaim,
       position,
       question);
 
@@ -359,7 +393,8 @@ abstract class $ItemDto implements ItemDto {
       required final DateTime date,
       required final UserDto user,
       required final CategoryDto category,
-      final List<ClaimDto>? claims,
+      final List<ClaimReceivedDto>? claims,
+      final ClaimSentDto? userClaim,
       final PositionDto? position,
       final String? question}) = _$$ItemDto;
 
@@ -380,7 +415,9 @@ abstract class $ItemDto implements ItemDto {
   @override
   CategoryDto get category;
   @override
-  List<ClaimDto>? get claims;
+  List<ClaimReceivedDto>? get claims;
+  @override
+  ClaimSentDto? get userClaim;
   @override
   PositionDto? get position;
   @override

@@ -1,25 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'claim_dto.dart';
+part of 'claim_sent_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$$ClaimDto _$$$ClaimDtoFromJson(Map<String, dynamic> json) => _$$ClaimDto(
+_$$ClaimSentDto _$$$ClaimSentDtoFromJson(Map<String, dynamic> json) =>
+    _$$ClaimSentDto(
       id: json['id'] as int,
-      user: UserDto.fromJson(json['user'] as Map<String, dynamic>),
+      status: json['status'] as String,
       answer: json['answer'] as String?,
       date:
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
-      status: json['status'] as String?,
     );
 
-Map<String, dynamic> _$$$ClaimDtoToJson(_$$ClaimDto instance) =>
+Map<String, dynamic> _$$$ClaimSentDtoToJson(_$$ClaimSentDto instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'user': instance.user,
+      'status': instance.status,
       'answer': instance.answer,
       'date': instance.date?.toIso8601String(),
-      'status': instance.status,
     };
