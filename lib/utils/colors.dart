@@ -15,4 +15,9 @@ class PersonalizedColor {
       800: Color.fromRGBO(28, 136, 111, 0.9),
       900: mainColor,
     });
+  static const nClaimsColor = Color.fromRGBO(255, 213, 79, 1);
+  static const claimWaitingStatusColor = Color.fromRGBO(255, 213, 79, 1);
+  static const claimAcceptedStatusColor = Color.fromRGBO(28, 136, 111, 0.3);
+  static const claimDeniedStatusColor = Color.fromRGBO(239, 83, 80, 1);
+
 }

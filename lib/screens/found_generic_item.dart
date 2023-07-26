@@ -15,7 +15,7 @@ class FoundGenericItemScreen extends StatefulWidget {
   final String user;
   final String userImage;
   final bool isClaimed;
-  final String claimStatus;
+  final String claimStatus; // (String) : ACCEPTED | DENIED | WAITING 
 
   const FoundGenericItemScreen(
       {Key? key,
@@ -41,10 +41,10 @@ class _FoundGenericItemScreenState extends State<FoundGenericItemScreen> {
   @override
   Widget build(BuildContext context) {
     var claimColor = claimStatus == "ACCEPTED"
-        ? PersonalizedColor.primarySwatch.shade200
+        ? PersonalizedColor.claimAcceptedStatusColor
         : widget.claimStatus == "DENIED"
-            ? Colors.red.shade400
-            : Colors.amber.shade300;
+            ? PersonalizedColor.claimDeniedStatusColor
+            : PersonalizedColor.claimWaitingStatusColor;
 
     var claimText = claimStatus == "ACCEPTED"
         ? Text(
