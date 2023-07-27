@@ -1,4 +1,4 @@
-import '../../../../core/data/datasources/database.dart';
+import '../../../../core/data/datasources/database/database.dart';
 import '../models/news/read_news.dart';
 
 abstract class ReadNewsDataSource {

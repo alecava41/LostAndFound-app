@@ -4,6 +4,7 @@ import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/item/claimed_item_card.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
+import '../../../../core/domain/entities/claim_status.dart';
 import '../../../../core/presentation/widgets/image_dialog.dart';
 import '../../../../injection_container.dart';
 import '../../../../utils/colors.dart';

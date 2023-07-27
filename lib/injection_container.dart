@@ -3,6 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:lost_and_found/core/data/datasources/category/category_data_source.dart';
 import 'package:lost_and_found/core/data/datasources/category/client/category_client.dart';
+import 'package:lost_and_found/core/data/datasources/claim/read_claim_datasource.dart';
 import 'package:lost_and_found/core/data/datasources/position/client/position_client.dart';
 import 'package:lost_and_found/core/data/datasources/position/position_data_source.dart';
 import 'package:lost_and_found/core/data/repositories/category_repository_impl.dart';
@@ -22,9 +23,15 @@ import 'package:lost_and_found/features/authentication/domain/usecases/registrat
 import 'package:lost_and_found/features/authentication/presentation/bloc/login/login_bloc.dart';
 import 'package:dio_http_formatter/dio_http_formatter.dart';
 import 'package:lost_and_found/features/authentication/presentation/bloc/registration/registration_bloc.dart';
+import 'package:lost_and_found/features/claim/data/datasources/claim_client.dart';
+import 'package:lost_and_found/features/claim/data/datasources/claim_datasource.dart';
+import 'package:lost_and_found/features/claim/domain/repositories/claim_repository.dart';
+import 'package:lost_and_found/features/claim/domain/usecases/get_received_claims_usecase.dart';
+import 'package:lost_and_found/features/claim/domain/usecases/get_sent_claims_usecase.dart';
+import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc.dart';
 import 'package:lost_and_found/features/item/data/datasources/item_client.dart';
 import 'package:lost_and_found/features/item/data/datasources/item_data_source.dart';
-import 'package:lost_and_found/features/item/data/datasources/read_news_data_source.dart';
+import 'package:lost_and_found/features/item/data/datasources/read_news_datasource.dart';
 import 'package:lost_and_found/features/item/data/repositories/item_repository_impl.dart';
 import 'package:lost_and_found/features/item/domain/repositories/item_repository.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_item.dart';
@@ -41,6 +48,7 @@ import 'core/data/secure_storage/secure_storage.dart';
 import 'core/domain/repositories/category_repository.dart';
 import 'core/presentation/select_position/bloc/select_position_bloc.dart';
 import 'features/authentication/domain/usecases/logout_use_case.dart';
+import 'features/claim/data/repositories/claim_repository_impl.dart';
 
 final sl = GetIt.instance;
 
@@ -78,11 +86,25 @@ Future<void> init() async {
 
   // Repository
   sl.registerLazySingleton<ItemRepository>(
-      () => ItemRepositoryImpl(dataSource: sl(), storage: sl(), networkInfo: sl(), readNewsDataSource: sl()));
+      () => ItemRepositoryImpl(dataSource: sl(), storage: sl(), networkInfo: sl(), readNewsDataSource: sl(), readClaimDataSource: sl()));
 
   // Data source
   sl.registerLazySingleton<ItemDataSource>(() => ItemDataSourceImpl(sl()));
   sl.registerLazySingleton<ReadNewsDataSource>(() => ReadNewsDataSourceImpl());
+
+  // ** Feature - Claim **
+  // BLoC
+  sl.registerFactory(() => ClaimBloc(getReceivedClaimsUseCase: sl(), getSentClaimsUseCase: sl(), secureStorage: sl()));
+
+  // Use cases
+  sl.registerLazySingleton(() => GetReceivedClaimsUseCase(sl()));
+  sl.registerLazySingleton(() => GetSentClaimsUseCase(sl()));
+
+  // Repository
+  sl.registerLazySingleton<ClaimRepository>(() => ClaimRepositoryImpl(dataSource: sl(), networkInfo: sl(), readClaimsDataSource: sl()));
+
+  // Data source
+  sl.registerLazySingleton<ClaimDataSource>(() => ClaimDataSourceImpl(sl()));
 
   // ** External - Generic **
   // Use cases
@@ -96,6 +118,7 @@ Future<void> init() async {
   // Data sources
   sl.registerLazySingleton<PositionDataSource>(() => PositionDataSourceImpl(sl()));
   sl.registerLazySingleton<CategoryDataSource>(() => CategoryDataSourceImpl(sl()));
+  sl.registerLazySingleton<ReadClaimDataSource>(() => ReadClaimDataSourceImpl());
 
   // Storage
   sl.registerLazySingleton<SecureStorage>(() => SecureStorageImpl(sl()));
@@ -114,6 +137,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => dio);
   sl.registerLazySingleton(() => AuthClient(sl()));
   sl.registerLazySingleton(() => ItemClient(sl()));
+  sl.registerLazySingleton(() => ClaimClient(sl()));
   sl.registerLazySingleton(() => PositionClient(sl()));
   sl.registerLazySingleton(() => CategoryClient(sl()));
 

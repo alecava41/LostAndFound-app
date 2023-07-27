@@ -7,6 +7,7 @@ import 'package:lost_and_found/features/authentication/presentation/pages/login_
 import 'package:lost_and_found/features/authentication/presentation/pages/registration_page.dart';
 import 'package:lost_and_found/features/item/presentation/pages/notifications_page.dart'
     as notify;
+import 'package:lost_and_found/features/claim/presentation/pages/claim_screen.dart' as claim;
 import 'package:lost_and_found/screens/notifications.dart';
 
 import '../core/presentation/home_controller/home_controller.dart';
@@ -49,6 +50,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const InsertItemScreen());
       case '/notifications':
         return MaterialPageRoute(builder: (_) => const notify.NotificationsScreen());
+      case '/claims':
+        return MaterialPageRoute(builder: (_) => const claim.ClaimsScreen());
       case '/options/changePassword':
         return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
       default:

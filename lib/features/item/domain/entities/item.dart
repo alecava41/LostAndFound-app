@@ -1,6 +1,7 @@
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 
 import '../../../../core/domain/entities/category.dart';
+import '../../../../core/domain/entities/claim_status.dart';
 
 class Item {
   final int id;
@@ -38,9 +39,8 @@ class User {
 class ClaimReceived {
   final int id;
   final ClaimStatus status;
-  final bool opened;
+  bool opened;
   final User user;
-  // TODO add other parameters based on UI requirements
 
   ClaimReceived({
     required this.id,
@@ -58,10 +58,4 @@ class ClaimSent {
     required this.id,
     required this.status
   });
-}
-
-enum ClaimStatus {
-  pending,
-  approved,
-  rejected
 }

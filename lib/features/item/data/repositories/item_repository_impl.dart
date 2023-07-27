@@ -1,11 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:lost_and_found/core/status/failures.dart';
+import 'package:lost_and_found/core/data/datasources/claim/read_claim_datasource.dart';
 import 'package:lost_and_found/features/item/data/adapters/item_from_dto.dart';
 import 'package:lost_and_found/features/item/data/adapters/news_from_dto.dart';
 import 'package:lost_and_found/features/item/data/adapters/search_item_from_dto.dart';
 import 'package:lost_and_found/features/item/data/adapters/user_item_from_dto.dart';
-import 'package:lost_and_found/features/item/data/datasources/read_news_data_source.dart';
+import 'package:lost_and_found/features/item/data/datasources/read_news_datasource.dart';
 import 'package:lost_and_found/features/item/domain/entities/item.dart';
 import 'package:lost_and_found/features/item/domain/entities/search_item.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
@@ -26,16 +27,19 @@ class ItemRepositoryImpl implements ItemRepository {
   final ItemDataSource _dataSource;
   final SecureStorage _storage;
   final ReadNewsDataSource _readNewsDataSource;
+  final ReadClaimDataSource _readClaimDataSource;
 
   ItemRepositoryImpl(
       {required ItemDataSource dataSource,
       required SecureStorage storage,
       required NetworkInfo networkInfo,
-      required ReadNewsDataSource readNewsDataSource})
+      required ReadNewsDataSource readNewsDataSource,
+      required ReadClaimDataSource readClaimDataSource})
       : _networkInfo = networkInfo,
         _dataSource = dataSource,
         _storage = storage,
-        _readNewsDataSource = readNewsDataSource;
+        _readNewsDataSource = readNewsDataSource,
+        _readClaimDataSource = readClaimDataSource;
 
   @override
   Future<Either<Failure, List<UserItem>>> getUserItems(GetUserItemsParams params) async {
@@ -103,8 +107,21 @@ class ItemRepositoryImpl implements ItemRepository {
     try {
       if (await _networkInfo.isConnected) {
         final item = await _dataSource.getItem(params);
+        final domainItem = item.toDomain();
 
-        return Right(item.toDomain());
+        if (domainItem.claims != null &&
+            domainItem.claims!.isNotEmpty &&
+            (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android)) {
+          final readClaims = await _readClaimDataSource.getReadClaims();
+
+          for (var claim in domainItem.claims!) {
+            if (readClaims.contains(claim.id)) {
+              claim.opened = true;
+            }
+          }
+        }
+
+        return Right(domainItem);
       } else {
         return const Left(Failure.networkFailure());
       }
