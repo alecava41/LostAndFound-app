@@ -53,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context) => const ChatScreen(
                   userTo: 'Maria',
                   userToImage: 'assets/images/no-image.png',
+                  userHasDoneClaim: false, userHasRecivedClaim: true
                 ),
               ));
         },
@@ -69,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context) => const ChatScreen(
                   userTo: 'Maria',
                   userToImage: 'assets/images/no-image.png',
+                  userHasDoneClaim: true, userHasRecivedClaim: false
                 ),
               ));
         },
@@ -84,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
               MaterialPageRoute(
                 builder: (context) => const ChatScreen(
                   userTo: 'Maria',
-                  userToImage: 'assets/images/no-image.png',
+                  userToImage: 'assets/images/no-image.png', userHasDoneClaim: true, userHasRecivedClaim: false,
                 ),
               ));
         },
@@ -112,28 +114,28 @@ class _HomeScreenState extends State<HomeScreen> {
                               "Iphone sssssssssssssssssssssssssssssssss12",
                           userImagePath: "assets/images/no-image.png",
                           user: "Gsadsaaddasdasdsadsadassdsdasdsadsacefesads",
-                          onlyUser: true, open: true,
+                          onlyUser: true, open: true, claimAnswered: false, onlyItem: false,
                         ),
                         ClaimedItemCard(
                           itemImagePath: "assets/images/key.png",
                           itemName: "Iphone 12",
                           userImagePath: "assets/images/key.png",
                           user: "Gianni",
-                          onlyUser: true, open: true,
+                          onlyUser: true, open: true,claimAnswered: false, onlyItem: false,
                         ),
                         ClaimedItemCard(
                           itemImagePath: "assets/images/key.png",
                           itemName: "Iphone 12",
                           userImagePath: "assets/images/no-image.png",
                           user: "Gianni",
-                          onlyUser: true, open: true,
+                          onlyUser: true, open: true,claimAnswered: false, onlyItem: false,
                         ),
                         ClaimedItemCard(
                           itemImagePath: "assets/images/key.png",
                           itemName: "Iphone 12",
                           userImagePath: "assets/images/no-image.png",
                           user: "Gianni",
-                          onlyUser: true, open: true,
+                          onlyUser: true, open: true,claimAnswered: false, onlyItem: false,
                         )
                       ],
                     ),
@@ -400,7 +402,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 MaterialPageRoute(
                   builder: (context) => const ChatScreen(
                     userTo: 'Maria',
-                    userToImage: 'assets/images/no-image.png',
+                    userToImage: 'assets/images/no-image.png', userHasDoneClaim: false, userHasRecivedClaim: false,
                   ),
                 ));
           },

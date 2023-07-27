@@ -26,7 +26,7 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
           userImagePath: "assets/images/no-image.png",
           user: "Gsadsaaddasdasdsadsadassdsdasdsadsacefesads",
           onlyUser: false,
-          open: true,
+          open: true,claimAnswered: false, onlyItem: false,
         ),
         const ClaimedItemCard(
           itemImagePath: "assets/images/key.png",
@@ -34,7 +34,7 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
           userImagePath: "assets/images/key.png",
           user: "Gianni",
           onlyUser: false,
-          open: true,
+          open: true,claimAnswered: false, onlyItem: false,
         ),
         const ClaimedItemCard(
           itemImagePath: "assets/images/key.png",
@@ -42,7 +42,7 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
           userImagePath: "assets/images/no-image.png",
           user: "Gianni",
           onlyUser: false,
-          open: true,
+          open: true,claimAnswered: false, onlyItem: false,
         ),
         const ClaimedItemCard(
           itemImagePath: "assets/images/key.png",
@@ -50,7 +50,7 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
           userImagePath: "assets/images/no-image.png",
           user: "Gianni",
           onlyUser: false,
-          open: true,
+          open: true,claimAnswered: false, onlyItem: false,
         ),
       ];
       userClaims = [];
@@ -177,6 +177,7 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
       user: "Gianni",
       onlyUser: false,
       open: false,
+      claimAnswered: false, onlyItem: false,
     );
     ClaimedStatusCard newUserClaim = const ClaimedStatusCard(
       itemImagePath: "assets/images/key.png",

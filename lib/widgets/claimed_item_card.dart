@@ -9,7 +9,10 @@ class ClaimedItemCard extends StatelessWidget {
   final String user;
   final bool
       onlyUser; // if only user true, the card display only the name of the user and his profile pic
+  final bool
+      onlyItem; // if onlyItem true, the card display only the name of the item and the image of the item, onlyUser must be false
   final bool open;
+  final bool claimAnswered;
 
   const ClaimedItemCard({
     super.key,
@@ -18,7 +21,9 @@ class ClaimedItemCard extends StatelessWidget {
     required this.userImagePath,
     required this.user,
     required this.onlyUser,
+    required this.onlyItem,
     required this.open,
+    required this.claimAnswered,
   });
 
   @override
@@ -34,12 +39,12 @@ class ClaimedItemCard extends StatelessWidget {
           onTap: () => onTap(context),
           child: Container(
             decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(10),
-      border: Border.all(
-        color: Colors.grey, 
-        width: 0.3, 
-      ),
-    ),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: Colors.grey,
+                width: 0.3,
+              ),
+            ),
             padding: const EdgeInsets.all(5),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,10 +77,10 @@ class ClaimedItemCard extends StatelessWidget {
                               maxLines: 1,
                             ),
                           ),
-                          onlyUser
+                          onlyUser || onlyItem
                               ? Container()
                               : Text(
-                                  "Claimed by: $user",
+                                  onlyUser ? "Claimed by: $user" : itemName,
                                   style: const TextStyle(fontSize: 13),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -85,10 +90,16 @@ class ClaimedItemCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Icon(
-                    Icons.chevron_right,
-                    size: 50,
-                  ),
+                claimAnswered
+                    ? const Icon(
+                        Icons.check_circle,
+                        color: PersonalizedColor.mainColor,
+                        size: 40,
+                      )
+                    : const Icon(
+                        Icons.chevron_right,
+                        size: 50,
+                      )
               ],
             ),
           ),
@@ -98,16 +109,33 @@ class ClaimedItemCard extends StatelessWidget {
   }
 
   void onTap(context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => AnswerClaimScreen(
-              question: "This is a question",
-              user: "GIANNI",
-              userImagePath: userImagePath,
-              answer: "This is an answer",
-              itemImagePath: itemImagePath,
-              itemName: itemName)),
+    if (claimAnswered) {
+      showSnackBar(context);
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => AnswerClaimScreen(
+                question: "This is a question",
+                user: "GIANNI",
+                userImagePath: userImagePath,
+                answer: "This is an answer",
+                itemImagePath: itemImagePath,
+                itemName: itemName)),
+      );
+    }
+  }
+
+  showSnackBar(context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        padding: EdgeInsets.all(30),
+        backgroundColor: PersonalizedColor.mainColor,
+        content: Text(
+          'Claim already answered',
+          style: TextStyle(fontSize: 18),
+        ),
+      ),
     );
   }
 }
