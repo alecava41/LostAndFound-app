@@ -32,6 +32,7 @@ import 'package:lost_and_found/features/item/domain/usecases/get_user_items_usec
 import 'package:lost_and_found/features/item/domain/usecases/get_user_notifications_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/search_items_usecase.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
+import 'package:lost_and_found/features/item/presentation/bloc/item/item_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/notification/news_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/search/search_bloc.dart';
 
@@ -67,6 +68,7 @@ Future<void> init() async {
   sl.registerFactory(() => NewsBloc(getUserNotificationsUseCase: sl(), secureStorage: sl()));
   sl.registerFactory(
       () => SearchBloc(searchItemsUseCase: sl(), secureStorage: sl(), getAddressFromPositionUseCase: sl()));
+  sl.registerFactory(() => ItemBloc(getItemUseCase: sl(), secureStorage: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetUserItemsUseCase(sl()));

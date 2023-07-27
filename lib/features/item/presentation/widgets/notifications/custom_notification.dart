@@ -4,6 +4,7 @@ import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/notification/news_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/notifications/circular_image_avatar.dart';
 import 'package:lost_and_found/utils/colors.dart';
+import 'package:lost_and_found/utils/constants.dart';
 
 class CustomNotification extends StatelessWidget {
   final int targetUserId;
@@ -43,7 +44,7 @@ class CustomNotification extends StatelessWidget {
                   child: Row(
                     children: [
                       CircularImage(
-                        imageUrl: "http://localhost:5000/api/users/$targetUserId/image",
+                        imageUrl: "$baseUrl/api/users/$targetUserId/image",
                         token: token,
                         radius: 35,
                       ),

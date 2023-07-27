@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import '../../status/exceptions.dart';
 
 Future<T> handleError<T>(Object obj) {
-  log(obj.runtimeType.toString());
 
   switch (obj.runtimeType) {
     case DioException:

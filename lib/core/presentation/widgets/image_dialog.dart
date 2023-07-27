@@ -33,7 +33,7 @@ class ImageDialogWidget extends StatelessWidget {
                       "Authorization": "Bearer $token",
                     },
                     progressIndicatorBuilder: (context, url, downloadProgress) =>
-                        CircularProgressIndicator(value: downloadProgress.progress),
+                        const CircularProgressIndicator(value: null),
                     errorWidget: (context, url, error) => const Icon(Icons.error),
                     imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                   ),

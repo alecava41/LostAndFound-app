@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
+import 'package:lost_and_found/utils/constants.dart';
 
 class CustomCardHome extends StatelessWidget {
   final int id;
@@ -8,12 +10,7 @@ class CustomCardHome extends StatelessWidget {
   final int claims;
   final String token;
 
-  const CustomCardHome(
-      {super.key,
-      required this.id,
-      required this.text,
-      required this.claims,
-      required this.token});
+  const CustomCardHome({super.key, required this.id, required this.text, required this.claims, required this.token});
 
   @override
   Widget build(BuildContext context) {
@@ -37,32 +34,24 @@ class CustomCardHome extends StatelessWidget {
                       height: 150.0,
                       width: 150.0,
                       child: CachedNetworkImage(
-                        imageUrl: "http://localhost:5000/api/items/$id/image",
+                        imageUrl: "$baseUrl/api/items/$id/image",
                         fit: BoxFit.cover,
                         httpHeaders: {
                           "Authorization": "Bearer $token",
                         },
-                        progressIndicatorBuilder:
-                            (context, url, downloadProgress) =>
-                                CircularProgressIndicator(
-                                    value: downloadProgress.progress),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
-                        imageRenderMethodForWeb:
-                            ImageRenderMethodForWeb.HttpGet,
+                        placeholder: (context, _) => const CircularProgressIndicator(value: null),
+                        errorWidget: (context, url, error) => const Icon(Icons.error),
+                        imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                       ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(
-                      top: 8, left: 18, bottom: 5, right: 18),
+                  padding: const EdgeInsets.only(top: 8, left: 18, bottom: 5, right: 18),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(text,
-                          style: const TextStyle(fontSize: 16.0),
-                          overflow: TextOverflow.ellipsis),
+                      Text(text, style: const TextStyle(fontSize: 16.0), overflow: TextOverflow.ellipsis),
                       const SizedBox(
                         height: 5,
                       ),
@@ -101,7 +90,14 @@ class CustomCardHome extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () {}, // TODO create wiring
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ItemScreen(
+                                id: id,
+                              )));
+                },
                 borderRadius: BorderRadius.circular(24.0),
               ),
             ),

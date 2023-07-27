@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +22,8 @@ class CircularImage extends StatelessWidget {
         "Authorization": "Bearer $token",
       },
        progressIndicatorBuilder: (context, url, downloadProgress) =>
-           CircularProgressIndicator(value: downloadProgress.progress),
-       errorWidget: (context, url, error)  { log(error); return const Icon(Icons.error);},
+           const CircularProgressIndicator(value: null),
+       errorWidget: (context, url, error)  { return const Icon(Icons.error);},
       imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
       imageBuilder: (ctx, imageProvider) => CircleAvatar(
         radius: radius,

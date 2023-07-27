@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
+import '../../../../utils/constants.dart';
 import '../models/item/item_dto.dart';
 import '../models/news/news_dto.dart';
 import '../models/search_item/search_item_dto.dart';
@@ -8,7 +9,7 @@ import '../models/user_item/user_item_dto.dart';
 
 part 'item_client.g.dart';
 
-@RestApi(baseUrl: "http://localhost:5000/api")
+@RestApi(baseUrl: "$baseUrl/api")
 abstract class ItemClient {
   factory ItemClient(Dio dio, {String baseUrl}) = _ItemClient;
 

@@ -19,7 +19,9 @@ extension ItemFromDto on ItemDto {
               id: claim.id,
               status: claim.status == ClaimStatus.pending.name
                   ? ClaimStatus.pending
-                  : (claim.status == ClaimStatus.rejected.name ? ClaimStatus.rejected : ClaimStatus.approved)))
+                  : (claim.status == ClaimStatus.rejected.name ? ClaimStatus.rejected : ClaimStatus.approved),
+          user: User(id: claim.user.id, username: claim.user.username),
+          opened: false)) // TODO fix opened status
           .toList(),
       userClaim: userClaim != null
           ? ClaimSent(

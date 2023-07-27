@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class InfoItem extends StatelessWidget {
   final String title;
@@ -46,7 +47,7 @@ class InfoItem extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -54,7 +55,7 @@ class InfoItem extends StatelessWidget {
               const SizedBox(width: 5),
               Expanded(
                 child: Text(
-                  "Date of insertion: $date",
+                  "Date of insertion: ${DateFormat("dd/MM/yyyy").format(date)}",
                   style: const TextStyle(fontSize: 18),
                   overflow: TextOverflow.ellipsis,
                 ),

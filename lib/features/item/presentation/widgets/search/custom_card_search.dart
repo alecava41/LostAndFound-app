@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/utils/constants.dart';
+
+import '../../pages/item_page.dart';
 
 class CustomCardSearch extends StatelessWidget {
   final int id;
@@ -34,13 +37,13 @@ class CustomCardSearch extends StatelessWidget {
                       height: 150.0,
                       width: 150.0,
                       child: CachedNetworkImage(
-                        imageUrl: "http://localhost:5000/api/items/$id/image",
+                        imageUrl: "$baseUrl/api/items/$id/image",
                         fit: BoxFit.cover,
                         httpHeaders: {
                           "Authorization": "Bearer $token",
                         },
                         progressIndicatorBuilder: (context, url, downloadProgress) =>
-                            CircularProgressIndicator(value: downloadProgress.progress),
+                            const CircularProgressIndicator(value: null),
                         errorWidget: (context, url, error) => const Icon(Icons.error),
                         imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                       ),
@@ -71,7 +74,14 @@ class CustomCardSearch extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () {}, // TODO create wiring
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ItemScreen(
+                            id: id,
+                          )));
+                },
                 borderRadius: BorderRadius.circular(24.0),
               ),
             ),

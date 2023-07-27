@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:lost_and_found/core/data/datasources/position/models/address_dto.dart';
+import 'package:lost_and_found/utils/constants.dart';
 import 'package:retrofit/http.dart';
 
 
 part 'position_client.g.dart';
 
-@RestApi(baseUrl: "http://localhost:5000/api/position")
+@RestApi(baseUrl: "$baseUrl/api/position")
 abstract class PositionClient {
   factory PositionClient(Dio dio, {String baseUrl}) = _PositionClient;
 

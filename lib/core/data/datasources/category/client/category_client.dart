@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
+import '../../../../../utils/constants.dart';
 import '../models/category_dto.dart';
 
 
 part 'category_client.g.dart';
 
-@RestApi(baseUrl: "http://localhost:5000/api/categories")
+@RestApi(baseUrl: "$baseUrl/api/categories")
 abstract class CategoryClient {
   factory CategoryClient(Dio dio, {String baseUrl}) = _CategoryClient;
 

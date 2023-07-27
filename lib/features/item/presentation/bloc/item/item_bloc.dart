@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lost_and_found/core/data/secure_storage/secure_storage.dart';
-import 'package:lost_and_found/core/domain/usecases/get_address_from_position_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_item.dart';
 
 import '../../../../../core/status/success.dart';
@@ -23,8 +22,8 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
 
   ItemBloc(
       {required GetItemUseCase getItemUseCase,
-      required SecureStorage secureStorage,
-      required GetAddressFromPositionUseCase getAddressFromPositionUseCase})
+      required SecureStorage secureStorage
+      })
       : _getItemUseCase = getItemUseCase,
         _secureStorage = secureStorage,
         super(ItemState.initial()) {

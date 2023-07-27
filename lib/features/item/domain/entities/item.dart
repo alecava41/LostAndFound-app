@@ -38,11 +38,15 @@ class User {
 class ClaimReceived {
   final int id;
   final ClaimStatus status;
+  final bool opened;
+  final User user;
   // TODO add other parameters based on UI requirements
 
   ClaimReceived({
     required this.id,
-    required this.status
+    required this.status,
+    required this.opened,
+    required this.user,
   });
 }
 

@@ -2,12 +2,13 @@ import 'package:lost_and_found/features/authentication/domain/usecases/login_use
 import 'package:retrofit/http.dart';
 import 'package:dio/dio.dart';
 
+import '../../../../utils/constants.dart';
 import '../../domain/usecases/registration_usecase.dart';
 import '../models/session_model.dart';
 
 part 'auth_client.g.dart';
 
-@RestApi(baseUrl: "http://localhost:5000/auth")
+@RestApi(baseUrl: "$baseUrl/auth")
 abstract class AuthClient {
   factory AuthClient(Dio dio, {String baseUrl}) = _AuthClient;
   
