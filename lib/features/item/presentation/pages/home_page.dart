@@ -15,7 +15,10 @@ class HomeScreen extends StatelessWidget {
       builder: (ctx, state) {
         return RefreshIndicator(
             onRefresh: () async {
-              Future block = ctx.read<HomeBloc>().stream.first;
+              Future block = ctx
+                  .read<HomeBloc>()
+                  .stream
+                  .first;
               ctx.read<HomeBloc>().add(const HomeEvent.homeRefreshed());
               await block;
             },
@@ -46,9 +49,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             ClickableCircularButton(
                               icon: Icons.search,
-                              onPressed: () {
-                                // TODO navigate to "claims" screen
-                              },
+                              onPressed: () => Navigator.of(context).pushNamed('/claims'),
                             ),
                           ],
                         )

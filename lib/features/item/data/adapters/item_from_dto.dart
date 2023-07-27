@@ -1,6 +1,7 @@
 import 'package:lost_and_found/core/domain/entities/category.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 
+import '../../../../core/domain/entities/claim_status.dart';
 import '../../domain/entities/item.dart';
 import '../models/item/item_dto.dart';
 
@@ -21,7 +22,7 @@ extension ItemFromDto on ItemDto {
                   ? ClaimStatus.pending
                   : (claim.status == ClaimStatus.rejected.name ? ClaimStatus.rejected : ClaimStatus.approved),
           user: User(id: claim.user.id, username: claim.user.username),
-          opened: false)) // TODO fix opened status
+          opened: false))
           .toList(),
       userClaim: userClaim != null
           ? ClaimSent(

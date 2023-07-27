@@ -63,6 +63,8 @@ class _$AppDatabase extends AppDatabase {
 
   ReadNewsDao? _readNewsDaoInstance;
 
+  ReadClaimDao? _readClaimDaoInstance;
+
   Future<sqflite.Database> open(
     String path,
     List<Migration> migrations, [
@@ -86,6 +88,8 @@ class _$AppDatabase extends AppDatabase {
       onCreate: (database, version) async {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `ReadNews` (`id` INTEGER NOT NULL, PRIMARY KEY (`id`))');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `ReadClaim` (`id` INTEGER NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -96,6 +100,11 @@ class _$AppDatabase extends AppDatabase {
   @override
   ReadNewsDao get readNewsDao {
     return _readNewsDaoInstance ??= _$ReadNewsDao(database, changeListener);
+  }
+
+  @override
+  ReadClaimDao get readClaimDao {
+    return _readClaimDaoInstance ??= _$ReadClaimDao(database, changeListener);
   }
 }
 
@@ -124,5 +133,33 @@ class _$ReadNewsDao extends ReadNewsDao {
   @override
   Future<void> insertReadNews(ReadNews news) async {
     await _readNewsInsertionAdapter.insert(news, OnConflictStrategy.abort);
+  }
+}
+
+class _$ReadClaimDao extends ReadClaimDao {
+  _$ReadClaimDao(
+    this.database,
+    this.changeListener,
+  )   : _queryAdapter = QueryAdapter(database),
+        _readClaimInsertionAdapter = InsertionAdapter(database, 'ReadClaim',
+            (ReadClaim item) => <String, Object?>{'id': item.id});
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final QueryAdapter _queryAdapter;
+
+  final InsertionAdapter<ReadClaim> _readClaimInsertionAdapter;
+
+  @override
+  Future<List<ReadClaim>> findAllReadClaims() async {
+    return _queryAdapter.queryList('SELECT * FROM ReadClaim',
+        mapper: (Map<String, Object?> row) => ReadClaim(id: row['id'] as int));
+  }
+
+  @override
+  Future<void> insertReadClaim(ReadClaim claim) async {
+    await _readClaimInsertionAdapter.insert(claim, OnConflictStrategy.abort);
   }
 }

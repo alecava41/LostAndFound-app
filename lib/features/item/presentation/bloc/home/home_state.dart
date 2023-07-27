@@ -7,7 +7,6 @@ class HomeState with _$HomeState {
     required List<UserItem> foundItems,
     required String token,
     Either<Failure, Success>? homeFailureOrSuccess,
-    // Unit comes from Dartz package and is equivalent to void.
   }) = _HomeState;
 
   factory HomeState.initial() => const HomeState(

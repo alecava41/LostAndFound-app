@@ -22,8 +22,7 @@ class NewsContent extends StatelessWidget {
                           failure.maybeWhen<String>(
                               genericFailure: () => 'Server error. Please try again later.',
                               networkFailure: () => 'No internet connection available. Check your internet connection.',
-                              orElse: () => 'Unknown error'
-                          ),
+                              orElse: () => 'Unknown error'),
                           style: const TextStyle(fontSize: 20)),
                     ),
                   )
