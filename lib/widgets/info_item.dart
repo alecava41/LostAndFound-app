@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/utils/colors.dart';
 
+// ignore: must_be_immutable
 class InfoItem extends StatelessWidget {
   final String title;
   final String position;
   final String date;
   final String category;
   final bool isFound;
+  String? question;
 
-  const InfoItem({
-    Key? key,
-    required this.title,
-    required this.position,
-    required this.date,
-    required this.category,
-    required this.isFound,
-  }) : super(key: key);
+  InfoItem(
+      {Key? key,
+      required this.title,
+      required this.position,
+      required this.date,
+      required this.category,
+      required this.isFound,
+      this.question})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +79,23 @@ class InfoItem extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 10),
+          question != null? Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(8),
+            decoration: const BoxDecoration(
+              
+              color: PersonalizedColor.claimAcceptedStatusColor,
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+              question != null
+              ? const Text("Question to verify the ownership:", style: TextStyle(fontSize: 18),)
+              : Container(),
+          question != null ? Text(question!) : Container(),
+            ]),
+          ): Container()
         ],
       ),
     );

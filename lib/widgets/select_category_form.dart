@@ -7,7 +7,8 @@ class CategorySelectionForm extends StatelessWidget {
   final ValueChanged<String> onTap;
   final String selectedCategory;
 
-  const CategorySelectionForm({super.key, 
+  const CategorySelectionForm({
+    super.key,
     required this.onTap,
     required this.selectedCategory,
   });
@@ -35,9 +36,7 @@ class CategorySelectionForm extends StatelessWidget {
         Material(
           color: Colors.white,
           child: InkWell(
-            onTap: () async => {
-              await navigateToCategorySelection(context)
-            },
+            onTap: () async => {await navigateToCategorySelection(context)},
             borderRadius: BorderRadius.circular(0),
             child: Container(
               height: 65,
@@ -50,21 +49,24 @@ class CategorySelectionForm extends StatelessWidget {
                       "Category",
                       style: TextStyle(fontSize: 25),
                     ),
-                    Row(
-                      children: [
-                        if (selectedCategory.isNotEmpty)
-                          Text(
-                            selectedCategory,
-                            style: const TextStyle(
-                              fontSize: 15,
-                              color: PersonalizedColor.mainColor,
-                            ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    if (selectedCategory.isNotEmpty)
+                      Expanded(
+                        child: Text(
+                          selectedCategory,
+                          textAlign: TextAlign.right,
+                          style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            fontSize: 15,
+                            color: PersonalizedColor.mainColor,
                           ),
-                        const Icon(
-                          Icons.chevron_right,
-                          size: 50,
                         ),
-                      ],
+                      ),
+                    const Icon(
+                      Icons.chevron_right,
+                      size: 50,
                     ),
                   ],
                 ),

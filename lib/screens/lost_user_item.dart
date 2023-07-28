@@ -3,6 +3,8 @@ import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/widgets/image_item.dart';
 import 'package:lost_and_found/widgets/info_item.dart';
 
+import 'insert_item.dart';
+
 class LostUserItemScreen extends StatelessWidget {
   final String image;
   final String title;
@@ -33,15 +35,15 @@ class LostUserItemScreen extends StatelessWidget {
               iconSize: 30,
               itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                 const PopupMenuItem<String>(
-                  value: 'opt1',
+                  value: 'delete',
                   child: Text('Check as found'),
                 ),
                 const PopupMenuItem<String>(
-                  value: 'opt2',
+                  value: 'modify',
                   child: Text('Modify'),
                 ),
                 const PopupMenuItem<String>(
-                  value: 'opt3',
+                  value: 'delete',
                   child: Text(
                     'Delete',
                     style: TextStyle(color: Colors.red),
@@ -51,14 +53,11 @@ class LostUserItemScreen extends StatelessWidget {
               onSelected: (String value) {
                 // Action to be performed when a menu item is selected
                 switch (value) {
-                  case 'opt1':
+                  case 'delete':
                     // Perform action for option 1
                     break;
-                  case 'opt2':
-                    // Perform action for option 2
-                    break;
-                  case 'opt3':
-                    // Perform action for option 3
+                  case 'modify':
+                    onModifyClick(context);
                     break;
                 }
               },
@@ -91,5 +90,19 @@ class LostUserItemScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void onModifyClick(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => InsertItemScreen(
+            imagePath: image,
+            categorySelected: category,
+            selectedPosition: position,
+            insertedTitle: title,
+            selectedLostOrFound: 1,
+          ),
+        ));
   }
 }

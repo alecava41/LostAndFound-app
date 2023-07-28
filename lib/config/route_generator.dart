@@ -26,7 +26,7 @@ class RouteGenerator {
       case '/home':
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case '/insert':
-        return MaterialPageRoute(builder: (_) => const InsertItemScreen());
+        return MaterialPageRoute(builder: (_) => InsertItemScreen());
       case '/notifications':
         return MaterialPageRoute(builder: (_) => const NotificationsScreen());
       case '/claims':

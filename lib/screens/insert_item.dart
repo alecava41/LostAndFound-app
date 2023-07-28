@@ -11,8 +11,23 @@ import 'package:lost_and_found/widgets/upload_photo_form.dart';
 
 import '../utils/colors.dart';
 
+// ignore: must_be_immutable
 class InsertItemScreen extends StatefulWidget {
-  const InsertItemScreen({super.key});
+  String? imagePath;
+  int? selectedLostOrFound;
+  String? insertedTitle;
+  String? insertedQuestion;
+  String? categorySelected;
+  String? selectedPosition;
+
+  InsertItemScreen(
+      {super.key,
+      this.imagePath,
+      this.selectedLostOrFound,
+      this.categorySelected,
+      this.insertedTitle,
+      this.insertedQuestion,
+      this.selectedPosition});
 
   @override
   State<InsertItemScreen> createState() => _InsertItemScreenState();
@@ -24,11 +39,59 @@ class _InsertItemScreenState extends State<InsertItemScreen> {
   String insertedTitle = '';
   String insertedQuestion = '';
   String categorySelected = '';
+  String? imagePath;
   final ImagePicker picker = ImagePicker();
   LatLng? selectedPosition;
 
   @override
+  void initState() {
+    imagePath = widget.imagePath;
+    if (widget.selectedLostOrFound != null) {
+      selectedFoundOrLost = widget.selectedLostOrFound!;
+    }
+    if (widget.insertedTitle != null) {
+      insertedTitle = widget.insertedTitle!;
+    }
+    if (widget.insertedQuestion != null) {
+      insertedQuestion = widget.insertedQuestion!;
+    }
+    if (widget.categorySelected != null) {
+      categorySelected = widget.categorySelected!;
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    var uploadButton = Row(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ElevatedButton(
+                onPressed: onUploadClick,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: PersonalizedColor.mainColor,
+                  shape: const StadiumBorder(),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
+                child: Text(
+                  widget.categorySelected != null ||
+                          widget.imagePath != null ||
+                          widget.insertedQuestion != null ||
+                          widget.insertedTitle != null ||
+                          widget.selectedLostOrFound != null ||
+                          widget.selectedPosition != null
+                      ? "Modify"
+                      : "Upload",
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                )),
+          ),
+        )
+      ],
+    );
+
     return WillPopScope(
       onWillPop: () async {
         if (somethingChecked()) {
@@ -39,79 +102,89 @@ class _InsertItemScreenState extends State<InsertItemScreen> {
         }
       },
       child: SafeArea(
+          top: false,
           child: Scaffold(
-        backgroundColor: PersonalizedColor.backGroundColor,
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: handleBackButtonPressed,
-          ),
-          iconTheme: const IconThemeData(color: Colors.black),
-          title: const Text(
-            "Insert an item",
-            style: TextStyle(color: Colors.black),
-          ),
-          backgroundColor: Colors.white,
-        ),
-        body: SingleChildScrollView(
-          child: Column(children: [
-            UploadImageForm(
-                onUploadPhoto: onUploadPhoto,
-                onDeletePhoto: onDeletePhoto,
-                image: image),
-            _divider,
-            const SizedBox(
-              height: 10,
+            backgroundColor: PersonalizedColor.backGroundColor,
+            appBar: AppBar(
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: handleBackButtonPressed,
+              ),
+              iconTheme: const IconThemeData(color: Colors.black),
+              title: const Text(
+                "Insert an item",
+                style: TextStyle(color: Colors.black),
+              ),
+              backgroundColor: Colors.white,
             ),
-            _divider,
-            PersonalizedRadioButtonsForm(
-                text: "The item has been:",
-                selectedValue: selectedFoundOrLost,
-                onChanged: onChangedRadioButtonsValue),
-            _divider,
-            const SizedBox(
-              height: 10,
+            body: SingleChildScrollView(
+              child: Column(children: [
+                UploadImageForm(
+                  onUploadPhoto: onUploadPhoto,
+                  onDeletePhoto: onDeletePhoto,
+                  image: image,
+                  imagePath: imagePath,
+                ),
+                _divider,
+                const SizedBox(
+                  height: 10,
+                ),
+                _divider,
+                PersonalizedRadioButtonsForm(
+                    text: "The item has been:",
+                    selectedValue: selectedFoundOrLost,
+                    onChanged: onChangedRadioButtonsValue),
+                _divider,
+                const SizedBox(
+                  height: 10,
+                ),
+                _divider,
+                PersonalizedFormWithTextInsertion(
+                  title: "Title:",
+                  onStringInserted: handleTitleInserted,
+                  hintText: "e.g. Iphone 12 black",
+                  text: insertedTitle,
+                ),
+                _divider,
+                selectedFoundOrLost == 2 ? const SizedBox(
+                  height: 10,
+                ) : Container(),
+                selectedFoundOrLost == 2 ? _divider : Container(),
+                selectedFoundOrLost == 2
+                    ? PersonalizedFormWithTextInsertion(
+                        title: "Question to verify the ownership:",
+                        onStringInserted: handleQuestionInserted,
+                        hintText: "e.g. Any device scratches? Where?",
+                        text: insertedQuestion,
+                      )
+                    : Container(),
+                selectedFoundOrLost == 2 ? _divider : Container(),
+                const SizedBox(
+                  height: 10,
+                ),
+                SelectPositionButton(
+                    address: (selectedPosition != null
+                        ? "${selectedPosition?.latitude.toString()}, ${selectedPosition?.longitude.toString()}"
+                        : widget.selectedPosition != null
+                            ? widget.selectedPosition!
+                            : ""),
+                    onTap: (value) => onPositionSelection(value)),
+                const SizedBox(
+                  height: 10,
+                ),
+                CategorySelectionForm(
+                    onTap: (value) => onCategorySelection(value),
+                    selectedCategory: categorySelected),
+                const SizedBox(
+                  height: 40,
+                ),
+                uploadButton,
+                const SizedBox(
+                  height: 50,
+                ),
+              ]),
             ),
-            _divider,
-            PersonalizedFormWithTextInsertion(
-                title: "Title:",
-                onStringInserted: handleTitleInserted,
-                hintText: "e.g. Iphone 12 black"),
-            _divider,
-            const SizedBox(
-              height: 10,
-            ),
-            _divider,
-            PersonalizedFormWithTextInsertion(
-              title: "Question to verify the ownership:",
-              onStringInserted: handleQuestionInserted,
-              hintText: "e.g. Any device scratches? Where?",
-            ),
-            _divider,
-            const SizedBox(
-              height: 10,
-            ),
-            SelectPositionButton(
-                address: (selectedPosition != null
-                    ? "${selectedPosition?.latitude.toString()}, ${selectedPosition?.longitude.toString()}"
-                    : ""),
-                onTap: (value) => onPositionSelection(value)),
-            const SizedBox(
-              height: 10,
-            ),
-            CategorySelectionForm(
-                onTap: (value) => onCategorySelection(value),
-                selectedCategory: categorySelected),
-            const SizedBox(
-              height: 40,
-            ),
-            uploadButton,
-            const SizedBox(
-              height: 50,
-            ),
-          ]),
-        ),
-      )),
+          )),
     );
   }
 
@@ -175,8 +248,9 @@ class _InsertItemScreenState extends State<InsertItemScreen> {
 
   void handleQuestionInserted(String string) {
     setState(() {
-      insertedTitle = string;
+      insertedQuestion = string;
     });
+    print(insertedQuestion);
   }
 
   void onUploadPhoto() {
@@ -186,6 +260,7 @@ class _InsertItemScreenState extends State<InsertItemScreen> {
   void onDeletePhoto() {
     setState(() {
       image = null;
+      imagePath = null;
     });
   }
 
@@ -221,32 +296,15 @@ class _InsertItemScreenState extends State<InsertItemScreen> {
     height: 0,
   );
 
-  var uploadButton = Row(
-    mainAxisSize: MainAxisSize.max,
-    children: [
-      Expanded(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: ElevatedButton(
-            onPressed: () => {print("Item uploaded")},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: PersonalizedColor.mainColor,
-              shape: const StadiumBorder(),
-              padding: const EdgeInsets.symmetric(vertical: 16),
-            ),
-            child: const Text(
-              "Upload",
-              style: TextStyle(fontSize: 20, color: Colors.white),
-            ),
-          ),
-        ),
-      )
-    ],
-  );
-
   onPositionSelection(value) {
     setState(() {
       selectedPosition = value;
     });
+  }
+
+  void onUploadClick() {
+    // upload or modify the item
+    // (in caso l'oggetto venga MODIFICATO) ALE attento che se si modifica Lost o Found bisogna farlo cambiare di categoria anche nella home
+    // attento a prendere l'immagine giusta!
   }
 }

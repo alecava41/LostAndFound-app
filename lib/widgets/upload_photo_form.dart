@@ -5,16 +5,19 @@ import 'package:image_picker/image_picker.dart';
 
 import '../utils/colors.dart';
 
+// ignore: must_be_immutable
 class UploadImageForm extends StatelessWidget {
   final VoidCallback onUploadPhoto;
   final VoidCallback onDeletePhoto;
   final XFile? image;
+  String? imagePath;
 
-  const UploadImageForm({super.key, 
-    required this.onUploadPhoto,
-    required this.onDeletePhoto,
-    required this.image,
-  });
+  UploadImageForm(
+      {super.key,
+      required this.onUploadPhoto,
+      required this.onDeletePhoto,
+      required this.image,
+      this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +27,17 @@ class UploadImageForm extends StatelessWidget {
           children: [
             Container(
               color: Colors.transparent,
-              height: 200,
+              //height: 300,
               child: Stack(
                 alignment: Alignment.bottomRight,
                 children: [
                   Container(
                     color: Colors.white,
-                    child: Center(
-                      child: image == null
-                          ? ElevatedButton(
+                    height: 300,
+                    width: MediaQuery.of(context).size.width,
+                    child: image == null && imagePath == null
+                        ? Center(
+                            child: ElevatedButton(
                               onPressed: onUploadPhoto,
                               style: ElevatedButton.styleFrom(
                                 surfaceTintColor: PersonalizedColor.mainColor,
@@ -52,18 +57,33 @@ class UploadImageForm extends StatelessWidget {
                                   color: PersonalizedColor.mainColor,
                                 ),
                               ),
-                            )
-                          : Image.file(File(image!.path)),
-                    ),
+                            ),
+                          )
+                        : image == null
+                            ? Image.asset(
+                                imagePath!,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.file(
+                                File(image!.path),
+                                fit: BoxFit.cover,
+                              ),
                   ),
-                  if (image != null)
+                  if (image != null || imagePath != null)
                     Positioned(
-                      right: 10,
-                      bottom: 5,
-                      child: FloatingActionButton(
-                        onPressed: onDeletePhoto,
-                        backgroundColor: PersonalizedColor.mainColor,
-                        child: const Icon(Icons.delete),
+                      right: 16,
+                      bottom: 10,
+                      child: SizedBox(
+                        width: 60,
+                        height: 60,
+                        child: FloatingActionButton(
+                          onPressed: onDeletePhoto,
+                          backgroundColor: Colors.red,
+                          child: const Icon(
+                            Icons.delete,
+                            size: 30,
+                          ),
+                        ),
                       ),
                     ),
                 ],

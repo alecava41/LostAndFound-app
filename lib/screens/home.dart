@@ -51,10 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
               context,
               MaterialPageRoute(
                 builder: (context) => const ChatScreen(
-                  userTo: 'Maria',
-                  userToImage: 'assets/images/no-image.png',
-                  userHasDoneClaim: false, userHasRecivedClaim: true
-                ),
+                    userTo: 'Maria',
+                    userToImage: 'assets/images/no-image.png',
+                    userHasDoneClaim: false,
+                    userHasRecivedClaim: true),
               ));
         },
       ),
@@ -68,10 +68,10 @@ class _HomeScreenState extends State<HomeScreen> {
               context,
               MaterialPageRoute(
                 builder: (context) => const ChatScreen(
-                  userTo: 'Maria',
-                  userToImage: 'assets/images/no-image.png',
-                  userHasDoneClaim: true, userHasRecivedClaim: false
-                ),
+                    userTo: 'Maria',
+                    userToImage: 'assets/images/no-image.png',
+                    userHasDoneClaim: true,
+                    userHasRecivedClaim: false),
               ));
         },
       ),
@@ -86,7 +86,9 @@ class _HomeScreenState extends State<HomeScreen> {
               MaterialPageRoute(
                 builder: (context) => const ChatScreen(
                   userTo: 'Maria',
-                  userToImage: 'assets/images/no-image.png', userHasDoneClaim: true, userHasRecivedClaim: false,
+                  userToImage: 'assets/images/no-image.png',
+                  userHasDoneClaim: true,
+                  userHasRecivedClaim: false,
                 ),
               ));
         },
@@ -114,30 +116,43 @@ class _HomeScreenState extends State<HomeScreen> {
                               "Iphone sssssssssssssssssssssssssssssssss12",
                           userImagePath: "assets/images/no-image.png",
                           user: "Gsadsaaddasdasdsadsadassdsdasdsadsacefesads",
-                          onlyUser: true, open: true, claimAnswered: false, onlyItem: false,
+                          onlyUser: true,
+                          open: true,
+                          claimAnswered: false,
+                          onlyItem: false,
                         ),
                         ClaimedItemCard(
                           itemImagePath: "assets/images/key.png",
                           itemName: "Iphone 12",
                           userImagePath: "assets/images/key.png",
                           user: "Gianni",
-                          onlyUser: true, open: true,claimAnswered: false, onlyItem: false,
+                          onlyUser: true,
+                          open: true,
+                          claimAnswered: false,
+                          onlyItem: false,
                         ),
                         ClaimedItemCard(
                           itemImagePath: "assets/images/key.png",
                           itemName: "Iphone 12",
                           userImagePath: "assets/images/no-image.png",
                           user: "Gianni",
-                          onlyUser: true, open: true,claimAnswered: false, onlyItem: false,
+                          onlyUser: true,
+                          open: true,
+                          claimAnswered: false,
+                          onlyItem: false,
                         ),
                         ClaimedItemCard(
                           itemImagePath: "assets/images/key.png",
                           itemName: "Iphone 12",
                           userImagePath: "assets/images/no-image.png",
                           user: "Gianni",
-                          onlyUser: true, open: true,claimAnswered: false, onlyItem: false,
+                          onlyUser: true,
+                          open: true,
+                          claimAnswered: false,
+                          onlyItem: false,
                         )
                       ],
+                      question: 'This is a question',
                     ),
                   ),
                 )
@@ -402,7 +417,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 MaterialPageRoute(
                   builder: (context) => const ChatScreen(
                     userTo: 'Maria',
-                    userToImage: 'assets/images/no-image.png', userHasDoneClaim: false, userHasRecivedClaim: false,
+                    userToImage: 'assets/images/no-image.png',
+                    userHasDoneClaim: false,
+                    userHasRecivedClaim: false,
                   ),
                 ));
           },

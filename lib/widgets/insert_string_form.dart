@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/widgets/text_field.dart';
 
+// ignore: must_be_immutable
 class PersonalizedFormWithTextInsertion extends StatelessWidget {
   final String title;
   final void Function(String) onStringInserted;
   final String hintText;
+  String? text;
 
-  const PersonalizedFormWithTextInsertion({super.key, required this.title, required this.onStringInserted, required this.hintText});
+  PersonalizedFormWithTextInsertion(
+      {super.key,
+      required this.title,
+      required this.onStringInserted,
+      required this.hintText,
+      this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +27,11 @@ class PersonalizedFormWithTextInsertion extends StatelessWidget {
           children: [
             Text(title),
             const SizedBox(height: 2),
-            PersonalizedTextField(onStringInserted: onStringInserted, hintText: hintText,),
+            PersonalizedTextField(
+              onStringInserted: onStringInserted,
+              hintText: hintText,
+              text: text,
+            ),
           ],
         ),
       ),
