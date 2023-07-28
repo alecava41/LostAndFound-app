@@ -9,7 +9,7 @@ class Item {
   final ItemType type;
   final String position;
   final DateTime insertion;
-  final String? question;
+  final String question;
   final User user;
   final Category category;
   final List<ClaimReceived>? claims;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_and_found/features/claim/presentation/pages/answer_question_screen.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/item/claimed_item_card.dart';
 import 'package:lost_and_found/utils/constants.dart';
@@ -79,7 +80,8 @@ class ItemScreen extends StatelessWidget {
                             ctx,
                             state.item!.userClaim,
                             state.token,
-                            state.item!.user
+                            state.item!.user,
+                            state.item!.id
                           );
                         }
                       }
@@ -318,7 +320,7 @@ class ItemScreen extends StatelessWidget {
     ];
   }
 
-  List<Widget> _showGenericFoundItemWidgets(BuildContext context, ClaimSent? claim, String token, User owner) {
+  List<Widget> _showGenericFoundItemWidgets(BuildContext context, ClaimSent? claim, String token, User owner, int itemId) {
     final userUrl = "$baseUrl/api/users/${owner.id}/image";
 
     return [
@@ -392,19 +394,12 @@ class ItemScreen extends StatelessWidget {
                 ),
               ),
               onPressed: () async {
-                // TODO handle claim question screen
-                // final userAnswer = await Navigator.push<String>(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) =>
-                //       const AnswerQuestionScreen(question: "This is a question")),
-                // );
-                // if (userAnswer != null) {
-                //   setState(() {
-                //     claimStatus = "WAITING";
-                //     isClaimed = true;
-                //   });
-                // }
+                final claimStatus = await Navigator.push<bool?>(context, 
+                    MaterialPageRoute(builder: (ctx) => AnswerQuestionScreen(itemId: itemId)));
+                
+                if (claimStatus != null && claimStatus && context.mounted) {
+                  context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
+                }
               },
               child: const Text(
                 'Claim the item',

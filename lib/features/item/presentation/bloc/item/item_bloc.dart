@@ -31,6 +31,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
       (event, emit) async {
         await event.when<FutureOr<void>>(
           itemCreated: (id) => _onItemCreated(emit, id),
+          itemRefreshed: () => _onItemRefreshed(emit),
         );
       },
     );
@@ -53,4 +54,22 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     emit(state.copyWith(
         isLoading: false, loadFailureOrSuccess: request, item: item, token: session.token, userId: session.user));
   }
+  Future<void> _onItemRefreshed(Emitter<ItemState> emit) async {
+    emit(state.copyWith(isLoading: true));
+
+    Item? item;
+    Either<Failure, Success>? request;
+
+    final itemResponse = await _getItemUseCase(GetItemParams(id: state.item!.id));
+    itemResponse.fold((failure) => request = Left(failure), (it) {
+      item = it;
+      request = const Right(Success.genericSuccess());
+    });
+
+    final session = await _secureStorage.getSessionInformation();
+
+    emit(state.copyWith(
+        isLoading: false, loadFailureOrSuccess: request, item: item, token: session.token, userId: session.user));
+  }
+
 }

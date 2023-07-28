@@ -16,42 +16,43 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ItemEvent {
-  int get id => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int id) itemCreated,
+    required TResult Function() itemRefreshed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? itemCreated,
+    TResult? Function()? itemRefreshed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? itemCreated,
+    TResult Function()? itemRefreshed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ItemCreated value) itemCreated,
+    required TResult Function(_ItemRefreshed value) itemRefreshed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ItemCreated value)? itemCreated,
+    TResult? Function(_ItemRefreshed value)? itemRefreshed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ItemCreated value)? itemCreated,
+    TResult Function(_ItemRefreshed value)? itemRefreshed,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $ItemEventCopyWith<ItemEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -59,8 +60,6 @@ mixin _$ItemEvent {
 abstract class $ItemEventCopyWith<$Res> {
   factory $ItemEventCopyWith(ItemEvent value, $Res Function(ItemEvent) then) =
       _$ItemEventCopyWithImpl<$Res, ItemEvent>;
-  @useResult
-  $Res call({int id});
 }
 
 /// @nodoc
@@ -72,28 +71,13 @@ class _$ItemEventCopyWithImpl<$Res, $Val extends ItemEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_ItemCreatedCopyWith<$Res>
-    implements $ItemEventCopyWith<$Res> {
+abstract class _$$_ItemCreatedCopyWith<$Res> {
   factory _$$_ItemCreatedCopyWith(
           _$_ItemCreated value, $Res Function(_$_ItemCreated) then) =
       __$$_ItemCreatedCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({int id});
 }
@@ -154,6 +138,7 @@ class _$_ItemCreated implements _ItemCreated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int id) itemCreated,
+    required TResult Function() itemRefreshed,
   }) {
     return itemCreated(id);
   }
@@ -162,6 +147,7 @@ class _$_ItemCreated implements _ItemCreated {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? itemCreated,
+    TResult? Function()? itemRefreshed,
   }) {
     return itemCreated?.call(id);
   }
@@ -170,6 +156,7 @@ class _$_ItemCreated implements _ItemCreated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? itemCreated,
+    TResult Function()? itemRefreshed,
     required TResult orElse(),
   }) {
     if (itemCreated != null) {
@@ -182,6 +169,7 @@ class _$_ItemCreated implements _ItemCreated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ItemCreated value) itemCreated,
+    required TResult Function(_ItemRefreshed value) itemRefreshed,
   }) {
     return itemCreated(this);
   }
@@ -190,6 +178,7 @@ class _$_ItemCreated implements _ItemCreated {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ItemCreated value)? itemCreated,
+    TResult? Function(_ItemRefreshed value)? itemRefreshed,
   }) {
     return itemCreated?.call(this);
   }
@@ -198,6 +187,7 @@ class _$_ItemCreated implements _ItemCreated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ItemCreated value)? itemCreated,
+    TResult Function(_ItemRefreshed value)? itemRefreshed,
     required TResult orElse(),
   }) {
     if (itemCreated != null) {
@@ -210,12 +200,112 @@ class _$_ItemCreated implements _ItemCreated {
 abstract class _ItemCreated implements ItemEvent {
   const factory _ItemCreated(final int id) = _$_ItemCreated;
 
-  @override
   int get id;
-  @override
   @JsonKey(ignore: true)
   _$$_ItemCreatedCopyWith<_$_ItemCreated> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ItemRefreshedCopyWith<$Res> {
+  factory _$$_ItemRefreshedCopyWith(
+          _$_ItemRefreshed value, $Res Function(_$_ItemRefreshed) then) =
+      __$$_ItemRefreshedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ItemRefreshedCopyWithImpl<$Res>
+    extends _$ItemEventCopyWithImpl<$Res, _$_ItemRefreshed>
+    implements _$$_ItemRefreshedCopyWith<$Res> {
+  __$$_ItemRefreshedCopyWithImpl(
+      _$_ItemRefreshed _value, $Res Function(_$_ItemRefreshed) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ItemRefreshed implements _ItemRefreshed {
+  const _$_ItemRefreshed();
+
+  @override
+  String toString() {
+    return 'ItemEvent.itemRefreshed()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ItemRefreshed);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int id) itemCreated,
+    required TResult Function() itemRefreshed,
+  }) {
+    return itemRefreshed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int id)? itemCreated,
+    TResult? Function()? itemRefreshed,
+  }) {
+    return itemRefreshed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int id)? itemCreated,
+    TResult Function()? itemRefreshed,
+    required TResult orElse(),
+  }) {
+    if (itemRefreshed != null) {
+      return itemRefreshed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ItemCreated value) itemCreated,
+    required TResult Function(_ItemRefreshed value) itemRefreshed,
+  }) {
+    return itemRefreshed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ItemCreated value)? itemCreated,
+    TResult? Function(_ItemRefreshed value)? itemRefreshed,
+  }) {
+    return itemRefreshed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ItemCreated value)? itemCreated,
+    TResult Function(_ItemRefreshed value)? itemRefreshed,
+    required TResult orElse(),
+  }) {
+    if (itemRefreshed != null) {
+      return itemRefreshed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ItemRefreshed implements ItemEvent {
+  const factory _ItemRefreshed() = _$_ItemRefreshed;
 }
 
 /// @nodoc

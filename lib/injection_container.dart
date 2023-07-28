@@ -26,8 +26,10 @@ import 'package:lost_and_found/features/authentication/presentation/bloc/registr
 import 'package:lost_and_found/features/claim/data/datasources/claim_client.dart';
 import 'package:lost_and_found/features/claim/data/datasources/claim_datasource.dart';
 import 'package:lost_and_found/features/claim/domain/repositories/claim_repository.dart';
+import 'package:lost_and_found/features/claim/domain/usecases/create_claim_usecase.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/get_received_claims_usecase.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/get_sent_claims_usecase.dart';
+import 'package:lost_and_found/features/claim/domain/usecases/manage_claim_usecase.dart';
 import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc.dart';
 import 'package:lost_and_found/features/item/data/datasources/item_client.dart';
 import 'package:lost_and_found/features/item/data/datasources/item_data_source.dart';
@@ -49,6 +51,7 @@ import 'core/domain/repositories/category_repository.dart';
 import 'core/presentation/select_position/bloc/select_position_bloc.dart';
 import 'features/authentication/domain/usecases/logout_use_case.dart';
 import 'features/claim/data/repositories/claim_repository_impl.dart';
+import 'features/claim/presentation/bloc/answer_question/answer_question_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -85,8 +88,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetItemUseCase(sl()));
 
   // Repository
-  sl.registerLazySingleton<ItemRepository>(
-      () => ItemRepositoryImpl(dataSource: sl(), storage: sl(), networkInfo: sl(), readNewsDataSource: sl(), readClaimDataSource: sl()));
+  sl.registerLazySingleton<ItemRepository>(() => ItemRepositoryImpl(
+      dataSource: sl(), storage: sl(), networkInfo: sl(), readNewsDataSource: sl(), readClaimDataSource: sl()));
 
   // Data source
   sl.registerLazySingleton<ItemDataSource>(() => ItemDataSourceImpl(sl()));
@@ -95,13 +98,17 @@ Future<void> init() async {
   // ** Feature - Claim **
   // BLoC
   sl.registerFactory(() => ClaimBloc(getReceivedClaimsUseCase: sl(), getSentClaimsUseCase: sl(), secureStorage: sl()));
+  sl.registerFactory(() => AnswerQuestionBloc(storage: sl(), createClaimUseCase: sl(), getItemUseCase: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetReceivedClaimsUseCase(sl()));
   sl.registerLazySingleton(() => GetSentClaimsUseCase(sl()));
+  sl.registerLazySingleton(() => CreateClaimUseCase(sl()));
+  sl.registerLazySingleton(() => ManageClaimUseCase(sl()));
 
   // Repository
-  sl.registerLazySingleton<ClaimRepository>(() => ClaimRepositoryImpl(dataSource: sl(), networkInfo: sl(), readClaimsDataSource: sl()));
+  sl.registerLazySingleton<ClaimRepository>(
+      () => ClaimRepositoryImpl(dataSource: sl(), networkInfo: sl(), readClaimsDataSource: sl(), storage: sl()));
 
   // Data source
   sl.registerLazySingleton<ClaimDataSource>(() => ClaimDataSourceImpl(sl()));

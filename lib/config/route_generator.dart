@@ -15,7 +15,7 @@ import '../core/presentation/home_controller/home_controller.dart';
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     // Getting arguments passed in while calling Navigator.pushNamed
-    ///* FRA
+    /* FRA
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => const HomeScreen());
@@ -36,8 +36,8 @@ class RouteGenerator {
       default:
         // If there is no such named route in the switch statement
         return _errorRoute();
-    }// */
-/*
+    } */
+
     // ALE
     switch (settings.name) {
       case '/':
@@ -57,7 +57,7 @@ class RouteGenerator {
       default:
         // If there is no such named route in the switch statement
         return _errorRoute();
-    }*/
+    }
   }
 
   static Route<dynamic> _errorRoute() {
