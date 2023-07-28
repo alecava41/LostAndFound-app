@@ -7,6 +7,7 @@ class ClaimedItemInfo extends StatelessWidget {
   final String itemName;
   final String userImagePath;
   final String user;
+  final bool isClaimed;
 
   const ClaimedItemInfo({
     super.key,
@@ -14,6 +15,7 @@ class ClaimedItemInfo extends StatelessWidget {
     required this.itemName,
     required this.userImagePath,
     required this.user,
+    required this.isClaimed, // if true shows claimed by $user, if false shows found by $user
   });
 
   @override
@@ -54,9 +56,9 @@ class ClaimedItemInfo extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
-                        child: Text("Claimed by:"),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                        child: Text(isClaimed ? "Claimed by:" : "Found by:"),
                       ),
                       Row(
                         children: [

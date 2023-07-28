@@ -157,7 +157,9 @@ class _AnswerClaimScreenState extends State<AnswerClaimScreen> {
                             itemImagePath: widget.itemImagePath,
                             itemName: widget.itemName,
                             userImagePath: widget.userImagePath,
-                            user: widget.user),
+                            user: widget.user,
+                            isClaimed: true,
+                            ),
                       )),
                 ),
                 const SizedBox(

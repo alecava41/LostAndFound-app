@@ -15,7 +15,7 @@ class FoundGenericItemScreen extends StatefulWidget {
   final String user;
   final String userImage;
   final bool isClaimed;
-  final String claimStatus; // (String) : ACCEPTED | DENIED | WAITING 
+  final String claimStatus; // (String) : ACCEPTED | DENIED | WAITING
 
   const FoundGenericItemScreen(
       {Key? key,
@@ -257,8 +257,13 @@ class _FoundGenericItemScreenState extends State<FoundGenericItemScreen> {
     final userAnswer = await Navigator.push<String>(
       context,
       MaterialPageRoute(
-          builder: (context) =>
-              const AnswerQuestionScreen(question: "This is a question")),
+          builder: (context) => AnswerQuestionScreen(
+                question: "This is a question",
+                itemImagePath: widget.image,
+                itemName: widget.title,
+                user: widget.user,
+                userImagePath: widget.userImage,
+              )),
     );
     if (userAnswer != null) {
       setState(() {
