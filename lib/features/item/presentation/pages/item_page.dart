@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_question_screen.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/item/claimed_item_card.dart';
@@ -16,16 +17,14 @@ import '../widgets/item/info_item.dart';
 import '../widgets/notifications/circular_image_avatar.dart';
 
 class ItemScreen extends StatelessWidget {
-  final int id;
+  final int itemId;
 
-  const ItemScreen({super.key, required this.id});
+  const ItemScreen({super.key, required this.itemId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ItemBloc>(
-      create: (_) =>
-      sl<ItemBloc>()
-        ..add(ItemEvent.itemCreated(id)),
+      create: (_) => sl<ItemBloc>()..add(ItemEvent.itemCreated(itemId)),
       child: BlocConsumer<ItemBloc, ItemState>(
         listener: (ctx, state) {},
         builder: (ctx, state) {
@@ -70,19 +69,14 @@ class ItemScreen extends StatelessWidget {
                       if (isCurrentUserOwner) {
                         if (state.item!.type == ItemType.found) {
                           widgetList += _showOwnerFoundItemWidgets(
-                              ctx, state.item!.claims != null ? state.item!.claims! : [], state.token);
+                              ctx, state.item!.claims != null ? state.item!.claims! : [], state.token, itemId);
                         }
                       } else {
                         if (state.item!.type == ItemType.lost) {
                           widgetList += _showGenericLostItemWidgets(ctx, state.token, state.item!.user);
                         } else {
                           widgetList += _showGenericFoundItemWidgets(
-                            ctx,
-                            state.item!.userClaim,
-                            state.token,
-                            state.item!.user,
-                            state.item!.id
-                          );
+                              ctx, state.item!.userClaim, state.token, state.item!.user, itemId);
                         }
                       }
 
@@ -94,7 +88,7 @@ class ItemScreen extends StatelessWidget {
             );
           } else {
             return const CircularProgressIndicator(
-              value: null,
+              value: 0.5,
             ); // TODO handle case when item is not available
           }
         },
@@ -107,8 +101,7 @@ class ItemScreen extends StatelessWidget {
       return [
         PopupMenuButton<String>(
           iconSize: 30,
-          itemBuilder: (BuildContext context) =>
-          <PopupMenuEntry<String>>[
+          itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
             const PopupMenuItem<String>(
               value: 'opt1',
               child: Text('Mark as solved'),
@@ -129,13 +122,13 @@ class ItemScreen extends StatelessWidget {
             // Action to be performed when a menu item is selected
             switch (value) {
               case 'opt1':
-              // TODO send request and close page (?)
+                // TODO send request and close page (?)
                 break;
               case 'opt2':
-              // TODO open "modify" page
+                // TODO open "modify" page
                 break;
               case 'opt3':
-              // TODO send request and close page (?)
+                // TODO send request and close page (?)
                 break;
             }
           },
@@ -160,10 +153,7 @@ class ItemScreen extends StatelessWidget {
       ),
       Container(
         color: Colors.white,
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
+        width: MediaQuery.of(context).size.width,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
@@ -234,7 +224,7 @@ class ItemScreen extends StatelessWidget {
     ];
   }
 
-  List<Widget> _showOwnerFoundItemWidgets(BuildContext context, List<ClaimReceived> claims, String token) {
+  List<Widget> _showOwnerFoundItemWidgets(BuildContext context, List<ClaimReceived> claims, String token, int itemId) {
     return [
       const SizedBox(
         height: 30,
@@ -246,10 +236,7 @@ class ItemScreen extends StatelessWidget {
       ),
       Container(
         color: Colors.white,
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
+        width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.all(10),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Padding(
@@ -265,51 +252,49 @@ class ItemScreen extends StatelessWidget {
                 ),
                 Expanded(
                     child: Text(
-                      "Item claimed by:",
-                      style: TextStyle(fontSize: 18),
-                      overflow: TextOverflow.ellipsis,
-                    )),
+                  "Item claimed by:",
+                  style: TextStyle(fontSize: 18),
+                  overflow: TextOverflow.ellipsis,
+                )),
               ],
             ),
           ),
           claims.isEmpty
               ? const Center(
-              child: Text(
-                "No claims received",
-                style: TextStyle(fontSize: 18),
-              ))
+                  child: Text(
+                  "No claims received",
+                  style: TextStyle(fontSize: 18),
+                ))
               : ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: claims.length,
-            itemBuilder: (context, index) {
-              final claim = claims[index];
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: claims.length,
+                  itemBuilder: (context, index) {
+                    final claim = claims[index];
 
-              return Container(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                  child: ClaimedItemCard(
-                    token: token,
-                    opened: claim.opened,
-                    userId: claim.user.id,
-                    username: claim.user.username,
-                    onTap: () {
-                      // TODO add navigation to answer claim page
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) =>
-                      //       const AnswerClaimScreen(
-                      //           question: "This is a question",
-                      //           user: "GIANNI",
-                      //           userImagePath: "",
-                      //           answer: "This is an answer",
-                      //           itemImagePath: "",
-                      //           itemName: "")),
-                      // );
-                    },
-                  ));
-            },
-          ),
+                    return Container(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                        child: ClaimedItemCard(
+                          token: token,
+                          opened: claim.opened,
+                          userId: claim.user.id,
+                          username: claim.user.username,
+                          onTap: () async {
+                            final claimStatus = await Navigator.push<bool?>(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (ctx) => AnswerClaimScreen(
+                                        itemId: itemId,
+                                        claimId: claim.id,
+                                        isClaimAlreadyManaged: claim.status != ClaimStatus.pending)));
+
+                            if (claimStatus != null && claimStatus && context.mounted) {
+                              context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
+                            }
+                          },
+                        ));
+                  },
+                ),
         ]),
       ),
       const Divider(
@@ -320,95 +305,94 @@ class ItemScreen extends StatelessWidget {
     ];
   }
 
-  List<Widget> _showGenericFoundItemWidgets(BuildContext context, ClaimSent? claim, String token, User owner, int itemId) {
+  List<Widget> _showGenericFoundItemWidgets(
+      BuildContext context, ClaimSent? claim, String token, User owner, int itemId) {
     final userUrl = "$baseUrl/api/users/${owner.id}/image";
 
     return [
       const SizedBox(
         height: 20,
       ),
-      claim != null ?
-      Padding(
-        padding: const EdgeInsets.all(8),
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: claim.status == ClaimStatus.approved ? PersonalizedColor.claimAcceptedStatusColor :
-            (claim.status == ClaimStatus.pending ? PersonalizedColor.claimWaitingStatusColor : PersonalizedColor
-                .claimDeniedStatusColor),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  const Icon(
-                    Icons.connect_without_contact,
-                    size: 25,
-                  ),
-                  const SizedBox(width: 5),
-                  RichText(
-                    text: TextSpan(
+      claim != null
+          ? Padding(
+              padding: const EdgeInsets.all(8),
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: claim.status == ClaimStatus.approved
+                      ? PersonalizedColor.claimAcceptedStatusColor
+                      : (claim.status == ClaimStatus.pending
+                          ? PersonalizedColor.claimWaitingStatusColor
+                          : PersonalizedColor.claimDeniedStatusColor),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
                       children: [
-                        const TextSpan(
-                          text: "Claim status: ",
-                          style: TextStyle(fontSize: 18, color: Colors.black),
+                        const Icon(
+                          Icons.connect_without_contact,
+                          size: 25,
                         ),
-                        TextSpan(
-                          text: claim.status.name.toUpperCase(),
-                          style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
+                        const SizedBox(width: 5),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              const TextSpan(
+                                text: "Claim status: ",
+                                style: TextStyle(fontSize: 18, color: Colors.black),
+                              ),
+                              TextSpan(
+                                text: claim.status.name.toUpperCase(),
+                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              claim.status == ClaimStatus.approved
-                  ? Text(
-                  "Your claim has been accepted! Get in touch with ${owner.username} through the chat to arrange the item's return.")
-                  : claim.status == ClaimStatus.rejected
-                  ? Text(
-                  "Unfortunately, your claim has been rejected by ${owner.username}, as the response you provided was not correct.")
-                  : Text("Wait for ${owner.username} to validate to your claim.")
-            ],
-          ),
-        ),
-      )
-          :
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(children: [
-          Expanded(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: const StadiumBorder(),
-                padding: const EdgeInsets.symmetric(
-                  vertical: 18,
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    claim.status == ClaimStatus.approved
+                        ? Text(
+                            "Your claim has been accepted! Get in touch with ${owner.username} through the chat to arrange the item's return.")
+                        : claim.status == ClaimStatus.rejected
+                            ? Text(
+                                "Unfortunately, your claim has been rejected by ${owner.username}, as the response you provided was not correct.")
+                            : Text("Wait for ${owner.username} to validate to your claim.")
+                  ],
                 ),
               ),
-              onPressed: () async {
-                final claimStatus = await Navigator.push<bool?>(context, 
-                    MaterialPageRoute(builder: (ctx) => AnswerQuestionScreen(itemId: itemId)));
-                
-                if (claimStatus != null && claimStatus && context.mounted) {
-                  context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
-                }
-              },
-              child: const Text(
-                'Claim the item',
-                style: TextStyle(fontSize: 22),
-              ),
+            )
+          : Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(children: [
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: const StadiumBorder(),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 18,
+                      ),
+                    ),
+                    onPressed: () async {
+                      final claimStatus = await Navigator.push<bool?>(
+                          context, MaterialPageRoute(builder: (ctx) => AnswerQuestionScreen(itemId: itemId)));
+
+                      if (claimStatus != null && claimStatus && context.mounted) {
+                        context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
+                      }
+                    },
+                    child: const Text(
+                      'Claim the item',
+                      style: TextStyle(fontSize: 22),
+                    ),
+                  ),
+                ),
+              ]),
             ),
-          ),
-        ]),
-      ),
       const SizedBox(
         height: 20,
       ),
@@ -453,8 +437,7 @@ class ItemScreen extends StatelessWidget {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  0, 0, 0, 30),
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                               child: Text(
                                 owner.username,
                                 style: const TextStyle(fontSize: 20),
@@ -468,21 +451,16 @@ class ItemScreen extends StatelessWidget {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        side: const BorderSide(
-                            color: PersonalizedColor.mainColor,
-                            width: 1.5),
+                        side: const BorderSide(color: PersonalizedColor.mainColor, width: 1.5),
                         shape: const StadiumBorder(),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 16, horizontal: 15),
+                        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
                       ),
-                      onPressed:() {
+                      onPressed: () {
                         // TODO navigate to chat
                       },
                       child: const Text(
                         'Send a message',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: PersonalizedColor.mainColor),
+                        style: TextStyle(fontSize: 18, color: PersonalizedColor.mainColor),
                       ),
                     ),
                   ],

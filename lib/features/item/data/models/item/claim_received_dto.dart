@@ -10,7 +10,7 @@ class ClaimReceivedDto with _$ClaimReceivedDto {
     required int id,
     required UserDto user,
     required String status,
-    String? answer,
+    required String answer,
     DateTime? date,
   }) = $ClaimReceivedDto;
 

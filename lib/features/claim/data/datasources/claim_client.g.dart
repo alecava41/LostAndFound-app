@@ -138,7 +138,7 @@ class _ClaimClient implements ClaimClient {
     )
         .compose(
           _dio.options,
-          'users/${userId}/items/${itemId}/claims/${claimId}',
+          '/users/${userId}/items/${itemId}/claims/${claimId}',
           queryParameters: queryParameters,
           data: _data,
         )

@@ -18,6 +18,7 @@ extension ItemFromDto on ItemDto {
       claims: claims
           ?.map((claim) => ClaimReceived(
               id: claim.id,
+              answer: claim.answer,
               status: claim.status == ClaimStatus.pending.name
                   ? ClaimStatus.pending
                   : (claim.status == ClaimStatus.rejected.name ? ClaimStatus.rejected : ClaimStatus.approved),

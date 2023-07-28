@@ -13,6 +13,8 @@ class AnswerQuestionScreen extends StatelessWidget {
 
   const AnswerQuestionScreen({super.key, required this.itemId});
 
+  // TODO: maybe it's better to let the user see his proposed answer to a claim, by transforming the text field in a simple textview and disabling the send button
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -163,7 +165,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                               child: Text(
-                                state.item!.question,
+                                state.item!.question!,
                                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -171,17 +173,16 @@ class AnswerQuestionScreen extends StatelessWidget {
                               height: 20,
                             ),
                             PersonalizedFormWithTextInsertion(
-                              title: "Your answer",
-                              onTextChanged: (value) =>
-                                  ctx.read<AnswerQuestionBloc>().add(AnswerQuestionEvent.answerFieldChanged(value)),
-                              hintText: "",
-                              errorText: state.answer.value.fold(
-                                      (failure) => failure.maybeWhen<String?>(
-                                          validationFailure: (reason) => reason,
-                                          orElse: () => null), (r) => null),
-                              isValid: state.answer.value.isRight(),
-                              showError: state.showErrorMessage
-                            ),
+                                title: "Your answer",
+                                onTextChanged: (value) =>
+                                    ctx.read<AnswerQuestionBloc>().add(AnswerQuestionEvent.answerFieldChanged(value)),
+                                hintText: "",
+                                errorText: state.answer.value.fold(
+                                    (failure) => failure.maybeWhen<String?>(
+                                        validationFailure: (reason) => reason, orElse: () => null),
+                                    (r) => null),
+                                isValid: state.answer.value.isRight(),
+                                showError: state.showErrorMessage),
                             const SizedBox(
                               height: 30,
                             ),

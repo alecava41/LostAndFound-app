@@ -22,6 +22,6 @@ abstract class ClaimClient {
   @POST('/items/{itemId}/claims')
   Future<void> createClaim(@Path() int itemId, @Body() CreateClaimBody body);
 
-  @PATCH('users/{userId}/items/{itemId}/claims/{claimId}')
+  @PATCH('/users/{userId}/items/{itemId}/claims/{claimId}')
   Future<void> manageClaim(@Path() int userId, @Path() int itemId, @Path() int claimId, @Body() ManageClaimBody body);
 }

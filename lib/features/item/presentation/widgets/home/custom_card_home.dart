@@ -95,7 +95,7 @@ class CustomCardHome extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => ItemScreen(
-                                id: id,
+                                itemId: id,
                               )));
                 },
                 borderRadius: BorderRadius.circular(24.0),

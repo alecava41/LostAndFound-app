@@ -27,7 +27,7 @@ mixin _$ItemDto {
   DateTime get date => throw _privateConstructorUsedError;
   UserDto get user => throw _privateConstructorUsedError;
   CategoryDto get category => throw _privateConstructorUsedError;
-  String get question => throw _privateConstructorUsedError;
+  String? get question => throw _privateConstructorUsedError;
   List<ClaimReceivedDto>? get claims => throw _privateConstructorUsedError;
   ClaimSentDto? get userClaim => throw _privateConstructorUsedError;
   PositionDto? get position => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $ItemDtoCopyWith<$Res> {
       DateTime date,
       UserDto user,
       CategoryDto category,
-      String question,
+      String? question,
       List<ClaimReceivedDto>? claims,
       ClaimSentDto? userClaim,
       PositionDto? position});
@@ -81,7 +81,7 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
     Object? date = null,
     Object? user = null,
     Object? category = null,
-    Object? question = null,
+    Object? question = freezed,
     Object? claims = freezed,
     Object? userClaim = freezed,
     Object? position = freezed,
@@ -115,10 +115,10 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as CategoryDto,
-      question: null == question
+      question: freezed == question
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       claims: freezed == claims
           ? _value.claims
           : claims // ignore: cast_nullable_to_non_nullable
@@ -190,7 +190,7 @@ abstract class _$$$ItemDtoCopyWith<$Res> implements $ItemDtoCopyWith<$Res> {
       DateTime date,
       UserDto user,
       CategoryDto category,
-      String question,
+      String? question,
       List<ClaimReceivedDto>? claims,
       ClaimSentDto? userClaim,
       PositionDto? position});
@@ -222,7 +222,7 @@ class __$$$ItemDtoCopyWithImpl<$Res>
     Object? date = null,
     Object? user = null,
     Object? category = null,
-    Object? question = null,
+    Object? question = freezed,
     Object? claims = freezed,
     Object? userClaim = freezed,
     Object? position = freezed,
@@ -256,10 +256,10 @@ class __$$$ItemDtoCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as CategoryDto,
-      question: null == question
+      question: freezed == question
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       claims: freezed == claims
           ? _value._claims
           : claims // ignore: cast_nullable_to_non_nullable
@@ -311,7 +311,7 @@ class _$$ItemDto implements $ItemDto {
   @override
   final CategoryDto category;
   @override
-  final String question;
+  final String? question;
   final List<ClaimReceivedDto>? _claims;
   @override
   List<ClaimReceivedDto>? get claims {
@@ -393,7 +393,7 @@ abstract class $ItemDto implements ItemDto {
       required final DateTime date,
       required final UserDto user,
       required final CategoryDto category,
-      required final String question,
+      required final String? question,
       final List<ClaimReceivedDto>? claims,
       final ClaimSentDto? userClaim,
       final PositionDto? position}) = _$$ItemDto;
@@ -415,7 +415,7 @@ abstract class $ItemDto implements ItemDto {
   @override
   CategoryDto get category;
   @override
-  String get question;
+  String? get question;
   @override
   List<ClaimReceivedDto>? get claims;
   @override

@@ -51,6 +51,7 @@ import 'core/domain/repositories/category_repository.dart';
 import 'core/presentation/select_position/bloc/select_position_bloc.dart';
 import 'features/authentication/domain/usecases/logout_use_case.dart';
 import 'features/claim/data/repositories/claim_repository_impl.dart';
+import 'features/claim/presentation/bloc/answer_claim/answer_claim_bloc.dart';
 import 'features/claim/presentation/bloc/answer_question/answer_question_bloc.dart';
 
 final sl = GetIt.instance;
@@ -99,6 +100,7 @@ Future<void> init() async {
   // BLoC
   sl.registerFactory(() => ClaimBloc(getReceivedClaimsUseCase: sl(), getSentClaimsUseCase: sl(), secureStorage: sl()));
   sl.registerFactory(() => AnswerQuestionBloc(storage: sl(), createClaimUseCase: sl(), getItemUseCase: sl()));
+  sl.registerFactory(() => AnswerClaimBloc(getItemUseCase: sl(), storage: sl(), manageClaimUseCase: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetReceivedClaimsUseCase(sl()));

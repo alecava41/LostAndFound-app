@@ -18,7 +18,7 @@ class ItemDto with _$ItemDto {
     required DateTime date,
     required UserDto user,
     required CategoryDto category,
-    required String question,
+    required String? question,
     List<ClaimReceivedDto>? claims,
     ClaimSentDto? userClaim,
     PositionDto? position,

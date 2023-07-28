@@ -14,7 +14,7 @@ _$$ItemDto _$$$ItemDtoFromJson(Map<String, dynamic> json) => _$$ItemDto(
       date: DateTime.parse(json['date'] as String),
       user: UserDto.fromJson(json['user'] as Map<String, dynamic>),
       category: CategoryDto.fromJson(json['category'] as Map<String, dynamic>),
-      question: json['question'] as String,
+      question: json['question'] as String?,
       claims: (json['claims'] as List<dynamic>?)
           ?.map((e) => ClaimReceivedDto.fromJson(e as Map<String, dynamic>))
           .toList(),

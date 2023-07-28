@@ -9,7 +9,7 @@ class Item {
   final ItemType type;
   final String position;
   final DateTime insertion;
-  final String question;
+  final String? question;
   final User user;
   final Category category;
   final List<ClaimReceived>? claims;
@@ -39,12 +39,14 @@ class User {
 class ClaimReceived {
   final int id;
   final ClaimStatus status;
+  final String answer;
   bool opened;
   final User user;
 
   ClaimReceived({
     required this.id,
     required this.status,
+    required this.answer,
     required this.opened,
     required this.user,
   });
