@@ -23,7 +23,7 @@ mixin _$ClaimReceivedDto {
   int get id => throw _privateConstructorUsedError;
   UserDto get user => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
-  String? get answer => throw _privateConstructorUsedError;
+  String get answer => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ abstract class $ClaimReceivedDtoCopyWith<$Res> {
       _$ClaimReceivedDtoCopyWithImpl<$Res, ClaimReceivedDto>;
   @useResult
   $Res call(
-      {int id, UserDto user, String status, String? answer, DateTime? date});
+      {int id, UserDto user, String status, String answer, DateTime? date});
 
   $UserDtoCopyWith<$Res> get user;
 }
@@ -60,7 +60,7 @@ class _$ClaimReceivedDtoCopyWithImpl<$Res, $Val extends ClaimReceivedDto>
     Object? id = null,
     Object? user = null,
     Object? status = null,
-    Object? answer = freezed,
+    Object? answer = null,
     Object? date = freezed,
   }) {
     return _then(_value.copyWith(
@@ -76,10 +76,10 @@ class _$ClaimReceivedDtoCopyWithImpl<$Res, $Val extends ClaimReceivedDto>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      answer: freezed == answer
+      answer: null == answer
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -105,7 +105,7 @@ abstract class _$$$ClaimReceivedDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id, UserDto user, String status, String? answer, DateTime? date});
+      {int id, UserDto user, String status, String answer, DateTime? date});
 
   @override
   $UserDtoCopyWith<$Res> get user;
@@ -125,7 +125,7 @@ class __$$$ClaimReceivedDtoCopyWithImpl<$Res>
     Object? id = null,
     Object? user = null,
     Object? status = null,
-    Object? answer = freezed,
+    Object? answer = null,
     Object? date = freezed,
   }) {
     return _then(_$$ClaimReceivedDto(
@@ -141,10 +141,10 @@ class __$$$ClaimReceivedDtoCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      answer: freezed == answer
+      answer: null == answer
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -160,7 +160,7 @@ class _$$ClaimReceivedDto implements $ClaimReceivedDto {
       {required this.id,
       required this.user,
       required this.status,
-      this.answer,
+      required this.answer,
       this.date});
 
   factory _$$ClaimReceivedDto.fromJson(Map<String, dynamic> json) =>
@@ -173,7 +173,7 @@ class _$$ClaimReceivedDto implements $ClaimReceivedDto {
   @override
   final String status;
   @override
-  final String? answer;
+  final String answer;
   @override
   final DateTime? date;
 
@@ -217,7 +217,7 @@ abstract class $ClaimReceivedDto implements ClaimReceivedDto {
       {required final int id,
       required final UserDto user,
       required final String status,
-      final String? answer,
+      required final String answer,
       final DateTime? date}) = _$$ClaimReceivedDto;
 
   factory $ClaimReceivedDto.fromJson(Map<String, dynamic> json) =
@@ -230,7 +230,7 @@ abstract class $ClaimReceivedDto implements ClaimReceivedDto {
   @override
   String get status;
   @override
-  String? get answer;
+  String get answer;
   @override
   DateTime? get date;
   @override

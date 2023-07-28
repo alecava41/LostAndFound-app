@@ -81,7 +81,7 @@ class _AnswerQuestionScreenState extends State<AnswerQuestionScreen> {
           backgroundColor: Colors.white,
           appBar: AppBar(
             title: const Text(
-              "Aswer claim question",
+              "Answer claim question",
               style: TextStyle(color: Colors.black),
             ),
             backgroundColor: Colors.white,

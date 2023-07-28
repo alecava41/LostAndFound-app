@@ -18,10 +18,10 @@ class ItemDto with _$ItemDto {
     required DateTime date,
     required UserDto user,
     required CategoryDto category,
+    required String? question,
     List<ClaimReceivedDto>? claims,
     ClaimSentDto? userClaim,
     PositionDto? position,
-    String? question,
   }) = $ItemDto;
 
   factory ItemDto.fromJson(Map<String, dynamic> data) => _$ItemDtoFromJson(data);

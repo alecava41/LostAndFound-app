@@ -11,7 +11,7 @@ _$$ClaimReceivedDto _$$$ClaimReceivedDtoFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int,
       user: UserDto.fromJson(json['user'] as Map<String, dynamic>),
       status: json['status'] as String,
-      answer: json['answer'] as String?,
+      answer: json['answer'] as String,
       date:
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
     );

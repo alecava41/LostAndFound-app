@@ -39,12 +39,14 @@ class User {
 class ClaimReceived {
   final int id;
   final ClaimStatus status;
+  final String answer;
   bool opened;
   final User user;
 
   ClaimReceived({
     required this.id,
     required this.status,
+    required this.answer,
     required this.opened,
     required this.user,
   });

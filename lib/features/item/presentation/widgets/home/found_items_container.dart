@@ -26,6 +26,7 @@ class FoundItemsContainer extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 children: state.foundItems.map(
                         (item) =>
+                        // TODO need to determine the real number of new claims (not just the total)!
                         CustomCardHome(
                             id: item.id,
                             text: item.title,
