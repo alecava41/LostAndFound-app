@@ -47,7 +47,7 @@ class RouteGenerator {
       case '/login':
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case '/insert':
-        return MaterialPageRoute(builder: (_) => const InsertItemScreen());
+        return MaterialPageRoute(builder: (_) => InsertItemScreen());
       case '/notifications':
         return MaterialPageRoute(builder: (_) => const notify.NotificationsScreen());
       case '/claims':
