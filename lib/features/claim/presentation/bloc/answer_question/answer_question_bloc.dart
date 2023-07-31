@@ -8,7 +8,7 @@ import 'package:lost_and_found/core/status/success.dart';
 import '../../../../../core/data/secure_storage/secure_storage.dart';
 import '../../../../../core/status/failures.dart';
 import '../../../../item/domain/entities/item.dart';
-import '../../../../item/domain/usecases/get_item.dart';
+import '../../../../item/domain/usecases/get_item_usecase.dart';
 import '../../../domain/fields/answer_question/answer_question_answer.dart';
 import '../../../domain/usecases/create_claim_usecase.dart';
 

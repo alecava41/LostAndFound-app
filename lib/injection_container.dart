@@ -36,7 +36,7 @@ import 'package:lost_and_found/features/item/data/datasources/item_data_source.d
 import 'package:lost_and_found/features/item/data/datasources/read_news_datasource.dart';
 import 'package:lost_and_found/features/item/data/repositories/item_repository_impl.dart';
 import 'package:lost_and_found/features/item/domain/repositories/item_repository.dart';
-import 'package:lost_and_found/features/item/domain/usecases/get_item.dart';
+import 'package:lost_and_found/features/item/domain/usecases/get_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_items_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_notifications_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/search_items_usecase.dart';
