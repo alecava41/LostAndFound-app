@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lost_and_found/core/data/secure_storage/secure_storage.dart';
-import 'package:lost_and_found/features/item/domain/usecases/get_item.dart';
+import 'package:lost_and_found/features/item/domain/usecases/get_item_usecase.dart';
 
 import '../../../../../core/status/success.dart';
 import '../../../../../core/status/failures.dart';

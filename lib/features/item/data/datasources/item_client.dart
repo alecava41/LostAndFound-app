@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:lost_and_found/features/item/domain/usecases/create_item_usecase.dart';
 import 'package:retrofit/http.dart';
 
 import '../../../../utils/constants.dart';
@@ -41,5 +42,11 @@ abstract class ItemClient {
   @GET('/items/{itemId}')
   Future<ItemDto> getItem(
       @Path("itemId") int id,
+      );
+
+  @POST('/users/{userId}/items')
+  Future<void> createItem(
+      @Path("userId") int userId,
+      @Body() CreateItemParams params,
       );
 }
