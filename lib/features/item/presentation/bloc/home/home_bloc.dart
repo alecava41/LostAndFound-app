@@ -27,7 +27,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
-            homeCreated: () => _onHomeCreatedOrRefreshed(emit), homeRefreshed: () => _onHomeCreatedOrRefreshed(emit));
+            homeCreated: () => _onHomeCreatedOrRefreshed(emit), homeRefreshed: () => _onHomeCreatedOrRefreshed(emit),
+        homeSectionRefreshed: (type) => _onHomeSectionRefreshed(emit, type)
+        );
       },
     );
   }
@@ -55,5 +57,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           homeFailureOrSuccess: loadFailureOrSuccess,
           token: session.token),
     );
+  }
+
+  Future<void> _onHomeSectionRefreshed(Emitter<HomeState> emit, ItemType type) async {
+    final itemsResponse = await _getUserItemsUseCase(GetUserItemsParams(type: type, last: 0));
+
+    if(itemsResponse.isRight()) {
+      if (type == ItemType.found) {
+        emit(state.copyWith(foundItems: itemsResponse.getOrElse(() => state.foundItems)));
+      } else {
+        emit(state.copyWith(lostItems: itemsResponse.getOrElse(() => state.lostItems)));
+      }
+    }
   }
 }

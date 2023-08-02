@@ -11,11 +11,13 @@ import '../entities/news.dart';
 import '../entities/search_item.dart';
 import '../usecases/create_item_usecase.dart';
 import '../usecases/get_user_items_usecase.dart';
+import '../usecases/upload_item_image_usecase.dart';
 
 abstract class ItemRepository {
   Future<Either<Failure, List<UserItem>>> getUserItems(GetUserItemsParams params);
   Future<Either<Failure, List<News>>> getUserNotifications(GetUserNotificationsParams params);
   Future<Either<Failure, List<SearchItem>>> searchItems(SearchItemsParams params);
   Future<Either<Failure, Item>> getItem(GetItemParams params);
-  Future<Either<Failure, Success>> createItem(CreateItemParams params);
+  Future<Either<Failure, int>> createItem(CreateItemParams params);
+  Future<Either<Failure, Success>> uploadItemImage(UploadItemImageParams params);
 }

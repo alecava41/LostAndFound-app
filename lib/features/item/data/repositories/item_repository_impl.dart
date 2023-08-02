@@ -18,6 +18,7 @@ import 'package:lost_and_found/features/item/domain/usecases/get_item_usecase.da
 import 'package:lost_and_found/features/item/domain/usecases/get_user_items_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_notifications_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/search_items_usecase.dart';
+import 'package:lost_and_found/features/item/domain/usecases/upload_item_image_usecase.dart';
 
 import '../../../../core/data/repositories/utils.dart';
 import '../../../../core/data/secure_storage/secure_storage.dart';
@@ -133,11 +134,27 @@ class ItemRepositoryImpl implements ItemRepository {
   }
 
   @override
-  Future<Either<Failure, Success>> createItem(CreateItemParams params) async {
+  Future<Either<Failure, int>> createItem(CreateItemParams params) async {
     try {
       if (await _networkInfo.isConnected) {
         final session = await _storage.getSessionInformation();
-        await _dataSource.createItem(params, session.user);
+        final newItem = await _dataSource.createItem(params, session.user);
+
+        return Right(newItem.id);
+      } else {
+        return const Left(Failure.networkFailure());
+      }
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> uploadItemImage(UploadItemImageParams params) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        final session = await _storage.getSessionInformation();
+        await _dataSource.uploadItemImage(params, session.user);
 
         return const Right(Success.genericSuccess());
       } else {

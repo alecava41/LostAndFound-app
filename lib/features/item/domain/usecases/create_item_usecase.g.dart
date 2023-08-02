@@ -12,17 +12,26 @@ CreateItemParams _$CreateItemParamsFromJson(Map<String, dynamic> json) =>
       type: $enumDecode(_$ItemTypeEnumMap, json['type']),
       position: Position.fromJson(json['position'] as Map<String, dynamic>),
       category: json['category'] as int,
-      address: json['address'] as String,
+      question: json['question'] as String?,
     );
 
-Map<String, dynamic> _$CreateItemParamsToJson(CreateItemParams instance) =>
-    <String, dynamic>{
-      'title': instance.title,
-      'type': _$ItemTypeEnumMap[instance.type]!,
-      'position': instance.position,
-      'address': instance.address,
-      'category': instance.category,
-    };
+Map<String, dynamic> _$CreateItemParamsToJson(CreateItemParams instance) {
+  final val = <String, dynamic>{
+    'title': instance.title,
+    'type': _$ItemTypeEnumMap[instance.type]!,
+    'position': instance.position,
+    'category': instance.category,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('question', instance.question);
+  return val;
+}
 
 const _$ItemTypeEnumMap = {
   ItemType.found: 'found',

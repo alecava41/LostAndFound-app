@@ -4,36 +4,35 @@ import 'package:lost_and_found/features/item/domain/repositories/item_repository
 
 import '../../../../core/domain/usecases/usecase.dart';
 import '../../../../core/status/failures.dart';
-import '../../../../core/status/success.dart';
 import '../entities/user_item.dart';
 
 part 'create_item_usecase.g.dart';
 
-class CreateItemUseCase implements UseCase<Success, CreateItemParams> {
+class CreateItemUseCase implements UseCase<int, CreateItemParams> {
   final ItemRepository repository;
 
   CreateItemUseCase(this.repository);
 
   @override
-  Future<Either<Failure, Success>> call(CreateItemParams params) async {
+  Future<Either<Failure, int>> call(CreateItemParams params) async {
     return await repository.createItem(params);
   }
 }
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class CreateItemParams {
   final String title;
   final ItemType type;
   final Position position;
-  final String address;
   final int category;
+  final String? question;
 
   CreateItemParams({
     required this.title,
     required this.type,
     required this.position,
     required this.category,
-    required this.address
+    required this.question,
   });
 
   Map<String,dynamic> toJson() => _$CreateItemParamsToJson(this);

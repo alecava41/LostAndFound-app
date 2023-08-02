@@ -8,6 +8,8 @@ import 'package:lost_and_found/features/authentication/presentation/pages/regist
 import 'package:lost_and_found/features/item/presentation/pages/notifications_page.dart'
     as notify;
 import 'package:lost_and_found/features/claim/presentation/pages/claim_screen.dart' as claim;
+import 'package:lost_and_found/features/item/presentation/pages/insert_item_page.dart' as insert;
+
 import 'package:lost_and_found/screens/notifications.dart';
 
 import '../core/presentation/home_controller/home_controller.dart';
@@ -47,7 +49,7 @@ class RouteGenerator {
       case '/login':
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case '/insert':
-        return MaterialPageRoute(builder: (_) => InsertItemScreen());
+        return MaterialPageRoute(builder: (_) => insert.InsertItemScreen());
       case '/notifications':
         return MaterialPageRoute(builder: (_) => const notify.NotificationsScreen());
       case '/claims':

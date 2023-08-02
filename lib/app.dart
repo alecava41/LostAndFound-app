@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/config/route_generator.dart';
+import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
@@ -17,7 +18,8 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider<HomeBloc>(create: (_) => sl<HomeBloc>()),
-          BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>())
+          BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>()),
+          BlocProvider<HomeControllerBloc>(create: (_) => sl<HomeControllerBloc>())
         ],
         child: MaterialApp(
           title: 'Lost&Found',
