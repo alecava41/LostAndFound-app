@@ -7,16 +7,18 @@ abstract class ReadClaimDataSource {
 }
 
 class ReadClaimDataSourceImpl implements ReadClaimDataSource {
+  final AppDatabase database;
+
+  ReadClaimDataSourceImpl({required this.database});
+
   @override
   Future<List<int>> getReadClaims() async {
-    final database = await $FloorAppDatabase.databaseBuilder('lostandfound.db').build();
     final result = await database.readClaimDao.findAllReadClaims();
     return result.map((claim) => claim.id).toList();
   }
 
   @override
   Future<void> insertReadClaim(int id) async {
-    final database = await $FloorAppDatabase.databaseBuilder('lostandfound.db').build();
     final read = ReadClaim(id: id);
 
     await database.readClaimDao.insertReadClaim(read);

@@ -1,20 +1,31 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../utils/colors.dart';
+import '../../../../../utils/colors.dart';
+import '../../../../../utils/constants.dart';
 
-// ignore: must_be_immutable
 class UploadImageForm extends StatelessWidget {
+  final int itemId;
+  final String token;
   final VoidCallback onSelectUploadMethod;
   final VoidCallback onDeletePhoto;
   final XFile? image;
-  String? imagePath;
+  final String? imagePath;
+  bool hasImage = true;
 
   UploadImageForm(
-      {super.key, required this.onSelectUploadMethod, required this.onDeletePhoto, required this.image, this.imagePath});
+      {super.key,
+      required this.itemId,
+      required this.token,
+      required this.onSelectUploadMethod,
+      required this.onDeletePhoto,
+      required this.image,
+      this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +43,19 @@ class UploadImageForm extends StatelessWidget {
                     color: Colors.white,
                     height: 300,
                     width: MediaQuery.of(context).size.width,
-                    child: image == null && imagePath == null
-                        ? Center(
+                    child: CachedNetworkImage(
+                      imageUrl: "$baseUrl/api/items/$itemId/image",
+                      fit: BoxFit.cover,
+                      httpHeaders: {
+                        "Authorization": "Bearer $token",
+                      },
+                      progressIndicatorBuilder: (context, url, downloadProgress) =>
+                          const CircularProgressIndicator(value: null),
+                      errorWidget: (context, url, error) {
+                        hasImage = false;
+
+                        if (image == null && imagePath == null) {
+                          Center(
                             child: ElevatedButton(
                               onPressed: onSelectUploadMethod,
                               style: ElevatedButton.styleFrom(
@@ -55,20 +77,30 @@ class UploadImageForm extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          )
-                        : image == null // TODO: why?
-                            ? Image.asset(
-                                imagePath!,
+                          );
+                        } else {
+                          if (image == null) {
+                            return Image.asset(
+                              imagePath!,
+                              fit: BoxFit.cover,
+                            );
+                          } else {
+                            if (!kIsWeb) {
+                              return Image.file(
+                                File(image!.path),
                                 fit: BoxFit.cover,
-                              )
-                            : (!kIsWeb
-                                ? Image.file(
-                                    File(image!.path),
-                                    fit: BoxFit.cover,
-                                  )
-                                : Container()),
+                              );
+                            } else {
+                              return Container();
+                            }
+                          }
+                        }
+                        return const Icon(Icons.error);
+                      },
+                      imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+                    ),
                   ),
-                  if (image != null || imagePath != null)
+                  if (image != null || imagePath != null || hasImage)
                     Positioned(
                       right: 16,
                       bottom: 10,

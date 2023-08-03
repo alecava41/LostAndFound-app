@@ -33,5 +33,3 @@ class InsertItemState with _$InsertItemState {
       image: null,
       imagePath: null);
 }
-
-enum SearchPageState { loadingPage, resultPage, filterPage }

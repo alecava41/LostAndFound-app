@@ -12,7 +12,7 @@ import '../../../../core/presentation/widgets/confirm_exit_dialog.dart';
 import '../../../../core/presentation/widgets/insert_string_form.dart';
 import '../../../../core/presentation/widgets/media_selection_dialog.dart';
 import '../../../../core/presentation/widgets/select_position_button.dart';
-import '../../../../core/presentation/widgets/upload_photo_form.dart';
+import '../widgets/insert_item/upload_image_form.dart';
 import '../../../../injection_container.dart';
 import '../../../../utils/colors.dart';
 import '../widgets/insert_item/radio_buttons_form.dart';
@@ -52,7 +52,16 @@ class InsertItemScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return WillPopScope(
+        onWillPop: () async {
+          if (true) { // TODO add check for empty fields
+            showDialogExit(context);
+            return false;
+          } else {
+            return true;
+          }
+        },
+    child: SafeArea(
         top: false,
         child: Scaffold(
           backgroundColor: PersonalizedColor.backGroundColor,
@@ -93,119 +102,120 @@ class InsertItemScreen extends StatelessWidget {
                             )
                           },
                               (_) => {
-                                // TODO: if successful, need to update lost/found item on HP
-                                ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.type)),
-                                Navigator.pop(ctx)
-                              });
+                            // TODO: if successful, need to update lost/found item on HP
+                            ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.type)),
+                            Navigator.pop(ctx)
+                          });
                     }
                   },
                   builder: (ctx, state) => SingleChildScrollView(
-                        child: Column(children: [
-                          UploadImageForm(
-                            onSelectUploadMethod: () => chooseMediaDialog(ctx),
-                            onDeletePhoto: () => ctx.read<InsertItemBloc>().add(const InsertItemEvent.imageDeleted()),
-                            image: state.image,
-                            imagePath: state.imagePath,
-                          ),
-                          customDivider(),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          customDivider(),
-                          PersonalizedRadioButtonsForm(
-                              selectedValue: state.type,
-                              onChanged: (type) => ctx.read<InsertItemBloc>().add(InsertItemEvent.typeChanged(type))),
-                          customDivider(),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          customDivider(),
-                          PersonalizedFormWithTextInsertion(
-                            title: "Title:",
-                            showError: state.showError,
-                            errorText: state.title.value.fold(
+                    child: Column(children: [
+                      UploadImageForm(
+                        onSelectUploadMethod: () => chooseMediaDialog(ctx),
+                        onDeletePhoto: () => ctx.read<InsertItemBloc>().add(const InsertItemEvent.imageDeleted()),
+                        image: state.image,
+                        imagePath: state.imagePath,
+                      ),
+                      customDivider(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      customDivider(),
+                      PersonalizedRadioButtonsForm(
+                          selectedValue: state.type,
+                          onChanged: (type) => ctx.read<InsertItemBloc>().add(InsertItemEvent.typeChanged(type))),
+                      customDivider(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      customDivider(),
+                      PersonalizedFormWithTextInsertion(
+                        title: "Title:",
+                        showError: state.showError,
+                        errorText: state.title.value.fold(
                                 (failure) =>
-                                    failure.maybeWhen<String?>(validationFailure: (reason) => reason, orElse: () => null),
+                                failure.maybeWhen<String?>(validationFailure: (reason) => reason, orElse: () => null),
                                 (r) => null),
-                            onTextChanged: (input) => ctx.read<InsertItemBloc>().add(InsertItemEvent.titleChanged(input)),
-                            isValid: state.title.value.isRight(),
-                            hintText: "e.g. Iphone 12 black",
-                          ),
-                          customDivider(),
-                          state.type == ItemType.found
-                              ? const SizedBox(
-                                  height: 10,
-                                )
-                              : Container(),
-                          state.type == ItemType.found ? customDivider() : Container(),
-                          state.type == ItemType.found
-                              ? PersonalizedFormWithTextInsertion(
-                                  title: "Question to verify the ownership:",
-                                  hintText: "e.g. Any device scratches? Where?",
-                                  isValid: state.question.value.isRight(),
-                                  onTextChanged: (input) =>
-                                      ctx.read<InsertItemBloc>().add(InsertItemEvent.questionChanged(input)),
-                                  showError: state.showError,
-                                  errorText: state.question.value.fold(
-                                      (failure) => failure.maybeWhen<String?>(
-                                          validationFailure: (reason) => reason, orElse: () => null),
-                                      (r) => null),
-                                )
-                              : Container(),
-                          state.type == ItemType.found ? customDivider() : Container(),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          SelectPositionButton(
-                            address: state.address,
-                            onPositionSelected: (LatLng? pos) {
-                              if (pos != null) {
-                                ctx
-                                    .read<InsertItemBloc>()
-                                    .add(InsertItemEvent.positionSelected(LatLng(pos.latitude, pos.longitude)));
-                              }
-                            },
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          CategorySelectionForm(
-                            onTap: (value) => ctx
+                        onTextChanged: (input) => ctx.read<InsertItemBloc>().add(InsertItemEvent.titleChanged(input)),
+                        isValid: state.title.value.isRight(),
+                        hintText: "e.g. Iphone 12 black",
+                      ),
+                      customDivider(),
+                      state.type == ItemType.found
+                          ? const SizedBox(
+                        height: 10,
+                      )
+                          : Container(),
+                      state.type == ItemType.found ? customDivider() : Container(),
+                      state.type == ItemType.found
+                          ? PersonalizedFormWithTextInsertion(
+                        title: "Question to verify the ownership:",
+                        hintText: "e.g. Any device scratches? Where?",
+                        isValid: state.question.value.isRight(),
+                        onTextChanged: (input) =>
+                            ctx.read<InsertItemBloc>().add(InsertItemEvent.questionChanged(input)),
+                        showError: state.showError,
+                        errorText: state.question.value.fold(
+                                (failure) => failure.maybeWhen<String?>(
+                                validationFailure: (reason) => reason, orElse: () => null),
+                                (r) => null),
+                      )
+                          : Container(),
+                      state.type == ItemType.found ? customDivider() : Container(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SelectPositionButton(
+                        address: state.address,
+                        onPositionSelected: (LatLng? pos) {
+                          if (pos != null) {
+                            ctx
                                 .read<InsertItemBloc>()
-                                .add(InsertItemEvent.categorySelected(value.first, value.second)),
-                            category: state.category,
-                          ),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: ElevatedButton(
-                                      onPressed: () =>
-                                          ctx.read<InsertItemBloc>().add(const InsertItemEvent.insertSubmitted()),
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: PersonalizedColor.mainColor,
-                                        shape: const StadiumBorder(),
-                                        padding: const EdgeInsets.symmetric(vertical: 16),
-                                      ),
-                                      child: const Text(
-                                        "Create",
-                                        style: TextStyle(fontSize: 20, color: Colors.white),
-                                      )),
-                                ),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 50,
-                          ),
-                        ]),
-                      ))),
-        ));
+                                .add(InsertItemEvent.positionSelected(LatLng(pos.latitude, pos.longitude)));
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CategorySelectionForm(
+                        onTap: (value) => ctx
+                            .read<InsertItemBloc>()
+                            .add(InsertItemEvent.categorySelected(value.first, value.second)),
+                        category: state.category,
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: ElevatedButton(
+                                  onPressed: () =>
+                                      ctx.read<InsertItemBloc>().add(const InsertItemEvent.insertSubmitted()),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: PersonalizedColor.mainColor,
+                                    shape: const StadiumBorder(),
+                                    padding: const EdgeInsets.symmetric(vertical: 16),
+                                  ),
+                                  child: const Text(
+                                    "Create",
+                                    style: TextStyle(fontSize: 20, color: Colors.white),
+                                  )),
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                    ]),
+                  ))),
+        )),
+    );
   }
 
   Divider customDivider() {

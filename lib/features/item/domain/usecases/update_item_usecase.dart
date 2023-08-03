@@ -4,39 +4,41 @@ import 'package:lost_and_found/features/item/domain/repositories/item_repository
 
 import '../../../../core/domain/usecases/usecase.dart';
 import '../../../../core/status/failures.dart';
-import '../entities/user_item.dart';
+import '../../../../core/status/success.dart';
 
-part 'create_item_usecase.g.dart';
+part 'update_item_usecase.g.dart';
 
-class CreateItemUseCase implements UseCase<int, CreateItemParams> {
+class UpdateItemUseCase implements UseCase<Success, UpdateItemParams> {
   final ItemRepository repository;
 
-  CreateItemUseCase(this.repository);
+  UpdateItemUseCase(this.repository);
 
   @override
-  Future<Either<Failure, int>> call(CreateItemParams params) async {
-    return await repository.createItem(params);
+  Future<Either<Failure, Success>> call(UpdateItemParams params) async {
+    return await repository.updateItem(params);
   }
 }
 
 @JsonSerializable(includeIfNull: false)
-class CreateItemParams {
+class UpdateItemParams {
+  @JsonKey(includeFromJson: true, includeToJson: false)
+  final int itemId;
+
   final String title;
-  final ItemType type;
   final Position position;
   final int category;
   final String? question;
 
-  CreateItemParams({
+  UpdateItemParams({
+    required this.itemId,
     required this.title,
-    required this.type,
     required this.position,
     required this.category,
     required this.question,
   });
 
-  Map<String,dynamic> toJson() => _$CreateItemParamsToJson(this);
-  factory CreateItemParams.fromJson(Map<String,dynamic> data) => _$CreateItemParamsFromJson(data);
+  Map<String,dynamic> toJson() => _$UpdateItemParamsToJson(this);
+  factory UpdateItemParams.fromJson(Map<String,dynamic> data) => _$UpdateItemParamsFromJson(data);
 
 }
 
@@ -49,4 +51,5 @@ class Position {
 
   Map<String,dynamic> toJson() => _$PositionToJson(this);
   factory Position.fromJson(Map<String,dynamic> data) => _$PositionFromJson(data);
+
 }

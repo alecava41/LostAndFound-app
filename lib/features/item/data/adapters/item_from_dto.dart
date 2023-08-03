@@ -13,7 +13,7 @@ extension ItemFromDto on ItemDto {
       insertion: date,
       user: User(id: user.id, username: user.username),
       type: type == "lost" ? ItemType.lost : ItemType.found,
-      position: address,
+      address: address,
       question: question,
       claims: claims
           ?.map((claim) => ClaimReceived(
@@ -33,6 +33,7 @@ extension ItemFromDto on ItemDto {
                   : (userClaim!.status == ClaimStatus.rejected.name ? ClaimStatus.rejected : ClaimStatus.approved))
           : null,
       category: Category(id: category.id, icon: category.icon, name: category.name),
+      position: Position(X: position.X, Y: position.Y),
     );
   }
 }

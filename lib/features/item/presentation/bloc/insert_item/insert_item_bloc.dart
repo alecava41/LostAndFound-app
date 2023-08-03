@@ -88,7 +88,7 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
           title: state.title.value.getOrElse(() => ""),
           question: state.type == ItemType.found ? state.question.value.getOrElse(() => "") : null,
           type: state.type,
-          position: Position(X: state.pos.longitude, Y: state.pos.longitude));
+          position: Position(X: state.pos.longitude, Y: state.pos.latitude));
 
       final insertResponse = await _createItemUseCase(params);
       insertResponse.fold((failure) => createFailureOrSuccess = Left(failure), (itemId) {
@@ -105,7 +105,6 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
                 (success) => imageFailureOrSuccess = Right(success)
         );
       }
-
     } else {
       createFailureOrSuccess =
           const Left(Failure.validationFailure("You need to fill all the fields with correct values."));

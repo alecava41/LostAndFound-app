@@ -8,9 +8,11 @@ class PersonalizedFormWithTextInsertion extends StatelessWidget {
   final bool showError;
   final bool isValid;
   final String? errorText;
+  final String text;
 
   const PersonalizedFormWithTextInsertion(
       {super.key,
+        this.text = "",
       required this.title,
       required this.onTextChanged,
       required this.hintText,
@@ -36,6 +38,7 @@ class PersonalizedFormWithTextInsertion extends StatelessWidget {
               showError: showError,
               isValid: isValid,
               hintText: hintText,
+              text: text,
             ),
           ],
         ),

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:lost_and_found/features/item/data/models/insert_item/item_response_dto.dart';
 import 'package:lost_and_found/features/item/domain/usecases/create_item_usecase.dart';
+import 'package:lost_and_found/features/item/domain/usecases/update_item_usecase.dart';
 import 'package:retrofit/http.dart';
 
 import '../../../../utils/constants.dart';
@@ -59,5 +60,24 @@ abstract class ItemClient {
       @Path("userId") int userId,
       @Path("itemId") int itemId,
       @Part() File image,
+      );
+
+  @PATCH('/users/{userId}/items/{itemId}/status')
+  Future<void> solveItem(
+      @Path("userId") int userId,
+      @Path("itemId") int itemId,
+      );
+
+  @DELETE('/users/{userId}/items/{itemId}')
+  Future<void> deleteItem(
+      @Path("userId") int userId,
+      @Path("itemId") int itemId,
+      );
+
+  @PATCH('/users/{userId}/items/{itemId}')
+  Future<void> updateItem(
+      @Path("userId") int userId,
+      @Path("itemId") int itemId,
+      @Body() UpdateItemParams params,
       );
 }

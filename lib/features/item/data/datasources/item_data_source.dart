@@ -1,13 +1,16 @@
 import 'package:lost_and_found/features/item/data/models/insert_item/item_response_dto.dart';
 import 'package:lost_and_found/features/item/data/models/user_item/user_item_dto.dart';
 import 'package:lost_and_found/features/item/domain/usecases/create_item_usecase.dart';
+import 'package:lost_and_found/features/item/domain/usecases/delete_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_items_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_notifications_usecase.dart';
+import 'package:lost_and_found/features/item/domain/usecases/update_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/upload_item_image_usecase.dart';
 
 import '../../../../core/data/datasources/utils.dart';
 import '../../domain/usecases/search_items_usecase.dart';
+import '../../domain/usecases/solve_item_usecase.dart';
 import '../models/item/item_dto.dart';
 import '../models/news/news_dto.dart';
 import '../models/search_item/search_item_dto.dart';
@@ -20,6 +23,9 @@ abstract class ItemDataSource {
   Future<ItemDto> getItem(GetItemParams params);
   Future<ItemResponseDto> createItem(CreateItemParams params, int userId);
   Future<void> uploadItemImage(UploadItemImageParams params, int userId);
+  Future<void> solveItem(SolveItemParams params, int userId);
+  Future<void> deleteItem(DeleteItemParams params, int userId);
+  Future<void> updateItem(UpdateItemParams params, int userId);
 }
 
 class ItemDataSourceImpl implements ItemDataSource {
@@ -64,5 +70,20 @@ class ItemDataSourceImpl implements ItemDataSource {
   @override
   Future<void> uploadItemImage(UploadItemImageParams params, int userId) {
     return _client.uploadItemImage(userId, params.itemId, params.image).catchError(handleError<void>);
+  }
+
+  @override
+  Future<void> solveItem(SolveItemParams params, int userId) {
+    return _client.solveItem(userId, params.itemId).catchError(handleError<void>);
+  }
+
+  @override
+  Future<void> deleteItem(DeleteItemParams params, int userId) {
+    return _client.deleteItem(userId, params.itemId).catchError(handleError<void>);
+  }
+
+  @override
+  Future<void> updateItem(UpdateItemParams params, int userId) {
+    return _client.updateItem(userId, params.itemId, params).catchError(handleError<void>);
   }
 }

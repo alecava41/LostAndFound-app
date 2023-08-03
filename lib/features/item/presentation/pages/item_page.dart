@@ -3,14 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_question_screen.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
+import 'package:lost_and_found/features/item/presentation/pages/update_item_page.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/item/claimed_item_card.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../core/domain/entities/claim_status.dart';
+import '../../../../core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import '../../../../core/presentation/widgets/image_dialog.dart';
 import '../../../../injection_container.dart';
 import '../../../../utils/colors.dart';
 import '../../domain/entities/item.dart';
+import '../bloc/home/home_bloc.dart';
 import '../bloc/item/item_bloc.dart';
 import '../widgets/item/image_item.dart';
 import '../widgets/item/info_item.dart';
@@ -26,7 +29,58 @@ class ItemScreen extends StatelessWidget {
     return BlocProvider<ItemBloc>(
       create: (_) => sl<ItemBloc>()..add(ItemEvent.itemCreated(itemId)),
       child: BlocConsumer<ItemBloc, ItemState>(
-        listener: (ctx, state) {},
+        listener: (ctx, state) {
+          // TODO: handle load request
+
+          final solveFailureOrSuccess = state.solveFailureOrSuccess;
+          final deleteFailureOrSuccess = state.deleteFailureOrSuccess;
+
+          if (solveFailureOrSuccess != null) {
+            solveFailureOrSuccess.fold(
+                (failure) => ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        padding: const EdgeInsets.all(30),
+                        backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                        content: Text(
+                            failure.maybeWhen<String>(
+                                genericFailure: () => 'Server error. Please try again later.',
+                                networkFailure: () => 'No internet connection available. Check your internet connection.',
+                                validationFailure: (reason) => reason!,
+                                orElse: () => "Unknown error"),
+                            style: const TextStyle(fontSize: 20)),
+                      ),
+                    ), (_) {
+              // Navigate back to HP + update HP
+              // TODO: check if it works
+              ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.item!.type));
+              context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
+              Navigator.pop(context);
+            });
+          }
+
+          if (deleteFailureOrSuccess != null) {
+            deleteFailureOrSuccess.fold(
+                    (failure) => ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    padding: const EdgeInsets.all(30),
+                    backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                    content: Text(
+                        failure.maybeWhen<String>(
+                            genericFailure: () => 'Server error. Please try again later.',
+                            networkFailure: () => 'No internet connection available. Check your internet connection.',
+                            validationFailure: (reason) => reason!,
+                            orElse: () => "Unknown error"),
+                        style: const TextStyle(fontSize: 20)),
+                  ),
+                ), (_) {
+              // Navigate back to HP + update HP
+              // TODO: check if it works
+              ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.item!.type));
+              context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
+              Navigator.pop(context);
+            });
+          }
+        },
         builder: (ctx, state) {
           if (state.isLoading) {
             return const CircularProgressIndicator(value: null); // TODO modify
@@ -40,7 +94,7 @@ class ItemScreen extends StatelessWidget {
                 appBar: AppBar(
                   backgroundColor: Colors.white,
                   iconTheme: const IconThemeData(color: Colors.black),
-                  actions: _showOwnerMenu(isCurrentUserOwner),
+                  actions: _showOwnerMenu(ctx, isCurrentUserOwner),
                 ),
                 body: SingleChildScrollView(
                   child: Column(
@@ -54,7 +108,7 @@ class ItemScreen extends StatelessWidget {
                         ),
                         InfoItem(
                           title: state.item!.title,
-                          position: state.item!.position,
+                          position: state.item!.address,
                           date: state.item!.insertion,
                           category: state.item!.category.name,
                           isFound: false,
@@ -96,7 +150,7 @@ class ItemScreen extends StatelessWidget {
     );
   }
 
-  List<Widget>? _showOwnerMenu(bool isCurrentUserOwner) {
+  List<Widget>? _showOwnerMenu(BuildContext ctx, bool isCurrentUserOwner) {
     if (isCurrentUserOwner) {
       return [
         PopupMenuButton<String>(
@@ -122,13 +176,13 @@ class ItemScreen extends StatelessWidget {
             // Action to be performed when a menu item is selected
             switch (value) {
               case 'opt1':
-                // TODO send request and close page (?)
+                ctx.read<ItemBloc>().add(const ItemEvent.itemSolved());
                 break;
               case 'opt2':
-                // TODO open "modify" page
+                Navigator.push(ctx, MaterialPageRoute(builder: (_) => UpdateItemScreen(itemId: itemId)));
                 break;
               case 'opt3':
-                // TODO send request and close page (?)
+                ctx.read<ItemBloc>().add(const ItemEvent.itemDeleted());
                 break;
             }
           },

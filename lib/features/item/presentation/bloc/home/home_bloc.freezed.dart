@@ -20,18 +20,21 @@ mixin _$HomeEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() homeCreated,
     required TResult Function() homeRefreshed,
+    required TResult Function(ItemType type) homeSectionRefreshed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? homeCreated,
     TResult? Function()? homeRefreshed,
+    TResult? Function(ItemType type)? homeSectionRefreshed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? homeCreated,
     TResult Function()? homeRefreshed,
+    TResult Function(ItemType type)? homeSectionRefreshed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$HomeEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeCreated value) homeCreated,
     required TResult Function(_HomeRefreshed value) homeRefreshed,
+    required TResult Function(_HomeSectionRefreshed value) homeSectionRefreshed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_HomeCreated value)? homeCreated,
     TResult? Function(_HomeRefreshed value)? homeRefreshed,
+    TResult? Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_HomeCreated value)? homeCreated,
     TResult Function(_HomeRefreshed value)? homeRefreshed,
+    TResult Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,6 +119,7 @@ class _$_HomeCreated implements _HomeCreated {
   TResult when<TResult extends Object?>({
     required TResult Function() homeCreated,
     required TResult Function() homeRefreshed,
+    required TResult Function(ItemType type) homeSectionRefreshed,
   }) {
     return homeCreated();
   }
@@ -122,6 +129,7 @@ class _$_HomeCreated implements _HomeCreated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? homeCreated,
     TResult? Function()? homeRefreshed,
+    TResult? Function(ItemType type)? homeSectionRefreshed,
   }) {
     return homeCreated?.call();
   }
@@ -131,6 +139,7 @@ class _$_HomeCreated implements _HomeCreated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? homeCreated,
     TResult Function()? homeRefreshed,
+    TResult Function(ItemType type)? homeSectionRefreshed,
     required TResult orElse(),
   }) {
     if (homeCreated != null) {
@@ -144,6 +153,7 @@ class _$_HomeCreated implements _HomeCreated {
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeCreated value) homeCreated,
     required TResult Function(_HomeRefreshed value) homeRefreshed,
+    required TResult Function(_HomeSectionRefreshed value) homeSectionRefreshed,
   }) {
     return homeCreated(this);
   }
@@ -153,6 +163,7 @@ class _$_HomeCreated implements _HomeCreated {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_HomeCreated value)? homeCreated,
     TResult? Function(_HomeRefreshed value)? homeRefreshed,
+    TResult? Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
   }) {
     return homeCreated?.call(this);
   }
@@ -162,6 +173,7 @@ class _$_HomeCreated implements _HomeCreated {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_HomeCreated value)? homeCreated,
     TResult Function(_HomeRefreshed value)? homeRefreshed,
+    TResult Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
     required TResult orElse(),
   }) {
     if (homeCreated != null) {
@@ -215,6 +227,7 @@ class _$_HomeRefreshed implements _HomeRefreshed {
   TResult when<TResult extends Object?>({
     required TResult Function() homeCreated,
     required TResult Function() homeRefreshed,
+    required TResult Function(ItemType type) homeSectionRefreshed,
   }) {
     return homeRefreshed();
   }
@@ -224,6 +237,7 @@ class _$_HomeRefreshed implements _HomeRefreshed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? homeCreated,
     TResult? Function()? homeRefreshed,
+    TResult? Function(ItemType type)? homeSectionRefreshed,
   }) {
     return homeRefreshed?.call();
   }
@@ -233,6 +247,7 @@ class _$_HomeRefreshed implements _HomeRefreshed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? homeCreated,
     TResult Function()? homeRefreshed,
+    TResult Function(ItemType type)? homeSectionRefreshed,
     required TResult orElse(),
   }) {
     if (homeRefreshed != null) {
@@ -246,6 +261,7 @@ class _$_HomeRefreshed implements _HomeRefreshed {
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeCreated value) homeCreated,
     required TResult Function(_HomeRefreshed value) homeRefreshed,
+    required TResult Function(_HomeSectionRefreshed value) homeSectionRefreshed,
   }) {
     return homeRefreshed(this);
   }
@@ -255,6 +271,7 @@ class _$_HomeRefreshed implements _HomeRefreshed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_HomeCreated value)? homeCreated,
     TResult? Function(_HomeRefreshed value)? homeRefreshed,
+    TResult? Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
   }) {
     return homeRefreshed?.call(this);
   }
@@ -264,6 +281,7 @@ class _$_HomeRefreshed implements _HomeRefreshed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_HomeCreated value)? homeCreated,
     TResult Function(_HomeRefreshed value)? homeRefreshed,
+    TResult Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
     required TResult orElse(),
   }) {
     if (homeRefreshed != null) {
@@ -275,6 +293,147 @@ class _$_HomeRefreshed implements _HomeRefreshed {
 
 abstract class _HomeRefreshed implements HomeEvent {
   const factory _HomeRefreshed() = _$_HomeRefreshed;
+}
+
+/// @nodoc
+abstract class _$$_HomeSectionRefreshedCopyWith<$Res> {
+  factory _$$_HomeSectionRefreshedCopyWith(_$_HomeSectionRefreshed value,
+          $Res Function(_$_HomeSectionRefreshed) then) =
+      __$$_HomeSectionRefreshedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ItemType type});
+}
+
+/// @nodoc
+class __$$_HomeSectionRefreshedCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$_HomeSectionRefreshed>
+    implements _$$_HomeSectionRefreshedCopyWith<$Res> {
+  __$$_HomeSectionRefreshedCopyWithImpl(_$_HomeSectionRefreshed _value,
+      $Res Function(_$_HomeSectionRefreshed) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+  }) {
+    return _then(_$_HomeSectionRefreshed(
+      null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ItemType,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_HomeSectionRefreshed implements _HomeSectionRefreshed {
+  const _$_HomeSectionRefreshed(this.type);
+
+  @override
+  final ItemType type;
+
+  @override
+  String toString() {
+    return 'HomeEvent.homeSectionRefreshed(type: $type)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_HomeSectionRefreshed &&
+            (identical(other.type, type) || other.type == type));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, type);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_HomeSectionRefreshedCopyWith<_$_HomeSectionRefreshed> get copyWith =>
+      __$$_HomeSectionRefreshedCopyWithImpl<_$_HomeSectionRefreshed>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() homeCreated,
+    required TResult Function() homeRefreshed,
+    required TResult Function(ItemType type) homeSectionRefreshed,
+  }) {
+    return homeSectionRefreshed(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? homeCreated,
+    TResult? Function()? homeRefreshed,
+    TResult? Function(ItemType type)? homeSectionRefreshed,
+  }) {
+    return homeSectionRefreshed?.call(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? homeCreated,
+    TResult Function()? homeRefreshed,
+    TResult Function(ItemType type)? homeSectionRefreshed,
+    required TResult orElse(),
+  }) {
+    if (homeSectionRefreshed != null) {
+      return homeSectionRefreshed(type);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_HomeCreated value) homeCreated,
+    required TResult Function(_HomeRefreshed value) homeRefreshed,
+    required TResult Function(_HomeSectionRefreshed value) homeSectionRefreshed,
+  }) {
+    return homeSectionRefreshed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_HomeCreated value)? homeCreated,
+    TResult? Function(_HomeRefreshed value)? homeRefreshed,
+    TResult? Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
+  }) {
+    return homeSectionRefreshed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_HomeCreated value)? homeCreated,
+    TResult Function(_HomeRefreshed value)? homeRefreshed,
+    TResult Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
+    required TResult orElse(),
+  }) {
+    if (homeSectionRefreshed != null) {
+      return homeSectionRefreshed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _HomeSectionRefreshed implements HomeEvent {
+  const factory _HomeSectionRefreshed(final ItemType type) =
+      _$_HomeSectionRefreshed;
+
+  ItemType get type;
+  @JsonKey(ignore: true)
+  _$$_HomeSectionRefreshedCopyWith<_$_HomeSectionRefreshed> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

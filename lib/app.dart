@@ -18,7 +18,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider<HomeBloc>(create: (_) => sl<HomeBloc>()),
+          BlocProvider<HomeBloc>(create: (_) => sl<HomeBloc>()..add(const HomeEvent.homeCreated())),
           BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>()),
           BlocProvider<HomeControllerBloc>(create: (_) => sl<HomeControllerBloc>())
         ],
@@ -34,4 +34,9 @@ class App extends StatelessWidget {
           onGenerateRoute: RouteGenerator.generateRoute,
         ));
   }
+
+// TODO: remove request output asap (emit error only once in every BLoC)
+// TODO: replace errorImage with images from assets
+// TODO: prevent image click if image is not null (from ImageDialog)
+// TODO: add spinner while loading address of position
 }

@@ -7,20 +7,20 @@ abstract class ReadNewsDataSource {
 }
 
 class ReadNewsDataSourceImpl implements ReadNewsDataSource {
+  final AppDatabase database;
+
+  ReadNewsDataSourceImpl({required this.database});
+
+
   @override
   Future<List<int>> getReadNews() async {
-    final database = await $FloorAppDatabase.databaseBuilder('lostandfound.db').build();
     final result = await database.readNewsDao.findAllReadNews();
     return result.map((news) => news.id).toList();
   }
 
   @override
   Future<void> insertReadNews(int id) async {
-    final database = await $FloorAppDatabase.databaseBuilder('lostandfound.db').build();
-    final newsRead = ReadNews(id: id);
-
-    await database.readNewsDao.insertReadNews(newsRead);
-    return;
+    return await database.readNewsDao.insertReadNews(ReadNews(id: id));
   }
 
 }
