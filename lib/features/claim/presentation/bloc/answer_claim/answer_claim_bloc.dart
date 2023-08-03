@@ -10,7 +10,7 @@ import '../../../../../core/data/secure_storage/secure_storage.dart';
 import '../../../../../core/domain/entities/claim_status.dart';
 import '../../../../../core/status/failures.dart';
 import '../../../../item/domain/entities/item.dart';
-import '../../../../item/domain/usecases/get_item.dart';
+import '../../../../item/domain/usecases/get_item_usecase.dart';
 
 part 'answer_claim_bloc.freezed.dart';
 

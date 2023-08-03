@@ -39,7 +39,7 @@ class SearchOptionScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                           ),
                           child: const Text(
-                            "DELETE ALL", // TODO maybe "reset"?
+                            "DELETE ALL", // TODO maybe "RESET"?
                           ),
                         ),
                       ],
@@ -62,8 +62,7 @@ class SearchOptionScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   CategorySelectionForm(
-                      onTap: (value) =>
-                          {ctx.read<SearchBloc>().add(SearchEvent.categorySelected(value.first, value.second))},
+                      onTap: (value) => ctx.read<SearchBloc>().add(SearchEvent.categorySelected(value.first, value.second)),
                       category: state.category),
                   const SizedBox(height: 40),
                   DateSelectionForm(

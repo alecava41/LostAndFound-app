@@ -36,7 +36,8 @@ import 'package:lost_and_found/features/item/data/datasources/item_data_source.d
 import 'package:lost_and_found/features/item/data/datasources/read_news_datasource.dart';
 import 'package:lost_and_found/features/item/data/repositories/item_repository_impl.dart';
 import 'package:lost_and_found/features/item/domain/repositories/item_repository.dart';
-import 'package:lost_and_found/features/item/domain/usecases/get_item.dart';
+import 'package:lost_and_found/features/item/domain/usecases/create_item_usecase.dart';
+import 'package:lost_and_found/features/item/domain/usecases/get_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_items_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_notifications_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/search_items_usecase.dart';
@@ -53,6 +54,8 @@ import 'features/authentication/domain/usecases/logout_use_case.dart';
 import 'features/claim/data/repositories/claim_repository_impl.dart';
 import 'features/claim/presentation/bloc/answer_claim/answer_claim_bloc.dart';
 import 'features/claim/presentation/bloc/answer_question/answer_question_bloc.dart';
+import 'features/item/domain/usecases/upload_item_image_usecase.dart';
+import 'features/item/presentation/bloc/insert_item/insert_item_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -81,12 +84,15 @@ Future<void> init() async {
   sl.registerFactory(
       () => SearchBloc(searchItemsUseCase: sl(), secureStorage: sl(), getAddressFromPositionUseCase: sl()));
   sl.registerFactory(() => ItemBloc(getItemUseCase: sl(), secureStorage: sl()));
+  sl.registerFactory(() => InsertItemBloc(createItemUseCase: sl(), getAddressFromPositionUseCase: sl(), uploadItemImageUseCase: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetUserItemsUseCase(sl()));
   sl.registerLazySingleton(() => GetUserNotificationsUseCase(sl()));
   sl.registerLazySingleton(() => SearchItemsUseCase(sl()));
   sl.registerLazySingleton(() => GetItemUseCase(sl()));
+  sl.registerLazySingleton(() => CreateItemUseCase(sl()));
+  sl.registerLazySingleton(() => UploadItemImageUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<ItemRepository>(() => ItemRepositoryImpl(

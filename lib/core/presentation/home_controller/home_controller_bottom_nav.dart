@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_and_found/features/item/presentation/pages/fake_insert_page_item.dart';
 import 'package:lost_and_found/features/item/presentation/pages/search_page.dart';
 
 import '../../../features/item/presentation/pages/home_page.dart';
@@ -15,9 +16,7 @@ class HomeControllerBottomNav extends StatelessWidget {
     List pages = [
       const HomeScreen(),
       const SearchScreen(),
-      const Center(
-        child: Text("Products"),
-      ),
+      const FakeInsertPageItem(),
       const Center(
         child: Text("Contact"),
       ),

@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:lost_and_found/features/item/data/models/insert_item/item_response_dto.dart';
+import 'package:lost_and_found/features/item/domain/usecases/create_item_usecase.dart';
 import 'package:retrofit/http.dart';
 
 import '../../../../utils/constants.dart';
@@ -41,5 +45,19 @@ abstract class ItemClient {
   @GET('/items/{itemId}')
   Future<ItemDto> getItem(
       @Path("itemId") int id,
+      );
+
+  @POST('/users/{userId}/items')
+  Future<ItemResponseDto> createItem(
+      @Path("userId") int userId,
+      @Body() CreateItemParams params,
+      );
+
+  @POST('/users/{userId}/items/{itemId}/image')
+  @MultiPart()
+  Future<void> uploadItemImage(
+      @Path("userId") int userId,
+      @Path("itemId") int itemId,
+      @Part() File image,
       );
 }
