@@ -80,22 +80,27 @@ class InfoItem extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          question != null? Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(8),
-            decoration: const BoxDecoration(
-              
-              color: PersonalizedColor.claimAcceptedStatusColor,
-              borderRadius: BorderRadius.all(Radius.circular(10))),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-              question != null
-              ? const Text("Question to verify the ownership:", style: TextStyle(fontSize: 18),)
-              : Container(),
-          question != null ? Text(question!) : Container(),
-            ]),
-          ): Container()
+            // TODO: aggiungere questo a file con BLOC
+          question != null
+              ? Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
+                      color: PersonalizedColor.claimAcceptedStatusColor,
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        question != null
+                            ? const Text(
+                                "Question to verify the ownership:",
+                                style: TextStyle(fontSize: 18),
+                              )
+                            : Container(),
+                        question != null ? Text(question!) : Container(),
+                      ]),
+                )
+              : Container()
         ],
       ),
     );

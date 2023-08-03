@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+  // TODO: aggiungere questo a file con BLOC (da stateless a statefull)
 // ignore: must_be_immutable
 class PersonalizedTextField extends StatefulWidget {
   final void Function(String) onStringInserted;
@@ -18,8 +18,10 @@ class PersonalizedTextField extends StatefulWidget {
 }
 
 class _PersonalizedTextFieldState extends State<PersonalizedTextField> {
+    // TODO: aggiungere questo a file con BLOC
   late TextEditingController _textEditingController;
 
+  // TODO: aggiungere questo a file con BLOC
   @override
   void initState() {
     super.initState();
@@ -27,6 +29,7 @@ class _PersonalizedTextFieldState extends State<PersonalizedTextField> {
     _textEditingController = TextEditingController(text: widget.text);
   }
 
+  // TODO: aggiungere questo a file con BLOC
   @override
   void dispose() {
     // Dispose of the controller when it is no longer needed

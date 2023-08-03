@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/config/route_generator.dart';
@@ -20,6 +21,8 @@ class App extends StatelessWidget {
           BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>())
         ],
         child: MaterialApp(
+          locale: DevicePreview.locale(context),
+          builder: DevicePreview.appBuilder,
           title: 'Lost&Found',
           theme: ThemeData(
             primarySwatch: PersonalizedColor.primarySwatch,

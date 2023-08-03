@@ -13,6 +13,7 @@ class PersonalizedFormWithTextInsertion extends StatelessWidget {
       required this.title,
       required this.onStringInserted,
       required this.hintText,
+        // TODO: aggiungere questo a file con BLOC
       this.text});
 
   @override

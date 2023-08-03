@@ -39,6 +39,7 @@ class RouteGenerator {
     } */
 
     // ALE
+    
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => const HomeControllerScreen());

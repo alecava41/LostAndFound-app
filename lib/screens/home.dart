@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           user: "Gsadsaaddasdasdsadsadassdsdasdsadsacefesads",
                           onlyUser: true,
                           open: true,
-                          claimAnswered: false,
+                          claimAnswered: true,
                           onlyItem: false,
                         ),
                         ClaimedItemCard(

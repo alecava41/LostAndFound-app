@@ -43,6 +43,7 @@ class _InsertItemScreenState extends State<InsertItemScreen> {
   final ImagePicker picker = ImagePicker();
   LatLng? selectedPosition;
 
+  // TODO: aggiungere questo a file con BLOC
   @override
   void initState() {
     imagePath = widget.imagePath;
@@ -76,6 +77,7 @@ class _InsertItemScreenState extends State<InsertItemScreen> {
                   shape: const StadiumBorder(),
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
+                  // TODO: aggiungere questo a file con BLOC
                 child: Text(
                   widget.categorySelected != null ||
                           widget.imagePath != null ||

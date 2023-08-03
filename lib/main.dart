@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/app.dart';
 import 'package:lost_and_found/features/authentication/domain/usecases/login_usecase.dart';
@@ -16,5 +18,10 @@ void main() async {
           (success) => initialRoute = "/"
   );
 
-  runApp(App(initialRoute: initialRoute));
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => App(initialRoute: initialRoute),
+    ),
+  );
 }

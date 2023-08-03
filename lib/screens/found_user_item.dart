@@ -124,6 +124,7 @@ class FoundUserItemScreen extends StatelessWidget {
                 thickness: 1,
                 height: 0,
               ),
+                // TODO: aggiungere question a file con BLOC
               InfoItem(
                 title: title,
                 position: position,
@@ -158,6 +159,7 @@ class FoundUserItemScreen extends StatelessWidget {
     );
   }
 
+  // TODO: aggiungere questo a file con BLOC
   void onModifyClick(context) {
     Navigator.push(
         context,
