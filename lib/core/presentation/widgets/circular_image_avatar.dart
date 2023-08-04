@@ -6,29 +6,42 @@ class CircularImage extends StatelessWidget {
   final String token;
   final String imageUrl;
   final double radius;
+  final String errorAsset;
+  final bool hasImage;
 
   const CircularImage({
     super.key,
     required this.token,
     required this.imageUrl,
+    required this.hasImage,
+    required this.errorAsset,
     this.radius = 50,
   });
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: imageUrl,
-      httpHeaders: {
-        "Authorization": "Bearer $token",
-      },
-       progressIndicatorBuilder: (context, url, downloadProgress) =>
-           const CircularProgressIndicator(value: null),
-       errorWidget: (context, url, error)  { return const Icon(Icons.error);},
-      imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-      imageBuilder: (ctx, imageProvider) => CircleAvatar(
+    if (hasImage) {
+      return CachedNetworkImage(
+        imageUrl: imageUrl,
+        httpHeaders: {
+          "Authorization": "Bearer $token",
+        },
+        progressIndicatorBuilder: (context, url, downloadProgress) => const CircularProgressIndicator(value: null),
+        errorWidget: (context, url, error) => CircleAvatar(
+          radius: radius,
+          backgroundImage: Image.asset(errorAsset).image,
+        ),
+        imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+        imageBuilder: (ctx, imageProvider) => CircleAvatar(
+          radius: radius,
+          backgroundImage: imageProvider,
+        ),
+      );
+    } else {
+      return CircleAvatar(
         radius: radius,
-        backgroundImage: imageProvider,
-      ),
-    );
+        backgroundImage: Image.asset(errorAsset).image,
+      );
+    }
   }
 }

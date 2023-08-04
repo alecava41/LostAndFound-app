@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/update_item/update_item_bloc.dart';
@@ -133,14 +134,11 @@ class UpdateItemScreen extends StatelessWidget {
                       }
                     },
                     builder: (ctx, state) => state.isLoading
-                        ? // TODO: handle loading
-                        const CircularProgressIndicator(
-                            value: null,
-                          )
+                        ? const CustomCircularProgress(size: 100)
                         : (state.item != null
                             ? SingleChildScrollView(
                                 child: Column(children: [
-                                  // TODO: handle case image already present
+                                  // TODO: handle case image already present and user clicks on delete
                                   UploadImageForm(
                                     onSelectUploadMethod: () => chooseMediaDialog(ctx),
                                     onDeletePhoto: () =>
@@ -149,6 +147,7 @@ class UpdateItemScreen extends StatelessWidget {
                                     imagePath: state.imagePath,
                                     itemId: itemId,
                                     token: state.token,
+                                    hasImage: state.item!.hasImage,
                                   ),
                                   customDivider(),
                                   const SizedBox(

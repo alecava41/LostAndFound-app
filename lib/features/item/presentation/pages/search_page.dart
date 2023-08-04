@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/search/search_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/search/search_option_screen.dart';
 
@@ -35,10 +36,7 @@ class SearchScreen extends StatelessWidget {
       builder: (ctx, state) {
         switch (state.pageState) {
           case SearchPageState.loadingPage:
-            return const Center(
-                child: CircularProgressIndicator(
-              value: null,
-            )); // TODO: modify
+            return const CustomCircularProgress(size: 100);
           case SearchPageState.resultPage:
             return const SearchResultScreen();
           case SearchPageState.filterPage:

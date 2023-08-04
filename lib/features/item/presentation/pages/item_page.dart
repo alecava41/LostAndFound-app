@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_question_screen.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
@@ -32,10 +33,26 @@ class ItemScreen extends StatelessWidget {
       create: (_) => sl<ItemBloc>()..add(ItemEvent.itemCreated(itemId)),
       child: BlocConsumer<ItemBloc, ItemState>(
         listener: (ctx, state) {
-          // TODO: handle load request
-
+          final loadFailureOrSuccess = state.loadFailureOrSuccess;
           final solveFailureOrSuccess = state.solveFailureOrSuccess;
           final deleteFailureOrSuccess = state.deleteFailureOrSuccess;
+
+          if (loadFailureOrSuccess != null) {
+            loadFailureOrSuccess.fold(
+                    (failure) => ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    padding: const EdgeInsets.all(30),
+                    backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                    content: Text(
+                        failure.maybeWhen<String>(
+                            genericFailure: () => 'Server error. Please try again later.',
+                            networkFailure: () => 'No internet connection available. Check your internet connection.',
+                            validationFailure: (reason) => reason!,
+                            orElse: () => "Unknown error"),
+                        style: const TextStyle(fontSize: 20)),
+                  ),
+                ), (_) {});
+          }
 
           if (solveFailureOrSuccess != null) {
             solveFailureOrSuccess.fold(
@@ -85,7 +102,7 @@ class ItemScreen extends StatelessWidget {
         },
         builder: (ctx, state) {
           if (state.isLoading) {
-            return const CircularProgressIndicator(value: null); // TODO modify
+            return const CustomCircularProgress(size: 100);
           } else if (state.item != null) {
             final isCurrentUserOwner = state.item!.user.id == state.userId;
 
@@ -102,7 +119,7 @@ class ItemScreen extends StatelessWidget {
                   child: Column(
                     children: () {
                       var widgetList = <Widget>[
-                        ImageItem(token: state.token, itemId: state.item!.id),
+                        ImageItem(token: state.token, itemId: state.item!.id, hasImage: state.item!.hasImage,),
                         const Divider(
                           color: Colors.grey,
                           thickness: 1,
@@ -229,15 +246,22 @@ class ItemScreen extends StatelessWidget {
                     Flexible(
                       child: Row(
                         children: [
+                          owner.hasImage ?
                           ImageDialogWidget(
                             token: token,
                             imageUrl: userUrl,
+                            errorAsset: 'assets/images/no-user.jpg',
                             child: CircularImage(
                               hasImage: owner.hasImage,
                               imageUrl: userUrl,
                               radius: 40,
                               token: token,
                             ),
+                          ) : CircularImage(
+                            hasImage: owner.hasImage,
+                            imageUrl: userUrl,
+                            radius: 40,
+                            token: token,
                           ),
                           const SizedBox(
                             width: 5,
@@ -480,14 +504,22 @@ class ItemScreen extends StatelessWidget {
                     Flexible(
                       child: Row(
                         children: [
+                          owner.hasImage ?
                           ImageDialogWidget(
                             token: token,
                             imageUrl: userUrl,
+                            errorAsset: 'assets/images/no-user.jpg',
                             child: CircularImage(
                               imageUrl: userUrl,
                               radius: 40,
-                              token: token, hasImage: owner.hasImage,
+                              token: token,
+                              hasImage: owner.hasImage,
                             ),
+                          ) : CircularImage(
+                            imageUrl: userUrl,
+                            radius: 40,
+                            token: token,
+                            hasImage: owner.hasImage,
                           ),
                           const SizedBox(
                             width: 5,

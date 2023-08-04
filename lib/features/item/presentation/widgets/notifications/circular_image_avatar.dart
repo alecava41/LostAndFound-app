@@ -26,7 +26,12 @@ class CircularImage extends StatelessWidget {
           "Authorization": "Bearer $token",
         },
         progressIndicatorBuilder: (context, url, downloadProgress) => const CustomCircularProgress(size: 20),
-        errorWidget: (context, url, error)  { return const Icon(Icons.error);},
+        errorWidget: (context, url, error) {
+          return CircleAvatar(
+            radius: radius,
+            backgroundImage: Image.asset("assets/images/no-user.jpg").image,
+          );
+        },
         imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
         imageBuilder: (ctx, imageProvider) => CircleAvatar(
           radius: radius,
@@ -34,7 +39,10 @@ class CircularImage extends StatelessWidget {
         ),
       );
     } else {
-      return Image.asset("assets/images/no-user.jpg");
+      return CircleAvatar(
+        radius: radius,
+        backgroundImage: Image.asset("assets/images/no-user.jpg").image,
+      );
     }
   }
 }
