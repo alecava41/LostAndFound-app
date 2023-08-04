@@ -24,6 +24,8 @@ class ItemScreen extends StatelessWidget {
 
   const ItemScreen({super.key, required this.itemId});
 
+  // TODO: fix images here (with "hasImage" property)
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ItemBloc>(
@@ -231,6 +233,7 @@ class ItemScreen extends StatelessWidget {
                             token: token,
                             imageUrl: userUrl,
                             child: CircularImage(
+                              hasImage: owner.hasImage,
                               imageUrl: userUrl,
                               radius: 40,
                               token: token,
@@ -483,7 +486,7 @@ class ItemScreen extends StatelessWidget {
                             child: CircularImage(
                               imageUrl: userUrl,
                               radius: 40,
-                              token: token,
+                              token: token, hasImage: owner.hasImage,
                             ),
                           ),
                           const SizedBox(

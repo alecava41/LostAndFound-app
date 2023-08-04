@@ -24,6 +24,7 @@ mixin _$ItemDto {
   String get title => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
+  bool get image => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   UserDto get user => throw _privateConstructorUsedError;
   CategoryDto get category => throw _privateConstructorUsedError;
@@ -47,6 +48,7 @@ abstract class $ItemDtoCopyWith<$Res> {
       String title,
       String type,
       String address,
+      bool image,
       DateTime date,
       UserDto user,
       CategoryDto category,
@@ -78,6 +80,7 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
     Object? title = null,
     Object? type = null,
     Object? address = null,
+    Object? image = null,
     Object? date = null,
     Object? user = null,
     Object? category = null,
@@ -103,6 +106,10 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as bool,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -183,6 +190,7 @@ abstract class _$$$ItemDtoCopyWith<$Res> implements $ItemDtoCopyWith<$Res> {
       String title,
       String type,
       String address,
+      bool image,
       DateTime date,
       UserDto user,
       CategoryDto category,
@@ -215,6 +223,7 @@ class __$$$ItemDtoCopyWithImpl<$Res>
     Object? title = null,
     Object? type = null,
     Object? address = null,
+    Object? image = null,
     Object? date = null,
     Object? user = null,
     Object? category = null,
@@ -240,6 +249,10 @@ class __$$$ItemDtoCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as bool,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -280,6 +293,7 @@ class _$$ItemDto implements $ItemDto {
       required this.title,
       required this.type,
       required this.address,
+      required this.image,
       required this.date,
       required this.user,
       required this.category,
@@ -300,6 +314,8 @@ class _$$ItemDto implements $ItemDto {
   final String type;
   @override
   final String address;
+  @override
+  final bool image;
   @override
   final DateTime date;
   @override
@@ -325,7 +341,7 @@ class _$$ItemDto implements $ItemDto {
 
   @override
   String toString() {
-    return 'ItemDto(id: $id, title: $title, type: $type, address: $address, date: $date, user: $user, category: $category, question: $question, position: $position, claims: $claims, userClaim: $userClaim)';
+    return 'ItemDto(id: $id, title: $title, type: $type, address: $address, image: $image, date: $date, user: $user, category: $category, question: $question, position: $position, claims: $claims, userClaim: $userClaim)';
   }
 
   @override
@@ -337,6 +353,7 @@ class _$$ItemDto implements $ItemDto {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.address, address) || other.address == address) &&
+            (identical(other.image, image) || other.image == image) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.category, category) ||
@@ -358,6 +375,7 @@ class _$$ItemDto implements $ItemDto {
       title,
       type,
       address,
+      image,
       date,
       user,
       category,
@@ -386,6 +404,7 @@ abstract class $ItemDto implements ItemDto {
       required final String title,
       required final String type,
       required final String address,
+      required final bool image,
       required final DateTime date,
       required final UserDto user,
       required final CategoryDto category,
@@ -404,6 +423,8 @@ abstract class $ItemDto implements ItemDto {
   String get type;
   @override
   String get address;
+  @override
+  bool get image;
   @override
   DateTime get date;
   @override

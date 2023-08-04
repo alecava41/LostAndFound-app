@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/notification/news_bloc.dart';
+import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/notifications/circular_image_avatar.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/utils/constants.dart';
@@ -10,6 +11,7 @@ class CustomNotification extends StatelessWidget {
   final int targetUserId;
   final String targetUsername;
   final int targetItemId;
+  final bool hasUserImage;
   final String subjectItemTitle;
   final ItemType subjectItemType;
   final String token;
@@ -18,6 +20,7 @@ class CustomNotification extends StatelessWidget {
   const CustomNotification({
     required this.targetUserId,
     required this.targetUsername,
+    required this.hasUserImage,
     required this.targetItemId,
     required this.subjectItemTitle,
     required this.subjectItemType,
@@ -34,7 +37,7 @@ class CustomNotification extends StatelessWidget {
           Material(
             color: opened ? PersonalizedColor.primarySwatch.shade200 : Colors.white,
             child: InkWell(
-              onTap: () {}, // TODO: navigate to target item page
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ItemScreen(itemId: targetItemId))),
               splashColor: opened ? PersonalizedColor.primarySwatch.shade500 : Colors.grey.withOpacity(0.4),
               child: SizedBox(
                 height: 100,
@@ -44,6 +47,7 @@ class CustomNotification extends StatelessWidget {
                   child: Row(
                     children: [
                       CircularImage(
+                        hasImage: hasUserImage,
                         imageUrl: "$baseUrl/api/users/$targetUserId/image",
                         token: token,
                         radius: 35,
@@ -55,6 +59,7 @@ class CustomNotification extends StatelessWidget {
                             final sentence =
                                 (subjectItemType == ItemType.lost) ? "might have found your " : "might be the owner of ";
 
+                            // TODO: evaluate whether to put bold for username/item_title
                             return Text(
                               "Hey, $targetUsername $sentence $subjectItemTitle!",
                               style: const TextStyle(fontSize: 15),

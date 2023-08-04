@@ -15,6 +15,7 @@ class ClaimSent {
 class Item {
   final int id;
   final String title;
+  final bool hasImage;
 
-  Item({required this.id, required this.title});
+  Item({required this.id, required this.title, required this.hasImage});
 }

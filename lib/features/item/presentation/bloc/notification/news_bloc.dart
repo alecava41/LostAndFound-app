@@ -35,6 +35,8 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
   }
 
   Future<void> _onNewsCreatedOrRefreshed(Emitter<NewsState> emit) async {
+    emit(state.copyWith(isLoading: true));
+
     Either<Failure, Success>? loadFailureOrSuccess;
 
     final newsResponse = await _getUserNotificationsUseCase(GetUserNotificationsParams(last: 0));
@@ -45,7 +47,10 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
 
     emit(
       state.copyWith(
-          loadFailureOrSuccess: loadFailureOrSuccess, news: newsResponse.getOrElse(() => []), token: session.token),
+          isLoading: false,
+          loadFailureOrSuccess: loadFailureOrSuccess,
+          news: newsResponse.getOrElse(() => []),
+          token: session.token),
     );
   }
 }

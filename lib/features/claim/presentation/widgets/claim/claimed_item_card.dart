@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/features/claim/domain/entities/claim_received.dart';
+import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
 
+import '../../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../../utils/colors.dart';
 import '../../../../../utils/constants.dart';
 
@@ -20,7 +22,8 @@ class ClaimedItemCard extends StatelessWidget {
         color: !claim.opened ? PersonalizedColor.primarySwatch.shade200 : Colors.white,
         child: InkWell(
           splashColor: !claim.opened ? PersonalizedColor.primarySwatch.shade500 : Colors.grey.withOpacity(0.4),
-          onTap: () {}, // TODO create wiring
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AnswerClaimScreen(itemId: claim.item.id, claimId: claim.id, isClaimAlreadyManaged: false))),
+          // TODO: manage "isClaimAlreadyManaged"
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -38,17 +41,19 @@ class ClaimedItemCard extends StatelessWidget {
                   height: 70,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: CachedNetworkImage(
-                      imageUrl: "$baseUrl/api/users/${claim.user.id}/image",
-                      fit: BoxFit.cover,
-                      httpHeaders: {
-                        "Authorization": "Bearer $token",
-                      },
-                      progressIndicatorBuilder: (context, url, downloadProgress) =>
-                          const CircularProgressIndicator(value: null),
-                      errorWidget: (context, url, error) => const Icon(Icons.error),
-                      imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-                    ),
+                    child: claim.user.hasImage
+                        ? CachedNetworkImage(
+                            imageUrl: "$baseUrl/api/users/${claim.user.id}/image",
+                            fit: BoxFit.cover,
+                            httpHeaders: {
+                              "Authorization": "Bearer $token",
+                            },
+                            progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                const CustomCircularProgress(size: 35),
+                            errorWidget: (context, url, error) => Image.asset("assets/images/no-user.jpg"),
+                            imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+                          )
+                        : Image.asset("assets/images/no-user.jpg"),
                   ),
                 ),
                 Expanded(

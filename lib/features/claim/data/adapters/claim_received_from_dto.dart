@@ -6,7 +6,7 @@ extension ClaimReceivedFromDto on ClaimReceivedDto {
     return ClaimReceived(
       id: id,
       item: Item(id: item.id, title: item.title),
-      user: User(id: user.id, username: user.username),
+      user: User(id: user.id, username: user.username, hasImage: user.image),
       opened: false
     );
   }

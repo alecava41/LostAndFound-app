@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
+import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
 import '../../../../../core/domain/entities/claim_status.dart';
@@ -25,7 +27,7 @@ class ClaimedStatusCard extends StatelessWidget {
         color: Colors.white,
         child: InkWell(
           splashColor: Colors.grey.withOpacity(0.4),
-          onTap: () {}, // TODO perform wiring
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ItemScreen(itemId: claim.item.id))),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -43,17 +45,17 @@ class ClaimedStatusCard extends StatelessWidget {
                   height: 70,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: CachedNetworkImage(
+                    child: claim.item.hasImage ? CachedNetworkImage(
                       imageUrl: "$baseUrl/api/items/${claim.item.id}/image",
                       fit: BoxFit.cover,
                       httpHeaders: {
                         "Authorization": "Bearer $token",
                       },
                       progressIndicatorBuilder: (context, url, downloadProgress) =>
-                          const CircularProgressIndicator(value: null),
-                      errorWidget: (context, url, error) => const Icon(Icons.error),
+                          const CustomCircularProgress(size: 35),
+                      errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
                       imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-                    ),
+                    ) : Image.asset("assets/images/no-item.png"),
                   ),
                 ),
                 Expanded(

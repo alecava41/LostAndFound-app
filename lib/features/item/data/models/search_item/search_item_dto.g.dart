@@ -11,6 +11,7 @@ _$$SearchItemDto _$$$SearchItemDtoFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int,
       title: json['title'] as String,
       type: json['type'] as String,
+      image: json['image'] as bool,
       user: UserDto.fromJson(json['user'] as Map<String, dynamic>),
     );
 
@@ -19,5 +20,6 @@ Map<String, dynamic> _$$$SearchItemDtoToJson(_$$SearchItemDto instance) =>
       'id': instance.id,
       'title': instance.title,
       'type': instance.type,
+      'image': instance.image,
       'user': instance.user,
     };

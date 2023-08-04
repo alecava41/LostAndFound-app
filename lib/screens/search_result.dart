@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
-import '../features/item/presentation/widgets/home/custom_card_home.dart';
+import '../widgets/custom_card_home.dart';
 import '../widgets/custom_list_view.dart';
 
 class SearchResultScreen extends StatelessWidget {

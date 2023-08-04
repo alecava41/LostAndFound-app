@@ -8,6 +8,7 @@ extension SearchItemFromDto on SearchItemDto {
     return SearchItem(
         id: id,
         title: title,
+        hasImage: image,
         user: User(id: user.id, username: user.username),
         type: type == "found" ? ItemType.found : ItemType.lost);
   }

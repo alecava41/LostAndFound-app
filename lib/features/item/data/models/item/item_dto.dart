@@ -16,6 +16,7 @@ class ItemDto with _$ItemDto {
     required String title,
     required String type,
     required String address,
+    required bool image,
     required DateTime date,
     required UserDto user,
     required CategoryDto category,
