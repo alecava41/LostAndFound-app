@@ -30,47 +30,67 @@ class SelectPositionButton extends StatelessWidget {
             onTap: () async {
               final selectedPos = await Navigator.push<LatLng>(
                 context,
-                MaterialPageRoute(builder: (context) => const SelectPositionScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const SelectPositionScreen()),
               );
 
               onPositionSelected(selectedPos);
             },
-            borderRadius: BorderRadius.circular(0),
             child: SizedBox(
               height: 140,
+              width: double.infinity,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Position",
-                          style: TextStyle(fontSize: 25),
-                        ),
-                        const Text("e.g. where the item has been found or lost"),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.location_on,
-                              color: address == "" ? Colors.black : PersonalizedColor.mainColor,
-                              size: 40,
-                            ),
-                            // TODO handle overflow
-                            Text(
-                              address == "" ? "Position not chosen yet" : address,
-                              style: TextStyle(
-                                  color: address == "" ? Colors.black : PersonalizedColor.mainColor, fontSize: 15),
-                            ),
-                          ],
-                        ),
-                      ],
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Position",
+                            style: TextStyle(fontSize: 25),
+                          ),
+                          const Text(
+                              "e.g. where the item has been found or lost"),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            // TODO: add progress bar
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                color: address == ""
+                                    ? Colors.black
+                                    : PersonalizedColor.mainColor,
+                                size: 40,
+                              ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      address == ""
+                                          ? "Position not chosen yet"
+                                          : address,
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        color: address == ""
+                                            ? Colors.black
+                                            : PersonalizedColor.mainColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   const Icon(

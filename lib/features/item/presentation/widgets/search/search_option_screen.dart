@@ -27,9 +27,15 @@ class SearchOptionScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Search filters",
-                          style: TextStyle(fontSize: 40),
+                        const Row(
+                          children: [
+                            Icon(Icons.search, size: 40,),
+                            SizedBox(width: 5,),
+                            Text(
+                              "Filters",
+                              style: TextStyle(fontSize: 40),
+                            ),
+                          ],
                         ),
                         ElevatedButton(
                           onPressed: () => ctx.read<SearchBloc>().add(const SearchEvent.resetFilters()),
@@ -39,7 +45,7 @@ class SearchOptionScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                           ),
                           child: const Text(
-                            "DELETE ALL", // TODO maybe "RESET"?
+                            "DELETE ALL",
                           ),
                         ),
                       ],

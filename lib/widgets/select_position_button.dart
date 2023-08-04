@@ -48,9 +48,7 @@ class _SelectPositionButtonState extends State<SelectPositionButton> {
           color: Colors.white,
           child: InkWell(
             onTap: () async => await navigateToSelectPosition(context),
-            borderRadius: BorderRadius.circular(0),
             child: Container(
-              height: 140,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -83,6 +81,7 @@ class _SelectPositionButtonState extends State<SelectPositionButton> {
                                   ? "Position not chosen yet"
                                   : widget.address,
                               style: TextStyle(
+                                  overflow: TextOverflow.ellipsis,
                                   color: widget.address == ""
                                       ? Colors.black
                                       : PersonalizedColor.mainColor,
@@ -93,9 +92,11 @@ class _SelectPositionButtonState extends State<SelectPositionButton> {
                       ],
                     ),
                   ),
-                  const Icon(
-                    Icons.chevron_right,
-                    size: 50,
+                  const Expanded(
+                    child: Icon(
+                      Icons.chevron_right,
+                      size: 50,
+                    ),
                   ),
                 ],
               ),

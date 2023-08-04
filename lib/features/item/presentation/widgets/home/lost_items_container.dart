@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/home/custom_card_home.dart';
+import 'package:lost_and_found/features/item/presentation/widgets/home/no_item_message.dart';
 
 class LostItemsContainer extends StatelessWidget {
   const LostItemsContainer({super.key});
@@ -19,25 +20,30 @@ class LostItemsContainer extends StatelessWidget {
               style: TextStyle(fontSize: 25),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 0, 25),
-            child: SizedBox(
-              height: 240,
-              child: state.lostItems.isNotEmpty
-                  ? ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: state.lostItems
-                          .map((item) => CustomCardHome(
-                                id: item.id,
-                                text: item.title,
-                                claims: item.claims,
-                                token: state.token,
-                              ))
-                          .toList(),
-                    )
-                  : const Center(child: Text("You have no lost item inserted yet :)", style: TextStyle(fontSize: 20))),
-            ),
-          ),
+          state.lostItems.isNotEmpty
+              ? Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 25),
+                  child: SizedBox(
+                      height: 240,
+                      width: MediaQuery.of(context).size.width,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: state.lostItems
+                            .map((item) => CustomCardHome(
+                                  id: item.id,
+                                  text: item.title,
+                                  claims: item.claims,
+                                  token: state.token,
+                                ))
+                            .toList(),
+                      )),
+                )
+              : const Padding(
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 30),
+                  child: NoItemMessage(
+                    icon: Icons.sentiment_very_satisfied_rounded,
+                    message: "You have no lost item!",
+                  )),
         ],
       );
     });

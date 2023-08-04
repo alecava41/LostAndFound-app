@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/home/custom_card_home.dart';
+import 'package:lost_and_found/features/item/presentation/widgets/home/no_item_message.dart';
 
 class FoundItemsContainer extends StatelessWidget {
   const FoundItemsContainer({super.key});
@@ -17,7 +18,8 @@ class FoundItemsContainer extends StatelessWidget {
             child: Text("Your found items", style: TextStyle(fontSize: 25),
             ),
           ),
-          Padding(
+          state.foundItems.isNotEmpty
+                  ? Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 0, 25),
             child: SizedBox(
               height: 240,
@@ -40,6 +42,9 @@ class FoundItemsContainer extends StatelessWidget {
                   child: Text("You have no found item inserted yet :)", style: TextStyle(fontSize: 20))
               ),
             ),
+          ) : const Padding(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 30),
+            child: NoItemMessage(message: "No found items yet, keep searching!", icon: Icons.image_search_rounded),
           ),
         ],
       );

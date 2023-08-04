@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                               width: 25,
                             ),
                             ClickableCircularButton(
-                              icon: Icons.search,
+                              icon: Icons.connect_without_contact,
                               onPressed: () => Navigator.of(context).pushNamed('/claims'),
                             ),
                           ],

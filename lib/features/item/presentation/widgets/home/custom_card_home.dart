@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
+import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
 class CustomCardHome extends StatelessWidget {
@@ -59,7 +60,7 @@ class CustomCardHome extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(3),
                           decoration: BoxDecoration(
-                            color: Colors.amber.shade300,
+                            color: PersonalizedColor.claimWaitingStatusColor,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Row(

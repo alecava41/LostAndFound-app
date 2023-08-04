@@ -64,10 +64,20 @@ class SearchResultScreen extends StatelessWidget {
                         ).toList(),
                       ))
                 // TODO adjust case without results
-                    : const Center(
-                        child: Text(
-                          "There are no matching items based on your parameters.",
-                          style: TextStyle(fontSize: 20),
+                    : const Padding(
+                      padding: EdgeInsets.all(20),
+                        child: Column(
+                          children: [
+                            Icon(Icons.search_off_rounded, size: 80,),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "No matching items found with your parameters! Maybe you can try with more general ones.",
+                              style: TextStyle(fontSize: 20),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
                       )
               ],

@@ -34,7 +34,8 @@ class ClaimReceivedContent extends StatelessWidget {
                             ),
                             Text(
                               "No received claims yet",
-                              style: TextStyle(fontSize: 25),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 20),
                             ),
                           ]),
                         ),

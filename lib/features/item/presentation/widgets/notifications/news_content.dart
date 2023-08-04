@@ -17,11 +17,14 @@ class NewsContent extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       padding: const EdgeInsets.all(30),
-                      backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                      backgroundColor: Colors
+                          .red, // TODO: see if color is good even in dark mode
                       content: Text(
                           failure.maybeWhen<String>(
-                              genericFailure: () => 'Server error. Please try again later.',
-                              networkFailure: () => 'No internet connection available. Check your internet connection.',
+                              genericFailure: () =>
+                                  'Server error. Please try again later.',
+                              networkFailure: () =>
+                                  'No internet connection available. Check your internet connection.',
                               orElse: () => 'Unknown error'),
                           style: const TextStyle(fontSize: 20)),
                     ),
@@ -43,7 +46,8 @@ class NewsContent extends StatelessWidget {
                   height: MediaQuery.of(context).size.height,
                   child: const SingleChildScrollView(
                     physics: AlwaysScrollableScrollPhysics(),
-                    child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(30.0),
                       child: Column(children: [
                         SizedBox(
                           height: 50,
@@ -57,7 +61,10 @@ class NewsContent extends StatelessWidget {
                         ),
                         Text(
                           "There aren't notifications waiting for you",
-                          style: TextStyle(fontSize: 25),
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ]),
                     ),

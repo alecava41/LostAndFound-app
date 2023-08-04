@@ -35,6 +35,7 @@ class ClaimSentContent extends StatelessWidget {
                             Text(
                               "You have not claimed any item yet",
                               style: TextStyle(fontSize: 20),
+                              textAlign: TextAlign.center,
                             ),
                           ]),
                         ),

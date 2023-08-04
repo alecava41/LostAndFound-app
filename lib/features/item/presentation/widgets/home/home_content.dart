@@ -6,6 +6,7 @@ import 'package:lost_and_found/features/item/presentation/widgets/home/found_ite
 import 'clickable_circular_button.dart';
 import 'lost_items_container.dart';
 
+// TODO: delete? Never used and duplicate of home
 class HomeContent extends StatelessWidget {
   const HomeContent({super.key});
 
@@ -45,7 +46,7 @@ class HomeContent extends StatelessWidget {
                               width: 25,
                             ),
                             ClickableCircularButton(
-                              icon: Icons.search,
+                              icon: Icons.connect_without_contact,
                               onPressed: () {
                                 // TODO navigate to "claims" screen
                               },
