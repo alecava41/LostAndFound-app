@@ -57,6 +57,7 @@ class SearchResultScreen extends StatelessWidget {
                             .map((item) =>
                             CustomCardSearch(
                                 id: item.id,
+                                hasImage: item.hasImage,
                                 text: item.title,
                                 type: item.type.name,
                                 owner: item.user.username,

@@ -1,17 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
 class CustomCardHome extends StatelessWidget {
   final int id;
+  final bool hasImage;
   final String text;
   final int claims;
   final String token;
 
-  const CustomCardHome({super.key, required this.id, required this.text, required this.claims, required this.token});
+  const CustomCardHome({super.key, required this.hasImage, required this.id, required this.text, required this.claims, required this.token});
+
+  // TODO: overflow somewhere
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +38,17 @@ class CustomCardHome extends StatelessWidget {
                     child: SizedBox(
                       height: 150.0,
                       width: 150.0,
-                      child: CachedNetworkImage(
+                      child: hasImage ?
+                      CachedNetworkImage(
                         imageUrl: "$baseUrl/api/items/$id/image",
                         fit: BoxFit.cover,
                         httpHeaders: {
                           "Authorization": "Bearer $token",
                         },
-                        placeholder: (context, _) => const CircularProgressIndicator(value: null),
-                        errorWidget: (context, url, error) => const Icon(Icons.error),
+                        placeholder: (context, _) => const CustomCircularProgress(size: 75.0),
+                        errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
                         imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-                      ),
+                      ) : Image.asset("assets/images/no-item.png"),
                     ),
                   ),
                 ),
@@ -52,6 +57,7 @@ class CustomCardHome extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // TODO: item title should be entirely readable (not "...")
                       Text(text, style: const TextStyle(fontSize: 16.0), overflow: TextOverflow.ellipsis),
                       const SizedBox(
                         height: 5,
@@ -72,7 +78,7 @@ class CustomCardHome extends StatelessWidget {
                                 size: 15,
                               ),
                               Text(
-                                " $claims new claim${claims > 1 ? "s" : ""}",
+                                " $claims claim${claims > 1 ? "s" : ""}",
                                 style: const TextStyle(
                                   fontSize: 14,
                                 ),
@@ -96,8 +102,8 @@ class CustomCardHome extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => ItemScreen(
-                                itemId: id,
-                              )));
+                            itemId: id,
+                          )));
                 },
                 borderRadius: BorderRadius.circular(24.0),
               ),

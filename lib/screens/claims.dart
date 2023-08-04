@@ -23,7 +23,7 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
         const ClaimedItemCard(
           itemImagePath: "assets/images/key.png",
           itemName: "Iphone sssssssssssssssssssssssssssssssss12",
-          userImagePath: "assets/images/no-image.png",
+          userImagePath: "assets/images/no-item.png",
           user: "Gsadsaaddasdasdsadsadassdsdasdsadsacefesads",
           onlyUser: false,
           open: true,claimAnswered: false, onlyItem: false,
@@ -39,7 +39,7 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
         const ClaimedItemCard(
           itemImagePath: "assets/images/key.png",
           itemName: "Iphone 12",
-          userImagePath: "assets/images/no-image.png",
+          userImagePath: "assets/images/no-item.png",
           user: "Gianni",
           onlyUser: false,
           open: true,claimAnswered: false, onlyItem: false,
@@ -47,7 +47,7 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
         const ClaimedItemCard(
           itemImagePath: "assets/images/key.png",
           itemName: "Iphone 12",
-          userImagePath: "assets/images/no-image.png",
+          userImagePath: "assets/images/no-item.png",
           user: "Gianni",
           onlyUser: false,
           open: true,claimAnswered: false, onlyItem: false,
@@ -173,7 +173,7 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
     ClaimedItemCard newClaim = const ClaimedItemCard(
       itemImagePath: "assets/images/key.png",
       itemName: "Iphone 12",
-      userImagePath: "assets/images/no-image.png",
+      userImagePath: "assets/images/no-item.png",
       user: "Gianni",
       onlyUser: false,
       open: false,
@@ -182,7 +182,7 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
     ClaimedStatusCard newUserClaim = const ClaimedStatusCard(
       itemImagePath: "assets/images/key.png",
       itemName: "Iphone 12",
-      userImagePath: "assets/images/no-image.png",
+      userImagePath: "assets/images/no-item.png",
       user: "Gianni",
       claimStatus: "ACCEPTED",
     );

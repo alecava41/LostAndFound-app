@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
 import '../../pages/item_page.dart';
@@ -11,9 +12,10 @@ class CustomCardSearch extends StatelessWidget {
   final String owner;
   final String type;
   final String token;
+  final bool hasImage;
 
   const CustomCardSearch(
-      {super.key, required this.id, required this.text, required this.type, required this.owner, required this.token});
+      {super.key, required this.hasImage, required this.id, required this.text, required this.type, required this.owner, required this.token});
 
   @override
   Widget build(BuildContext context) {
@@ -36,17 +38,17 @@ class CustomCardSearch extends StatelessWidget {
                     child: SizedBox(
                       height: 150.0,
                       width: 150.0,
-                      child: CachedNetworkImage(
+                      child: hasImage ? CachedNetworkImage(
                         imageUrl: "$baseUrl/api/items/$id/image",
                         fit: BoxFit.cover,
                         httpHeaders: {
                           "Authorization": "Bearer $token",
                         },
                         progressIndicatorBuilder: (context, url, downloadProgress) =>
-                            const CircularProgressIndicator(value: null),
-                        errorWidget: (context, url, error) => const Icon(Icons.error),
+                        const CustomCircularProgress(size: 75),
+                        errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
                         imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-                      ),
+                      ) : Image.asset("assets/images/no-item.png"),
                     ),
                   ),
                 ),
@@ -78,9 +80,10 @@ class CustomCardSearch extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ItemScreen(
-                            itemId: id,
-                          )));
+                          builder: (context) =>
+                              ItemScreen(
+                                itemId: id,
+                              )));
                 },
                 borderRadius: BorderRadius.circular(24.0),
               ),

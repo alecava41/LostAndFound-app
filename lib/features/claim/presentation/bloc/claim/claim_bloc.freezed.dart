@@ -414,6 +414,8 @@ mixin _$ClaimState {
   List<ClaimReceived> get claimsReceived => throw _privateConstructorUsedError;
   List<ClaimSent> get claimsSent => throw _privateConstructorUsedError;
   String get token => throw _privateConstructorUsedError;
+  bool get isLoadingReceived => throw _privateConstructorUsedError;
+  bool get isLoadingSent => throw _privateConstructorUsedError;
   Either<Failure, Success>? get loadFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
@@ -432,6 +434,8 @@ abstract class $ClaimStateCopyWith<$Res> {
       {List<ClaimReceived> claimsReceived,
       List<ClaimSent> claimsSent,
       String token,
+      bool isLoadingReceived,
+      bool isLoadingSent,
       Either<Failure, Success>? loadFailureOrSuccess});
 }
 
@@ -451,6 +455,8 @@ class _$ClaimStateCopyWithImpl<$Res, $Val extends ClaimState>
     Object? claimsReceived = null,
     Object? claimsSent = null,
     Object? token = null,
+    Object? isLoadingReceived = null,
+    Object? isLoadingSent = null,
     Object? loadFailureOrSuccess = freezed,
   }) {
     return _then(_value.copyWith(
@@ -466,6 +472,14 @@ class _$ClaimStateCopyWithImpl<$Res, $Val extends ClaimState>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoadingReceived: null == isLoadingReceived
+          ? _value.isLoadingReceived
+          : isLoadingReceived // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingSent: null == isLoadingSent
+          ? _value.isLoadingSent
+          : isLoadingSent // ignore: cast_nullable_to_non_nullable
+              as bool,
       loadFailureOrSuccess: freezed == loadFailureOrSuccess
           ? _value.loadFailureOrSuccess
           : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -486,6 +500,8 @@ abstract class _$$_ClaimStateCopyWith<$Res>
       {List<ClaimReceived> claimsReceived,
       List<ClaimSent> claimsSent,
       String token,
+      bool isLoadingReceived,
+      bool isLoadingSent,
       Either<Failure, Success>? loadFailureOrSuccess});
 }
 
@@ -503,6 +519,8 @@ class __$$_ClaimStateCopyWithImpl<$Res>
     Object? claimsReceived = null,
     Object? claimsSent = null,
     Object? token = null,
+    Object? isLoadingReceived = null,
+    Object? isLoadingSent = null,
     Object? loadFailureOrSuccess = freezed,
   }) {
     return _then(_$_ClaimState(
@@ -518,6 +536,14 @@ class __$$_ClaimStateCopyWithImpl<$Res>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoadingReceived: null == isLoadingReceived
+          ? _value.isLoadingReceived
+          : isLoadingReceived // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingSent: null == isLoadingSent
+          ? _value.isLoadingSent
+          : isLoadingSent // ignore: cast_nullable_to_non_nullable
+              as bool,
       loadFailureOrSuccess: freezed == loadFailureOrSuccess
           ? _value.loadFailureOrSuccess
           : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -532,7 +558,9 @@ class _$_ClaimState implements _ClaimState {
   const _$_ClaimState(
       {required final List<ClaimReceived> claimsReceived,
       required final List<ClaimSent> claimsSent,
-      required this.token,
+      this.token = "",
+      this.isLoadingReceived = false,
+      this.isLoadingSent = false,
       this.loadFailureOrSuccess})
       : _claimsReceived = claimsReceived,
         _claimsSent = claimsSent;
@@ -554,13 +582,20 @@ class _$_ClaimState implements _ClaimState {
   }
 
   @override
+  @JsonKey()
   final String token;
+  @override
+  @JsonKey()
+  final bool isLoadingReceived;
+  @override
+  @JsonKey()
+  final bool isLoadingSent;
   @override
   final Either<Failure, Success>? loadFailureOrSuccess;
 
   @override
   String toString() {
-    return 'ClaimState(claimsReceived: $claimsReceived, claimsSent: $claimsSent, token: $token, loadFailureOrSuccess: $loadFailureOrSuccess)';
+    return 'ClaimState(claimsReceived: $claimsReceived, claimsSent: $claimsSent, token: $token, isLoadingReceived: $isLoadingReceived, isLoadingSent: $isLoadingSent, loadFailureOrSuccess: $loadFailureOrSuccess)';
   }
 
   @override
@@ -573,6 +608,10 @@ class _$_ClaimState implements _ClaimState {
             const DeepCollectionEquality()
                 .equals(other._claimsSent, _claimsSent) &&
             (identical(other.token, token) || other.token == token) &&
+            (identical(other.isLoadingReceived, isLoadingReceived) ||
+                other.isLoadingReceived == isLoadingReceived) &&
+            (identical(other.isLoadingSent, isLoadingSent) ||
+                other.isLoadingSent == isLoadingSent) &&
             (identical(other.loadFailureOrSuccess, loadFailureOrSuccess) ||
                 other.loadFailureOrSuccess == loadFailureOrSuccess));
   }
@@ -583,6 +622,8 @@ class _$_ClaimState implements _ClaimState {
       const DeepCollectionEquality().hash(_claimsReceived),
       const DeepCollectionEquality().hash(_claimsSent),
       token,
+      isLoadingReceived,
+      isLoadingSent,
       loadFailureOrSuccess);
 
   @JsonKey(ignore: true)
@@ -596,7 +637,9 @@ abstract class _ClaimState implements ClaimState {
   const factory _ClaimState(
       {required final List<ClaimReceived> claimsReceived,
       required final List<ClaimSent> claimsSent,
-      required final String token,
+      final String token,
+      final bool isLoadingReceived,
+      final bool isLoadingSent,
       final Either<Failure, Success>? loadFailureOrSuccess}) = _$_ClaimState;
 
   @override
@@ -605,6 +648,10 @@ abstract class _ClaimState implements ClaimState {
   List<ClaimSent> get claimsSent;
   @override
   String get token;
+  @override
+  bool get isLoadingReceived;
+  @override
+  bool get isLoadingSent;
   @override
   Either<Failure, Success>? get loadFailureOrSuccess;
   @override

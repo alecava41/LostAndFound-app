@@ -10,6 +10,7 @@ class SearchItemDto with _$SearchItemDto {
     required int id,
     required String title,
     required String type,
+    required bool image,
     required UserDto user
   }) = $SearchItemDto;
 

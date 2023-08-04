@@ -22,6 +22,7 @@ ItemDto _$ItemDtoFromJson(Map<String, dynamic> json) {
 mixin _$ItemDto {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  bool get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +34,7 @@ abstract class $ItemDtoCopyWith<$Res> {
   factory $ItemDtoCopyWith(ItemDto value, $Res Function(ItemDto) then) =
       _$ItemDtoCopyWithImpl<$Res, ItemDto>;
   @useResult
-  $Res call({int id, String title});
+  $Res call({int id, String title, bool image});
 }
 
 /// @nodoc
@@ -51,6 +52,7 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
   $Res call({
     Object? id = null,
     Object? title = null,
+    Object? image = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -61,6 +63,10 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -72,7 +78,7 @@ abstract class _$$$ItemDtoCopyWith<$Res> implements $ItemDtoCopyWith<$Res> {
       __$$$ItemDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title});
+  $Res call({int id, String title, bool image});
 }
 
 /// @nodoc
@@ -87,6 +93,7 @@ class __$$$ItemDtoCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? title = null,
+    Object? image = null,
   }) {
     return _then(_$$ItemDto(
       id: null == id
@@ -97,6 +104,10 @@ class __$$$ItemDtoCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -104,7 +115,8 @@ class __$$$ItemDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$$ItemDto implements $ItemDto {
-  const _$$ItemDto({required this.id, required this.title});
+  const _$$ItemDto(
+      {required this.id, required this.title, required this.image});
 
   factory _$$ItemDto.fromJson(Map<String, dynamic> json) =>
       _$$$ItemDtoFromJson(json);
@@ -113,10 +125,12 @@ class _$$ItemDto implements $ItemDto {
   final int id;
   @override
   final String title;
+  @override
+  final bool image;
 
   @override
   String toString() {
-    return 'ItemDto(id: $id, title: $title)';
+    return 'ItemDto(id: $id, title: $title, image: $image)';
   }
 
   @override
@@ -125,12 +139,13 @@ class _$$ItemDto implements $ItemDto {
         (other.runtimeType == runtimeType &&
             other is _$$ItemDto &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.title, title) || other.title == title));
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title);
+  int get hashCode => Object.hash(runtimeType, id, title, image);
 
   @JsonKey(ignore: true)
   @override
@@ -147,8 +162,10 @@ class _$$ItemDto implements $ItemDto {
 }
 
 abstract class $ItemDto implements ItemDto {
-  const factory $ItemDto({required final int id, required final String title}) =
-      _$$ItemDto;
+  const factory $ItemDto(
+      {required final int id,
+      required final String title,
+      required final bool image}) = _$$ItemDto;
 
   factory $ItemDto.fromJson(Map<String, dynamic> json) = _$$ItemDto.fromJson;
 
@@ -156,6 +173,8 @@ abstract class $ItemDto implements ItemDto {
   int get id;
   @override
   String get title;
+  @override
+  bool get image;
   @override
   @JsonKey(ignore: true)
   _$$$ItemDtoCopyWith<_$$ItemDto> get copyWith =>

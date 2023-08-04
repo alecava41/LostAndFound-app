@@ -1,17 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 
 class ImageDialogWidget extends StatelessWidget {
   final String imageUrl;
   final String token;
   final Widget child;
+  final String errorAsset;
 
   const ImageDialogWidget({
     super.key,
     required this.imageUrl,
     required this.token,
     required this.child,
+    required this.errorAsset
   });
 
   @override
@@ -23,9 +26,7 @@ class ImageDialogWidget extends StatelessWidget {
             builder: (BuildContext context) {
               return Dialog(
                 child: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
+                  onTap: () => Navigator.pop(context),
                   child: CachedNetworkImage(
                     imageUrl: imageUrl,
                     fit: BoxFit.cover,
@@ -33,8 +34,8 @@ class ImageDialogWidget extends StatelessWidget {
                       "Authorization": "Bearer $token",
                     },
                     progressIndicatorBuilder: (context, url, downloadProgress) =>
-                        const CircularProgressIndicator(value: null),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    const CustomCircularProgress(size: 100),
+                    errorWidget: (context, url, error) => Image.asset(errorAsset),
                     imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                   ),
                 ),

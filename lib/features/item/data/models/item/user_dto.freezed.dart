@@ -22,6 +22,7 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
 mixin _$UserDto {
   int get id => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
+  bool get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +34,7 @@ abstract class $UserDtoCopyWith<$Res> {
   factory $UserDtoCopyWith(UserDto value, $Res Function(UserDto) then) =
       _$UserDtoCopyWithImpl<$Res, UserDto>;
   @useResult
-  $Res call({int id, String username});
+  $Res call({int id, String username, bool image});
 }
 
 /// @nodoc
@@ -51,6 +52,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
   $Res call({
     Object? id = null,
     Object? username = null,
+    Object? image = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -61,6 +63,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -72,7 +78,7 @@ abstract class _$$$UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       __$$$UserDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String username});
+  $Res call({int id, String username, bool image});
 }
 
 /// @nodoc
@@ -87,6 +93,7 @@ class __$$$UserDtoCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? username = null,
+    Object? image = null,
   }) {
     return _then(_$$UserDto(
       id: null == id
@@ -97,6 +104,10 @@ class __$$$UserDtoCopyWithImpl<$Res>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -104,7 +115,8 @@ class __$$$UserDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$$UserDto implements $UserDto {
-  const _$$UserDto({required this.id, required this.username});
+  const _$$UserDto(
+      {required this.id, required this.username, required this.image});
 
   factory _$$UserDto.fromJson(Map<String, dynamic> json) =>
       _$$$UserDtoFromJson(json);
@@ -113,10 +125,12 @@ class _$$UserDto implements $UserDto {
   final int id;
   @override
   final String username;
+  @override
+  final bool image;
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username)';
+    return 'UserDto(id: $id, username: $username, image: $image)';
   }
 
   @override
@@ -126,12 +140,13 @@ class _$$UserDto implements $UserDto {
             other is _$$UserDto &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.username, username) ||
-                other.username == username));
+                other.username == username) &&
+            (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, username);
+  int get hashCode => Object.hash(runtimeType, id, username, image);
 
   @JsonKey(ignore: true)
   @override
@@ -149,7 +164,9 @@ class _$$UserDto implements $UserDto {
 
 abstract class $UserDto implements UserDto {
   const factory $UserDto(
-      {required final int id, required final String username}) = _$$UserDto;
+      {required final int id,
+      required final String username,
+      required final bool image}) = _$$UserDto;
 
   factory $UserDto.fromJson(Map<String, dynamic> json) = _$$UserDto.fromJson;
 
@@ -157,6 +174,8 @@ abstract class $UserDto implements UserDto {
   int get id;
   @override
   String get username;
+  @override
+  bool get image;
   @override
   @JsonKey(ignore: true)
   _$$$UserDtoCopyWith<_$$UserDto> get copyWith =>

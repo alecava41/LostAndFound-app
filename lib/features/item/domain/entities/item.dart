@@ -7,7 +7,9 @@ class Item {
   final int id;
   final String title;
   final ItemType type;
-  final String position;
+  final String address;
+  final Position position;
+  final bool hasImage;
   final DateTime insertion;
   final String? question;
   final User user;
@@ -15,25 +17,34 @@ class Item {
   final List<ClaimReceived>? claims;
   final ClaimSent? userClaim;
 
-  const Item({
-    required this.id,
-    required this.title,
-    required this.type,
-    required this.position,
-    required this.insertion,
-    required this.question,
-    required this.user,
-    required this.category,
-    required this.claims,
-    required this.userClaim
-  });
+  const Item(
+      {required this.id,
+      required this.title,
+      required this.type,
+      required this.address,
+      required this.position,
+      required this.hasImage,
+      required this.insertion,
+      required this.question,
+      required this.user,
+      required this.category,
+      required this.claims,
+      required this.userClaim});
+}
+
+class Position {
+  final double X;
+  final double Y;
+
+  Position({required this.X, required this.Y});
 }
 
 class User {
   final int id;
   final String username;
+  final bool hasImage;
 
-  const User({required this.id, required this.username});
+  const User({required this.id, required this.username, required this.hasImage});
 }
 
 class ClaimReceived {
@@ -56,8 +67,5 @@ class ClaimSent {
   final int id;
   final ClaimStatus status;
 
-  ClaimSent({
-    required this.id,
-    required this.status
-  });
+  ClaimSent({required this.id, required this.status});
 }

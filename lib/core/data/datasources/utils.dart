@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import '../../status/exceptions.dart';
 
@@ -42,6 +44,8 @@ Future<T> handleError<T>(Object obj) {
           throw Exception();
       }
     default:
+      log(obj.toString());
+      log(obj.runtimeType.toString());
       throw Exception();
   }
 }

@@ -14,10 +14,13 @@ import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/domain/entities/news.dart';
 import 'package:lost_and_found/features/item/domain/repositories/item_repository.dart';
 import 'package:lost_and_found/features/item/domain/usecases/create_item_usecase.dart';
+import 'package:lost_and_found/features/item/domain/usecases/delete_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_items_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_notifications_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/search_items_usecase.dart';
+import 'package:lost_and_found/features/item/domain/usecases/solve_item_usecase.dart';
+import 'package:lost_and_found/features/item/domain/usecases/update_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/upload_item_image_usecase.dart';
 
 import '../../../../core/data/repositories/utils.dart';
@@ -155,6 +158,54 @@ class ItemRepositoryImpl implements ItemRepository {
       if (await _networkInfo.isConnected) {
         final session = await _storage.getSessionInformation();
         await _dataSource.uploadItemImage(params, session.user);
+
+        return const Right(Success.genericSuccess());
+      } else {
+        return const Left(Failure.networkFailure());
+      }
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> solveItem(SolveItemParams params) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        final session = await _storage.getSessionInformation();
+        await _dataSource.solveItem(params, session.user);
+
+        return const Right(Success.genericSuccess());
+      } else {
+        return const Left(Failure.networkFailure());
+      }
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> deleteItem(DeleteItemParams params) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        final session = await _storage.getSessionInformation();
+        await _dataSource.deleteItem(params, session.user);
+
+        return const Right(Success.genericSuccess());
+      } else {
+        return const Left(Failure.networkFailure());
+      }
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> updateItem(UpdateItemParams params) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        final session = await _storage.getSessionInformation();
+        await _dataSource.updateItem(params, session.user);
 
         return const Right(Success.genericSuccess());
       } else {

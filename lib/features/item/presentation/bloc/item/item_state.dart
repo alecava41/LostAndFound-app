@@ -7,7 +7,10 @@ class ItemState with _$ItemState {
     required int userId,
     required String token,
     @Default(true) bool isLoading,
+
     Either<Failure, Success>? loadFailureOrSuccess,
+    Either<Failure, Success>? solveFailureOrSuccess,
+    Either<Failure, Success>? deleteFailureOrSuccess,
   }) = _ItemState;
 
   factory ItemState.initial() => const ItemState(

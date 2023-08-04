@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../utils/colors.dart';
+import '../../../../../utils/colors.dart';
 
 // ignore: must_be_immutable
 class UploadImageForm extends StatelessWidget {
@@ -56,7 +56,7 @@ class UploadImageForm extends StatelessWidget {
                               ),
                             ),
                           )
-                        : image == null // TODO: why?
+                        : (image == null // TODO: why?
                             ? Image.asset(
                                 imagePath!,
                                 fit: BoxFit.cover,
@@ -66,7 +66,7 @@ class UploadImageForm extends StatelessWidget {
                                     File(image!.path),
                                     fit: BoxFit.cover,
                                   )
-                                : Container()),
+                                : Container())),
                   ),
                   if (image != null || imagePath != null)
                     Positioned(

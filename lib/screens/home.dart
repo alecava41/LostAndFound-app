@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _foundChecked = false;
   bool _lostChecked = false;
   LatLng? selectedPosition;
-  String userImagePath = "assets/images/no-image.png";
+  String userImagePath = "assets/images/no-item.png";
   String userName = "Alessandro";
   XFile? userImageFile;
   late List<InboxItem> inboxItems;
@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     inboxItems = [
       InboxItem(
-        userImagePath: "assets/images/no-image.png",
+        userImagePath: "assets/images/no-item.png",
         userName: "Maria",
         lastMessage: "Thank you!",
         open: true,
@@ -52,14 +52,14 @@ class _HomeScreenState extends State<HomeScreen> {
               MaterialPageRoute(
                 builder: (context) => const ChatScreen(
                     userTo: 'Maria',
-                    userToImage: 'assets/images/no-image.png',
+                    userToImage: 'assets/images/no-item.png',
                     userHasDoneClaim: false,
                     userHasRecivedClaim: true),
               ));
         },
       ),
       InboxItem(
-        userImagePath: "assets/images/no-image.png",
+        userImagePath: "assets/images/no-item.png",
         userName: "Maria",
         lastMessage: "Thank you!",
         open: false,
@@ -69,14 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
               MaterialPageRoute(
                 builder: (context) => const ChatScreen(
                     userTo: 'Maria',
-                    userToImage: 'assets/images/no-image.png',
+                    userToImage: 'assets/images/no-item.png',
                     userHasDoneClaim: true,
                     userHasRecivedClaim: false),
               ));
         },
       ),
       InboxItem(
-        userImagePath: "assets/images/no-image.png",
+        userImagePath: "assets/images/no-item.png",
         userName: "Maria",
         lastMessage: "Thank you!",
         open: true,
@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
               MaterialPageRoute(
                 builder: (context) => const ChatScreen(
                   userTo: 'Maria',
-                  userToImage: 'assets/images/no-image.png',
+                  userToImage: 'assets/images/no-item.png',
                   userHasDoneClaim: true,
                   userHasRecivedClaim: false,
                 ),
@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemImagePath: "assets/images/key.png",
                           itemName:
                               "Iphone sssssssssssssssssssssssssssssssss12",
-                          userImagePath: "assets/images/no-image.png",
+                          userImagePath: "assets/images/no-item.png",
                           user: "Gsadsaaddasdasdsadsadassdsdasdsadsacefesads",
                           onlyUser: true,
                           open: true,
@@ -134,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ClaimedItemCard(
                           itemImagePath: "assets/images/key.png",
                           itemName: "Iphone 12",
-                          userImagePath: "assets/images/no-image.png",
+                          userImagePath: "assets/images/no-item.png",
                           user: "Gianni",
                           onlyUser: true,
                           open: true,
@@ -144,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ClaimedItemCard(
                           itemImagePath: "assets/images/key.png",
                           itemName: "Iphone 12",
-                          userImagePath: "assets/images/no-image.png",
+                          userImagePath: "assets/images/no-item.png",
                           user: "Gianni",
                           onlyUser: true,
                           open: true,
@@ -407,7 +407,7 @@ class _HomeScreenState extends State<HomeScreen> {
       inboxItems.insert(
         0,
         InboxItem(
-          userImagePath: "assets/images/no-image.png",
+          userImagePath: "assets/images/no-item.png",
           userName: "Maria",
           lastMessage: "Thank you!",
           open: false,
@@ -417,7 +417,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 MaterialPageRoute(
                   builder: (context) => const ChatScreen(
                     userTo: 'Maria',
-                    userToImage: 'assets/images/no-image.png',
+                    userToImage: 'assets/images/no-item.png',
                     userHasDoneClaim: false,
                     userHasRecivedClaim: false,
                   ),

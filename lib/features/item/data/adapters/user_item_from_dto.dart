@@ -3,10 +3,6 @@ import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 
 extension UserItemFromDto on UserItemDto {
   UserItem toDomain() {
-    return UserItem(
-        id: id,
-        title: title,
-        claims: claims
-    );
+    return UserItem(id: id, title: title, claims: claims, hasImage: image);
   }
 }

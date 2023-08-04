@@ -37,15 +37,20 @@ import 'package:lost_and_found/features/item/data/datasources/read_news_datasour
 import 'package:lost_and_found/features/item/data/repositories/item_repository_impl.dart';
 import 'package:lost_and_found/features/item/domain/repositories/item_repository.dart';
 import 'package:lost_and_found/features/item/domain/usecases/create_item_usecase.dart';
+import 'package:lost_and_found/features/item/domain/usecases/delete_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_items_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_notifications_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/search_items_usecase.dart';
+import 'package:lost_and_found/features/item/domain/usecases/solve_item_usecase.dart';
+import 'package:lost_and_found/features/item/domain/usecases/update_item_usecase.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/item/item_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/notification/news_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/search/search_bloc.dart';
+import 'package:lost_and_found/features/item/presentation/bloc/update_item/update_item_bloc.dart';
 
+import 'core/data/datasources/database/database.dart';
 import 'core/data/datasources/http_interceptor.dart';
 import 'core/data/secure_storage/secure_storage.dart';
 import 'core/domain/repositories/category_repository.dart';
@@ -83,8 +88,16 @@ Future<void> init() async {
   sl.registerFactory(() => NewsBloc(getUserNotificationsUseCase: sl(), secureStorage: sl()));
   sl.registerFactory(
       () => SearchBloc(searchItemsUseCase: sl(), secureStorage: sl(), getAddressFromPositionUseCase: sl()));
-  sl.registerFactory(() => ItemBloc(getItemUseCase: sl(), secureStorage: sl()));
-  sl.registerFactory(() => InsertItemBloc(createItemUseCase: sl(), getAddressFromPositionUseCase: sl(), uploadItemImageUseCase: sl()));
+  sl.registerFactory(
+      () => ItemBloc(getItemUseCase: sl(), secureStorage: sl(), solveItemUseCase: sl(), deleteItemUseCase: sl()));
+  sl.registerFactory(
+      () => InsertItemBloc(createItemUseCase: sl(), getAddressFromPositionUseCase: sl(), uploadItemImageUseCase: sl()));
+  sl.registerLazySingleton(() => UpdateItemBloc(
+      getItemUseCase: sl(),
+      uploadItemImageUseCase: sl(),
+      updateItemUseCase: sl(),
+      getAddressFromPositionUseCase: sl(),
+      secureStorage: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetUserItemsUseCase(sl()));
@@ -93,6 +106,9 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetItemUseCase(sl()));
   sl.registerLazySingleton(() => CreateItemUseCase(sl()));
   sl.registerLazySingleton(() => UploadItemImageUseCase(sl()));
+  sl.registerLazySingleton(() => SolveItemUseCase(sl()));
+  sl.registerLazySingleton(() => DeleteItemUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateItemUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<ItemRepository>(() => ItemRepositoryImpl(
@@ -100,7 +116,7 @@ Future<void> init() async {
 
   // Data source
   sl.registerLazySingleton<ItemDataSource>(() => ItemDataSourceImpl(sl()));
-  sl.registerLazySingleton<ReadNewsDataSource>(() => ReadNewsDataSourceImpl());
+  sl.registerLazySingleton<ReadNewsDataSource>(() => ReadNewsDataSourceImpl(database: sl()));
 
   // ** Feature - Claim **
   // BLoC
@@ -133,7 +149,7 @@ Future<void> init() async {
   // Data sources
   sl.registerLazySingleton<PositionDataSource>(() => PositionDataSourceImpl(sl()));
   sl.registerLazySingleton<CategoryDataSource>(() => CategoryDataSourceImpl(sl()));
-  sl.registerLazySingleton<ReadClaimDataSource>(() => ReadClaimDataSourceImpl());
+  sl.registerLazySingleton<ReadClaimDataSource>(() => ReadClaimDataSourceImpl(database: sl()));
 
   // Storage
   sl.registerLazySingleton<SecureStorage>(() => SecureStorageImpl(sl()));
@@ -143,6 +159,10 @@ Future<void> init() async {
 
   // Connection checker
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl());
+
+  // Database
+  final database = await $FloorAppDatabase.databaseBuilder('lostandfound.db').build();
+  sl.registerLazySingleton(() => database);
 
   // HTTP clients
   final dio = Dio();

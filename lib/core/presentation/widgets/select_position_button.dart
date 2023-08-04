@@ -7,11 +7,14 @@ import '../../../utils/colors.dart';
 class SelectPositionButton extends StatelessWidget {
   final String address;
   final ValueChanged<LatLng?> onPositionSelected;
+  final LatLng startingPosition;
 
   const SelectPositionButton({
     Key? key,
     required this.address,
     required this.onPositionSelected,
+    this.startingPosition =
+        const LatLng(43.102107520506756, 12.349117446797067),
   }) : super(key: key);
 
   @override
@@ -31,7 +34,9 @@ class SelectPositionButton extends StatelessWidget {
               final selectedPos = await Navigator.push<LatLng>(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const SelectPositionScreen()),
+                    builder: (context) => SelectPositionScreen(
+                          startingPosition: startingPosition,
+                        )),
               );
 
               onPositionSelected(selectedPos);

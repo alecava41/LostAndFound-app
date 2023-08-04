@@ -45,6 +45,8 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
   // TODO handle initial loading gracefully (show loading bar, then results)
 
   Future<void> _onClaimCreated(Emitter<ClaimState> emit) async {
+    emit(state.copyWith(isLoadingReceived: true, isLoadingSent: true));
+
     Either<Failure, Success>? loadFailureOrSuccess;
 
     final receivedClaimsResponse = await _getReceivedClaimsUseCase(GetReceivedClaimsParams(last: 0));
@@ -63,11 +65,15 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
           claimsReceived: receivedClaimsResponse.getOrElse(() => []),
           claimsSent: sentClaimsResponse.getOrElse(() => []),
           loadFailureOrSuccess: loadFailureOrSuccess,
-          token: session.token),
+          token: session.token,
+          isLoadingReceived: false,
+          isLoadingSent: false),
     );
   }
 
   Future<void> _onReceivedClaimRefreshed(Emitter<ClaimState> emit) async {
+    emit(state.copyWith(isLoadingReceived: true));
+
     Either<Failure, Success>? loadFailureOrSuccess;
 
     final receivedClaimsResponse = await _getReceivedClaimsUseCase(GetReceivedClaimsParams(last: 0));
@@ -77,11 +83,15 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
 
     emit(
       state.copyWith(
-          claimsReceived: receivedClaimsResponse.getOrElse(() => []), loadFailureOrSuccess: loadFailureOrSuccess),
+          isLoadingReceived: false,
+          claimsReceived: receivedClaimsResponse.getOrElse(() => []),
+          loadFailureOrSuccess: loadFailureOrSuccess),
     );
   }
 
   Future<void> _onSentClaimRefreshed(Emitter<ClaimState> emit) async {
+    emit(state.copyWith(isLoadingSent: true));
+
     Either<Failure, Success>? loadFailureOrSuccess;
 
     final sentClaimsResponse = await _getSentClaimsUseCase(GetSentClaimsParams(last: 0));
@@ -90,7 +100,10 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
         (success) => loadFailureOrSuccess = const Right(Success.genericSuccess()));
 
     emit(
-      state.copyWith(claimsSent: sentClaimsResponse.getOrElse(() => []), loadFailureOrSuccess: loadFailureOrSuccess),
+      state.copyWith(
+          isLoadingSent: false,
+          claimsSent: sentClaimsResponse.getOrElse(() => []),
+          loadFailureOrSuccess: loadFailureOrSuccess),
     );
   }
 }

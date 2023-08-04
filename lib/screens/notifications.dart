@@ -119,7 +119,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     // Simulate an asynchronous operation for page refreshing
     await Future.delayed(Duration(seconds: 2));
     CustomNotification newNotificaion = CustomNotification(
-      userPhotoimagePath: "assets/images/no-image.png",
+      userPhotoimagePath: "assets/images/no-item.png",
       fromUser: "Maria",
       notificationType: 'objfound',
       open: false,

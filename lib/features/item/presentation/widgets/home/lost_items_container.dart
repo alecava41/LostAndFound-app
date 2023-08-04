@@ -34,6 +34,7 @@ class LostItemsContainer extends StatelessWidget {
                                   text: item.title,
                                   claims: item.claims,
                                   token: state.token,
+                                  hasImage: item.hasImage,
                                 ))
                             .toList(),
                       )),

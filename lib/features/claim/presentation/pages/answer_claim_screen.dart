@@ -4,6 +4,7 @@ import 'package:lost_and_found/core/domain/entities/claim_status.dart';
 import 'package:lost_and_found/features/claim/presentation/bloc/answer_claim/answer_claim_bloc.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
+import '../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../core/presentation/widgets/large_green_button.dart';
 import '../../../../injection_container.dart';
 import '../widgets/claimed_item_info.dart';
@@ -82,9 +83,7 @@ class AnswerClaimScreen extends StatelessWidget {
                   }
                 },
                 builder: (ctx, state) => state.isLoading
-                    ? const CircularProgressIndicator(
-                        value: null,
-                      )
+                    ? const CustomCircularProgress(size: 100)
                     : SingleChildScrollView(
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),

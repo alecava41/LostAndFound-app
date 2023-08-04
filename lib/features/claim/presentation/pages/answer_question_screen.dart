@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../core/presentation/widgets/insert_string_form.dart';
 import '../../../../core/presentation/widgets/large_green_button.dart';
 import '../../../../injection_container.dart';
@@ -53,6 +54,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                                 ),
                               )
                             },
+                        // TODO: Navigate away?
                         (_) => {});
                   }
 
@@ -80,9 +82,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                   }
                 },
                 builder: (ctx, state) => state.isLoading
-                    ? const CircularProgressIndicator(
-                        value: null,
-                      )
+                    ? const CustomCircularProgress(size: 100)
                     : SingleChildScrollView(
                         child: Padding(
                         padding: const EdgeInsets.all(12.0),

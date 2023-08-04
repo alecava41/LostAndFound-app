@@ -9,7 +9,9 @@ import 'package:lost_and_found/core/presentation/select_position/bloc/select_pos
 import '../../../injection_container.dart';
 
 class SelectPositionScreen extends StatefulWidget {
-  const SelectPositionScreen({super.key});
+  final LatLng startingPosition;
+
+  const SelectPositionScreen({super.key, required this.startingPosition});
 
   @override
   State<SelectPositionScreen> createState() => _SelectPositionScreenState();
@@ -19,8 +21,8 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
     with TickerProviderStateMixin {
   late StreamSubscription subscription;
   bool isAlertSet = false;
-  LatLng center = const LatLng(43.102107520506756, 12.349117446797067);
-  LatLng markerPos = const LatLng(43.102107520506756, 12.349117446797067);
+  late LatLng center = widget.startingPosition;
+  late LatLng markerPos = widget.startingPosition;
 
   late final AnimatedMapController mapController = AnimatedMapController(
       vsync: this, duration: const Duration(milliseconds: 3000));

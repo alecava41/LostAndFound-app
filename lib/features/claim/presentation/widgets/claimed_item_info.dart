@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../core/presentation/widgets/circular_image_avatar.dart';
@@ -32,9 +33,11 @@ class ClaimedItemInfo extends StatelessWidget {
         SizedBox(
           width: 150,
           height: 150,
-          child: ImageDialogWidget(
+          child: item.hasImage ?
+          ImageDialogWidget(
               imageUrl: itemUrl,
               token: token,
+              errorAsset: 'assets/images/no-item.png',
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: CachedNetworkImage(
@@ -43,11 +46,11 @@ class ClaimedItemInfo extends StatelessWidget {
                   httpHeaders: {
                     "Authorization": "Bearer $token",
                   },
-                  placeholder: (context, _) => const CircularProgressIndicator(value: null),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  placeholder: (context, _) => const CustomCircularProgress(size: 75),
+                  errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
                   imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                 ),
-              )),
+              )) : Image.asset("assets/images/no-item.png"),
         ),
         Expanded(
           child: SizedBox(
@@ -75,14 +78,24 @@ class ClaimedItemInfo extends StatelessWidget {
                       ),
                       Row(
                         children: [
+                          item.user.hasImage ?
                           ImageDialogWidget(
                             imageUrl: userUrl,
                             token: token,
+                            errorAsset: 'assets/images/no-user.jpg',
                             child: CircularImage(
                               radius: 25,
                               token: token,
                               imageUrl: userUrl,
+                              hasImage: item.user.hasImage,
+                              errorAsset: "assets/images/no-user.jpg",
                             ),
+                          ) : CircularImage(
+                            radius: 25,
+                            token: token,
+                            imageUrl: userUrl,
+                            hasImage: false,
+                            errorAsset: "assets/images/no-user.jpg",
                           ),
                           const SizedBox(
                             width: 8,

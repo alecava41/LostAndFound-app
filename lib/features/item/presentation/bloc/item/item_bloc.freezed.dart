@@ -20,18 +20,24 @@ mixin _$ItemEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(int id) itemCreated,
     required TResult Function() itemRefreshed,
+    required TResult Function() itemSolved,
+    required TResult Function() itemDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? itemCreated,
     TResult? Function()? itemRefreshed,
+    TResult? Function()? itemSolved,
+    TResult? Function()? itemDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? itemCreated,
     TResult Function()? itemRefreshed,
+    TResult Function()? itemSolved,
+    TResult Function()? itemDeleted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +45,24 @@ mixin _$ItemEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_ItemCreated value) itemCreated,
     required TResult Function(_ItemRefreshed value) itemRefreshed,
+    required TResult Function(_ItemSolved value) itemSolved,
+    required TResult Function(_ItemDeleted value) itemDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ItemCreated value)? itemCreated,
     TResult? Function(_ItemRefreshed value)? itemRefreshed,
+    TResult? Function(_ItemSolved value)? itemSolved,
+    TResult? Function(_ItemDeleted value)? itemDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ItemCreated value)? itemCreated,
     TResult Function(_ItemRefreshed value)? itemRefreshed,
+    TResult Function(_ItemSolved value)? itemSolved,
+    TResult Function(_ItemDeleted value)? itemDeleted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -139,6 +151,8 @@ class _$_ItemCreated implements _ItemCreated {
   TResult when<TResult extends Object?>({
     required TResult Function(int id) itemCreated,
     required TResult Function() itemRefreshed,
+    required TResult Function() itemSolved,
+    required TResult Function() itemDeleted,
   }) {
     return itemCreated(id);
   }
@@ -148,6 +162,8 @@ class _$_ItemCreated implements _ItemCreated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? itemCreated,
     TResult? Function()? itemRefreshed,
+    TResult? Function()? itemSolved,
+    TResult? Function()? itemDeleted,
   }) {
     return itemCreated?.call(id);
   }
@@ -157,6 +173,8 @@ class _$_ItemCreated implements _ItemCreated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? itemCreated,
     TResult Function()? itemRefreshed,
+    TResult Function()? itemSolved,
+    TResult Function()? itemDeleted,
     required TResult orElse(),
   }) {
     if (itemCreated != null) {
@@ -170,6 +188,8 @@ class _$_ItemCreated implements _ItemCreated {
   TResult map<TResult extends Object?>({
     required TResult Function(_ItemCreated value) itemCreated,
     required TResult Function(_ItemRefreshed value) itemRefreshed,
+    required TResult Function(_ItemSolved value) itemSolved,
+    required TResult Function(_ItemDeleted value) itemDeleted,
   }) {
     return itemCreated(this);
   }
@@ -179,6 +199,8 @@ class _$_ItemCreated implements _ItemCreated {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ItemCreated value)? itemCreated,
     TResult? Function(_ItemRefreshed value)? itemRefreshed,
+    TResult? Function(_ItemSolved value)? itemSolved,
+    TResult? Function(_ItemDeleted value)? itemDeleted,
   }) {
     return itemCreated?.call(this);
   }
@@ -188,6 +210,8 @@ class _$_ItemCreated implements _ItemCreated {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ItemCreated value)? itemCreated,
     TResult Function(_ItemRefreshed value)? itemRefreshed,
+    TResult Function(_ItemSolved value)? itemSolved,
+    TResult Function(_ItemDeleted value)? itemDeleted,
     required TResult orElse(),
   }) {
     if (itemCreated != null) {
@@ -246,6 +270,8 @@ class _$_ItemRefreshed implements _ItemRefreshed {
   TResult when<TResult extends Object?>({
     required TResult Function(int id) itemCreated,
     required TResult Function() itemRefreshed,
+    required TResult Function() itemSolved,
+    required TResult Function() itemDeleted,
   }) {
     return itemRefreshed();
   }
@@ -255,6 +281,8 @@ class _$_ItemRefreshed implements _ItemRefreshed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? itemCreated,
     TResult? Function()? itemRefreshed,
+    TResult? Function()? itemSolved,
+    TResult? Function()? itemDeleted,
   }) {
     return itemRefreshed?.call();
   }
@@ -264,6 +292,8 @@ class _$_ItemRefreshed implements _ItemRefreshed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? itemCreated,
     TResult Function()? itemRefreshed,
+    TResult Function()? itemSolved,
+    TResult Function()? itemDeleted,
     required TResult orElse(),
   }) {
     if (itemRefreshed != null) {
@@ -277,6 +307,8 @@ class _$_ItemRefreshed implements _ItemRefreshed {
   TResult map<TResult extends Object?>({
     required TResult Function(_ItemCreated value) itemCreated,
     required TResult Function(_ItemRefreshed value) itemRefreshed,
+    required TResult Function(_ItemSolved value) itemSolved,
+    required TResult Function(_ItemDeleted value) itemDeleted,
   }) {
     return itemRefreshed(this);
   }
@@ -286,6 +318,8 @@ class _$_ItemRefreshed implements _ItemRefreshed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ItemCreated value)? itemCreated,
     TResult? Function(_ItemRefreshed value)? itemRefreshed,
+    TResult? Function(_ItemSolved value)? itemSolved,
+    TResult? Function(_ItemDeleted value)? itemDeleted,
   }) {
     return itemRefreshed?.call(this);
   }
@@ -295,6 +329,8 @@ class _$_ItemRefreshed implements _ItemRefreshed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ItemCreated value)? itemCreated,
     TResult Function(_ItemRefreshed value)? itemRefreshed,
+    TResult Function(_ItemSolved value)? itemSolved,
+    TResult Function(_ItemDeleted value)? itemDeleted,
     required TResult orElse(),
   }) {
     if (itemRefreshed != null) {
@@ -309,12 +345,244 @@ abstract class _ItemRefreshed implements ItemEvent {
 }
 
 /// @nodoc
+abstract class _$$_ItemSolvedCopyWith<$Res> {
+  factory _$$_ItemSolvedCopyWith(
+          _$_ItemSolved value, $Res Function(_$_ItemSolved) then) =
+      __$$_ItemSolvedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ItemSolvedCopyWithImpl<$Res>
+    extends _$ItemEventCopyWithImpl<$Res, _$_ItemSolved>
+    implements _$$_ItemSolvedCopyWith<$Res> {
+  __$$_ItemSolvedCopyWithImpl(
+      _$_ItemSolved _value, $Res Function(_$_ItemSolved) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ItemSolved implements _ItemSolved {
+  const _$_ItemSolved();
+
+  @override
+  String toString() {
+    return 'ItemEvent.itemSolved()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ItemSolved);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int id) itemCreated,
+    required TResult Function() itemRefreshed,
+    required TResult Function() itemSolved,
+    required TResult Function() itemDeleted,
+  }) {
+    return itemSolved();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int id)? itemCreated,
+    TResult? Function()? itemRefreshed,
+    TResult? Function()? itemSolved,
+    TResult? Function()? itemDeleted,
+  }) {
+    return itemSolved?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int id)? itemCreated,
+    TResult Function()? itemRefreshed,
+    TResult Function()? itemSolved,
+    TResult Function()? itemDeleted,
+    required TResult orElse(),
+  }) {
+    if (itemSolved != null) {
+      return itemSolved();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ItemCreated value) itemCreated,
+    required TResult Function(_ItemRefreshed value) itemRefreshed,
+    required TResult Function(_ItemSolved value) itemSolved,
+    required TResult Function(_ItemDeleted value) itemDeleted,
+  }) {
+    return itemSolved(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ItemCreated value)? itemCreated,
+    TResult? Function(_ItemRefreshed value)? itemRefreshed,
+    TResult? Function(_ItemSolved value)? itemSolved,
+    TResult? Function(_ItemDeleted value)? itemDeleted,
+  }) {
+    return itemSolved?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ItemCreated value)? itemCreated,
+    TResult Function(_ItemRefreshed value)? itemRefreshed,
+    TResult Function(_ItemSolved value)? itemSolved,
+    TResult Function(_ItemDeleted value)? itemDeleted,
+    required TResult orElse(),
+  }) {
+    if (itemSolved != null) {
+      return itemSolved(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ItemSolved implements ItemEvent {
+  const factory _ItemSolved() = _$_ItemSolved;
+}
+
+/// @nodoc
+abstract class _$$_ItemDeletedCopyWith<$Res> {
+  factory _$$_ItemDeletedCopyWith(
+          _$_ItemDeleted value, $Res Function(_$_ItemDeleted) then) =
+      __$$_ItemDeletedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ItemDeletedCopyWithImpl<$Res>
+    extends _$ItemEventCopyWithImpl<$Res, _$_ItemDeleted>
+    implements _$$_ItemDeletedCopyWith<$Res> {
+  __$$_ItemDeletedCopyWithImpl(
+      _$_ItemDeleted _value, $Res Function(_$_ItemDeleted) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ItemDeleted implements _ItemDeleted {
+  const _$_ItemDeleted();
+
+  @override
+  String toString() {
+    return 'ItemEvent.itemDeleted()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ItemDeleted);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int id) itemCreated,
+    required TResult Function() itemRefreshed,
+    required TResult Function() itemSolved,
+    required TResult Function() itemDeleted,
+  }) {
+    return itemDeleted();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int id)? itemCreated,
+    TResult? Function()? itemRefreshed,
+    TResult? Function()? itemSolved,
+    TResult? Function()? itemDeleted,
+  }) {
+    return itemDeleted?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int id)? itemCreated,
+    TResult Function()? itemRefreshed,
+    TResult Function()? itemSolved,
+    TResult Function()? itemDeleted,
+    required TResult orElse(),
+  }) {
+    if (itemDeleted != null) {
+      return itemDeleted();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ItemCreated value) itemCreated,
+    required TResult Function(_ItemRefreshed value) itemRefreshed,
+    required TResult Function(_ItemSolved value) itemSolved,
+    required TResult Function(_ItemDeleted value) itemDeleted,
+  }) {
+    return itemDeleted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ItemCreated value)? itemCreated,
+    TResult? Function(_ItemRefreshed value)? itemRefreshed,
+    TResult? Function(_ItemSolved value)? itemSolved,
+    TResult? Function(_ItemDeleted value)? itemDeleted,
+  }) {
+    return itemDeleted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ItemCreated value)? itemCreated,
+    TResult Function(_ItemRefreshed value)? itemRefreshed,
+    TResult Function(_ItemSolved value)? itemSolved,
+    TResult Function(_ItemDeleted value)? itemDeleted,
+    required TResult orElse(),
+  }) {
+    if (itemDeleted != null) {
+      return itemDeleted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ItemDeleted implements ItemEvent {
+  const factory _ItemDeleted() = _$_ItemDeleted;
+}
+
+/// @nodoc
 mixin _$ItemState {
   Item? get item => throw _privateConstructorUsedError;
   int get userId => throw _privateConstructorUsedError;
   String get token => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Either<Failure, Success>? get loadFailureOrSuccess =>
+      throw _privateConstructorUsedError;
+  Either<Failure, Success>? get solveFailureOrSuccess =>
+      throw _privateConstructorUsedError;
+  Either<Failure, Success>? get deleteFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -332,7 +600,9 @@ abstract class $ItemStateCopyWith<$Res> {
       int userId,
       String token,
       bool isLoading,
-      Either<Failure, Success>? loadFailureOrSuccess});
+      Either<Failure, Success>? loadFailureOrSuccess,
+      Either<Failure, Success>? solveFailureOrSuccess,
+      Either<Failure, Success>? deleteFailureOrSuccess});
 }
 
 /// @nodoc
@@ -353,6 +623,8 @@ class _$ItemStateCopyWithImpl<$Res, $Val extends ItemState>
     Object? token = null,
     Object? isLoading = null,
     Object? loadFailureOrSuccess = freezed,
+    Object? solveFailureOrSuccess = freezed,
+    Object? deleteFailureOrSuccess = freezed,
   }) {
     return _then(_value.copyWith(
       item: freezed == item
@@ -375,6 +647,14 @@ class _$ItemStateCopyWithImpl<$Res, $Val extends ItemState>
           ? _value.loadFailureOrSuccess
           : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
               as Either<Failure, Success>?,
+      solveFailureOrSuccess: freezed == solveFailureOrSuccess
+          ? _value.solveFailureOrSuccess
+          : solveFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Either<Failure, Success>?,
+      deleteFailureOrSuccess: freezed == deleteFailureOrSuccess
+          ? _value.deleteFailureOrSuccess
+          : deleteFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Either<Failure, Success>?,
     ) as $Val);
   }
 }
@@ -391,7 +671,9 @@ abstract class _$$_ItemStateCopyWith<$Res> implements $ItemStateCopyWith<$Res> {
       int userId,
       String token,
       bool isLoading,
-      Either<Failure, Success>? loadFailureOrSuccess});
+      Either<Failure, Success>? loadFailureOrSuccess,
+      Either<Failure, Success>? solveFailureOrSuccess,
+      Either<Failure, Success>? deleteFailureOrSuccess});
 }
 
 /// @nodoc
@@ -410,6 +692,8 @@ class __$$_ItemStateCopyWithImpl<$Res>
     Object? token = null,
     Object? isLoading = null,
     Object? loadFailureOrSuccess = freezed,
+    Object? solveFailureOrSuccess = freezed,
+    Object? deleteFailureOrSuccess = freezed,
   }) {
     return _then(_$_ItemState(
       item: freezed == item
@@ -432,6 +716,14 @@ class __$$_ItemStateCopyWithImpl<$Res>
           ? _value.loadFailureOrSuccess
           : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
               as Either<Failure, Success>?,
+      solveFailureOrSuccess: freezed == solveFailureOrSuccess
+          ? _value.solveFailureOrSuccess
+          : solveFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Either<Failure, Success>?,
+      deleteFailureOrSuccess: freezed == deleteFailureOrSuccess
+          ? _value.deleteFailureOrSuccess
+          : deleteFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Either<Failure, Success>?,
     ));
   }
 }
@@ -444,7 +736,9 @@ class _$_ItemState implements _ItemState {
       required this.userId,
       required this.token,
       this.isLoading = true,
-      this.loadFailureOrSuccess});
+      this.loadFailureOrSuccess,
+      this.solveFailureOrSuccess,
+      this.deleteFailureOrSuccess});
 
   @override
   final Item? item;
@@ -457,10 +751,14 @@ class _$_ItemState implements _ItemState {
   final bool isLoading;
   @override
   final Either<Failure, Success>? loadFailureOrSuccess;
+  @override
+  final Either<Failure, Success>? solveFailureOrSuccess;
+  @override
+  final Either<Failure, Success>? deleteFailureOrSuccess;
 
   @override
   String toString() {
-    return 'ItemState(item: $item, userId: $userId, token: $token, isLoading: $isLoading, loadFailureOrSuccess: $loadFailureOrSuccess)';
+    return 'ItemState(item: $item, userId: $userId, token: $token, isLoading: $isLoading, loadFailureOrSuccess: $loadFailureOrSuccess, solveFailureOrSuccess: $solveFailureOrSuccess, deleteFailureOrSuccess: $deleteFailureOrSuccess)';
   }
 
   @override
@@ -474,12 +772,16 @@ class _$_ItemState implements _ItemState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.loadFailureOrSuccess, loadFailureOrSuccess) ||
-                other.loadFailureOrSuccess == loadFailureOrSuccess));
+                other.loadFailureOrSuccess == loadFailureOrSuccess) &&
+            (identical(other.solveFailureOrSuccess, solveFailureOrSuccess) ||
+                other.solveFailureOrSuccess == solveFailureOrSuccess) &&
+            (identical(other.deleteFailureOrSuccess, deleteFailureOrSuccess) ||
+                other.deleteFailureOrSuccess == deleteFailureOrSuccess));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, item, userId, token, isLoading, loadFailureOrSuccess);
+  int get hashCode => Object.hash(runtimeType, item, userId, token, isLoading,
+      loadFailureOrSuccess, solveFailureOrSuccess, deleteFailureOrSuccess);
 
   @JsonKey(ignore: true)
   @override
@@ -494,7 +796,9 @@ abstract class _ItemState implements ItemState {
       required final int userId,
       required final String token,
       final bool isLoading,
-      final Either<Failure, Success>? loadFailureOrSuccess}) = _$_ItemState;
+      final Either<Failure, Success>? loadFailureOrSuccess,
+      final Either<Failure, Success>? solveFailureOrSuccess,
+      final Either<Failure, Success>? deleteFailureOrSuccess}) = _$_ItemState;
 
   @override
   Item? get item;
@@ -506,6 +810,10 @@ abstract class _ItemState implements ItemState {
   bool get isLoading;
   @override
   Either<Failure, Success>? get loadFailureOrSuccess;
+  @override
+  Either<Failure, Success>? get solveFailureOrSuccess;
+  @override
+  Either<Failure, Success>? get deleteFailureOrSuccess;
   @override
   @JsonKey(ignore: true)
   _$$_ItemStateCopyWith<_$_ItemState> get copyWith =>

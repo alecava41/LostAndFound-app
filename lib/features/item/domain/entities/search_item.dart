@@ -5,12 +5,14 @@ class SearchItem {
   final User user;
   final String title;
   final ItemType type;
+  final bool hasImage;
 
   SearchItem({
     required this.id,
     required this.title,
     required this.user,
     required this.type,
+    required this.hasImage
   });
 }
 

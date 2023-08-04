@@ -11,19 +11,18 @@ _$$ItemDto _$$$ItemDtoFromJson(Map<String, dynamic> json) => _$$ItemDto(
       title: json['title'] as String,
       type: json['type'] as String,
       address: json['address'] as String,
+      image: json['image'] as bool,
       date: DateTime.parse(json['date'] as String),
       user: UserDto.fromJson(json['user'] as Map<String, dynamic>),
       category: CategoryDto.fromJson(json['category'] as Map<String, dynamic>),
       question: json['question'] as String?,
+      position: PositionDto.fromJson(json['position'] as Map<String, dynamic>),
       claims: (json['claims'] as List<dynamic>?)
           ?.map((e) => ClaimReceivedDto.fromJson(e as Map<String, dynamic>))
           .toList(),
       userClaim: json['userClaim'] == null
           ? null
           : ClaimSentDto.fromJson(json['userClaim'] as Map<String, dynamic>),
-      position: json['position'] == null
-          ? null
-          : PositionDto.fromJson(json['position'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$$ItemDtoToJson(_$$ItemDto instance) =>
@@ -32,11 +31,12 @@ Map<String, dynamic> _$$$ItemDtoToJson(_$$ItemDto instance) =>
       'title': instance.title,
       'type': instance.type,
       'address': instance.address,
+      'image': instance.image,
       'date': instance.date.toIso8601String(),
       'user': instance.user,
       'category': instance.category,
       'question': instance.question,
+      'position': instance.position,
       'claims': instance.claims,
       'userClaim': instance.userClaim,
-      'position': instance.position,
     };

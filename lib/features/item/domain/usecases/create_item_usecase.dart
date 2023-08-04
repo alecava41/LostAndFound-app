@@ -49,5 +49,4 @@ class Position {
 
   Map<String,dynamic> toJson() => _$PositionToJson(this);
   factory Position.fromJson(Map<String,dynamic> data) => _$PositionFromJson(data);
-
 }

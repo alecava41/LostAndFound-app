@@ -7,6 +7,7 @@ class PersonalizedTextField extends StatelessWidget {
   final bool showError;
   final bool isValid;
   final String? errorText;
+  final String text;
 
   const PersonalizedTextField(
       {super.key,
@@ -14,11 +15,13 @@ class PersonalizedTextField extends StatelessWidget {
       required this.hintText,
       required this.showError,
       required this.isValid,
+        required this.text,
       required this.errorText});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: text,
       cursorColor: PersonalizedColor.mainColor,
       onChanged: onTextChanged,
       minLines: 1,
