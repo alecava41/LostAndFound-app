@@ -4,7 +4,7 @@ import 'package:lost_and_found/core/status/success.dart';
 
 import '../../../../core/domain/usecases/usecase.dart';
 import '../../../../core/status/failures.dart';
-import '../repositories/authentication_repository.dart';
+import '../../../../core/domain/repositories/authentication_repository.dart';
 
 part 'login_usecase.g.dart';
 

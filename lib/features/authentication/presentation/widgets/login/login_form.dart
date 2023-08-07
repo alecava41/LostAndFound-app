@@ -39,12 +39,9 @@ class LoginForm extends StatelessWidget {
                         )
                       },
                   (success) => {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Successful sign in'),
-                          ),
-                        ),
-                        Navigator.of(context).pushNamed('/')
+                        // TODO check if it works
+                        Navigator.popUntil(context, (route) => route.isFirst),
+                        Navigator.of(context).pushReplacementNamed('/')
                       });
             }
           },

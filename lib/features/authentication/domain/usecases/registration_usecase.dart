@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:lost_and_found/core/status/failures.dart';
-import 'package:lost_and_found/features/authentication/domain/repositories/authentication_repository.dart';
+import 'package:lost_and_found/core/domain/repositories/authentication_repository.dart';
 
 import '../../../../core/domain/usecases/usecase.dart';
 import '../../../../core/status/success.dart';

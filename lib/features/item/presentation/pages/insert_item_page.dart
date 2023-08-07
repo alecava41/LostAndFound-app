@@ -31,13 +31,13 @@ class InsertItemScreen extends StatelessWidget {
   void onTapGallery(BuildContext ctx) {
     Navigator.pop(ctx);
     getImage(ImageSource.gallery,
-        (image, path) => ctx.read<InsertItemBloc>().add(InsertItemEvent.imageSelected(image!, path!)));
+        (image, path) => ctx.read<InsertItemBloc>().add(InsertItemEvent.imageSelected(image!)));
   }
 
   void onTapCamera(BuildContext ctx) {
     Navigator.pop(ctx);
     getImage(ImageSource.camera,
-        (image, path) => ctx.read<InsertItemBloc>().add(InsertItemEvent.imageSelected(image!, path!)));
+        (image, path) => ctx.read<InsertItemBloc>().add(InsertItemEvent.imageSelected(image!)));
   }
 
   void onConfirm(BuildContext context) {
@@ -114,7 +114,6 @@ class InsertItemScreen extends StatelessWidget {
                         onSelectUploadMethod: () => chooseMediaDialog(ctx),
                         onDeletePhoto: () => ctx.read<InsertItemBloc>().add(const InsertItemEvent.imageDeleted()),
                         image: state.image,
-                        imagePath: state.imagePath,
                       ),
                       customDivider(),
                       const SizedBox(

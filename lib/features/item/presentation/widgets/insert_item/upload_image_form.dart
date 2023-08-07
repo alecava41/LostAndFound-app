@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -11,10 +8,9 @@ class UploadImageForm extends StatelessWidget {
   final VoidCallback onSelectUploadMethod;
   final VoidCallback onDeletePhoto;
   final XFile? image;
-  String? imagePath;
 
-  UploadImageForm(
-      {super.key, required this.onSelectUploadMethod, required this.onDeletePhoto, required this.image, this.imagePath});
+  const UploadImageForm(
+      {super.key, required this.onSelectUploadMethod, required this.onDeletePhoto, required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +28,7 @@ class UploadImageForm extends StatelessWidget {
                     color: Colors.white,
                     height: 300,
                     width: MediaQuery.of(context).size.width,
-                    child: image == null && imagePath == null
+                    child: image == null
                         ? Center(
                             child: ElevatedButton(
                               onPressed: onSelectUploadMethod,
@@ -56,19 +52,9 @@ class UploadImageForm extends StatelessWidget {
                               ),
                             ),
                           )
-                        : (image == null // TODO: why?
-                            ? Image.asset(
-                                imagePath!,
-                                fit: BoxFit.cover,
-                              )
-                            : (!kIsWeb
-                                ? Image.file(
-                                    File(image!.path),
-                                    fit: BoxFit.cover,
-                                  )
-                                : Container())),
+                        : Container(),
                   ),
-                  if (image != null || imagePath != null)
+                  if (image != null)
                     Positioned(
                       right: 16,
                       bottom: 10,

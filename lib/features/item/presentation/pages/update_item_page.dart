@@ -24,21 +24,21 @@ class UpdateItemScreen extends StatelessWidget {
   UpdateItemScreen({super.key, required this.itemId});
 
   // Upload image from camera or from gallery based on parameter
-  Future getImage(ImageSource media, Function(XFile? image, String? path) callback) async {
+  Future getImage(ImageSource media, Function(XFile? image) callback) async {
     var img = await picker.pickImage(source: media);
-    callback(img, img?.path);
+    callback(img);
   }
 
   void onTapGallery(BuildContext ctx) {
     Navigator.pop(ctx);
     getImage(ImageSource.gallery,
-        (image, path) => ctx.read<UpdateItemBloc>().add(UpdateItemEvent.imageSelected(image!, path!)));
+        (image) => ctx.read<UpdateItemBloc>().add(UpdateItemEvent.imageSelected(image!)));
   }
 
   void onTapCamera(BuildContext ctx) {
     Navigator.pop(ctx);
     getImage(ImageSource.camera,
-        (image, path) => ctx.read<UpdateItemBloc>().add(UpdateItemEvent.imageSelected(image!, path!)));
+        (image) => ctx.read<UpdateItemBloc>().add(UpdateItemEvent.imageSelected(image!)));
   }
 
   void onConfirm(BuildContext context) {
@@ -138,13 +138,12 @@ class UpdateItemScreen extends StatelessWidget {
                         : (state.item != null
                             ? SingleChildScrollView(
                                 child: Column(children: [
-                                  // TODO: handle case image already present and user clicks on delete
+                                  // TODO: handle case image already present and user clicks on delete (see user_page)
                                   UploadImageForm(
                                     onSelectUploadMethod: () => chooseMediaDialog(ctx),
                                     onDeletePhoto: () =>
                                         ctx.read<UpdateItemBloc>().add(const UpdateItemEvent.imageDeleted()),
                                     image: state.image,
-                                    imagePath: state.imagePath,
                                     itemId: itemId,
                                     token: state.token,
                                     hasImage: state.item!.hasImage,

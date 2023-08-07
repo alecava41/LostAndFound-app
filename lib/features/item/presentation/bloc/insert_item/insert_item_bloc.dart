@@ -38,8 +38,8 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
     on<InsertItemEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
-            imageSelected: (image, path) => _onImageChanged(emit, image, path),
-            imageDeleted: () => _onImageChanged(emit, null, null),
+            imageSelected: (image) => _onImageChanged(emit, image),
+            imageDeleted: () => _onImageChanged(emit, null),
             typeChanged: (type) => _onTypeChanged(emit, type),
             titleChanged: (input) => _onTitleChanged(emit, input),
             questionChanged: (input) => _onQuestionChanged(emit, input),
@@ -54,8 +54,8 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
     emit(state.copyWith(categoryId: catId, category: category));
   }
 
-  void _onImageChanged(Emitter<InsertItemState> emit, XFile? image, String? path) {
-    emit(state.copyWith(image: image, imagePath: path));
+  void _onImageChanged(Emitter<InsertItemState> emit, XFile? image) {
+    emit(state.copyWith(image: image));
   }
 
   void _onTypeChanged(Emitter<InsertItemState> emit, ItemType? type) {

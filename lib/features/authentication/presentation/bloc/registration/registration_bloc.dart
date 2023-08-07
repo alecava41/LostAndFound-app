@@ -8,7 +8,7 @@ import 'package:lost_and_found/features/authentication/domain/fields/registratio
 
 import '../../../../../core/status/failures.dart';
 import '../../../../../core/status/success.dart';
-import '../../../domain/fields/registration/registration__confirm_password.dart';
+import '../../../domain/fields/registration/registration_confirm_password.dart';
 import '../../../domain/fields/registration/registration_password.dart';
 import '../../../domain/usecases/registration_usecase.dart';
 

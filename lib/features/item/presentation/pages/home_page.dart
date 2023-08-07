@@ -9,6 +9,8 @@ import '../widgets/home/lost_items_container.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  // TODO need to handle loading properly
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(

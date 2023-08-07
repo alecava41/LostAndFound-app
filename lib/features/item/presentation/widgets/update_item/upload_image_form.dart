@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -16,7 +13,6 @@ class UploadImageForm extends StatelessWidget {
   final VoidCallback onSelectUploadMethod;
   final VoidCallback onDeletePhoto;
   final XFile? image;
-  final String? imagePath;
   final bool hasImage;
 
   const UploadImageForm(
@@ -26,8 +22,7 @@ class UploadImageForm extends StatelessWidget {
       required this.onSelectUploadMethod,
       required this.onDeletePhoto,
       required this.image,
-      required this.hasImage,
-      this.imagePath});
+      required this.hasImage});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +53,7 @@ class UploadImageForm extends StatelessWidget {
                             imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                           )
                         : () {
-                            if (image == null && imagePath == null) {
+                            if (image == null) {
                               Center(
                                 child: ElevatedButton(
                                   onPressed: onSelectUploadMethod,
@@ -83,26 +78,12 @@ class UploadImageForm extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              if (image == null) {
-                                return Image.asset(
-                                  imagePath!,
-                                  fit: BoxFit.cover,
-                                );
-                              } else {
-                                if (!kIsWeb) {
-                                  return Image.file(
-                                    File(image!.path),
-                                    fit: BoxFit.cover,
-                                  );
-                                } else {
-                                  return Container();
-                                }
-                              }
+                              return Container();
                             }
                             return const Icon(Icons.error);
                           }(),
                   ),
-                  if (image != null || imagePath != null || hasImage)
+                  if (image != null || hasImage)
                     Positioned(
                       right: 16,
                       bottom: 10,

@@ -16,8 +16,8 @@ import 'package:lost_and_found/core/presentation/home_controller/bloc/home_contr
 import 'package:lost_and_found/core/presentation/select_category/bloc/category_bloc.dart';
 import 'package:lost_and_found/features/authentication/data/datasources/auth_client.dart';
 import 'package:lost_and_found/features/authentication/data/datasources/authentication_data_source.dart';
-import 'package:lost_and_found/features/authentication/data/repositories/authentication_repository_impl.dart';
-import 'package:lost_and_found/features/authentication/domain/repositories/authentication_repository.dart';
+import 'package:lost_and_found/core/data/repositories/authentication_repository_impl.dart';
+import 'package:lost_and_found/core/domain/repositories/authentication_repository.dart';
 import 'package:lost_and_found/features/authentication/domain/usecases/login_usecase.dart';
 import 'package:lost_and_found/features/authentication/domain/usecases/registration_usecase.dart';
 import 'package:lost_and_found/features/authentication/presentation/bloc/login/login_bloc.dart';
@@ -49,18 +49,27 @@ import 'package:lost_and_found/features/item/presentation/bloc/item/item_bloc.da
 import 'package:lost_and_found/features/item/presentation/bloc/notification/news_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/search/search_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/update_item/update_item_bloc.dart';
+import 'package:lost_and_found/features/user/data/datasources/user_client.dart';
+import 'package:lost_and_found/features/user/data/datasources/user_data_source.dart';
+import 'package:lost_and_found/features/user/domain/repositories/user_repository.dart';
+import 'package:lost_and_found/features/user/domain/usecases/get_user_info_usecase.dart';
+import 'package:lost_and_found/features/user/domain/usecases/update_password_usecase.dart';
+import 'package:lost_and_found/features/user/domain/usecases/upload_user_image_usecase.dart';
+import 'package:lost_and_found/features/user/presentation/bloc/change_password/change_password_bloc.dart';
+import 'package:lost_and_found/features/user/presentation/bloc/user/user_bloc.dart';
 
 import 'core/data/datasources/database/database.dart';
 import 'core/data/datasources/http_interceptor.dart';
 import 'core/data/secure_storage/secure_storage.dart';
 import 'core/domain/repositories/category_repository.dart';
 import 'core/presentation/select_position/bloc/select_position_bloc.dart';
-import 'features/authentication/domain/usecases/logout_use_case.dart';
 import 'features/claim/data/repositories/claim_repository_impl.dart';
 import 'features/claim/presentation/bloc/answer_claim/answer_claim_bloc.dart';
 import 'features/claim/presentation/bloc/answer_question/answer_question_bloc.dart';
 import 'features/item/domain/usecases/upload_item_image_usecase.dart';
 import 'features/item/presentation/bloc/insert_item/insert_item_bloc.dart';
+import 'features/user/data/repositories/user_repository_impl.dart';
+import 'features/user/domain/usecases/logout_usecase.dart';
 
 final sl = GetIt.instance;
 
@@ -73,11 +82,6 @@ Future<void> init() async {
   // Use cases
   sl.registerLazySingleton(() => LoginUseCase(sl()));
   sl.registerLazySingleton(() => RegistrationUseCase(sl()));
-  sl.registerLazySingleton(() => LogoutUseCase(sl()));
-
-  // Repository
-  sl.registerLazySingleton<AuthenticationRepository>(
-      () => AuthenticationRepositoryImpl(networkInfo: sl(), dataSource: sl(), storage: sl()));
 
   // Data source
   sl.registerLazySingleton<AuthenticationDataSource>(() => AuthenticationDataSourceImpl(client: sl()));
@@ -99,7 +103,7 @@ Future<void> init() async {
       getAddressFromPositionUseCase: sl(),
       secureStorage: sl()));
 
-  // Use cases
+  // Use Cases
   sl.registerLazySingleton(() => GetUserItemsUseCase(sl()));
   sl.registerLazySingleton(() => GetUserNotificationsUseCase(sl()));
   sl.registerLazySingleton(() => SearchItemsUseCase(sl()));
@@ -137,6 +141,23 @@ Future<void> init() async {
   // Data source
   sl.registerLazySingleton<ClaimDataSource>(() => ClaimDataSourceImpl(sl()));
 
+  // ** Feature - User **
+  // BLoC
+  sl.registerFactory(() => UserBloc(getUserInfoUseCase: sl(), secureStorage: sl(), logoutUseCase: sl(), uploadUserImageUseCase: sl()));
+  sl.registerFactory(() => ChangePasswordBloc(updatePasswordUseCase: sl(), storage: sl(), loginUseCase: sl()));
+
+  // Use Cases
+  sl.registerLazySingleton(() => GetUserInfoUseCase(sl()));
+  sl.registerLazySingleton(() => LogoutUseCase(sl()));
+  sl.registerLazySingleton(() => UploadUserImageUseCase(sl()));
+  sl.registerLazySingleton(() => UpdatePasswordUseCase(sl()));
+
+  // Repository
+  sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(storage: sl(), networkInfo: sl(), dataSource: sl()));
+
+  // Data sources
+  sl.registerLazySingleton<UserDataSource>(() => UserDataSourceImpl(sl()));
+
   // ** External - Generic **
   // Use cases
   sl.registerLazySingleton(() => GetAddressFromPositionUseCase(sl()));
@@ -145,6 +166,8 @@ Future<void> init() async {
   // Repositories
   sl.registerLazySingleton<PositionRepository>(() => PositionRepositoryImpl(dataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<CategoryRepository>(() => CategoryRepositoryImpl(dataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<AuthenticationRepository>(
+          () => AuthenticationRepositoryImpl(networkInfo: sl(), dataSource: sl(), storage: sl()));
 
   // Data sources
   sl.registerLazySingleton<PositionDataSource>(() => PositionDataSourceImpl(sl()));
@@ -175,6 +198,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ClaimClient(sl()));
   sl.registerLazySingleton(() => PositionClient(sl()));
   sl.registerLazySingleton(() => CategoryClient(sl()));
+  sl.registerLazySingleton(() => UserClient(sl()));
 
   // Global BLoCs
   sl.registerFactory(() => HomeControllerBloc());

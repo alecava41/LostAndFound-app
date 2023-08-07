@@ -10,10 +10,10 @@ import 'package:lost_and_found/features/authentication/domain/usecases/login_use
 
 import 'package:lost_and_found/features/authentication/domain/usecases/registration_usecase.dart';
 
-import '../../../../core/data/repositories/utils.dart';
-import '../../../../core/data/secure_storage/secure_storage.dart';
-import '../../../../core/domain/usecases/usecase.dart';
-import '../../../../core/status/success.dart';
+import 'utils.dart';
+import '../secure_storage/secure_storage.dart';
+import '../../domain/usecases/usecase.dart';
+import '../../status/success.dart';
 import '../../domain/repositories/authentication_repository.dart';
 
 class AuthenticationRepositoryImpl implements AuthenticationRepository {

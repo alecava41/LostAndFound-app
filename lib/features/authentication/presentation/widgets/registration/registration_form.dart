@@ -12,6 +12,8 @@ import 'package:lost_and_found/widgets/title_logo.dart';
 class RegistrationForm extends StatelessWidget {
   const RegistrationForm({super.key});
 
+  // TODO check if it works like a 'stepper' (by using the keyboard)
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

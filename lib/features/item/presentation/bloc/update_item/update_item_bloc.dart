@@ -49,8 +49,8 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
       (event, emit) async {
         await event.when<FutureOr<void>>(
             contentCreated: (itemId) => _onContentCreated(emit, itemId),
-            imageSelected: (image, path) => _onImageChanged(emit, image, path),
-            imageDeleted: () => _onImageChanged(emit, null, null),
+            imageSelected: (image) => _onImageChanged(emit, image),
+            imageDeleted: () => _onImageChanged(emit, null),
             titleChanged: (input) => _onTitleChanged(emit, input),
             questionChanged: (input) => _onQuestionChanged(emit, input),
             positionSelected: (pos) => _onPositionSelected(emit, pos),
@@ -96,8 +96,8 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
     emit(state.copyWith(categoryId: catId, category: category));
   }
 
-  void _onImageChanged(Emitter<UpdateItemState> emit, XFile? image, String? path) {
-    emit(state.copyWith(image: image, imagePath: path));
+  void _onImageChanged(Emitter<UpdateItemState> emit, XFile? image) {
+    emit(state.copyWith(image: image));
   }
 
   void _onTitleChanged(Emitter<UpdateItemState> emit, String input) {
@@ -130,6 +130,9 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
           (failure) => updateFailureOrSuccess = Left(failure), (success) => updateFailureOrSuccess = Right(success));
 
       if (state.image != null) {
+        // TODO correctly handle update
+        // TODO handle deletion (usecase + understand when it's the case)
+        // TODO handle image refresh (just like in user_page)
         final params = UploadItemImageParams(itemId: state.item!.id, image: File(state.image!.path));
 
         final imgFailureOrSuccess = await _uploadItemImageUseCase(params);

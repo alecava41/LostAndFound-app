@@ -23,7 +23,7 @@ mixin _$UpdateItemEvent {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image, String path) imageSelected,
+    required TResult Function(XFile image) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() updateSubmitted,
   }) =>
@@ -35,7 +35,7 @@ mixin _$UpdateItemEvent {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image, String path)? imageSelected,
+    TResult? Function(XFile image)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? updateSubmitted,
   }) =>
@@ -47,7 +47,7 @@ mixin _$UpdateItemEvent {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image, String path)? imageSelected,
+    TResult Function(XFile image)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? updateSubmitted,
     required TResult orElse(),
@@ -179,7 +179,7 @@ class _$_ContentCreated implements _ContentCreated {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image, String path) imageSelected,
+    required TResult Function(XFile image) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() updateSubmitted,
   }) {
@@ -194,7 +194,7 @@ class _$_ContentCreated implements _ContentCreated {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image, String path)? imageSelected,
+    TResult? Function(XFile image)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? updateSubmitted,
   }) {
@@ -209,7 +209,7 @@ class _$_ContentCreated implements _ContentCreated {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image, String path)? imageSelected,
+    TResult Function(XFile image)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? updateSubmitted,
     required TResult orElse(),
@@ -348,7 +348,7 @@ class _$_TitleChanged implements _TitleChanged {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image, String path) imageSelected,
+    required TResult Function(XFile image) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() updateSubmitted,
   }) {
@@ -363,7 +363,7 @@ class _$_TitleChanged implements _TitleChanged {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image, String path)? imageSelected,
+    TResult? Function(XFile image)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? updateSubmitted,
   }) {
@@ -378,7 +378,7 @@ class _$_TitleChanged implements _TitleChanged {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image, String path)? imageSelected,
+    TResult Function(XFile image)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? updateSubmitted,
     required TResult orElse(),
@@ -517,7 +517,7 @@ class _$_QuestionChanged implements _QuestionChanged {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image, String path) imageSelected,
+    required TResult Function(XFile image) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() updateSubmitted,
   }) {
@@ -532,7 +532,7 @@ class _$_QuestionChanged implements _QuestionChanged {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image, String path)? imageSelected,
+    TResult? Function(XFile image)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? updateSubmitted,
   }) {
@@ -547,7 +547,7 @@ class _$_QuestionChanged implements _QuestionChanged {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image, String path)? imageSelected,
+    TResult Function(XFile image)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? updateSubmitted,
     required TResult orElse(),
@@ -686,7 +686,7 @@ class _$_PositionSelected implements _PositionSelected {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image, String path) imageSelected,
+    required TResult Function(XFile image) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() updateSubmitted,
   }) {
@@ -701,7 +701,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image, String path)? imageSelected,
+    TResult? Function(XFile image)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? updateSubmitted,
   }) {
@@ -716,7 +716,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image, String path)? imageSelected,
+    TResult Function(XFile image)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? updateSubmitted,
     required TResult orElse(),
@@ -864,7 +864,7 @@ class _$_CategorySelected implements _CategorySelected {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image, String path) imageSelected,
+    required TResult Function(XFile image) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() updateSubmitted,
   }) {
@@ -879,7 +879,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image, String path)? imageSelected,
+    TResult? Function(XFile image)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? updateSubmitted,
   }) {
@@ -894,7 +894,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image, String path)? imageSelected,
+    TResult Function(XFile image)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? updateSubmitted,
     required TResult orElse(),
@@ -972,7 +972,7 @@ abstract class _$$_ImageSelectedCopyWith<$Res> {
           _$_ImageSelected value, $Res Function(_$_ImageSelected) then) =
       __$$_ImageSelectedCopyWithImpl<$Res>;
   @useResult
-  $Res call({XFile image, String path});
+  $Res call({XFile image});
 }
 
 /// @nodoc
@@ -987,17 +987,12 @@ class __$$_ImageSelectedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? image = null,
-    Object? path = null,
   }) {
     return _then(_$_ImageSelected(
       null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as XFile,
-      null == path
-          ? _value.path
-          : path // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -1005,16 +1000,14 @@ class __$$_ImageSelectedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ImageSelected implements _ImageSelected {
-  const _$_ImageSelected(this.image, this.path);
+  const _$_ImageSelected(this.image);
 
   @override
   final XFile image;
-  @override
-  final String path;
 
   @override
   String toString() {
-    return 'UpdateItemEvent.imageSelected(image: $image, path: $path)';
+    return 'UpdateItemEvent.imageSelected(image: $image)';
   }
 
   @override
@@ -1022,12 +1015,11 @@ class _$_ImageSelected implements _ImageSelected {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ImageSelected &&
-            (identical(other.image, image) || other.image == image) &&
-            (identical(other.path, path) || other.path == path));
+            (identical(other.image, image) || other.image == image));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, image, path);
+  int get hashCode => Object.hash(runtimeType, image);
 
   @JsonKey(ignore: true)
   @override
@@ -1043,11 +1035,11 @@ class _$_ImageSelected implements _ImageSelected {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image, String path) imageSelected,
+    required TResult Function(XFile image) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() updateSubmitted,
   }) {
-    return imageSelected(image, path);
+    return imageSelected(image);
   }
 
   @override
@@ -1058,11 +1050,11 @@ class _$_ImageSelected implements _ImageSelected {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image, String path)? imageSelected,
+    TResult? Function(XFile image)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? updateSubmitted,
   }) {
-    return imageSelected?.call(image, path);
+    return imageSelected?.call(image);
   }
 
   @override
@@ -1073,13 +1065,13 @@ class _$_ImageSelected implements _ImageSelected {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image, String path)? imageSelected,
+    TResult Function(XFile image)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? updateSubmitted,
     required TResult orElse(),
   }) {
     if (imageSelected != null) {
-      return imageSelected(image, path);
+      return imageSelected(image);
     }
     return orElse();
   }
@@ -1135,11 +1127,9 @@ class _$_ImageSelected implements _ImageSelected {
 }
 
 abstract class _ImageSelected implements UpdateItemEvent {
-  const factory _ImageSelected(final XFile image, final String path) =
-      _$_ImageSelected;
+  const factory _ImageSelected(final XFile image) = _$_ImageSelected;
 
   XFile get image;
-  String get path;
   @JsonKey(ignore: true)
   _$$_ImageSelectedCopyWith<_$_ImageSelected> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1188,7 +1178,7 @@ class _$_ImageDeleted implements _ImageDeleted {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image, String path) imageSelected,
+    required TResult Function(XFile image) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() updateSubmitted,
   }) {
@@ -1203,7 +1193,7 @@ class _$_ImageDeleted implements _ImageDeleted {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image, String path)? imageSelected,
+    TResult? Function(XFile image)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? updateSubmitted,
   }) {
@@ -1218,7 +1208,7 @@ class _$_ImageDeleted implements _ImageDeleted {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image, String path)? imageSelected,
+    TResult Function(XFile image)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? updateSubmitted,
     required TResult orElse(),
@@ -1326,7 +1316,7 @@ class _$_UpdateSubmitted implements _UpdateSubmitted {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image, String path) imageSelected,
+    required TResult Function(XFile image) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() updateSubmitted,
   }) {
@@ -1341,7 +1331,7 @@ class _$_UpdateSubmitted implements _UpdateSubmitted {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image, String path)? imageSelected,
+    TResult? Function(XFile image)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? updateSubmitted,
   }) {
@@ -1356,7 +1346,7 @@ class _$_UpdateSubmitted implements _UpdateSubmitted {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image, String path)? imageSelected,
+    TResult Function(XFile image)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? updateSubmitted,
     required TResult orElse(),
@@ -1427,7 +1417,6 @@ mixin _$UpdateItemState {
   item_entity.Item? get item =>
       throw _privateConstructorUsedError; // Update item parameters
   XFile? get image => throw _privateConstructorUsedError;
-  String? get imagePath => throw _privateConstructorUsedError;
   LatLng get pos => throw _privateConstructorUsedError;
   int get categoryId => throw _privateConstructorUsedError;
   TitleField get title => throw _privateConstructorUsedError;
@@ -1461,7 +1450,6 @@ abstract class $UpdateItemStateCopyWith<$Res> {
   $Res call(
       {item_entity.Item? item,
       XFile? image,
-      String? imagePath,
       LatLng pos,
       int categoryId,
       TitleField title,
@@ -1493,7 +1481,6 @@ class _$UpdateItemStateCopyWithImpl<$Res, $Val extends UpdateItemState>
   $Res call({
     Object? item = freezed,
     Object? image = freezed,
-    Object? imagePath = freezed,
     Object? pos = null,
     Object? categoryId = null,
     Object? title = null,
@@ -1518,10 +1505,6 @@ class _$UpdateItemStateCopyWithImpl<$Res, $Val extends UpdateItemState>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as XFile?,
-      imagePath: freezed == imagePath
-          ? _value.imagePath
-          : imagePath // ignore: cast_nullable_to_non_nullable
-              as String?,
       pos: null == pos
           ? _value.pos
           : pos // ignore: cast_nullable_to_non_nullable
@@ -1593,7 +1576,6 @@ abstract class _$$_UpdateItemStateCopyWith<$Res>
   $Res call(
       {item_entity.Item? item,
       XFile? image,
-      String? imagePath,
       LatLng pos,
       int categoryId,
       TitleField title,
@@ -1623,7 +1605,6 @@ class __$$_UpdateItemStateCopyWithImpl<$Res>
   $Res call({
     Object? item = freezed,
     Object? image = freezed,
-    Object? imagePath = freezed,
     Object? pos = null,
     Object? categoryId = null,
     Object? title = null,
@@ -1648,10 +1629,6 @@ class __$$_UpdateItemStateCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as XFile?,
-      imagePath: freezed == imagePath
-          ? _value.imagePath
-          : imagePath // ignore: cast_nullable_to_non_nullable
-              as String?,
       pos: null == pos
           ? _value.pos
           : pos // ignore: cast_nullable_to_non_nullable
@@ -1712,7 +1689,6 @@ class _$_UpdateItemState implements _UpdateItemState {
   const _$_UpdateItemState(
       {required this.item,
       required this.image,
-      required this.imagePath,
       required this.pos,
       required this.categoryId,
       required this.title,
@@ -1734,8 +1710,6 @@ class _$_UpdateItemState implements _UpdateItemState {
 // Update item parameters
   @override
   final XFile? image;
-  @override
-  final String? imagePath;
   @override
   final LatLng pos;
   @override
@@ -1775,7 +1749,7 @@ class _$_UpdateItemState implements _UpdateItemState {
 
   @override
   String toString() {
-    return 'UpdateItemState(item: $item, image: $image, imagePath: $imagePath, pos: $pos, categoryId: $categoryId, title: $title, question: $question, token: $token, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, showError: $showError, isLoading: $isLoading, loadFailureOrSuccess: $loadFailureOrSuccess, updateFailureOrSuccess: $updateFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
+    return 'UpdateItemState(item: $item, image: $image, pos: $pos, categoryId: $categoryId, title: $title, question: $question, token: $token, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, showError: $showError, isLoading: $isLoading, loadFailureOrSuccess: $loadFailureOrSuccess, updateFailureOrSuccess: $updateFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
   }
 
   @override
@@ -1785,8 +1759,6 @@ class _$_UpdateItemState implements _UpdateItemState {
             other is _$_UpdateItemState &&
             (identical(other.item, item) || other.item == item) &&
             (identical(other.image, image) || other.image == image) &&
-            (identical(other.imagePath, imagePath) ||
-                other.imagePath == imagePath) &&
             (identical(other.pos, pos) || other.pos == pos) &&
             (identical(other.categoryId, categoryId) ||
                 other.categoryId == categoryId) &&
@@ -1818,7 +1790,6 @@ class _$_UpdateItemState implements _UpdateItemState {
       runtimeType,
       item,
       image,
-      imagePath,
       pos,
       categoryId,
       title,
@@ -1845,7 +1816,6 @@ abstract class _UpdateItemState implements UpdateItemState {
   const factory _UpdateItemState(
           {required final item_entity.Item? item,
           required final XFile? image,
-          required final String? imagePath,
           required final LatLng pos,
           required final int categoryId,
           required final TitleField title,
@@ -1866,8 +1836,6 @@ abstract class _UpdateItemState implements UpdateItemState {
   item_entity.Item? get item;
   @override // Update item parameters
   XFile? get image;
-  @override
-  String? get imagePath;
   @override
   LatLng get pos;
   @override

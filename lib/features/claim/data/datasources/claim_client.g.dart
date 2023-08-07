@@ -13,7 +13,7 @@ class _ClaimClient implements ClaimClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://13.48.104.143:5000/api';
+    baseUrl ??= 'http://16.170.98.131:5000/api';
   }
 
   final Dio _dio;

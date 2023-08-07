@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/config/route_generator.dart';
 import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
+import 'package:lost_and_found/features/user/presentation/bloc/user/user_bloc.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
 import 'features/item/presentation/bloc/search/search_bloc.dart';
@@ -20,6 +21,7 @@ class App extends StatelessWidget {
         providers: [
           BlocProvider<HomeBloc>(create: (_) => sl<HomeBloc>()..add(const HomeEvent.homeCreated())),
           BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>()),
+          BlocProvider<UserBloc>(create: (_) => sl<UserBloc>()..add(const UserEvent.contentCreated())),
           BlocProvider<HomeControllerBloc>(create: (_) => sl<HomeControllerBloc>())
         ],
         child: MaterialApp(

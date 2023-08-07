@@ -16,9 +16,11 @@ class LoginScreen extends StatelessWidget {
           backgroundColor: Colors.transparent,
           elevation: 0,
           iconTheme: const IconThemeData(color: Colors.black),
-          leading: IconButton(
+          leading:
+          // TODO: show it only if there are other screens, otherwise not needed. The same applies to registration screen.
+          IconButton(
             icon: const Icon(Icons.arrow_back),
-            onPressed: () { Navigator.of(context).pushNamed('/'); }, // TODO maybe not needed
+            onPressed: () {},
           ),
         ),
         body: BlocProvider(

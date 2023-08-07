@@ -9,7 +9,6 @@ class UpdateItemState with _$UpdateItemState {
 
       // Update item parameters
       required XFile? image,
-      required String? imagePath,
       required LatLng pos,
       required int categoryId,
       required TitleField title,
@@ -33,6 +32,5 @@ class UpdateItemState with _$UpdateItemState {
       question: QuestionField(""),
       pos: const LatLng(0, 0),
       categoryId: 0,
-      image: null,
-      imagePath: null);
+      image: null);
 }

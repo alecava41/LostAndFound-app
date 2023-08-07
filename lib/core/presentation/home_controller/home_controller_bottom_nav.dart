@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/pages/fake_insert_page_item.dart';
 import 'package:lost_and_found/features/item/presentation/pages/search_page.dart';
+import 'package:lost_and_found/features/user/presentation/pages/user_page.dart';
 
 import '../../../features/item/presentation/pages/home_page.dart';
-import '../../../screens/pages/option_page.dart';
 import '../../../utils/colors.dart';
 import 'bloc/home_controller_bloc.dart';
 
@@ -20,12 +20,7 @@ class HomeControllerBottomNav extends StatelessWidget {
       const Center(
         child: Text("Contact"),
       ),
-      OptionScreenPage(
-        userImagePath: "",
-        userName: "",
-        onPhotoChange: () => {},
-        userImageFile: null,
-      ),
+    const UserScreen(),
     ];
 
     return BlocBuilder<HomeControllerBloc, HomeControllerState>(builder: (ctx, state) {

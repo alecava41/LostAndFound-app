@@ -6,7 +6,6 @@ class InsertItemState with _$InsertItemState {
     // Insert item parameters
     required ItemType type,
     required XFile? image,
-    required String? imagePath,
     required LatLng pos,
     required int categoryId,
     required TitleField title,
@@ -30,6 +29,5 @@ class InsertItemState with _$InsertItemState {
       pos: const LatLng(0, 0),
       type: ItemType.lost,
       categoryId: 0,
-      image: null,
-      imagePath: null);
+      image: null);
 }

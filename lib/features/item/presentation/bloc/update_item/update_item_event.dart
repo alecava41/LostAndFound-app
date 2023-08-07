@@ -7,7 +7,7 @@ class UpdateItemEvent with _$UpdateItemEvent {
   const factory UpdateItemEvent.questionChanged(String input) = _QuestionChanged;
   const factory UpdateItemEvent.positionSelected(LatLng pos) = _PositionSelected;
   const factory UpdateItemEvent.categorySelected(int id, String category) = _CategorySelected;
-  const factory UpdateItemEvent.imageSelected(XFile image, String path) = _ImageSelected;
+  const factory UpdateItemEvent.imageSelected(XFile image) = _ImageSelected;
   const factory UpdateItemEvent.imageDeleted() = _ImageDeleted;
   const factory UpdateItemEvent.updateSubmitted() = _UpdateSubmitted;
 }
