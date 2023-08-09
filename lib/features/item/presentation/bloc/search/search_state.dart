@@ -4,14 +4,17 @@ part of 'search_bloc.dart';
 class SearchState with _$SearchState {
   const factory SearchState({
     // Search parameters
-    required bool foundChecked,
-    required bool lostChecked,
-    required List<SearchItem> results,
-    @Default("") String address,
-    required LatLng pos,
-    @Default("") String category,
-    required int categoryId,
+    required ItemsTypeField itemsToSearch,
+    required PositionField pos,
+    required CategoryField cat,
     required DateTime? dateTime,
+
+    // Search results
+    required List<SearchItem> results,
+
+    // User-friendly fields
+    @Default("") String category,
+    @Default("") String address,
 
     @Default(false) bool isConnected,
     @Default(false) bool hasLocationPermissions,
@@ -19,15 +22,15 @@ class SearchState with _$SearchState {
     @Default("") String token,
 
     // Fields to handle real search
+    @Default(false) bool showError,
     @Default(SearchPageState.filterPage) SearchPageState pageState,
     Either<Failure, Success>? searchFailureOrSuccess,
   }) = _SearchState;
 
-  factory SearchState.initial() => const SearchState(
-      foundChecked: false,
-      pos: LatLng(0, 0),
-      lostChecked: false,
-      categoryId: 0,
+  factory SearchState.initial() => SearchState(
+      itemsToSearch: ItemsTypeField(false, false),
+      pos: PositionField(const LatLng(0,0)),
+      cat: CategoryField(-1),
       results: [],
       dateTime: null,
   );

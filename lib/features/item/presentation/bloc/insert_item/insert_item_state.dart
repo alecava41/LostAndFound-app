@@ -6,19 +6,21 @@ class InsertItemState with _$InsertItemState {
     // Insert item parameters
     required ItemType type,
     required XFile? image,
-    required LatLng pos,
-    required int categoryId,
+    required PositionField pos,
+    required CategoryField cat,
     required TitleField title,
     required QuestionField question,
 
-    // Additional params
+    // User-friendly info
     @Default("") String category,
     @Default("") String address,
+    @Default(false) isLoadingPosition,
+
+    // Additional parameters
     @Default(false) bool isConnected,
     @Default(false) bool hasLocationPermissions,
     @Default(false) showError,
     @Default(false) isLoading,
-    @Default(false) isLoadingPosition,
 
     Either<Failure, Success>? insertFailureOrSuccess,
     Either<Failure, Success>? imageUploadFailureOrSuccess
@@ -27,8 +29,8 @@ class InsertItemState with _$InsertItemState {
   factory InsertItemState.initial() => InsertItemState(
       title: TitleField(""),
       question: QuestionField(""),
-      pos: const LatLng(0, 0), // TODO replace with the default one
+      pos: PositionField(const LatLng(0,0)),
       type: ItemType.lost,
-      categoryId: 0,
+      cat: CategoryField(-1),
       image: null);
 }

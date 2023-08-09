@@ -31,14 +31,12 @@ class UpdateItemScreen extends StatelessWidget {
 
   void onTapGallery(BuildContext ctx) {
     Navigator.pop(ctx);
-    getImage(ImageSource.gallery,
-        (image) => ctx.read<UpdateItemBloc>().add(UpdateItemEvent.imageSelected(image!)));
+    getImage(ImageSource.gallery, (image) => ctx.read<UpdateItemBloc>().add(UpdateItemEvent.imageSelected(image!)));
   }
 
   void onTapCamera(BuildContext ctx) {
     Navigator.pop(ctx);
-    getImage(ImageSource.camera,
-        (image) => ctx.read<UpdateItemBloc>().add(UpdateItemEvent.imageSelected(image!)));
+    getImage(ImageSource.camera, (image) => ctx.read<UpdateItemBloc>().add(UpdateItemEvent.imageSelected(image!)));
   }
 
   void onConfirm(BuildContext context) {
@@ -89,20 +87,23 @@ class UpdateItemScreen extends StatelessWidget {
                       if (loadFailureOrSuccess != null) {
                         loadFailureOrSuccess.fold(
                             (failure) => {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      padding: const EdgeInsets.all(30),
-                                      backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
-                                      content: Text(
-                                          failure.maybeWhen<String>(
-                                              genericFailure: () => 'Server error. Please try again later.',
-                                              networkFailure: () =>
-                                                  'No internet connection available. Check your internet connection.',
-                                              validationFailure: (reason) => reason!,
-                                              orElse: () => "Unknown error"),
-                                          style: const TextStyle(fontSize: 20)),
-                                    ),
-                                  )
+                                  failure.maybeWhen(
+                                      validationFailure: (_) {},
+                                      orElse: () {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            padding: const EdgeInsets.all(30),
+                                            backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                                            content: Text(
+                                                failure.maybeWhen<String>(
+                                                    genericFailure: () => 'Server error. Please try again later.',
+                                                    networkFailure: () =>
+                                                        'No internet connection available. Check your internet connection.',
+                                                    orElse: () => "Unknown error"),
+                                                style: const TextStyle(fontSize: 20)),
+                                          ),
+                                        );
+                                      })
                                   // TODO: close page or do something (even for InsertItemScreen)
                                 },
                             (_) => {});
@@ -175,7 +176,7 @@ class UpdateItemScreen extends StatelessWidget {
                                   state.item!.type == ItemType.found ? customDivider() : Container(),
                                   state.item!.type == ItemType.found
                                       ? PersonalizedFormWithTextInsertion(
-                                    text: state.question.value.getOrElse(() => ""),
+                                          text: state.question.value.getOrElse(() => ""),
                                           title: "Question to verify the ownership:",
                                           hintText: "e.g. Any device scratches? Where?",
                                           isValid: state.question.value.isRight(),
@@ -193,7 +194,12 @@ class UpdateItemScreen extends StatelessWidget {
                                     height: 10,
                                   ),
                                   SelectPositionButton(
-                                    startingPosition: state.pos,
+                                    showError: state.showError,
+                                    errorText: state.pos.value.fold(
+                                        (failure) =>
+                                            failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""),
+                                        (_) => ""),
+                                    startingPosition: state.pos.value.getOrElse(() => const LatLng(0, 0)),
                                     isLoadingAddress: state.isLoadingPosition,
                                     address: state.address,
                                     onPositionSelected: (LatLng? pos) {
@@ -212,6 +218,12 @@ class UpdateItemScreen extends StatelessWidget {
                                         .read<UpdateItemBloc>()
                                         .add(UpdateItemEvent.categorySelected(value.first, value.second)),
                                     category: state.category,
+                                    showError: state.showError,
+                                    errorText: state.cat.value.fold(
+                                        (failure) =>
+                                            failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""),
+                                        (_) => ""),
+                                    removeAllOption: true,
                                   ),
                                   const SizedBox(
                                     height: 40,

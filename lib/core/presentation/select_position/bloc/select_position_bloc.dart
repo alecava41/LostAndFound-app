@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../../core/network/network_info.dart';
 import '../../../../../core/status/failures.dart';

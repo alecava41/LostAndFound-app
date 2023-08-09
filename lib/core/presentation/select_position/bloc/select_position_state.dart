@@ -12,6 +12,6 @@ class SelectPositionState with _$SelectPositionState {
   }) = _SelectPositionState;
 
   factory SelectPositionState.initial() => const SelectPositionState(
-    userCurrentPos: LatLng(43.102107520506756, 12.349117446797067)
+    userCurrentPos: defaultPosition
   );
 }

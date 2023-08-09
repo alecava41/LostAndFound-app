@@ -1321,19 +1321,21 @@ abstract class _ShowFilters implements SearchEvent {
 /// @nodoc
 mixin _$SearchState {
 // Search parameters
-  bool get foundChecked => throw _privateConstructorUsedError;
-  bool get lostChecked => throw _privateConstructorUsedError;
-  List<SearchItem> get results => throw _privateConstructorUsedError;
-  String get address => throw _privateConstructorUsedError;
-  LatLng get pos => throw _privateConstructorUsedError;
+  ItemsTypeField get itemsToSearch => throw _privateConstructorUsedError;
+  PositionField get pos => throw _privateConstructorUsedError;
+  CategoryField get cat => throw _privateConstructorUsedError;
+  DateTime? get dateTime =>
+      throw _privateConstructorUsedError; // Search results
+  List<SearchItem> get results =>
+      throw _privateConstructorUsedError; // User-friendly fields
   String get category => throw _privateConstructorUsedError;
-  int get categoryId => throw _privateConstructorUsedError;
-  DateTime? get dateTime => throw _privateConstructorUsedError;
+  String get address => throw _privateConstructorUsedError;
   bool get isConnected => throw _privateConstructorUsedError;
   bool get hasLocationPermissions => throw _privateConstructorUsedError;
   bool get isLoadingPosition => throw _privateConstructorUsedError;
   String get token =>
       throw _privateConstructorUsedError; // Fields to handle real search
+  bool get showError => throw _privateConstructorUsedError;
   SearchPageState get pageState => throw _privateConstructorUsedError;
   Either<Failure, Success>? get searchFailureOrSuccess =>
       throw _privateConstructorUsedError;
@@ -1350,18 +1352,18 @@ abstract class $SearchStateCopyWith<$Res> {
       _$SearchStateCopyWithImpl<$Res, SearchState>;
   @useResult
   $Res call(
-      {bool foundChecked,
-      bool lostChecked,
-      List<SearchItem> results,
-      String address,
-      LatLng pos,
-      String category,
-      int categoryId,
+      {ItemsTypeField itemsToSearch,
+      PositionField pos,
+      CategoryField cat,
       DateTime? dateTime,
+      List<SearchItem> results,
+      String category,
+      String address,
       bool isConnected,
       bool hasLocationPermissions,
       bool isLoadingPosition,
       String token,
+      bool showError,
       SearchPageState pageState,
       Either<Failure, Success>? searchFailureOrSuccess});
 }
@@ -1379,54 +1381,50 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? foundChecked = null,
-    Object? lostChecked = null,
-    Object? results = null,
-    Object? address = null,
+    Object? itemsToSearch = null,
     Object? pos = null,
-    Object? category = null,
-    Object? categoryId = null,
+    Object? cat = null,
     Object? dateTime = freezed,
+    Object? results = null,
+    Object? category = null,
+    Object? address = null,
     Object? isConnected = null,
     Object? hasLocationPermissions = null,
     Object? isLoadingPosition = null,
     Object? token = null,
+    Object? showError = null,
     Object? pageState = null,
     Object? searchFailureOrSuccess = freezed,
   }) {
     return _then(_value.copyWith(
-      foundChecked: null == foundChecked
-          ? _value.foundChecked
-          : foundChecked // ignore: cast_nullable_to_non_nullable
-              as bool,
-      lostChecked: null == lostChecked
-          ? _value.lostChecked
-          : lostChecked // ignore: cast_nullable_to_non_nullable
-              as bool,
-      results: null == results
-          ? _value.results
-          : results // ignore: cast_nullable_to_non_nullable
-              as List<SearchItem>,
-      address: null == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String,
+      itemsToSearch: null == itemsToSearch
+          ? _value.itemsToSearch
+          : itemsToSearch // ignore: cast_nullable_to_non_nullable
+              as ItemsTypeField,
       pos: null == pos
           ? _value.pos
           : pos // ignore: cast_nullable_to_non_nullable
-              as LatLng,
-      category: null == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as PositionField,
+      cat: null == cat
+          ? _value.cat
+          : cat // ignore: cast_nullable_to_non_nullable
+              as CategoryField,
       dateTime: freezed == dateTime
           ? _value.dateTime
           : dateTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      results: null == results
+          ? _value.results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<SearchItem>,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
       isConnected: null == isConnected
           ? _value.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
@@ -1443,6 +1441,10 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
+      showError: null == showError
+          ? _value.showError
+          : showError // ignore: cast_nullable_to_non_nullable
+              as bool,
       pageState: null == pageState
           ? _value.pageState
           : pageState // ignore: cast_nullable_to_non_nullable
@@ -1464,18 +1466,18 @@ abstract class _$$_SearchStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool foundChecked,
-      bool lostChecked,
-      List<SearchItem> results,
-      String address,
-      LatLng pos,
-      String category,
-      int categoryId,
+      {ItemsTypeField itemsToSearch,
+      PositionField pos,
+      CategoryField cat,
       DateTime? dateTime,
+      List<SearchItem> results,
+      String category,
+      String address,
       bool isConnected,
       bool hasLocationPermissions,
       bool isLoadingPosition,
       String token,
+      bool showError,
       SearchPageState pageState,
       Either<Failure, Success>? searchFailureOrSuccess});
 }
@@ -1491,54 +1493,50 @@ class __$$_SearchStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? foundChecked = null,
-    Object? lostChecked = null,
-    Object? results = null,
-    Object? address = null,
+    Object? itemsToSearch = null,
     Object? pos = null,
-    Object? category = null,
-    Object? categoryId = null,
+    Object? cat = null,
     Object? dateTime = freezed,
+    Object? results = null,
+    Object? category = null,
+    Object? address = null,
     Object? isConnected = null,
     Object? hasLocationPermissions = null,
     Object? isLoadingPosition = null,
     Object? token = null,
+    Object? showError = null,
     Object? pageState = null,
     Object? searchFailureOrSuccess = freezed,
   }) {
     return _then(_$_SearchState(
-      foundChecked: null == foundChecked
-          ? _value.foundChecked
-          : foundChecked // ignore: cast_nullable_to_non_nullable
-              as bool,
-      lostChecked: null == lostChecked
-          ? _value.lostChecked
-          : lostChecked // ignore: cast_nullable_to_non_nullable
-              as bool,
-      results: null == results
-          ? _value._results
-          : results // ignore: cast_nullable_to_non_nullable
-              as List<SearchItem>,
-      address: null == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String,
+      itemsToSearch: null == itemsToSearch
+          ? _value.itemsToSearch
+          : itemsToSearch // ignore: cast_nullable_to_non_nullable
+              as ItemsTypeField,
       pos: null == pos
           ? _value.pos
           : pos // ignore: cast_nullable_to_non_nullable
-              as LatLng,
-      category: null == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as PositionField,
+      cat: null == cat
+          ? _value.cat
+          : cat // ignore: cast_nullable_to_non_nullable
+              as CategoryField,
       dateTime: freezed == dateTime
           ? _value.dateTime
           : dateTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      results: null == results
+          ? _value._results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<SearchItem>,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
       isConnected: null == isConnected
           ? _value.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
@@ -1555,6 +1553,10 @@ class __$$_SearchStateCopyWithImpl<$Res>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
+      showError: null == showError
+          ? _value.showError
+          : showError // ignore: cast_nullable_to_non_nullable
+              as bool,
       pageState: null == pageState
           ? _value.pageState
           : pageState // ignore: cast_nullable_to_non_nullable
@@ -1571,28 +1573,34 @@ class __$$_SearchStateCopyWithImpl<$Res>
 
 class _$_SearchState implements _SearchState {
   const _$_SearchState(
-      {required this.foundChecked,
-      required this.lostChecked,
-      required final List<SearchItem> results,
-      this.address = "",
+      {required this.itemsToSearch,
       required this.pos,
-      this.category = "",
-      required this.categoryId,
+      required this.cat,
       required this.dateTime,
+      required final List<SearchItem> results,
+      this.category = "",
+      this.address = "",
       this.isConnected = false,
       this.hasLocationPermissions = false,
       this.isLoadingPosition = false,
       this.token = "",
+      this.showError = false,
       this.pageState = SearchPageState.filterPage,
       this.searchFailureOrSuccess})
       : _results = results;
 
 // Search parameters
   @override
-  final bool foundChecked;
+  final ItemsTypeField itemsToSearch;
   @override
-  final bool lostChecked;
+  final PositionField pos;
+  @override
+  final CategoryField cat;
+  @override
+  final DateTime? dateTime;
+// Search results
   final List<SearchItem> _results;
+// Search results
   @override
   List<SearchItem> get results {
     if (_results is EqualUnmodifiableListView) return _results;
@@ -1600,18 +1608,13 @@ class _$_SearchState implements _SearchState {
     return EqualUnmodifiableListView(_results);
   }
 
-  @override
-  @JsonKey()
-  final String address;
-  @override
-  final LatLng pos;
+// User-friendly fields
   @override
   @JsonKey()
   final String category;
   @override
-  final int categoryId;
-  @override
-  final DateTime? dateTime;
+  @JsonKey()
+  final String address;
   @override
   @JsonKey()
   final bool isConnected;
@@ -1627,13 +1630,16 @@ class _$_SearchState implements _SearchState {
 // Fields to handle real search
   @override
   @JsonKey()
+  final bool showError;
+  @override
+  @JsonKey()
   final SearchPageState pageState;
   @override
   final Either<Failure, Success>? searchFailureOrSuccess;
 
   @override
   String toString() {
-    return 'SearchState(foundChecked: $foundChecked, lostChecked: $lostChecked, results: $results, address: $address, pos: $pos, category: $category, categoryId: $categoryId, dateTime: $dateTime, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, isLoadingPosition: $isLoadingPosition, token: $token, pageState: $pageState, searchFailureOrSuccess: $searchFailureOrSuccess)';
+    return 'SearchState(itemsToSearch: $itemsToSearch, pos: $pos, cat: $cat, dateTime: $dateTime, results: $results, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, isLoadingPosition: $isLoadingPosition, token: $token, showError: $showError, pageState: $pageState, searchFailureOrSuccess: $searchFailureOrSuccess)';
   }
 
   @override
@@ -1641,19 +1647,16 @@ class _$_SearchState implements _SearchState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SearchState &&
-            (identical(other.foundChecked, foundChecked) ||
-                other.foundChecked == foundChecked) &&
-            (identical(other.lostChecked, lostChecked) ||
-                other.lostChecked == lostChecked) &&
-            const DeepCollectionEquality().equals(other._results, _results) &&
-            (identical(other.address, address) || other.address == address) &&
+            (identical(other.itemsToSearch, itemsToSearch) ||
+                other.itemsToSearch == itemsToSearch) &&
             (identical(other.pos, pos) || other.pos == pos) &&
-            (identical(other.category, category) ||
-                other.category == category) &&
-            (identical(other.categoryId, categoryId) ||
-                other.categoryId == categoryId) &&
+            (identical(other.cat, cat) || other.cat == cat) &&
             (identical(other.dateTime, dateTime) ||
                 other.dateTime == dateTime) &&
+            const DeepCollectionEquality().equals(other._results, _results) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
+            (identical(other.address, address) || other.address == address) &&
             (identical(other.isConnected, isConnected) ||
                 other.isConnected == isConnected) &&
             (identical(other.hasLocationPermissions, hasLocationPermissions) ||
@@ -1661,6 +1664,8 @@ class _$_SearchState implements _SearchState {
             (identical(other.isLoadingPosition, isLoadingPosition) ||
                 other.isLoadingPosition == isLoadingPosition) &&
             (identical(other.token, token) || other.token == token) &&
+            (identical(other.showError, showError) ||
+                other.showError == showError) &&
             (identical(other.pageState, pageState) ||
                 other.pageState == pageState) &&
             (identical(other.searchFailureOrSuccess, searchFailureOrSuccess) ||
@@ -1670,18 +1675,18 @@ class _$_SearchState implements _SearchState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      foundChecked,
-      lostChecked,
-      const DeepCollectionEquality().hash(_results),
-      address,
+      itemsToSearch,
       pos,
-      category,
-      categoryId,
+      cat,
       dateTime,
+      const DeepCollectionEquality().hash(_results),
+      category,
+      address,
       isConnected,
       hasLocationPermissions,
       isLoadingPosition,
       token,
+      showError,
       pageState,
       searchFailureOrSuccess);
 
@@ -1694,37 +1699,35 @@ class _$_SearchState implements _SearchState {
 
 abstract class _SearchState implements SearchState {
   const factory _SearchState(
-      {required final bool foundChecked,
-      required final bool lostChecked,
-      required final List<SearchItem> results,
-      final String address,
-      required final LatLng pos,
-      final String category,
-      required final int categoryId,
+      {required final ItemsTypeField itemsToSearch,
+      required final PositionField pos,
+      required final CategoryField cat,
       required final DateTime? dateTime,
+      required final List<SearchItem> results,
+      final String category,
+      final String address,
       final bool isConnected,
       final bool hasLocationPermissions,
       final bool isLoadingPosition,
       final String token,
+      final bool showError,
       final SearchPageState pageState,
       final Either<Failure, Success>? searchFailureOrSuccess}) = _$_SearchState;
 
   @override // Search parameters
-  bool get foundChecked;
+  ItemsTypeField get itemsToSearch;
   @override
-  bool get lostChecked;
+  PositionField get pos;
   @override
-  List<SearchItem> get results;
-  @override
-  String get address;
-  @override
-  LatLng get pos;
-  @override
-  String get category;
-  @override
-  int get categoryId;
+  CategoryField get cat;
   @override
   DateTime? get dateTime;
+  @override // Search results
+  List<SearchItem> get results;
+  @override // User-friendly fields
+  String get category;
+  @override
+  String get address;
   @override
   bool get isConnected;
   @override
@@ -1734,6 +1737,8 @@ abstract class _SearchState implements SearchState {
   @override
   String get token;
   @override // Fields to handle real search
+  bool get showError;
+  @override
   SearchPageState get pageState;
   @override
   Either<Failure, Success>? get searchFailureOrSuccess;

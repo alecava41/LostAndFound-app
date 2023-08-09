@@ -1416,18 +1416,19 @@ mixin _$InsertItemState {
 // Insert item parameters
   ItemType get type => throw _privateConstructorUsedError;
   XFile? get image => throw _privateConstructorUsedError;
-  LatLng get pos => throw _privateConstructorUsedError;
-  int get categoryId => throw _privateConstructorUsedError;
+  PositionField get pos => throw _privateConstructorUsedError;
+  CategoryField get cat => throw _privateConstructorUsedError;
   TitleField get title => throw _privateConstructorUsedError;
   QuestionField get question =>
-      throw _privateConstructorUsedError; // Additional params
+      throw _privateConstructorUsedError; // User-friendly info
   String get category => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
+  dynamic get isLoadingPosition =>
+      throw _privateConstructorUsedError; // Additional parameters
   bool get isConnected => throw _privateConstructorUsedError;
   bool get hasLocationPermissions => throw _privateConstructorUsedError;
   dynamic get showError => throw _privateConstructorUsedError;
   dynamic get isLoading => throw _privateConstructorUsedError;
-  dynamic get isLoadingPosition => throw _privateConstructorUsedError;
   Either<Failure, Success>? get insertFailureOrSuccess =>
       throw _privateConstructorUsedError;
   Either<Failure, Success>? get imageUploadFailureOrSuccess =>
@@ -1447,17 +1448,17 @@ abstract class $InsertItemStateCopyWith<$Res> {
   $Res call(
       {ItemType type,
       XFile? image,
-      LatLng pos,
-      int categoryId,
+      PositionField pos,
+      CategoryField cat,
       TitleField title,
       QuestionField question,
       String category,
       String address,
+      dynamic isLoadingPosition,
       bool isConnected,
       bool hasLocationPermissions,
       dynamic showError,
       dynamic isLoading,
-      dynamic isLoadingPosition,
       Either<Failure, Success>? insertFailureOrSuccess,
       Either<Failure, Success>? imageUploadFailureOrSuccess});
 }
@@ -1478,16 +1479,16 @@ class _$InsertItemStateCopyWithImpl<$Res, $Val extends InsertItemState>
     Object? type = null,
     Object? image = freezed,
     Object? pos = null,
-    Object? categoryId = null,
+    Object? cat = null,
     Object? title = null,
     Object? question = null,
     Object? category = null,
     Object? address = null,
+    Object? isLoadingPosition = freezed,
     Object? isConnected = null,
     Object? hasLocationPermissions = null,
     Object? showError = freezed,
     Object? isLoading = freezed,
-    Object? isLoadingPosition = freezed,
     Object? insertFailureOrSuccess = freezed,
     Object? imageUploadFailureOrSuccess = freezed,
   }) {
@@ -1503,11 +1504,11 @@ class _$InsertItemStateCopyWithImpl<$Res, $Val extends InsertItemState>
       pos: null == pos
           ? _value.pos
           : pos // ignore: cast_nullable_to_non_nullable
-              as LatLng,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as PositionField,
+      cat: null == cat
+          ? _value.cat
+          : cat // ignore: cast_nullable_to_non_nullable
+              as CategoryField,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -1524,6 +1525,10 @@ class _$InsertItemStateCopyWithImpl<$Res, $Val extends InsertItemState>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoadingPosition: freezed == isLoadingPosition
+          ? _value.isLoadingPosition
+          : isLoadingPosition // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       isConnected: null == isConnected
           ? _value.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
@@ -1539,10 +1544,6 @@ class _$InsertItemStateCopyWithImpl<$Res, $Val extends InsertItemState>
       isLoading: freezed == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      isLoadingPosition: freezed == isLoadingPosition
-          ? _value.isLoadingPosition
-          : isLoadingPosition // ignore: cast_nullable_to_non_nullable
               as dynamic,
       insertFailureOrSuccess: freezed == insertFailureOrSuccess
           ? _value.insertFailureOrSuccess
@@ -1567,17 +1568,17 @@ abstract class _$$_InsertItemStateCopyWith<$Res>
   $Res call(
       {ItemType type,
       XFile? image,
-      LatLng pos,
-      int categoryId,
+      PositionField pos,
+      CategoryField cat,
       TitleField title,
       QuestionField question,
       String category,
       String address,
+      dynamic isLoadingPosition,
       bool isConnected,
       bool hasLocationPermissions,
       dynamic showError,
       dynamic isLoading,
-      dynamic isLoadingPosition,
       Either<Failure, Success>? insertFailureOrSuccess,
       Either<Failure, Success>? imageUploadFailureOrSuccess});
 }
@@ -1596,16 +1597,16 @@ class __$$_InsertItemStateCopyWithImpl<$Res>
     Object? type = null,
     Object? image = freezed,
     Object? pos = null,
-    Object? categoryId = null,
+    Object? cat = null,
     Object? title = null,
     Object? question = null,
     Object? category = null,
     Object? address = null,
+    Object? isLoadingPosition = freezed,
     Object? isConnected = null,
     Object? hasLocationPermissions = null,
     Object? showError = freezed,
     Object? isLoading = freezed,
-    Object? isLoadingPosition = freezed,
     Object? insertFailureOrSuccess = freezed,
     Object? imageUploadFailureOrSuccess = freezed,
   }) {
@@ -1621,11 +1622,11 @@ class __$$_InsertItemStateCopyWithImpl<$Res>
       pos: null == pos
           ? _value.pos
           : pos // ignore: cast_nullable_to_non_nullable
-              as LatLng,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as PositionField,
+      cat: null == cat
+          ? _value.cat
+          : cat // ignore: cast_nullable_to_non_nullable
+              as CategoryField,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -1642,6 +1643,9 @@ class __$$_InsertItemStateCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoadingPosition: freezed == isLoadingPosition
+          ? _value.isLoadingPosition!
+          : isLoadingPosition,
       isConnected: null == isConnected
           ? _value.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
@@ -1652,9 +1656,6 @@ class __$$_InsertItemStateCopyWithImpl<$Res>
               as bool,
       showError: freezed == showError ? _value.showError! : showError,
       isLoading: freezed == isLoading ? _value.isLoading! : isLoading,
-      isLoadingPosition: freezed == isLoadingPosition
-          ? _value.isLoadingPosition!
-          : isLoadingPosition,
       insertFailureOrSuccess: freezed == insertFailureOrSuccess
           ? _value.insertFailureOrSuccess
           : insertFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -1674,16 +1675,16 @@ class _$_InsertItemState implements _InsertItemState {
       {required this.type,
       required this.image,
       required this.pos,
-      required this.categoryId,
+      required this.cat,
       required this.title,
       required this.question,
       this.category = "",
       this.address = "",
+      this.isLoadingPosition = false,
       this.isConnected = false,
       this.hasLocationPermissions = false,
       this.showError = false,
       this.isLoading = false,
-      this.isLoadingPosition = false,
       this.insertFailureOrSuccess,
       this.imageUploadFailureOrSuccess});
 
@@ -1693,20 +1694,24 @@ class _$_InsertItemState implements _InsertItemState {
   @override
   final XFile? image;
   @override
-  final LatLng pos;
+  final PositionField pos;
   @override
-  final int categoryId;
+  final CategoryField cat;
   @override
   final TitleField title;
   @override
   final QuestionField question;
-// Additional params
+// User-friendly info
   @override
   @JsonKey()
   final String category;
   @override
   @JsonKey()
   final String address;
+  @override
+  @JsonKey()
+  final dynamic isLoadingPosition;
+// Additional parameters
   @override
   @JsonKey()
   final bool isConnected;
@@ -1720,16 +1725,13 @@ class _$_InsertItemState implements _InsertItemState {
   @JsonKey()
   final dynamic isLoading;
   @override
-  @JsonKey()
-  final dynamic isLoadingPosition;
-  @override
   final Either<Failure, Success>? insertFailureOrSuccess;
   @override
   final Either<Failure, Success>? imageUploadFailureOrSuccess;
 
   @override
   String toString() {
-    return 'InsertItemState(type: $type, image: $image, pos: $pos, categoryId: $categoryId, title: $title, question: $question, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, showError: $showError, isLoading: $isLoading, isLoadingPosition: $isLoadingPosition, insertFailureOrSuccess: $insertFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
+    return 'InsertItemState(type: $type, image: $image, pos: $pos, cat: $cat, title: $title, question: $question, category: $category, address: $address, isLoadingPosition: $isLoadingPosition, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, showError: $showError, isLoading: $isLoading, insertFailureOrSuccess: $insertFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
   }
 
   @override
@@ -1740,22 +1742,21 @@ class _$_InsertItemState implements _InsertItemState {
             (identical(other.type, type) || other.type == type) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.pos, pos) || other.pos == pos) &&
-            (identical(other.categoryId, categoryId) ||
-                other.categoryId == categoryId) &&
+            (identical(other.cat, cat) || other.cat == cat) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.question, question) ||
                 other.question == question) &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.address, address) || other.address == address) &&
+            const DeepCollectionEquality()
+                .equals(other.isLoadingPosition, isLoadingPosition) &&
             (identical(other.isConnected, isConnected) ||
                 other.isConnected == isConnected) &&
             (identical(other.hasLocationPermissions, hasLocationPermissions) ||
                 other.hasLocationPermissions == hasLocationPermissions) &&
             const DeepCollectionEquality().equals(other.showError, showError) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
-            const DeepCollectionEquality()
-                .equals(other.isLoadingPosition, isLoadingPosition) &&
             (identical(other.insertFailureOrSuccess, insertFailureOrSuccess) ||
                 other.insertFailureOrSuccess == insertFailureOrSuccess) &&
             (identical(other.imageUploadFailureOrSuccess,
@@ -1770,16 +1771,16 @@ class _$_InsertItemState implements _InsertItemState {
       type,
       image,
       pos,
-      categoryId,
+      cat,
       title,
       question,
       category,
       address,
+      const DeepCollectionEquality().hash(isLoadingPosition),
       isConnected,
       hasLocationPermissions,
       const DeepCollectionEquality().hash(showError),
       const DeepCollectionEquality().hash(isLoading),
-      const DeepCollectionEquality().hash(isLoadingPosition),
       insertFailureOrSuccess,
       imageUploadFailureOrSuccess);
 
@@ -1794,17 +1795,17 @@ abstract class _InsertItemState implements InsertItemState {
   const factory _InsertItemState(
           {required final ItemType type,
           required final XFile? image,
-          required final LatLng pos,
-          required final int categoryId,
+          required final PositionField pos,
+          required final CategoryField cat,
           required final TitleField title,
           required final QuestionField question,
           final String category,
           final String address,
+          final dynamic isLoadingPosition,
           final bool isConnected,
           final bool hasLocationPermissions,
           final dynamic showError,
           final dynamic isLoading,
-          final dynamic isLoadingPosition,
           final Either<Failure, Success>? insertFailureOrSuccess,
           final Either<Failure, Success>? imageUploadFailureOrSuccess}) =
       _$_InsertItemState;
@@ -1814,18 +1815,20 @@ abstract class _InsertItemState implements InsertItemState {
   @override
   XFile? get image;
   @override
-  LatLng get pos;
+  PositionField get pos;
   @override
-  int get categoryId;
+  CategoryField get cat;
   @override
   TitleField get title;
   @override
   QuestionField get question;
-  @override // Additional params
+  @override // User-friendly info
   String get category;
   @override
   String get address;
   @override
+  dynamic get isLoadingPosition;
+  @override // Additional parameters
   bool get isConnected;
   @override
   bool get hasLocationPermissions;
@@ -1833,8 +1836,6 @@ abstract class _InsertItemState implements InsertItemState {
   dynamic get showError;
   @override
   dynamic get isLoading;
-  @override
-  dynamic get isLoadingPosition;
   @override
   Either<Failure, Success>? get insertFailureOrSuccess;
   @override

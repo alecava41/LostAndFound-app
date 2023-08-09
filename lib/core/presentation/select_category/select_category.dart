@@ -8,7 +8,9 @@ import '../../../injection_container.dart';
 import 'category_item.dart';
 
 class CategorySelectionScreen extends StatelessWidget {
-  const CategorySelectionScreen({super.key});
+  final bool removeAllOption;
+
+  const CategorySelectionScreen({super.key, this.removeAllOption = false});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class CategorySelectionScreen extends StatelessWidget {
                     return SingleChildScrollView(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: state.categories
+                        children: (removeAllOption ? state.categories.drop(1) : state.categories)
                             .map((cat) => CategoryItem(
                                   categoryName: cat.name,
                                   icon: IconData(cat.icon, fontFamily: 'MaterialIcons'),

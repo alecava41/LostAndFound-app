@@ -1417,8 +1417,8 @@ mixin _$UpdateItemState {
   item_entity.Item? get item =>
       throw _privateConstructorUsedError; // Update item parameters
   XFile? get image => throw _privateConstructorUsedError;
-  LatLng get pos => throw _privateConstructorUsedError;
-  int get categoryId => throw _privateConstructorUsedError;
+  PositionField get pos => throw _privateConstructorUsedError;
+  CategoryField get cat => throw _privateConstructorUsedError;
   TitleField get title => throw _privateConstructorUsedError;
   QuestionField get question =>
       throw _privateConstructorUsedError; // Additional params
@@ -1451,8 +1451,8 @@ abstract class $UpdateItemStateCopyWith<$Res> {
   $Res call(
       {item_entity.Item? item,
       XFile? image,
-      LatLng pos,
-      int categoryId,
+      PositionField pos,
+      CategoryField cat,
       TitleField title,
       QuestionField question,
       String token,
@@ -1484,7 +1484,7 @@ class _$UpdateItemStateCopyWithImpl<$Res, $Val extends UpdateItemState>
     Object? item = freezed,
     Object? image = freezed,
     Object? pos = null,
-    Object? categoryId = null,
+    Object? cat = null,
     Object? title = null,
     Object? question = null,
     Object? token = null,
@@ -1511,11 +1511,11 @@ class _$UpdateItemStateCopyWithImpl<$Res, $Val extends UpdateItemState>
       pos: null == pos
           ? _value.pos
           : pos // ignore: cast_nullable_to_non_nullable
-              as LatLng,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as PositionField,
+      cat: null == cat
+          ? _value.cat
+          : cat // ignore: cast_nullable_to_non_nullable
+              as CategoryField,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -1583,8 +1583,8 @@ abstract class _$$_UpdateItemStateCopyWith<$Res>
   $Res call(
       {item_entity.Item? item,
       XFile? image,
-      LatLng pos,
-      int categoryId,
+      PositionField pos,
+      CategoryField cat,
       TitleField title,
       QuestionField question,
       String token,
@@ -1614,7 +1614,7 @@ class __$$_UpdateItemStateCopyWithImpl<$Res>
     Object? item = freezed,
     Object? image = freezed,
     Object? pos = null,
-    Object? categoryId = null,
+    Object? cat = null,
     Object? title = null,
     Object? question = null,
     Object? token = null,
@@ -1641,11 +1641,11 @@ class __$$_UpdateItemStateCopyWithImpl<$Res>
       pos: null == pos
           ? _value.pos
           : pos // ignore: cast_nullable_to_non_nullable
-              as LatLng,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as PositionField,
+      cat: null == cat
+          ? _value.cat
+          : cat // ignore: cast_nullable_to_non_nullable
+              as CategoryField,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -1702,7 +1702,7 @@ class _$_UpdateItemState implements _UpdateItemState {
       {required this.item,
       required this.image,
       required this.pos,
-      required this.categoryId,
+      required this.cat,
       required this.title,
       required this.question,
       this.token = "",
@@ -1724,9 +1724,9 @@ class _$_UpdateItemState implements _UpdateItemState {
   @override
   final XFile? image;
   @override
-  final LatLng pos;
+  final PositionField pos;
   @override
-  final int categoryId;
+  final CategoryField cat;
   @override
   final TitleField title;
   @override
@@ -1765,7 +1765,7 @@ class _$_UpdateItemState implements _UpdateItemState {
 
   @override
   String toString() {
-    return 'UpdateItemState(item: $item, image: $image, pos: $pos, categoryId: $categoryId, title: $title, question: $question, token: $token, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, showError: $showError, isLoading: $isLoading, isLoadingPosition: $isLoadingPosition, loadFailureOrSuccess: $loadFailureOrSuccess, updateFailureOrSuccess: $updateFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
+    return 'UpdateItemState(item: $item, image: $image, pos: $pos, cat: $cat, title: $title, question: $question, token: $token, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, showError: $showError, isLoading: $isLoading, isLoadingPosition: $isLoadingPosition, loadFailureOrSuccess: $loadFailureOrSuccess, updateFailureOrSuccess: $updateFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
   }
 
   @override
@@ -1776,8 +1776,7 @@ class _$_UpdateItemState implements _UpdateItemState {
             (identical(other.item, item) || other.item == item) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.pos, pos) || other.pos == pos) &&
-            (identical(other.categoryId, categoryId) ||
-                other.categoryId == categoryId) &&
+            (identical(other.cat, cat) || other.cat == cat) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.question, question) ||
                 other.question == question) &&
@@ -1809,7 +1808,7 @@ class _$_UpdateItemState implements _UpdateItemState {
       item,
       image,
       pos,
-      categoryId,
+      cat,
       title,
       question,
       token,
@@ -1835,8 +1834,8 @@ abstract class _UpdateItemState implements UpdateItemState {
   const factory _UpdateItemState(
           {required final item_entity.Item? item,
           required final XFile? image,
-          required final LatLng pos,
-          required final int categoryId,
+          required final PositionField pos,
+          required final CategoryField cat,
           required final TitleField title,
           required final QuestionField question,
           final String token,
@@ -1857,9 +1856,9 @@ abstract class _UpdateItemState implements UpdateItemState {
   @override // Update item parameters
   XFile? get image;
   @override
-  LatLng get pos;
+  PositionField get pos;
   @override
-  int get categoryId;
+  CategoryField get cat;
   @override
   TitleField get title;
   @override

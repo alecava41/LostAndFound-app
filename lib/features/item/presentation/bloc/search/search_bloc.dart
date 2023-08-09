@@ -1,12 +1,16 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dartx/dartx.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/data/secure_storage/secure_storage.dart';
 import 'package:lost_and_found/core/domain/usecases/get_address_from_position_usecase.dart';
 import 'package:lost_and_found/features/item/domain/entities/search_item.dart';
+import 'package:lost_and_found/features/item/domain/fields/search/category.dart';
+import 'package:lost_and_found/features/item/domain/fields/search/items_type.dart';
+import 'package:lost_and_found/features/item/domain/fields/search/position.dart';
 import 'package:lost_and_found/features/item/domain/usecases/search_items_usecase.dart';
 
 import '../../../../../core/status/failures.dart';
@@ -52,27 +56,31 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   }
 
   Future<void> _onSearchSubmit(Emitter<SearchState> emit) async {
-    final isTypeValid = state.foundChecked || state.lostChecked;
-    final isPositionValid = state.pos != const LatLng(0, 0);
+    final isTypeValid = state.itemsToSearch.value.isRight();
+    final isPositionValid = state.pos.value.isRight();
+    final isCategoryValid = state.cat.value.isRight();
 
     Either<Failure, Success>? searchFailureOrSuccess;
     List<SearchItem> items = [];
     SearchPageState pageState = state.pageState;
 
-    if (isTypeValid && isPositionValid) {
+    if (isTypeValid && isPositionValid && isCategoryValid) {
       emit(state.copyWith(pageState: SearchPageState.loadingPage, searchFailureOrSuccess: null));
+
+      final itemsToSearch = state.itemsToSearch.value.getOrElse(() => const Pair(false, false));
+      final pos = state.pos.value.getOrElse(() => const LatLng(0, 0));
 
       final params = SearchItemsParams(
           last: 0,
           range: 100,
-          X: state.pos.longitude,
-          Y: state.pos.latitude,
+          X: pos.longitude,
+          Y: pos.latitude,
           order: SearchItemOrder.date,
           // TODO add order
-          type: state.foundChecked && state.lostChecked
+          type: itemsToSearch.first && itemsToSearch.second
               ? SearchItemType.all
-              : (state.foundChecked ? SearchItemType.found : SearchItemType.lost),
-          category: state.categoryId,
+              : (itemsToSearch.first ? SearchItemType.found : SearchItemType.lost),
+          category: state.cat.value.getOrElse(() => 0),
           date: state.dateTime);
 
       // TODO error handling (must be done everywhere)
@@ -96,7 +104,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     ));
 
     emit(state.copyWith(
-        searchFailureOrSuccess: null
+      searchFailureOrSuccess: null,
+      showError: true,
     ));
   }
 
@@ -105,15 +114,17 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   }
 
   void _onCategorySelected(Emitter<SearchState> emit, int id, String category) {
-    emit(state.copyWith(category: category, categoryId: id));
+    emit(state.copyWith(category: category, cat: CategoryField(id)));
   }
 
   void _onFoundCheckTriggered(Emitter<SearchState> emit) {
-    emit(state.copyWith(foundChecked: !state.foundChecked));
+    final itemsToSearch = state.itemsToSearch.value.getOrElse(() => const Pair(false, false));
+    emit(state.copyWith(itemsToSearch: ItemsTypeField(!itemsToSearch.first, itemsToSearch.second)));
   }
 
   void _onLostCheckTriggered(Emitter<SearchState> emit) {
-    emit(state.copyWith(lostChecked: !state.lostChecked));
+    final itemsToSearch = state.itemsToSearch.value.getOrElse(() => const Pair(false, false));
+    emit(state.copyWith(itemsToSearch: ItemsTypeField(itemsToSearch.first, !itemsToSearch.second)));
   }
 
   Future<void> _onPositionSelected(Emitter<SearchState> emit, LatLng pos) async {
@@ -122,7 +133,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     final addressOrFailure =
         await _getAddressFromPositionUseCase(GetAddressFromPositionParams(lat: pos.latitude, lon: pos.longitude));
 
-    addressOrFailure.fold((failure) => emit(state.copyWith(isLoadingPosition: false)), (address) =>
-        emit(state.copyWith(address: address, pos: pos, isLoadingPosition: false)));
+    addressOrFailure.fold((failure) => emit(state.copyWith(isLoadingPosition: false)),
+        (address) => emit(state.copyWith(address: address, pos: PositionField(pos), isLoadingPosition: false)));
   }
 }

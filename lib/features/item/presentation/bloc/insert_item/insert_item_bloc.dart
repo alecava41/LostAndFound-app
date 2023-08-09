@@ -8,10 +8,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/domain/usecases/get_address_from_position_usecase.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
+import 'package:lost_and_found/features/item/domain/fields/insert_item/position.dart';
 import 'package:lost_and_found/features/item/domain/usecases/create_item_usecase.dart';
 
 import '../../../../../core/status/failures.dart';
 import '../../../../../core/status/success.dart';
+import '../../../domain/fields/insert_item/category.dart';
 import '../../../domain/fields/insert_item/question.dart';
 import '../../../domain/fields/insert_item/title.dart';
 import '../../../domain/usecases/upload_item_image_usecase.dart';
@@ -52,7 +54,7 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
   }
 
   void _onCategoryChanged(Emitter<InsertItemState> emit, int catId, String category) {
-    emit(state.copyWith(categoryId: catId, category: category));
+    emit(state.copyWith(cat: CategoryField(catId), category: category));
   }
 
   void _onImageChanged(Emitter<InsertItemState> emit, XFile? image) {
@@ -76,20 +78,24 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
   Future<void> _onInsertSubmitted(Emitter<InsertItemState> emit) async {
     final isItemLostValid = state.title.value.isRight();
     final isItemFoundValid = state.title.value.isRight() && state.question.value.isRight();
+    final isCategoryValid = state.cat.value.isRight();
+    final isPositionValid = state.pos.value.isRight();
 
     Either<Failure, Success>? createFailureOrSuccess;
     Either<Failure, Success>? imageFailureOrSuccess;
     int? newItemId;
 
-    if ((isItemLostValid || isItemFoundValid) && state.categoryId != 0 && state.pos != const LatLng(0, 0)) {
+    if ((isItemLostValid || isItemFoundValid) && isCategoryValid && isPositionValid) {
       emit(state.copyWith(isLoading: true, insertFailureOrSuccess: null));
 
+      final pos = state.pos.value.getOrElse(() => const LatLng(0, 0));
+
       final params = CreateItemParams(
-          category: state.categoryId,
+          category: state.cat.value.getOrElse(() => 0),
           title: state.title.value.getOrElse(() => ""),
           question: state.type == ItemType.found ? state.question.value.getOrElse(() => "") : null,
           type: state.type,
-          position: Position(X: state.pos.longitude, Y: state.pos.latitude));
+          position: Position(X: pos.longitude, Y: pos.latitude));
 
       final insertResponse = await _createItemUseCase(params);
       insertResponse.fold((failure) => createFailureOrSuccess = Left(failure), (itemId) {
@@ -125,6 +131,6 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
         (failure) => emit(state.copyWith(
               isLoadingPosition: false,
             )),
-        (address) => emit(state.copyWith(address: address, pos: pos, isLoadingPosition: false)));
+        (address) => emit(state.copyWith(address: address, pos: PositionField(pos), isLoadingPosition: false)));
   }
 }

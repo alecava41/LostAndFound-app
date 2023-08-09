@@ -8,6 +8,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/domain/usecases/get_address_from_position_usecase.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
+import 'package:lost_and_found/features/item/domain/fields/update_item/category.dart';
+import 'package:lost_and_found/features/item/domain/fields/update_item/position.dart';
 
 import '../../../../../core/data/secure_storage/secure_storage.dart';
 import '../../../../../core/status/failures.dart';
@@ -85,16 +87,15 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
         token: session != null ? session.token : "",
         question: question,
         title: title,
-        categoryId: item != null ? item!.category.id : 0,
+        cat: CategoryField(item != null ? item!.category.id : -1),
         category: item != null ? item!.category.name : "",
-        pos: item != null ? LatLng(item!.position.Y, item!.position.X) : const LatLng(0, 0),
-        // TODO replace w/ center
+        pos: PositionField(item != null ? LatLng(item!.position.Y, item!.position.X) : const LatLng(0, 0)),
         address: item != null ? item!.address : ""));
     emit(state.copyWith(loadFailureOrSuccess: null));
   }
 
   void _onCategoryChanged(Emitter<UpdateItemState> emit, int catId, String category) {
-    emit(state.copyWith(categoryId: catId, category: category));
+    emit(state.copyWith(cat: CategoryField(catId), category: category));
   }
 
   void _onImageChanged(Emitter<UpdateItemState> emit, XFile? image) {
@@ -112,18 +113,22 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
   Future<void> _onUpdateSubmitted(Emitter<UpdateItemState> emit) async {
     final isItemLostValid = state.title.value.isRight();
     final isItemFoundValid = state.title.value.isRight() && state.question.value.isRight();
+    final isPositionValid = state.pos.value.isRight();
+     final isCategoryValid = state.cat.value.isRight();
 
     Either<Failure, Success>? updateFailureOrSuccess;
     Either<Failure, Success>? imageFailureOrSuccess;
 
-    if ((isItemLostValid || isItemFoundValid) && state.categoryId != 0 && state.pos != const LatLng(0, 0)) {
+    if ((isItemLostValid || isItemFoundValid) && isCategoryValid && isPositionValid) {
       emit(state.copyWith(isLoading: true, updateFailureOrSuccess: null));
 
+      final pos = state.pos.value.getOrElse(() => const LatLng(0, 0));
+
       final params = UpdateItemParams(
-          category: state.categoryId,
+          category: state.cat.value.getOrElse(() => 0),
           title: state.title.value.getOrElse(() => ""),
           question: state.item!.type == ItemType.found ? state.question.value.getOrElse(() => "") : null,
-          position: Position(X: state.pos.longitude, Y: state.pos.latitude),
+          position: Position(X: pos.longitude, Y: pos.latitude),
           itemId: state.item!.id);
 
       final updateResponse = await _updateItemUseCase(params);
@@ -132,7 +137,7 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
 
       if (state.image != null) {
         // TODO correctly handle update
-        // TODO handle deletion (usecase + understand when it's the case)
+        // TODO handle deletion (usecase + understand when it is the case)
         // TODO handle image refresh (just like in user_page)
         final params = UploadItemImageParams(itemId: state.item!.id, image: File(state.image!.path));
 
@@ -158,6 +163,6 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
         await _getAddressFromPositionUseCase(GetAddressFromPositionParams(lat: pos.latitude, lon: pos.longitude));
 
     addressOrFailure.fold((failure) => emit(state.copyWith(isLoadingPosition: false)),
-        (address) => emit(state.copyWith(address: address, pos: pos, isLoadingPosition: false)));
+        (address) => emit(state.copyWith(address: address, pos: PositionField(pos), isLoadingPosition: false)));
   }
 }

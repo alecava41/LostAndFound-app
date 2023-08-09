@@ -36,6 +36,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     List<Category> categories = [];
 
     categoriesOrFailure.fold((failure) => {}, (cats) => categories = cats);
+    categories.insert(0, const Category(id: 0, name: "All", icon: 0xe1f7));
 
     emit(state.copyWith(
         isLoading: false,

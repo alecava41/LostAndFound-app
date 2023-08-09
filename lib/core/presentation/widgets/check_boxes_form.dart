@@ -2,18 +2,22 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/colors.dart';
 
-
 class PersonalizedCheckBoxesForm extends StatelessWidget {
   final bool foundChecked;
   final bool lostChecked;
-  final ValueChanged<bool?>? onFoundCheckedChanged;
-  final ValueChanged<bool?>? onLostCheckedChanged;
+  final bool showError;
+  final String errorText;
+  final ValueChanged<bool?> onFoundCheckedChanged;
+  final ValueChanged<bool?> onLostCheckedChanged;
 
-  const PersonalizedCheckBoxesForm({super.key, 
+  const PersonalizedCheckBoxesForm({
+    super.key,
+    required this.showError,
+    required this.errorText,
     required this.foundChecked,
     required this.lostChecked,
-    this.onFoundCheckedChanged,
-    this.onLostCheckedChanged,
+    required this.onFoundCheckedChanged,
+    required this.onLostCheckedChanged,
   });
 
   @override
@@ -26,16 +30,15 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
           height: 0,
         ),
         Container(
-          height: 90,
+          height: showError && errorText != "" ? 105 : 90,
           color: Colors.white,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Padding(
                 padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
                 child: Text(
-                  'Search items:',
+                  'Items',
                   style: TextStyle(fontSize: 25),
                 ),
               ),
@@ -47,6 +50,7 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
                         activeColor: PersonalizedColor.mainColor,
                         value: foundChecked,
                         onChanged: onFoundCheckedChanged,
+                        isError: showError && !foundChecked && !lostChecked,
                       ),
                       const Text(
                         'Found',
@@ -61,11 +65,21 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
                         activeColor: PersonalizedColor.mainColor,
                         value: lostChecked,
                         onChanged: onLostCheckedChanged,
+                        isError: showError && !lostChecked && !foundChecked,
                       ),
                       const Text('Lost', style: TextStyle(fontSize: 18)),
                     ],
                   ),
                 ],
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                child: showError && !foundChecked && !lostChecked
+                    ? Text(
+                        errorText,
+                        style: const TextStyle(color: Colors.red, fontSize: 12),
+                      )
+                    : Container(),
               )
             ],
           ),

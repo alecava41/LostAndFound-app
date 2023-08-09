@@ -16,18 +16,23 @@ class SearchScreen extends StatelessWidget {
         if (state.searchFailureOrSuccess != null) {
           state.searchFailureOrSuccess!.fold(
               (failure) => {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        padding: const EdgeInsets.all(30),
-                        backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
-                        content: Text(
-                            failure.maybeWhen<String>(
-                                genericFailure: () => 'Server error. Please try again later.',
-                                networkFailure: () => 'No internet connection available. Check your internet connection.',
-                                validationFailure: (reason) => reason!,
-                                orElse: () => 'Unknown error'),
-                            style: const TextStyle(fontSize: 20)),
-                      ),
+                    failure.maybeWhen(
+                      validationFailure: (_) {},
+                      orElse: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            padding: const EdgeInsets.all(30),
+                            backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                            content: Text(
+                                failure.maybeWhen<String>(
+                                    genericFailure: () => 'Server error. Please try again later.',
+                                    networkFailure: () =>
+                                        'No internet connection available. Check your internet connection.',
+                                    orElse: () => 'Unknown error'),
+                                style: const TextStyle(fontSize: 20)),
+                          ),
+                        );
+                      },
                     )
                   },
               (success) => {});

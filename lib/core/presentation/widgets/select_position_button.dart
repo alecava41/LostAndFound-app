@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/presentation/select_position/select_position.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
+import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../utils/colors.dart';
 
@@ -10,13 +11,17 @@ class SelectPositionButton extends StatelessWidget {
   final ValueChanged<LatLng?> onPositionSelected;
   final LatLng startingPosition;
   final bool isLoadingAddress;
+  final bool showError;
+  final String errorText;
 
   const SelectPositionButton({
     Key? key,
+    required this.showError,
+    required this.errorText,
     required this.address,
     required this.onPositionSelected,
     required this.isLoadingAddress,
-    this.startingPosition = const LatLng(43.102107520506756, 12.349117446797067),
+    this.startingPosition = defaultPosition,
   }) : super(key: key);
 
   @override
@@ -44,7 +49,7 @@ class SelectPositionButton extends StatelessWidget {
               onPositionSelected(selectedPos);
             },
             child: SizedBox(
-              height: 140,
+              height: showError && errorText != "" ? 165 : 140,
               width: double.infinity,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,6 +95,16 @@ class SelectPositionButton extends StatelessWidget {
                               ),
                             ],
                           ),
+                          showError && (startingPosition == defaultPosition || startingPosition == const LatLng(0, 0))
+                              ? const SizedBox(height: 10)
+                              : Container(),
+                          showError && (startingPosition == defaultPosition || startingPosition == const LatLng(0, 0))
+                              ? Text(
+                                  errorText,
+                                  // TODO errorColor is different from the default one, need to revise all custom error fields
+                                  style: const TextStyle(color: Colors.red, fontSize: 12),
+                                )
+                              : Container(),
                         ],
                       ),
                     ),

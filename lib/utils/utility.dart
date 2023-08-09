@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
 class Utility {
-  // TODO replaced with DateFormatter utils
   static String getMonth(int month) {
     switch (month) {
       case 1:
@@ -34,7 +33,6 @@ class Utility {
     }
   }
 
-  // TODO can be replaced with service
   static Future<Position> getUserLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
