@@ -18,6 +18,7 @@ class UpdateItemState with _$UpdateItemState {
       @Default("") String token,
       @Default("") String category,
       @Default("") String address,
+      @Default(false) hasDeletedOriginalImage,
       @Default(false) bool isConnected,
       @Default(false) bool hasLocationPermissions,
       @Default(false) showError,

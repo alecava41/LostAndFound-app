@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
+import 'package:lost_and_found/screens/chat.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../../core/presentation/widgets/image_dialog.dart';
@@ -24,6 +25,7 @@ class ImageItem extends StatelessWidget {
       final String imageUrl = "$baseUrl/api/items/$itemId/image";
 
       return ImageDialogWidget(
+        key: Key(randomString()),
         imageUrl: imageUrl,
         token: token,
         errorAsset: 'assets/images/no-item.png',

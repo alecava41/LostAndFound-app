@@ -9,6 +9,7 @@ import 'package:lost_and_found/features/item/domain/usecases/update_item_usecase
 import 'package:lost_and_found/features/item/domain/usecases/upload_item_image_usecase.dart';
 
 import '../../../../core/data/datasources/utils.dart';
+import '../../domain/usecases/delete_item_image_usecase.dart';
 import '../../domain/usecases/search_items_usecase.dart';
 import '../../domain/usecases/solve_item_usecase.dart';
 import '../models/item/item_dto.dart';
@@ -26,6 +27,7 @@ abstract class ItemDataSource {
   Future<void> solveItem(SolveItemParams params, int userId);
   Future<void> deleteItem(DeleteItemParams params, int userId);
   Future<void> updateItem(UpdateItemParams params, int userId);
+  Future<void> deleteItemImage(DeleteItemImageParams params, int userId);
 }
 
 class ItemDataSourceImpl implements ItemDataSource {
@@ -85,5 +87,10 @@ class ItemDataSourceImpl implements ItemDataSource {
   @override
   Future<void> updateItem(UpdateItemParams params, int userId) {
     return _client.updateItem(userId, params.itemId, params).catchError(handleError<void>);
+  }
+
+  @override
+  Future<void> deleteItemImage(DeleteItemImageParams params, int userId) {
+    return _client.deleteItemImage(userId, params.itemId).catchError(handleError<void>);
   }
 }

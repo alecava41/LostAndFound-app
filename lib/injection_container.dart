@@ -37,6 +37,7 @@ import 'package:lost_and_found/features/item/data/datasources/read_news_datasour
 import 'package:lost_and_found/features/item/data/repositories/item_repository_impl.dart';
 import 'package:lost_and_found/features/item/domain/repositories/item_repository.dart';
 import 'package:lost_and_found/features/item/domain/usecases/create_item_usecase.dart';
+import 'package:lost_and_found/features/item/domain/usecases/delete_item_image_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/delete_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_items_usecase.dart';
@@ -96,9 +97,10 @@ Future<void> init() async {
       () => ItemBloc(getItemUseCase: sl(), secureStorage: sl(), solveItemUseCase: sl(), deleteItemUseCase: sl()));
   sl.registerFactory(
       () => InsertItemBloc(createItemUseCase: sl(), getAddressFromPositionUseCase: sl(), uploadItemImageUseCase: sl()));
-  sl.registerLazySingleton(() => UpdateItemBloc(
+  sl.registerFactory(() => UpdateItemBloc(
       getItemUseCase: sl(),
       uploadItemImageUseCase: sl(),
+      deleteItemImageUseCase: sl(),
       updateItemUseCase: sl(),
       getAddressFromPositionUseCase: sl(),
       secureStorage: sl()));
@@ -113,6 +115,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SolveItemUseCase(sl()));
   sl.registerLazySingleton(() => DeleteItemUseCase(sl()));
   sl.registerLazySingleton(() => UpdateItemUseCase(sl()));
+  sl.registerLazySingleton(() => DeleteItemImageUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<ItemRepository>(() => ItemRepositoryImpl(

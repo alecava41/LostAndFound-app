@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,9 +15,11 @@ import 'package:lost_and_found/features/item/domain/fields/update_item/position.
 import '../../../../../core/data/secure_storage/secure_storage.dart';
 import '../../../../../core/status/failures.dart';
 import '../../../../../core/status/success.dart';
+import '../../../../../utils/constants.dart';
 import '../../../domain/entities/item.dart' as item_entity;
 import '../../../domain/fields/insert_item/question.dart';
 import '../../../domain/fields/insert_item/title.dart';
+import '../../../domain/usecases/delete_item_image_usecase.dart';
 import '../../../domain/usecases/get_item_usecase.dart';
 import '../../../domain/usecases/update_item_usecase.dart';
 import '../../../domain/usecases/upload_item_image_usecase.dart';
@@ -31,6 +34,7 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
   final GetItemUseCase _getItemUseCase;
   final UpdateItemUseCase _updateItemUseCase;
   final UploadItemImageUseCase _uploadItemImageUseCase;
+  final DeleteItemImageUseCase _deleteItemImageUseCase;
   final GetAddressFromPositionUseCase _getAddressFromPositionUseCase;
 
   final SecureStorage _secureStorage;
@@ -40,11 +44,13 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
       required UploadItemImageUseCase uploadItemImageUseCase,
       required UpdateItemUseCase updateItemUseCase,
       required GetAddressFromPositionUseCase getAddressFromPositionUseCase,
+      required DeleteItemImageUseCase deleteItemImageUseCase,
       required SecureStorage secureStorage})
       : _getItemUseCase = getItemUseCase,
         _uploadItemImageUseCase = uploadItemImageUseCase,
         _getAddressFromPositionUseCase = getAddressFromPositionUseCase,
         _updateItemUseCase = updateItemUseCase,
+        _deleteItemImageUseCase = deleteItemImageUseCase,
         _secureStorage = secureStorage,
         super(UpdateItemState.initial()) {
     on<UpdateItemEvent>(
@@ -99,7 +105,7 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
   }
 
   void _onImageChanged(Emitter<UpdateItemState> emit, XFile? image) {
-    emit(state.copyWith(image: image));
+    emit(state.copyWith(image: image, hasDeletedOriginalImage: image == null));
   }
 
   void _onTitleChanged(Emitter<UpdateItemState> emit, String input) {
@@ -114,7 +120,7 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
     final isItemLostValid = state.title.value.isRight();
     final isItemFoundValid = state.title.value.isRight() && state.question.value.isRight();
     final isPositionValid = state.pos.value.isRight();
-     final isCategoryValid = state.cat.value.isRight();
+    final isCategoryValid = state.cat.value.isRight();
 
     Either<Failure, Success>? updateFailureOrSuccess;
     Either<Failure, Success>? imageFailureOrSuccess;
@@ -136,15 +142,21 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
           (failure) => updateFailureOrSuccess = Left(failure), (success) => updateFailureOrSuccess = Right(success));
 
       if (state.image != null) {
-        // TODO correctly handle update
-        // TODO handle deletion (usecase + understand when it is the case)
-        // TODO handle image refresh (just like in user_page)
         final params = UploadItemImageParams(itemId: state.item!.id, image: File(state.image!.path));
 
         final imgFailureOrSuccess = await _uploadItemImageUseCase(params);
         imgFailureOrSuccess.fold(
             (failure) => imageFailureOrSuccess = Left(failure), (success) => imageFailureOrSuccess = Right(success));
+      } else if (state.item!.hasImage && state.hasDeletedOriginalImage) {
+        final params = DeleteItemImageParams(itemId: state.item!.id);
+
+        final imgFailureOrSuccess = await _deleteItemImageUseCase(params);
+        imgFailureOrSuccess.fold(
+            (failure) => imageFailureOrSuccess = Left(failure), (success) => imageFailureOrSuccess = Right(success));
       }
+
+      // Workaround to refresh image
+      await CachedNetworkImage.evictFromCache("$baseUrl/api/users/${state.item!.id}/image");
     } else {
       updateFailureOrSuccess =
           const Left(Failure.validationFailure("You need to fill all the fields with correct values."));

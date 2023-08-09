@@ -27,6 +27,7 @@ import '../../../../core/data/repositories/utils.dart';
 import '../../../../core/data/secure_storage/secure_storage.dart';
 import '../../../../core/network/network_info.dart';
 import '../../../../core/status/exceptions.dart';
+import '../../domain/usecases/delete_item_image_usecase.dart';
 import '../datasources/item_data_source.dart';
 
 class ItemRepositoryImpl implements ItemRepository {
@@ -242,6 +243,26 @@ class ItemRepositoryImpl implements ItemRepository {
 
         await _dataSource.updateItem(params, session.user);
 
+        return const Right(Success.genericSuccess());
+      } else {
+        return const Left(Failure.networkFailure());
+      }
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> deleteItemImage(DeleteItemImageParams params) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        final session = await _storage.getSessionInformation();
+
+        if (session == null) {
+          throw UserNotAuthorizedException();
+        }
+
+        await _dataSource.deleteItemImage(params, session.user);
         return const Right(Success.genericSuccess());
       } else {
         return const Left(Failure.networkFailure());

@@ -80,4 +80,10 @@ abstract class ItemClient {
       @Path("itemId") int itemId,
       @Body() UpdateItemParams params,
       );
+
+  @DELETE('/users/{userId}/items/{itemId}/image')
+  Future<void> deleteItemImage(
+      @Path("userId") int userId,
+      @Path("itemId") int itemId,
+      );
 }

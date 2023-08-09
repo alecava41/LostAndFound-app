@@ -1425,6 +1425,7 @@ mixin _$UpdateItemState {
   String get token => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
+  dynamic get hasDeletedOriginalImage => throw _privateConstructorUsedError;
   bool get isConnected => throw _privateConstructorUsedError;
   bool get hasLocationPermissions => throw _privateConstructorUsedError;
   dynamic get showError => throw _privateConstructorUsedError;
@@ -1458,6 +1459,7 @@ abstract class $UpdateItemStateCopyWith<$Res> {
       String token,
       String category,
       String address,
+      dynamic hasDeletedOriginalImage,
       bool isConnected,
       bool hasLocationPermissions,
       dynamic showError,
@@ -1490,6 +1492,7 @@ class _$UpdateItemStateCopyWithImpl<$Res, $Val extends UpdateItemState>
     Object? token = null,
     Object? category = null,
     Object? address = null,
+    Object? hasDeletedOriginalImage = freezed,
     Object? isConnected = null,
     Object? hasLocationPermissions = null,
     Object? showError = freezed,
@@ -1536,6 +1539,10 @@ class _$UpdateItemStateCopyWithImpl<$Res, $Val extends UpdateItemState>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
+      hasDeletedOriginalImage: freezed == hasDeletedOriginalImage
+          ? _value.hasDeletedOriginalImage
+          : hasDeletedOriginalImage // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       isConnected: null == isConnected
           ? _value.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
@@ -1590,6 +1597,7 @@ abstract class _$$_UpdateItemStateCopyWith<$Res>
       String token,
       String category,
       String address,
+      dynamic hasDeletedOriginalImage,
       bool isConnected,
       bool hasLocationPermissions,
       dynamic showError,
@@ -1620,6 +1628,7 @@ class __$$_UpdateItemStateCopyWithImpl<$Res>
     Object? token = null,
     Object? category = null,
     Object? address = null,
+    Object? hasDeletedOriginalImage = freezed,
     Object? isConnected = null,
     Object? hasLocationPermissions = null,
     Object? showError = freezed,
@@ -1666,6 +1675,9 @@ class __$$_UpdateItemStateCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
+      hasDeletedOriginalImage: freezed == hasDeletedOriginalImage
+          ? _value.hasDeletedOriginalImage!
+          : hasDeletedOriginalImage,
       isConnected: null == isConnected
           ? _value.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
@@ -1708,6 +1720,7 @@ class _$_UpdateItemState implements _UpdateItemState {
       this.token = "",
       this.category = "",
       this.address = "",
+      this.hasDeletedOriginalImage = false,
       this.isConnected = false,
       this.hasLocationPermissions = false,
       this.showError = false,
@@ -1743,6 +1756,9 @@ class _$_UpdateItemState implements _UpdateItemState {
   final String address;
   @override
   @JsonKey()
+  final dynamic hasDeletedOriginalImage;
+  @override
+  @JsonKey()
   final bool isConnected;
   @override
   @JsonKey()
@@ -1765,7 +1781,7 @@ class _$_UpdateItemState implements _UpdateItemState {
 
   @override
   String toString() {
-    return 'UpdateItemState(item: $item, image: $image, pos: $pos, cat: $cat, title: $title, question: $question, token: $token, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, showError: $showError, isLoading: $isLoading, isLoadingPosition: $isLoadingPosition, loadFailureOrSuccess: $loadFailureOrSuccess, updateFailureOrSuccess: $updateFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
+    return 'UpdateItemState(item: $item, image: $image, pos: $pos, cat: $cat, title: $title, question: $question, token: $token, category: $category, address: $address, hasDeletedOriginalImage: $hasDeletedOriginalImage, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, showError: $showError, isLoading: $isLoading, isLoadingPosition: $isLoadingPosition, loadFailureOrSuccess: $loadFailureOrSuccess, updateFailureOrSuccess: $updateFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
   }
 
   @override
@@ -1784,6 +1800,8 @@ class _$_UpdateItemState implements _UpdateItemState {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.address, address) || other.address == address) &&
+            const DeepCollectionEquality().equals(
+                other.hasDeletedOriginalImage, hasDeletedOriginalImage) &&
             (identical(other.isConnected, isConnected) ||
                 other.isConnected == isConnected) &&
             (identical(other.hasLocationPermissions, hasLocationPermissions) ||
@@ -1814,6 +1832,7 @@ class _$_UpdateItemState implements _UpdateItemState {
       token,
       category,
       address,
+      const DeepCollectionEquality().hash(hasDeletedOriginalImage),
       isConnected,
       hasLocationPermissions,
       const DeepCollectionEquality().hash(showError),
@@ -1841,6 +1860,7 @@ abstract class _UpdateItemState implements UpdateItemState {
           final String token,
           final String category,
           final String address,
+          final dynamic hasDeletedOriginalImage,
           final bool isConnected,
           final bool hasLocationPermissions,
           final dynamic showError,
@@ -1869,6 +1889,8 @@ abstract class _UpdateItemState implements UpdateItemState {
   String get category;
   @override
   String get address;
+  @override
+  dynamic get hasDeletedOriginalImage;
   @override
   bool get isConnected;
   @override
