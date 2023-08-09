@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SelectPositionEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() selectPositionCreated,
+    required TResult Function(LatLng pos) selectPositionCreated,
     required TResult Function() selectCurrentPosition,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? selectPositionCreated,
+    TResult? Function(LatLng pos)? selectPositionCreated,
     TResult? Function()? selectCurrentPosition,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? selectPositionCreated,
+    TResult Function(LatLng pos)? selectPositionCreated,
     TResult Function()? selectCurrentPosition,
     required TResult orElse(),
   }) =>
@@ -81,6 +81,8 @@ abstract class _$$_SelectPositionCreatedCopyWith<$Res> {
   factory _$$_SelectPositionCreatedCopyWith(_$_SelectPositionCreated value,
           $Res Function(_$_SelectPositionCreated) then) =
       __$$_SelectPositionCreatedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({LatLng pos});
 }
 
 /// @nodoc
@@ -90,54 +92,79 @@ class __$$_SelectPositionCreatedCopyWithImpl<$Res>
   __$$_SelectPositionCreatedCopyWithImpl(_$_SelectPositionCreated _value,
       $Res Function(_$_SelectPositionCreated) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? pos = null,
+  }) {
+    return _then(_$_SelectPositionCreated(
+      null == pos
+          ? _value.pos
+          : pos // ignore: cast_nullable_to_non_nullable
+              as LatLng,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_SelectPositionCreated implements _SelectPositionCreated {
-  const _$_SelectPositionCreated();
+  const _$_SelectPositionCreated(this.pos);
+
+  @override
+  final LatLng pos;
 
   @override
   String toString() {
-    return 'SelectPositionEvent.selectPositionCreated()';
+    return 'SelectPositionEvent.selectPositionCreated(pos: $pos)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_SelectPositionCreated);
+        (other.runtimeType == runtimeType &&
+            other is _$_SelectPositionCreated &&
+            (identical(other.pos, pos) || other.pos == pos));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, pos);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SelectPositionCreatedCopyWith<_$_SelectPositionCreated> get copyWith =>
+      __$$_SelectPositionCreatedCopyWithImpl<_$_SelectPositionCreated>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() selectPositionCreated,
+    required TResult Function(LatLng pos) selectPositionCreated,
     required TResult Function() selectCurrentPosition,
   }) {
-    return selectPositionCreated();
+    return selectPositionCreated(pos);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? selectPositionCreated,
+    TResult? Function(LatLng pos)? selectPositionCreated,
     TResult? Function()? selectCurrentPosition,
   }) {
-    return selectPositionCreated?.call();
+    return selectPositionCreated?.call(pos);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? selectPositionCreated,
+    TResult Function(LatLng pos)? selectPositionCreated,
     TResult Function()? selectCurrentPosition,
     required TResult orElse(),
   }) {
     if (selectPositionCreated != null) {
-      return selectPositionCreated();
+      return selectPositionCreated(pos);
     }
     return orElse();
   }
@@ -177,7 +204,13 @@ class _$_SelectPositionCreated implements _SelectPositionCreated {
 }
 
 abstract class _SelectPositionCreated implements SelectPositionEvent {
-  const factory _SelectPositionCreated() = _$_SelectPositionCreated;
+  const factory _SelectPositionCreated(final LatLng pos) =
+      _$_SelectPositionCreated;
+
+  LatLng get pos;
+  @JsonKey(ignore: true)
+  _$$_SelectPositionCreatedCopyWith<_$_SelectPositionCreated> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -218,7 +251,7 @@ class _$_SelectCurrentPosition implements _SelectCurrentPosition {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() selectPositionCreated,
+    required TResult Function(LatLng pos) selectPositionCreated,
     required TResult Function() selectCurrentPosition,
   }) {
     return selectCurrentPosition();
@@ -227,7 +260,7 @@ class _$_SelectCurrentPosition implements _SelectCurrentPosition {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? selectPositionCreated,
+    TResult? Function(LatLng pos)? selectPositionCreated,
     TResult? Function()? selectCurrentPosition,
   }) {
     return selectCurrentPosition?.call();
@@ -236,7 +269,7 @@ class _$_SelectCurrentPosition implements _SelectCurrentPosition {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? selectPositionCreated,
+    TResult Function(LatLng pos)? selectPositionCreated,
     TResult Function()? selectCurrentPosition,
     required TResult orElse(),
   }) {

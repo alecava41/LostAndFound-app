@@ -12,8 +12,10 @@ class SearchState with _$SearchState {
     @Default("") String category,
     required int categoryId,
     required DateTime? dateTime,
+
     @Default(false) bool isConnected,
     @Default(false) bool hasLocationPermissions,
+    @Default(false) bool isLoadingPosition,
     @Default("") String token,
 
     // Fields to handle real search

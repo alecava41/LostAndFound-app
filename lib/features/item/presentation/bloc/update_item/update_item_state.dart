@@ -22,6 +22,7 @@ class UpdateItemState with _$UpdateItemState {
       @Default(false) bool hasLocationPermissions,
       @Default(false) showError,
       @Default(false) isLoading,
+      @Default(false) isLoadingPosition,
       Either<Failure, Success>? loadFailureOrSuccess,
       Either<Failure, Success>? updateFailureOrSuccess,
       Either<Failure, Success>? imageUploadFailureOrSuccess}) = _UpdateItemState;

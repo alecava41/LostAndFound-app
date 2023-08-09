@@ -24,7 +24,7 @@ class SelectPositionBloc extends Bloc<SelectPositionEvent, SelectPositionState> 
     on<SelectPositionEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
-          selectPositionCreated: () => _onSelectPositionCreated(emit),
+          selectPositionCreated: (pos) => _onSelectPositionCreated(emit, pos),
           selectCurrentPosition: () => _onSelectCurrentPosition(emit),
         );
       },
@@ -41,7 +41,7 @@ class SelectPositionBloc extends Bloc<SelectPositionEvent, SelectPositionState> 
             )));
   }
 
-  Future<void> _onSelectPositionCreated(Emitter<SelectPositionState> emit) async {
+  Future<void> _onSelectPositionCreated(Emitter<SelectPositionState> emit, LatLng pos) async {
     final isDeviceConnected = await _networkInfo.isConnected;
     bool isServiceFailure = false;
     bool isPermissionPermanentlyDeniedFailure = false;
@@ -55,7 +55,9 @@ class SelectPositionBloc extends Bloc<SelectPositionEvent, SelectPositionState> 
         hasPermissions: isPermissionPermanentlyDeniedFailure == false,
         isDeviceConnected: isDeviceConnected,
         isServiceAvailable: isServiceFailure == false,
-        isPermissionPermanentlyNegated: isPermissionPermanentlyDeniedFailure));
+        isPermissionPermanentlyNegated: isPermissionPermanentlyDeniedFailure,
+        userCurrentPos: pos
+    ));
   }
 
   (bool, bool) _mapFailureToState(Failure failure) {

@@ -193,7 +193,8 @@ class UpdateItemScreen extends StatelessWidget {
                                     height: 10,
                                   ),
                                   SelectPositionButton(
-                                    startingPosition: LatLng(state.item!.position.Y, state.item!.position.X),
+                                    startingPosition: state.pos,
+                                    isLoadingAddress: state.isLoadingPosition,
                                     address: state.address,
                                     onPositionSelected: (LatLng? pos) {
                                       if (pos != null) {

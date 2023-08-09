@@ -47,10 +47,11 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
 
     emit(
       state.copyWith(
-          isLoading: false,
-          loadFailureOrSuccess: loadFailureOrSuccess,
-          news: newsResponse.getOrElse(() => []),
-          token: session.token),
+        isLoading: false,
+        loadFailureOrSuccess: loadFailureOrSuccess,
+        news: newsResponse.getOrElse(() => []),
+        token: session != null ? session.token : "",
+      ),
     );
   }
 }

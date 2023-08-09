@@ -65,7 +65,7 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
           claimsReceived: receivedClaimsResponse.getOrElse(() => []),
           claimsSent: sentClaimsResponse.getOrElse(() => []),
           loadFailureOrSuccess: loadFailureOrSuccess,
-          token: session.token,
+          token: session != null ? session.token : "",
           isLoadingReceived: false,
           isLoadingSent: false),
     );

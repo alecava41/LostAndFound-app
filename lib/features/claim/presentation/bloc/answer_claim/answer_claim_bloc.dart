@@ -53,7 +53,13 @@ class AnswerClaimBloc extends Bloc<AnswerClaimEvent, AnswerClaimState> {
 
     final session = await _storage.getSessionInformation();
 
-    emit(state.copyWith(isLoading: false, loadFailureOrSuccess: loadFailureOrSuccess, item: item, token: session.token));
+    emit(
+      state.copyWith(
+          isLoading: false,
+          loadFailureOrSuccess: loadFailureOrSuccess,
+          item: item,
+          token: session != null ? session.token : ""),
+    );
   }
 
   void _onInfoTriggered(Emitter<AnswerClaimState> emit) {

@@ -92,7 +92,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       searchFailureOrSuccess: searchFailureOrSuccess,
       pageState: pageState,
       results: items,
-      token: session.token
+      token: session != null ? session.token : "",
     ));
 
     emit(state.copyWith(
@@ -117,10 +117,12 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   }
 
   Future<void> _onPositionSelected(Emitter<SearchState> emit, LatLng pos) async {
+    emit(state.copyWith(isLoadingPosition: true));
+
     final addressOrFailure =
         await _getAddressFromPositionUseCase(GetAddressFromPositionParams(lat: pos.latitude, lon: pos.longitude));
 
-    addressOrFailure.fold((failure) => {}, (address) =>
-        emit(state.copyWith(address: address, pos: pos)));
+    addressOrFailure.fold((failure) => emit(state.copyWith(isLoadingPosition: false)), (address) =>
+        emit(state.copyWith(address: address, pos: pos, isLoadingPosition: false)));
   }
 }

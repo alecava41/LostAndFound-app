@@ -1429,6 +1429,7 @@ mixin _$UpdateItemState {
   bool get hasLocationPermissions => throw _privateConstructorUsedError;
   dynamic get showError => throw _privateConstructorUsedError;
   dynamic get isLoading => throw _privateConstructorUsedError;
+  dynamic get isLoadingPosition => throw _privateConstructorUsedError;
   Either<Failure, Success>? get loadFailureOrSuccess =>
       throw _privateConstructorUsedError;
   Either<Failure, Success>? get updateFailureOrSuccess =>
@@ -1461,6 +1462,7 @@ abstract class $UpdateItemStateCopyWith<$Res> {
       bool hasLocationPermissions,
       dynamic showError,
       dynamic isLoading,
+      dynamic isLoadingPosition,
       Either<Failure, Success>? loadFailureOrSuccess,
       Either<Failure, Success>? updateFailureOrSuccess,
       Either<Failure, Success>? imageUploadFailureOrSuccess});
@@ -1492,6 +1494,7 @@ class _$UpdateItemStateCopyWithImpl<$Res, $Val extends UpdateItemState>
     Object? hasLocationPermissions = null,
     Object? showError = freezed,
     Object? isLoading = freezed,
+    Object? isLoadingPosition = freezed,
     Object? loadFailureOrSuccess = freezed,
     Object? updateFailureOrSuccess = freezed,
     Object? imageUploadFailureOrSuccess = freezed,
@@ -1549,6 +1552,10 @@ class _$UpdateItemStateCopyWithImpl<$Res, $Val extends UpdateItemState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      isLoadingPosition: freezed == isLoadingPosition
+          ? _value.isLoadingPosition
+          : isLoadingPosition // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       loadFailureOrSuccess: freezed == loadFailureOrSuccess
           ? _value.loadFailureOrSuccess
           : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -1587,6 +1594,7 @@ abstract class _$$_UpdateItemStateCopyWith<$Res>
       bool hasLocationPermissions,
       dynamic showError,
       dynamic isLoading,
+      dynamic isLoadingPosition,
       Either<Failure, Success>? loadFailureOrSuccess,
       Either<Failure, Success>? updateFailureOrSuccess,
       Either<Failure, Success>? imageUploadFailureOrSuccess});
@@ -1616,6 +1624,7 @@ class __$$_UpdateItemStateCopyWithImpl<$Res>
     Object? hasLocationPermissions = null,
     Object? showError = freezed,
     Object? isLoading = freezed,
+    Object? isLoadingPosition = freezed,
     Object? loadFailureOrSuccess = freezed,
     Object? updateFailureOrSuccess = freezed,
     Object? imageUploadFailureOrSuccess = freezed,
@@ -1667,6 +1676,9 @@ class __$$_UpdateItemStateCopyWithImpl<$Res>
               as bool,
       showError: freezed == showError ? _value.showError! : showError,
       isLoading: freezed == isLoading ? _value.isLoading! : isLoading,
+      isLoadingPosition: freezed == isLoadingPosition
+          ? _value.isLoadingPosition!
+          : isLoadingPosition,
       loadFailureOrSuccess: freezed == loadFailureOrSuccess
           ? _value.loadFailureOrSuccess
           : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -1700,6 +1712,7 @@ class _$_UpdateItemState implements _UpdateItemState {
       this.hasLocationPermissions = false,
       this.showError = false,
       this.isLoading = false,
+      this.isLoadingPosition = false,
       this.loadFailureOrSuccess,
       this.updateFailureOrSuccess,
       this.imageUploadFailureOrSuccess});
@@ -1741,6 +1754,9 @@ class _$_UpdateItemState implements _UpdateItemState {
   @JsonKey()
   final dynamic isLoading;
   @override
+  @JsonKey()
+  final dynamic isLoadingPosition;
+  @override
   final Either<Failure, Success>? loadFailureOrSuccess;
   @override
   final Either<Failure, Success>? updateFailureOrSuccess;
@@ -1749,7 +1765,7 @@ class _$_UpdateItemState implements _UpdateItemState {
 
   @override
   String toString() {
-    return 'UpdateItemState(item: $item, image: $image, pos: $pos, categoryId: $categoryId, title: $title, question: $question, token: $token, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, showError: $showError, isLoading: $isLoading, loadFailureOrSuccess: $loadFailureOrSuccess, updateFailureOrSuccess: $updateFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
+    return 'UpdateItemState(item: $item, image: $image, pos: $pos, categoryId: $categoryId, title: $title, question: $question, token: $token, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, showError: $showError, isLoading: $isLoading, isLoadingPosition: $isLoadingPosition, loadFailureOrSuccess: $loadFailureOrSuccess, updateFailureOrSuccess: $updateFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
   }
 
   @override
@@ -1775,6 +1791,8 @@ class _$_UpdateItemState implements _UpdateItemState {
                 other.hasLocationPermissions == hasLocationPermissions) &&
             const DeepCollectionEquality().equals(other.showError, showError) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other.isLoadingPosition, isLoadingPosition) &&
             (identical(other.loadFailureOrSuccess, loadFailureOrSuccess) ||
                 other.loadFailureOrSuccess == loadFailureOrSuccess) &&
             (identical(other.updateFailureOrSuccess, updateFailureOrSuccess) ||
@@ -1801,6 +1819,7 @@ class _$_UpdateItemState implements _UpdateItemState {
       hasLocationPermissions,
       const DeepCollectionEquality().hash(showError),
       const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(isLoadingPosition),
       loadFailureOrSuccess,
       updateFailureOrSuccess,
       imageUploadFailureOrSuccess);
@@ -1827,6 +1846,7 @@ abstract class _UpdateItemState implements UpdateItemState {
           final bool hasLocationPermissions,
           final dynamic showError,
           final dynamic isLoading,
+          final dynamic isLoadingPosition,
           final Either<Failure, Success>? loadFailureOrSuccess,
           final Either<Failure, Success>? updateFailureOrSuccess,
           final Either<Failure, Success>? imageUploadFailureOrSuccess}) =
@@ -1858,6 +1878,8 @@ abstract class _UpdateItemState implements UpdateItemState {
   dynamic get showError;
   @override
   dynamic get isLoading;
+  @override
+  dynamic get isLoadingPosition;
   @override
   Either<Failure, Success>? get loadFailureOrSuccess;
   @override

@@ -82,12 +82,13 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
         isLoading: false,
         loadFailureOrSuccess: request,
         item: item,
-        token: session.token,
+        token: session != null ? session.token : "",
         question: question,
         title: title,
         categoryId: item != null ? item!.category.id : 0,
         category: item != null ? item!.category.name : "",
         pos: item != null ? LatLng(item!.position.Y, item!.position.X) : const LatLng(0, 0),
+        // TODO replace w/ center
         address: item != null ? item!.address : ""));
     emit(state.copyWith(loadFailureOrSuccess: null));
   }
@@ -151,9 +152,12 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
   }
 
   Future<void> _onPositionSelected(Emitter<UpdateItemState> emit, LatLng pos) async {
+    emit(state.copyWith(isLoadingPosition: true));
+
     final addressOrFailure =
         await _getAddressFromPositionUseCase(GetAddressFromPositionParams(lat: pos.latitude, lon: pos.longitude));
 
-    addressOrFailure.fold((failure) => {}, (address) => emit(state.copyWith(address: address, pos: pos)));
+    addressOrFailure.fold((failure) => emit(state.copyWith(isLoadingPosition: false)),
+        (address) => emit(state.copyWith(address: address, pos: pos, isLoadingPosition: false)));
   }
 }

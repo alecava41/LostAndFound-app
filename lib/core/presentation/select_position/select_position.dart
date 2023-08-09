@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -13,48 +12,34 @@ class SelectPositionScreen extends StatefulWidget {
 
   const SelectPositionScreen({super.key, required this.startingPosition});
 
+  // TODO evaluate whether to zoom at the beginning if position is not the default one
+
   @override
   State<SelectPositionScreen> createState() => _SelectPositionScreenState();
 }
 
-class _SelectPositionScreenState extends State<SelectPositionScreen>
-    with TickerProviderStateMixin {
-  late StreamSubscription subscription;
+class _SelectPositionScreenState extends State<SelectPositionScreen> with TickerProviderStateMixin {
   bool isAlertSet = false;
   late LatLng center = widget.startingPosition;
   late LatLng markerPos = widget.startingPosition;
 
-  late final AnimatedMapController mapController = AnimatedMapController(
-      vsync: this, duration: const Duration(milliseconds: 3000));
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    subscription.cancel();
-    super.dispose();
-  }
+  late final AnimatedMapController mapController =
+  AnimatedMapController(vsync: this, duration: const Duration(milliseconds: 3000));
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SelectPositionBloc>(
-      create: (_) => sl<SelectPositionBloc>()
-        ..add(const SelectPositionEvent.selectPositionCreated()),
+      create: (_) =>
+      sl<SelectPositionBloc>()
+        ..add(SelectPositionEvent.selectPositionCreated(markerPos)),
       child: BlocConsumer<SelectPositionBloc, SelectPositionState>(
         listener: (ctx, state) {
-          if (state.userCurrentPos.latitude != markerPos.latitude &&
-              state.userCurrentPos.longitude != markerPos.longitude) {
+          if (markerPos.latitude != state.userCurrentPos.latitude) {
             setState(() {
               markerPos = state.userCurrentPos;
             });
 
-            mapController.animatedZoomOut();
-            mapController.centerOnPoint(
-                LatLng(markerPos.latitude, markerPos.longitude),
-                zoom: 10);
+            mapController.centerOnPoint(LatLng(markerPos.latitude, markerPos.longitude), zoom: 10);
           }
         },
         builder: (ctx, state) {
@@ -77,30 +62,32 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
                     Stack(
                       children: [
                         SizedBox(
-                          height: MediaQuery.of(context).size.height,
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height,
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 150),
                             child: FlutterMap(
                               mapController: mapController.mapController,
                               options: MapOptions(
-                                  interactiveFlags: InteractiveFlag.all &
-                                      ~InteractiveFlag.rotate,
+                                  onMapReady: () {
+                                    mapController.centerOnPoint(LatLng(markerPos.latitude, markerPos.longitude),
+                                        zoom: 5.5);
+                                  },
+                                  interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
                                   center: center,
                                   zoom: 5.5,
-                                  onPositionChanged:
-                                      (MapPosition position, bool gesture) {
+                                  onPositionChanged: (MapPosition position, bool gesture) {
                                     // Update marker position based on the map center
                                     setState(() {
-                                      markerPos = LatLng(
-                                          position.center!.latitude,
-                                          position.center!.longitude);
+                                      markerPos = LatLng(position.center!.latitude, position.center!.longitude);
                                     });
                                   }),
                               children: [
                                 TileLayer(
-                                  urlTemplate:
-                                      'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                                  userAgentPackageName: 'com.af.lostandfound',
+                                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                  userAgentPackageName: 'it.fabc.lostandfound',
                                 ),
                                 MarkerLayer(
                                   markers: [
@@ -108,7 +95,8 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
                                       width: 200.0,
                                       height: 200.0,
                                       point: markerPos,
-                                      builder: (ctx) => const Icon(
+                                      builder: (ctx) =>
+                                      const Icon(
                                         Icons.location_on,
                                         color: Color.fromRGBO(47, 122, 106, 1),
                                         weight: 10,
@@ -129,7 +117,10 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Container(
-                              width: MediaQuery.of(context).size.width,
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width,
                               height: 200.0,
                               decoration: const BoxDecoration(
                                 color: Colors.white,
@@ -144,34 +135,24 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
                                 children: [
                                   TextButton(
                                     onPressed: () async {
-                                      if (state.hasPermissions &&
-                                          state.isDeviceConnected &&
-                                          state.isServiceAvailable) {
-                                        // TODO: add animation zoom out of 3 second to do something while is searching the position
-                                        // TODO: go to selected position if already selected?
-                                        ctx.read<SelectPositionBloc>().add(
-                                            const SelectPositionEvent
-                                                .selectCurrentPosition());
+                                      if (state.hasPermissions && state.isDeviceConnected && state.isServiceAvailable) {
+                                        ctx
+                                            .read<SelectPositionBloc>()
+                                            .add(const SelectPositionEvent.selectCurrentPosition());
+
+                                        mapController.animatedZoomOut();
                                       } else if (!state.hasPermissions) {
-                                        if (!state
-                                            .isPermissionPermanentlyNegated) {
-                                          // ignore: use_build_context_synchronously
-                                          showLocationPermissionDeniedDialog(
-                                              context);
+                                        if (!state.isPermissionPermanentlyNegated) {
+                                          showLocationPermissionDeniedDialog(context);
                                         } else {
-                                          // ignore: use_build_context_synchronously
-                                          showLocationPermissionPermanentlyDeniedDialog(
-                                              context);
+                                          showLocationPermissionPermanentlyDeniedDialog(context);
                                         }
-                                      } else if (!state.isDeviceConnected ||
-                                          !state.isServiceAvailable) {
-                                        showConnectionLostAlert(
-                                            state.isDeviceConnected);
+                                      } else if (!state.isDeviceConnected || !state.isServiceAvailable) {
+                                        showConnectionLostAlert(state.isDeviceConnected);
                                       }
                                     },
                                     child: const Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Icon(
                                           Icons.navigation,
@@ -181,8 +162,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
                                         Text(
                                           'Use my current location',
                                           style: TextStyle(
-                                            decoration:
-                                                TextDecoration.underline,
+                                            decoration: TextDecoration.underline,
                                             fontSize: 18,
                                           ),
                                         ),
@@ -196,14 +176,11 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
                                         Expanded(
                                           child: ElevatedButton(
                                               onPressed: () {
-                                                Navigator.pop(
-                                                    context, markerPos);
+                                                Navigator.pop(context, markerPos);
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 shape: const StadiumBorder(),
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 18),
+                                                padding: const EdgeInsets.symmetric(vertical: 18),
                                               ),
                                               child: const Text(
                                                 'Choose this position',
@@ -232,8 +209,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Location Permissions Denied'),
-          content: const Text(
-              'Location permissions are required to use your current location.'),
+          content: const Text('Location permissions are required to use your current location.'),
           actions: <Widget>[
             TextButton(
               onPressed: () {

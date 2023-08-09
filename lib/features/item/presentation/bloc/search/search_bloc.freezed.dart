@@ -1331,6 +1331,7 @@ mixin _$SearchState {
   DateTime? get dateTime => throw _privateConstructorUsedError;
   bool get isConnected => throw _privateConstructorUsedError;
   bool get hasLocationPermissions => throw _privateConstructorUsedError;
+  bool get isLoadingPosition => throw _privateConstructorUsedError;
   String get token =>
       throw _privateConstructorUsedError; // Fields to handle real search
   SearchPageState get pageState => throw _privateConstructorUsedError;
@@ -1359,6 +1360,7 @@ abstract class $SearchStateCopyWith<$Res> {
       DateTime? dateTime,
       bool isConnected,
       bool hasLocationPermissions,
+      bool isLoadingPosition,
       String token,
       SearchPageState pageState,
       Either<Failure, Success>? searchFailureOrSuccess});
@@ -1387,6 +1389,7 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
     Object? dateTime = freezed,
     Object? isConnected = null,
     Object? hasLocationPermissions = null,
+    Object? isLoadingPosition = null,
     Object? token = null,
     Object? pageState = null,
     Object? searchFailureOrSuccess = freezed,
@@ -1432,6 +1435,10 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.hasLocationPermissions
           : hasLocationPermissions // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoadingPosition: null == isLoadingPosition
+          ? _value.isLoadingPosition
+          : isLoadingPosition // ignore: cast_nullable_to_non_nullable
+              as bool,
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -1467,6 +1474,7 @@ abstract class _$$_SearchStateCopyWith<$Res>
       DateTime? dateTime,
       bool isConnected,
       bool hasLocationPermissions,
+      bool isLoadingPosition,
       String token,
       SearchPageState pageState,
       Either<Failure, Success>? searchFailureOrSuccess});
@@ -1493,6 +1501,7 @@ class __$$_SearchStateCopyWithImpl<$Res>
     Object? dateTime = freezed,
     Object? isConnected = null,
     Object? hasLocationPermissions = null,
+    Object? isLoadingPosition = null,
     Object? token = null,
     Object? pageState = null,
     Object? searchFailureOrSuccess = freezed,
@@ -1538,6 +1547,10 @@ class __$$_SearchStateCopyWithImpl<$Res>
           ? _value.hasLocationPermissions
           : hasLocationPermissions // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoadingPosition: null == isLoadingPosition
+          ? _value.isLoadingPosition
+          : isLoadingPosition // ignore: cast_nullable_to_non_nullable
+              as bool,
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -1568,6 +1581,7 @@ class _$_SearchState implements _SearchState {
       required this.dateTime,
       this.isConnected = false,
       this.hasLocationPermissions = false,
+      this.isLoadingPosition = false,
       this.token = "",
       this.pageState = SearchPageState.filterPage,
       this.searchFailureOrSuccess})
@@ -1606,6 +1620,9 @@ class _$_SearchState implements _SearchState {
   final bool hasLocationPermissions;
   @override
   @JsonKey()
+  final bool isLoadingPosition;
+  @override
+  @JsonKey()
   final String token;
 // Fields to handle real search
   @override
@@ -1616,7 +1633,7 @@ class _$_SearchState implements _SearchState {
 
   @override
   String toString() {
-    return 'SearchState(foundChecked: $foundChecked, lostChecked: $lostChecked, results: $results, address: $address, pos: $pos, category: $category, categoryId: $categoryId, dateTime: $dateTime, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, token: $token, pageState: $pageState, searchFailureOrSuccess: $searchFailureOrSuccess)';
+    return 'SearchState(foundChecked: $foundChecked, lostChecked: $lostChecked, results: $results, address: $address, pos: $pos, category: $category, categoryId: $categoryId, dateTime: $dateTime, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, isLoadingPosition: $isLoadingPosition, token: $token, pageState: $pageState, searchFailureOrSuccess: $searchFailureOrSuccess)';
   }
 
   @override
@@ -1641,6 +1658,8 @@ class _$_SearchState implements _SearchState {
                 other.isConnected == isConnected) &&
             (identical(other.hasLocationPermissions, hasLocationPermissions) ||
                 other.hasLocationPermissions == hasLocationPermissions) &&
+            (identical(other.isLoadingPosition, isLoadingPosition) ||
+                other.isLoadingPosition == isLoadingPosition) &&
             (identical(other.token, token) || other.token == token) &&
             (identical(other.pageState, pageState) ||
                 other.pageState == pageState) &&
@@ -1661,6 +1680,7 @@ class _$_SearchState implements _SearchState {
       dateTime,
       isConnected,
       hasLocationPermissions,
+      isLoadingPosition,
       token,
       pageState,
       searchFailureOrSuccess);
@@ -1684,6 +1704,7 @@ abstract class _SearchState implements SearchState {
       required final DateTime? dateTime,
       final bool isConnected,
       final bool hasLocationPermissions,
+      final bool isLoadingPosition,
       final String token,
       final SearchPageState pageState,
       final Either<Failure, Success>? searchFailureOrSuccess}) = _$_SearchState;
@@ -1708,6 +1729,8 @@ abstract class _SearchState implements SearchState {
   bool get isConnected;
   @override
   bool get hasLocationPermissions;
+  @override
+  bool get isLoadingPosition;
   @override
   String get token;
   @override // Fields to handle real search

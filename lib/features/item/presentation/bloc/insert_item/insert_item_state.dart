@@ -18,6 +18,7 @@ class InsertItemState with _$InsertItemState {
     @Default(false) bool hasLocationPermissions,
     @Default(false) showError,
     @Default(false) isLoading,
+    @Default(false) isLoadingPosition,
 
     Either<Failure, Success>? insertFailureOrSuccess,
     Either<Failure, Success>? imageUploadFailureOrSuccess
@@ -26,7 +27,7 @@ class InsertItemState with _$InsertItemState {
   factory InsertItemState.initial() => InsertItemState(
       title: TitleField(""),
       question: QuestionField(""),
-      pos: const LatLng(0, 0),
+      pos: const LatLng(0, 0), // TODO replace with the default one
       type: ItemType.lost,
       categoryId: 0,
       image: null);

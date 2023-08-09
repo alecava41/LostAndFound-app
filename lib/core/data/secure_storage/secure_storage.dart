@@ -18,7 +18,7 @@ abstract class SecureStorage {
   Future<void> saveLoginInformation(LoginParams param);
   Future<void> saveSessionInformation(SessionModel session);
   
-  Future<SessionModel> getSessionInformation();
+  Future<SessionModel?> getSessionInformation();
   Future<LoginParams> getCredentials();
 
   Future<void> removeCredentials();
@@ -32,11 +32,9 @@ class SecureStorageImpl extends SecureStorage {
 
   @override
   Future<bool> hasValidSession() async {
-    final validData =  await _storage.containsKey(key: ID) &&
-        await _storage.containsKey(key: TOKEN) && 
-        await _storage.containsKey(key: EXPIRE);
+    final validData =  await getSessionInformation();
 
-    if(!validData) {
+    if(validData == null) {
       return false;
     }
 
@@ -78,13 +76,16 @@ class SecureStorageImpl extends SecureStorage {
   }
 
   @override
-  Future<SessionModel> getSessionInformation() async {
+  Future<SessionModel?> getSessionInformation() async {
     final id = await _storage.read(key: ID);
     final token = await _storage.read(key: TOKEN);
     final expire = await _storage.read(key: EXPIRE);
 
-    // TODO: fix, otherwise it may throw null exception
-    return SessionModel(token: token!, user: int.parse(id!), expire: int.parse(expire!));
+    if (id != null && token != null && expire != null) {
+      return SessionModel(token: token, user: int.parse(id), expire: int.parse(expire));
+    } else {
+      return null;
+    }
   }
 
   @override

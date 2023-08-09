@@ -143,7 +143,8 @@ Future<void> init() async {
 
   // ** Feature - User **
   // BLoC
-  sl.registerFactory(() => UserBloc(getUserInfoUseCase: sl(), secureStorage: sl(), logoutUseCase: sl(), uploadUserImageUseCase: sl()));
+  sl.registerFactory(
+      () => UserBloc(getUserInfoUseCase: sl(), secureStorage: sl(), logoutUseCase: sl(), uploadUserImageUseCase: sl()));
   sl.registerFactory(() => ChangePasswordBloc(updatePasswordUseCase: sl(), storage: sl(), loginUseCase: sl()));
 
   // Use Cases
@@ -167,7 +168,7 @@ Future<void> init() async {
   sl.registerLazySingleton<PositionRepository>(() => PositionRepositoryImpl(dataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<CategoryRepository>(() => CategoryRepositoryImpl(dataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<AuthenticationRepository>(
-          () => AuthenticationRepositoryImpl(networkInfo: sl(), dataSource: sl(), storage: sl()));
+      () => AuthenticationRepositoryImpl(networkInfo: sl(), dataSource: sl(), storage: sl()));
 
   // Data sources
   sl.registerLazySingleton<PositionDataSource>(() => PositionDataSourceImpl(sl()));

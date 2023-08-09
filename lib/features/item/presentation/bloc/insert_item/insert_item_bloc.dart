@@ -38,14 +38,15 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
     on<InsertItemEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
-            imageSelected: (image) => _onImageChanged(emit, image),
-            imageDeleted: () => _onImageChanged(emit, null),
-            typeChanged: (type) => _onTypeChanged(emit, type),
-            titleChanged: (input) => _onTitleChanged(emit, input),
-            questionChanged: (input) => _onQuestionChanged(emit, input),
-            positionSelected: (pos) => _onPositionSelected(emit, pos),
-            categorySelected: (catId, category) => _onCategoryChanged(emit, catId, category),
-            insertSubmitted: () => _onInsertSubmitted(emit));
+          imageSelected: (image) => _onImageChanged(emit, image),
+          imageDeleted: () => _onImageChanged(emit, null),
+          typeChanged: (type) => _onTypeChanged(emit, type),
+          titleChanged: (input) => _onTitleChanged(emit, input),
+          questionChanged: (input) => _onQuestionChanged(emit, input),
+          positionSelected: (pos) => _onPositionSelected(emit, pos),
+          categorySelected: (catId, category) => _onCategoryChanged(emit, catId, category),
+          insertSubmitted: () => _onInsertSubmitted(emit),
+        );
       },
     );
   }
@@ -96,14 +97,12 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
         newItemId = itemId;
       });
 
-      if(newItemId != null && state.image != null) {
+      if (newItemId != null && state.image != null) {
         final params = UploadItemImageParams(itemId: newItemId!, image: File(state.image!.path));
 
         final imgFailureOrSuccess = await _uploadItemImageUseCase(params);
         imgFailureOrSuccess.fold(
-                (failure) => imageFailureOrSuccess = Left(failure),
-                (success) => imageFailureOrSuccess = Right(success)
-        );
+            (failure) => imageFailureOrSuccess = Left(failure), (success) => imageFailureOrSuccess = Right(success));
       }
     } else {
       createFailureOrSuccess =
@@ -111,16 +110,21 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
     }
 
     emit(state.copyWith(
-      showError: true,
-      insertFailureOrSuccess: createFailureOrSuccess,
-      imageUploadFailureOrSuccess: imageFailureOrSuccess
-    ));
+        showError: true,
+        insertFailureOrSuccess: createFailureOrSuccess,
+        imageUploadFailureOrSuccess: imageFailureOrSuccess));
   }
 
   Future<void> _onPositionSelected(Emitter<InsertItemState> emit, LatLng pos) async {
+    emit(state.copyWith(isLoadingPosition: true));
+
     final addressOrFailure =
         await _getAddressFromPositionUseCase(GetAddressFromPositionParams(lat: pos.latitude, lon: pos.longitude));
 
-    addressOrFailure.fold((failure) => {}, (address) => emit(state.copyWith(address: address, pos: pos)));
+    addressOrFailure.fold(
+        (failure) => emit(state.copyWith(
+              isLoadingPosition: false,
+            )),
+        (address) => emit(state.copyWith(address: address, pos: pos, isLoadingPosition: false)));
   }
 }

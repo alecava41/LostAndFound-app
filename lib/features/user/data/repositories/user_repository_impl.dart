@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import 'package:lost_and_found/core/domain/usecases/usecase.dart';
+import 'package:lost_and_found/core/status/exceptions.dart';
 
 import 'package:lost_and_found/core/status/failures.dart';
 import 'package:lost_and_found/core/status/success.dart';
@@ -34,6 +35,11 @@ class UserRepositoryImpl implements UserRepository {
     try {
       if (await _networkInfo.isConnected) {
         final session = await _storage.getSessionInformation();
+
+        if (session == null) {
+          throw UserNotAuthorizedException();
+        }
+
         final userDto = await _dataSource.getUserInfo(params, session.user);
 
         return Right(userDto.toDomain());
@@ -64,6 +70,11 @@ class UserRepositoryImpl implements UserRepository {
     try {
       if (await _networkInfo.isConnected) {
         final session = await _storage.getSessionInformation();
+
+        if (session == null) {
+          throw UserNotAuthorizedException();
+        }
+
         await _dataSource.updatePassword(params, session.user);
 
         return const Right(Success.genericSuccess());

@@ -55,7 +55,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           lostItems: lostItemsResponse.getOrElse(() => []),
           foundItems: foundItemsResponse.getOrElse(() => []),
           homeFailureOrSuccess: loadFailureOrSuccess,
-          token: session.token),
+          token: session != null ? session.token : ""),
     );
   }
 

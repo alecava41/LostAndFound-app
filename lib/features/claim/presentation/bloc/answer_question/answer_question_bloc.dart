@@ -37,8 +37,7 @@ class AnswerQuestionBloc extends Bloc<AnswerQuestionEvent, AnswerQuestionState> 
             contentCreated: (itemId) => _onContentCreated(emit, itemId),
             answerFieldChanged: (String answer) => _onAnswerFieldChanged(emit, answer),
             claimCreated: () => _onClaimSubmitted(emit),
-            infoTriggered: () => _onInfoTriggered(emit)
-        );
+            infoTriggered: () => _onInfoTriggered(emit));
       },
     );
   }
@@ -55,7 +54,13 @@ class AnswerQuestionBloc extends Bloc<AnswerQuestionEvent, AnswerQuestionState> 
 
     final session = await _storage.getSessionInformation();
 
-    emit(state.copyWith(isLoading: false, loadFailureOrSuccess: loadFailureOrSuccess, item: item, token: session.token));
+    emit(
+      state.copyWith(
+          isLoading: false,
+          loadFailureOrSuccess: loadFailureOrSuccess,
+          item: item,
+          token: session != null ? session.token : ""),
+    );
   }
 
   void _onAnswerFieldChanged(Emitter<AnswerQuestionState> emit, String answer) {

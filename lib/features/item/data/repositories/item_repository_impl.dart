@@ -26,6 +26,7 @@ import 'package:lost_and_found/features/item/domain/usecases/upload_item_image_u
 import '../../../../core/data/repositories/utils.dart';
 import '../../../../core/data/secure_storage/secure_storage.dart';
 import '../../../../core/network/network_info.dart';
+import '../../../../core/status/exceptions.dart';
 import '../datasources/item_data_source.dart';
 
 class ItemRepositoryImpl implements ItemRepository {
@@ -53,6 +54,10 @@ class ItemRepositoryImpl implements ItemRepository {
       if (await _networkInfo.isConnected) {
         final session = await _storage.getSessionInformation();
 
+        if (session == null) {
+          throw UserNotAuthorizedException();
+        }
+
         final items = await _dataSource.getUserItems(params, session.user);
         final domainItems = items.map((item) => item.toDomain()).toList();
 
@@ -70,6 +75,11 @@ class ItemRepositoryImpl implements ItemRepository {
     try {
       if (await _networkInfo.isConnected) {
         final session = await _storage.getSessionInformation();
+
+        if (session == null) {
+          throw UserNotAuthorizedException();
+        }
+
         final news = await _dataSource.getUserNotifications(params, session.user);
         final domainNews = news.map((news) => news.toDomain()).toList();
 
@@ -141,6 +151,11 @@ class ItemRepositoryImpl implements ItemRepository {
     try {
       if (await _networkInfo.isConnected) {
         final session = await _storage.getSessionInformation();
+
+        if (session == null) {
+          throw UserNotAuthorizedException();
+        }
+
         final newItem = await _dataSource.createItem(params, session.user);
 
         return Right(newItem.id);
@@ -157,6 +172,11 @@ class ItemRepositoryImpl implements ItemRepository {
     try {
       if (await _networkInfo.isConnected) {
         final session = await _storage.getSessionInformation();
+
+        if (session == null) {
+          throw UserNotAuthorizedException();
+        }
+
         await _dataSource.uploadItemImage(params, session.user);
 
         return const Right(Success.genericSuccess());
@@ -173,6 +193,11 @@ class ItemRepositoryImpl implements ItemRepository {
     try {
       if (await _networkInfo.isConnected) {
         final session = await _storage.getSessionInformation();
+
+        if (session == null) {
+          throw UserNotAuthorizedException();
+        }
+
         await _dataSource.solveItem(params, session.user);
 
         return const Right(Success.genericSuccess());
@@ -189,6 +214,11 @@ class ItemRepositoryImpl implements ItemRepository {
     try {
       if (await _networkInfo.isConnected) {
         final session = await _storage.getSessionInformation();
+
+        if (session == null) {
+          throw UserNotAuthorizedException();
+        }
+
         await _dataSource.deleteItem(params, session.user);
 
         return const Right(Success.genericSuccess());
@@ -205,6 +235,11 @@ class ItemRepositoryImpl implements ItemRepository {
     try {
       if (await _networkInfo.isConnected) {
         final session = await _storage.getSessionInformation();
+
+        if (session == null) {
+          throw UserNotAuthorizedException();
+        }
+
         await _dataSource.updateItem(params, session.user);
 
         return const Right(Success.genericSuccess());

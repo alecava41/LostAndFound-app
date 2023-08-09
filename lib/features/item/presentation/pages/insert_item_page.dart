@@ -173,6 +173,8 @@ class InsertItemScreen extends StatelessWidget {
                                 .add(InsertItemEvent.positionSelected(LatLng(pos.latitude, pos.longitude)));
                           }
                         },
+                        startingPosition: state.pos,
+                        isLoadingAddress: state.isLoadingPosition,
                       ),
                       const SizedBox(
                         height: 10,

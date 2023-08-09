@@ -59,12 +59,14 @@ class SearchOptionScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   SelectPositionButton(
+                    isLoadingAddress: state.isLoadingPosition,
                     address: state.address,
                     onPositionSelected: (LatLng? pos) {
                       if (pos != null) {
                         ctx.read<SearchBloc>().add(SearchEvent.positionSelected(LatLng(pos.latitude, pos.longitude)));
                       }
                     },
+                    startingPosition: state.pos,
                   ),
                   const SizedBox(height: 40),
                   CategorySelectionForm(

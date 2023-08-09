@@ -62,7 +62,12 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     final session = await _secureStorage.getSessionInformation();
 
     emit(state.copyWith(
-        isLoading: false, loadFailureOrSuccess: request, item: item, token: session.token, userId: session.user));
+      isLoading: false,
+      loadFailureOrSuccess: request,
+      item: item,
+      token: session != null ? session.token : "",
+      userId: session != null ? session.user : 0,
+    ));
     emit(state.copyWith(loadFailureOrSuccess: null));
   }
 
@@ -81,8 +86,15 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
 
     final session = await _secureStorage.getSessionInformation();
 
-    emit(state.copyWith(
-        isLoading: false, loadFailureOrSuccess: request, item: item, token: session.token, userId: session.user));
+    emit(
+      state.copyWith(
+        isLoading: false,
+        loadFailureOrSuccess: request,
+        item: item,
+        token: session != null ? session.token : "",
+        userId: session != null ? session.user : 0,
+      ),
+    );
     emit(state.copyWith(loadFailureOrSuccess: null));
   }
 

@@ -68,6 +68,7 @@ dependencies:
   floor: ^1.4.2
   dartx: ^1.2.0
   intl: ^0.18.0
+  http: ^1.1.0
 
 dev_dependencies:
   flutter_test:

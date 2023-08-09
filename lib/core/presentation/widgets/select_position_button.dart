@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/presentation/select_position/select_position.dart';
+import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 
 import '../../../utils/colors.dart';
 
@@ -8,13 +9,14 @@ class SelectPositionButton extends StatelessWidget {
   final String address;
   final ValueChanged<LatLng?> onPositionSelected;
   final LatLng startingPosition;
+  final bool isLoadingAddress;
 
   const SelectPositionButton({
     Key? key,
     required this.address,
     required this.onPositionSelected,
-    this.startingPosition =
-        const LatLng(43.102107520506756, 12.349117446797067),
+    required this.isLoadingAddress,
+    this.startingPosition = const LatLng(43.102107520506756, 12.349117446797067),
   }) : super(key: key);
 
   @override
@@ -58,37 +60,31 @@ class SelectPositionButton extends StatelessWidget {
                             "Position",
                             style: TextStyle(fontSize: 25),
                           ),
-                          const Text(
-                              "e.g. where the item has been found or lost"),
+                          const Text("e.g. where the item has been found or lost"),
                           const SizedBox(
                             height: 20,
                           ),
                           Row(
-                            // TODO: add progress bar
                             children: [
                               Icon(
                                 Icons.location_on,
-                                color: address == ""
-                                    ? Colors.black
-                                    : PersonalizedColor.mainColor,
+                                color: address == "" ? Colors.black : PersonalizedColor.mainColor,
                                 size: 40,
                               ),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      address == ""
-                                          ? "Position not chosen yet"
-                                          : address,
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        color: address == ""
-                                            ? Colors.black
-                                            : PersonalizedColor.mainColor,
-                                      ),
-                                    ),
+                                    isLoadingAddress
+                                        ? const CustomCircularProgress(size: 15)
+                                        : Text(
+                                            address == "" ? "Position not chosen yet" : address,
+                                            maxLines: 2,
+                                            style: TextStyle(
+                                              overflow: TextOverflow.ellipsis,
+                                              color: address == "" ? Colors.black : PersonalizedColor.mainColor,
+                                            ),
+                                          ),
                                   ],
                                 ),
                               ),

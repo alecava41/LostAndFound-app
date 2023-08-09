@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
+import 'package:lost_and_found/core/status/exceptions.dart';
 import 'package:lost_and_found/core/status/failures.dart';
 import 'package:lost_and_found/core/status/success.dart';
 import 'package:lost_and_found/features/claim/data/adapters/claim_received_from_dto.dart';
@@ -95,7 +96,12 @@ class ClaimRepositoryImpl implements ClaimRepository {
     try {
       if (await _networkInfo.isConnected) {
         final session = await _storage.getSessionInformation();
-        _dataSource.manageClaim(params, session.user);
+
+        if (session == null) {
+          throw UserNotAuthorizedException();
+        }
+
+        await _dataSource.manageClaim(params, session.user);
         return const Right(Success.genericSuccess());
       } else {
         return const Left(Failure.networkFailure());

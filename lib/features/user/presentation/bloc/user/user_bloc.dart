@@ -67,7 +67,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     final session = await _secureStorage.getSessionInformation();
 
-    emit(state.copyWith(isLoading: false, loadFailureOrSuccess: request, user: user, token: session.token));
+    emit(state.copyWith(
+      isLoading: false,
+      loadFailureOrSuccess: request,
+      user: user,
+      token: session != null ? session.token : "",
+    ));
     emit(state.copyWith(loadFailureOrSuccess: null));
   }
 

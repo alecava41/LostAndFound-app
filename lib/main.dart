@@ -12,6 +12,7 @@ void main() async {
   await di.init();
 
   String initialRoute = "/login";
+
   final response = await sl<LoginUseCase>()(null);
   response.fold(
           (failure) => initialRoute = "/login",
