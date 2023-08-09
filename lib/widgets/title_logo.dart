@@ -19,18 +19,22 @@ Widget titleLogoVertical() {
 }
 
 Widget titleLogoHorizontal() {
-  return Row(
-    children: [
-      Image.asset(
-        'assets/images/logo-removebg-preview.png', // Replace with your image path
-        width: 90,
-        height: 90,
-      ),
-      const SizedBox(width: 10), // Add some spacing between the image and text
-      const Text(
-        "Lost&Found",
-        style: TextStyle(fontSize: 40),
-      ),
-    ],
+  return SizedBox(
+    width: 400,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Image.asset(
+          'assets/images/logo-removebg-preview.png', // Replace with your image path
+          width: 90,
+          height: 90,
+        ),
+        //const SizedBox(width: 8), // Add some spacing between the image and text
+        const Text(
+          "Lost&Found",
+          style: TextStyle(fontSize: 40),
+        ),
+      ],
+    ),
   );
 }

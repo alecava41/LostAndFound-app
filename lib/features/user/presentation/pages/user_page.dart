@@ -22,14 +22,19 @@ class UserScreen extends StatelessWidget {
                     SnackBar(
                       action: SnackBarAction(
                         label: 'Retry',
-                        onPressed: () => ctx.read<UserBloc>().add(UserEvent.imageChanged(state.imagePath)),
+                        onPressed: () => ctx
+                            .read<UserBloc>()
+                            .add(UserEvent.imageChanged(state.imagePath)),
                       ),
                       padding: const EdgeInsets.all(30),
-                      backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                      backgroundColor: Colors
+                          .red, // TODO: see if color is good even in dark mode
                       content: Text(
                           failure.maybeWhen<String>(
-                              genericFailure: () => 'Server error. Please try again later.',
-                              networkFailure: () => 'No internet connection available. Check your internet connection.',
+                              genericFailure: () =>
+                                  'Server error. Please try again later.',
+                              networkFailure: () =>
+                                  'No internet connection available. Check your internet connection.',
                               orElse: () => "Unknown error"),
                           style: const TextStyle(fontSize: 20)),
                     ),
@@ -44,11 +49,14 @@ class UserScreen extends StatelessWidget {
               (failure) => ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       padding: const EdgeInsets.all(30),
-                      backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                      backgroundColor: Colors
+                          .red, // TODO: see if color is good even in dark mode
                       content: Text(
                           failure.maybeWhen<String>(
-                              genericFailure: () => 'Server error. Please try again later.',
-                              networkFailure: () => 'No internet connection available. Check your internet connection.',
+                              genericFailure: () =>
+                                  'Server error. Please try again later.',
+                              networkFailure: () =>
+                                  'No internet connection available. Check your internet connection.',
                               orElse: () => "Unknown error"),
                           style: const TextStyle(fontSize: 20)),
                     ),
@@ -80,18 +88,22 @@ class UserScreen extends StatelessWidget {
                                 style: TextStyle(fontSize: 40),
                               ),
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                                padding:
+                                    const EdgeInsets.fromLTRB(0, 10, 10, 10),
                                 child: Row(
                                   children: [
                                     Flexible(
                                       child: Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           EditableCircularImage(
                                             token: state.token,
                                             userId: state.user!.id,
-                                            onImageChange: (String? path) =>
-                                                ctx.read<UserBloc>().add(UserEvent.imageChanged(path)),
+                                            onImageChange: (String? path) => ctx
+                                                .read<UserBloc>()
+                                                .add(UserEvent.imageChanged(
+                                                    path)),
                                             radius: 70,
                                             hasImage: state.user!.hasImage,
                                           ),
@@ -100,10 +112,13 @@ class UserScreen extends StatelessWidget {
                                           ),
                                           Expanded(
                                             child: Padding(
-                                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      0, 10, 0, 0),
                                               child: Text(
                                                 state.user!.username,
-                                                style: const TextStyle(fontSize: 25),
+                                                style: const TextStyle(
+                                                    fontSize: 25),
                                               ),
                                             ),
                                           ),
@@ -135,13 +150,16 @@ class UserScreen extends StatelessWidget {
                           onTap: () => Navigator.of(ctx).pushNamed(
                                 '/options/changePassword',
                               )),
-                      // TODO add tutorial shortcut here?
+                      OptionItem(
+                          optionName: "Tutorial",
+                          onTap: () => Navigator.of(ctx).pushNamed(
+                                '/options/tutorial',
+                              )),
                       OptionItem(
                           optionName: "Logout",
                           showArrow: false,
                           onTap: () {
-                            // TODO: is it better to show confirm dialog?
-                            ctx.read<UserBloc>().add(const UserEvent.logout());
+                            showLogoutDialog(context);
                           })
                     ],
                   ),
@@ -149,6 +167,34 @@ class UserScreen extends StatelessWidget {
               :
               // TODO handle error (on listener)
               Container(),
+    );
+  }
+
+  void showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Logout'),
+          content: const Text('Are you sure you want to log out?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('No, stay connected'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                // TODO: go to path: / (e.g. InfoScreen)
+                context.read<UserBloc>().add(const UserEvent.logout());
+              },
+              child: const Text('Yes, log out'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

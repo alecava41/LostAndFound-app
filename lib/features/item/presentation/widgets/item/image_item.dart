@@ -11,7 +11,12 @@ class ImageItem extends StatelessWidget {
   final bool hasImage;
   final String token;
 
-  const ImageItem({Key? key, required this.itemId, required this.token, required this.hasImage}) : super(key: key);
+  const ImageItem(
+      {Key? key,
+      required this.itemId,
+      required this.token,
+      required this.hasImage})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +38,21 @@ class ImageItem extends StatelessWidget {
               "Authorization": "Bearer $token",
             },
             progressIndicatorBuilder: (context, url, downloadProgress) =>
-            const CustomCircularProgress(size: 150),
-            errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
+                const CustomCircularProgress(size: 150),
+            errorWidget: (context, url, error) =>
+                Image.asset("assets/images/no-item.png"),
             imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
           ),
         ),
       );
     } else {
-      return Image.asset("assets/images/no-item.png");
+      return SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 300,
+          child: Image.asset(
+            "assets/images/no-item.png",
+            fit: BoxFit.cover,
+          ));
     }
   }
 }

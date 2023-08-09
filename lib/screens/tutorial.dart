@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/widgets/carousel_item.dart';
+import 'package:lost_and_found/widgets/large_white_button.dart';
 import 'package:lost_and_found/widgets/title_logo.dart';
 
 class InfoScreen extends StatefulWidget {
@@ -19,22 +21,23 @@ class _InfoScreenState extends State<InfoScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      //appBar: AppBar(),
-      body: Container(
-        margin: const EdgeInsets.all(24),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              titleLogoHorizontal(),
-              _carouselSlider(),
-              const SizedBox(
-                height: 25,
-              ),
-              _loginButton(),
-              const SizedBox(height: 35),
-              _registerButton()
-            ]),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.all(24),
+          child: Column(
+              //crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                titleLogoHorizontal(),
+                _carouselSlider(),
+                const SizedBox(
+                  height: 25,
+                ),
+                _loginButton(),
+                const SizedBox(height: 20),
+                _registerButton()
+              ]),
+        ),
       ),
     ));
   }
@@ -46,8 +49,7 @@ class _InfoScreenState extends State<InfoScreen> {
       height: 8.0,
       width: isActive ? 24.0 : 16.0,
       decoration: BoxDecoration(
-        color:
-            isActive ? PersonalizedColor.mainColor : Colors.black,
+        color: isActive ? PersonalizedColor.mainColor : Colors.black,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
@@ -97,42 +99,28 @@ class _InfoScreenState extends State<InfoScreen> {
   }
 
   _loginButton() {
-    return ElevatedButton(
+    return PersonalizedLargeWhiteButton(
       onPressed: () {
         Navigator.of(context).pushNamed(
           '/login',
         );
       },
-      style: ElevatedButton.styleFrom(
-        shape: const StadiumBorder(),
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        backgroundColor: Colors.white,
-        side: const BorderSide(color: PersonalizedColor.mainColor, width: 0.5),
-      ),
-      child: const Text(
+      text: const Text(
         "Sing In",
         style: TextStyle(fontSize: 20, color: PersonalizedColor.mainColor),
-        
       ),
     );
   }
 
   _registerButton() {
-    return ElevatedButton(
-      onPressed: () {
+    return 
+    PersonalizedLargeGreenButton(onPressed: () {
         Navigator.of(context).pushNamed(
           '/register',
         );
-      },
-      style: ElevatedButton.styleFrom(
-        shape: const StadiumBorder(),
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        backgroundColor: PersonalizedColor.mainColor,
-      ),
-      child: const Text(
+      }, text: const Text(
         "Sign Up",
         style: TextStyle(fontSize: 20, color: Colors.white),
-      ),
-    );
+      ),);
   }
 }

@@ -4,6 +4,8 @@ import 'package:lost_and_found/features/authentication/presentation/pages/regist
 import 'package:lost_and_found/features/item/presentation/pages/notifications_page.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/claim_screen.dart';
 import 'package:lost_and_found/features/item/presentation/pages/insert_item_page.dart';
+import 'package:lost_and_found/features/user/presentation/pages/tutorial_page.dart';
+import 'package:lost_and_found/screens/tutorial.dart';
 
 import '../core/presentation/home_controller/home_controller.dart';
 import '../features/user/presentation/pages/change_password_page.dart';
@@ -13,7 +15,7 @@ class RouteGenerator {
     // Getting arguments passed in while calling Navigator.pushNamed
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => const HomeControllerScreen());
+        return MaterialPageRoute(builder: (_) => const HomeControllerScreen()); // TODO: go to InfoScreen (login/logout and tutorial)
       case '/register':
         return MaterialPageRoute(builder: (_) => const RegistrationScreen());
       case '/login':
@@ -26,6 +28,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const ClaimsScreen());
       case '/options/changePassword':
         return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
+      case '/options/tutorial':
+        return MaterialPageRoute(builder: (_) => const TutorialScreen());
       default:
         // If there is no such named route in the switch statement
         return _errorRoute();
