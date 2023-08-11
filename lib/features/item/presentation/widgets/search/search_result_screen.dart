@@ -3,46 +3,82 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/search/custom_card_search.dart';
 
 import '../../bloc/search/search_bloc.dart';
+import 'custom_dropdown_button_form_field.dart';
 import 'custom_list_view.dart';
 
-class SearchResultScreen extends StatelessWidget {
+class SearchResultScreen extends StatefulWidget {
   const SearchResultScreen({super.key});
 
-  // TODO adjust page like "search filter page"
+  @override
+  State<SearchResultScreen> createState() => _SearchResultScreenState();
+}
 
+class _SearchResultScreenState extends State<SearchResultScreen> {
+  String selectedValue = "Item 1";
+
+  // TODO adjust page like "search filter page"
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchBloc, SearchState>(
         builder: (ctx, state) => Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
                   color: Colors.white,
                   height: 70,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: const StadiumBorder(),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: const StadiumBorder(),
+                          ),
+                          onPressed: () {
+                            ctx
+                                .read<SearchBloc>()
+                                .add(const SearchEvent.showFilters());
+                          },
+                          child: const Row(
+                            children: [
+                              Icon(
+                                Icons.filter_list,
+                                size: 25,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'Filters',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      onPressed: () {
-                        ctx.read<SearchBloc>().add(const SearchEvent.showFilters());
-                      },
-                      child: const Row(
-                        children: [
-                          Icon(
-                            Icons.filter_list,
-                            size: 25,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Filter',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ],
-                      ),
-                    ),
+                      Container(
+                        width: 150,
+                        height: 60,
+                        child: CustomDropdownFormField(
+                          items: const [
+                            DropdownMenuItem(
+                                value: 'Item 1', child: Text('Alphabetic',)),
+                            DropdownMenuItem(
+                                value: 'Item 2', child: Text('Distance')),
+                            DropdownMenuItem(
+                                value: 'Item 3', child: Text('Date')),
+                          ],
+                          value: selectedValue,
+                          onChanged: (String? newValue) {
+                            if (newValue != null) {
+                              setState(() {
+                                selectedValue = newValue;
+                              });
+                            }
+                          },
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 const Divider(
@@ -54,22 +90,24 @@ class SearchResultScreen extends StatelessWidget {
                     ? Expanded(
                         child: CustomScrollableListView(
                         itemList: state.results
-                            .map((item) =>
-                            CustomCardSearch(
+                            .map((item) => CustomCardSearch(
                                 id: item.id,
                                 hasImage: item.hasImage,
                                 text: item.title,
                                 type: item.type.name,
                                 owner: item.user.username,
-                                token: state.token)
-                        ).toList(),
+                                token: state.token))
+                            .toList(),
                       ))
-                // TODO adjust case without results
+                    // TODO adjust case without results
                     : const Padding(
-                      padding: EdgeInsets.all(20),
+                        padding: EdgeInsets.all(20),
                         child: Column(
                           children: [
-                            Icon(Icons.search_off_rounded, size: 80,),
+                            Icon(
+                              Icons.search_off_rounded,
+                              size: 80,
+                            ),
                             SizedBox(
                               height: 10,
                             ),

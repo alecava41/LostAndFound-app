@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
+import '../../../../../utils/colors.dart';
 import '../../pages/item_page.dart';
 
 class CustomCardSearch extends StatelessWidget {
@@ -15,7 +16,13 @@ class CustomCardSearch extends StatelessWidget {
   final bool hasImage;
 
   const CustomCardSearch(
-      {super.key, required this.hasImage, required this.id, required this.text, required this.type, required this.owner, required this.token});
+      {super.key,
+      required this.hasImage,
+      required this.id,
+      required this.text,
+      required this.type,
+      required this.owner,
+      required this.token});
 
   @override
   Widget build(BuildContext context) {
@@ -38,32 +45,45 @@ class CustomCardSearch extends StatelessWidget {
                     child: SizedBox(
                       height: 150.0,
                       width: 150.0,
-                      child: hasImage ? CachedNetworkImage(
-                        imageUrl: "$baseUrl/api/items/$id/image",
-                        fit: BoxFit.cover,
-                        httpHeaders: {
-                          "Authorization": "Bearer $token",
-                        },
-                        progressIndicatorBuilder: (context, url, downloadProgress) =>
-                        const CustomCircularProgress(size: 75),
-                        errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
-                        imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-                      ) : Image.asset("assets/images/no-item.png"),
+                      child: hasImage
+                          ? CachedNetworkImage(
+                              imageUrl: "$baseUrl/api/items/$id/image",
+                              fit: BoxFit.cover,
+                              httpHeaders: {
+                                "Authorization": "Bearer $token",
+                              },
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) =>
+                                      const CustomCircularProgress(size: 75),
+                              errorWidget: (context, url, error) => Image.asset(
+                                "assets/images/no-item.png",
+                                fit: BoxFit.cover,
+                              ),
+                              imageRenderMethodForWeb:
+                                  ImageRenderMethodForWeb.HttpGet,
+                            )
+                          : Image.asset(
+                              "assets/images/no-item.png",
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 8, left: 18, bottom: 5, right: 18),
+                  padding: const EdgeInsets.only(
+                      top: 8, left: 18, bottom: 5, right: 18),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(text, style: const TextStyle(fontSize: 16.0), overflow: TextOverflow.ellipsis),
+                      Text(text,
+                          style: const TextStyle(fontSize: 16.0),
+                          overflow: TextOverflow.ellipsis),
                       const SizedBox(
                         height: 5,
                       ),
                       Text(
-                        " ${type[0].toUpperCase()}${type.substring(1)} by $owner",
-                        style: const TextStyle(fontSize: 14),
+                        "${type[0].toUpperCase()}${type.substring(1)} by $owner",
+                        style: const TextStyle(fontSize: 14, color: Colors.black54),
                       )
                     ],
                   ),
@@ -71,6 +91,36 @@ class CustomCardSearch extends StatelessWidget {
               ],
             ),
           ),
+          Positioned(
+              right: 4,
+              top: 25,
+              child: Container(
+                padding: const EdgeInsets.all(5),
+                width: 65,
+                height: 30,
+                decoration: BoxDecoration(
+                  color: PersonalizedColor.mainColor,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black
+                          .withOpacity(0.3), // Colore e opacità dell'ombra
+                      spreadRadius: 2, // Distanza di diffusione dell'ombra
+                      blurRadius: 4, // Raggio di sfocatura dell'ombra
+                      offset: const Offset(0, 2), // Posizione dell'ombra (x, y)
+                    ),
+                  ],
+                ),
+                child:  Center(
+                  child: Text(
+                    "${type[0].toUpperCase()}${type.substring(1)}",
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ),
+              )),
           Positioned.fill(
             bottom: -1,
             child: Material(
@@ -80,8 +130,7 @@ class CustomCardSearch extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                              ItemScreen(
+                          builder: (context) => ItemScreen(
                                 itemId: id,
                               )));
                 },

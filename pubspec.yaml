@@ -73,6 +73,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -86,6 +88,11 @@ dev_dependencies:
   built_value_generator: any
   freezed: ^2.3.5
   floor_generator: ^1.4.2
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/ic_launcher.png"  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

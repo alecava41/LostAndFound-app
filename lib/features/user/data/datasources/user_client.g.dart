@@ -13,7 +13,7 @@ class _UserClient implements UserClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.1.215:5000/api';
+    baseUrl ??= 'http://16.170.98.131:5000/api';
   }
 
   final Dio _dio;

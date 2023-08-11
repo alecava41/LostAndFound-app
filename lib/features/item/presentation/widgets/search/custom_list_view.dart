@@ -19,19 +19,21 @@ class CustomScrollableListView extends StatelessWidget {
         final bool hasTwoItems = endIndex < itemList.length;
 
         return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(child: itemList[startIndex]),
-              ),
+            Padding(
+              padding: const EdgeInsets.all(7.0),
+              child: itemList[startIndex],
             ),
             if (hasTwoItems)
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(child: itemList[endIndex]),
-                ),
+              Padding(
+                padding: const EdgeInsets.all(7.0),
+                child: itemList[endIndex],
+              ),
+            if (!hasTwoItems)
+              const Padding(
+                padding: EdgeInsets.all(7.0),
+                child: SizedBox(width: 165),
               ),
           ],
         );

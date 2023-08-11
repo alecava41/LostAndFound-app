@@ -13,7 +13,13 @@ class CustomCardHome extends StatelessWidget {
   final int claims;
   final String token;
 
-  const CustomCardHome({super.key, required this.hasImage, required this.id, required this.text, required this.claims, required this.token});
+  const CustomCardHome(
+      {super.key,
+      required this.hasImage,
+      required this.id,
+      required this.text,
+      required this.claims,
+      required this.token});
 
   // TODO: overflow somewhere
 
@@ -38,27 +44,39 @@ class CustomCardHome extends StatelessWidget {
                     child: SizedBox(
                       height: 150.0,
                       width: 150.0,
-                      child: hasImage ?
-                      CachedNetworkImage(
-                        imageUrl: "$baseUrl/api/items/$id/image",
-                        fit: BoxFit.cover,
-                        httpHeaders: {
-                          "Authorization": "Bearer $token",
-                        },
-                        placeholder: (context, _) => const CustomCircularProgress(size: 75.0),
-                        errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
-                        imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-                      ) : Image.asset("assets/images/no-item.png"),
+                      child: hasImage
+                          ? CachedNetworkImage(
+                              imageUrl: "$baseUrl/api/items/$id/image",
+                              fit: BoxFit.cover,
+                              httpHeaders: {
+                                "Authorization": "Bearer $token",
+                              },
+                              placeholder: (context, _) =>
+                                  const CustomCircularProgress(size: 75.0),
+                              errorWidget: (context, url, error) => Image.asset(
+                                "assets/images/no-item.png",
+                                fit: BoxFit.cover,
+                              ),
+                              imageRenderMethodForWeb:
+                                  ImageRenderMethodForWeb.HttpGet,
+                            )
+                          : Image.asset(
+                              "assets/images/no-item.png",
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 8, left: 18, bottom: 5, right: 18),
+                  padding: const EdgeInsets.only(
+                      top: 8, left: 18, bottom: 5, right: 18),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // TODO: item title should be entirely readable (not "...")
-                      Text(text, style: const TextStyle(fontSize: 16.0), overflow: TextOverflow.ellipsis),
+                      Text(text,
+                          style: const TextStyle(fontSize: 16.0),
+                          overflow: TextOverflow.ellipsis),
                       const SizedBox(
                         height: 5,
                       ),
@@ -102,8 +120,8 @@ class CustomCardHome extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => ItemScreen(
-                            itemId: id,
-                          )));
+                                itemId: id,
+                              )));
                 },
                 borderRadius: BorderRadius.circular(24.0),
               ),
