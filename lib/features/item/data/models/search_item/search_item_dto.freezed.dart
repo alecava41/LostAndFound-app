@@ -25,6 +25,7 @@ mixin _$SearchItemDto {
   String get type => throw _privateConstructorUsedError;
   bool get image => throw _privateConstructorUsedError;
   UserDto get user => throw _privateConstructorUsedError;
+  DateTime get date => throw _privateConstructorUsedError;
   double get distance => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $SearchItemDtoCopyWith<$Res> {
       String type,
       bool image,
       UserDto user,
+      DateTime date,
       double distance});
 
   $UserDtoCopyWith<$Res> get user;
@@ -68,6 +70,7 @@ class _$SearchItemDtoCopyWithImpl<$Res, $Val extends SearchItemDto>
     Object? type = null,
     Object? image = null,
     Object? user = null,
+    Object? date = null,
     Object? distance = null,
   }) {
     return _then(_value.copyWith(
@@ -91,6 +94,10 @@ class _$SearchItemDtoCopyWithImpl<$Res, $Val extends SearchItemDto>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserDto,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       distance: null == distance
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
@@ -121,6 +128,7 @@ abstract class _$$$SearchItemDtoCopyWith<$Res>
       String type,
       bool image,
       UserDto user,
+      DateTime date,
       double distance});
 
   @override
@@ -143,6 +151,7 @@ class __$$$SearchItemDtoCopyWithImpl<$Res>
     Object? type = null,
     Object? image = null,
     Object? user = null,
+    Object? date = null,
     Object? distance = null,
   }) {
     return _then(_$$SearchItemDto(
@@ -166,6 +175,10 @@ class __$$$SearchItemDtoCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserDto,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       distance: null == distance
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
@@ -183,6 +196,7 @@ class _$$SearchItemDto implements $SearchItemDto {
       required this.type,
       required this.image,
       required this.user,
+      required this.date,
       required this.distance});
 
   factory _$$SearchItemDto.fromJson(Map<String, dynamic> json) =>
@@ -199,11 +213,13 @@ class _$$SearchItemDto implements $SearchItemDto {
   @override
   final UserDto user;
   @override
+  final DateTime date;
+  @override
   final double distance;
 
   @override
   String toString() {
-    return 'SearchItemDto(id: $id, title: $title, type: $type, image: $image, user: $user, distance: $distance)';
+    return 'SearchItemDto(id: $id, title: $title, type: $type, image: $image, user: $user, date: $date, distance: $distance)';
   }
 
   @override
@@ -216,6 +232,7 @@ class _$$SearchItemDto implements $SearchItemDto {
             (identical(other.type, type) || other.type == type) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.user, user) || other.user == user) &&
+            (identical(other.date, date) || other.date == date) &&
             (identical(other.distance, distance) ||
                 other.distance == distance));
   }
@@ -223,7 +240,7 @@ class _$$SearchItemDto implements $SearchItemDto {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, title, type, image, user, distance);
+      Object.hash(runtimeType, id, title, type, image, user, date, distance);
 
   @JsonKey(ignore: true)
   @override
@@ -246,6 +263,7 @@ abstract class $SearchItemDto implements SearchItemDto {
       required final String type,
       required final bool image,
       required final UserDto user,
+      required final DateTime date,
       required final double distance}) = _$$SearchItemDto;
 
   factory $SearchItemDto.fromJson(Map<String, dynamic> json) =
@@ -261,6 +279,8 @@ abstract class $SearchItemDto implements SearchItemDto {
   bool get image;
   @override
   UserDto get user;
+  @override
+  DateTime get date;
   @override
   double get distance;
   @override

@@ -9,6 +9,7 @@ class SearchState with _$SearchState {
     required CategoryField cat,
     required DateTime? dateTime,
     required ResultOrder order,
+    required OrderFlow orderFlow,
 
     // Search results
     required List<SearchItem> results,
@@ -28,14 +29,18 @@ class SearchState with _$SearchState {
   }) = _SearchState;
 
   factory SearchState.initial() => SearchState(
-      itemsToSearch: ItemsTypeField(false, false),
-      pos: PositionField(const LatLng(0, 0)),
-      cat: CategoryField(-1),
-      results: [],
-      dateTime: null,
-      order: ResultOrder.date);
+        itemsToSearch: ItemsTypeField(false, false),
+        pos: PositionField(const LatLng(0, 0)),
+        cat: CategoryField(-1),
+        results: [],
+        dateTime: null,
+        order: ResultOrder.date,
+        orderFlow: OrderFlow.ascending,
+      );
 }
 
 enum SearchPageState { loadingPage, resultPage, filterPage }
 
 enum ResultOrder { alphabetic, date, distance }
+
+enum OrderFlow { ascending, descending }

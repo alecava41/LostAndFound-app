@@ -9,6 +9,8 @@ import 'custom_list_view.dart';
 class SearchResultScreen extends StatelessWidget {
   const SearchResultScreen({super.key});
 
+  // TODO add ascending/descending ordering button
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchBloc, SearchState>(
@@ -54,15 +56,16 @@ class SearchResultScreen extends StatelessWidget {
                           child: Text(
                             'Alphabetic',
                           )),
-                      DropdownMenuItem(value: 'opt2', child: Text('Distance')),
-                      DropdownMenuItem(value: 'opt3', child: Text('Date')),
+                      DropdownMenuItem(value: 'opt2', child: Text('Date')),
+                      DropdownMenuItem(value: 'opt3', child: Text('Distance')),
                     ],
-                    value: selectedValue,
+                    value: state.order.name,
                     onChanged: (String? newValue) {
                       if (newValue != null) {
-                        setState(() {
-                          selectedValue = newValue;
-                        });
+                        final order = newValue == "Alphabetic"
+                            ? ResultOrder.alphabetic
+                            : (newValue == "Distance" ? ResultOrder.date : ResultOrder.distance);
+                        ctx.read<SearchBloc>().add(SearchEvent.sortParameterChanged(order));
                       }
                     },
                   ),

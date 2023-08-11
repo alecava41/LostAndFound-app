@@ -13,6 +13,7 @@ _$$SearchItemDto _$$$SearchItemDtoFromJson(Map<String, dynamic> json) =>
       type: json['type'] as String,
       image: json['image'] as bool,
       user: UserDto.fromJson(json['user'] as Map<String, dynamic>),
+      date: DateTime.parse(json['date'] as String),
       distance: (json['distance'] as num).toDouble(),
     );
 
@@ -23,5 +24,6 @@ Map<String, dynamic> _$$$SearchItemDtoToJson(_$$SearchItemDto instance) =>
       'type': instance.type,
       'image': instance.image,
       'user': instance.user,
+      'date': instance.date.toIso8601String(),
       'distance': instance.distance,
     };

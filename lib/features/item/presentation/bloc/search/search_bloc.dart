@@ -47,6 +47,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           searchSubmitted: () => _onSearchSubmit(emit),
           showFilters: () => _onShowFilters(emit),
           sortParameterChanged: (order) => _onChangeSortingParameter(emit, order),
+          orderFlowParameterChanged: (flow) => _onChangeOrderFlowParameter(emit, flow),
         );
       },
     );
@@ -94,7 +95,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
     // Sort items
 
-
     emit(state.copyWith(
       searchFailureOrSuccess: searchFailureOrSuccess,
       pageState: pageState,
@@ -137,17 +137,35 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   }
 
   void _onChangeSortingParameter(Emitter<SearchState> emit, ResultOrder order) {
-
+    sortItems(state.results, order, state.orderFlow);
+    emit(state.copyWith(results: state.results, order: order));
   }
 
-  void sortItems(List<SearchItem> items, ResultOrder order) {
-      switch(order) {
-        case ResultOrder.alphabetic:
+  void sortItems(List<SearchItem> items, ResultOrder order, OrderFlow flow) {
+    switch (order) {
+      case ResultOrder.alphabetic:
+        if (flow == OrderFlow.ascending) {
           items.sort((a, b) => a.title.compareTo(b.title));
-        case ResultOrder.date:
-          items.sort((a, b) => a.title.compareTo(b.title));
-        case ResultOrder.distance:
-          items.sort((a, b) => a.title.compareTo(b.title));
-      }
+        } else {
+          items.sort((b, a) => a.title.compareTo(b.title));
+        }
+      case ResultOrder.date:
+        if (flow == OrderFlow.ascending) {
+          items.sort((a, b) => a.date.compareTo(b.date));
+        } else {
+          items.sort((b, a) => a.date.compareTo(b.date));
+        }
+      case ResultOrder.distance:
+        if (flow == OrderFlow.ascending) {
+          items.sort((a, b) => a.distance.compareTo(b.distance));
+        } else {
+          items.sort((b, a) => a.distance.compareTo(b.distance));
+        }
+    }
+  }
+
+  void _onChangeOrderFlowParameter(Emitter<SearchState> emit, OrderFlow flow) {
+    sortItems(state.results, state.order, flow);
+    emit(state.copyWith(results: state.results, orderFlow: flow));
   }
 }

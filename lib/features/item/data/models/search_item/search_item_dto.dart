@@ -12,6 +12,7 @@ class SearchItemDto with _$SearchItemDto {
     required String type,
     required bool image,
     required UserDto user,
+    required DateTime date,
     required double distance
   }) = $SearchItemDto;
 

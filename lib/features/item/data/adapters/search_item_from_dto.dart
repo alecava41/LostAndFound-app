@@ -6,10 +6,13 @@ import '../../domain/entities/search_item.dart';
 extension SearchItemFromDto on SearchItemDto {
   SearchItem toDomain() {
     return SearchItem(
-        id: id,
-        title: title,
-        hasImage: image,
-        user: User(id: user.id, username: user.username),
-        type: type == "found" ? ItemType.found : ItemType.lost);
+      id: id,
+      title: title,
+      hasImage: image,
+      user: User(id: user.id, username: user.username),
+      type: type == "found" ? ItemType.found : ItemType.lost,
+      distance: distance,
+      date: date
+    );
   }
 }
