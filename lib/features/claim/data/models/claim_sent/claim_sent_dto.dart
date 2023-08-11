@@ -10,8 +10,8 @@ class ClaimSentDto with _$ClaimSentDto {
     required int id,
     required String status,
     required ItemDto item,
+    required String? answer,
     DateTime? date,
-    String? answer,
   }) = $ClaimSentDto;
 
   factory ClaimSentDto.fromJson(Map<String, dynamic> data) => _$ClaimSentDtoFromJson(data);

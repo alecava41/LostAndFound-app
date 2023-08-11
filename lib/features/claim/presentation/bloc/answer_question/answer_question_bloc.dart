@@ -64,11 +64,7 @@ class AnswerQuestionBloc extends Bloc<AnswerQuestionEvent, AnswerQuestionState> 
   }
 
   void _onAnswerFieldChanged(Emitter<AnswerQuestionState> emit, String answer) {
-    emit(
-      state.copyWith(
-        answer: AnswerField(answer),
-      ),
-    );
+    emit(state.copyWith(answer: AnswerField(answer)));
   }
 
   void _onInfoTriggered(Emitter<AnswerQuestionState> emit) {
@@ -98,5 +94,6 @@ class AnswerQuestionBloc extends Bloc<AnswerQuestionEvent, AnswerQuestionState> 
     emit(
       state.copyWith(isLoading: false, showErrorMessage: true, claimFailureOrSuccess: claimFailureOrSuccess),
     );
+    emit(state.copyWith(claimFailureOrSuccess: null));
   }
 }

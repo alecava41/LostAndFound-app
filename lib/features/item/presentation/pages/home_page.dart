@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 
 import '../widgets/home/clickable_circular_button.dart';
@@ -9,22 +10,40 @@ import '../widgets/home/lost_items_container.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  // TODO need to handle loading properly
+  // TODO: need to handle error on loading
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(
+    return BlocConsumer<HomeBloc, HomeState>(
+      listener: (ctx, state) {
+        final loadFailureOrSuccess = state.homeFailureOrSuccess;
+
+        if (loadFailureOrSuccess != null) {
+          loadFailureOrSuccess.fold((failure) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              padding: const EdgeInsets.all(30),
+              backgroundColor: Colors.red,
+              content: Text(
+                  failure.maybeWhen<String>(
+                      genericFailure: () => 'Server error. Please try again later.',
+                      networkFailure: () => 'No internet connection available. Check your internet connection.',
+                      orElse: () => "Unknown error"),
+                  style: const TextStyle(fontSize: 20)),
+            ));
+          }, (_) {});
+        }
+      },
       builder: (ctx, state) {
+        if (state.isLoading) {
+          return const CustomCircularProgress(size: 100);
+        }
+
         return RefreshIndicator(
             onRefresh: () async {
-              Future block = ctx
-                  .read<HomeBloc>()
-                  .stream
-                  .first;
+              Future block = ctx.read<HomeBloc>().stream.first;
               ctx.read<HomeBloc>().add(const HomeEvent.homeRefreshed());
               await block;
             },
-            // TODO handle error messages from the server with listener
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,8 +62,7 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             ClickableCircularButton(
                               icon: Icons.notifications,
-                              onPressed: () =>
-                                  Navigator.of(context).pushNamed('/notifications'),
+                              onPressed: () => Navigator.of(context).pushNamed('/notifications'),
                             ),
                             const SizedBox(
                               width: 25,

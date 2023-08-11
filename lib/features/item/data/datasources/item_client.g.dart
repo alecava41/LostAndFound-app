@@ -91,7 +91,6 @@ class _ItemClient implements ItemClient {
   @override
   Future<List<SearchItemDto>> getItems(
     String type,
-    String order,
     int last,
     double X,
     double Y,
@@ -102,7 +101,6 @@ class _ItemClient implements ItemClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'type': type,
-      r'order': order,
       r'last': last,
       r'X': X,
       r'Y': Y,

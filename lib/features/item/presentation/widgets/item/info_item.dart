@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../utils/colors.dart';
+
 class InfoItem extends StatelessWidget {
   final String title;
   final String position;
   final DateTime date;
   final String category;
+  final String? question;
   final bool isFound;
 
   const InfoItem({
@@ -15,6 +18,7 @@ class InfoItem extends StatelessWidget {
     required this.date,
     required this.category,
     required this.isFound,
+    required this.question,
   }) : super(key: key);
 
   @override
@@ -76,6 +80,23 @@ class InfoItem extends StatelessWidget {
               ),
             ],
           ),
+          question != null ? const SizedBox(height: 10) : Container(),
+          question != null
+              ? Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
+                      color: PersonalizedColor.claimAcceptedStatusColor,
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    const Text(
+                      "Question to verify the ownership:",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    Text(question!),
+                  ]),
+                )
+              : Container()
         ],
       ),
     );

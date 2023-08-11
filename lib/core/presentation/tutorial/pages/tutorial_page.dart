@@ -79,9 +79,13 @@ class _InfoScreenState extends State<InfoScreen> {
             children: <Widget>[
               carouselItem('assets/images/input_item.png', 'Report a Lost Item',
                   'Input the item details in the app to report it as lost.'),
-              carouselItem('assets/images/report_item.png', 'Report a Found Item',
+              carouselItem(
+                  'assets/images/report_item.png',
+                  'Report a Found Item',
                   'Notify others by reporting a found item\nthrough the app.'),
-              carouselItem('assets/images/return_item.png', 'Arrange Item Return',
+              carouselItem(
+                  'assets/images/return_item.png',
+                  'Arrange Item Return',
                   'Connect with the finder via messaging to arrange\na safe meetup location for item return.'),
             ],
           ),
@@ -97,7 +101,9 @@ class _InfoScreenState extends State<InfoScreen> {
   _loginButton() {
     return PersonalizedLargeWhiteButton(
       onPressed: () {
-        Navigator.of(context).pushNamed('/login');
+        Navigator.of(context).pushNamed(
+          '/login',
+        );
       },
       text: const Text(
         "Sign In",
@@ -107,14 +113,14 @@ class _InfoScreenState extends State<InfoScreen> {
   }
 
   _registerButton() {
-    return PersonalizedLargeGreenButton(
-      onPressed: () {
-        Navigator.of(context).pushNamed('/register');
-      },
-      text: const Text(
+    return 
+    PersonalizedLargeGreenButton(onPressed: () {
+        Navigator.of(context).pushNamed(
+          '/register',
+        );
+      }, text: const Text(
         "Sign Up",
         style: TextStyle(fontSize: 20, color: Colors.white),
-      ),
-    );
+      ),);
   }
 }

@@ -39,55 +39,33 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
   }
 
   void _onObscurePasswordToggled(Emitter<RegistrationState> emit) {
-    emit(state.copyWith(
-      obscurePassword: !state.obscurePassword,
-      registrationFailureOrSuccess: null,
-    ));
+    emit(state.copyWith(obscurePassword: !state.obscurePassword));
   }
 
   void _onObscureConfirmPasswordToggled(Emitter<RegistrationState> emit) {
-    emit(state.copyWith(
-      obscureConfirmPassword: !state.obscureConfirmPassword,
-      registrationFailureOrSuccess: null,
-    ));
+    emit(state.copyWith(obscureConfirmPassword: !state.obscureConfirmPassword));
   }
 
   void _onUsernameFieldChanged(Emitter<RegistrationState> emit, String userString) {
     emit(
-      state.copyWith(
-        username: RegistrationUsernameField(userString, false),
-        registrationFailureOrSuccess: null,
-      ),
+      state.copyWith(username: RegistrationUsernameField(userString, false)),
     );
   }
 
   void _onEmailFieldChanged(Emitter<RegistrationState> emit, String email) {
-    emit(
-      state.copyWith(
-        email: RegistrationEmailField(email, false),
-        registrationFailureOrSuccess: null,
-      ),
-    );
+    emit(state.copyWith(email: RegistrationEmailField(email, false)));
   }
 
-  // TODO: not working flawlessly, something errors for confirmPassword pops up even if that's not the case
   void _onPasswordFieldChanged(Emitter<RegistrationState> emit, String psw) {
-    emit(
-      state.copyWith(
-        password: RegistrationPasswordField(psw),
-        confirmPassword: RegistrationConfirmPasswordField(psw, state.password.value.getOrElse(() => "")),
-        registrationFailureOrSuccess: null,
-      ),
-    );
+    emit(state.copyWith(
+      password: RegistrationPasswordField(psw),
+      confirmPassword: RegistrationConfirmPasswordField(psw, state.password.value.getOrElse(() => "")),
+    ));
   }
 
   void _onConfirmPasswordFieldChanged(Emitter<RegistrationState> emit, String confirm) {
-    emit(
-      state.copyWith(
-        confirmPassword: RegistrationConfirmPasswordField(state.password.value.getOrElse(() => ""), confirm),
-        registrationFailureOrSuccess: null,
-      ),
-    );
+    emit(state.copyWith(
+        confirmPassword: RegistrationConfirmPasswordField(state.password.value.getOrElse(() => ""), confirm)));
   }
 
   Future<void> _onRegistrationSubmitted(Emitter<RegistrationState> emit) async {
@@ -136,5 +114,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
       state.copyWith(
           isSubmitting: false, showErrorMessage: true, registrationFailureOrSuccess: registrationFailureOrSuccess),
     );
+
+    emit(state.copyWith(registrationFailureOrSuccess: null));
   }
 }

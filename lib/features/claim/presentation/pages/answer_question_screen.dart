@@ -11,10 +11,9 @@ import '../widgets/claimed_item_info.dart';
 
 class AnswerQuestionScreen extends StatelessWidget {
   final int itemId;
+  final bool isClaimAlreadyTaken;
 
-  const AnswerQuestionScreen({super.key, required this.itemId});
-
-  // TODO: maybe it's better to let the user see his proposed answer to a claim, by transforming the text field in a simple textview and disabling the send button
+  const AnswerQuestionScreen({super.key, required this.itemId, required this.isClaimAlreadyTaken});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   padding: const EdgeInsets.all(30),
-                                  backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                                  backgroundColor: Colors.red,
                                   content: Text(
                                       failure.maybeWhen<String>(
                                           genericFailure: () => 'Server error. Please try again later.',
@@ -52,9 +51,9 @@ class AnswerQuestionScreen extends StatelessWidget {
                                           orElse: () => "Unknown error"),
                                       style: const TextStyle(fontSize: 20)),
                                 ),
-                              )
+                              ),
+                              Navigator.pop(ctx),
                             },
-                        // TODO: Navigate away?
                         (_) => {});
                   }
 
@@ -64,7 +63,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   padding: const EdgeInsets.all(30),
-                                  backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                                  backgroundColor: Colors.red,
                                   content: Text(
                                       failure.maybeWhen<String>(
                                           genericFailure: () => 'Server error. Please try again later.',
@@ -172,23 +171,41 @@ class AnswerQuestionScreen extends StatelessWidget {
                             const SizedBox(
                               height: 20,
                             ),
-                            PersonalizedFormWithTextInsertion(
-                                title: "Your answer",
-                                onTextChanged: (value) =>
-                                    ctx.read<AnswerQuestionBloc>().add(AnswerQuestionEvent.answerFieldChanged(value)),
-                                hintText: "",
-                                errorText: state.answer.value.fold(
-                                    (failure) => failure.maybeWhen<String?>(
-                                        validationFailure: (reason) => reason, orElse: () => null),
-                                    (r) => null),
-                                isValid: state.answer.value.isRight(),
-                                showError: state.showErrorMessage),
+                            isClaimAlreadyTaken
+                                ? const Padding(
+                                    padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
+                                    child: Text("Question"),
+                                  )
+                                : Container(),
+                            isClaimAlreadyTaken
+                                ? Padding(
+                                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                                    child: Text(
+                                      state.item!.userClaim!.answer!,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  )
+                                : PersonalizedFormWithTextInsertion(
+                                    title: "Your answer",
+                                    onTextChanged: (value) =>
+                                        ctx.read<AnswerQuestionBloc>().add(AnswerQuestionEvent.answerFieldChanged(value)),
+                                    hintText: "",
+                                    errorText: state.answer.value.fold(
+                                        (failure) => failure.maybeWhen<String?>(
+                                            validationFailure: (reason) => reason, orElse: () => null),
+                                        (r) => null),
+                                    isValid: state.answer.value.isRight(),
+                                    showError: state.showErrorMessage),
                             const SizedBox(
                               height: 30,
                             ),
                             PersonalizedLargeGreenButton(
-                                onPressed: () =>
-                                    ctx.read<AnswerQuestionBloc>().add(const AnswerQuestionEvent.claimCreated()),
+                                isActive: !isClaimAlreadyTaken,
+                                onPressed: () => isClaimAlreadyTaken
+                                    ? ()
+                                    : ctx.read<AnswerQuestionBloc>().add(const AnswerQuestionEvent.claimCreated()),
                                 text: const Text(
                                   "Send",
                                   style: TextStyle(fontSize: 20),

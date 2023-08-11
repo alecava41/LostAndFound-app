@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lost_and_found/features/claim/domain/entities/claim_received.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
 
+import '../../../../../core/domain/entities/claim_status.dart';
 import '../../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../../utils/colors.dart';
 import '../../../../../utils/constants.dart';
@@ -22,8 +23,16 @@ class ClaimedItemCard extends StatelessWidget {
         color: !claim.opened ? PersonalizedColor.primarySwatch.shade200 : Colors.white,
         child: InkWell(
           splashColor: !claim.opened ? PersonalizedColor.primarySwatch.shade500 : Colors.grey.withOpacity(0.4),
-          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AnswerClaimScreen(itemId: claim.item.id, claimId: claim.id, isClaimAlreadyManaged: false))),
-          // TODO: manage "isClaimAlreadyManaged"
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => AnswerClaimScreen(
+                itemId: claim.item.id,
+                claimId: claim.id,
+                isClaimAlreadyManaged: claim.status != ClaimStatus.pending,
+              ),
+            ),
+          ),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),

@@ -23,8 +23,8 @@ mixin _$ClaimReceivedDto {
   int get id => throw _privateConstructorUsedError;
   ItemDto get item => throw _privateConstructorUsedError;
   UserDto get user => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
-  String? get status => throw _privateConstructorUsedError;
   String? get answer => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,8 +43,8 @@ abstract class $ClaimReceivedDtoCopyWith<$Res> {
       {int id,
       ItemDto item,
       UserDto user,
+      String status,
       DateTime? date,
-      String? status,
       String? answer});
 
   $ItemDtoCopyWith<$Res> get item;
@@ -67,8 +67,8 @@ class _$ClaimReceivedDtoCopyWithImpl<$Res, $Val extends ClaimReceivedDto>
     Object? id = null,
     Object? item = null,
     Object? user = null,
+    Object? status = null,
     Object? date = freezed,
-    Object? status = freezed,
     Object? answer = freezed,
   }) {
     return _then(_value.copyWith(
@@ -84,14 +84,14 @@ class _$ClaimReceivedDtoCopyWithImpl<$Res, $Val extends ClaimReceivedDto>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserDto,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      status: freezed == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String?,
       answer: freezed == answer
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
@@ -128,8 +128,8 @@ abstract class _$$$ClaimReceivedDtoCopyWith<$Res>
       {int id,
       ItemDto item,
       UserDto user,
+      String status,
       DateTime? date,
-      String? status,
       String? answer});
 
   @override
@@ -152,8 +152,8 @@ class __$$$ClaimReceivedDtoCopyWithImpl<$Res>
     Object? id = null,
     Object? item = null,
     Object? user = null,
+    Object? status = null,
     Object? date = freezed,
-    Object? status = freezed,
     Object? answer = freezed,
   }) {
     return _then(_$$ClaimReceivedDto(
@@ -169,14 +169,14 @@ class __$$$ClaimReceivedDtoCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserDto,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      status: freezed == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String?,
       answer: freezed == answer
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
@@ -192,8 +192,8 @@ class _$$ClaimReceivedDto implements $ClaimReceivedDto {
       {required this.id,
       required this.item,
       required this.user,
+      required this.status,
       this.date,
-      this.status,
       this.answer});
 
   factory _$$ClaimReceivedDto.fromJson(Map<String, dynamic> json) =>
@@ -206,15 +206,15 @@ class _$$ClaimReceivedDto implements $ClaimReceivedDto {
   @override
   final UserDto user;
   @override
-  final DateTime? date;
+  final String status;
   @override
-  final String? status;
+  final DateTime? date;
   @override
   final String? answer;
 
   @override
   String toString() {
-    return 'ClaimReceivedDto(id: $id, item: $item, user: $user, date: $date, status: $status, answer: $answer)';
+    return 'ClaimReceivedDto(id: $id, item: $item, user: $user, status: $status, date: $date, answer: $answer)';
   }
 
   @override
@@ -225,15 +225,15 @@ class _$$ClaimReceivedDto implements $ClaimReceivedDto {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.item, item) || other.item == item) &&
             (identical(other.user, user) || other.user == user) &&
-            (identical(other.date, date) || other.date == date) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.date, date) || other.date == date) &&
             (identical(other.answer, answer) || other.answer == answer));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, item, user, date, status, answer);
+      Object.hash(runtimeType, id, item, user, status, date, answer);
 
   @JsonKey(ignore: true)
   @override
@@ -254,8 +254,8 @@ abstract class $ClaimReceivedDto implements ClaimReceivedDto {
       {required final int id,
       required final ItemDto item,
       required final UserDto user,
+      required final String status,
       final DateTime? date,
-      final String? status,
       final String? answer}) = _$$ClaimReceivedDto;
 
   factory $ClaimReceivedDto.fromJson(Map<String, dynamic> json) =
@@ -268,9 +268,9 @@ abstract class $ClaimReceivedDto implements ClaimReceivedDto {
   @override
   UserDto get user;
   @override
-  DateTime? get date;
+  String get status;
   @override
-  String? get status;
+  DateTime? get date;
   @override
   String? get answer;
   @override

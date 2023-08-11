@@ -25,6 +25,7 @@ mixin _$SearchItemDto {
   String get type => throw _privateConstructorUsedError;
   bool get image => throw _privateConstructorUsedError;
   UserDto get user => throw _privateConstructorUsedError;
+  double get distance => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +39,13 @@ abstract class $SearchItemDtoCopyWith<$Res> {
           SearchItemDto value, $Res Function(SearchItemDto) then) =
       _$SearchItemDtoCopyWithImpl<$Res, SearchItemDto>;
   @useResult
-  $Res call({int id, String title, String type, bool image, UserDto user});
+  $Res call(
+      {int id,
+      String title,
+      String type,
+      bool image,
+      UserDto user,
+      double distance});
 
   $UserDtoCopyWith<$Res> get user;
 }
@@ -61,6 +68,7 @@ class _$SearchItemDtoCopyWithImpl<$Res, $Val extends SearchItemDto>
     Object? type = null,
     Object? image = null,
     Object? user = null,
+    Object? distance = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -83,6 +91,10 @@ class _$SearchItemDtoCopyWithImpl<$Res, $Val extends SearchItemDto>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserDto,
+      distance: null == distance
+          ? _value.distance
+          : distance // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 
@@ -103,7 +115,13 @@ abstract class _$$$SearchItemDtoCopyWith<$Res>
       __$$$SearchItemDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title, String type, bool image, UserDto user});
+  $Res call(
+      {int id,
+      String title,
+      String type,
+      bool image,
+      UserDto user,
+      double distance});
 
   @override
   $UserDtoCopyWith<$Res> get user;
@@ -125,6 +143,7 @@ class __$$$SearchItemDtoCopyWithImpl<$Res>
     Object? type = null,
     Object? image = null,
     Object? user = null,
+    Object? distance = null,
   }) {
     return _then(_$$SearchItemDto(
       id: null == id
@@ -147,6 +166,10 @@ class __$$$SearchItemDtoCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserDto,
+      distance: null == distance
+          ? _value.distance
+          : distance // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -159,7 +182,8 @@ class _$$SearchItemDto implements $SearchItemDto {
       required this.title,
       required this.type,
       required this.image,
-      required this.user});
+      required this.user,
+      required this.distance});
 
   factory _$$SearchItemDto.fromJson(Map<String, dynamic> json) =>
       _$$$SearchItemDtoFromJson(json);
@@ -174,10 +198,12 @@ class _$$SearchItemDto implements $SearchItemDto {
   final bool image;
   @override
   final UserDto user;
+  @override
+  final double distance;
 
   @override
   String toString() {
-    return 'SearchItemDto(id: $id, title: $title, type: $type, image: $image, user: $user)';
+    return 'SearchItemDto(id: $id, title: $title, type: $type, image: $image, user: $user, distance: $distance)';
   }
 
   @override
@@ -189,12 +215,15 @@ class _$$SearchItemDto implements $SearchItemDto {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.image, image) || other.image == image) &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.distance, distance) ||
+                other.distance == distance));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, type, image, user);
+  int get hashCode =>
+      Object.hash(runtimeType, id, title, type, image, user, distance);
 
   @JsonKey(ignore: true)
   @override
@@ -216,7 +245,8 @@ abstract class $SearchItemDto implements SearchItemDto {
       required final String title,
       required final String type,
       required final bool image,
-      required final UserDto user}) = _$$SearchItemDto;
+      required final UserDto user,
+      required final double distance}) = _$$SearchItemDto;
 
   factory $SearchItemDto.fromJson(Map<String, dynamic> json) =
       _$$SearchItemDto.fromJson;
@@ -231,6 +261,8 @@ abstract class $SearchItemDto implements SearchItemDto {
   bool get image;
   @override
   UserDto get user;
+  @override
+  double get distance;
   @override
   @JsonKey(ignore: true)
   _$$$SearchItemDtoCopyWith<_$$SearchItemDto> get copyWith =>

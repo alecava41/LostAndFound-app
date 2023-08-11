@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../../utils/colors.dart';
@@ -9,24 +10,18 @@ class ClaimedItemCard extends StatelessWidget {
   final int userId;
   final String username;
   final bool opened;
+  final bool hasImage;
   final String token;
   final VoidCallback onTap;
 
-  // final String itemImagePath;
-  // final String itemName;
-  // final bool onlyUser; // if only user true, the card display only the name of the user and his profile pic
-
-  const ClaimedItemCard({
-    super.key,
-    // required this.itemImagePath,
-    // required this.itemName,
-    // required this.onlyUser,
-    required this.userId,
-    required this.username,
-    required this.opened,
-    required this.token,
-    required this.onTap
-  });
+  const ClaimedItemCard(
+      {super.key,
+      required this.userId,
+      required this.username,
+      required this.hasImage,
+      required this.opened,
+      required this.token,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -53,23 +48,21 @@ class ClaimedItemCard extends StatelessWidget {
                   width: 70,
                   height: 70,
                   child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: CachedNetworkImage(
-                        imageUrl: "$baseUrl/api/users/$userId/image",
-                        fit: BoxFit.cover,
-                        httpHeaders: {
-                          "Authorization": "Bearer $token",
-                        },
-                        progressIndicatorBuilder: (context, url, downloadProgress) =>
-                            const CircularProgressIndicator(value: null),
-                        errorWidget: (context, url, error) => const Icon(Icons.error),
-                        imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-                      )
-                      // Image.asset(
-                      //   onlyUser ? userImagePath : itemImagePath,
-                      //   fit: BoxFit.cover,
-                      // ),
-                      ),
+                    borderRadius: BorderRadius.circular(10),
+                    child: hasImage
+                        ? CachedNetworkImage(
+                            imageUrl: "$baseUrl/api/users/$userId/image",
+                            fit: BoxFit.cover,
+                            httpHeaders: {
+                              "Authorization": "Bearer $token",
+                            },
+                            progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                const CustomCircularProgress(size: 35),
+                            errorWidget: (context, url, error) => Image.asset('assets/images/no-user.jpg'),
+                            imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+                          )
+                        : Image.asset('assets/images/no-user.jpg'),
+                  ),
                 ),
                 Expanded(
                   child: SizedBox(
@@ -80,18 +73,6 @@ class ClaimedItemCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          // Flexible(
-                          //   child: Text(
-                          //     username,
-                          //     // onlyUser ? user : itemName,
-                          //     style: const TextStyle(fontSize: 17),
-                          //     overflow: TextOverflow.ellipsis,
-                          //     maxLines: 1,
-                          //   ),
-                          // ),
-                          // onlyUser
-                          //     ? Container()
-                          //     :
                           Text(
                             "Claimed by $username",
                             style: const TextStyle(fontSize: 13),

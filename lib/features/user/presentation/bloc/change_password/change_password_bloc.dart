@@ -69,7 +69,6 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
     emit(state.copyWith(oldPassword: ChangePswOldPasswordField(psw, false)));
   }
 
-// TODO: not working flawlessly, something errors for confirmPassword pops up even if that's not the case
   void _onNewPasswordFieldChanged(Emitter<ChangePasswordState> emit, String psw) {
     emit(
       state.copyWith(
@@ -120,9 +119,8 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
       });
     }
 
-    emit(
-      state.copyWith(isSubmitting: false, showErrorMessage: true, changePswFailureOrSuccess: pswChangeFailureOrSuccess),
-    );
+    emit(state.copyWith(
+        isSubmitting: false, showErrorMessage: true, changePswFailureOrSuccess: pswChangeFailureOrSuccess));
     emit(state.copyWith(changePswFailureOrSuccess: null));
   }
 }

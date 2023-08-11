@@ -25,7 +25,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
-            loginCreated: () => _onLoginCreated(emit),
             loginSubmitted: () => _onLoginSubmitted(emit),
             obscurePasswordToggled: () => _onObscurePasswordToggled(emit),
             passwordFieldChanged: (password) => _onPasswordFieldChanged(emit, password),
@@ -34,39 +33,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     );
   }
 
-  Future<void> _onLoginCreated(Emitter<LoginState> emit) async {
-    Either<Failure, Success>? authFailureOrSuccess;
-
-    final loginResponse = await _loginUseCase(null);
-    loginResponse.fold((failure) => authFailureOrSuccess = Left(failure),
-        (success) => authFailureOrSuccess = Right(success));
-
-    emit(state.copyWith(isSubmitting: false, showErrorMessage: true, authFailureOrSuccess: authFailureOrSuccess));
-  }
-
   void _onObscurePasswordToggled(Emitter<LoginState> emit) {
-    emit(state.copyWith(
-      obscurePassword: !state.obscurePassword,
-      authFailureOrSuccess: null,
-    ));
+    emit(state.copyWith(obscurePassword: !state.obscurePassword));
   }
 
   void _onUserFieldChanged(Emitter<LoginState> emit, String userString) {
-    emit(
-      state.copyWith(
-        user: LoginUserField(userString),
-        authFailureOrSuccess: null,
-      ),
-    );
+    emit(state.copyWith(user: LoginUserField(userString)));
   }
 
   void _onPasswordFieldChanged(Emitter<LoginState> emit, String passwordString) {
-    emit(
-      state.copyWith(
-        password: LoginPasswordField(passwordString),
-        authFailureOrSuccess: null,
-      ),
-    );
+    emit(state.copyWith(password: LoginPasswordField(passwordString)));
   }
 
   Future<void> _onLoginSubmitted(Emitter<LoginState> emit) async {
@@ -87,12 +63,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           LoginParams(password: state.password.value.getOrElse(() => ""), user: state.user.value.getOrElse(() => ""));
 
       final loginResponse = await _loginUseCase(params);
-      loginResponse.fold((failure) => authFailureOrSuccess = Left(failure),
-          (success) => authFailureOrSuccess = Right(success));
+      loginResponse.fold(
+          (failure) => authFailureOrSuccess = Left(failure), (success) => authFailureOrSuccess = Right(success));
     }
 
     emit(
       state.copyWith(isSubmitting: false, showErrorMessage: true, authFailureOrSuccess: authFailureOrSuccess),
     );
+
+    emit(state.copyWith(authFailureOrSuccess: null));
   }
 }

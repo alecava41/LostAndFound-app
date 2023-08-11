@@ -5,7 +5,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/search/search_bloc.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
-import '../../../../../core/presentation/select_category/select_category_form.dart';
+import '../../../../../core/presentation/select_category/widgets/select_category_form.dart';
 import '../../../../../core/presentation/widgets/check_boxes_form.dart';
 import '../../../../../core/presentation/widgets/large_green_button.dart';
 import '../../../../../core/presentation/widgets/select_date_form.dart';

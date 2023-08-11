@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/notification/news_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/notifications/custom_notification.dart';
-import 'package:retrofit/http.dart';
 
 class NewsContent extends StatelessWidget {
   const NewsContent({super.key});
@@ -19,14 +18,11 @@ class NewsContent extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       padding: const EdgeInsets.all(30),
-                      backgroundColor: Colors
-                          .red, // TODO: see if color is good even in dark mode
+                      backgroundColor: Colors.red,
                       content: Text(
                           failure.maybeWhen<String>(
-                              genericFailure: () =>
-                                  'Server error. Please try again later.',
-                              networkFailure: () =>
-                                  'No internet connection available. Check your internet connection.',
+                              genericFailure: () => 'Server error. Please try again later.',
+                              networkFailure: () => 'No internet connection available. Check your internet connection.',
                               orElse: () => 'Unknown error'),
                           style: const TextStyle(fontSize: 20)),
                     ),
@@ -63,7 +59,6 @@ class NewsContent extends StatelessWidget {
                               height: 10,
                             ),
                             Text(
-                              
                               "There aren't notifications waiting for you",
                               style: TextStyle(fontSize: 20),
                               textAlign: TextAlign.center,

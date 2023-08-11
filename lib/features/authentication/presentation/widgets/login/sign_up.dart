@@ -11,9 +11,7 @@ class SignUpText extends StatelessWidget {
         const Text("Don't have an account?"),
         TextButton(
           onPressed: () {
-            Navigator.of(context).pushNamed(
-              '/register',
-            );
+            Navigator.pushReplacementNamed(context, '/register');
           },
           child: const Text(
             "Sign Up",

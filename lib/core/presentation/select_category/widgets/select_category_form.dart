@@ -1,8 +1,8 @@
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
-import 'package:lost_and_found/core/presentation/select_category/select_category.dart';
+import 'package:lost_and_found/core/presentation/select_category/pages/select_category_page.dart';
 
-import '../../../utils/colors.dart';
+import '../../../../utils/colors.dart';
 
 class CategorySelectionForm extends StatelessWidget {
   final ValueChanged<Pair<int, String>> onTap;

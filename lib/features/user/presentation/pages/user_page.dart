@@ -9,6 +9,8 @@ import '../widgets/user/option_item.dart';
 class UserScreen extends StatelessWidget {
   const UserScreen({super.key});
 
+  // TODO: need to handle error on loading user info
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserBloc, UserState>(
@@ -22,26 +24,19 @@ class UserScreen extends StatelessWidget {
                     SnackBar(
                       action: SnackBarAction(
                         label: 'Retry',
-                        onPressed: () => ctx
-                            .read<UserBloc>()
-                            .add(UserEvent.imageChanged(state.imagePath)),
+                        onPressed: () => ctx.read<UserBloc>().add(UserEvent.imageChanged(state.imagePath)),
                       ),
                       padding: const EdgeInsets.all(30),
-                      backgroundColor: Colors
-                          .red, // TODO: see if color is good even in dark mode
+                      backgroundColor: Colors.red,
                       content: Text(
                           failure.maybeWhen<String>(
-                              genericFailure: () =>
-                                  'Server error. Please try again later.',
-                              networkFailure: () =>
-                                  'No internet connection available. Check your internet connection.',
+                              genericFailure: () => 'Server error. Please try again later.',
+                              networkFailure: () => 'No internet connection available. Check your internet connection.',
                               orElse: () => "Unknown error"),
                           style: const TextStyle(fontSize: 20)),
                     ),
                   ),
               (_) => {});
-
-          // TODO add action on snackbar (generally speaking should be added everywhere, where reasonable)
         }
 
         if (logoutFailureOrSuccess != null) {
@@ -49,14 +44,11 @@ class UserScreen extends StatelessWidget {
               (failure) => ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       padding: const EdgeInsets.all(30),
-                      backgroundColor: Colors
-                          .red, // TODO: see if color is good even in dark mode
+                      backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
                       content: Text(
                           failure.maybeWhen<String>(
-                              genericFailure: () =>
-                                  'Server error. Please try again later.',
-                              networkFailure: () =>
-                                  'No internet connection available. Check your internet connection.',
+                              genericFailure: () => 'Server error. Please try again later.',
+                              networkFailure: () => 'No internet connection available. Check your internet connection.',
                               orElse: () => "Unknown error"),
                           style: const TextStyle(fontSize: 20)),
                     ),
@@ -64,10 +56,8 @@ class UserScreen extends StatelessWidget {
               (_) => {
                     // Go back to login page, remove all history
                     Navigator.popUntil(context, (route) => route.isFirst),
-                    Navigator.pushReplacementNamed(context, "/login")
+                    Navigator.pushReplacementNamed(context, "/tutorial")
                   });
-
-          // TODO add action on snackbar to retry image upload (generally speaking should be added everywhere)
         }
       },
       builder: (ctx, state) => state.isLoading
@@ -88,22 +78,18 @@ class UserScreen extends StatelessWidget {
                                 style: TextStyle(fontSize: 40),
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                                padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
                                 child: Row(
                                   children: [
                                     Flexible(
                                       child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           EditableCircularImage(
                                             token: state.token,
                                             userId: state.user!.id,
-                                            onImageChange: (String? path) => ctx
-                                                .read<UserBloc>()
-                                                .add(UserEvent.imageChanged(
-                                                    path)),
+                                            onImageChange: (String? path) =>
+                                                ctx.read<UserBloc>().add(UserEvent.imageChanged(path)),
                                             radius: 70,
                                             hasImage: state.user!.hasImage,
                                           ),
@@ -112,13 +98,10 @@ class UserScreen extends StatelessWidget {
                                           ),
                                           Expanded(
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      0, 10, 0, 0),
+                                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                                               child: Text(
                                                 state.user!.username,
-                                                style: const TextStyle(
-                                                    fontSize: 25),
+                                                style: const TextStyle(fontSize: 25),
                                               ),
                                             ),
                                           ),
@@ -164,9 +147,7 @@ class UserScreen extends StatelessWidget {
                     ],
                   ),
                 )
-              :
-              // TODO handle error (on listener)
-              Container(),
+              : Container(),
     );
   }
 
@@ -187,7 +168,6 @@ class UserScreen extends StatelessWidget {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                // TODO: go to path: / (e.g. InfoScreen)
                 context.read<UserBloc>().add(const UserEvent.logout());
               },
               child: const Text('Yes, log out'),

@@ -46,6 +46,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           dateSelected: (date) => _onDateSelected(emit, date),
           searchSubmitted: () => _onSearchSubmit(emit),
           showFilters: () => _onShowFilters(emit),
+          sortParameterChanged: (order) => _onChangeSortingParameter(emit, order),
         );
       },
     );
@@ -75,26 +76,24 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           range: 100,
           X: pos.longitude,
           Y: pos.latitude,
-          order: SearchItemOrder.date,
-          // TODO add order
           type: itemsToSearch.first && itemsToSearch.second
               ? SearchItemType.all
               : (itemsToSearch.first ? SearchItemType.found : SearchItemType.lost),
           category: state.cat.value.getOrElse(() => 0),
           date: state.dateTime);
 
-      // TODO error handling (must be done everywhere)
       final searchResponse = await _searchItemsUseCase(params);
       searchResponse.fold((failure) => searchFailureOrSuccess = Left(failure), (searchItems) {
         searchFailureOrSuccess = const Right(Success.genericSuccess());
         items = searchItems;
         pageState = SearchPageState.resultPage;
       });
-    } else {
-      searchFailureOrSuccess = const Left(Failure.validationFailure("Specify at least type and location."));
     }
 
     final session = await _secureStorage.getSessionInformation();
+
+    // Sort items
+
 
     emit(state.copyWith(
       searchFailureOrSuccess: searchFailureOrSuccess,
@@ -135,5 +134,20 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
     addressOrFailure.fold((failure) => emit(state.copyWith(isLoadingPosition: false)),
         (address) => emit(state.copyWith(address: address, pos: PositionField(pos), isLoadingPosition: false)));
+  }
+
+  void _onChangeSortingParameter(Emitter<SearchState> emit, ResultOrder order) {
+
+  }
+
+  void sortItems(List<SearchItem> items, ResultOrder order) {
+      switch(order) {
+        case ResultOrder.alphabetic:
+          items.sort((a, b) => a.title.compareTo(b.title));
+        case ResultOrder.date:
+          items.sort((a, b) => a.title.compareTo(b.title));
+        case ResultOrder.distance:
+          items.sort((a, b) => a.title.compareTo(b.title));
+      }
   }
 }

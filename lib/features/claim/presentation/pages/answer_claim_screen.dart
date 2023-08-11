@@ -14,8 +14,6 @@ class AnswerClaimScreen extends StatelessWidget {
   final int claimId;
   final bool isClaimAlreadyManaged;
 
-  // TODO maybe it's better to let owner see how he evaluated the claim even after the evaluation (but buttons are disabled)
-
   const AnswerClaimScreen({super.key, required this.itemId, required this.claimId, required this.isClaimAlreadyManaged});
 
   @override
@@ -45,7 +43,7 @@ class AnswerClaimScreen extends StatelessWidget {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   padding: const EdgeInsets.all(30),
-                                  backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                                  backgroundColor: Colors.red,
                                   content: Text(
                                       failure.maybeWhen<String>(
                                           genericFailure: () => 'Server error. Please try again later.',
@@ -54,7 +52,8 @@ class AnswerClaimScreen extends StatelessWidget {
                                           orElse: () => "Unknown error"),
                                       style: const TextStyle(fontSize: 20)),
                                 ),
-                              )
+                              ),
+                              Navigator.pop(ctx)
                             },
                         (_) => {});
                   }
@@ -65,7 +64,7 @@ class AnswerClaimScreen extends StatelessWidget {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   padding: const EdgeInsets.all(30),
-                                  backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                                  backgroundColor: Colors.red,
                                   content: Text(
                                       failure.maybeWhen<String>(
                                           genericFailure: () => 'Server error. Please try again later.',
@@ -135,7 +134,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                   : Container(),
                               const Padding(
                                 padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
-                                child: Text("Item claimed:"),
+                                child: Text("Item claimed"),
                               ),
                               const SizedBox(
                                 height: 5,
@@ -164,7 +163,7 @@ class AnswerClaimScreen extends StatelessWidget {
                               ),
                               const Padding(
                                 padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
-                                child: Text("Question:"),
+                                child: Text("Question"),
                               ),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
@@ -193,9 +192,12 @@ class AnswerClaimScreen extends StatelessWidget {
                                 height: 30,
                               ),
                               PersonalizedLargeGreenButton(
-                                  onPressed: () => ctx
-                                      .read<AnswerClaimBloc>()
-                                      .add(AnswerClaimEvent.claimDecisionTaken(ClaimStatus.approved, claimId)),
+                                  isActive: isClaimAlreadyManaged,
+                                  onPressed: () => isClaimAlreadyManaged
+                                      ? {}
+                                      : ctx
+                                          .read<AnswerClaimBloc>()
+                                          .add(AnswerClaimEvent.claimDecisionTaken(ClaimStatus.approved, claimId)),
                                   text: const Text(
                                     "Accept",
                                     style: TextStyle(fontSize: 20),
@@ -210,11 +212,12 @@ class AnswerClaimScreen extends StatelessWidget {
                                     child: Padding(
                                       padding: const EdgeInsets.all(10.0),
                                       child: ElevatedButton(
-                                          onPressed: () => ctx
-                                              .read<AnswerClaimBloc>()
-                                              .add(AnswerClaimEvent.claimDecisionTaken(ClaimStatus.rejected, claimId)),
+                                          onPressed: () => isClaimAlreadyManaged
+                                              ? {}
+                                              : ctx.read<AnswerClaimBloc>().add(
+                                                  AnswerClaimEvent.claimDecisionTaken(ClaimStatus.rejected, claimId)),
                                           style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.red,
+                                            backgroundColor: isClaimAlreadyManaged ? Colors.grey : Colors.red,
                                             shape: const StadiumBorder(),
                                             padding: const EdgeInsets.symmetric(vertical: 16),
                                           ),

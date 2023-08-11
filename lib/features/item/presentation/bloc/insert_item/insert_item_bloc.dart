@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/domain/usecases/get_address_from_position_usecase.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
@@ -57,8 +56,8 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
     emit(state.copyWith(cat: CategoryField(catId), category: category));
   }
 
-  void _onImageChanged(Emitter<InsertItemState> emit, XFile? image) {
-    emit(state.copyWith(image: image));
+  void _onImageChanged(Emitter<InsertItemState> emit, String? image) {
+    emit(state.copyWith(imagePath: image));
   }
 
   void _onTypeChanged(Emitter<InsertItemState> emit, ItemType? type) {
@@ -103,8 +102,8 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
         newItemId = itemId;
       });
 
-      if (newItemId != null && state.image != null) {
-        final params = UploadItemImageParams(itemId: newItemId!, image: File(state.image!.path));
+      if (newItemId != null && state.imagePath != null) {
+        final params = UploadItemImageParams(itemId: newItemId!, image: File(state.imagePath!));
 
         final imgFailureOrSuccess = await _uploadItemImageUseCase(params);
         imgFailureOrSuccess.fold(
@@ -119,6 +118,7 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
         showError: true,
         insertFailureOrSuccess: createFailureOrSuccess,
         imageUploadFailureOrSuccess: imageFailureOrSuccess));
+    emit(state.copyWith(insertFailureOrSuccess: null, imageUploadFailureOrSuccess: null));
   }
 
   Future<void> _onPositionSelected(Emitter<InsertItemState> emit, LatLng pos) async {

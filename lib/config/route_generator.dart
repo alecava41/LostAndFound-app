@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/core/presentation/tutorial/pages/tutorial_page.dart';
 import 'package:lost_and_found/features/authentication/presentation/pages/login_page.dart';
 import 'package:lost_and_found/features/authentication/presentation/pages/registration_page.dart';
 import 'package:lost_and_found/features/item/presentation/pages/notifications_page.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/claim_screen.dart';
 import 'package:lost_and_found/features/item/presentation/pages/insert_item_page.dart';
 import 'package:lost_and_found/features/user/presentation/pages/tutorial_page.dart';
-import 'package:lost_and_found/screens/tutorial.dart';
 
-import '../core/presentation/home_controller/home_controller.dart';
+import '../core/presentation/home_controller/pages/home_controller_page.dart';
 import '../features/user/presentation/pages/change_password_page.dart';
 
 class RouteGenerator {
@@ -15,7 +15,9 @@ class RouteGenerator {
     // Getting arguments passed in while calling Navigator.pushNamed
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => const HomeControllerScreen()); // TODO: go to InfoScreen (login/logout and tutorial)
+        return MaterialPageRoute(builder: (_) => const HomeControllerScreen());
+      case '/tutorial':
+        return MaterialPageRoute(builder: (_) => const InfoScreen());
       case '/register':
         return MaterialPageRoute(builder: (_) => const RegistrationScreen());
       case '/login':

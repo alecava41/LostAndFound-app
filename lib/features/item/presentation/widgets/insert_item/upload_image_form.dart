@@ -1,5 +1,6 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../../../../utils/colors.dart';
 
@@ -7,10 +8,10 @@ import '../../../../../utils/colors.dart';
 class UploadImageForm extends StatelessWidget {
   final VoidCallback onSelectUploadMethod;
   final VoidCallback onDeletePhoto;
-  final XFile? image;
+  final String? imagePath;
 
   const UploadImageForm(
-      {super.key, required this.onSelectUploadMethod, required this.onDeletePhoto, required this.image});
+      {super.key, required this.onSelectUploadMethod, required this.onDeletePhoto, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class UploadImageForm extends StatelessWidget {
                     color: Colors.white,
                     height: 300,
                     width: MediaQuery.of(context).size.width,
-                    child: image == null
+                    child: imagePath == null
                         ? Center(
                             child: ElevatedButton(
                               onPressed: onSelectUploadMethod,
@@ -52,9 +53,9 @@ class UploadImageForm extends StatelessWidget {
                               ),
                             ),
                           )
-                        : Container(),
+                        : Image.file(File(imagePath!)),
                   ),
-                  if (image != null)
+                  if (imagePath != null)
                     Positioned(
                       right: 16,
                       bottom: 10,

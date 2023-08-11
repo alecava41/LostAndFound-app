@@ -11,9 +11,9 @@ _$$ClaimSentDto _$$$ClaimSentDtoFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int,
       status: json['status'] as String,
       item: ItemDto.fromJson(json['item'] as Map<String, dynamic>),
+      answer: json['answer'] as String?,
       date:
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
-      answer: json['answer'] as String?,
     );
 
 Map<String, dynamic> _$$$ClaimSentDtoToJson(_$$ClaimSentDto instance) =>
@@ -21,6 +21,6 @@ Map<String, dynamic> _$$$ClaimSentDtoToJson(_$$ClaimSentDto instance) =>
       'id': instance.id,
       'status': instance.status,
       'item': instance.item,
-      'date': instance.date?.toIso8601String(),
       'answer': instance.answer,
+      'date': instance.date?.toIso8601String(),
     };

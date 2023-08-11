@@ -13,9 +13,7 @@ class ClaimReceivedContent extends StatelessWidget {
         builder: (ctx, state) => RefreshIndicator(
               onRefresh: () async {
                 Future block = ctx.read<ClaimBloc>().stream.first;
-                ctx
-                    .read<ClaimBloc>()
-                    .add(const ClaimEvent.receivedClaimsRefreshed());
+                ctx.read<ClaimBloc>().add(const ClaimEvent.receivedClaimsRefreshed());
                 await block;
               },
               child: state.isLoadingReceived
@@ -51,11 +49,12 @@ class ClaimReceivedContent extends StatelessWidget {
                           itemBuilder: (context, index) {
                             final claim = state.claimsReceived[index];
                             return Container(
-                                padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                                child: ClaimedItemCard(
-                                  claim: claim,
-                                  token: state.token,
-                                ));
+                              padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                              child: ClaimedItemCard(
+                                claim: claim,
+                                token: state.token,
+                              ),
+                            );
                           },
                         ),
             ));

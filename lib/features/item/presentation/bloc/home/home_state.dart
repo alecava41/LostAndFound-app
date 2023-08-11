@@ -5,13 +5,10 @@ class HomeState with _$HomeState {
   const factory HomeState({
     required List<UserItem> lostItems,
     required List<UserItem> foundItems,
-    required String token,
+    @Default("") String token,
+    @Default(false) bool isLoading,
     Either<Failure, Success>? homeFailureOrSuccess,
   }) = _HomeState;
 
-  factory HomeState.initial() => const HomeState(
-      token: "",
-      lostItems: [],
-      foundItems: []
-  );
+  factory HomeState.initial() => const HomeState(token: "", lostItems: [], foundItems: []);
 }

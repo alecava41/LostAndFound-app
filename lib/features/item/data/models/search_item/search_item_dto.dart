@@ -11,7 +11,8 @@ class SearchItemDto with _$SearchItemDto {
     required String title,
     required String type,
     required bool image,
-    required UserDto user
+    required UserDto user,
+    required double distance
   }) = $SearchItemDto;
 
   factory SearchItemDto.fromJson(Map<String, dynamic> data) => _$SearchItemDtoFromJson(data);

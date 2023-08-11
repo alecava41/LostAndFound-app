@@ -23,7 +23,7 @@ mixin _$InsertItemEvent {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image) imageSelected,
+    required TResult Function(String imagePath) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
   }) =>
@@ -35,7 +35,7 @@ mixin _$InsertItemEvent {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image)? imageSelected,
+    TResult? Function(String imagePath)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
   }) =>
@@ -47,7 +47,7 @@ mixin _$InsertItemEvent {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image)? imageSelected,
+    TResult Function(String imagePath)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     required TResult orElse(),
@@ -179,7 +179,7 @@ class _$_TypeChanged implements _TypeChanged {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image) imageSelected,
+    required TResult Function(String imagePath) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
   }) {
@@ -194,7 +194,7 @@ class _$_TypeChanged implements _TypeChanged {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image)? imageSelected,
+    TResult? Function(String imagePath)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
   }) {
@@ -209,7 +209,7 @@ class _$_TypeChanged implements _TypeChanged {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image)? imageSelected,
+    TResult Function(String imagePath)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     required TResult orElse(),
@@ -348,7 +348,7 @@ class _$_TitleChanged implements _TitleChanged {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image) imageSelected,
+    required TResult Function(String imagePath) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
   }) {
@@ -363,7 +363,7 @@ class _$_TitleChanged implements _TitleChanged {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image)? imageSelected,
+    TResult? Function(String imagePath)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
   }) {
@@ -378,7 +378,7 @@ class _$_TitleChanged implements _TitleChanged {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image)? imageSelected,
+    TResult Function(String imagePath)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     required TResult orElse(),
@@ -517,7 +517,7 @@ class _$_QuestionChanged implements _QuestionChanged {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image) imageSelected,
+    required TResult Function(String imagePath) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
   }) {
@@ -532,7 +532,7 @@ class _$_QuestionChanged implements _QuestionChanged {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image)? imageSelected,
+    TResult? Function(String imagePath)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
   }) {
@@ -547,7 +547,7 @@ class _$_QuestionChanged implements _QuestionChanged {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image)? imageSelected,
+    TResult Function(String imagePath)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     required TResult orElse(),
@@ -686,7 +686,7 @@ class _$_PositionSelected implements _PositionSelected {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image) imageSelected,
+    required TResult Function(String imagePath) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
   }) {
@@ -701,7 +701,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image)? imageSelected,
+    TResult? Function(String imagePath)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
   }) {
@@ -716,7 +716,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image)? imageSelected,
+    TResult Function(String imagePath)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     required TResult orElse(),
@@ -864,7 +864,7 @@ class _$_CategorySelected implements _CategorySelected {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image) imageSelected,
+    required TResult Function(String imagePath) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
   }) {
@@ -879,7 +879,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image)? imageSelected,
+    TResult? Function(String imagePath)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
   }) {
@@ -894,7 +894,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image)? imageSelected,
+    TResult Function(String imagePath)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     required TResult orElse(),
@@ -972,7 +972,7 @@ abstract class _$$_ImageSelectedCopyWith<$Res> {
           _$_ImageSelected value, $Res Function(_$_ImageSelected) then) =
       __$$_ImageSelectedCopyWithImpl<$Res>;
   @useResult
-  $Res call({XFile image});
+  $Res call({String imagePath});
 }
 
 /// @nodoc
@@ -986,13 +986,13 @@ class __$$_ImageSelectedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? image = null,
+    Object? imagePath = null,
   }) {
     return _then(_$_ImageSelected(
-      null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as XFile,
+      null == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -1000,14 +1000,14 @@ class __$$_ImageSelectedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ImageSelected implements _ImageSelected {
-  const _$_ImageSelected(this.image);
+  const _$_ImageSelected(this.imagePath);
 
   @override
-  final XFile image;
+  final String imagePath;
 
   @override
   String toString() {
-    return 'InsertItemEvent.imageSelected(image: $image)';
+    return 'InsertItemEvent.imageSelected(imagePath: $imagePath)';
   }
 
   @override
@@ -1015,11 +1015,12 @@ class _$_ImageSelected implements _ImageSelected {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ImageSelected &&
-            (identical(other.image, image) || other.image == image));
+            (identical(other.imagePath, imagePath) ||
+                other.imagePath == imagePath));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, image);
+  int get hashCode => Object.hash(runtimeType, imagePath);
 
   @JsonKey(ignore: true)
   @override
@@ -1035,11 +1036,11 @@ class _$_ImageSelected implements _ImageSelected {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image) imageSelected,
+    required TResult Function(String imagePath) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
   }) {
-    return imageSelected(image);
+    return imageSelected(imagePath);
   }
 
   @override
@@ -1050,11 +1051,11 @@ class _$_ImageSelected implements _ImageSelected {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image)? imageSelected,
+    TResult? Function(String imagePath)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
   }) {
-    return imageSelected?.call(image);
+    return imageSelected?.call(imagePath);
   }
 
   @override
@@ -1065,13 +1066,13 @@ class _$_ImageSelected implements _ImageSelected {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image)? imageSelected,
+    TResult Function(String imagePath)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     required TResult orElse(),
   }) {
     if (imageSelected != null) {
-      return imageSelected(image);
+      return imageSelected(imagePath);
     }
     return orElse();
   }
@@ -1127,9 +1128,9 @@ class _$_ImageSelected implements _ImageSelected {
 }
 
 abstract class _ImageSelected implements InsertItemEvent {
-  const factory _ImageSelected(final XFile image) = _$_ImageSelected;
+  const factory _ImageSelected(final String imagePath) = _$_ImageSelected;
 
-  XFile get image;
+  String get imagePath;
   @JsonKey(ignore: true)
   _$$_ImageSelectedCopyWith<_$_ImageSelected> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1178,7 +1179,7 @@ class _$_ImageDeleted implements _ImageDeleted {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image) imageSelected,
+    required TResult Function(String imagePath) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
   }) {
@@ -1193,7 +1194,7 @@ class _$_ImageDeleted implements _ImageDeleted {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image)? imageSelected,
+    TResult? Function(String imagePath)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
   }) {
@@ -1208,7 +1209,7 @@ class _$_ImageDeleted implements _ImageDeleted {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image)? imageSelected,
+    TResult Function(String imagePath)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     required TResult orElse(),
@@ -1316,7 +1317,7 @@ class _$_InsertSubmitted implements _InsertSubmitted {
     required TResult Function(String input) questionChanged,
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
-    required TResult Function(XFile image) imageSelected,
+    required TResult Function(String imagePath) imageSelected,
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
   }) {
@@ -1331,7 +1332,7 @@ class _$_InsertSubmitted implements _InsertSubmitted {
     TResult? Function(String input)? questionChanged,
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(XFile image)? imageSelected,
+    TResult? Function(String imagePath)? imageSelected,
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
   }) {
@@ -1346,7 +1347,7 @@ class _$_InsertSubmitted implements _InsertSubmitted {
     TResult Function(String input)? questionChanged,
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
-    TResult Function(XFile image)? imageSelected,
+    TResult Function(String imagePath)? imageSelected,
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     required TResult orElse(),
@@ -1415,7 +1416,7 @@ abstract class _InsertSubmitted implements InsertItemEvent {
 mixin _$InsertItemState {
 // Insert item parameters
   ItemType get type => throw _privateConstructorUsedError;
-  XFile? get image => throw _privateConstructorUsedError;
+  String? get imagePath => throw _privateConstructorUsedError;
   PositionField get pos => throw _privateConstructorUsedError;
   CategoryField get cat => throw _privateConstructorUsedError;
   TitleField get title => throw _privateConstructorUsedError;
@@ -1447,7 +1448,7 @@ abstract class $InsertItemStateCopyWith<$Res> {
   @useResult
   $Res call(
       {ItemType type,
-      XFile? image,
+      String? imagePath,
       PositionField pos,
       CategoryField cat,
       TitleField title,
@@ -1477,7 +1478,7 @@ class _$InsertItemStateCopyWithImpl<$Res, $Val extends InsertItemState>
   @override
   $Res call({
     Object? type = null,
-    Object? image = freezed,
+    Object? imagePath = freezed,
     Object? pos = null,
     Object? cat = null,
     Object? title = null,
@@ -1497,10 +1498,10 @@ class _$InsertItemStateCopyWithImpl<$Res, $Val extends InsertItemState>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as ItemType,
-      image: freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as XFile?,
+      imagePath: freezed == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String?,
       pos: null == pos
           ? _value.pos
           : pos // ignore: cast_nullable_to_non_nullable
@@ -1567,7 +1568,7 @@ abstract class _$$_InsertItemStateCopyWith<$Res>
   @useResult
   $Res call(
       {ItemType type,
-      XFile? image,
+      String? imagePath,
       PositionField pos,
       CategoryField cat,
       TitleField title,
@@ -1595,7 +1596,7 @@ class __$$_InsertItemStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? type = null,
-    Object? image = freezed,
+    Object? imagePath = freezed,
     Object? pos = null,
     Object? cat = null,
     Object? title = null,
@@ -1615,10 +1616,10 @@ class __$$_InsertItemStateCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as ItemType,
-      image: freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as XFile?,
+      imagePath: freezed == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String?,
       pos: null == pos
           ? _value.pos
           : pos // ignore: cast_nullable_to_non_nullable
@@ -1670,10 +1671,10 @@ class __$$_InsertItemStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_InsertItemState implements _InsertItemState {
+class _$_InsertItemState extends _InsertItemState {
   const _$_InsertItemState(
       {required this.type,
-      required this.image,
+      required this.imagePath,
       required this.pos,
       required this.cat,
       required this.title,
@@ -1686,13 +1687,14 @@ class _$_InsertItemState implements _InsertItemState {
       this.showError = false,
       this.isLoading = false,
       this.insertFailureOrSuccess,
-      this.imageUploadFailureOrSuccess});
+      this.imageUploadFailureOrSuccess})
+      : super._();
 
 // Insert item parameters
   @override
   final ItemType type;
   @override
-  final XFile? image;
+  final String? imagePath;
   @override
   final PositionField pos;
   @override
@@ -1731,7 +1733,7 @@ class _$_InsertItemState implements _InsertItemState {
 
   @override
   String toString() {
-    return 'InsertItemState(type: $type, image: $image, pos: $pos, cat: $cat, title: $title, question: $question, category: $category, address: $address, isLoadingPosition: $isLoadingPosition, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, showError: $showError, isLoading: $isLoading, insertFailureOrSuccess: $insertFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
+    return 'InsertItemState(type: $type, imagePath: $imagePath, pos: $pos, cat: $cat, title: $title, question: $question, category: $category, address: $address, isLoadingPosition: $isLoadingPosition, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, showError: $showError, isLoading: $isLoading, insertFailureOrSuccess: $insertFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
   }
 
   @override
@@ -1740,7 +1742,8 @@ class _$_InsertItemState implements _InsertItemState {
         (other.runtimeType == runtimeType &&
             other is _$_InsertItemState &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.image, image) || other.image == image) &&
+            (identical(other.imagePath, imagePath) ||
+                other.imagePath == imagePath) &&
             (identical(other.pos, pos) || other.pos == pos) &&
             (identical(other.cat, cat) || other.cat == cat) &&
             (identical(other.title, title) || other.title == title) &&
@@ -1769,7 +1772,7 @@ class _$_InsertItemState implements _InsertItemState {
   int get hashCode => Object.hash(
       runtimeType,
       type,
-      image,
+      imagePath,
       pos,
       cat,
       title,
@@ -1791,10 +1794,10 @@ class _$_InsertItemState implements _InsertItemState {
       __$$_InsertItemStateCopyWithImpl<_$_InsertItemState>(this, _$identity);
 }
 
-abstract class _InsertItemState implements InsertItemState {
+abstract class _InsertItemState extends InsertItemState {
   const factory _InsertItemState(
           {required final ItemType type,
-          required final XFile? image,
+          required final String? imagePath,
           required final PositionField pos,
           required final CategoryField cat,
           required final TitleField title,
@@ -1809,11 +1812,12 @@ abstract class _InsertItemState implements InsertItemState {
           final Either<Failure, Success>? insertFailureOrSuccess,
           final Either<Failure, Success>? imageUploadFailureOrSuccess}) =
       _$_InsertItemState;
+  const _InsertItemState._() : super._();
 
   @override // Insert item parameters
   ItemType get type;
   @override
-  XFile? get image;
+  String? get imagePath;
   @override
   PositionField get pos;
   @override

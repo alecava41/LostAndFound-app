@@ -8,6 +8,7 @@ class SearchState with _$SearchState {
     required PositionField pos,
     required CategoryField cat,
     required DateTime? dateTime,
+    required ResultOrder order,
 
     // Search results
     required List<SearchItem> results,
@@ -15,7 +16,6 @@ class SearchState with _$SearchState {
     // User-friendly fields
     @Default("") String category,
     @Default("") String address,
-
     @Default(false) bool isConnected,
     @Default(false) bool hasLocationPermissions,
     @Default(false) bool isLoadingPosition,
@@ -29,15 +29,13 @@ class SearchState with _$SearchState {
 
   factory SearchState.initial() => SearchState(
       itemsToSearch: ItemsTypeField(false, false),
-      pos: PositionField(const LatLng(0,0)),
+      pos: PositionField(const LatLng(0, 0)),
       cat: CategoryField(-1),
       results: [],
       dateTime: null,
-  );
+      order: ResultOrder.date);
 }
 
-enum SearchPageState {
-  loadingPage,
-  resultPage,
-  filterPage
-}
+enum SearchPageState { loadingPage, resultPage, filterPage }
+
+enum ResultOrder { alphabetic, date, distance }

@@ -4,10 +4,13 @@ import '../../../utils/colors.dart';
 
 class PersonalizedLargeGreenButton extends StatelessWidget {
   final VoidCallback? onPressed;
+  final bool isActive;
   final Widget text;
 
-  const PersonalizedLargeGreenButton({super.key, 
+  const PersonalizedLargeGreenButton({
+    super.key,
     required this.onPressed,
+    this.isActive = true,
     required this.text,
   });
 
@@ -20,14 +23,13 @@ class PersonalizedLargeGreenButton extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: ElevatedButton(
-              onPressed: onPressed,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: PersonalizedColor.mainColor,
-                shape: const StadiumBorder(),
-                padding: const EdgeInsets.symmetric(vertical: 16),
-              ),
-              child: text
-            ),
+                onPressed: onPressed,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: isActive ? PersonalizedColor.mainColor : Colors.grey,
+                  shape: const StadiumBorder(),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
+                child: text),
           ),
         )
       ],

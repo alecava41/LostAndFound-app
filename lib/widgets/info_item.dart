@@ -80,7 +80,6 @@ class InfoItem extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-            // TODO: aggiungere questo a file con BLOC
           question != null
               ? Container(
                   width: double.infinity,

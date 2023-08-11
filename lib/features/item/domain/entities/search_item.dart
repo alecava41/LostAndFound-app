@@ -4,6 +4,7 @@ class SearchItem {
   final int id;
   final User user;
   final String title;
+  final
   final ItemType type;
   final bool hasImage;
 

@@ -11,12 +11,10 @@ class SignInText extends StatelessWidget {
         const Text("Already have an account?"),
         TextButton(
           onPressed: () {
-            Navigator.of(context).pushNamed(
-              '/login',
-            );
+            Navigator.pushReplacementNamed(context, '/login');
           },
           child: const Text(
-            "Sign in!",
+            "Sign in",
             style: TextStyle(
               decoration: TextDecoration.underline,
             ),

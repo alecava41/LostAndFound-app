@@ -23,8 +23,8 @@ mixin _$ClaimSentDto {
   int get id => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   ItemDto get item => throw _privateConstructorUsedError;
-  DateTime? get date => throw _privateConstructorUsedError;
   String? get answer => throw _privateConstructorUsedError;
+  DateTime? get date => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,7 +39,7 @@ abstract class $ClaimSentDtoCopyWith<$Res> {
       _$ClaimSentDtoCopyWithImpl<$Res, ClaimSentDto>;
   @useResult
   $Res call(
-      {int id, String status, ItemDto item, DateTime? date, String? answer});
+      {int id, String status, ItemDto item, String? answer, DateTime? date});
 
   $ItemDtoCopyWith<$Res> get item;
 }
@@ -60,8 +60,8 @@ class _$ClaimSentDtoCopyWithImpl<$Res, $Val extends ClaimSentDto>
     Object? id = null,
     Object? status = null,
     Object? item = null,
-    Object? date = freezed,
     Object? answer = freezed,
+    Object? date = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -76,14 +76,14 @@ class _$ClaimSentDtoCopyWithImpl<$Res, $Val extends ClaimSentDto>
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as ItemDto,
-      date: freezed == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       answer: freezed == answer
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
               as String?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 
@@ -105,7 +105,7 @@ abstract class _$$$ClaimSentDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id, String status, ItemDto item, DateTime? date, String? answer});
+      {int id, String status, ItemDto item, String? answer, DateTime? date});
 
   @override
   $ItemDtoCopyWith<$Res> get item;
@@ -125,8 +125,8 @@ class __$$$ClaimSentDtoCopyWithImpl<$Res>
     Object? id = null,
     Object? status = null,
     Object? item = null,
-    Object? date = freezed,
     Object? answer = freezed,
+    Object? date = freezed,
   }) {
     return _then(_$$ClaimSentDto(
       id: null == id
@@ -141,14 +141,14 @@ class __$$$ClaimSentDtoCopyWithImpl<$Res>
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as ItemDto,
-      date: freezed == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       answer: freezed == answer
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
               as String?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -160,8 +160,8 @@ class _$$ClaimSentDto implements $ClaimSentDto {
       {required this.id,
       required this.status,
       required this.item,
-      this.date,
-      this.answer});
+      required this.answer,
+      this.date});
 
   factory _$$ClaimSentDto.fromJson(Map<String, dynamic> json) =>
       _$$$ClaimSentDtoFromJson(json);
@@ -173,13 +173,13 @@ class _$$ClaimSentDto implements $ClaimSentDto {
   @override
   final ItemDto item;
   @override
-  final DateTime? date;
-  @override
   final String? answer;
+  @override
+  final DateTime? date;
 
   @override
   String toString() {
-    return 'ClaimSentDto(id: $id, status: $status, item: $item, date: $date, answer: $answer)';
+    return 'ClaimSentDto(id: $id, status: $status, item: $item, answer: $answer, date: $date)';
   }
 
   @override
@@ -190,13 +190,13 @@ class _$$ClaimSentDto implements $ClaimSentDto {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.item, item) || other.item == item) &&
-            (identical(other.date, date) || other.date == date) &&
-            (identical(other.answer, answer) || other.answer == answer));
+            (identical(other.answer, answer) || other.answer == answer) &&
+            (identical(other.date, date) || other.date == date));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, status, item, date, answer);
+  int get hashCode => Object.hash(runtimeType, id, status, item, answer, date);
 
   @JsonKey(ignore: true)
   @override
@@ -217,8 +217,8 @@ abstract class $ClaimSentDto implements ClaimSentDto {
       {required final int id,
       required final String status,
       required final ItemDto item,
-      final DateTime? date,
-      final String? answer}) = _$$ClaimSentDto;
+      required final String? answer,
+      final DateTime? date}) = _$$ClaimSentDto;
 
   factory $ClaimSentDto.fromJson(Map<String, dynamic> json) =
       _$$ClaimSentDto.fromJson;
@@ -230,9 +230,9 @@ abstract class $ClaimSentDto implements ClaimSentDto {
   @override
   ItemDto get item;
   @override
-  DateTime? get date;
-  @override
   String? get answer;
+  @override
+  DateTime? get date;
   @override
   @JsonKey(ignore: true)
   _$$$ClaimSentDtoCopyWith<_$$ClaimSentDto> get copyWith =>

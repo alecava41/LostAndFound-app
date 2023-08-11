@@ -49,7 +49,6 @@ class ItemDataSourceImpl implements ItemDataSource {
   Future<List<SearchItemDto>> searchItems(SearchItemsParams params) {
     return _client.getItems(
       params.type.name,
-      params.order.name,
       params.last,
       params.X,
       params.Y,

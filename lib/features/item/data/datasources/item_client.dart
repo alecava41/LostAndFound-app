@@ -34,7 +34,6 @@ abstract class ItemClient {
   @GET('/items')
   Future<List<SearchItemDto>> getItems(
       @Query("type") String type,
-      @Query("order") String order,
       @Query("last") int last,
       @Query("X") double X,
       @Query("Y") double Y,

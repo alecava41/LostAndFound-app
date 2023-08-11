@@ -4,15 +4,14 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/presentation/select_position/bloc/select_position_bloc.dart';
+import 'package:lost_and_found/utils/constants.dart';
 
-import '../../../injection_container.dart';
+import '../../../../injection_container.dart';
 
 class SelectPositionScreen extends StatefulWidget {
   final LatLng startingPosition;
 
   const SelectPositionScreen({super.key, required this.startingPosition});
-
-  // TODO evaluate whether to zoom at the beginning if position is not the default one
 
   @override
   State<SelectPositionScreen> createState() => _SelectPositionScreenState();
@@ -72,8 +71,10 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                               mapController: mapController.mapController,
                               options: MapOptions(
                                   onMapReady: () {
-                                    mapController.centerOnPoint(LatLng(markerPos.latitude, markerPos.longitude),
-                                        zoom: 5.5);
+                                    if (markerPos != defaultPosition) {
+                                      mapController.centerOnPoint(LatLng(markerPos.latitude, markerPos.longitude),
+                                          zoom: 10);
+                                    }
                                   },
                                   interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
                                   center: center,

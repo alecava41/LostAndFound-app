@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:lost_and_found/core/presentation/select_position/select_position.dart';
+import 'package:lost_and_found/core/presentation/select_position/pages/select_position_page.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/utils/constants.dart';
 

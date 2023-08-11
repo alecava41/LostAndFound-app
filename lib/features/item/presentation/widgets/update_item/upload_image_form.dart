@@ -1,7 +1,8 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../../utils/colors.dart';
@@ -12,17 +13,20 @@ class UploadImageForm extends StatelessWidget {
   final String token;
   final VoidCallback onSelectUploadMethod;
   final VoidCallback onDeletePhoto;
-  final XFile? image;
+  final String? imagePath;
   final bool hasImage;
+  final bool hasDeletedOriginalImage;
 
-  const UploadImageForm(
-      {super.key,
-      required this.itemId,
-      required this.token,
-      required this.onSelectUploadMethod,
-      required this.onDeletePhoto,
-      required this.image,
-      required this.hasImage});
+  const UploadImageForm({
+    super.key,
+    required this.itemId,
+    required this.token,
+    required this.onSelectUploadMethod,
+    required this.onDeletePhoto,
+    required this.imagePath,
+    required this.hasDeletedOriginalImage,
+    required this.hasImage,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,7 @@ class UploadImageForm extends StatelessWidget {
                     color: Colors.white,
                     height: 300,
                     width: MediaQuery.of(context).size.width,
-                    child: hasImage
+                    child: hasImage && !hasDeletedOriginalImage
                         ? CachedNetworkImage(
                             imageUrl: "$baseUrl/api/items/$itemId/image",
                             fit: BoxFit.cover,
@@ -53,8 +57,8 @@ class UploadImageForm extends StatelessWidget {
                             imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                           )
                         : () {
-                            if (image == null) {
-                              Center(
+                            if (imagePath == null) {
+                              return Center(
                                 child: ElevatedButton(
                                   onPressed: onSelectUploadMethod,
                                   style: ElevatedButton.styleFrom(
@@ -78,12 +82,11 @@ class UploadImageForm extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return Container();
+                              return Image.file(File(imagePath!));
                             }
-                            return const Icon(Icons.error);
                           }(),
                   ),
-                  if (image != null || hasImage)
+                  if (imagePath != null || (hasImage && !hasDeletedOriginalImage))
                     Positioned(
                       right: 16,
                       bottom: 10,

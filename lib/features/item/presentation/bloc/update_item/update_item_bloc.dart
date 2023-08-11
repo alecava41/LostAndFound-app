@@ -5,7 +5,6 @@ import 'package:bloc/bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/domain/usecases/get_address_from_position_usecase.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
@@ -101,19 +100,19 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
   }
 
   void _onCategoryChanged(Emitter<UpdateItemState> emit, int catId, String category) {
-    emit(state.copyWith(cat: CategoryField(catId), category: category));
+    emit(state.copyWith(cat: CategoryField(catId), category: category, hasChangedSomething: true));
   }
 
-  void _onImageChanged(Emitter<UpdateItemState> emit, XFile? image) {
-    emit(state.copyWith(image: image, hasDeletedOriginalImage: image == null));
+  void _onImageChanged(Emitter<UpdateItemState> emit, String? image) {
+    emit(state.copyWith(imagePath: image, hasDeletedOriginalImage: image == null, hasChangedSomething: true));
   }
 
   void _onTitleChanged(Emitter<UpdateItemState> emit, String input) {
-    emit(state.copyWith(title: TitleField(input)));
+    emit(state.copyWith(title: TitleField(input), hasChangedSomething: true));
   }
 
   void _onQuestionChanged(Emitter<UpdateItemState> emit, String input) {
-    emit(state.copyWith(question: QuestionField(input)));
+    emit(state.copyWith(question: QuestionField(input),hasChangedSomething: true));
   }
 
   Future<void> _onUpdateSubmitted(Emitter<UpdateItemState> emit) async {
@@ -141,8 +140,8 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
       updateResponse.fold(
           (failure) => updateFailureOrSuccess = Left(failure), (success) => updateFailureOrSuccess = Right(success));
 
-      if (state.image != null) {
-        final params = UploadItemImageParams(itemId: state.item!.id, image: File(state.image!.path));
+      if (state.imagePath != null) {
+        final params = UploadItemImageParams(itemId: state.item!.id, image: File(state.imagePath!));
 
         final imgFailureOrSuccess = await _uploadItemImageUseCase(params);
         imgFailureOrSuccess.fold(
@@ -166,10 +165,14 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
         showError: true,
         updateFailureOrSuccess: updateFailureOrSuccess,
         imageUploadFailureOrSuccess: imageFailureOrSuccess));
+
+    emit(state.copyWith(
+        updateFailureOrSuccess: null,
+        imageUploadFailureOrSuccess: null));
   }
 
   Future<void> _onPositionSelected(Emitter<UpdateItemState> emit, LatLng pos) async {
-    emit(state.copyWith(isLoadingPosition: true));
+    emit(state.copyWith(isLoadingPosition: true, hasChangedSomething: true));
 
     final addressOrFailure =
         await _getAddressFromPositionUseCase(GetAddressFromPositionParams(lat: pos.latitude, lon: pos.longitude));

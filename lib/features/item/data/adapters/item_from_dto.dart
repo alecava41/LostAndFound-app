@@ -30,7 +30,7 @@ extension ItemFromDto on ItemDto {
               id: userClaim!.id,
               status: userClaim!.status == ClaimStatus.pending.name
                   ? ClaimStatus.pending
-                  : (userClaim!.status == ClaimStatus.rejected.name ? ClaimStatus.rejected : ClaimStatus.approved))
+                  : (userClaim!.status == ClaimStatus.rejected.name ? ClaimStatus.rejected : ClaimStatus.approved), answer: userClaim!.answer)
           : null,
       category: Category(id: category.id, icon: category.icon, name: category.name),
       position: Position(X: position.X, Y: position.Y),

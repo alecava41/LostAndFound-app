@@ -69,11 +69,7 @@ class AnswerClaimBloc extends Bloc<AnswerClaimEvent, AnswerClaimState> {
   Future<void> _onClaimDecisionTaken(Emitter<AnswerClaimState> emit, ClaimStatus status, int claimId) async {
     Either<Failure, Success>? claimFailureOrSuccess;
 
-    emit(
-      state.copyWith(
-        isLoading: true,
-      ),
-    );
+    emit(state.copyWith(isLoading: true));
 
     final params = ManageClaimParams(itemId: state.item!.id, status: status, claimId: claimId);
 
@@ -84,5 +80,7 @@ class AnswerClaimBloc extends Bloc<AnswerClaimEvent, AnswerClaimState> {
     emit(
       state.copyWith(isLoading: false, claimFailureOrSuccess: claimFailureOrSuccess),
     );
+
+    emit(state.copyWith(claimFailureOrSuccess: null));
   }
 }

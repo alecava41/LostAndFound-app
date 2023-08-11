@@ -25,7 +25,7 @@ class ItemScreen extends StatelessWidget {
 
   const ItemScreen({super.key, required this.itemId});
 
-  // TODO: fix images here (with "hasImage" property)
+  // TODO address not completely visible
 
   @override
   Widget build(BuildContext context) {
@@ -38,20 +38,21 @@ class ItemScreen extends StatelessWidget {
           final deleteFailureOrSuccess = state.deleteFailureOrSuccess;
 
           if (loadFailureOrSuccess != null) {
-            loadFailureOrSuccess.fold(
-                    (failure) => ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    padding: const EdgeInsets.all(30),
-                    backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
-                    content: Text(
-                        failure.maybeWhen<String>(
-                            genericFailure: () => 'Server error. Please try again later.',
-                            networkFailure: () => 'No internet connection available. Check your internet connection.',
-                            validationFailure: (reason) => reason!,
-                            orElse: () => "Unknown error"),
-                        style: const TextStyle(fontSize: 20)),
-                  ),
-                ), (_) {});
+            loadFailureOrSuccess.fold((failure) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                padding: const EdgeInsets.all(30),
+                backgroundColor: Colors.red,
+                content: Text(
+                    failure.maybeWhen<String>(
+                        genericFailure: () => 'Server error. Please try again later.',
+                        networkFailure: () => 'No internet connection available. Check your internet connection.',
+                        validationFailure: (reason) => reason!,
+                        orElse: () => "Unknown error"),
+                    style: const TextStyle(fontSize: 20)),
+              ));
+              // Error => navigate back to previous page
+              Navigator.pop(ctx);
+            }, (_) {});
           }
 
           if (solveFailureOrSuccess != null) {
@@ -59,7 +60,7 @@ class ItemScreen extends StatelessWidget {
                 (failure) => ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         padding: const EdgeInsets.all(30),
-                        backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                        backgroundColor: Colors.red,
                         content: Text(
                             failure.maybeWhen<String>(
                                 genericFailure: () => 'Server error. Please try again later.',
@@ -70,7 +71,6 @@ class ItemScreen extends StatelessWidget {
                       ),
                     ), (_) {
               // Navigate back to HP + update HP
-              // TODO: check if it works
               ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.item!.type));
               context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
               Navigator.pop(context);
@@ -79,21 +79,20 @@ class ItemScreen extends StatelessWidget {
 
           if (deleteFailureOrSuccess != null) {
             deleteFailureOrSuccess.fold(
-                    (failure) => ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    padding: const EdgeInsets.all(30),
-                    backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
-                    content: Text(
-                        failure.maybeWhen<String>(
-                            genericFailure: () => 'Server error. Please try again later.',
-                            networkFailure: () => 'No internet connection available. Check your internet connection.',
-                            validationFailure: (reason) => reason!,
-                            orElse: () => "Unknown error"),
-                        style: const TextStyle(fontSize: 20)),
-                  ),
-                ), (_) {
+                (failure) => ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        padding: const EdgeInsets.all(30),
+                        backgroundColor: Colors.red,
+                        content: Text(
+                            failure.maybeWhen<String>(
+                                genericFailure: () => 'Server error. Please try again later.',
+                                networkFailure: () => 'No internet connection available. Check your internet connection.',
+                                validationFailure: (reason) => reason!,
+                                orElse: () => "Unknown error"),
+                            style: const TextStyle(fontSize: 20)),
+                      ),
+                    ), (_) {
               // Navigate back to HP + update HP
-              // TODO: check if it works
               ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.item!.type));
               context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
               Navigator.pop(context);
@@ -119,7 +118,11 @@ class ItemScreen extends StatelessWidget {
                   child: Column(
                     children: () {
                       var widgetList = <Widget>[
-                        ImageItem(token: state.token, itemId: state.item!.id, hasImage: state.item!.hasImage,),
+                        ImageItem(
+                          token: state.token,
+                          itemId: state.item!.id,
+                          hasImage: state.item!.hasImage,
+                        ),
                         const Divider(
                           color: Colors.grey,
                           thickness: 1,
@@ -130,6 +133,7 @@ class ItemScreen extends StatelessWidget {
                           position: state.item!.address,
                           date: state.item!.insertion,
                           category: state.item!.category.name,
+                          question: state.item!.question,
                           isFound: false,
                         ),
                         const Divider(
@@ -160,9 +164,7 @@ class ItemScreen extends StatelessWidget {
               ),
             );
           } else {
-            return const CircularProgressIndicator(
-              value: 0.5,
-            ); // TODO handle case when item is not available
+            return Container();
           }
         },
       ),
@@ -191,14 +193,18 @@ class ItemScreen extends StatelessWidget {
               ),
             ),
           ],
-          onSelected: (String value) {
+          onSelected: (String value) async {
             // Action to be performed when a menu item is selected
             switch (value) {
               case 'opt1':
                 ctx.read<ItemBloc>().add(const ItemEvent.itemSolved());
                 break;
               case 'opt2':
-                Navigator.push(ctx, MaterialPageRoute(builder: (_) => UpdateItemScreen(itemId: itemId)));
+                final changes =
+                    await Navigator.push<bool>(ctx, MaterialPageRoute(builder: (_) => UpdateItemScreen(itemId: itemId)));
+                if (changes != null && changes && ctx.mounted) {
+                  ctx.read<ItemBloc>().add(ItemEvent.itemCreated(itemId));
+                }
                 break;
               case 'opt3':
                 ctx.read<ItemBloc>().add(const ItemEvent.itemDeleted());
@@ -234,7 +240,7 @@ class ItemScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Lost by:",
+                  "Lost by",
                   style: TextStyle(fontSize: 20),
                 ),
                 const SizedBox(
@@ -246,23 +252,24 @@ class ItemScreen extends StatelessWidget {
                     Flexible(
                       child: Row(
                         children: [
-                          owner.hasImage ?
-                          ImageDialogWidget(
-                            token: token,
-                            imageUrl: userUrl,
-                            errorAsset: 'assets/images/no-user.jpg',
-                            child: CircularImage(
-                              hasImage: owner.hasImage,
-                              imageUrl: userUrl,
-                              radius: 40,
-                              token: token,
-                            ),
-                          ) : CircularImage(
-                            hasImage: owner.hasImage,
-                            imageUrl: userUrl,
-                            radius: 40,
-                            token: token,
-                          ),
+                          owner.hasImage
+                              ? ImageDialogWidget(
+                                  token: token,
+                                  imageUrl: userUrl,
+                                  errorAsset: 'assets/images/no-user.jpg',
+                                  child: CircularImage(
+                                    hasImage: owner.hasImage,
+                                    imageUrl: userUrl,
+                                    radius: 40,
+                                    token: token,
+                                  ),
+                                )
+                              : CircularImage(
+                                  hasImage: owner.hasImage,
+                                  imageUrl: userUrl,
+                                  radius: 40,
+                                  token: token,
+                                ),
                           const SizedBox(
                             width: 5,
                           ),
@@ -333,7 +340,7 @@ class ItemScreen extends StatelessWidget {
                 ),
                 Expanded(
                     child: Text(
-                  "Item claimed by:",
+                  "Item claimed by",
                   style: TextStyle(fontSize: 18),
                   overflow: TextOverflow.ellipsis,
                 )),
@@ -359,6 +366,7 @@ class ItemScreen extends StatelessWidget {
                           token: token,
                           opened: claim.opened,
                           userId: claim.user.id,
+                          hasImage: claim.user.hasImage,
                           username: claim.user.username,
                           onTap: () async {
                             final claimStatus = await Navigator.push<bool?>(
@@ -421,7 +429,7 @@ class ItemScreen extends StatelessWidget {
                           text: TextSpan(
                             children: [
                               const TextSpan(
-                                text: "Claim status: ",
+                                text: "Claim status ",
                                 style: TextStyle(fontSize: 18, color: Colors.black),
                               ),
                               TextSpan(
@@ -460,7 +468,7 @@ class ItemScreen extends StatelessWidget {
                     ),
                     onPressed: () async {
                       final claimStatus = await Navigator.push<bool?>(
-                          context, MaterialPageRoute(builder: (ctx) => AnswerQuestionScreen(itemId: itemId)));
+                          context, MaterialPageRoute(builder: (ctx) => AnswerQuestionScreen(itemId: itemId, isClaimAlreadyTaken: claim!.answer != null,)));
 
                       if (claimStatus != null && claimStatus && context.mounted) {
                         context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
@@ -492,7 +500,7 @@ class ItemScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Found by: ",
+                  "Found by",
                   style: TextStyle(fontSize: 20),
                 ),
                 const SizedBox(
@@ -504,23 +512,24 @@ class ItemScreen extends StatelessWidget {
                     Flexible(
                       child: Row(
                         children: [
-                          owner.hasImage ?
-                          ImageDialogWidget(
-                            token: token,
-                            imageUrl: userUrl,
-                            errorAsset: 'assets/images/no-user.jpg',
-                            child: CircularImage(
-                              imageUrl: userUrl,
-                              radius: 40,
-                              token: token,
-                              hasImage: owner.hasImage,
-                            ),
-                          ) : CircularImage(
-                            imageUrl: userUrl,
-                            radius: 40,
-                            token: token,
-                            hasImage: owner.hasImage,
-                          ),
+                          owner.hasImage
+                              ? ImageDialogWidget(
+                                  token: token,
+                                  imageUrl: userUrl,
+                                  errorAsset: 'assets/images/no-user.jpg',
+                                  child: CircularImage(
+                                    imageUrl: userUrl,
+                                    radius: 40,
+                                    token: token,
+                                    hasImage: owner.hasImage,
+                                  ),
+                                )
+                              : CircularImage(
+                                  imageUrl: userUrl,
+                                  radius: 40,
+                                  token: token,
+                                  hasImage: owner.hasImage,
+                                ),
                           const SizedBox(
                             width: 5,
                           ),

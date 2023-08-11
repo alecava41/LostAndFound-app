@@ -21,7 +21,6 @@ class SearchItemsParams {
   final int range;
   final double X;
   final double Y;
-  final SearchItemOrder order;
   final SearchItemType type;
   final int category;
   final DateTime? date;
@@ -31,16 +30,10 @@ class SearchItemsParams {
     required this.range,
     required this.X,
     required this.Y,
-    required this.order,
     required this.type,
     required this.category,
     required this.date
   });
-}
-
-enum SearchItemOrder {
-  date,
-  distance
 }
 
 enum SearchItemType {

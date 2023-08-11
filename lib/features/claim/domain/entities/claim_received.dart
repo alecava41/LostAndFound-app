@@ -1,7 +1,10 @@
+import '../../../../core/domain/entities/claim_status.dart';
+
 class ClaimReceived {
   final int id;
   final Item item;
   final User user;
+  final ClaimStatus status;
   bool opened;
 
   ClaimReceived({
@@ -9,6 +12,7 @@ class ClaimReceived {
     required this.item,
     required this.user,
     required this.opened,
+    required this.status,
   });
 }
 

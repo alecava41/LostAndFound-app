@@ -27,17 +27,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
-            homeCreated: () => _onHomeCreatedOrRefreshed(emit), homeRefreshed: () => _onHomeCreatedOrRefreshed(emit),
+            homeCreated: () => _onHomeCreatedOrRefreshed(emit, true), homeRefreshed: () => _onHomeCreatedOrRefreshed(emit, false),
         homeSectionRefreshed: (type) => _onHomeSectionRefreshed(emit, type)
         );
       },
     );
   }
 
-  // TODO handle initial loading gracefully (show loading bar, then results)
-
-  Future<void> _onHomeCreatedOrRefreshed(Emitter<HomeState> emit) async {
+  Future<void> _onHomeCreatedOrRefreshed(Emitter<HomeState> emit, bool creation) async {
     Either<Failure, Success>? loadFailureOrSuccess;
+
+    if (creation) {
+      emit(state.copyWith(isLoading: true));
+    }
 
     final foundItemsResponse = await _getUserItemsUseCase(GetUserItemsParams(type: ItemType.found, last: 0));
     final lostItemsResponse = await _getUserItemsUseCase(GetUserItemsParams(type: ItemType.lost, last: 0));
@@ -57,6 +59,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           homeFailureOrSuccess: loadFailureOrSuccess,
           token: session != null ? session.token : ""),
     );
+    emit(state.copyWith(homeFailureOrSuccess: null));
+
+    if (creation) {
+      emit(state.copyWith(isLoading: false));
+    }
   }
 
   Future<void> _onHomeSectionRefreshed(Emitter<HomeState> emit, ItemType type) async {

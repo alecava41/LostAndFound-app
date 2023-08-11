@@ -37,9 +37,8 @@ class FoundItemsContainer extends StatelessWidget {
                         )
                 ).toList(),
               )
-              // TODO: maybe we can do better when there aren't items (UI PoV) (both lost and found)
                   : const Center(
-                  child: Text("You have no found item inserted yet :)", style: TextStyle(fontSize: 20))
+                  child: Text("You have no found item inserted yet!", style: TextStyle(fontSize: 20))
               ),
             ),
           ) : const Padding(

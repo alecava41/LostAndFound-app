@@ -11,11 +11,11 @@ void main() async {
 
   await di.init();
 
-  String initialRoute = "/login";
+  String initialRoute = "/tutorial";
 
   final response = await sl<LoginUseCase>()(null);
   response.fold(
-          (failure) => initialRoute = "/login",
+          (_) {},
           (success) => initialRoute = "/"
   );
 

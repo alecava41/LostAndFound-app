@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/select_category/bloc/category_bloc.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
-import '../../../injection_container.dart';
-import 'category_item.dart';
+import '../../../../injection_container.dart';
+import '../widgets/category_item.dart';
 
 class CategorySelectionScreen extends StatelessWidget {
   final bool removeAllOption;
@@ -21,7 +21,7 @@ class CategorySelectionScreen extends StatelessWidget {
             if (state.loadFailureOrSuccess != null && state.loadFailureOrSuccess!.isLeft()) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 padding: EdgeInsets.all(30),
-                backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                backgroundColor: Colors.red,
                 content: Text('Server error. Please try again later.', style: TextStyle(fontSize: 20)),
               ));
             }

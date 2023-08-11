@@ -26,7 +26,7 @@ class LoginForm extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             padding: const EdgeInsets.all(30),
-                            backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                            backgroundColor: Colors.red,
                             content: Text(
                                 failure.maybeWhen<String>(
                                     passwordMismatchFailure: () => 'Invalid credentials. Please try again.',
@@ -39,7 +39,6 @@ class LoginForm extends StatelessWidget {
                         )
                       },
                   (success) => {
-                        // TODO check if it works
                         Navigator.popUntil(context, (route) => route.isFirst),
                         Navigator.of(context).pushReplacementNamed('/')
                       });

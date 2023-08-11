@@ -71,7 +71,6 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     emit(state.copyWith(loadFailureOrSuccess: null));
   }
 
-  // TODO it would be better to refresh only claims for the item (not entire item)!
   Future<void> _onItemRefreshed(Emitter<ItemState> emit) async {
     emit(state.copyWith(isLoading: true));
 

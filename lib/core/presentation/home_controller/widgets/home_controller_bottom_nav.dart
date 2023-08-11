@@ -4,9 +4,9 @@ import 'package:lost_and_found/features/item/presentation/pages/fake_insert_page
 import 'package:lost_and_found/features/item/presentation/pages/search_page.dart';
 import 'package:lost_and_found/features/user/presentation/pages/user_page.dart';
 
-import '../../../features/item/presentation/pages/home_page.dart';
-import '../../../utils/colors.dart';
-import 'bloc/home_controller_bloc.dart';
+import '../../../../features/item/presentation/pages/home_page.dart';
+import '../../../../utils/colors.dart';
+import '../bloc/home_controller_bloc.dart';
 
 class HomeControllerBottomNav extends StatelessWidget {
   const HomeControllerBottomNav({super.key});

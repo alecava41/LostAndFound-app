@@ -12,7 +12,7 @@ import 'package:lost_and_found/widgets/title_logo.dart';
 class RegistrationForm extends StatelessWidget {
   const RegistrationForm({super.key});
 
-  // TODO check if it works like a 'stepper' (by using the keyboard)
+  // TODO check if it works like a 'stepper' (by pressing enter it should go to the next text field)
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +28,13 @@ class RegistrationForm extends StatelessWidget {
                   (failure) => failure.maybeWhen(
                       genericFailure: () => ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                              backgroundColor: Colors.red,
                               content: Text('Server error. Please try again later.', style: TextStyle(fontSize: 20)),
                             ),
                           ),
                       networkFailure: () => ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                              backgroundColor: Colors.red,
                               content: Text('No internet connection available. Check your internet connection.',
                                   style: TextStyle(fontSize: 20)),
                             ),

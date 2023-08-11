@@ -42,8 +42,6 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
     );
   }
 
-  // TODO handle initial loading gracefully (show loading bar, then results)
-
   Future<void> _onClaimCreated(Emitter<ClaimState> emit) async {
     emit(state.copyWith(isLoadingReceived: true, isLoadingSent: true));
 

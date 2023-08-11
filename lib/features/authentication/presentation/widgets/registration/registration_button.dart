@@ -8,7 +8,6 @@ class RegistrationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RegistrationBloc, RegistrationState>(builder: (ctx, state) {
-      // TODO: handle request loading
       return ElevatedButton(
         onPressed: () {
           context.read<RegistrationBloc>().add(const RegistrationEvent.registrationSubmitted());

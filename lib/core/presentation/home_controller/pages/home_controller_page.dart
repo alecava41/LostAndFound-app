@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lost_and_found/core/presentation/home_controller/home_controller_bottom_nav.dart';
+import 'package:lost_and_found/core/presentation/home_controller/widgets/home_controller_bottom_nav.dart';
 
 
 class HomeControllerScreen extends StatelessWidget {

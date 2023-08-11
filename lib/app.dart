@@ -18,27 +18,23 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider<HomeBloc>(create: (_) => sl<HomeBloc>()..add(const HomeEvent.homeCreated())),
-          BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>()),
-          BlocProvider<UserBloc>(create: (_) => sl<UserBloc>()..add(const UserEvent.contentCreated())),
-          BlocProvider<HomeControllerBloc>(create: (_) => sl<HomeControllerBloc>())
-        ],
-        child: MaterialApp(
-          locale: DevicePreview.locale(context),
-          builder: DevicePreview.appBuilder,
-          title: 'Lost&Found',
-          theme: ThemeData(
-            primarySwatch: PersonalizedColor.primarySwatch,
-          ),
-          // Initially display FirstPage
-          initialRoute: initialRoute,
-          onGenerateRoute: RouteGenerator.generateRoute,
-        ));
+      providers: [
+        BlocProvider<HomeBloc>(create: (_) => sl<HomeBloc>()..add(const HomeEvent.homeCreated())),
+        BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>()),
+        BlocProvider<UserBloc>(create: (_) => sl<UserBloc>()..add(const UserEvent.contentCreated())),
+        BlocProvider<HomeControllerBloc>(create: (_) => sl<HomeControllerBloc>())
+      ],
+      child: MaterialApp(
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,
+        title: 'Lost&Found',
+        theme: ThemeData(
+          primarySwatch: PersonalizedColor.primarySwatch,
+        ),
+        // Initially display FirstPage
+        initialRoute: initialRoute,
+        onGenerateRoute: RouteGenerator.generateRoute,
+      ),
+    );
   }
-
-// TODO: remove request output asap (emit error only once in every BLoC)
-// TODO: replace errorImage with images from assets
-// TODO: prevent image click if image is not null (from ImageDialog)
-// TODO: add spinner while loading address of position
 }

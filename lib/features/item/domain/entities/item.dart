@@ -66,6 +66,7 @@ class ClaimReceived {
 class ClaimSent {
   final int id;
   final ClaimStatus status;
+  final String? answer;
 
-  ClaimSent({required this.id, required this.status});
+  ClaimSent({required this.id, required this.status, required this.answer});
 }

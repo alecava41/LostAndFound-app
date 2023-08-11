@@ -10,22 +10,25 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          iconTheme: const IconThemeData(color: Colors.black),
-          leading:
-          // TODO: show it only if there are other screens, otherwise not needed. The same applies to registration screen.
-          IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {},
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            iconTheme: const IconThemeData(color: Colors.black),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
           ),
-        ),
-        body: BlocProvider(
-          create: (_) => sl<LoginBloc>(),
-          child: const LoginForm(),
+          body: BlocProvider(
+            create: (_) => sl<LoginBloc>(),
+            child: const LoginForm(),
+          ),
         ),
       ),
     );
