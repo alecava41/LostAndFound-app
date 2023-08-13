@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:bloc/bloc.dart';
 import 'package:lost_and_found/features/authentication/domain/fields/registration/registration_email.dart';
@@ -27,7 +29,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     on<RegistrationEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
-            registrationSubmitted: () => _onRegistrationSubmitted(emit),
+            registrationSubmitted: (hasNotificationPermissions) => _onRegistrationSubmitted(emit, hasNotificationPermissions),
             obscurePasswordToggled: () => _onObscurePasswordToggled(emit),
             obscureConfirmPasswordToggled: () => _onObscureConfirmPasswordToggled(emit),
             usernameFieldChanged: (username) => _onUsernameFieldChanged(emit, username),
@@ -68,7 +70,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
         confirmPassword: RegistrationConfirmPasswordField(state.password.value.getOrElse(() => ""), confirm)));
   }
 
-  Future<void> _onRegistrationSubmitted(Emitter<RegistrationState> emit) async {
+  Future<void> _onRegistrationSubmitted(Emitter<RegistrationState> emit, bool hasNotificationPermissions) async {
     final isUsernameFieldValid = state.username.value.isRight();
     final isEmailFieldValid = state.email.value.isRight();
     final isPasswordFieldValid = state.password.value.isRight();
@@ -84,7 +86,9 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
         ),
       );
 
-      final params = RegistrationParams("token", "android",
+      final params = RegistrationParams(
+          device: hasNotificationPermissions ? (Platform.isAndroid ? 'android' : "ios") : null,
+          token: hasNotificationPermissions ? await FirebaseMessaging.instance.getToken() : null,
           password: state.password.value.getOrElse(() => ""),
           username: state.username.value.getOrElse(() => ""),
           email: state.email.value.getOrElse(() => ""));

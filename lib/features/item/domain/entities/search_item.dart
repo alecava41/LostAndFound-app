@@ -1,7 +1,5 @@
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 
-// Just to commit
-
 class SearchItem {
   final int id;
   final User user;

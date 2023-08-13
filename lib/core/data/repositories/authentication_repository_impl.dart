@@ -56,7 +56,6 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       } else {
         return const Left(Failure.networkFailure());
       }
-
     } on Exception catch (e) {
       return Left(mapExceptionToFailure(e));
     }

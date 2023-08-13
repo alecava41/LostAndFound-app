@@ -9,5 +9,4 @@ class HomeControllerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const HomeControllerBottomNav();
   }
-
 }

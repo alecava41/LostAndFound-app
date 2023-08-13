@@ -24,13 +24,10 @@ class RegistrationParams {
   final String email;
   final String username;
   final String password;
+  final String? token;
+  final String? device;
 
-  // TODO: token/device are missing
-  final String token;
-  final String device;
-
-  RegistrationParams(this.token, this.device,
-      {required this.email, required this.username, required this.password});
+  RegistrationParams({required this.email, this.token, this.device, required this.username, required this.password});
 
   Map<String, dynamic> toJson() => _$RegistrationParamsToJson(this);
 }

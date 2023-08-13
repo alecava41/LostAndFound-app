@@ -13,6 +13,7 @@ class RegistrationForm extends StatelessWidget {
   const RegistrationForm({super.key});
 
   // TODO check if it works like a 'stepper' (by pressing enter it should go to the next text field)
+  // TODO need to handle notification permission request (checkbox to let user decide whether to be notified or not?)
 
   @override
   Widget build(BuildContext context) {

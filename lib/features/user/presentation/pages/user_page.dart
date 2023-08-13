@@ -10,6 +10,7 @@ class UserScreen extends StatelessWidget {
   const UserScreen({super.key});
 
   // TODO: need to handle error on loading user info
+  // TODO: need to add screen to handle user fields / preferences (notifications, email, ...)
 
   @override
   Widget build(BuildContext context) {

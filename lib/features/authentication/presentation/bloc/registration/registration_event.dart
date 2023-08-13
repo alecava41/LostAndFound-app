@@ -8,5 +8,5 @@ class RegistrationEvent with _$RegistrationEvent {
   const factory RegistrationEvent.confirmPasswordFieldChanged(String confirmPasswordString) =_ConfirmPasswordFieldChanged;
   const factory RegistrationEvent.obscurePasswordToggled() =_ObscurePasswordToggled;
   const factory RegistrationEvent.obscureConfirmPasswordToggled() =_ObscureConfirmPasswordToggled;
-  const factory RegistrationEvent.registrationSubmitted() = _RegistrationSubmitted;
+  const factory RegistrationEvent.registrationSubmitted(bool hasNotificationPermissions) = _RegistrationSubmitted;
 }

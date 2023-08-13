@@ -25,7 +25,8 @@ mixin _$RegistrationEvent {
         confirmPasswordFieldChanged,
     required TResult Function() obscurePasswordToggled,
     required TResult Function() obscureConfirmPasswordToggled,
-    required TResult Function() registrationSubmitted,
+    required TResult Function(bool hasNotificationPermissions)
+        registrationSubmitted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +38,7 @@ mixin _$RegistrationEvent {
         confirmPasswordFieldChanged,
     TResult? Function()? obscurePasswordToggled,
     TResult? Function()? obscureConfirmPasswordToggled,
-    TResult? Function()? registrationSubmitted,
+    TResult? Function(bool hasNotificationPermissions)? registrationSubmitted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -48,7 +49,7 @@ mixin _$RegistrationEvent {
     TResult Function(String confirmPasswordString)? confirmPasswordFieldChanged,
     TResult Function()? obscurePasswordToggled,
     TResult Function()? obscureConfirmPasswordToggled,
-    TResult Function()? registrationSubmitted,
+    TResult Function(bool hasNotificationPermissions)? registrationSubmitted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -187,7 +188,8 @@ class _$_UsernameFieldChanged implements _UsernameFieldChanged {
         confirmPasswordFieldChanged,
     required TResult Function() obscurePasswordToggled,
     required TResult Function() obscureConfirmPasswordToggled,
-    required TResult Function() registrationSubmitted,
+    required TResult Function(bool hasNotificationPermissions)
+        registrationSubmitted,
   }) {
     return usernameFieldChanged(userString);
   }
@@ -202,7 +204,7 @@ class _$_UsernameFieldChanged implements _UsernameFieldChanged {
         confirmPasswordFieldChanged,
     TResult? Function()? obscurePasswordToggled,
     TResult? Function()? obscureConfirmPasswordToggled,
-    TResult? Function()? registrationSubmitted,
+    TResult? Function(bool hasNotificationPermissions)? registrationSubmitted,
   }) {
     return usernameFieldChanged?.call(userString);
   }
@@ -216,7 +218,7 @@ class _$_UsernameFieldChanged implements _UsernameFieldChanged {
     TResult Function(String confirmPasswordString)? confirmPasswordFieldChanged,
     TResult Function()? obscurePasswordToggled,
     TResult Function()? obscureConfirmPasswordToggled,
-    TResult Function()? registrationSubmitted,
+    TResult Function(bool hasNotificationPermissions)? registrationSubmitted,
     required TResult orElse(),
   }) {
     if (usernameFieldChanged != null) {
@@ -363,7 +365,8 @@ class _$_EmailFieldChanged implements _EmailFieldChanged {
         confirmPasswordFieldChanged,
     required TResult Function() obscurePasswordToggled,
     required TResult Function() obscureConfirmPasswordToggled,
-    required TResult Function() registrationSubmitted,
+    required TResult Function(bool hasNotificationPermissions)
+        registrationSubmitted,
   }) {
     return emailFieldChanged(emailString);
   }
@@ -378,7 +381,7 @@ class _$_EmailFieldChanged implements _EmailFieldChanged {
         confirmPasswordFieldChanged,
     TResult? Function()? obscurePasswordToggled,
     TResult? Function()? obscureConfirmPasswordToggled,
-    TResult? Function()? registrationSubmitted,
+    TResult? Function(bool hasNotificationPermissions)? registrationSubmitted,
   }) {
     return emailFieldChanged?.call(emailString);
   }
@@ -392,7 +395,7 @@ class _$_EmailFieldChanged implements _EmailFieldChanged {
     TResult Function(String confirmPasswordString)? confirmPasswordFieldChanged,
     TResult Function()? obscurePasswordToggled,
     TResult Function()? obscureConfirmPasswordToggled,
-    TResult Function()? registrationSubmitted,
+    TResult Function(bool hasNotificationPermissions)? registrationSubmitted,
     required TResult orElse(),
   }) {
     if (emailFieldChanged != null) {
@@ -539,7 +542,8 @@ class _$_PasswordFieldChanged implements _PasswordFieldChanged {
         confirmPasswordFieldChanged,
     required TResult Function() obscurePasswordToggled,
     required TResult Function() obscureConfirmPasswordToggled,
-    required TResult Function() registrationSubmitted,
+    required TResult Function(bool hasNotificationPermissions)
+        registrationSubmitted,
   }) {
     return passwordFieldChanged(passwordString);
   }
@@ -554,7 +558,7 @@ class _$_PasswordFieldChanged implements _PasswordFieldChanged {
         confirmPasswordFieldChanged,
     TResult? Function()? obscurePasswordToggled,
     TResult? Function()? obscureConfirmPasswordToggled,
-    TResult? Function()? registrationSubmitted,
+    TResult? Function(bool hasNotificationPermissions)? registrationSubmitted,
   }) {
     return passwordFieldChanged?.call(passwordString);
   }
@@ -568,7 +572,7 @@ class _$_PasswordFieldChanged implements _PasswordFieldChanged {
     TResult Function(String confirmPasswordString)? confirmPasswordFieldChanged,
     TResult Function()? obscurePasswordToggled,
     TResult Function()? obscureConfirmPasswordToggled,
-    TResult Function()? registrationSubmitted,
+    TResult Function(bool hasNotificationPermissions)? registrationSubmitted,
     required TResult orElse(),
   }) {
     if (passwordFieldChanged != null) {
@@ -718,7 +722,8 @@ class _$_ConfirmPasswordFieldChanged implements _ConfirmPasswordFieldChanged {
         confirmPasswordFieldChanged,
     required TResult Function() obscurePasswordToggled,
     required TResult Function() obscureConfirmPasswordToggled,
-    required TResult Function() registrationSubmitted,
+    required TResult Function(bool hasNotificationPermissions)
+        registrationSubmitted,
   }) {
     return confirmPasswordFieldChanged(confirmPasswordString);
   }
@@ -733,7 +738,7 @@ class _$_ConfirmPasswordFieldChanged implements _ConfirmPasswordFieldChanged {
         confirmPasswordFieldChanged,
     TResult? Function()? obscurePasswordToggled,
     TResult? Function()? obscureConfirmPasswordToggled,
-    TResult? Function()? registrationSubmitted,
+    TResult? Function(bool hasNotificationPermissions)? registrationSubmitted,
   }) {
     return confirmPasswordFieldChanged?.call(confirmPasswordString);
   }
@@ -747,7 +752,7 @@ class _$_ConfirmPasswordFieldChanged implements _ConfirmPasswordFieldChanged {
     TResult Function(String confirmPasswordString)? confirmPasswordFieldChanged,
     TResult Function()? obscurePasswordToggled,
     TResult Function()? obscureConfirmPasswordToggled,
-    TResult Function()? registrationSubmitted,
+    TResult Function(bool hasNotificationPermissions)? registrationSubmitted,
     required TResult orElse(),
   }) {
     if (confirmPasswordFieldChanged != null) {
@@ -867,7 +872,8 @@ class _$_ObscurePasswordToggled implements _ObscurePasswordToggled {
         confirmPasswordFieldChanged,
     required TResult Function() obscurePasswordToggled,
     required TResult Function() obscureConfirmPasswordToggled,
-    required TResult Function() registrationSubmitted,
+    required TResult Function(bool hasNotificationPermissions)
+        registrationSubmitted,
   }) {
     return obscurePasswordToggled();
   }
@@ -882,7 +888,7 @@ class _$_ObscurePasswordToggled implements _ObscurePasswordToggled {
         confirmPasswordFieldChanged,
     TResult? Function()? obscurePasswordToggled,
     TResult? Function()? obscureConfirmPasswordToggled,
-    TResult? Function()? registrationSubmitted,
+    TResult? Function(bool hasNotificationPermissions)? registrationSubmitted,
   }) {
     return obscurePasswordToggled?.call();
   }
@@ -896,7 +902,7 @@ class _$_ObscurePasswordToggled implements _ObscurePasswordToggled {
     TResult Function(String confirmPasswordString)? confirmPasswordFieldChanged,
     TResult Function()? obscurePasswordToggled,
     TResult Function()? obscureConfirmPasswordToggled,
-    TResult Function()? registrationSubmitted,
+    TResult Function(bool hasNotificationPermissions)? registrationSubmitted,
     required TResult orElse(),
   }) {
     if (obscurePasswordToggled != null) {
@@ -1014,7 +1020,8 @@ class _$_ObscureConfirmPasswordToggled
         confirmPasswordFieldChanged,
     required TResult Function() obscurePasswordToggled,
     required TResult Function() obscureConfirmPasswordToggled,
-    required TResult Function() registrationSubmitted,
+    required TResult Function(bool hasNotificationPermissions)
+        registrationSubmitted,
   }) {
     return obscureConfirmPasswordToggled();
   }
@@ -1029,7 +1036,7 @@ class _$_ObscureConfirmPasswordToggled
         confirmPasswordFieldChanged,
     TResult? Function()? obscurePasswordToggled,
     TResult? Function()? obscureConfirmPasswordToggled,
-    TResult? Function()? registrationSubmitted,
+    TResult? Function(bool hasNotificationPermissions)? registrationSubmitted,
   }) {
     return obscureConfirmPasswordToggled?.call();
   }
@@ -1043,7 +1050,7 @@ class _$_ObscureConfirmPasswordToggled
     TResult Function(String confirmPasswordString)? confirmPasswordFieldChanged,
     TResult Function()? obscurePasswordToggled,
     TResult Function()? obscureConfirmPasswordToggled,
-    TResult Function()? registrationSubmitted,
+    TResult Function(bool hasNotificationPermissions)? registrationSubmitted,
     required TResult orElse(),
   }) {
     if (obscureConfirmPasswordToggled != null) {
@@ -1117,6 +1124,8 @@ abstract class _$$_RegistrationSubmittedCopyWith<$Res> {
   factory _$$_RegistrationSubmittedCopyWith(_$_RegistrationSubmitted value,
           $Res Function(_$_RegistrationSubmitted) then) =
       __$$_RegistrationSubmittedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool hasNotificationPermissions});
 }
 
 /// @nodoc
@@ -1126,26 +1135,54 @@ class __$$_RegistrationSubmittedCopyWithImpl<$Res>
   __$$_RegistrationSubmittedCopyWithImpl(_$_RegistrationSubmitted _value,
       $Res Function(_$_RegistrationSubmitted) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? hasNotificationPermissions = null,
+  }) {
+    return _then(_$_RegistrationSubmitted(
+      null == hasNotificationPermissions
+          ? _value.hasNotificationPermissions
+          : hasNotificationPermissions // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_RegistrationSubmitted implements _RegistrationSubmitted {
-  const _$_RegistrationSubmitted();
+  const _$_RegistrationSubmitted(this.hasNotificationPermissions);
+
+  @override
+  final bool hasNotificationPermissions;
 
   @override
   String toString() {
-    return 'RegistrationEvent.registrationSubmitted()';
+    return 'RegistrationEvent.registrationSubmitted(hasNotificationPermissions: $hasNotificationPermissions)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_RegistrationSubmitted);
+        (other.runtimeType == runtimeType &&
+            other is _$_RegistrationSubmitted &&
+            (identical(other.hasNotificationPermissions,
+                    hasNotificationPermissions) ||
+                other.hasNotificationPermissions ==
+                    hasNotificationPermissions));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, hasNotificationPermissions);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RegistrationSubmittedCopyWith<_$_RegistrationSubmitted> get copyWith =>
+      __$$_RegistrationSubmittedCopyWithImpl<_$_RegistrationSubmitted>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1157,9 +1194,10 @@ class _$_RegistrationSubmitted implements _RegistrationSubmitted {
         confirmPasswordFieldChanged,
     required TResult Function() obscurePasswordToggled,
     required TResult Function() obscureConfirmPasswordToggled,
-    required TResult Function() registrationSubmitted,
+    required TResult Function(bool hasNotificationPermissions)
+        registrationSubmitted,
   }) {
-    return registrationSubmitted();
+    return registrationSubmitted(hasNotificationPermissions);
   }
 
   @override
@@ -1172,9 +1210,9 @@ class _$_RegistrationSubmitted implements _RegistrationSubmitted {
         confirmPasswordFieldChanged,
     TResult? Function()? obscurePasswordToggled,
     TResult? Function()? obscureConfirmPasswordToggled,
-    TResult? Function()? registrationSubmitted,
+    TResult? Function(bool hasNotificationPermissions)? registrationSubmitted,
   }) {
-    return registrationSubmitted?.call();
+    return registrationSubmitted?.call(hasNotificationPermissions);
   }
 
   @override
@@ -1186,11 +1224,11 @@ class _$_RegistrationSubmitted implements _RegistrationSubmitted {
     TResult Function(String confirmPasswordString)? confirmPasswordFieldChanged,
     TResult Function()? obscurePasswordToggled,
     TResult Function()? obscureConfirmPasswordToggled,
-    TResult Function()? registrationSubmitted,
+    TResult Function(bool hasNotificationPermissions)? registrationSubmitted,
     required TResult orElse(),
   }) {
     if (registrationSubmitted != null) {
-      return registrationSubmitted();
+      return registrationSubmitted(hasNotificationPermissions);
     }
     return orElse();
   }
@@ -1251,7 +1289,13 @@ class _$_RegistrationSubmitted implements _RegistrationSubmitted {
 }
 
 abstract class _RegistrationSubmitted implements RegistrationEvent {
-  const factory _RegistrationSubmitted() = _$_RegistrationSubmitted;
+  const factory _RegistrationSubmitted(final bool hasNotificationPermissions) =
+      _$_RegistrationSubmitted;
+
+  bool get hasNotificationPermissions;
+  @JsonKey(ignore: true)
+  _$$_RegistrationSubmittedCopyWith<_$_RegistrationSubmitted> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

@@ -8,9 +8,9 @@ part of 'registration_usecase.dart';
 
 RegistrationParams _$RegistrationParamsFromJson(Map<String, dynamic> json) =>
     RegistrationParams(
-      json['token'] as String,
-      json['device'] as String,
       email: json['email'] as String,
+      token: json['token'] as String?,
+      device: json['device'] as String?,
       username: json['username'] as String,
       password: json['password'] as String,
     );
