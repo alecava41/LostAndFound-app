@@ -108,8 +108,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                     width: 20,
                                   ),
                                   InkWell(
-                                    onTap: () =>
-                                        ctx.read<AnswerClaimBloc>().add(const AnswerClaimEvent.infoTriggered()),
+                                    onTap: () => ctx.read<AnswerClaimBloc>().add(const AnswerClaimEvent.infoTriggered()),
                                     child: const Icon(
                                       Icons.info,
                                       size: 30,
@@ -118,7 +117,9 @@ class AnswerClaimScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 15,),
+                              const SizedBox(
+                                height: 15,
+                              ),
                               state.isInfoOpen
                                   ? Padding(
                                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -136,30 +137,38 @@ class AnswerClaimScreen extends StatelessWidget {
                                       ),
                                     )
                                   : Container(),
-                              ClaimInfoField(title: "Item claimed", content: ClaimedItemInfo(
-                                token: state.token,
-                                item: state.item!,
-                                subject: state.item!.claims!
-                                    .firstWhere((element) => element.id == claimId)
-                                    .user
-                                    .username,
-                              ),),
+                              ClaimInfoField(
+                                title: "Item claimed",
+                                content: ClaimedItemInfo(
+                                  token: state.token,
+                                  item: state.item!,
+                                  subject:
+                                      state.item!.claims!.firstWhere((element) => element.id == claimId).user.username,
+                                  claimIdx: claimIdx,
+                                ),
+                              ),
                               const SizedBox(
                                 height: 10,
                               ),
-                              ClaimInfoField(title: "Question", content: Text(
+                              ClaimInfoField(
+                                title: "Question",
+                                content: Text(
                                   state.item!.question!,
                                   style: const TextStyle(
                                     fontSize: 20,
                                   ),
-                                ),),
+                                ),
+                              ),
                               const SizedBox(
                                 height: 10,
                               ),
-                              ClaimInfoField(title: "Answer", content: Text(
+                              ClaimInfoField(
+                                title: "Answer",
+                                content: Text(
                                   state.item!.claims!.firstWhere((element) => element.id == claimId).answer,
                                   style: const TextStyle(fontSize: 20),
-                                ),),
+                                ),
+                              ),
                               const SizedBox(
                                 height: 30,
                               ),

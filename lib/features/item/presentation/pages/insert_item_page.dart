@@ -31,26 +31,16 @@ class InsertItemScreen extends StatelessWidget {
 
   void onTapGallery(BuildContext ctx) {
     Navigator.pop(ctx);
-    getImage(
-        ImageSource.gallery,
-        (path) => ctx
-            .read<InsertItemBloc>()
-            .add(InsertItemEvent.imageSelected(path!)));
+    getImage(ImageSource.gallery, (path) => ctx.read<InsertItemBloc>().add(InsertItemEvent.imageSelected(path!)));
   }
 
   void onTapCamera(BuildContext ctx) {
     Navigator.pop(ctx);
-    getImage(
-        ImageSource.camera,
-        (path) => ctx
-            .read<InsertItemBloc>()
-            .add(InsertItemEvent.imageSelected(path!)));
+    getImage(ImageSource.camera, (path) => ctx.read<InsertItemBloc>().add(InsertItemEvent.imageSelected(path!)));
   }
 
   void onConfirm(BuildContext context) {
-    context
-        .read<HomeControllerBloc>()
-        .add(const HomeControllerEvent.tabChanged(0));
+    context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
     Navigator.pop(context);
     Navigator.pop(context);
   }
@@ -79,8 +69,7 @@ class InsertItemScreen extends StatelessWidget {
                                 backgroundColor: Colors.red,
                                 content: Text(
                                     failure.maybeWhen<String>(
-                                        genericFailure: () =>
-                                            'Server error. Please try again later.',
+                                        genericFailure: () => 'Server error. Please try again later.',
                                         networkFailure: () =>
                                             'No internet connection available. Check your internet connection.',
                                         orElse: () => "Unknown error"),
@@ -90,54 +79,42 @@ class InsertItemScreen extends StatelessWidget {
                           })
                     },
                 (_) => {
-                      ctx
-                          .read<HomeBloc>()
-                          .add(HomeEvent.homeSectionRefreshed(state.type)),
-                      ctx
-                          .read<HomeControllerBloc>()
-                          .add(const HomeControllerEvent.tabChanged(0)),
+                      ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.type)),
+                      ctx.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0)),
                       Navigator.pop(ctx)
                     });
           }
         },
         builder: (ctx, state) {
+          // TODO why is it possible to add multiple rows? (@backToFrancesco)
           var titleField = CustomFieldContainer(
             title: "Title",
             content: PersonalizedFormWithTextInsertion(
               showError: state.showError,
               errorText: state.title.value.fold(
-                  (failure) => failure.maybeWhen<String?>(
-                      validationFailure: (reason) => reason,
-                      orElse: () => null),
+                  (failure) => failure.maybeWhen<String?>(validationFailure: (reason) => reason, orElse: () => null),
                   (r) => null),
-              onTextChanged: (input) => ctx
-                  .read<InsertItemBloc>()
-                  .add(InsertItemEvent.titleChanged(input)),
+              onTextChanged: (input) => ctx.read<InsertItemBloc>().add(InsertItemEvent.titleChanged(input)),
               isValid: state.title.value.isRight(),
               hintText: "e.g. Iphone 12 black",
             ),
           );
           var checkboxField = CustomFieldContainer(
-            title: "The item has been:",
+            title: "The item has been",
             content: PersonalizedRadioButtonsForm(
                 selectedValue: state.type,
-                onChanged: (type) => ctx
-                    .read<InsertItemBloc>()
-                    .add(InsertItemEvent.typeChanged(type))),
+                onChanged: (type) => ctx.read<InsertItemBloc>().add(InsertItemEvent.typeChanged(type))),
           );
+          // TODO why is it possible to add multiple rows? (@backToFrancesco)
           var questionField = CustomFieldContainer(
             title: "Question to verify the ownership",
             content: PersonalizedFormWithTextInsertion(
               hintText: "e.g. Any device scratches? Where?",
               isValid: state.question.value.isRight(),
-              onTextChanged: (input) => ctx
-                  .read<InsertItemBloc>()
-                  .add(InsertItemEvent.questionChanged(input)),
+              onTextChanged: (input) => ctx.read<InsertItemBloc>().add(InsertItemEvent.questionChanged(input)),
               showError: state.showError,
               errorText: state.question.value.fold(
-                  (failure) => failure.maybeWhen<String?>(
-                      validationFailure: (reason) => reason,
-                      orElse: () => null),
+                  (failure) => failure.maybeWhen<String?>(validationFailure: (reason) => reason, orElse: () => null),
                   (r) => null),
             ),
           );
@@ -148,9 +125,7 @@ class InsertItemScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: ElevatedButton(
-                      onPressed: () => ctx
-                          .read<InsertItemBloc>()
-                          .add(const InsertItemEvent.insertSubmitted()),
+                      onPressed: () => ctx.read<InsertItemBloc>().add(const InsertItemEvent.insertSubmitted()),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: PersonalizedColor.mainColor,
                         shape: const StadiumBorder(),
@@ -170,9 +145,7 @@ class InsertItemScreen extends StatelessWidget {
                 showDialogExit(context);
                 return false;
               } else {
-                context
-                    .read<HomeControllerBloc>()
-                    .add(const HomeControllerEvent.tabChanged(0));
+                context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
                 Navigator.pop(ctx);
                 return true;
               }
@@ -200,9 +173,7 @@ class InsertItemScreen extends StatelessWidget {
                       children: [
                         UploadImageForm(
                           onSelectUploadMethod: () => chooseMediaDialog(ctx),
-                          onDeletePhoto: () => ctx
-                              .read<InsertItemBloc>()
-                              .add(const InsertItemEvent.imageDeleted()),
+                          onDeletePhoto: () => ctx.read<InsertItemBloc>().add(const InsertItemEvent.imageDeleted()),
                           imagePath: state.imagePath,
                         ),
                         customDivider(),
@@ -228,9 +199,7 @@ class InsertItemScreen extends StatelessWidget {
                                       height: 15,
                                     )
                                   : Container(),
-                              state.type == ItemType.found
-                                  ? questionField
-                                  : Container(),
+                              state.type == ItemType.found ? questionField : Container(),
                               const SizedBox(
                                 height: 10,
                               ),
@@ -245,34 +214,28 @@ class InsertItemScreen extends StatelessWidget {
                           address: state.address,
                           onPositionSelected: (LatLng? pos) {
                             if (pos != null) {
-                              ctx.read<InsertItemBloc>().add(
-                                  InsertItemEvent.positionSelected(
-                                      LatLng(pos.latitude, pos.longitude)));
+                              ctx
+                                  .read<InsertItemBloc>()
+                                  .add(InsertItemEvent.positionSelected(LatLng(pos.latitude, pos.longitude)));
                             }
                           },
                           showError: state.showError,
                           errorText: state.pos.value.fold(
-                              (failure) => failure.maybeWhen(
-                                  validationFailure: (reason) => reason!,
-                                  orElse: () => ""),
+                              (failure) => failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""),
                               (_) => ""),
-                          startingPosition: state.pos.value
-                              .getOrElse(() => const LatLng(0, 0)),
+                          startingPosition: state.pos.value.getOrElse(() => const LatLng(0, 0)),
                           isLoadingAddress: state.isLoadingPosition,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         CategorySelectionForm(
-                          onTap: (value) => ctx.read<InsertItemBloc>().add(
-                              InsertItemEvent.categorySelected(
-                                  value.first, value.second)),
+                          onTap: (value) =>
+                              ctx.read<InsertItemBloc>().add(InsertItemEvent.categorySelected(value.first, value.second)),
                           category: state.category,
                           showError: state.showError,
                           errorText: state.cat.value.fold(
-                              (failure) => failure.maybeWhen(
-                                  validationFailure: (reason) => reason!,
-                                  orElse: () => ""),
+                              (failure) => failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""),
                               (_) => ""),
                           removeAllOption: true,
                         ),
@@ -291,159 +254,6 @@ class InsertItemScreen extends StatelessWidget {
             ),
           );
         },
-        builder: (ctx, state) => WillPopScope(
-          onWillPop: () async {
-            if (!state.isInitial()) {
-              showDialogExit(context);
-              return false;
-            } else {
-              context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
-              Navigator.pop(ctx);
-              return true;
-            }
-          },
-          child: GestureDetector(
-            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-            child: SafeArea(
-              top: false,
-              child: Scaffold(
-                backgroundColor: PersonalizedColor.backGroundColor,
-                appBar: AppBar(
-                  leading: IconButton(
-                    icon: const Icon(Icons.arrow_back),
-                    onPressed: () => showDialogExit(context),
-                  ),
-                  iconTheme: const IconThemeData(color: Colors.black),
-                  title: const Text(
-                    "Insert an item",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  backgroundColor: Colors.white,
-                ),
-                body: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      UploadImageForm(
-                        onSelectUploadMethod: () => chooseMediaDialog(ctx),
-                        onDeletePhoto: () => ctx.read<InsertItemBloc>().add(const InsertItemEvent.imageDeleted()),
-                        imagePath: state.imagePath,
-                      ),
-                      customDivider(),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      customDivider(),
-                      PersonalizedRadioButtonsForm(
-                          selectedValue: state.type,
-                          onChanged: (type) => ctx.read<InsertItemBloc>().add(InsertItemEvent.typeChanged(type))),
-                      customDivider(),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      customDivider(),
-                      // TODO why is it possible to add multiple rows? (@backToFrancesco)
-                      PersonalizedFormWithTextInsertion(
-                        title: "Title:",
-                        showError: state.showError,
-                        errorText: state.title.value.fold(
-                            (failure) =>
-                                failure.maybeWhen<String?>(validationFailure: (reason) => reason, orElse: () => null),
-                            (r) => null),
-                        onTextChanged: (input) => ctx.read<InsertItemBloc>().add(InsertItemEvent.titleChanged(input)),
-                        isValid: state.title.value.isRight(),
-                        hintText: "e.g. Iphone 12 black",
-                      ),
-                      customDivider(),
-                      state.type == ItemType.found
-                          ? const SizedBox(
-                              height: 10,
-                            )
-                          : Container(),
-                      state.type == ItemType.found ? customDivider() : Container(),
-                      state.type == ItemType.found
-                          ?
-                      // TODO why is it possible to add multiple rows? (@backToFrancesco)
-                      PersonalizedFormWithTextInsertion(
-                              title: "Question to verify the ownership:",
-                              hintText: "e.g. Any device scratches? Where?",
-                              isValid: state.question.value.isRight(),
-                              onTextChanged: (input) =>
-                                  ctx.read<InsertItemBloc>().add(InsertItemEvent.questionChanged(input)),
-                              showError: state.showError,
-                              errorText: state.question.value.fold(
-                                  (failure) => failure.maybeWhen<String?>(
-                                      validationFailure: (reason) => reason, orElse: () => null),
-                                  (r) => null),
-                            )
-                          : Container(),
-                      state.type == ItemType.found ? customDivider() : Container(),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SelectPositionButton(
-                        address: state.address,
-                        onPositionSelected: (LatLng? pos) {
-                          if (pos != null) {
-                            ctx
-                                .read<InsertItemBloc>()
-                                .add(InsertItemEvent.positionSelected(LatLng(pos.latitude, pos.longitude)));
-                          }
-                        },
-                        showError: state.showError,
-                        errorText: state.pos.value.fold(
-                            (failure) => failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""),
-                            (_) => ""),
-                        startingPosition: state.pos.value.getOrElse(() => const LatLng(0, 0)),
-                        isLoadingAddress: state.isLoadingPosition,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      CategorySelectionForm(
-                        onTap: (value) =>
-                            ctx.read<InsertItemBloc>().add(InsertItemEvent.categorySelected(value.first, value.second)),
-                        category: state.category,
-                        showError: state.showError,
-                        errorText: state.cat.value.fold(
-                            (failure) => failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""),
-                            (_) => ""),
-                        removeAllOption: true,
-                      ),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: ElevatedButton(
-                                  onPressed: () =>
-                                      ctx.read<InsertItemBloc>().add(const InsertItemEvent.insertSubmitted()),
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: PersonalizedColor.mainColor,
-                                    shape: const StadiumBorder(),
-                                    padding: const EdgeInsets.symmetric(vertical: 16),
-                                  ),
-                                  child: const Text(
-                                    "Create",
-                                    style: TextStyle(fontSize: 20, color: Colors.white),
-                                  )),
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
       ),
     );
   }
@@ -461,9 +271,7 @@ class InsertItemScreen extends StatelessWidget {
     showDialog(
         context: context,
         builder: (BuildContext ctx) {
-          return MediaSelectionDialog(
-              onTapGallery: () => onTapGallery(context),
-              onTapCamera: () => onTapCamera(context));
+          return MediaSelectionDialog(onTapGallery: () => onTapGallery(context), onTapCamera: () => onTapCamera(context));
         });
   }
 
