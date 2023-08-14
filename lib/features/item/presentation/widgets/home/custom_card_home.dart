@@ -73,7 +73,6 @@ class CustomCardHome extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // TODO: item title should be entirely readable (not "...")
                       Text(text,
                           style: const TextStyle(fontSize: 16.0),
                           overflow: TextOverflow.ellipsis),

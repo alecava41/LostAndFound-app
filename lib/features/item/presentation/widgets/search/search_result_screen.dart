@@ -9,7 +9,7 @@ import 'custom_list_view.dart';
 class SearchResultScreen extends StatelessWidget {
   const SearchResultScreen({super.key});
 
-  // TODO add ascending/descending ordering button
+  // TODO add ascending/descending ordering like in video
 
   @override
   Widget build(BuildContext context) {

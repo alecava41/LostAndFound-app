@@ -38,6 +38,10 @@ class HomeScreen extends StatelessWidget {
           return const CustomCircularProgress(size: 100);
         }
 
+        if (state.homeFailureOrSuccess != null && state.homeFailureOrSuccess!.isLeft()) {
+          return const Text("Create screen");
+        }
+
         return RefreshIndicator(
             onRefresh: () async {
               Future block = ctx.read<HomeBloc>().stream.first;

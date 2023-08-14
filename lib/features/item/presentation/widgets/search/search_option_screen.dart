@@ -15,6 +15,12 @@ import '../../../../../utils/colors.dart';
 class SearchOptionScreen extends StatelessWidget {
   const SearchOptionScreen({super.key});
 
+  /*
+    TODO
+      if search has already been performed, show 'new' filter page (without bottom_bar, with back_button)
+      if back_button is pressed, then navigate back to results
+   */
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchBloc, SearchState>(

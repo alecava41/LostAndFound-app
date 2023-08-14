@@ -49,7 +49,8 @@ class EditableCircularImage extends StatelessWidget {
                   },
                   progressIndicatorBuilder: (context, url, downloadProgress) =>
                       // TODO fix size to let it be equal to the final size even while loading
-                      const CustomCircularProgress(size: 50),
+                      // TODO test
+                      CustomCircularProgress(size: radius),
                   errorWidget: (context, url, error) => CircleAvatar(
                     radius: radius,
                     backgroundImage: Image.asset("assets/images/no-user.jpg").image,

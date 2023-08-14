@@ -60,7 +60,6 @@ class App extends StatefulWidget {
             - (home => claims => sent_claim => question_claim_page)
             - (fields) topic=sentClaims,id=claimId
         - chat ??
-
    */
 }
 

@@ -49,6 +49,8 @@ class SelectPositionButton extends StatelessWidget {
               onPositionSelected(selectedPos);
             },
             child: SizedBox(
+              // TODO remove height from SizedBox from all fields of search, insert, update
+              // TODO change width to be Mediaquery.of ...
               height: showError && errorText != "" ? 165 : 140,
               width: double.infinity,
               child: Row(

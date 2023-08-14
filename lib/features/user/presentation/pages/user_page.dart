@@ -45,7 +45,7 @@ class UserScreen extends StatelessWidget {
               (failure) => ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       padding: const EdgeInsets.all(30),
-                      backgroundColor: Colors.red, // TODO: see if color is good even in dark mode
+                      backgroundColor: Colors.red,
                       content: Text(
                           failure.maybeWhen<String>(
                               genericFailure: () => 'Server error. Please try again later.',
@@ -148,7 +148,9 @@ class UserScreen extends StatelessWidget {
                     ],
                   ),
                 )
-              : Container(),
+              : // TODO handle error on user info loading
+
+      Container(),
     );
   }
 
