@@ -4,11 +4,11 @@ Widget titleLogoVertical() {
   return Column(
     children: [
       Image.asset(
-        'assets/images/logo-removebg-preview.png', // Replace with your image path
+        'assets/images/logo.png',
         width: 200,
         height: 200,
       ),
-      const SizedBox(height: 20), // Add some spacing between the image and text
+      const SizedBox(height: 20),
       const Text(
         "Lost&Found",
         style: TextStyle(fontSize: 40),
@@ -25,11 +25,10 @@ Widget titleLogoHorizontal() {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Image.asset(
-          'assets/images/logo-removebg-preview.png', // Replace with your image path
+          'assets/images/logo.png',
           width: 90,
           height: 90,
         ),
-        //const SizedBox(width: 8), // Add some spacing between the image and text
         const Text(
           "Lost&Found",
           style: TextStyle(fontSize: 40),

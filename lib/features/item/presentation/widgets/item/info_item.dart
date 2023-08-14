@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lost_and_found/features/item/presentation/widgets/item/info_item_field.dart';
 
 import '../../../../../utils/colors.dart';
 
@@ -26,7 +27,7 @@ class InfoItem extends StatelessWidget {
     return Container(
       color: Colors.white,
       width: double.infinity,
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -36,67 +37,16 @@ class InfoItem extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 10),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(Icons.location_on, size: 25),
-              const SizedBox(width: 5),
-              Expanded(
-                child: Text(
-                  isFound ? "Found near $position" : "Lost near $position",
-                  style: const TextStyle(fontSize: 18),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              )
-            ],
-          ),
+          InfoItemField(icon: Icons.location_on, title: isFound ? "Found near" : "Lost near", content: position),
           const SizedBox(height: 10),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(Icons.calendar_month, size: 25),
-              const SizedBox(width: 5),
-              Expanded(
-                child: Text(
-                  "Date of insertion: ${DateFormat("dd/MM/yyyy").format(date)}",
-                  style: const TextStyle(fontSize: 18),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
+          InfoItemField(icon: Icons.calendar_month, title: "Date of insertion", content: DateFormat("dd/MM/yyyy").format(date)),
           const SizedBox(height: 10),
-          Row(
-            children: [
-              const Icon(Icons.category, size: 25),
-              const SizedBox(width: 5),
-              Expanded(
-                child: Text(
-                  "Category: $category",
-                  style: const TextStyle(fontSize: 18),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
+          InfoItemField(icon: Icons.category, title: "Category", content: category),
           question != null ? const SizedBox(height: 10) : Container(),
           question != null
-              ? Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(8),
-                  decoration: const BoxDecoration(
-                      color: PersonalizedColor.claimAcceptedStatusColor,
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    const Text(
-                      "Question to verify the ownership:",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    Text(question!),
-                  ]),
-                )
-              : Container()
+              ? InfoItemField(icon: Icons.connect_without_contact, title: "Question to verify the ownership", content: question!)
+              : Container(),
+        
         ],
       ),
     );
