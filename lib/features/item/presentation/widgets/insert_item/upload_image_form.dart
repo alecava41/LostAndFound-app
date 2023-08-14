@@ -21,7 +21,6 @@ class UploadImageForm extends StatelessWidget {
           children: [
             Container(
               color: Colors.transparent,
-              //height: 300,
               child: Stack(
                 alignment: Alignment.bottomRight,
                 children: [
@@ -53,7 +52,7 @@ class UploadImageForm extends StatelessWidget {
                               ),
                             ),
                           )
-                        : Image.file(File(imagePath!)),
+                        : Image.file(File(imagePath!), fit: BoxFit.cover,),
                   ),
                   if (imagePath != null)
                     Positioned(

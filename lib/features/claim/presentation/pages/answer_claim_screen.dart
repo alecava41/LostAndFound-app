@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/domain/entities/claim_status.dart';
 import 'package:lost_and_found/features/claim/presentation/bloc/answer_claim/answer_claim_bloc.dart';
-import 'package:lost_and_found/utils/colors.dart';
+import 'package:lost_and_found/features/claim/presentation/widgets/claim_info_field.dart';
 
 import '../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../core/presentation/widgets/large_green_button.dart';
@@ -92,29 +92,27 @@ class AnswerClaimScreen extends StatelessWidget {
                               const SizedBox(
                                 height: 10,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(5, 0, 5, 10),
-                                child: Row(
-                                  children: [
-                                    const Text(
-                                      "Claim decision",
-                                      style: TextStyle(fontSize: 30),
+                              Row(
+                                children: [
+                                  const Text(
+                                    "Claim decision",
+                                    style: TextStyle(fontSize: 30),
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  InkWell(
+                                    onTap: () =>
+                                        ctx.read<AnswerClaimBloc>().add(const AnswerClaimEvent.infoTriggered()),
+                                    child: const Icon(
+                                      Icons.info,
+                                      size: 30,
+                                      color: Color.fromRGBO(144, 202, 249, 1),
                                     ),
-                                    const SizedBox(
-                                      width: 20,
-                                    ),
-                                    InkWell(
-                                      onTap: () =>
-                                          ctx.read<AnswerClaimBloc>().add(const AnswerClaimEvent.infoTriggered()),
-                                      child: const Icon(
-                                        Icons.info,
-                                        size: 30,
-                                        color: Color.fromRGBO(144, 202, 249, 1),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
+                              const SizedBox(height: 15,),
                               state.isInfoOpen
                                   ? Padding(
                                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -132,62 +130,30 @@ class AnswerClaimScreen extends StatelessWidget {
                                       ),
                                     )
                                   : Container(),
-                              const Padding(
-                                padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
-                                child: Text("Item claimed"),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                      color: PersonalizedColor.primarySwatch.shade200,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10),
-                                      child: ClaimedItemInfo(
-                                        token: state.token,
-                                        item: state.item!,
-                                        subject: state.item!.claims!
-                                            .firstWhere((element) => element.id == claimId)
-                                            .user
-                                            .username,
-                                      ),
-                                    )),
-                              ),
+                              ClaimInfoField(title: "Item claimed", content: ClaimedItemInfo(
+                                token: state.token,
+                                item: state.item!,
+                                subject: state.item!.claims!
+                                    .firstWhere((element) => element.id == claimId)
+                                    .user
+                                    .username,
+                              ),),
                               const SizedBox(
                                 height: 10,
                               ),
-                              const Padding(
-                                padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
-                                child: Text("Question"),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                                child: Text(
+                              ClaimInfoField(title: "Question", content: Text(
                                   state.item!.question!,
                                   style: const TextStyle(
                                     fontSize: 20,
                                   ),
-                                ),
-                              ),
+                                ),),
                               const SizedBox(
                                 height: 10,
                               ),
-                              const Padding(
-                                padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
-                                child: Text("Answer:"),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                                child: Text(
+                              ClaimInfoField(title: "Answer", content: Text(
                                   state.item!.claims!.firstWhere((element) => element.id == claimId).answer,
-                                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                                ),
-                              ),
+                                  style: const TextStyle(fontSize: 20),
+                                ),),
                               const SizedBox(
                                 height: 30,
                               ),

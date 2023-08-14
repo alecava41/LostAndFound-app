@@ -37,8 +37,7 @@ class ClaimedItemCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: Colors.grey,
-                width: 0.3,
+                color: PersonalizedColor.mainColor,
               ),
             ),
             padding: const EdgeInsets.all(5),

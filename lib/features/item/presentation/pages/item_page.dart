@@ -44,8 +44,10 @@ class ItemScreen extends StatelessWidget {
                 backgroundColor: Colors.red,
                 content: Text(
                     failure.maybeWhen<String>(
-                        genericFailure: () => 'Server error. Please try again later.',
-                        networkFailure: () => 'No internet connection available. Check your internet connection.',
+                        genericFailure: () =>
+                            'Server error. Please try again later.',
+                        networkFailure: () =>
+                            'No internet connection available. Check your internet connection.',
                         validationFailure: (reason) => reason!,
                         orElse: () => "Unknown error"),
                     style: const TextStyle(fontSize: 20)),
@@ -63,16 +65,22 @@ class ItemScreen extends StatelessWidget {
                         backgroundColor: Colors.red,
                         content: Text(
                             failure.maybeWhen<String>(
-                                genericFailure: () => 'Server error. Please try again later.',
-                                networkFailure: () => 'No internet connection available. Check your internet connection.',
+                                genericFailure: () =>
+                                    'Server error. Please try again later.',
+                                networkFailure: () =>
+                                    'No internet connection available. Check your internet connection.',
                                 validationFailure: (reason) => reason!,
                                 orElse: () => "Unknown error"),
                             style: const TextStyle(fontSize: 20)),
                       ),
                     ), (_) {
               // Navigate back to HP + update HP
-              ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.item!.type));
-              context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
+              ctx
+                  .read<HomeBloc>()
+                  .add(HomeEvent.homeSectionRefreshed(state.item!.type));
+              context
+                  .read<HomeControllerBloc>()
+                  .add(const HomeControllerEvent.tabChanged(0));
               Navigator.pop(context);
             });
           }
@@ -85,16 +93,22 @@ class ItemScreen extends StatelessWidget {
                         backgroundColor: Colors.red,
                         content: Text(
                             failure.maybeWhen<String>(
-                                genericFailure: () => 'Server error. Please try again later.',
-                                networkFailure: () => 'No internet connection available. Check your internet connection.',
+                                genericFailure: () =>
+                                    'Server error. Please try again later.',
+                                networkFailure: () =>
+                                    'No internet connection available. Check your internet connection.',
                                 validationFailure: (reason) => reason!,
                                 orElse: () => "Unknown error"),
                             style: const TextStyle(fontSize: 20)),
                       ),
                     ), (_) {
               // Navigate back to HP + update HP
-              ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.item!.type));
-              context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
+              ctx
+                  .read<HomeBloc>()
+                  .add(HomeEvent.homeSectionRefreshed(state.item!.type));
+              context
+                  .read<HomeControllerBloc>()
+                  .add(const HomeControllerEvent.tabChanged(0));
               Navigator.pop(context);
             });
           }
@@ -136,24 +150,29 @@ class ItemScreen extends StatelessWidget {
                           question: state.item!.question,
                           isFound: false,
                         ),
-                        const Divider(
-                          color: Colors.grey,
-                          thickness: 1,
-                          height: 0,
-                        )
                       ];
 
                       if (isCurrentUserOwner) {
                         if (state.item!.type == ItemType.found) {
                           widgetList += _showOwnerFoundItemWidgets(
-                              ctx, state.item!.claims != null ? state.item!.claims! : [], state.token, itemId);
+                              ctx,
+                              state.item!.claims != null
+                                  ? state.item!.claims!
+                                  : [],
+                              state.token,
+                              itemId);
                         }
                       } else {
                         if (state.item!.type == ItemType.lost) {
-                          widgetList += _showGenericLostItemWidgets(ctx, state.token, state.item!.user);
+                          widgetList += _showGenericLostItemWidgets(
+                              ctx, state.token, state.item!.user);
                         } else {
                           widgetList += _showGenericFoundItemWidgets(
-                              ctx, state.item!.userClaim, state.token, state.item!.user, itemId);
+                              ctx,
+                              state.item!.userClaim,
+                              state.token,
+                              state.item!.user,
+                              itemId);
                         }
                       }
 
@@ -200,8 +219,10 @@ class ItemScreen extends StatelessWidget {
                 ctx.read<ItemBloc>().add(const ItemEvent.itemSolved());
                 break;
               case 'opt2':
-                final changes =
-                    await Navigator.push<bool>(ctx, MaterialPageRoute(builder: (_) => UpdateItemScreen(itemId: itemId)));
+                final changes = await Navigator.push<bool>(
+                    ctx,
+                    MaterialPageRoute(
+                        builder: (_) => UpdateItemScreen(itemId: itemId)));
                 if (changes != null && changes && ctx.mounted) {
                   ctx.read<ItemBloc>().add(ItemEvent.itemCreated(itemId));
                 }
@@ -218,7 +239,8 @@ class ItemScreen extends StatelessWidget {
     }
   }
 
-  List<Widget> _showGenericLostItemWidgets(BuildContext context, String token, User owner) {
+  List<Widget> _showGenericLostItemWidgets(
+      BuildContext context, String token, User owner) {
     final userUrl = "$baseUrl/api/users/${owner.id}/image";
 
     return [
@@ -289,14 +311,17 @@ class ItemScreen extends StatelessWidget {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        side: const BorderSide(color: PersonalizedColor.mainColor, width: 1.5),
+                        side: const BorderSide(
+                            color: PersonalizedColor.mainColor, width: 1.5),
                         shape: const StadiumBorder(),
-                        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16, horizontal: 15),
                       ),
                       onPressed: () {}, // TODO: navigate to chat
                       child: const Text(
                         'Send a message',
-                        style: TextStyle(fontSize: 18, color: PersonalizedColor.mainColor),
+                        style: TextStyle(
+                            fontSize: 18, color: PersonalizedColor.mainColor),
                       ),
                     ),
                   ],
@@ -312,90 +337,122 @@ class ItemScreen extends StatelessWidget {
     ];
   }
 
-  List<Widget> _showOwnerFoundItemWidgets(BuildContext context, List<ClaimReceived> claims, String token, int itemId) {
+  List<Widget> _showOwnerFoundItemWidgets(BuildContext context,
+      List<ClaimReceived> claims, String token, int itemId) {
     return [
-      const SizedBox(
-        height: 30,
-      ),
-      const Divider(
-        color: Colors.grey,
-        thickness: 1,
-        height: 0,
-      ),
       Container(
-        color: Colors.white,
-        width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.all(10),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Padding(
-            padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.connect_without_contact,
-                  size: 25,
+          color: Colors.white,
+          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.all(10),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: PersonalizedColor.mainColor,
+                  width: 1,
                 ),
-                SizedBox(
-                  width: 5,
-                ),
-                Expanded(
-                    child: Text(
-                  "Item claimed by",
-                  style: TextStyle(fontSize: 18),
-                  overflow: TextOverflow.ellipsis,
-                )),
-              ],
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: const BoxDecoration(
+                      color: PersonalizedColor.mainColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(8.0),
+                        topRight: Radius.circular(8.0),
+                      ),
+                    ),
+                    child: const Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Icon(
+                          Icons.connect_without_contact,
+                          size: 22,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "Item claimed by",
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: claims.isEmpty
+                              ? const Column(
+                                
+                                children: [
+                                  Icon(Icons.connect_without_contact, size: 30),
+                                  Text(
+                                  "No claims received",
+                                  style: TextStyle(fontSize: 18),
+                                    ),
+                                ],
+                              )
+                              : ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: claims.length,
+                                  itemBuilder: (context, index) {
+                                    final claim = claims[index];
+
+                                    return Container(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 0, 0, 8),
+                                        child: ClaimedItemCard(
+                                          token: token,
+                                          opened: claim.opened,
+                                          userId: claim.user.id,
+                                          hasImage: claim.user.hasImage,
+                                          username: claim.user.username,
+                                          onTap: () async {
+                                            final claimStatus = await Navigator.push<
+                                                    bool?>(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (ctx) =>
+                                                        AnswerClaimScreen(
+                                                            itemId: itemId,
+                                                            claimId: claim.id,
+                                                            isClaimAlreadyManaged:
+                                                                claim.status !=
+                                                                    ClaimStatus
+                                                                        .pending)));
+
+                                            if (claimStatus != null &&
+                                                claimStatus &&
+                                                context.mounted) {
+                                              context.read<ItemBloc>().add(
+                                                  const ItemEvent
+                                                      .itemRefreshed());
+                                            }
+                                          },
+                                        ));
+                                  },
+                                ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          claims.isEmpty
-              ? const Center(
-                  child: Text(
-                  "No claims received",
-                  style: TextStyle(fontSize: 18),
-                ))
-              : ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: claims.length,
-                  itemBuilder: (context, index) {
-                    final claim = claims[index];
-
-                    return Container(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                        child: ClaimedItemCard(
-                          token: token,
-                          opened: claim.opened,
-                          userId: claim.user.id,
-                          hasImage: claim.user.hasImage,
-                          username: claim.user.username,
-                          onTap: () async {
-                            final claimStatus = await Navigator.push<bool?>(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (ctx) => AnswerClaimScreen(
-                                        itemId: itemId,
-                                        claimId: claim.id,
-                                        isClaimAlreadyManaged: claim.status != ClaimStatus.pending)));
-
-                            if (claimStatus != null && claimStatus && context.mounted) {
-                              context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
-                            }
-                          },
-                        ));
-                  },
-                ),
-        ]),
-      ),
-      const Divider(
-        color: Colors.grey,
-        thickness: 1,
-        height: 0,
-      ),
+          ]))
     ];
   }
 
-  List<Widget> _showGenericFoundItemWidgets(
-      BuildContext context, ClaimSent? claim, String token, User owner, int itemId) {
+  List<Widget> _showGenericFoundItemWidgets(BuildContext context,
+      ClaimSent? claim, String token, User owner, int itemId) {
     final userUrl = "$baseUrl/api/users/${owner.id}/image";
 
     return [
@@ -430,11 +487,15 @@ class ItemScreen extends StatelessWidget {
                             children: [
                               const TextSpan(
                                 text: "Claim status ",
-                                style: TextStyle(fontSize: 18, color: Colors.black),
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.black),
                               ),
                               TextSpan(
                                 text: claim.status.name.toUpperCase(),
-                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                                style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
                               ),
                             ],
                           ),
@@ -450,7 +511,8 @@ class ItemScreen extends StatelessWidget {
                         : claim.status == ClaimStatus.rejected
                             ? Text(
                                 "Unfortunately, your claim has been rejected by ${owner.username}, as the response you provided was not correct.")
-                            : Text("Wait for ${owner.username} to validate to your claim.")
+                            : Text(
+                                "Wait for ${owner.username} to validate to your claim.")
                   ],
                 ),
               ),
@@ -468,10 +530,19 @@ class ItemScreen extends StatelessWidget {
                     ),
                     onPressed: () async {
                       final claimStatus = await Navigator.push<bool?>(
-                          context, MaterialPageRoute(builder: (ctx) => AnswerQuestionScreen(itemId: itemId, isClaimAlreadyTaken: claim!.answer != null,)));
+                          context,
+                          MaterialPageRoute(
+                              builder: (ctx) => AnswerQuestionScreen(
+                                    itemId: itemId,
+                                    isClaimAlreadyTaken: claim!.answer != null,
+                                  )));
 
-                      if (claimStatus != null && claimStatus && context.mounted) {
-                        context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
+                      if (claimStatus != null &&
+                          claimStatus &&
+                          context.mounted) {
+                        context
+                            .read<ItemBloc>()
+                            .add(const ItemEvent.itemRefreshed());
                       }
                     },
                     child: const Text(
@@ -549,16 +620,19 @@ class ItemScreen extends StatelessWidget {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        side: const BorderSide(color: PersonalizedColor.mainColor, width: 1.5),
+                        side: const BorderSide(
+                            color: PersonalizedColor.mainColor, width: 1.5),
                         shape: const StadiumBorder(),
-                        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16, horizontal: 15),
                       ),
                       onPressed: () {
                         // TODO navigate to chat
                       },
                       child: const Text(
                         'Send a message',
-                        style: TextStyle(fontSize: 18, color: PersonalizedColor.mainColor),
+                        style: TextStyle(
+                            fontSize: 18, color: PersonalizedColor.mainColor),
                       ),
                     ),
                   ],

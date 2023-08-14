@@ -188,7 +188,6 @@ class AnswerQuestionScreen extends StatelessWidget {
                                     ),
                                   )
                                 : PersonalizedFormWithTextInsertion(
-                                    title: "Your answer",
                                     onTextChanged: (value) =>
                                         ctx.read<AnswerQuestionBloc>().add(AnswerQuestionEvent.answerFieldChanged(value)),
                                     hintText: "",

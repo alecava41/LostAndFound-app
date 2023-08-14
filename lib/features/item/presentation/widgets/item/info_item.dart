@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/item/info_item_field.dart';
 
-import '../../../../../utils/colors.dart';
-
 class InfoItem extends StatelessWidget {
   final String title;
   final String position;
@@ -33,10 +31,11 @@ class InfoItem extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(fontSize: 30),
+            style: const TextStyle(fontSize: 35),
             overflow: TextOverflow.ellipsis,
+            maxLines: 2,
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 15),
           InfoItemField(icon: Icons.location_on, title: isFound ? "Found near" : "Lost near", content: position),
           const SizedBox(height: 10),
           InfoItemField(icon: Icons.calendar_month, title: "Date of insertion", content: DateFormat("dd/MM/yyyy").format(date)),
