@@ -134,6 +134,7 @@ class InsertItemScreen extends StatelessWidget {
                         height: 10,
                       ),
                       customDivider(),
+                      // TODO why is it possible to add multiple rows? (@backToFrancesco)
                       PersonalizedFormWithTextInsertion(
                         title: "Title:",
                         showError: state.showError,
@@ -153,7 +154,9 @@ class InsertItemScreen extends StatelessWidget {
                           : Container(),
                       state.type == ItemType.found ? customDivider() : Container(),
                       state.type == ItemType.found
-                          ? PersonalizedFormWithTextInsertion(
+                          ?
+                      // TODO why is it possible to add multiple rows? (@backToFrancesco)
+                      PersonalizedFormWithTextInsertion(
                               title: "Question to verify the ownership:",
                               hintText: "e.g. Any device scratches? Where?",
                               isValid: state.question.value.isRight(),

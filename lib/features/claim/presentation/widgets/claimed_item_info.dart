@@ -13,19 +13,25 @@ class ClaimedItemInfo extends StatelessWidget {
   final Item item;
   final String token;
   final String subject; // either the owner of the object or the user that claimed it
+  final int? claimIdx;
 
   const ClaimedItemInfo({
     super.key,
     required this.item,
     required this.token,
-    required this.subject
-    // required this.isClaimed, // if true shows claimed by $user, if false shows found by $user
+    required this.subject,
+    required this.claimIdx,
   });
 
   @override
   Widget build(BuildContext context) {
     final String itemUrl = '$baseUrl/api/items/${item.id}/image';
-    final String userUrl = '$baseUrl/api/users/${item.user.id}/image';
+
+    final User user = claimIdx != null ? item.claims![claimIdx!].user : item.user;
+
+    final String userUrl = '$baseUrl/api/users/${user.id}/image';
+
+    // TODO (@backToFrancesco) if the name of item is too long, it can't be read
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +80,7 @@ class ClaimedItemInfo extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                        child: Text(item.userClaim != null ? "Claimed by:" : "Found by:"),
+                        child: Text(item.claims != null ? "Claimed by" : "Found by"),
                       ),
                       Row(
                         children: [
@@ -87,7 +93,7 @@ class ClaimedItemInfo extends StatelessWidget {
                               radius: 25,
                               token: token,
                               imageUrl: userUrl,
-                              hasImage: item.user.hasImage,
+                              hasImage: user.hasImage,
                               errorAsset: "assets/images/no-user.jpg",
                             ),
                           ) : CircularImage(
@@ -100,6 +106,7 @@ class ClaimedItemInfo extends StatelessWidget {
                           const SizedBox(
                             width: 8,
                           ),
+                          // TODO (@backToFrancesco) if the username of item is too long, it displays in two lines
                           Flexible(
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),

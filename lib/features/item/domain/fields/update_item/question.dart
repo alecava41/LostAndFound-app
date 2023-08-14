@@ -15,6 +15,8 @@ class QuestionField extends Equatable {
 }
 
 Either<Failure, String> _validateQuestionField(String input) {
+  input = input.trim();
+
   if (input.isNotEmpty) {
     return Right(input);
   } else {

@@ -84,7 +84,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       final response = await _uploadUserImageUseCase(params);
       imgFailureOrSuccess = response.fold((failure) => Left(failure), (success) {
         path = null;
-
         return Right(success);
       });
 
@@ -92,7 +91,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       await CachedNetworkImage.evictFromCache("$baseUrl/api/users/${state.user!.id}/image");
     }
 
-    emit(state.copyWith(imageUploadFailureOrSuccess: imgFailureOrSuccess, imagePath: path));
+    emit(state.copyWith(
+        imageUploadFailureOrSuccess: imgFailureOrSuccess,
+        imagePath: path,
+        user: state.user == null
+            ? null
+            : User(
+                id: state.user!.id,
+                username: state.user!.username,
+                hasImage: imgFailureOrSuccess != null ? imgFailureOrSuccess.isRight() : state.user!.hasImage)));
     emit(state.copyWith(imageUploadFailureOrSuccess: null));
   }
 }

@@ -47,10 +47,11 @@ class EditableCircularImage extends StatelessWidget {
                   httpHeaders: {
                     "Authorization": "Bearer $token",
                   },
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      // TODO fix size to let it be equal to the final size even while loading
-                      // TODO test
-                      CustomCircularProgress(size: radius),
+                  progressIndicatorBuilder: (context, url, downloadProgress) => SizedBox(
+                    height: radius * 2,
+                    width: radius * 2,
+                    child: CustomCircularProgress(size: radius),
+                  ),
                   errorWidget: (context, url, error) => CircleAvatar(
                     radius: radius,
                     backgroundImage: Image.asset("assets/images/no-user.jpg").image,

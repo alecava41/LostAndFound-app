@@ -12,8 +12,8 @@ import 'package:lost_and_found/widgets/title_logo.dart';
 class RegistrationForm extends StatelessWidget {
   const RegistrationForm({super.key});
 
-  // TODO check if it works like a 'stepper' (by pressing enter it should go to the next text field)
-  // TODO need to handle notification permission request (checkbox to let user decide whether to be notified or not?)
+  // TODO (@backToFrancesco) check if it works like a 'stepper' (by pressing enter it should go to the next text field)
+  // TODO (@backToFrancesco) need to handle notification permission request (checkbox to let user decide whether to be notified or not?)
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class RegistrationForm extends StatelessWidget {
                             content: Text('Successful sign up', style: TextStyle(fontSize: 20)),
                           ),
                         ),
-                        Navigator.of(context).pushNamed('/login')
+                        Navigator.pushReplacementNamed(ctx, '/login')
                       });
             }
           },

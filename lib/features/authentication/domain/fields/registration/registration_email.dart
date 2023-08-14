@@ -20,7 +20,9 @@ Either<Failure, String> _validateEmailField(String input, bool isDuplicate) {
     return const Left(Failure.validationFailure("Email already used."));
   }
 
+  input = input.trim();
   const emailRegex = r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
+
 
   if (RegExp(emailRegex).hasMatch(input)) {
     return Right(input);

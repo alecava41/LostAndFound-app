@@ -57,7 +57,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
   Widget build(BuildContext context) {
     var chooseCurrentPositionButton = TextButton(
       onPressed: () async {
-        var isConnected = true; // TODO: change with real check
+        var isConnected = true;
         var permission = await requestLocationPermission();
         if (permission.isGranted && isConnected) {
           mapController.animatedZoomOut();
@@ -270,7 +270,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
               onPressed: () async {
                 Navigator.pop(context, 'Cancel');
                 setState(() => isAlertSet = false);
-                isDeviceConnected = true; // TODO: modify
+                isDeviceConnected = true;
                 if (!isDeviceConnected && !isAlertSet) {
                   showConnectionLostAlert();
                   setState(() => isAlertSet = true);

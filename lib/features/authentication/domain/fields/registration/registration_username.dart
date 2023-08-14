@@ -20,7 +20,8 @@ Either<Failure, String> _validateUsernameField(String input, bool isDuplicate) {
   if (isDuplicate) {
     return const Left(Failure.validationFailure("Username already used."));
   }
-  
+
+  input = input.trim();
   const usernameRegex = r"""^[a-zA-Z0-9]{1,30}$""";
 
   if (RegExp(usernameRegex).hasMatch(input)) {

@@ -38,6 +38,7 @@ class SelectPositionButton extends StatelessWidget {
           color: Colors.white,
           child: InkWell(
             onTap: () async {
+              FocusManager.instance.primaryFocus?.unfocus();
               final selectedPos = await Navigator.push<LatLng>(
                 context,
                 MaterialPageRoute(
@@ -49,12 +50,10 @@ class SelectPositionButton extends StatelessWidget {
               onPositionSelected(selectedPos);
             },
             child: SizedBox(
-              // TODO remove height from SizedBox from all fields of search, insert, update
-              // TODO change width to be Mediaquery.of ...
-              height: showError && errorText != "" ? 165 : 140,
-              width: double.infinity,
+              height: showError && errorText != "" ? 155 : 130,
+              width: MediaQuery.of(context).size.width,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
                     child: Padding(
@@ -76,7 +75,7 @@ class SelectPositionButton extends StatelessWidget {
                               Icon(
                                 Icons.location_on,
                                 color: address == "" ? Colors.black : PersonalizedColor.mainColor,
-                                size: 40,
+                                size: 30,
                               ),
                               Expanded(
                                 child: Column(
@@ -103,8 +102,7 @@ class SelectPositionButton extends StatelessWidget {
                           showError && (startingPosition == defaultPosition || startingPosition == const LatLng(0, 0))
                               ? Text(
                                   errorText,
-                                  // TODO errorColor is different from the default one, need to revise all custom error fields
-                                  style: const TextStyle(color: Colors.red, fontSize: 12),
+                                  style: TextStyle(color: Colors.redAccent.shade700, fontSize: 12),
                                 )
                               : Container(),
                         ],

@@ -21,7 +21,7 @@ class UpdateItemScreen extends StatelessWidget {
   final int itemId;
   final ImagePicker picker = ImagePicker();
 
-  // TODO maybe it's better to add item's type anyway (not editable)
+  // TODO (@backToFrancesco) maybe it's better to add item's type anyway (not editable)
 
   UpdateItemScreen({super.key, required this.itemId});
 
@@ -158,6 +158,7 @@ class UpdateItemScreen extends StatelessWidget {
                                 height: 10,
                               ),
                               customDivider(),
+                              // TODO why is it possible to add multiple rows? (@backToFrancesco)
                               PersonalizedFormWithTextInsertion(
                                 text: state.title.value.getOrElse(() => ""),
                                 title: "Title:",
@@ -165,7 +166,7 @@ class UpdateItemScreen extends StatelessWidget {
                                 errorText: state.title.value.fold(
                                     (failure) => failure.maybeWhen<String?>(
                                         validationFailure: (reason) => reason, orElse: () => null),
-                                    (r) => null),
+                                    (_) => null),
                                 onTextChanged: (input) =>
                                     ctx.read<UpdateItemBloc>().add(UpdateItemEvent.titleChanged(input)),
                                 isValid: state.title.value.isRight(),
@@ -179,7 +180,9 @@ class UpdateItemScreen extends StatelessWidget {
                                   : Container(),
                               state.item!.type == ItemType.found ? customDivider() : Container(),
                               state.item!.type == ItemType.found
-                                  ? PersonalizedFormWithTextInsertion(
+                                  ?
+                                  // TODO why is it possible to add multiple rows? (@backToFrancesco)
+                                  PersonalizedFormWithTextInsertion(
                                       text: state.question.value.getOrElse(() => ""),
                                       title: "Question to verify the ownership:",
                                       hintText: "e.g. Any device scratches? Where?",

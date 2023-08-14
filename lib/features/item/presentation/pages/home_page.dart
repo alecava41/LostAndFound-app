@@ -10,8 +10,6 @@ import '../widgets/home/lost_items_container.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  // TODO: need to handle error on loading
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeBloc, HomeState>(
@@ -39,6 +37,7 @@ class HomeScreen extends StatelessWidget {
         }
 
         if (state.homeFailureOrSuccess != null && state.homeFailureOrSuccess!.isLeft()) {
+          // TODO: need to handle error on loading (@backToFrancesco)
           return const Text("Create screen");
         }
 

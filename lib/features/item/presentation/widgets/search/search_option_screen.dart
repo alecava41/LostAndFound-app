@@ -16,7 +16,7 @@ class SearchOptionScreen extends StatelessWidget {
   const SearchOptionScreen({super.key});
 
   /*
-    TODO
+    TODO (@alecava41)
       if search has already been performed, show 'new' filter page (without bottom_bar, with back_button)
       if back_button is pressed, then navigate back to results
    */
@@ -35,10 +35,11 @@ class SearchOptionScreen extends StatelessWidget {
                       children: [
                         const Row(
                           children: [
-                            Icon(
-                              Icons.search,
-                              size: 40,
-                            ),
+                            // TODO (@backToFrancesco) ugly in my opinion
+                            // Icon(
+                            //   Icons.search,
+                            //   size: 40,
+                            // ),
                             SizedBox(
                               width: 5,
                             ),

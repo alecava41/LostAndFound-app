@@ -15,6 +15,7 @@ class LoginUserField extends Equatable {
 }
 
 Either<Failure, String> _validateUserField(String input) {
+  input = input.trim();
   const emailRegex = r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
   const usernameRegex = r"""^[a-zA-Z0-9]+$""";
 

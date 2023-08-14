@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
@@ -37,7 +39,10 @@ class CustomNotification extends StatelessWidget {
           Material(
             color: opened ? PersonalizedColor.primarySwatch.shade200 : Colors.white,
             child: InkWell(
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ItemScreen(itemId: targetItemId))),
+              onTap: () => {
+                log(targetItemId.toString()),
+                Navigator.push(context, MaterialPageRoute(builder: (_) => ItemScreen(itemId: targetItemId)))
+              },
               splashColor: opened ? PersonalizedColor.primarySwatch.shade500 : Colors.grey.withOpacity(0.4),
               child: SizedBox(
                 height: 100,
@@ -59,10 +64,31 @@ class CustomNotification extends StatelessWidget {
                             final sentence =
                                 (subjectItemType == ItemType.lost) ? "might have found your " : "might be the owner of ";
 
-                            // TODO: evaluate whether to put bold for username/item_title
-                            return Text(
-                              "Hey, $targetUsername $sentence $subjectItemTitle!",
-                              style: const TextStyle(fontSize: 15),
+                            return RichText(text:
+                              TextSpan(
+                                children: [
+                                  const TextSpan(
+                                    text: "Hey, ",
+                                    style: TextStyle(fontSize: 15, color: Colors.black),
+                                  ),
+                                  TextSpan(
+                                    text: targetUsername,
+                                    style: const TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
+                                  ),
+                                  TextSpan(
+                                    text: " $sentence ",
+                                    style: const TextStyle(fontSize: 15, color: Colors.black),
+                                  ),
+                                  TextSpan(
+                                    text: subjectItemTitle,
+                                    style: const TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
+                                  ),
+                                  const TextSpan(
+                                    text: "!",
+                                    style: TextStyle(fontSize: 15, color: Colors.black),
+                                  ),
+                                ]
+                              )
                             );
                           },
                         ),

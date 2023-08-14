@@ -42,49 +42,63 @@ class CategorySelectionForm extends StatelessWidget {
         Material(
           color: Colors.white,
           child: InkWell(
-            onTap: () async => {await navigateToCategorySelection(context)},
+            onTap: () async =>
+                {FocusManager.instance.primaryFocus?.unfocus(), await navigateToCategorySelection(context)},
             borderRadius: BorderRadius.circular(0),
             child: SizedBox(
               height: showError && errorText != "" ? 80 : 65,
               child: Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Category",
-                            style: TextStyle(fontSize: 25),
-                          ),
-                          Row(
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              if (category.isNotEmpty)
-                                Text(
-                                  category,
-                                  style: const TextStyle(
-                                    fontSize: 15,
-                                    color: PersonalizedColor.mainColor,
-                                  ),
-                                ),
-                              const Icon(
-                                Icons.chevron_right,
-                                size: 50,
+                              Text(
+                                "Category",
+                                style: TextStyle(fontSize: 25),
                               ),
                             ],
                           ),
+                          showError && category == ""
+                              ? const SizedBox(
+                                  height: 8,
+                                )
+                              : Container(),
+                          showError && category == ""
+                              ? Text(
+                                  errorText,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(color: Colors.redAccent.shade700, fontSize: 12),
+                                )
+                              : Container()
                         ],
                       ),
-                      showError && category == ""
-                          ? Text(
-                            errorText,
-                            textAlign: TextAlign.start,
-                            style: const TextStyle(color: Colors.red, fontSize: 12),
-                          )
-                          : Container()
-                    ],
-                  )),
+                    ),
+                    Row(
+                      children: [
+                        if (category.isNotEmpty)
+                          Text(
+                            category,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              color: PersonalizedColor.mainColor,
+                            ),
+                          ),
+                        const Icon(
+                          Icons.chevron_right,
+                          size: 50,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ),

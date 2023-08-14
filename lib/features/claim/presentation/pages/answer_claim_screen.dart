@@ -12,9 +12,15 @@ import '../widgets/claimed_item_info.dart';
 class AnswerClaimScreen extends StatelessWidget {
   final int itemId;
   final int claimId;
+  final int claimIdx;
   final bool isClaimAlreadyManaged;
 
-  const AnswerClaimScreen({super.key, required this.itemId, required this.claimId, required this.isClaimAlreadyManaged});
+  const AnswerClaimScreen(
+      {super.key,
+      required this.claimIdx,
+      required this.itemId,
+      required this.claimId,
+      required this.isClaimAlreadyManaged});
 
   @override
   Widget build(BuildContext context) {
@@ -155,6 +161,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                             .firstWhere((element) => element.id == claimId)
                                             .user
                                             .username,
+                                        claimIdx: claimIdx,
                                       ),
                                     )),
                               ),
@@ -179,7 +186,7 @@ class AnswerClaimScreen extends StatelessWidget {
                               ),
                               const Padding(
                                 padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
-                                child: Text("Answer:"),
+                                child: Text("Answer"),
                               ),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
@@ -191,8 +198,9 @@ class AnswerClaimScreen extends StatelessWidget {
                               const SizedBox(
                                 height: 30,
                               ),
+                              // TODO (@alecava41) add claim outcome
                               PersonalizedLargeGreenButton(
-                                  isActive: isClaimAlreadyManaged,
+                                  isActive: !isClaimAlreadyManaged,
                                   onPressed: () => isClaimAlreadyManaged
                                       ? {}
                                       : ctx

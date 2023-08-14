@@ -325,6 +325,8 @@ mixin _$SelectPositionState {
   bool get hasPermissions => throw _privateConstructorUsedError;
   bool get isPermissionPermanentlyNegated => throw _privateConstructorUsedError;
   DateTime? get lastPositionUpdate => throw _privateConstructorUsedError;
+  Either<Failure, Success>? get positionFailureOrSuccess =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SelectPositionStateCopyWith<SelectPositionState> get copyWith =>
@@ -343,7 +345,8 @@ abstract class $SelectPositionStateCopyWith<$Res> {
       bool isServiceAvailable,
       bool hasPermissions,
       bool isPermissionPermanentlyNegated,
-      DateTime? lastPositionUpdate});
+      DateTime? lastPositionUpdate,
+      Either<Failure, Success>? positionFailureOrSuccess});
 }
 
 /// @nodoc
@@ -365,6 +368,7 @@ class _$SelectPositionStateCopyWithImpl<$Res, $Val extends SelectPositionState>
     Object? hasPermissions = null,
     Object? isPermissionPermanentlyNegated = null,
     Object? lastPositionUpdate = freezed,
+    Object? positionFailureOrSuccess = freezed,
   }) {
     return _then(_value.copyWith(
       userCurrentPos: null == userCurrentPos
@@ -391,6 +395,10 @@ class _$SelectPositionStateCopyWithImpl<$Res, $Val extends SelectPositionState>
           ? _value.lastPositionUpdate
           : lastPositionUpdate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      positionFailureOrSuccess: freezed == positionFailureOrSuccess
+          ? _value.positionFailureOrSuccess
+          : positionFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Either<Failure, Success>?,
     ) as $Val);
   }
 }
@@ -409,7 +417,8 @@ abstract class _$$_SelectPositionStateCopyWith<$Res>
       bool isServiceAvailable,
       bool hasPermissions,
       bool isPermissionPermanentlyNegated,
-      DateTime? lastPositionUpdate});
+      DateTime? lastPositionUpdate,
+      Either<Failure, Success>? positionFailureOrSuccess});
 }
 
 /// @nodoc
@@ -429,6 +438,7 @@ class __$$_SelectPositionStateCopyWithImpl<$Res>
     Object? hasPermissions = null,
     Object? isPermissionPermanentlyNegated = null,
     Object? lastPositionUpdate = freezed,
+    Object? positionFailureOrSuccess = freezed,
   }) {
     return _then(_$_SelectPositionState(
       userCurrentPos: null == userCurrentPos
@@ -455,6 +465,10 @@ class __$$_SelectPositionStateCopyWithImpl<$Res>
           ? _value.lastPositionUpdate
           : lastPositionUpdate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      positionFailureOrSuccess: freezed == positionFailureOrSuccess
+          ? _value.positionFailureOrSuccess
+          : positionFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Either<Failure, Success>?,
     ));
   }
 }
@@ -468,7 +482,8 @@ class _$_SelectPositionState implements _SelectPositionState {
       this.isServiceAvailable = false,
       this.hasPermissions = false,
       this.isPermissionPermanentlyNegated = false,
-      this.lastPositionUpdate = null});
+      this.lastPositionUpdate = null,
+      this.positionFailureOrSuccess});
 
   @override
   final LatLng userCurrentPos;
@@ -487,10 +502,12 @@ class _$_SelectPositionState implements _SelectPositionState {
   @override
   @JsonKey()
   final DateTime? lastPositionUpdate;
+  @override
+  final Either<Failure, Success>? positionFailureOrSuccess;
 
   @override
   String toString() {
-    return 'SelectPositionState(userCurrentPos: $userCurrentPos, isDeviceConnected: $isDeviceConnected, isServiceAvailable: $isServiceAvailable, hasPermissions: $hasPermissions, isPermissionPermanentlyNegated: $isPermissionPermanentlyNegated, lastPositionUpdate: $lastPositionUpdate)';
+    return 'SelectPositionState(userCurrentPos: $userCurrentPos, isDeviceConnected: $isDeviceConnected, isServiceAvailable: $isServiceAvailable, hasPermissions: $hasPermissions, isPermissionPermanentlyNegated: $isPermissionPermanentlyNegated, lastPositionUpdate: $lastPositionUpdate, positionFailureOrSuccess: $positionFailureOrSuccess)';
   }
 
   @override
@@ -511,7 +528,10 @@ class _$_SelectPositionState implements _SelectPositionState {
                 other.isPermissionPermanentlyNegated ==
                     isPermissionPermanentlyNegated) &&
             (identical(other.lastPositionUpdate, lastPositionUpdate) ||
-                other.lastPositionUpdate == lastPositionUpdate));
+                other.lastPositionUpdate == lastPositionUpdate) &&
+            (identical(
+                    other.positionFailureOrSuccess, positionFailureOrSuccess) ||
+                other.positionFailureOrSuccess == positionFailureOrSuccess));
   }
 
   @override
@@ -522,7 +542,8 @@ class _$_SelectPositionState implements _SelectPositionState {
       isServiceAvailable,
       hasPermissions,
       isPermissionPermanentlyNegated,
-      lastPositionUpdate);
+      lastPositionUpdate,
+      positionFailureOrSuccess);
 
   @JsonKey(ignore: true)
   @override
@@ -534,12 +555,14 @@ class _$_SelectPositionState implements _SelectPositionState {
 
 abstract class _SelectPositionState implements SelectPositionState {
   const factory _SelectPositionState(
-      {required final LatLng userCurrentPos,
-      final bool isDeviceConnected,
-      final bool isServiceAvailable,
-      final bool hasPermissions,
-      final bool isPermissionPermanentlyNegated,
-      final DateTime? lastPositionUpdate}) = _$_SelectPositionState;
+          {required final LatLng userCurrentPos,
+          final bool isDeviceConnected,
+          final bool isServiceAvailable,
+          final bool hasPermissions,
+          final bool isPermissionPermanentlyNegated,
+          final DateTime? lastPositionUpdate,
+          final Either<Failure, Success>? positionFailureOrSuccess}) =
+      _$_SelectPositionState;
 
   @override
   LatLng get userCurrentPos;
@@ -553,6 +576,8 @@ abstract class _SelectPositionState implements SelectPositionState {
   bool get isPermissionPermanentlyNegated;
   @override
   DateTime? get lastPositionUpdate;
+  @override
+  Either<Failure, Success>? get positionFailureOrSuccess;
   @override
   @JsonKey(ignore: true)
   _$$_SelectPositionStateCopyWith<_$_SelectPositionState> get copyWith =>

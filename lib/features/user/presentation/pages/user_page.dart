@@ -9,8 +9,7 @@ import '../widgets/user/option_item.dart';
 class UserScreen extends StatelessWidget {
   const UserScreen({super.key});
 
-  // TODO: need to handle error on loading user info
-  // TODO: need to add screen to handle user fields / preferences (notifications, email, ...)
+  // TODO (@alecava41 / @backToFrancesco) need to add screen to handle user fields / preferences (notifications, email, ...)
 
   @override
   Widget build(BuildContext context) {
@@ -148,8 +147,8 @@ class UserScreen extends StatelessWidget {
                     ],
                   ),
                 )
-              : // TODO handle error on user info loading
-
+              :
+              // TODO need to handle error on loading (@backToFrancesco)
       Container(),
     );
   }

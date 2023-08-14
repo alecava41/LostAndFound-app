@@ -51,6 +51,7 @@ class ClaimReceivedContent extends StatelessWidget {
                             return Container(
                               padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
                               child: ClaimedItemCard(
+                                claimIdx: index,
                                 claim: claim,
                                 token: state.token,
                               ),

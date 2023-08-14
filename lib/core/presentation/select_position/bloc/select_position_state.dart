@@ -8,7 +8,9 @@ class SelectPositionState with _$SelectPositionState {
     @Default(false) bool isServiceAvailable,
     @Default(false) bool hasPermissions,
     @Default(false) bool isPermissionPermanentlyNegated,
-    @Default(null) DateTime? lastPositionUpdate
+    @Default(null) DateTime? lastPositionUpdate,
+
+    Either<Failure, Success>? positionFailureOrSuccess
   }) = _SelectPositionState;
 
   factory SelectPositionState.initial() => const SelectPositionState(

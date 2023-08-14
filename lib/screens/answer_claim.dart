@@ -167,7 +167,7 @@ class _AnswerClaimScreenState extends State<AnswerClaimScreen> {
                 ),
                 const Padding(
                   padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
-                  child: Text("Question:"),
+                  child: Text("Question"),
                 ),
                 questionText,
                 const SizedBox(
@@ -175,7 +175,7 @@ class _AnswerClaimScreenState extends State<AnswerClaimScreen> {
                 ),
                 const Padding(
                   padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
-                  child: Text("Answer:"),
+                  child: Text("Answer"),
                 ),
                 answerText,
                 const SizedBox(

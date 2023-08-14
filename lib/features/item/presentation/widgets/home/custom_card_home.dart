@@ -21,8 +21,6 @@ class CustomCardHome extends StatelessWidget {
       required this.claims,
       required this.token});
 
-  // TODO: overflow somewhere in found items
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(

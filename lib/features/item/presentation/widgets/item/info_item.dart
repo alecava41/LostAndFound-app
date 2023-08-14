@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/item/info_item_field.dart';
 
-import '../../../../../utils/colors.dart';
 
 class InfoItem extends StatelessWidget {
   final String title;
@@ -10,7 +10,7 @@ class InfoItem extends StatelessWidget {
   final DateTime date;
   final String category;
   final String? question;
-  final bool isFound;
+  final ItemType type;
 
   const InfoItem({
     Key? key,
@@ -18,7 +18,7 @@ class InfoItem extends StatelessWidget {
     required this.position,
     required this.date,
     required this.category,
-    required this.isFound,
+    required this.type,
     required this.question,
   }) : super(key: key);
 
@@ -37,7 +37,7 @@ class InfoItem extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 10),
-          InfoItemField(icon: Icons.location_on, title: isFound ? "Found near" : "Lost near", content: position),
+          InfoItemField(icon: Icons.location_on, title: type == ItemType.found ? "Found near" : "Lost near", content: position),
           const SizedBox(height: 10),
           InfoItemField(icon: Icons.calendar_month, title: "Date of insertion", content: DateFormat("dd/MM/yyyy").format(date)),
           const SizedBox(height: 10),

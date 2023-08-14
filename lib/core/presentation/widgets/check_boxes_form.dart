@@ -33,6 +33,7 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
           height: showError && errorText != "" ? 105 : 90,
           color: Colors.white,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Padding(
@@ -77,7 +78,7 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
                 child: showError && !foundChecked && !lostChecked
                     ? Text(
                         errorText,
-                        style: const TextStyle(color: Colors.red, fontSize: 12),
+                        style: TextStyle(color: Colors.redAccent.shade700, fontSize: 12),
                       )
                     : Container(),
               )

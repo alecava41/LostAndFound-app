@@ -22,12 +22,13 @@ class App extends StatefulWidget {
   State<StatefulWidget> createState() => _Application();
 
   /*
-   TODO need to add DB support for badges
+   TODO (@alecava41) need to add DB support for badges
       - notifications not read yet;
       - claims (received not read yet, sent w/ updated not read yet);
       - chat ??
       - badges on the bottom_bar
-   TODO if app is in foreground, use badges (how?)
+
+   TODO (@alecava41) if app is in foreground, use badges (how?)
       - notification cases
         - someone has inserted new item which may interest you
             - update badge number for notifications
@@ -44,7 +45,7 @@ class App extends StatefulWidget {
    */
 
   /*
-   TODO if app is in background (notification pop up):
+   TODO (@alecava41) if app is in background (notification pop up):
     1 - check login status;
     2 - use 'topic' to create right navigation
         - check how to handle with BLoC and stuff

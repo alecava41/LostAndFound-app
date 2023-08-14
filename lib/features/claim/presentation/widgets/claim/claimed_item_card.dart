@@ -12,8 +12,9 @@ import '../../../../../utils/constants.dart';
 class ClaimedItemCard extends StatelessWidget {
   final String token;
   final ClaimReceived claim;
+  final int claimIdx;
 
-  const ClaimedItemCard({super.key, required this.token, required this.claim});
+  const ClaimedItemCard({super.key, required this.token, required this.claim, required this.claimIdx});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,7 @@ class ClaimedItemCard extends StatelessWidget {
                 itemId: claim.item.id,
                 claimId: claim.id,
                 isClaimAlreadyManaged: claim.status != ClaimStatus.pending,
+                claimIdx: claimIdx,
               ),
             ),
           ),

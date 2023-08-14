@@ -25,7 +25,7 @@ class ItemScreen extends StatelessWidget {
 
   const ItemScreen({super.key, required this.itemId});
 
-  // TODO address not completely visible
+  // TODO (@backToFrancesco) address not completely visible
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +134,7 @@ class ItemScreen extends StatelessWidget {
                           date: state.item!.insertion,
                           category: state.item!.category.name,
                           question: state.item!.question,
-                          isFound: false,
+                          type: state.item!.type,
                         ),
                         const Divider(
                           color: Colors.grey,
@@ -246,6 +246,7 @@ class ItemScreen extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
+                // TODO (@backToFrancesco) username is in two lines because "send a message" is too large
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -293,7 +294,7 @@ class ItemScreen extends StatelessWidget {
                         shape: const StadiumBorder(),
                         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
                       ),
-                      onPressed: () {}, // TODO: navigate to chat
+                      onPressed: () {}, // TODO (@alecava41) navigate to chat
                       child: const Text(
                         'Send a message',
                         style: TextStyle(fontSize: 18, color: PersonalizedColor.mainColor),
@@ -373,9 +374,11 @@ class ItemScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (ctx) => AnswerClaimScreen(
-                                        itemId: itemId,
-                                        claimId: claim.id,
-                                        isClaimAlreadyManaged: claim.status != ClaimStatus.pending)));
+                                          itemId: itemId,
+                                          claimId: claim.id,
+                                          isClaimAlreadyManaged: claim.status != ClaimStatus.pending,
+                                          claimIdx: index,
+                                        )));
 
                             if (claimStatus != null && claimStatus && context.mounted) {
                               context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
@@ -468,7 +471,12 @@ class ItemScreen extends StatelessWidget {
                     ),
                     onPressed: () async {
                       final claimStatus = await Navigator.push<bool?>(
-                          context, MaterialPageRoute(builder: (ctx) => AnswerQuestionScreen(itemId: itemId, isClaimAlreadyTaken: claim!.answer != null,)));
+                          context,
+                          MaterialPageRoute(
+                              builder: (ctx) => AnswerQuestionScreen(
+                                    itemId: itemId,
+                                    isClaimAlreadyTaken: claim?.answer != null,
+                                  )));
 
                       if (claimStatus != null && claimStatus && context.mounted) {
                         context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
@@ -506,6 +514,7 @@ class ItemScreen extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
+                // TODO (@backToFrancesco) username is in two lines because "send a message" is too large
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -554,7 +563,7 @@ class ItemScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
                       ),
                       onPressed: () {
-                        // TODO navigate to chat
+                        // TODO (@alecava41) navigate to chat
                       },
                       child: const Text(
                         'Send a message',

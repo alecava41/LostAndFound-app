@@ -133,7 +133,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                                 : Container(),
                             const Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
-                              child: Text("Item you are claiming:"),
+                              child: Text("Item you are claiming"),
                             ),
                             const SizedBox(
                               height: 5,
@@ -151,6 +151,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                                       item: state.item!,
                                       token: state.token,
                                       subject: state.item!.user.username,
+                                      claimIdx: null,
                                     ),
                                   )),
                             ),
@@ -159,7 +160,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                             ),
                             const Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
-                              child: Text("Question:"),
+                              child: Text("Question"),
                             ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
@@ -187,7 +188,9 @@ class AnswerQuestionScreen extends StatelessWidget {
                                       ),
                                     ),
                                   )
-                                : PersonalizedFormWithTextInsertion(
+                                :
+                                // TODO (@backToFrancesco) why is it possible to add multiple lines?
+                                PersonalizedFormWithTextInsertion(
                                     title: "Your answer",
                                     onTextChanged: (value) =>
                                         ctx.read<AnswerQuestionBloc>().add(AnswerQuestionEvent.answerFieldChanged(value)),
@@ -205,7 +208,10 @@ class AnswerQuestionScreen extends StatelessWidget {
                                 isActive: !isClaimAlreadyTaken,
                                 onPressed: () => isClaimAlreadyTaken
                                     ? ()
-                                    : ctx.read<AnswerQuestionBloc>().add(const AnswerQuestionEvent.claimCreated()),
+                                    : {
+                                        FocusManager.instance.primaryFocus?.unfocus(),
+                                        ctx.read<AnswerQuestionBloc>().add(const AnswerQuestionEvent.claimCreated())
+                                      },
                                 text: const Text(
                                   "Send",
                                   style: TextStyle(fontSize: 20),

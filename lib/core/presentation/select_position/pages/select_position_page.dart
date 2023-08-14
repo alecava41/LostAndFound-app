@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -19,18 +20,16 @@ class SelectPositionScreen extends StatefulWidget {
 
 class _SelectPositionScreenState extends State<SelectPositionScreen> with TickerProviderStateMixin {
   bool isAlertSet = false;
-  late LatLng center = widget.startingPosition;
-  late LatLng markerPos = widget.startingPosition;
+  late LatLng center = widget.startingPosition == const LatLng(0, 0) ? defaultPosition : widget.startingPosition;
+  late LatLng markerPos = widget.startingPosition == const LatLng(0, 0) ? defaultPosition : widget.startingPosition;
 
   late final AnimatedMapController mapController =
-  AnimatedMapController(vsync: this, duration: const Duration(milliseconds: 3000));
+      AnimatedMapController(vsync: this, duration: const Duration(milliseconds: 3000));
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SelectPositionBloc>(
-      create: (_) =>
-      sl<SelectPositionBloc>()
-        ..add(SelectPositionEvent.selectPositionCreated(markerPos)),
+      create: (_) => sl<SelectPositionBloc>()..add(SelectPositionEvent.selectPositionCreated(markerPos)),
       child: BlocConsumer<SelectPositionBloc, SelectPositionState>(
         listener: (ctx, state) {
           if (markerPos.latitude != state.userCurrentPos.latitude) {
@@ -38,7 +37,26 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
               markerPos = state.userCurrentPos;
             });
 
+            mapController.animatedZoomOut();
             mapController.centerOnPoint(LatLng(markerPos.latitude, markerPos.longitude), zoom: 10);
+          }
+
+          final positionFailureOrSuccess = state.positionFailureOrSuccess;
+          if (positionFailureOrSuccess != null) {
+            positionFailureOrSuccess.fold(
+                    (failure) {
+              if (!state.hasPermissions) {
+                if (!state.isPermissionPermanentlyNegated) {
+                  showLocationPermissionDeniedDialog(context);
+                } else {
+                  showLocationPermissionPermanentlyDeniedDialog(context);
+                }
+              } else if (!state.isDeviceConnected) {
+                showConnectionLostAlert(state.isDeviceConnected);
+              } else if (!state.isServiceAvailable) {
+                showPositionServiceNotAvailableAlert(state.isDeviceConnected);
+              }
+            }, (_) {});
           }
         },
         builder: (ctx, state) {
@@ -61,10 +79,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                     Stack(
                       children: [
                         SizedBox(
-                          height: MediaQuery
-                              .of(context)
-                              .size
-                              .height,
+                          height: MediaQuery.of(context).size.height,
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 150),
                             child: FlutterMap(
@@ -96,8 +111,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                       width: 200.0,
                                       height: 200.0,
                                       point: markerPos,
-                                      builder: (ctx) =>
-                                      const Icon(
+                                      builder: (ctx) => const Icon(
                                         Icons.location_on,
                                         color: Color.fromRGBO(47, 122, 106, 1),
                                         weight: 10,
@@ -118,10 +132,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Container(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width,
+                              width: MediaQuery.of(context).size.width,
                               height: 200.0,
                               decoration: const BoxDecoration(
                                 color: Colors.white,
@@ -136,21 +147,9 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                 children: [
                                   TextButton(
                                     onPressed: () async {
-                                      if (state.hasPermissions && state.isDeviceConnected && state.isServiceAvailable) {
-                                        ctx
-                                            .read<SelectPositionBloc>()
-                                            .add(const SelectPositionEvent.selectCurrentPosition());
-
-                                        mapController.animatedZoomOut();
-                                      } else if (!state.hasPermissions) {
-                                        if (!state.isPermissionPermanentlyNegated) {
-                                          showLocationPermissionDeniedDialog(context);
-                                        } else {
-                                          showLocationPermissionPermanentlyDeniedDialog(context);
-                                        }
-                                      } else if (!state.isDeviceConnected || !state.isServiceAvailable) {
-                                        showConnectionLostAlert(state.isDeviceConnected);
-                                      }
+                                      ctx
+                                          .read<SelectPositionBloc>()
+                                          .add(const SelectPositionEvent.selectCurrentPosition());
                                     },
                                     child: const Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
@@ -262,7 +261,32 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                   setState(() => isAlertSet = true);
                 }
               },
-              child: const Text('OK'),
+              child: const Text('Ok'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  showPositionServiceNotAvailableAlert(bool isServiceEnabled) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Position Service Disabled'),
+          content: const Text('Please enable your position service'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context, 'Cancel');
+                setState(() => isAlertSet = false);
+                if (!isServiceEnabled && !isAlertSet) {
+                  showPositionServiceNotAvailableAlert(isServiceEnabled);
+                  setState(() => isAlertSet = true);
+                }
+              },
+              child: const Text('Ok'),
             ),
           ],
         );
