@@ -33,8 +33,9 @@ class InfoItem extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(fontSize: 30),
+            style: const TextStyle(fontSize: 35),
             overflow: TextOverflow.ellipsis,
+            maxLines: 2,
           ),
           const SizedBox(height: 10),
           InfoItemField(icon: Icons.location_on, title: type == ItemType.found ? "Found near" : "Lost near", content: position),

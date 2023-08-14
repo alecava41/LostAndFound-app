@@ -151,7 +151,6 @@ class AnswerQuestionScreen extends StatelessWidget {
                                       item: state.item!,
                                       token: state.token,
                                       subject: state.item!.user.username,
-                                      claimIdx: null,
                                     ),
                                   )),
                             ),
@@ -160,7 +159,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                             ),
                             const Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
-                              child: Text("Question"),
+                              child: Text("Question:"),
                             ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
@@ -208,10 +207,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                                 isActive: !isClaimAlreadyTaken,
                                 onPressed: () => isClaimAlreadyTaken
                                     ? ()
-                                    : {
-                                        FocusManager.instance.primaryFocus?.unfocus(),
-                                        ctx.read<AnswerQuestionBloc>().add(const AnswerQuestionEvent.claimCreated())
-                                      },
+                                    : ctx.read<AnswerQuestionBloc>().add(const AnswerQuestionEvent.claimCreated()),
                                 text: const Text(
                                   "Send",
                                   style: TextStyle(fontSize: 20),

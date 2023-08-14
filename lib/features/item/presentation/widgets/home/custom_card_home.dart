@@ -78,28 +78,33 @@ class CustomCardHome extends StatelessWidget {
                         height: 5,
                       ),
                       if (claims > 0)
-                        Container(
-                          padding: const EdgeInsets.all(3),
-                          decoration: BoxDecoration(
-                            color: PersonalizedColor.claimWaitingStatusColor,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.connect_without_contact,
-                                size: 15,
-                              ),
-                              Text(
-                                " $claims claim${claims > 1 ? "s" : ""}",
-                                style: const TextStyle(
-                                  fontSize: 14,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                padding: const EdgeInsets.all(3),
+                                decoration: BoxDecoration(
+                                  color: PersonalizedColor.claimWaitingStatusColor,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(
+                                      Icons.connect_without_contact,
+                                      size: 15,
+                                    ),
+                                    Text(
+                                      " $claims claim${claims > 1 ? "s" : ""}",
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         )
                     ],
                   ),

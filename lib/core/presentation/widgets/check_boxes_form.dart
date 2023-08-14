@@ -37,7 +37,7 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Padding(
-                padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                padding: EdgeInsets.fromLTRB(15, 8, 0, 0),
                 child: Text(
                   'Items',
                   style: TextStyle(fontSize: 25),
