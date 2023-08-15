@@ -37,7 +37,7 @@ class CustomNotification extends StatelessWidget {
       return Column(
         children: [
           Material(
-            color: opened ? PersonalizedColor.primarySwatch.shade200 : Colors.white,
+            color: !opened ? PersonalizedColor.primarySwatch.shade200 : Colors.white,
             child: InkWell(
               onTap: () => {
                 log(targetItemId.toString()),
@@ -62,7 +62,7 @@ class CustomNotification extends StatelessWidget {
                         child: Builder(
                           builder: (BuildContext context) {
                             final sentence =
-                                (subjectItemType == ItemType.lost) ? "might have found your " : "might be the owner of ";
+                                (subjectItemType == ItemType.lost) ? "might have found your" : "might be the owner of";
 
                             return RichText(text:
                               TextSpan(

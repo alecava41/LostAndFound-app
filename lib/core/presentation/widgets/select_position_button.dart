@@ -50,7 +50,7 @@ class SelectPositionButton extends StatelessWidget {
               onPositionSelected(selectedPos);
             },
             child: SizedBox(
-              height: showError && errorText != "" ? 155 : 130,
+              height: showError && errorText != "" ? 155 : 131,
               width: MediaQuery.of(context).size.width,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

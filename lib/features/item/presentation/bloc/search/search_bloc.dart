@@ -48,19 +48,30 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           showFilters: () => _onShowFilters(emit),
           sortParameterChanged: (order) => _onChangeSortingParameter(emit, order),
           orderFlowParameterChanged: (flow) => _onChangeOrderFlowParameter(emit, flow),
+          searchPageChanged: (page) => _onSearchPageChanged(emit, page),
         );
       },
     );
   }
 
+  void _onSearchPageChanged(Emitter<SearchState> emit, SearchPageState page) {
+    emit(state.copyWith(pageState: page));
+  }
+
   void _onShowFilters(Emitter<SearchState> emit) {
-    emit(state.copyWith(pageState: SearchPageState.filterPage));
+    emit(
+      state.copyWith(
+        pageState: SearchPageState.filterPage,
+      ),
+    );
   }
 
   Future<void> _onSearchSubmit(Emitter<SearchState> emit) async {
     final isTypeValid = state.itemsToSearch.value.isRight();
     final isPositionValid = state.pos.value.isRight();
     final isCategoryValid = state.cat.value.isRight();
+
+    bool hasPerformedSearch = false;
 
     Either<Failure, Success>? searchFailureOrSuccess;
     List<SearchItem> items = [];
@@ -88,24 +99,27 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         searchFailureOrSuccess = const Right(Success.genericSuccess());
         items = searchItems;
         pageState = SearchPageState.resultPage;
+        hasPerformedSearch = true;
       });
     }
 
     final session = await _secureStorage.getSessionInformation();
 
     // Sort items
+    items = sortItems(items, state.order, state.orderFlow);
 
-    emit(state.copyWith(
-      searchFailureOrSuccess: searchFailureOrSuccess,
-      pageState: pageState,
-      results: items,
-      token: session != null ? session.token : "",
-    ));
+    emit(
+      state.copyWith(
+        searchFailureOrSuccess: searchFailureOrSuccess,
+        pageState: pageState,
+        results: items,
+        hasPerformedFirstSearch: hasPerformedSearch,
+        token: session != null ? session.token : "",
+        showError: true,
+      ),
+    );
 
-    emit(state.copyWith(
-      searchFailureOrSuccess: null,
-      showError: true,
-    ));
+    emit(state.copyWith(searchFailureOrSuccess: null));
   }
 
   void _onDateSelected(Emitter<SearchState> emit, DateTime date) {
@@ -137,35 +151,42 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   }
 
   void _onChangeSortingParameter(Emitter<SearchState> emit, ResultOrder order) {
-    sortItems(state.results, order, state.orderFlow);
-    emit(state.copyWith(results: state.results, order: order));
-  }
-
-  void sortItems(List<SearchItem> items, ResultOrder order, OrderFlow flow) {
-    switch (order) {
-      case ResultOrder.alphabetic:
-        if (flow == OrderFlow.ascending) {
-          items.sort((a, b) => a.title.compareTo(b.title));
-        } else {
-          items.sort((b, a) => a.title.compareTo(b.title));
-        }
-      case ResultOrder.date:
-        if (flow == OrderFlow.ascending) {
-          items.sort((a, b) => a.date.compareTo(b.date));
-        } else {
-          items.sort((b, a) => a.date.compareTo(b.date));
-        }
-      case ResultOrder.distance:
-        if (flow == OrderFlow.ascending) {
-          items.sort((a, b) => a.distance.compareTo(b.distance));
-        } else {
-          items.sort((b, a) => a.distance.compareTo(b.distance));
-        }
-    }
+    final items = sortItems(state.results, order, state.orderFlow);
+    emit(state.copyWith(results: items, order: order));
   }
 
   void _onChangeOrderFlowParameter(Emitter<SearchState> emit, OrderFlow flow) {
-    sortItems(state.results, state.order, flow);
-    emit(state.copyWith(results: state.results, orderFlow: flow));
+    final items = sortItems(state.results, state.order, flow);
+    emit(state.copyWith(results: items, orderFlow: flow));
+  }
+
+  List<SearchItem> sortItems(List<SearchItem> items, ResultOrder order, OrderFlow flow) {
+    List<SearchItem> orderedItems = List.from(items);
+
+    switch (order) {
+      case ResultOrder.alphabetic:
+        if (flow == OrderFlow.ascending) {
+          orderedItems.sort((a, b) => a.title.compareTo(b.title));
+        } else {
+          orderedItems.sort((b, a) => a.title.compareTo(b.title));
+        }
+        break;
+      case ResultOrder.date:
+        if (flow == OrderFlow.ascending) {
+          orderedItems.sort((a, b) => a.date.compareTo(b.date));
+        } else {
+          orderedItems.sort((b, a) => a.date.compareTo(b.date));
+        }
+        break;
+      case ResultOrder.distance:
+        if (flow == OrderFlow.ascending) {
+          orderedItems.sort((a, b) => a.distance.compareTo(b.distance));
+        } else {
+          orderedItems.sort((b, a) => a.distance.compareTo(b.distance));
+        }
+        break;
+    }
+
+    return orderedItems;
   }
 }
