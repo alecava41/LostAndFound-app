@@ -29,6 +29,7 @@ import 'package:lost_and_found/features/claim/domain/repositories/claim_reposito
 import 'package:lost_and_found/features/claim/domain/usecases/create_claim_usecase.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/get_received_claims_usecase.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/get_sent_claims_usecase.dart';
+import 'package:lost_and_found/features/claim/domain/usecases/insert_read_claim_usecase.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/manage_claim_usecase.dart';
 import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc.dart';
 import 'package:lost_and_found/features/item/data/datasources/item_client.dart';
@@ -42,6 +43,7 @@ import 'package:lost_and_found/features/item/domain/usecases/delete_item_usecase
 import 'package:lost_and_found/features/item/domain/usecases/get_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_items_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_notifications_usecase.dart';
+import 'package:lost_and_found/features/item/domain/usecases/insert_read_news_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/search_items_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/solve_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/update_item_usecase.dart';
@@ -90,11 +92,15 @@ Future<void> init() async {
   // ** Feature - Item **
   // BLoC
   sl.registerFactory(() => HomeBloc(getUserItemsUseCase: sl(), secureStorage: sl()));
-  sl.registerFactory(() => NewsBloc(getUserNotificationsUseCase: sl(), secureStorage: sl()));
+  sl.registerFactory(() => NewsBloc(getUserNotificationsUseCase: sl(), secureStorage: sl(), insertReadNewsUseCase: sl()));
   sl.registerFactory(
       () => SearchBloc(searchItemsUseCase: sl(), secureStorage: sl(), getAddressFromPositionUseCase: sl()));
-  sl.registerFactory(
-      () => ItemBloc(getItemUseCase: sl(), secureStorage: sl(), solveItemUseCase: sl(), deleteItemUseCase: sl()));
+  sl.registerFactory(() => ItemBloc(
+      getItemUseCase: sl(),
+      secureStorage: sl(),
+      solveItemUseCase: sl(),
+      deleteItemUseCase: sl(),
+      insertReadClaimUseCase: sl()));
   sl.registerFactory(
       () => InsertItemBloc(createItemUseCase: sl(), getAddressFromPositionUseCase: sl(), uploadItemImageUseCase: sl()));
   sl.registerFactory(() => UpdateItemBloc(
@@ -116,6 +122,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => DeleteItemUseCase(sl()));
   sl.registerLazySingleton(() => UpdateItemUseCase(sl()));
   sl.registerLazySingleton(() => DeleteItemImageUseCase(sl()));
+  sl.registerLazySingleton(() => InsertReadNewsUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<ItemRepository>(() => ItemRepositoryImpl(
@@ -127,7 +134,8 @@ Future<void> init() async {
 
   // ** Feature - Claim **
   // BLoC
-  sl.registerFactory(() => ClaimBloc(getReceivedClaimsUseCase: sl(), getSentClaimsUseCase: sl(), secureStorage: sl()));
+  sl.registerFactory(() => ClaimBloc(
+      getReceivedClaimsUseCase: sl(), getSentClaimsUseCase: sl(), secureStorage: sl(), insertReadClaimUseCase: sl()));
   sl.registerFactory(() => AnswerQuestionBloc(storage: sl(), createClaimUseCase: sl(), getItemUseCase: sl()));
   sl.registerFactory(() => AnswerClaimBloc(getItemUseCase: sl(), storage: sl(), manageClaimUseCase: sl()));
 
@@ -136,6 +144,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetSentClaimsUseCase(sl()));
   sl.registerLazySingleton(() => CreateClaimUseCase(sl()));
   sl.registerLazySingleton(() => ManageClaimUseCase(sl()));
+  sl.registerLazySingleton(() => InsertReadClaimUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<ClaimRepository>(

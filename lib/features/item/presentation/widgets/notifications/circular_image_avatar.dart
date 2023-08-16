@@ -25,7 +25,11 @@ class CircularImage extends StatelessWidget {
         httpHeaders: {
           "Authorization": "Bearer $token",
         },
-        progressIndicatorBuilder: (context, url, downloadProgress) => const CustomCircularProgress(size: 20),
+        progressIndicatorBuilder: (context, url, downloadProgress) => SizedBox(
+          height: radius * 2,
+          width: radius * 2,
+          child: CustomCircularProgress(size: radius),
+        ),
         errorWidget: (context, url, error) {
           return CircleAvatar(
             radius: radius,

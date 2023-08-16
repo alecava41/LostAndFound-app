@@ -14,6 +14,7 @@ import '../entities/search_item.dart';
 import '../usecases/create_item_usecase.dart';
 import '../usecases/delete_item_usecase.dart';
 import '../usecases/get_user_items_usecase.dart';
+import '../usecases/insert_read_news_usecase.dart';
 import '../usecases/update_item_usecase.dart';
 import '../usecases/upload_item_image_usecase.dart';
 
@@ -28,4 +29,5 @@ abstract class ItemRepository {
   Future<Either<Failure, Success>> deleteItem(DeleteItemParams params);
   Future<Either<Failure, Success>> updateItem(UpdateItemParams params);
   Future<Either<Failure, Success>> deleteItemImage(DeleteItemImageParams params);
+  Future<Either<Failure, Success>> insertReadNews(InsertReadNewsParams params);
 }

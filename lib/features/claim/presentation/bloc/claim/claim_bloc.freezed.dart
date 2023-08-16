@@ -20,6 +20,7 @@ mixin _$ClaimEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() claimContentCreated,
     required TResult Function() receivedClaimsRefreshed,
+    required TResult Function(int id) claimRead,
     required TResult Function() sentClaimsRefreshed,
   }) =>
       throw _privateConstructorUsedError;
@@ -27,6 +28,7 @@ mixin _$ClaimEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? claimContentCreated,
     TResult? Function()? receivedClaimsRefreshed,
+    TResult? Function(int id)? claimRead,
     TResult? Function()? sentClaimsRefreshed,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,6 +36,7 @@ mixin _$ClaimEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? claimContentCreated,
     TResult Function()? receivedClaimsRefreshed,
+    TResult Function(int id)? claimRead,
     TResult Function()? sentClaimsRefreshed,
     required TResult orElse(),
   }) =>
@@ -43,6 +46,7 @@ mixin _$ClaimEvent {
     required TResult Function(_ClaimContentCreated value) claimContentCreated,
     required TResult Function(_ReceivedClaimsRefreshed value)
         receivedClaimsRefreshed,
+    required TResult Function(_ClaimRead value) claimRead,
     required TResult Function(_SentClaimsRefreshed value) sentClaimsRefreshed,
   }) =>
       throw _privateConstructorUsedError;
@@ -50,6 +54,7 @@ mixin _$ClaimEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ClaimContentCreated value)? claimContentCreated,
     TResult? Function(_ReceivedClaimsRefreshed value)? receivedClaimsRefreshed,
+    TResult? Function(_ClaimRead value)? claimRead,
     TResult? Function(_SentClaimsRefreshed value)? sentClaimsRefreshed,
   }) =>
       throw _privateConstructorUsedError;
@@ -57,6 +62,7 @@ mixin _$ClaimEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ClaimContentCreated value)? claimContentCreated,
     TResult Function(_ReceivedClaimsRefreshed value)? receivedClaimsRefreshed,
+    TResult Function(_ClaimRead value)? claimRead,
     TResult Function(_SentClaimsRefreshed value)? sentClaimsRefreshed,
     required TResult orElse(),
   }) =>
@@ -121,6 +127,7 @@ class _$_ClaimContentCreated implements _ClaimContentCreated {
   TResult when<TResult extends Object?>({
     required TResult Function() claimContentCreated,
     required TResult Function() receivedClaimsRefreshed,
+    required TResult Function(int id) claimRead,
     required TResult Function() sentClaimsRefreshed,
   }) {
     return claimContentCreated();
@@ -131,6 +138,7 @@ class _$_ClaimContentCreated implements _ClaimContentCreated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? claimContentCreated,
     TResult? Function()? receivedClaimsRefreshed,
+    TResult? Function(int id)? claimRead,
     TResult? Function()? sentClaimsRefreshed,
   }) {
     return claimContentCreated?.call();
@@ -141,6 +149,7 @@ class _$_ClaimContentCreated implements _ClaimContentCreated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? claimContentCreated,
     TResult Function()? receivedClaimsRefreshed,
+    TResult Function(int id)? claimRead,
     TResult Function()? sentClaimsRefreshed,
     required TResult orElse(),
   }) {
@@ -156,6 +165,7 @@ class _$_ClaimContentCreated implements _ClaimContentCreated {
     required TResult Function(_ClaimContentCreated value) claimContentCreated,
     required TResult Function(_ReceivedClaimsRefreshed value)
         receivedClaimsRefreshed,
+    required TResult Function(_ClaimRead value) claimRead,
     required TResult Function(_SentClaimsRefreshed value) sentClaimsRefreshed,
   }) {
     return claimContentCreated(this);
@@ -166,6 +176,7 @@ class _$_ClaimContentCreated implements _ClaimContentCreated {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ClaimContentCreated value)? claimContentCreated,
     TResult? Function(_ReceivedClaimsRefreshed value)? receivedClaimsRefreshed,
+    TResult? Function(_ClaimRead value)? claimRead,
     TResult? Function(_SentClaimsRefreshed value)? sentClaimsRefreshed,
   }) {
     return claimContentCreated?.call(this);
@@ -176,6 +187,7 @@ class _$_ClaimContentCreated implements _ClaimContentCreated {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ClaimContentCreated value)? claimContentCreated,
     TResult Function(_ReceivedClaimsRefreshed value)? receivedClaimsRefreshed,
+    TResult Function(_ClaimRead value)? claimRead,
     TResult Function(_SentClaimsRefreshed value)? sentClaimsRefreshed,
     required TResult orElse(),
   }) {
@@ -231,6 +243,7 @@ class _$_ReceivedClaimsRefreshed implements _ReceivedClaimsRefreshed {
   TResult when<TResult extends Object?>({
     required TResult Function() claimContentCreated,
     required TResult Function() receivedClaimsRefreshed,
+    required TResult Function(int id) claimRead,
     required TResult Function() sentClaimsRefreshed,
   }) {
     return receivedClaimsRefreshed();
@@ -241,6 +254,7 @@ class _$_ReceivedClaimsRefreshed implements _ReceivedClaimsRefreshed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? claimContentCreated,
     TResult? Function()? receivedClaimsRefreshed,
+    TResult? Function(int id)? claimRead,
     TResult? Function()? sentClaimsRefreshed,
   }) {
     return receivedClaimsRefreshed?.call();
@@ -251,6 +265,7 @@ class _$_ReceivedClaimsRefreshed implements _ReceivedClaimsRefreshed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? claimContentCreated,
     TResult Function()? receivedClaimsRefreshed,
+    TResult Function(int id)? claimRead,
     TResult Function()? sentClaimsRefreshed,
     required TResult orElse(),
   }) {
@@ -266,6 +281,7 @@ class _$_ReceivedClaimsRefreshed implements _ReceivedClaimsRefreshed {
     required TResult Function(_ClaimContentCreated value) claimContentCreated,
     required TResult Function(_ReceivedClaimsRefreshed value)
         receivedClaimsRefreshed,
+    required TResult Function(_ClaimRead value) claimRead,
     required TResult Function(_SentClaimsRefreshed value) sentClaimsRefreshed,
   }) {
     return receivedClaimsRefreshed(this);
@@ -276,6 +292,7 @@ class _$_ReceivedClaimsRefreshed implements _ReceivedClaimsRefreshed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ClaimContentCreated value)? claimContentCreated,
     TResult? Function(_ReceivedClaimsRefreshed value)? receivedClaimsRefreshed,
+    TResult? Function(_ClaimRead value)? claimRead,
     TResult? Function(_SentClaimsRefreshed value)? sentClaimsRefreshed,
   }) {
     return receivedClaimsRefreshed?.call(this);
@@ -286,6 +303,7 @@ class _$_ReceivedClaimsRefreshed implements _ReceivedClaimsRefreshed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ClaimContentCreated value)? claimContentCreated,
     TResult Function(_ReceivedClaimsRefreshed value)? receivedClaimsRefreshed,
+    TResult Function(_ClaimRead value)? claimRead,
     TResult Function(_SentClaimsRefreshed value)? sentClaimsRefreshed,
     required TResult orElse(),
   }) {
@@ -298,6 +316,152 @@ class _$_ReceivedClaimsRefreshed implements _ReceivedClaimsRefreshed {
 
 abstract class _ReceivedClaimsRefreshed implements ClaimEvent {
   const factory _ReceivedClaimsRefreshed() = _$_ReceivedClaimsRefreshed;
+}
+
+/// @nodoc
+abstract class _$$_ClaimReadCopyWith<$Res> {
+  factory _$$_ClaimReadCopyWith(
+          _$_ClaimRead value, $Res Function(_$_ClaimRead) then) =
+      __$$_ClaimReadCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int id});
+}
+
+/// @nodoc
+class __$$_ClaimReadCopyWithImpl<$Res>
+    extends _$ClaimEventCopyWithImpl<$Res, _$_ClaimRead>
+    implements _$$_ClaimReadCopyWith<$Res> {
+  __$$_ClaimReadCopyWithImpl(
+      _$_ClaimRead _value, $Res Function(_$_ClaimRead) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$_ClaimRead(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ClaimRead implements _ClaimRead {
+  const _$_ClaimRead(this.id);
+
+  @override
+  final int id;
+
+  @override
+  String toString() {
+    return 'ClaimEvent.claimRead(id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ClaimRead &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ClaimReadCopyWith<_$_ClaimRead> get copyWith =>
+      __$$_ClaimReadCopyWithImpl<_$_ClaimRead>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() claimContentCreated,
+    required TResult Function() receivedClaimsRefreshed,
+    required TResult Function(int id) claimRead,
+    required TResult Function() sentClaimsRefreshed,
+  }) {
+    return claimRead(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? claimContentCreated,
+    TResult? Function()? receivedClaimsRefreshed,
+    TResult? Function(int id)? claimRead,
+    TResult? Function()? sentClaimsRefreshed,
+  }) {
+    return claimRead?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? claimContentCreated,
+    TResult Function()? receivedClaimsRefreshed,
+    TResult Function(int id)? claimRead,
+    TResult Function()? sentClaimsRefreshed,
+    required TResult orElse(),
+  }) {
+    if (claimRead != null) {
+      return claimRead(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ClaimContentCreated value) claimContentCreated,
+    required TResult Function(_ReceivedClaimsRefreshed value)
+        receivedClaimsRefreshed,
+    required TResult Function(_ClaimRead value) claimRead,
+    required TResult Function(_SentClaimsRefreshed value) sentClaimsRefreshed,
+  }) {
+    return claimRead(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ClaimContentCreated value)? claimContentCreated,
+    TResult? Function(_ReceivedClaimsRefreshed value)? receivedClaimsRefreshed,
+    TResult? Function(_ClaimRead value)? claimRead,
+    TResult? Function(_SentClaimsRefreshed value)? sentClaimsRefreshed,
+  }) {
+    return claimRead?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ClaimContentCreated value)? claimContentCreated,
+    TResult Function(_ReceivedClaimsRefreshed value)? receivedClaimsRefreshed,
+    TResult Function(_ClaimRead value)? claimRead,
+    TResult Function(_SentClaimsRefreshed value)? sentClaimsRefreshed,
+    required TResult orElse(),
+  }) {
+    if (claimRead != null) {
+      return claimRead(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClaimRead implements ClaimEvent {
+  const factory _ClaimRead(final int id) = _$_ClaimRead;
+
+  int get id;
+  @JsonKey(ignore: true)
+  _$$_ClaimReadCopyWith<_$_ClaimRead> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -340,6 +504,7 @@ class _$_SentClaimsRefreshed implements _SentClaimsRefreshed {
   TResult when<TResult extends Object?>({
     required TResult Function() claimContentCreated,
     required TResult Function() receivedClaimsRefreshed,
+    required TResult Function(int id) claimRead,
     required TResult Function() sentClaimsRefreshed,
   }) {
     return sentClaimsRefreshed();
@@ -350,6 +515,7 @@ class _$_SentClaimsRefreshed implements _SentClaimsRefreshed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? claimContentCreated,
     TResult? Function()? receivedClaimsRefreshed,
+    TResult? Function(int id)? claimRead,
     TResult? Function()? sentClaimsRefreshed,
   }) {
     return sentClaimsRefreshed?.call();
@@ -360,6 +526,7 @@ class _$_SentClaimsRefreshed implements _SentClaimsRefreshed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? claimContentCreated,
     TResult Function()? receivedClaimsRefreshed,
+    TResult Function(int id)? claimRead,
     TResult Function()? sentClaimsRefreshed,
     required TResult orElse(),
   }) {
@@ -375,6 +542,7 @@ class _$_SentClaimsRefreshed implements _SentClaimsRefreshed {
     required TResult Function(_ClaimContentCreated value) claimContentCreated,
     required TResult Function(_ReceivedClaimsRefreshed value)
         receivedClaimsRefreshed,
+    required TResult Function(_ClaimRead value) claimRead,
     required TResult Function(_SentClaimsRefreshed value) sentClaimsRefreshed,
   }) {
     return sentClaimsRefreshed(this);
@@ -385,6 +553,7 @@ class _$_SentClaimsRefreshed implements _SentClaimsRefreshed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ClaimContentCreated value)? claimContentCreated,
     TResult? Function(_ReceivedClaimsRefreshed value)? receivedClaimsRefreshed,
+    TResult? Function(_ClaimRead value)? claimRead,
     TResult? Function(_SentClaimsRefreshed value)? sentClaimsRefreshed,
   }) {
     return sentClaimsRefreshed?.call(this);
@@ -395,6 +564,7 @@ class _$_SentClaimsRefreshed implements _SentClaimsRefreshed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ClaimContentCreated value)? claimContentCreated,
     TResult Function(_ReceivedClaimsRefreshed value)? receivedClaimsRefreshed,
+    TResult Function(_ClaimRead value)? claimRead,
     TResult Function(_SentClaimsRefreshed value)? sentClaimsRefreshed,
     required TResult orElse(),
   }) {

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
@@ -10,6 +8,7 @@ import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
 class CustomNotification extends StatelessWidget {
+  final int id;
   final int targetUserId;
   final String targetUsername;
   final int targetItemId;
@@ -20,6 +19,7 @@ class CustomNotification extends StatelessWidget {
   final bool opened;
 
   const CustomNotification({
+    required this.id,
     required this.targetUserId,
     required this.targetUsername,
     required this.hasUserImage,
@@ -40,10 +40,10 @@ class CustomNotification extends StatelessWidget {
             color: !opened ? PersonalizedColor.primarySwatch.shade200 : Colors.white,
             child: InkWell(
               onTap: () => {
-                log(targetItemId.toString()),
+                ctx.read<NewsBloc>().add(NewsEvent.newsRead(id)),
                 Navigator.push(context, MaterialPageRoute(builder: (_) => ItemScreen(itemId: targetItemId)))
               },
-              splashColor: opened ? PersonalizedColor.primarySwatch.shade500 : Colors.grey.withOpacity(0.4),
+              splashColor: !opened ? PersonalizedColor.primarySwatch.shade500 : Colors.grey.withOpacity(0.4),
               child: SizedBox(
                 height: 100,
                 child: Padding(

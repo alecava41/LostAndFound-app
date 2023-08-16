@@ -246,7 +246,7 @@ class ItemScreen extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                // TODO (@backToFrancesco) username is in two lines because "send a message" is too large
+                // TODO (@backToFrancesco) username in two lines because "send a message" is too large
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -363,6 +363,7 @@ class ItemScreen extends StatelessWidget {
 
                     return Container(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                        // TODO if claim already managed it would be better to put the status even in the card
                         child: ClaimedItemCard(
                           token: token,
                           opened: claim.opened,
@@ -370,6 +371,7 @@ class ItemScreen extends StatelessWidget {
                           hasImage: claim.user.hasImage,
                           username: claim.user.username,
                           onTap: () async {
+                            context.read<ItemBloc>().add(ItemEvent.claimRead(claim.id));
                             final claimStatus = await Navigator.push<bool?>(
                                 context,
                                 MaterialPageRoute(
@@ -444,6 +446,7 @@ class ItemScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    // TODO even if claim already sent, make it clickable and show answer on AnswerQuestionScreen
                     const SizedBox(
                       height: 5,
                     ),
@@ -471,12 +474,14 @@ class ItemScreen extends StatelessWidget {
                     ),
                     onPressed: () async {
                       final claimStatus = await Navigator.push<bool?>(
-                          context,
-                          MaterialPageRoute(
-                              builder: (ctx) => AnswerQuestionScreen(
-                                    itemId: itemId,
-                                    isClaimAlreadyTaken: claim?.answer != null,
-                                  )));
+                        context,
+                        MaterialPageRoute(
+                          builder: (ctx) => AnswerQuestionScreen(
+                            itemId: itemId,
+                            isClaimAlreadyTaken: claim?.answer != null,
+                          ),
+                        ),
+                      );
 
                       if (claimStatus != null && claimStatus && context.mounted) {
                         context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());

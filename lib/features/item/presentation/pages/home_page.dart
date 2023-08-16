@@ -10,6 +10,8 @@ import '../widgets/home/lost_items_container.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  // TODO add tooltip on icons
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeBloc, HomeState>(

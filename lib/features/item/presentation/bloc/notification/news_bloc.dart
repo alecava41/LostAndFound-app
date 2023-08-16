@@ -9,6 +9,7 @@ import '../../../../../core/data/secure_storage/secure_storage.dart';
 import '../../../../../core/status/failures.dart';
 import '../../../../../core/status/success.dart';
 import '../../../domain/entities/news.dart';
+import '../../../domain/usecases/insert_read_news_usecase.dart';
 
 part 'news_bloc.freezed.dart';
 
@@ -18,20 +19,38 @@ part 'news_state.dart';
 
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
   final GetUserNotificationsUseCase _getUserNotificationsUseCase;
+  final InsertReadNewsUseCase _insertReadNewsUseCase;
   final SecureStorage _secureStorage;
 
-  NewsBloc({required GetUserNotificationsUseCase getUserNotificationsUseCase, required SecureStorage secureStorage})
+  NewsBloc(
+      {required GetUserNotificationsUseCase getUserNotificationsUseCase,
+      required SecureStorage secureStorage,
+      required InsertReadNewsUseCase insertReadNewsUseCase})
       : _getUserNotificationsUseCase = getUserNotificationsUseCase,
         _secureStorage = secureStorage,
+        _insertReadNewsUseCase = insertReadNewsUseCase,
         super(NewsState.initial()) {
     on<NewsEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
           newsCreated: () => _onNewsCreatedOrRefreshed(emit),
           newsRefreshed: () => _onNewsCreatedOrRefreshed(emit),
+          newsRead: (id) => _onNewsRead(emit, id),
         );
       },
     );
+  }
+
+  Future<void> _onNewsRead(Emitter<NewsState> emit, int id) async {
+    final response = await _insertReadNewsUseCase(InsertReadNewsParams(newsId: id));
+    response.fold(
+            (_) => null,
+            (_) {
+              final token = state.token;
+              state.news.firstWhere((element) => element.id == id).opened = true;
+              emit(state.copyWith(token: ""));
+              emit(state.copyWith(token: token));
+            });
   }
 
   Future<void> _onNewsCreatedOrRefreshed(Emitter<NewsState> emit) async {

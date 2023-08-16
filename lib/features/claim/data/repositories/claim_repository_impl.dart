@@ -11,6 +11,7 @@ import 'package:lost_and_found/features/claim/domain/repositories/claim_reposito
 import 'package:lost_and_found/features/claim/domain/usecases/create_claim_usecase.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/get_received_claims_usecase.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/get_sent_claims_usecase.dart';
+import 'package:lost_and_found/features/claim/domain/usecases/insert_read_claim_usecase.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/manage_claim_usecase.dart';
 
 import '../../../../core/data/repositories/utils.dart';
@@ -106,6 +107,16 @@ class ClaimRepositoryImpl implements ClaimRepository {
       } else {
         return const Left(Failure.networkFailure());
       }
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> insertReadClaim(InsertReadClaimParams params) async {
+    try {
+        await _readClaimsDataSource.insertReadClaim(params.claimId);
+        return const Right(Success.genericSuccess());
     } on Exception catch (e) {
       return Left(mapExceptionToFailure(e));
     }

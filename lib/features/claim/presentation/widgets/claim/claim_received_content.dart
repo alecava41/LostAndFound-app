@@ -10,54 +10,55 @@ class ClaimReceivedContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ClaimBloc, ClaimState>(
-        builder: (ctx, state) => RefreshIndicator(
-              onRefresh: () async {
-                Future block = ctx.read<ClaimBloc>().stream.first;
-                ctx.read<ClaimBloc>().add(const ClaimEvent.receivedClaimsRefreshed());
-                await block;
-              },
-              child: state.isLoadingReceived
-                  ? const CustomCircularProgress(size: 100)
-                  : state.claimsReceived.isEmpty
-                      ? SizedBox(
-                          height: MediaQuery.of(context).size.height,
-                          child: const SingleChildScrollView(
-                            physics: AlwaysScrollableScrollPhysics(),
-                            child: Center(
-                              child: Column(children: [
-                                SizedBox(
-                                  height: 50,
-                                ),
-                                Icon(
-                                  Icons.connect_without_contact,
-                                  size: 80,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "No received claims yet",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              ]),
-                            ),
+      builder: (ctx, state) => RefreshIndicator(
+        onRefresh: () async {
+          Future block = ctx.read<ClaimBloc>().stream.first;
+          ctx.read<ClaimBloc>().add(const ClaimEvent.receivedClaimsRefreshed());
+          await block;
+        },
+        child: state.isLoadingReceived
+            ? const CustomCircularProgress(size: 100)
+            : state.claimsReceived.isEmpty
+                ? SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    child: const SingleChildScrollView(
+                      physics: AlwaysScrollableScrollPhysics(),
+                      child: Center(
+                        child: Column(children: [
+                          SizedBox(
+                            height: 50,
                           ),
-                        )
-                      : ListView.builder(
-                          itemCount: state.claimsReceived.length,
-                          itemBuilder: (context, index) {
-                            final claim = state.claimsReceived[index];
-                            return Container(
-                              padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                              child: ClaimedItemCard(
-                                claimIdx: index,
-                                claim: claim,
-                                token: state.token,
-                              ),
-                            );
-                          },
+                          Icon(
+                            Icons.connect_without_contact,
+                            size: 80,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "No received claims yet",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ]),
+                      ),
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: state.claimsReceived.length,
+                    itemBuilder: (context, index) {
+                      final claim = state.claimsReceived[index];
+                      return Container(
+                        padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                        child: ClaimedItemCard(
+                          claimIdx: index,
+                          claim: claim,
+                          token: state.token,
                         ),
-            ));
+                      );
+                    },
+                  ),
+      ),
+    );
   }
 }

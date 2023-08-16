@@ -22,6 +22,8 @@ class AnswerClaimScreen extends StatelessWidget {
       required this.claimId,
       required this.isClaimAlreadyManaged});
 
+  // TODO if claim already managed, it would be better to put response there
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -173,7 +175,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                 height: 30,
                               ),
                               PersonalizedLargeGreenButton(
-                                  isActive: isClaimAlreadyManaged,
+                                  isActive: !isClaimAlreadyManaged,
                                   onPressed: () => isClaimAlreadyManaged
                                       ? {}
                                       : ctx

@@ -18,6 +18,7 @@ import 'package:lost_and_found/features/item/domain/usecases/delete_item_usecase
 import 'package:lost_and_found/features/item/domain/usecases/get_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_items_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_notifications_usecase.dart';
+import 'package:lost_and_found/features/item/domain/usecases/insert_read_news_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/search_items_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/solve_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/update_item_usecase.dart';
@@ -267,6 +268,16 @@ class ItemRepositoryImpl implements ItemRepository {
       } else {
         return const Left(Failure.networkFailure());
       }
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> insertReadNews(InsertReadNewsParams params) async {
+    try {
+      await _readNewsDataSource.insertReadNews(params.newsId);
+      return const Right(Success.genericSuccess());
     } on Exception catch (e) {
       return Left(mapExceptionToFailure(e));
     }
