@@ -379,7 +379,6 @@ class ItemScreen extends StatelessWidget {
                                           itemId: itemId,
                                           claimId: claim.id,
                                           isClaimAlreadyManaged: claim.status != ClaimStatus.pending,
-                                          claimIdx: index,
                                         )));
 
                             if (claimStatus != null && claimStatus && context.mounted) {

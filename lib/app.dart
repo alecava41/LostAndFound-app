@@ -1,14 +1,15 @@
-import 'dart:developer';
-
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/config/route_generator.dart';
 import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
+import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
+import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 import 'package:lost_and_found/features/user/presentation/bloc/user/user_bloc.dart';
 import 'package:lost_and_found/utils/colors.dart';
+import 'package:lost_and_found/utils/constants.dart';
 
 import 'features/item/presentation/bloc/search/search_bloc.dart';
 import 'injection_container.dart';
@@ -21,7 +22,7 @@ class App extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _Application();
 
-  /*
+/*
    TODO (@alecava41) need to add DB support for badges
       - notifications not read yet;
       - claims (received not read yet, sent w/ updated not read yet);
@@ -44,16 +45,13 @@ class App extends StatefulWidget {
         - chat ??
    */
 
-  /*
+/*
    TODO (@alecava41) if app is in background (notification pop up):
     1 - check login status;
     2 - use 'topic' to create right navigation
         - check how to handle with BLoC and stuff
         - (firstly create home_controller, then navigate to wanted pages / subpages, need to include the specific info)
     3 - notification cases
-        - someone has inserted new item which may interest you => go to the specific item page
-            - (home => notifications => item page)
-            - (fields) topic=items,id=itemId,newsId=newsId
         - someone claimed one of your found items => go to answer claim page
             - (home => claims => received_claim => answer_claim_page)
             - (fields) topic=newClaim,id=claimId
@@ -66,27 +64,54 @@ class App extends StatefulWidget {
 
 class _Application extends State<App> {
   late String initialRoute = widget.initialRoute;
+  RemoteMessage? remoteMessage;
 
-  // It is assumed that all messages contain a data field with the key 'type'
   Future<void> setupInteractedMessage() async {
-    // Get any messages which caused the application to open from
-    // a terminated state.
-    RemoteMessage? initialMessage =
-    await FirebaseMessaging.instance.getInitialMessage();
+    // Get any messages which caused the application to open from a terminated state.
+    RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
 
-    // If the message also contains a data property with a "type" of "chat",
-    // navigate to a chat screen
     if (initialMessage != null) {
       _handleMessage(initialMessage);
     }
 
-    // Also handle any interaction when the app is in the background via a
-    // Stream listener
+    // Also handle any interaction when the app is in the background via a Stream listener
     FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
   }
 
   void _handleMessage(RemoteMessage message) {
-    log(message.toString());
+    final topic = message.data['topic'] == 'item'
+        ? NotificationType.item
+        : (message.data['topic'] == 'newClaim'
+            ? NotificationType.newClaim
+            : (message.data['topic'] == 'sentClaim' ? NotificationType.sentClaim : NotificationType.chat));
+
+    switch (topic) {
+      case NotificationType.item:
+        _handleItemMessage(int.parse(message.data['news']), int.parse(message.data['item']));
+      case NotificationType.newClaim:
+        _handleNewClaimMessage(int.parse(message.data['claim']), int.parse(message.data['item']));
+      case NotificationType.sentClaim:
+      case NotificationType.chat:
+    }
+  }
+
+  void _handleItemMessage(int newsId, int itemId) {
+    navigatorKey.currentState?.pushNamed('/notifications');
+    // TODO it would be better to trigger BLoC event to mark news as read
+    navigatorKey.currentState?.push(MaterialPageRoute(builder: (_) => ItemScreen(itemId: itemId)));
+  }
+
+  void _handleNewClaimMessage(int claimId, int itemId) {
+    navigatorKey.currentState?.pushNamed('/claims');
+    navigatorKey.currentState?.push(
+      MaterialPageRoute(
+        builder: (_) => AnswerClaimScreen(
+          itemId: itemId,
+          claimId: claimId,
+          isClaimAlreadyManaged: false,
+        ),
+      ),
+    );
   }
 
   @override
@@ -108,6 +133,7 @@ class _Application extends State<App> {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         title: 'Lost&Found',
+        navigatorKey: navigatorKey,
         theme: ThemeData(
           primarySwatch: PersonalizedColor.primarySwatch,
         ),

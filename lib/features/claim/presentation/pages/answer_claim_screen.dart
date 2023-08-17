@@ -12,12 +12,10 @@ import '../widgets/claimed_item_info.dart';
 class AnswerClaimScreen extends StatelessWidget {
   final int itemId;
   final int claimId;
-  final int claimIdx;
   final bool isClaimAlreadyManaged;
 
   const AnswerClaimScreen(
       {super.key,
-      required this.claimIdx,
       required this.itemId,
       required this.claimId,
       required this.isClaimAlreadyManaged});
@@ -146,7 +144,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                   item: state.item!,
                                   subject:
                                       state.item!.claims!.firstWhere((element) => element.id == claimId).user.username,
-                                  claimIdx: claimIdx,
+                                  claimIdx: state.item!.claims!.indexWhere((element) => element.id == claimId),
                                 ),
                               ),
                               const SizedBox(

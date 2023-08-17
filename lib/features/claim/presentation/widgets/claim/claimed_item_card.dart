@@ -14,9 +14,8 @@ import '../../../../../utils/constants.dart';
 class ClaimedItemCard extends StatelessWidget {
   final String token;
   final ClaimReceived claim;
-  final int claimIdx;
 
-  const ClaimedItemCard({super.key, required this.token, required this.claim, required this.claimIdx});
+  const ClaimedItemCard({super.key, required this.token, required this.claim});
 
   // TODO if claim already managed it would be better to put the status even in the card
 
@@ -38,7 +37,6 @@ class ClaimedItemCard extends StatelessWidget {
                     itemId: claim.item.id,
                     claimId: claim.id,
                     isClaimAlreadyManaged: claim.status != ClaimStatus.pending,
-                    claimIdx: claimIdx,
                   ),
                 ),
               )
