@@ -33,8 +33,8 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     on<NewsEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
-          newsCreated: () => _onNewsCreatedOrRefreshed(emit),
-          newsRefreshed: () => _onNewsCreatedOrRefreshed(emit),
+          newsCreated: (newNewsId) => _onNewsCreatedOrRefreshed(emit, newNewsId),
+          newsRefreshed: () => _onNewsCreatedOrRefreshed(emit, null),
           newsRead: (id) => _onNewsRead(emit, id),
         );
       },
@@ -53,7 +53,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
             });
   }
 
-  Future<void> _onNewsCreatedOrRefreshed(Emitter<NewsState> emit) async {
+  Future<void> _onNewsCreatedOrRefreshed(Emitter<NewsState> emit, int? newNewsId) async {
     emit(state.copyWith(isLoading: true));
 
     Either<Failure, Success>? loadFailureOrSuccess;
@@ -72,5 +72,9 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
         token: session != null ? session.token : "",
       ),
     );
+
+    if (newNewsId != null) {
+      await _onNewsRead(emit, newNewsId);
+    }
   }
 }

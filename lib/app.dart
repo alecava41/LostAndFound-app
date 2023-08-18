@@ -5,8 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/config/route_generator.dart';
 import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
+import 'package:lost_and_found/features/claim/presentation/pages/claim_screen.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
+import 'package:lost_and_found/features/item/presentation/pages/notifications_page.dart';
 import 'package:lost_and_found/features/user/presentation/bloc/user/user_bloc.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/utils/constants.dart';
@@ -52,12 +54,6 @@ class App extends StatefulWidget {
         - check how to handle with BLoC and stuff
         - (firstly create home_controller, then navigate to wanted pages / subpages, need to include the specific info)
     3 - notification cases
-        - someone claimed one of your found items => go to answer claim page
-            - (home => claims => received_claim => answer_claim_page)
-            - (fields) topic=newClaim,id=claimId
-        - someone has updated a claim opened by yourself
-            - (home => claims => sent_claim => question_claim_page)
-            - (fields) topic=sentClaims,id=claimId
         - chat ??
    */
 }
@@ -91,18 +87,18 @@ class _Application extends State<App> {
       case NotificationType.newClaim:
         _handleNewClaimMessage(int.parse(message.data['claim']), int.parse(message.data['item']));
       case NotificationType.sentClaim:
+        _handleSentClaimUpdateMessage(int.parse(message.data['item']));
       case NotificationType.chat:
     }
   }
 
   void _handleItemMessage(int newsId, int itemId) {
-    navigatorKey.currentState?.pushNamed('/notifications');
-    // TODO it would be better to trigger BLoC event to mark news as read
+    navigatorKey.currentState?.pushNamed('/notifications', arguments: NotificationsScreenArguments(newNewsId: newsId));
     navigatorKey.currentState?.push(MaterialPageRoute(builder: (_) => ItemScreen(itemId: itemId)));
   }
 
   void _handleNewClaimMessage(int claimId, int itemId) {
-    navigatorKey.currentState?.pushNamed('/claims');
+    navigatorKey.currentState?.pushNamed('/claims', arguments: ClaimsScreenArguments(claimId: claimId, tab: null));
     navigatorKey.currentState?.push(
       MaterialPageRoute(
         builder: (_) => AnswerClaimScreen(
@@ -112,6 +108,13 @@ class _Application extends State<App> {
         ),
       ),
     );
+  }
+
+  void _handleSentClaimUpdateMessage(int itemId) {
+    navigatorKey.currentState?.pushNamed('/claims', arguments: const ClaimsScreenArguments(claimId: null, tab: 0));
+    navigatorKey.currentState?.push(MaterialPageRoute(
+      builder: (_) => ItemScreen(itemId: itemId),
+    ));
   }
 
   @override

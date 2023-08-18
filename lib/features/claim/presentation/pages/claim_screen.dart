@@ -7,10 +7,11 @@ import 'package:lost_and_found/utils/colors.dart';
 import '../../../../injection_container.dart';
 import '../widgets/claim/claim_sent_content.dart';
 
-
 class ClaimsScreen extends StatelessWidget {
-  const ClaimsScreen({super.key});
+  final int? newClaimId;
+  final int? tab;
 
+  const ClaimsScreen({super.key, this.tab, this.newClaimId});
 
   @override
   Widget build(BuildContext context) {
@@ -43,35 +44,50 @@ class ClaimsScreen extends StatelessWidget {
         body: SafeArea(
           top: false,
           child: BlocProvider(
-            create: (_) => sl<ClaimBloc>()..add(const ClaimEvent.claimContentCreated()),
-            child: BlocListener<ClaimBloc, ClaimState>(
+            create: (_) => sl<ClaimBloc>()..add(ClaimEvent.claimContentCreated(tab, newClaimId)),
+            child: BlocConsumer<ClaimBloc, ClaimState>(
               listener: (ctx, state) {
+                if (state.needToSwitchTab != null && state.needToSwitchTab!) {
+                  DefaultTabController.of(ctx).animateTo(DefaultTabController.of(ctx).length - 1);
+                }
+
                 final loadFailureOrSuccess = state.loadFailureOrSuccess;
 
                 if (loadFailureOrSuccess != null) {
                   loadFailureOrSuccess.fold(
-                          (failure) => {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            padding: const EdgeInsets.all(30),
-                            backgroundColor: Colors.red,
-                            content: Text(
-                                failure.maybeWhen<String>(
-                                    genericFailure: () => 'Server error. Please try again later.',
-                                    networkFailure: () => 'No internet connection available. Check your internet connection.',
-                                    orElse: () => 'Unknown error'),
-                                style: const TextStyle(fontSize: 20)),
-                          ),
-                        )
-                      },
-                          (success) => {});
+                      (failure) => {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                padding: const EdgeInsets.all(30),
+                                backgroundColor: Colors.red,
+                                content: Text(
+                                    failure.maybeWhen<String>(
+                                        genericFailure: () => 'Server error. Please try again later.',
+                                        networkFailure: () =>
+                                            'No internet connection available. Check your internet connection.',
+                                        orElse: () => 'Unknown error'),
+                                    style: const TextStyle(fontSize: 20)),
+                              ),
+                            )
+                          },
+                      (success) => {});
                 }
               },
-              child: const TabBarView(children: [ClaimReceivedContent(), ClaimSentContent()]),
-            )
+              builder: (ctx, state) => TabBarView(
+                controller: DefaultTabController.of(ctx),
+                children: const [ClaimReceivedContent(), ClaimSentContent()],
+              ),
+            ),
           ),
         ),
       ),
     );
   }
+}
+
+class ClaimsScreenArguments {
+  final int? claimId;
+  final int? tab;
+
+  const ClaimsScreenArguments({this.tab, this.claimId});
 }
