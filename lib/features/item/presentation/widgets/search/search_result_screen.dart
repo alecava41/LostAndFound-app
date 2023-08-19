@@ -1,34 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/search/custom_card_search.dart';
+import 'package:lost_and_found/utils/colors.dart';
 
 import '../../bloc/search/search_bloc.dart';
 import 'custom_dropdown_button_form_field.dart';
 import 'custom_list_view.dart';
 
-class SearchResultScreen extends StatelessWidget {
+class SearchResultScreen extends StatefulWidget {
   const SearchResultScreen({super.key});
 
-  // TODO (@backToFrancesco) add ascending/descending ordering like in video
+  @override
+  State<SearchResultScreen> createState() => _SearchResultScreenState();
+}
+
+class _SearchResultScreenState extends State<SearchResultScreen> {
+  OrdinationType orderResultsOption = OrdinationType.alphabeticalAZ;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchBloc, SearchState>(
       builder: (ctx, state) => Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             color: Colors.white,
             height: 70,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                  padding: const EdgeInsets.fromLTRB(12, 5, 10, 5),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       shape: const StadiumBorder(),
                     ),
-                    onPressed: () => ctx.read<SearchBloc>().add(const SearchEvent.showFilters()),
+                    onPressed: () => ctx
+                        .read<SearchBloc>()
+                        .add(const SearchEvent.showFilters()),
                     child: const Row(
                       children: [
                         Icon(
@@ -46,28 +54,28 @@ class SearchResultScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 150,
-                  height: 60,
-                  child: CustomDropdownFormField(
-                    items: const [
-                      DropdownMenuItem(
-                          value: 'alphabetic',
-                          child: Text(
-                            'Alphabetic',
-                          )),
-                      DropdownMenuItem(value: 'date', child: Text('Date')),
-                      DropdownMenuItem(value: 'distance', child: Text('Distance')),
-                    ],
-                    value: state.order.name,
-                    onChanged: (String? newValue) {
-                      if (newValue != null) {
-                        final order = newValue == "alphabetic"
-                            ? ResultOrder.alphabetic
-                            : (newValue == "date" ? ResultOrder.date : ResultOrder.distance);
-                        ctx.read<SearchBloc>().add(SearchEvent.sortParameterChanged(order));
-                      }
-                    },
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 12, 0),
+                    child: TextButton(
+                        onPressed: () => onOrderMenuButtonClick(context),
+                        child: Row(
+                          
+                          children: [
+                            const Icon(Icons.list),
+                            const SizedBox(width: 2,),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(OrderUtils.getOrderLabel(
+                                      orderResultsOption), textAlign: TextAlign.center,),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )),
                   ),
                 )
               ],
@@ -115,5 +123,137 @@ class SearchResultScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void onOrderMenuButtonClick(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'Select a sorting method.',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const Divider(
+              height: 0,
+            ),
+            OrderOptionButton(
+              text: OrderUtils.getOrderLabel(OrdinationType.alphabeticalAZ),
+              isSelected: orderResultsOption == OrdinationType.alphabeticalAZ
+                  ? true
+                  : false,
+              onClick: () => setState(() {
+                orderResultsOption = OrdinationType.alphabeticalAZ;
+              }),
+            ),
+            const Divider(
+              height: 0,
+            ),
+            OrderOptionButton(
+              text: OrderUtils.getOrderLabel(OrdinationType.alphabeticalZA),
+              isSelected: orderResultsOption == OrdinationType.alphabeticalZA
+                  ? true
+                  : false,
+              onClick: () => setState(() {
+                orderResultsOption = OrdinationType.alphabeticalZA;
+              }),
+            ),
+            const Divider(
+              height: 0,
+            ),
+            OrderOptionButton(
+              text: OrderUtils.getOrderLabel(OrdinationType.dateAscending),
+              isSelected: orderResultsOption == OrdinationType.dateAscending
+                  ? true
+                  : false,
+              onClick: () => setState(() {
+                orderResultsOption = OrdinationType.dateAscending;
+              }),
+            ),
+            const Divider(
+              height: 0,
+            ),
+            OrderOptionButton(
+              text: OrderUtils.getOrderLabel(OrdinationType.dateDescending),
+              isSelected: orderResultsOption == OrdinationType.dateDescending
+                  ? true
+                  : false,
+              onClick: () {
+                setState(() {
+                  orderResultsOption = OrdinationType.dateDescending;
+                });
+              },
+            ),
+            const SizedBox(height: 5,)
+          ],
+        );
+      },
+    );
+  }
+}
+
+class OrderOptionButton extends StatelessWidget {
+  final String text;
+  final bool isSelected;
+  final VoidCallback onClick;
+
+  const OrderOptionButton(
+      {super.key,
+      required this.text,
+      required this.isSelected,
+      required this.onClick});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: isSelected
+          ? PersonalizedColor.claimAcceptedStatusColor
+          : Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          onClick();
+          Navigator.pop(context);
+        },
+        splashColor: Colors.grey.shade200,
+        child: Container(
+          padding: const EdgeInsets.all(14),
+          alignment: Alignment.center,
+          width: MediaQuery.of(context).size.width,
+          child: Text(
+            text,
+            style:  TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.6)),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+enum OrdinationType {
+  alphabeticalAZ,
+  alphabeticalZA,
+  dateAscending,
+  dateDescending,
+}
+
+class OrderUtils {
+  static String getOrderLabel(OrdinationType ordinationType) {
+    switch (ordinationType) {
+      case OrdinationType.alphabeticalAZ:
+        return 'Alphabetic order from A to Z';
+      case OrdinationType.alphabeticalZA:
+        return 'Alphabetic order from Z to A';
+      case OrdinationType.dateAscending:
+        return 'Ascending for date of insertion';
+      case OrdinationType.dateDescending:
+        return 'Descending for date of insertion';
+      default:
+        return '';
+    }
   }
 }
