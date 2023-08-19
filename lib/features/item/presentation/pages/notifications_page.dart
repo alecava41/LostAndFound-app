@@ -7,7 +7,9 @@ import '../../../../injection_container.dart';
 import '../widgets/notifications/news_content.dart';
 
 class NotificationsScreen extends StatelessWidget {
-  const NotificationsScreen({super.key});
+  final int? newNewsId;
+
+  const NotificationsScreen({super.key, this.newNewsId});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +24,14 @@ class NotificationsScreen extends StatelessWidget {
           iconTheme: const IconThemeData(color: Colors.black),
         ),
         body: BlocProvider(
-          create: (_) => sl<NewsBloc>()..add(const NewsEvent.newsCreated()),
+          create: (_) => sl<NewsBloc>()..add(NewsEvent.newsCreated(newNewsId)),
           child: const NewsContent(),
         ));
   }
+}
+
+class NotificationsScreenArguments {
+  final int newNewsId;
+
+  const NotificationsScreenArguments({required this.newNewsId});
 }

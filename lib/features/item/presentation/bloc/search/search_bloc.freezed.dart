@@ -26,6 +26,7 @@ mixin _$SearchEvent {
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
     required TResult Function() showFilters,
+    required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
     required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) =>
@@ -40,6 +41,7 @@ mixin _$SearchEvent {
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
     TResult? Function()? showFilters,
+    TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
     TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) =>
@@ -54,6 +56,7 @@ mixin _$SearchEvent {
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
     TResult Function()? showFilters,
+    TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
     TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
@@ -69,6 +72,7 @@ mixin _$SearchEvent {
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
     required TResult Function(_ShowFilters value) showFilters,
+    required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
     required TResult Function(_OrderFlowParameterChanged value)
         orderFlowParameterChanged,
@@ -84,6 +88,7 @@ mixin _$SearchEvent {
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
     TResult? Function(_ShowFilters value)? showFilters,
+    TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
     TResult? Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -99,6 +104,7 @@ mixin _$SearchEvent {
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
     TResult Function(_ShowFilters value)? showFilters,
+    TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
     TResult Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -171,6 +177,7 @@ class _$_ResetFilters implements _ResetFilters {
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
     required TResult Function() showFilters,
+    required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
     required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
@@ -188,6 +195,7 @@ class _$_ResetFilters implements _ResetFilters {
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
     TResult? Function()? showFilters,
+    TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
     TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
@@ -205,6 +213,7 @@ class _$_ResetFilters implements _ResetFilters {
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
     TResult Function()? showFilters,
+    TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
     TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
@@ -226,6 +235,7 @@ class _$_ResetFilters implements _ResetFilters {
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
     required TResult Function(_ShowFilters value) showFilters,
+    required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
     required TResult Function(_OrderFlowParameterChanged value)
         orderFlowParameterChanged,
@@ -244,6 +254,7 @@ class _$_ResetFilters implements _ResetFilters {
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
     TResult? Function(_ShowFilters value)? showFilters,
+    TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
     TResult? Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -262,6 +273,7 @@ class _$_ResetFilters implements _ResetFilters {
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
     TResult Function(_ShowFilters value)? showFilters,
+    TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
     TResult Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -324,6 +336,7 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
     required TResult Function() showFilters,
+    required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
     required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
@@ -341,6 +354,7 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
     TResult? Function()? showFilters,
+    TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
     TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
@@ -358,6 +372,7 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
     TResult Function()? showFilters,
+    TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
     TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
@@ -379,6 +394,7 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
     required TResult Function(_ShowFilters value) showFilters,
+    required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
     required TResult Function(_OrderFlowParameterChanged value)
         orderFlowParameterChanged,
@@ -397,6 +413,7 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
     TResult? Function(_ShowFilters value)? showFilters,
+    TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
     TResult? Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -415,6 +432,7 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
     TResult Function(_ShowFilters value)? showFilters,
+    TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
     TResult Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -477,6 +495,7 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
     required TResult Function() showFilters,
+    required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
     required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
@@ -494,6 +513,7 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
     TResult? Function()? showFilters,
+    TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
     TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
@@ -511,6 +531,7 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
     TResult Function()? showFilters,
+    TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
     TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
@@ -532,6 +553,7 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
     required TResult Function(_ShowFilters value) showFilters,
+    required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
     required TResult Function(_OrderFlowParameterChanged value)
         orderFlowParameterChanged,
@@ -550,6 +572,7 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
     TResult? Function(_ShowFilters value)? showFilters,
+    TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
     TResult? Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -568,6 +591,7 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
     TResult Function(_ShowFilters value)? showFilters,
+    TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
     TResult Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -656,6 +680,7 @@ class _$_PositionSelected implements _PositionSelected {
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
     required TResult Function() showFilters,
+    required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
     required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
@@ -673,6 +698,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
     TResult? Function()? showFilters,
+    TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
     TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
@@ -690,6 +716,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
     TResult Function()? showFilters,
+    TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
     TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
@@ -711,6 +738,7 @@ class _$_PositionSelected implements _PositionSelected {
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
     required TResult Function(_ShowFilters value) showFilters,
+    required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
     required TResult Function(_OrderFlowParameterChanged value)
         orderFlowParameterChanged,
@@ -729,6 +757,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
     TResult? Function(_ShowFilters value)? showFilters,
+    TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
     TResult? Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -747,6 +776,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
     TResult Function(_ShowFilters value)? showFilters,
+    TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
     TResult Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -849,6 +879,7 @@ class _$_CategorySelected implements _CategorySelected {
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
     required TResult Function() showFilters,
+    required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
     required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
@@ -866,6 +897,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
     TResult? Function()? showFilters,
+    TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
     TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
@@ -883,6 +915,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
     TResult Function()? showFilters,
+    TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
     TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
@@ -904,6 +937,7 @@ class _$_CategorySelected implements _CategorySelected {
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
     required TResult Function(_ShowFilters value) showFilters,
+    required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
     required TResult Function(_OrderFlowParameterChanged value)
         orderFlowParameterChanged,
@@ -922,6 +956,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
     TResult? Function(_ShowFilters value)? showFilters,
+    TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
     TResult? Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -940,6 +975,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
     TResult Function(_ShowFilters value)? showFilters,
+    TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
     TResult Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -1035,6 +1071,7 @@ class _$_DateSelected implements _DateSelected {
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
     required TResult Function() showFilters,
+    required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
     required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
@@ -1052,6 +1089,7 @@ class _$_DateSelected implements _DateSelected {
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
     TResult? Function()? showFilters,
+    TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
     TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
@@ -1069,6 +1107,7 @@ class _$_DateSelected implements _DateSelected {
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
     TResult Function()? showFilters,
+    TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
     TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
@@ -1090,6 +1129,7 @@ class _$_DateSelected implements _DateSelected {
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
     required TResult Function(_ShowFilters value) showFilters,
+    required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
     required TResult Function(_OrderFlowParameterChanged value)
         orderFlowParameterChanged,
@@ -1108,6 +1148,7 @@ class _$_DateSelected implements _DateSelected {
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
     TResult? Function(_ShowFilters value)? showFilters,
+    TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
     TResult? Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -1126,6 +1167,7 @@ class _$_DateSelected implements _DateSelected {
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
     TResult Function(_ShowFilters value)? showFilters,
+    TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
     TResult Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -1193,6 +1235,7 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
     required TResult Function() showFilters,
+    required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
     required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
@@ -1210,6 +1253,7 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
     TResult? Function()? showFilters,
+    TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
     TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
@@ -1227,6 +1271,7 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
     TResult Function()? showFilters,
+    TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
     TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
@@ -1248,6 +1293,7 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
     required TResult Function(_ShowFilters value) showFilters,
+    required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
     required TResult Function(_OrderFlowParameterChanged value)
         orderFlowParameterChanged,
@@ -1266,6 +1312,7 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
     TResult? Function(_ShowFilters value)? showFilters,
+    TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
     TResult? Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -1284,6 +1331,7 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
     TResult Function(_ShowFilters value)? showFilters,
+    TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
     TResult Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -1346,6 +1394,7 @@ class _$_ShowFilters implements _ShowFilters {
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
     required TResult Function() showFilters,
+    required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
     required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
@@ -1363,6 +1412,7 @@ class _$_ShowFilters implements _ShowFilters {
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
     TResult? Function()? showFilters,
+    TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
     TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
@@ -1380,6 +1430,7 @@ class _$_ShowFilters implements _ShowFilters {
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
     TResult Function()? showFilters,
+    TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
     TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
@@ -1401,6 +1452,7 @@ class _$_ShowFilters implements _ShowFilters {
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
     required TResult Function(_ShowFilters value) showFilters,
+    required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
     required TResult Function(_OrderFlowParameterChanged value)
         orderFlowParameterChanged,
@@ -1419,6 +1471,7 @@ class _$_ShowFilters implements _ShowFilters {
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
     TResult? Function(_ShowFilters value)? showFilters,
+    TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
     TResult? Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -1437,6 +1490,7 @@ class _$_ShowFilters implements _ShowFilters {
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
     TResult Function(_ShowFilters value)? showFilters,
+    TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
     TResult Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -1451,6 +1505,198 @@ class _$_ShowFilters implements _ShowFilters {
 
 abstract class _ShowFilters implements SearchEvent {
   const factory _ShowFilters() = _$_ShowFilters;
+}
+
+/// @nodoc
+abstract class _$$_SearchPageChangedCopyWith<$Res> {
+  factory _$$_SearchPageChangedCopyWith(_$_SearchPageChanged value,
+          $Res Function(_$_SearchPageChanged) then) =
+      __$$_SearchPageChangedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({SearchPageState page});
+}
+
+/// @nodoc
+class __$$_SearchPageChangedCopyWithImpl<$Res>
+    extends _$SearchEventCopyWithImpl<$Res, _$_SearchPageChanged>
+    implements _$$_SearchPageChangedCopyWith<$Res> {
+  __$$_SearchPageChangedCopyWithImpl(
+      _$_SearchPageChanged _value, $Res Function(_$_SearchPageChanged) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+  }) {
+    return _then(_$_SearchPageChanged(
+      null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as SearchPageState,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SearchPageChanged implements _SearchPageChanged {
+  const _$_SearchPageChanged(this.page);
+
+  @override
+  final SearchPageState page;
+
+  @override
+  String toString() {
+    return 'SearchEvent.searchPageChanged(page: $page)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SearchPageChanged &&
+            (identical(other.page, page) || other.page == page));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, page);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SearchPageChangedCopyWith<_$_SearchPageChanged> get copyWith =>
+      __$$_SearchPageChangedCopyWithImpl<_$_SearchPageChanged>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() resetFilters,
+    required TResult Function() foundCheckTriggered,
+    required TResult Function() lostCheckTriggered,
+    required TResult Function(LatLng pos) positionSelected,
+    required TResult Function(int id, String category) categorySelected,
+    required TResult Function(DateTime date) dateSelected,
+    required TResult Function() searchSubmitted,
+    required TResult Function() showFilters,
+    required TResult Function(SearchPageState page) searchPageChanged,
+    required TResult Function(ResultOrder order) sortParameterChanged,
+    required TResult Function(OrderFlow flow) orderFlowParameterChanged,
+  }) {
+    return searchPageChanged(page);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? resetFilters,
+    TResult? Function()? foundCheckTriggered,
+    TResult? Function()? lostCheckTriggered,
+    TResult? Function(LatLng pos)? positionSelected,
+    TResult? Function(int id, String category)? categorySelected,
+    TResult? Function(DateTime date)? dateSelected,
+    TResult? Function()? searchSubmitted,
+    TResult? Function()? showFilters,
+    TResult? Function(SearchPageState page)? searchPageChanged,
+    TResult? Function(ResultOrder order)? sortParameterChanged,
+    TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
+  }) {
+    return searchPageChanged?.call(page);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? resetFilters,
+    TResult Function()? foundCheckTriggered,
+    TResult Function()? lostCheckTriggered,
+    TResult Function(LatLng pos)? positionSelected,
+    TResult Function(int id, String category)? categorySelected,
+    TResult Function(DateTime date)? dateSelected,
+    TResult Function()? searchSubmitted,
+    TResult Function()? showFilters,
+    TResult Function(SearchPageState page)? searchPageChanged,
+    TResult Function(ResultOrder order)? sortParameterChanged,
+    TResult Function(OrderFlow flow)? orderFlowParameterChanged,
+    required TResult orElse(),
+  }) {
+    if (searchPageChanged != null) {
+      return searchPageChanged(page);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ResetFilters value) resetFilters,
+    required TResult Function(_FoundCheckTriggered value) foundCheckTriggered,
+    required TResult Function(_LostCheckTriggered value) lostCheckTriggered,
+    required TResult Function(_PositionSelected value) positionSelected,
+    required TResult Function(_CategorySelected value) categorySelected,
+    required TResult Function(_DateSelected value) dateSelected,
+    required TResult Function(_SearchSubmitted value) searchSubmitted,
+    required TResult Function(_ShowFilters value) showFilters,
+    required TResult Function(_SearchPageChanged value) searchPageChanged,
+    required TResult Function(_SortParameterChanged value) sortParameterChanged,
+    required TResult Function(_OrderFlowParameterChanged value)
+        orderFlowParameterChanged,
+  }) {
+    return searchPageChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ResetFilters value)? resetFilters,
+    TResult? Function(_FoundCheckTriggered value)? foundCheckTriggered,
+    TResult? Function(_LostCheckTriggered value)? lostCheckTriggered,
+    TResult? Function(_PositionSelected value)? positionSelected,
+    TResult? Function(_CategorySelected value)? categorySelected,
+    TResult? Function(_DateSelected value)? dateSelected,
+    TResult? Function(_SearchSubmitted value)? searchSubmitted,
+    TResult? Function(_ShowFilters value)? showFilters,
+    TResult? Function(_SearchPageChanged value)? searchPageChanged,
+    TResult? Function(_SortParameterChanged value)? sortParameterChanged,
+    TResult? Function(_OrderFlowParameterChanged value)?
+        orderFlowParameterChanged,
+  }) {
+    return searchPageChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ResetFilters value)? resetFilters,
+    TResult Function(_FoundCheckTriggered value)? foundCheckTriggered,
+    TResult Function(_LostCheckTriggered value)? lostCheckTriggered,
+    TResult Function(_PositionSelected value)? positionSelected,
+    TResult Function(_CategorySelected value)? categorySelected,
+    TResult Function(_DateSelected value)? dateSelected,
+    TResult Function(_SearchSubmitted value)? searchSubmitted,
+    TResult Function(_ShowFilters value)? showFilters,
+    TResult Function(_SearchPageChanged value)? searchPageChanged,
+    TResult Function(_SortParameterChanged value)? sortParameterChanged,
+    TResult Function(_OrderFlowParameterChanged value)?
+        orderFlowParameterChanged,
+    required TResult orElse(),
+  }) {
+    if (searchPageChanged != null) {
+      return searchPageChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SearchPageChanged implements SearchEvent {
+  const factory _SearchPageChanged(final SearchPageState page) =
+      _$_SearchPageChanged;
+
+  SearchPageState get page;
+  @JsonKey(ignore: true)
+  _$$_SearchPageChangedCopyWith<_$_SearchPageChanged> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1526,6 +1772,7 @@ class _$_SortParameterChanged implements _SortParameterChanged {
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
     required TResult Function() showFilters,
+    required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
     required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
@@ -1543,6 +1790,7 @@ class _$_SortParameterChanged implements _SortParameterChanged {
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
     TResult? Function()? showFilters,
+    TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
     TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
@@ -1560,6 +1808,7 @@ class _$_SortParameterChanged implements _SortParameterChanged {
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
     TResult Function()? showFilters,
+    TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
     TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
@@ -1581,6 +1830,7 @@ class _$_SortParameterChanged implements _SortParameterChanged {
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
     required TResult Function(_ShowFilters value) showFilters,
+    required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
     required TResult Function(_OrderFlowParameterChanged value)
         orderFlowParameterChanged,
@@ -1599,6 +1849,7 @@ class _$_SortParameterChanged implements _SortParameterChanged {
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
     TResult? Function(_ShowFilters value)? showFilters,
+    TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
     TResult? Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -1617,6 +1868,7 @@ class _$_SortParameterChanged implements _SortParameterChanged {
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
     TResult Function(_ShowFilters value)? showFilters,
+    TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
     TResult Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -1714,6 +1966,7 @@ class _$_OrderFlowParameterChanged implements _OrderFlowParameterChanged {
     required TResult Function(DateTime date) dateSelected,
     required TResult Function() searchSubmitted,
     required TResult Function() showFilters,
+    required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
     required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
@@ -1731,6 +1984,7 @@ class _$_OrderFlowParameterChanged implements _OrderFlowParameterChanged {
     TResult? Function(DateTime date)? dateSelected,
     TResult? Function()? searchSubmitted,
     TResult? Function()? showFilters,
+    TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
     TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
@@ -1748,6 +2002,7 @@ class _$_OrderFlowParameterChanged implements _OrderFlowParameterChanged {
     TResult Function(DateTime date)? dateSelected,
     TResult Function()? searchSubmitted,
     TResult Function()? showFilters,
+    TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
     TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
@@ -1769,6 +2024,7 @@ class _$_OrderFlowParameterChanged implements _OrderFlowParameterChanged {
     required TResult Function(_DateSelected value) dateSelected,
     required TResult Function(_SearchSubmitted value) searchSubmitted,
     required TResult Function(_ShowFilters value) showFilters,
+    required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
     required TResult Function(_OrderFlowParameterChanged value)
         orderFlowParameterChanged,
@@ -1787,6 +2043,7 @@ class _$_OrderFlowParameterChanged implements _OrderFlowParameterChanged {
     TResult? Function(_DateSelected value)? dateSelected,
     TResult? Function(_SearchSubmitted value)? searchSubmitted,
     TResult? Function(_ShowFilters value)? showFilters,
+    TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
     TResult? Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -1805,6 +2062,7 @@ class _$_OrderFlowParameterChanged implements _OrderFlowParameterChanged {
     TResult Function(_DateSelected value)? dateSelected,
     TResult Function(_SearchSubmitted value)? searchSubmitted,
     TResult Function(_ShowFilters value)? showFilters,
+    TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
     TResult Function(_OrderFlowParameterChanged value)?
         orderFlowParameterChanged,
@@ -1847,6 +2105,7 @@ mixin _$SearchState {
   String get token =>
       throw _privateConstructorUsedError; // Fields to handle real search
   bool get showError => throw _privateConstructorUsedError;
+  bool get hasPerformedFirstSearch => throw _privateConstructorUsedError;
   SearchPageState get pageState => throw _privateConstructorUsedError;
   Either<Failure, Success>? get searchFailureOrSuccess =>
       throw _privateConstructorUsedError;
@@ -1877,6 +2136,7 @@ abstract class $SearchStateCopyWith<$Res> {
       bool isLoadingPosition,
       String token,
       bool showError,
+      bool hasPerformedFirstSearch,
       SearchPageState pageState,
       Either<Failure, Success>? searchFailureOrSuccess});
 }
@@ -1908,6 +2168,7 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
     Object? isLoadingPosition = null,
     Object? token = null,
     Object? showError = null,
+    Object? hasPerformedFirstSearch = null,
     Object? pageState = null,
     Object? searchFailureOrSuccess = freezed,
   }) {
@@ -1968,6 +2229,10 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.showError
           : showError // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasPerformedFirstSearch: null == hasPerformedFirstSearch
+          ? _value.hasPerformedFirstSearch
+          : hasPerformedFirstSearch // ignore: cast_nullable_to_non_nullable
+              as bool,
       pageState: null == pageState
           ? _value.pageState
           : pageState // ignore: cast_nullable_to_non_nullable
@@ -2003,6 +2268,7 @@ abstract class _$$_SearchStateCopyWith<$Res>
       bool isLoadingPosition,
       String token,
       bool showError,
+      bool hasPerformedFirstSearch,
       SearchPageState pageState,
       Either<Failure, Success>? searchFailureOrSuccess});
 }
@@ -2032,6 +2298,7 @@ class __$$_SearchStateCopyWithImpl<$Res>
     Object? isLoadingPosition = null,
     Object? token = null,
     Object? showError = null,
+    Object? hasPerformedFirstSearch = null,
     Object? pageState = null,
     Object? searchFailureOrSuccess = freezed,
   }) {
@@ -2092,6 +2359,10 @@ class __$$_SearchStateCopyWithImpl<$Res>
           ? _value.showError
           : showError // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasPerformedFirstSearch: null == hasPerformedFirstSearch
+          ? _value.hasPerformedFirstSearch
+          : hasPerformedFirstSearch // ignore: cast_nullable_to_non_nullable
+              as bool,
       pageState: null == pageState
           ? _value.pageState
           : pageState // ignore: cast_nullable_to_non_nullable
@@ -2122,6 +2393,7 @@ class _$_SearchState implements _SearchState {
       this.isLoadingPosition = false,
       this.token = "",
       this.showError = false,
+      this.hasPerformedFirstSearch = false,
       this.pageState = SearchPageState.filterPage,
       this.searchFailureOrSuccess})
       : _results = results;
@@ -2174,13 +2446,16 @@ class _$_SearchState implements _SearchState {
   final bool showError;
   @override
   @JsonKey()
+  final bool hasPerformedFirstSearch;
+  @override
+  @JsonKey()
   final SearchPageState pageState;
   @override
   final Either<Failure, Success>? searchFailureOrSuccess;
 
   @override
   String toString() {
-    return 'SearchState(itemsToSearch: $itemsToSearch, pos: $pos, cat: $cat, dateTime: $dateTime, order: $order, orderFlow: $orderFlow, results: $results, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, isLoadingPosition: $isLoadingPosition, token: $token, showError: $showError, pageState: $pageState, searchFailureOrSuccess: $searchFailureOrSuccess)';
+    return 'SearchState(itemsToSearch: $itemsToSearch, pos: $pos, cat: $cat, dateTime: $dateTime, order: $order, orderFlow: $orderFlow, results: $results, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, isLoadingPosition: $isLoadingPosition, token: $token, showError: $showError, hasPerformedFirstSearch: $hasPerformedFirstSearch, pageState: $pageState, searchFailureOrSuccess: $searchFailureOrSuccess)';
   }
 
   @override
@@ -2210,6 +2485,9 @@ class _$_SearchState implements _SearchState {
             (identical(other.token, token) || other.token == token) &&
             (identical(other.showError, showError) ||
                 other.showError == showError) &&
+            (identical(
+                    other.hasPerformedFirstSearch, hasPerformedFirstSearch) ||
+                other.hasPerformedFirstSearch == hasPerformedFirstSearch) &&
             (identical(other.pageState, pageState) ||
                 other.pageState == pageState) &&
             (identical(other.searchFailureOrSuccess, searchFailureOrSuccess) ||
@@ -2233,6 +2511,7 @@ class _$_SearchState implements _SearchState {
       isLoadingPosition,
       token,
       showError,
+      hasPerformedFirstSearch,
       pageState,
       searchFailureOrSuccess);
 
@@ -2259,6 +2538,7 @@ abstract class _SearchState implements SearchState {
       final bool isLoadingPosition,
       final String token,
       final bool showError,
+      final bool hasPerformedFirstSearch,
       final SearchPageState pageState,
       final Either<Failure, Success>? searchFailureOrSuccess}) = _$_SearchState;
 
@@ -2290,6 +2570,8 @@ abstract class _SearchState implements SearchState {
   String get token;
   @override // Fields to handle real search
   bool get showError;
+  @override
+  bool get hasPerformedFirstSearch;
   @override
   SearchPageState get pageState;
   @override

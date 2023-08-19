@@ -52,19 +52,19 @@ class SearchResultScreen extends StatelessWidget {
                   child: CustomDropdownFormField(
                     items: const [
                       DropdownMenuItem(
-                          value: 'opt1',
+                          value: 'alphabetic',
                           child: Text(
                             'Alphabetic',
                           )),
-                      DropdownMenuItem(value: 'opt2', child: Text('Date')),
-                      DropdownMenuItem(value: 'opt3', child: Text('Distance')),
+                      DropdownMenuItem(value: 'date', child: Text('Date')),
+                      DropdownMenuItem(value: 'distance', child: Text('Distance')),
                     ],
                     value: state.order.name,
                     onChanged: (String? newValue) {
                       if (newValue != null) {
-                        final order = newValue == "Alphabetic"
+                        final order = newValue == "alphabetic"
                             ? ResultOrder.alphabetic
-                            : (newValue == "Distance" ? ResultOrder.date : ResultOrder.distance);
+                            : (newValue == "date" ? ResultOrder.date : ResultOrder.distance);
                         ctx.read<SearchBloc>().add(SearchEvent.sortParameterChanged(order));
                       }
                     },

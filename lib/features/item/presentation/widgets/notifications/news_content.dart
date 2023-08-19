@@ -72,6 +72,7 @@ class NewsContent extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final news = state.news[index];
                         return CustomNotification(
+                          id: news.id,
                             subjectItemTitle: news.subject.title,
                             subjectItemType: news.subject.type,
                             hasUserImage: news.targetUser.hasImage,

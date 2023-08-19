@@ -18,20 +18,23 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$NewsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() newsCreated,
+    required TResult Function(int? newNewsId) newsCreated,
     required TResult Function() newsRefreshed,
+    required TResult Function(int id) newsRead,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? newsCreated,
+    TResult? Function(int? newNewsId)? newsCreated,
     TResult? Function()? newsRefreshed,
+    TResult? Function(int id)? newsRead,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? newsCreated,
+    TResult Function(int? newNewsId)? newsCreated,
     TResult Function()? newsRefreshed,
+    TResult Function(int id)? newsRead,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$NewsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_NewsCreated value) newsCreated,
     required TResult Function(_NewsRefreshed value) newsRefreshed,
+    required TResult Function(_NewsRead value) newsRead,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NewsCreated value)? newsCreated,
     TResult? Function(_NewsRefreshed value)? newsRefreshed,
+    TResult? Function(_NewsRead value)? newsRead,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NewsCreated value)? newsCreated,
     TResult Function(_NewsRefreshed value)? newsRefreshed,
+    TResult Function(_NewsRead value)? newsRead,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -78,6 +84,8 @@ abstract class _$$_NewsCreatedCopyWith<$Res> {
   factory _$$_NewsCreatedCopyWith(
           _$_NewsCreated value, $Res Function(_$_NewsCreated) then) =
       __$$_NewsCreatedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int? newNewsId});
 }
 
 /// @nodoc
@@ -87,54 +95,82 @@ class __$$_NewsCreatedCopyWithImpl<$Res>
   __$$_NewsCreatedCopyWithImpl(
       _$_NewsCreated _value, $Res Function(_$_NewsCreated) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? newNewsId = freezed,
+  }) {
+    return _then(_$_NewsCreated(
+      freezed == newNewsId
+          ? _value.newNewsId
+          : newNewsId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_NewsCreated implements _NewsCreated {
-  const _$_NewsCreated();
+  const _$_NewsCreated(this.newNewsId);
+
+  @override
+  final int? newNewsId;
 
   @override
   String toString() {
-    return 'NewsEvent.newsCreated()';
+    return 'NewsEvent.newsCreated(newNewsId: $newNewsId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_NewsCreated);
+        (other.runtimeType == runtimeType &&
+            other is _$_NewsCreated &&
+            (identical(other.newNewsId, newNewsId) ||
+                other.newNewsId == newNewsId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, newNewsId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_NewsCreatedCopyWith<_$_NewsCreated> get copyWith =>
+      __$$_NewsCreatedCopyWithImpl<_$_NewsCreated>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() newsCreated,
+    required TResult Function(int? newNewsId) newsCreated,
     required TResult Function() newsRefreshed,
+    required TResult Function(int id) newsRead,
   }) {
-    return newsCreated();
+    return newsCreated(newNewsId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? newsCreated,
+    TResult? Function(int? newNewsId)? newsCreated,
     TResult? Function()? newsRefreshed,
+    TResult? Function(int id)? newsRead,
   }) {
-    return newsCreated?.call();
+    return newsCreated?.call(newNewsId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? newsCreated,
+    TResult Function(int? newNewsId)? newsCreated,
     TResult Function()? newsRefreshed,
+    TResult Function(int id)? newsRead,
     required TResult orElse(),
   }) {
     if (newsCreated != null) {
-      return newsCreated();
+      return newsCreated(newNewsId);
     }
     return orElse();
   }
@@ -144,6 +180,7 @@ class _$_NewsCreated implements _NewsCreated {
   TResult map<TResult extends Object?>({
     required TResult Function(_NewsCreated value) newsCreated,
     required TResult Function(_NewsRefreshed value) newsRefreshed,
+    required TResult Function(_NewsRead value) newsRead,
   }) {
     return newsCreated(this);
   }
@@ -153,6 +190,7 @@ class _$_NewsCreated implements _NewsCreated {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NewsCreated value)? newsCreated,
     TResult? Function(_NewsRefreshed value)? newsRefreshed,
+    TResult? Function(_NewsRead value)? newsRead,
   }) {
     return newsCreated?.call(this);
   }
@@ -162,6 +200,7 @@ class _$_NewsCreated implements _NewsCreated {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NewsCreated value)? newsCreated,
     TResult Function(_NewsRefreshed value)? newsRefreshed,
+    TResult Function(_NewsRead value)? newsRead,
     required TResult orElse(),
   }) {
     if (newsCreated != null) {
@@ -172,7 +211,12 @@ class _$_NewsCreated implements _NewsCreated {
 }
 
 abstract class _NewsCreated implements NewsEvent {
-  const factory _NewsCreated() = _$_NewsCreated;
+  const factory _NewsCreated(final int? newNewsId) = _$_NewsCreated;
+
+  int? get newNewsId;
+  @JsonKey(ignore: true)
+  _$$_NewsCreatedCopyWith<_$_NewsCreated> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -213,8 +257,9 @@ class _$_NewsRefreshed implements _NewsRefreshed {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() newsCreated,
+    required TResult Function(int? newNewsId) newsCreated,
     required TResult Function() newsRefreshed,
+    required TResult Function(int id) newsRead,
   }) {
     return newsRefreshed();
   }
@@ -222,8 +267,9 @@ class _$_NewsRefreshed implements _NewsRefreshed {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? newsCreated,
+    TResult? Function(int? newNewsId)? newsCreated,
     TResult? Function()? newsRefreshed,
+    TResult? Function(int id)? newsRead,
   }) {
     return newsRefreshed?.call();
   }
@@ -231,8 +277,9 @@ class _$_NewsRefreshed implements _NewsRefreshed {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? newsCreated,
+    TResult Function(int? newNewsId)? newsCreated,
     TResult Function()? newsRefreshed,
+    TResult Function(int id)? newsRead,
     required TResult orElse(),
   }) {
     if (newsRefreshed != null) {
@@ -246,6 +293,7 @@ class _$_NewsRefreshed implements _NewsRefreshed {
   TResult map<TResult extends Object?>({
     required TResult Function(_NewsCreated value) newsCreated,
     required TResult Function(_NewsRefreshed value) newsRefreshed,
+    required TResult Function(_NewsRead value) newsRead,
   }) {
     return newsRefreshed(this);
   }
@@ -255,6 +303,7 @@ class _$_NewsRefreshed implements _NewsRefreshed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NewsCreated value)? newsCreated,
     TResult? Function(_NewsRefreshed value)? newsRefreshed,
+    TResult? Function(_NewsRead value)? newsRead,
   }) {
     return newsRefreshed?.call(this);
   }
@@ -264,6 +313,7 @@ class _$_NewsRefreshed implements _NewsRefreshed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NewsCreated value)? newsCreated,
     TResult Function(_NewsRefreshed value)? newsRefreshed,
+    TResult Function(_NewsRead value)? newsRead,
     required TResult orElse(),
   }) {
     if (newsRefreshed != null) {
@@ -275,6 +325,145 @@ class _$_NewsRefreshed implements _NewsRefreshed {
 
 abstract class _NewsRefreshed implements NewsEvent {
   const factory _NewsRefreshed() = _$_NewsRefreshed;
+}
+
+/// @nodoc
+abstract class _$$_NewsReadCopyWith<$Res> {
+  factory _$$_NewsReadCopyWith(
+          _$_NewsRead value, $Res Function(_$_NewsRead) then) =
+      __$$_NewsReadCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int id});
+}
+
+/// @nodoc
+class __$$_NewsReadCopyWithImpl<$Res>
+    extends _$NewsEventCopyWithImpl<$Res, _$_NewsRead>
+    implements _$$_NewsReadCopyWith<$Res> {
+  __$$_NewsReadCopyWithImpl(
+      _$_NewsRead _value, $Res Function(_$_NewsRead) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$_NewsRead(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_NewsRead implements _NewsRead {
+  const _$_NewsRead(this.id);
+
+  @override
+  final int id;
+
+  @override
+  String toString() {
+    return 'NewsEvent.newsRead(id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_NewsRead &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_NewsReadCopyWith<_$_NewsRead> get copyWith =>
+      __$$_NewsReadCopyWithImpl<_$_NewsRead>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int? newNewsId) newsCreated,
+    required TResult Function() newsRefreshed,
+    required TResult Function(int id) newsRead,
+  }) {
+    return newsRead(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int? newNewsId)? newsCreated,
+    TResult? Function()? newsRefreshed,
+    TResult? Function(int id)? newsRead,
+  }) {
+    return newsRead?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int? newNewsId)? newsCreated,
+    TResult Function()? newsRefreshed,
+    TResult Function(int id)? newsRead,
+    required TResult orElse(),
+  }) {
+    if (newsRead != null) {
+      return newsRead(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_NewsCreated value) newsCreated,
+    required TResult Function(_NewsRefreshed value) newsRefreshed,
+    required TResult Function(_NewsRead value) newsRead,
+  }) {
+    return newsRead(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_NewsCreated value)? newsCreated,
+    TResult? Function(_NewsRefreshed value)? newsRefreshed,
+    TResult? Function(_NewsRead value)? newsRead,
+  }) {
+    return newsRead?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_NewsCreated value)? newsCreated,
+    TResult Function(_NewsRefreshed value)? newsRefreshed,
+    TResult Function(_NewsRead value)? newsRead,
+    required TResult orElse(),
+  }) {
+    if (newsRead != null) {
+      return newsRead(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NewsRead implements NewsEvent {
+  const factory _NewsRead(final int id) = _$_NewsRead;
+
+  int get id;
+  @JsonKey(ignore: true)
+  _$$_NewsReadCopyWith<_$_NewsRead> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

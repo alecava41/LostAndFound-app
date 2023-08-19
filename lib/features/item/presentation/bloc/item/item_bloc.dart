@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lost_and_found/core/data/secure_storage/secure_storage.dart';
+import 'package:lost_and_found/features/claim/domain/usecases/insert_read_claim_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/delete_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/solve_item_usecase.dart';
@@ -22,6 +23,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
   final GetItemUseCase _getItemUseCase;
   final SolveItemUseCase _solveItemUseCase;
   final DeleteItemUseCase _deleteItemUseCase;
+  final InsertReadClaimUseCase _insertReadClaimUseCase;
 
   final SecureStorage _secureStorage;
 
@@ -29,10 +31,12 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
       {required GetItemUseCase getItemUseCase,
       required SolveItemUseCase solveItemUseCase,
       required DeleteItemUseCase deleteItemUseCase,
+      required InsertReadClaimUseCase insertReadClaimUseCase,
       required SecureStorage secureStorage})
       : _getItemUseCase = getItemUseCase,
         _solveItemUseCase = solveItemUseCase,
         _deleteItemUseCase = deleteItemUseCase,
+        _insertReadClaimUseCase = insertReadClaimUseCase,
         _secureStorage = secureStorage,
         super(ItemState.initial()) {
     on<ItemEvent>(
@@ -42,9 +46,20 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
           itemRefreshed: () => _onItemRefreshed(emit),
           itemSolved: () => _onItemSolved(emit),
           itemDeleted: () => _onItemDeleted(emit),
+          claimRead: (id) => _onClaimRead(emit, id),
         );
       },
     );
+  }
+
+  Future<void> _onClaimRead(Emitter<ItemState> emit, int claimId) async {
+    final response = await _insertReadClaimUseCase(InsertReadClaimParams(claimId: claimId));
+    response.fold((_) => null, (_) {
+      final token = state.token;
+      state.item!.claims!.firstWhere((element) => element.id == claimId).opened = true;
+      emit(state.copyWith(token: ""));
+      emit(state.copyWith(token: token));
+    });
   }
 
   Future<void> _onItemCreated(Emitter<ItemState> emit, int id) async {

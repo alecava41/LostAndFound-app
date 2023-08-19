@@ -21,6 +21,7 @@ mixin _$ItemEvent {
     required TResult Function(int id) itemCreated,
     required TResult Function() itemRefreshed,
     required TResult Function() itemSolved,
+    required TResult Function(int id) claimRead,
     required TResult Function() itemDeleted,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,6 +30,7 @@ mixin _$ItemEvent {
     TResult? Function(int id)? itemCreated,
     TResult? Function()? itemRefreshed,
     TResult? Function()? itemSolved,
+    TResult? Function(int id)? claimRead,
     TResult? Function()? itemDeleted,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,6 +39,7 @@ mixin _$ItemEvent {
     TResult Function(int id)? itemCreated,
     TResult Function()? itemRefreshed,
     TResult Function()? itemSolved,
+    TResult Function(int id)? claimRead,
     TResult Function()? itemDeleted,
     required TResult orElse(),
   }) =>
@@ -46,6 +49,7 @@ mixin _$ItemEvent {
     required TResult Function(_ItemCreated value) itemCreated,
     required TResult Function(_ItemRefreshed value) itemRefreshed,
     required TResult Function(_ItemSolved value) itemSolved,
+    required TResult Function(_ClaimRead value) claimRead,
     required TResult Function(_ItemDeleted value) itemDeleted,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +58,7 @@ mixin _$ItemEvent {
     TResult? Function(_ItemCreated value)? itemCreated,
     TResult? Function(_ItemRefreshed value)? itemRefreshed,
     TResult? Function(_ItemSolved value)? itemSolved,
+    TResult? Function(_ClaimRead value)? claimRead,
     TResult? Function(_ItemDeleted value)? itemDeleted,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +67,7 @@ mixin _$ItemEvent {
     TResult Function(_ItemCreated value)? itemCreated,
     TResult Function(_ItemRefreshed value)? itemRefreshed,
     TResult Function(_ItemSolved value)? itemSolved,
+    TResult Function(_ClaimRead value)? claimRead,
     TResult Function(_ItemDeleted value)? itemDeleted,
     required TResult orElse(),
   }) =>
@@ -152,6 +158,7 @@ class _$_ItemCreated implements _ItemCreated {
     required TResult Function(int id) itemCreated,
     required TResult Function() itemRefreshed,
     required TResult Function() itemSolved,
+    required TResult Function(int id) claimRead,
     required TResult Function() itemDeleted,
   }) {
     return itemCreated(id);
@@ -163,6 +170,7 @@ class _$_ItemCreated implements _ItemCreated {
     TResult? Function(int id)? itemCreated,
     TResult? Function()? itemRefreshed,
     TResult? Function()? itemSolved,
+    TResult? Function(int id)? claimRead,
     TResult? Function()? itemDeleted,
   }) {
     return itemCreated?.call(id);
@@ -174,6 +182,7 @@ class _$_ItemCreated implements _ItemCreated {
     TResult Function(int id)? itemCreated,
     TResult Function()? itemRefreshed,
     TResult Function()? itemSolved,
+    TResult Function(int id)? claimRead,
     TResult Function()? itemDeleted,
     required TResult orElse(),
   }) {
@@ -189,6 +198,7 @@ class _$_ItemCreated implements _ItemCreated {
     required TResult Function(_ItemCreated value) itemCreated,
     required TResult Function(_ItemRefreshed value) itemRefreshed,
     required TResult Function(_ItemSolved value) itemSolved,
+    required TResult Function(_ClaimRead value) claimRead,
     required TResult Function(_ItemDeleted value) itemDeleted,
   }) {
     return itemCreated(this);
@@ -200,6 +210,7 @@ class _$_ItemCreated implements _ItemCreated {
     TResult? Function(_ItemCreated value)? itemCreated,
     TResult? Function(_ItemRefreshed value)? itemRefreshed,
     TResult? Function(_ItemSolved value)? itemSolved,
+    TResult? Function(_ClaimRead value)? claimRead,
     TResult? Function(_ItemDeleted value)? itemDeleted,
   }) {
     return itemCreated?.call(this);
@@ -211,6 +222,7 @@ class _$_ItemCreated implements _ItemCreated {
     TResult Function(_ItemCreated value)? itemCreated,
     TResult Function(_ItemRefreshed value)? itemRefreshed,
     TResult Function(_ItemSolved value)? itemSolved,
+    TResult Function(_ClaimRead value)? claimRead,
     TResult Function(_ItemDeleted value)? itemDeleted,
     required TResult orElse(),
   }) {
@@ -271,6 +283,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     required TResult Function(int id) itemCreated,
     required TResult Function() itemRefreshed,
     required TResult Function() itemSolved,
+    required TResult Function(int id) claimRead,
     required TResult Function() itemDeleted,
   }) {
     return itemRefreshed();
@@ -282,6 +295,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     TResult? Function(int id)? itemCreated,
     TResult? Function()? itemRefreshed,
     TResult? Function()? itemSolved,
+    TResult? Function(int id)? claimRead,
     TResult? Function()? itemDeleted,
   }) {
     return itemRefreshed?.call();
@@ -293,6 +307,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     TResult Function(int id)? itemCreated,
     TResult Function()? itemRefreshed,
     TResult Function()? itemSolved,
+    TResult Function(int id)? claimRead,
     TResult Function()? itemDeleted,
     required TResult orElse(),
   }) {
@@ -308,6 +323,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     required TResult Function(_ItemCreated value) itemCreated,
     required TResult Function(_ItemRefreshed value) itemRefreshed,
     required TResult Function(_ItemSolved value) itemSolved,
+    required TResult Function(_ClaimRead value) claimRead,
     required TResult Function(_ItemDeleted value) itemDeleted,
   }) {
     return itemRefreshed(this);
@@ -319,6 +335,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     TResult? Function(_ItemCreated value)? itemCreated,
     TResult? Function(_ItemRefreshed value)? itemRefreshed,
     TResult? Function(_ItemSolved value)? itemSolved,
+    TResult? Function(_ClaimRead value)? claimRead,
     TResult? Function(_ItemDeleted value)? itemDeleted,
   }) {
     return itemRefreshed?.call(this);
@@ -330,6 +347,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     TResult Function(_ItemCreated value)? itemCreated,
     TResult Function(_ItemRefreshed value)? itemRefreshed,
     TResult Function(_ItemSolved value)? itemSolved,
+    TResult Function(_ClaimRead value)? claimRead,
     TResult Function(_ItemDeleted value)? itemDeleted,
     required TResult orElse(),
   }) {
@@ -385,6 +403,7 @@ class _$_ItemSolved implements _ItemSolved {
     required TResult Function(int id) itemCreated,
     required TResult Function() itemRefreshed,
     required TResult Function() itemSolved,
+    required TResult Function(int id) claimRead,
     required TResult Function() itemDeleted,
   }) {
     return itemSolved();
@@ -396,6 +415,7 @@ class _$_ItemSolved implements _ItemSolved {
     TResult? Function(int id)? itemCreated,
     TResult? Function()? itemRefreshed,
     TResult? Function()? itemSolved,
+    TResult? Function(int id)? claimRead,
     TResult? Function()? itemDeleted,
   }) {
     return itemSolved?.call();
@@ -407,6 +427,7 @@ class _$_ItemSolved implements _ItemSolved {
     TResult Function(int id)? itemCreated,
     TResult Function()? itemRefreshed,
     TResult Function()? itemSolved,
+    TResult Function(int id)? claimRead,
     TResult Function()? itemDeleted,
     required TResult orElse(),
   }) {
@@ -422,6 +443,7 @@ class _$_ItemSolved implements _ItemSolved {
     required TResult Function(_ItemCreated value) itemCreated,
     required TResult Function(_ItemRefreshed value) itemRefreshed,
     required TResult Function(_ItemSolved value) itemSolved,
+    required TResult Function(_ClaimRead value) claimRead,
     required TResult Function(_ItemDeleted value) itemDeleted,
   }) {
     return itemSolved(this);
@@ -433,6 +455,7 @@ class _$_ItemSolved implements _ItemSolved {
     TResult? Function(_ItemCreated value)? itemCreated,
     TResult? Function(_ItemRefreshed value)? itemRefreshed,
     TResult? Function(_ItemSolved value)? itemSolved,
+    TResult? Function(_ClaimRead value)? claimRead,
     TResult? Function(_ItemDeleted value)? itemDeleted,
   }) {
     return itemSolved?.call(this);
@@ -444,6 +467,7 @@ class _$_ItemSolved implements _ItemSolved {
     TResult Function(_ItemCreated value)? itemCreated,
     TResult Function(_ItemRefreshed value)? itemRefreshed,
     TResult Function(_ItemSolved value)? itemSolved,
+    TResult Function(_ClaimRead value)? claimRead,
     TResult Function(_ItemDeleted value)? itemDeleted,
     required TResult orElse(),
   }) {
@@ -456,6 +480,157 @@ class _$_ItemSolved implements _ItemSolved {
 
 abstract class _ItemSolved implements ItemEvent {
   const factory _ItemSolved() = _$_ItemSolved;
+}
+
+/// @nodoc
+abstract class _$$_ClaimReadCopyWith<$Res> {
+  factory _$$_ClaimReadCopyWith(
+          _$_ClaimRead value, $Res Function(_$_ClaimRead) then) =
+      __$$_ClaimReadCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int id});
+}
+
+/// @nodoc
+class __$$_ClaimReadCopyWithImpl<$Res>
+    extends _$ItemEventCopyWithImpl<$Res, _$_ClaimRead>
+    implements _$$_ClaimReadCopyWith<$Res> {
+  __$$_ClaimReadCopyWithImpl(
+      _$_ClaimRead _value, $Res Function(_$_ClaimRead) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$_ClaimRead(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ClaimRead implements _ClaimRead {
+  const _$_ClaimRead(this.id);
+
+  @override
+  final int id;
+
+  @override
+  String toString() {
+    return 'ItemEvent.claimRead(id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ClaimRead &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ClaimReadCopyWith<_$_ClaimRead> get copyWith =>
+      __$$_ClaimReadCopyWithImpl<_$_ClaimRead>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int id) itemCreated,
+    required TResult Function() itemRefreshed,
+    required TResult Function() itemSolved,
+    required TResult Function(int id) claimRead,
+    required TResult Function() itemDeleted,
+  }) {
+    return claimRead(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int id)? itemCreated,
+    TResult? Function()? itemRefreshed,
+    TResult? Function()? itemSolved,
+    TResult? Function(int id)? claimRead,
+    TResult? Function()? itemDeleted,
+  }) {
+    return claimRead?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int id)? itemCreated,
+    TResult Function()? itemRefreshed,
+    TResult Function()? itemSolved,
+    TResult Function(int id)? claimRead,
+    TResult Function()? itemDeleted,
+    required TResult orElse(),
+  }) {
+    if (claimRead != null) {
+      return claimRead(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ItemCreated value) itemCreated,
+    required TResult Function(_ItemRefreshed value) itemRefreshed,
+    required TResult Function(_ItemSolved value) itemSolved,
+    required TResult Function(_ClaimRead value) claimRead,
+    required TResult Function(_ItemDeleted value) itemDeleted,
+  }) {
+    return claimRead(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ItemCreated value)? itemCreated,
+    TResult? Function(_ItemRefreshed value)? itemRefreshed,
+    TResult? Function(_ItemSolved value)? itemSolved,
+    TResult? Function(_ClaimRead value)? claimRead,
+    TResult? Function(_ItemDeleted value)? itemDeleted,
+  }) {
+    return claimRead?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ItemCreated value)? itemCreated,
+    TResult Function(_ItemRefreshed value)? itemRefreshed,
+    TResult Function(_ItemSolved value)? itemSolved,
+    TResult Function(_ClaimRead value)? claimRead,
+    TResult Function(_ItemDeleted value)? itemDeleted,
+    required TResult orElse(),
+  }) {
+    if (claimRead != null) {
+      return claimRead(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClaimRead implements ItemEvent {
+  const factory _ClaimRead(final int id) = _$_ClaimRead;
+
+  int get id;
+  @JsonKey(ignore: true)
+  _$$_ClaimReadCopyWith<_$_ClaimRead> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -499,6 +674,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     required TResult Function(int id) itemCreated,
     required TResult Function() itemRefreshed,
     required TResult Function() itemSolved,
+    required TResult Function(int id) claimRead,
     required TResult Function() itemDeleted,
   }) {
     return itemDeleted();
@@ -510,6 +686,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     TResult? Function(int id)? itemCreated,
     TResult? Function()? itemRefreshed,
     TResult? Function()? itemSolved,
+    TResult? Function(int id)? claimRead,
     TResult? Function()? itemDeleted,
   }) {
     return itemDeleted?.call();
@@ -521,6 +698,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     TResult Function(int id)? itemCreated,
     TResult Function()? itemRefreshed,
     TResult Function()? itemSolved,
+    TResult Function(int id)? claimRead,
     TResult Function()? itemDeleted,
     required TResult orElse(),
   }) {
@@ -536,6 +714,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     required TResult Function(_ItemCreated value) itemCreated,
     required TResult Function(_ItemRefreshed value) itemRefreshed,
     required TResult Function(_ItemSolved value) itemSolved,
+    required TResult Function(_ClaimRead value) claimRead,
     required TResult Function(_ItemDeleted value) itemDeleted,
   }) {
     return itemDeleted(this);
@@ -547,6 +726,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     TResult? Function(_ItemCreated value)? itemCreated,
     TResult? Function(_ItemRefreshed value)? itemRefreshed,
     TResult? Function(_ItemSolved value)? itemSolved,
+    TResult? Function(_ClaimRead value)? claimRead,
     TResult? Function(_ItemDeleted value)? itemDeleted,
   }) {
     return itemDeleted?.call(this);
@@ -558,6 +738,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     TResult Function(_ItemCreated value)? itemCreated,
     TResult Function(_ItemRefreshed value)? itemRefreshed,
     TResult Function(_ItemSolved value)? itemSolved,
+    TResult Function(_ClaimRead value)? claimRead,
     TResult Function(_ItemDeleted value)? itemDeleted,
     required TResult orElse(),
   }) {

@@ -35,7 +35,7 @@ class SearchScreen extends StatelessWidget {
                       },
                     )
                   },
-              (success) => {});
+              (_) {});
         }
       },
       builder: (ctx, state) {
@@ -45,7 +45,7 @@ class SearchScreen extends StatelessWidget {
           case SearchPageState.resultPage:
             return const SearchResultScreen();
           case SearchPageState.filterPage:
-            return const SearchOptionScreen();
+            return SearchOptionScreen(hasPerformedFirstSearch: state.hasPerformedFirstSearch);
         }
       },
     );

@@ -5,8 +5,6 @@ import 'package:lost_and_found/features/authentication/presentation/bloc/registr
 class UsernameInput extends StatelessWidget {
   const UsernameInput({super.key});
 
-  // TODO (@alecava41) should accept only lower-case characters
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RegistrationBloc, RegistrationState>(builder: (ctx, state) {

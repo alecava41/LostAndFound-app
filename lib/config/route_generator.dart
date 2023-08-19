@@ -15,7 +15,7 @@ class RouteGenerator {
     // Getting arguments passed in while calling Navigator.pushNamed
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => const HomeControllerScreen());
+        return MaterialPageRoute(builder: (builder) => const HomeControllerScreen());
       case '/tutorial':
         return MaterialPageRoute(builder: (_) => const InfoScreen());
       case '/register':
@@ -25,9 +25,31 @@ class RouteGenerator {
       case '/insert':
         return MaterialPageRoute(builder: (_) => InsertItemScreen());
       case '/notifications':
-        return MaterialPageRoute(builder: (_) => const NotificationsScreen());
+        return MaterialPageRoute(
+          builder: (_) {
+            int? newNewsId;
+
+            if (settings.arguments != null) {
+              newNewsId = (settings.arguments as NotificationsScreenArguments).newNewsId;
+            }
+
+            return NotificationsScreen(newNewsId: newNewsId);
+          },
+        );
       case '/claims':
-        return MaterialPageRoute(builder: (_) => const ClaimsScreen());
+        return MaterialPageRoute(
+          builder: (_) {
+            int? tab;
+            int? newClaimId;
+
+            if (settings.arguments != null) {
+              tab = (settings.arguments as ClaimsScreenArguments).tab;
+              newClaimId = (settings.arguments as ClaimsScreenArguments).claimId;
+            }
+
+            return ClaimsScreen(newClaimId: newClaimId, tab: tab);
+          },
+        );
       case '/options/changePassword':
         return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
       case '/options/tutorial':

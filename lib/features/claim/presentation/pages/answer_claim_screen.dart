@@ -12,15 +12,15 @@ import '../widgets/claimed_item_info.dart';
 class AnswerClaimScreen extends StatelessWidget {
   final int itemId;
   final int claimId;
-  final int claimIdx;
   final bool isClaimAlreadyManaged;
 
   const AnswerClaimScreen(
       {super.key,
-      required this.claimIdx,
       required this.itemId,
       required this.claimId,
       required this.isClaimAlreadyManaged});
+
+  // TODO if claim already managed, it would be better to put response there
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +144,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                   item: state.item!,
                                   subject:
                                       state.item!.claims!.firstWhere((element) => element.id == claimId).user.username,
-                                  claimIdx: claimIdx,
+                                  claimIdx: state.item!.claims!.indexWhere((element) => element.id == claimId),
                                 ),
                               ),
                               const SizedBox(
@@ -173,7 +173,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                 height: 30,
                               ),
                               PersonalizedLargeGreenButton(
-                                  isActive: isClaimAlreadyManaged,
+                                  isActive: !isClaimAlreadyManaged,
                                   onPressed: () => isClaimAlreadyManaged
                                       ? {}
                                       : ctx
