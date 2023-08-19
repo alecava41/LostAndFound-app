@@ -25,8 +25,6 @@ class ItemScreen extends StatelessWidget {
 
   const ItemScreen({super.key, required this.itemId});
 
-  // TODO (@backToFrancesco) address not completely visible
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ItemBloc>(
