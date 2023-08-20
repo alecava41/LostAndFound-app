@@ -4,7 +4,6 @@ import 'package:lost_and_found/features/item/presentation/widgets/search/custom_
 import 'package:lost_and_found/utils/colors.dart';
 
 import '../../bloc/search/search_bloc.dart';
-import 'custom_dropdown_button_form_field.dart';
 import 'custom_list_view.dart';
 
 class SearchResultScreen extends StatefulWidget {
@@ -127,6 +126,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
 
   void onOrderMenuButtonClick(BuildContext context) {
     showModalBottomSheet<void>(
+      
       context: context,
       builder: (BuildContext context) {
         return Column(
@@ -189,6 +189,30 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                 });
               },
             ),
+            const Divider(height: 0,),
+            OrderOptionButton(
+              text: OrderUtils.getOrderLabel(OrdinationType.distanceAscending),
+              isSelected: orderResultsOption == OrdinationType.distanceAscending
+                  ? true
+                  : false,
+              onClick: () {
+                setState(() {
+                  orderResultsOption = OrdinationType.distanceAscending;
+                });
+              },
+            ),
+            const Divider(height: 0,),
+            OrderOptionButton(
+              text: OrderUtils.getOrderLabel(OrdinationType.distanceDescending),
+              isSelected: orderResultsOption == OrdinationType.distanceDescending
+                  ? true
+                  : false,
+              onClick: () {
+                setState(() {
+                  orderResultsOption = OrdinationType.distanceDescending;
+                });
+              },
+            ),
             const SizedBox(height: 5,)
           ],
         );
@@ -239,19 +263,25 @@ enum OrdinationType {
   alphabeticalZA,
   dateAscending,
   dateDescending,
+  distanceAscending,
+  distanceDescending
 }
 
 class OrderUtils {
   static String getOrderLabel(OrdinationType ordinationType) {
     switch (ordinationType) {
       case OrdinationType.alphabeticalAZ:
-        return 'Alphabetic order from A to Z';
+        return 'Alphabetic from A to Z';
       case OrdinationType.alphabeticalZA:
-        return 'Alphabetic order from Z to A';
+        return 'Alphabetic from Z to A';
       case OrdinationType.dateAscending:
         return 'Ascending for date of insertion';
       case OrdinationType.dateDescending:
         return 'Descending for date of insertion';
+      case OrdinationType.distanceAscending:
+        return 'Ascending for distance';
+      case OrdinationType.distanceDescending:
+        return 'Descending for distance';
       default:
         return '';
     }

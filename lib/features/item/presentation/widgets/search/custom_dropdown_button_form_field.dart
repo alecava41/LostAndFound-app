@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// TODO (@backToFrancesco): delete if no more needed
 class CustomDropdownFormField extends StatelessWidget {
   final List<DropdownMenuItem<String>> items;
   final String value;
