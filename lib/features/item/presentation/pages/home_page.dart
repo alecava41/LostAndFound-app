@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
+import 'package:lost_and_found/features/item/presentation/widgets/home/error_page.dart';
 
 import '../widgets/home/clickable_circular_button.dart';
 import '../widgets/home/found_items_container.dart';
 import '../widgets/home/lost_items_container.dart';
+import 'package:badges/badges.dart' as badges;
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  // TODO add tooltip on icons
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +39,8 @@ class HomeScreen extends StatelessWidget {
         }
 
         if (state.homeFailureOrSuccess != null && state.homeFailureOrSuccess!.isLeft()) {
-          // TODO: need to handle error on loading (@backToFrancesco)
-          return const Text("Create screen");
+          // TODO: (@alecava41) add function to refresh
+          return ErrorPage(onRetry: (){print("Retry");});
         }
 
         return RefreshIndicator(
@@ -65,16 +65,27 @@ class HomeScreen extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            ClickableCircularButton(
-                              icon: Icons.notifications,
-                              onPressed: () => Navigator.of(context).pushNamed('/notifications'),
+                            badges.Badge(
+                              // TODO: (@alecava41) add logic to badges
+                              badgeContent: Text("3"),
+                              showBadge: false,
+                              position: badges.BadgePosition.topEnd(top: 6, end: 8),
+                              child: ClickableCircularButton(
+                                icon: Icons.notifications,
+                                onPressed: () => Navigator.of(context).pushNamed('/notifications'),
+                              ),
                             ),
                             const SizedBox(
                               width: 25,
                             ),
-                            ClickableCircularButton(
-                              icon: Icons.connect_without_contact,
-                              onPressed: () => Navigator.of(context).pushNamed('/claims'),
+                            badges.Badge(
+                              // TODO: (@alecava41) add bloc
+                              badgeContent: Text("3"),
+                              position: badges.BadgePosition.topEnd(top: 6, end: 8),
+                              child: ClickableCircularButton(
+                                icon: Icons.connect_without_contact,
+                                onPressed: () => Navigator.of(context).pushNamed('/claims'),
+                              ),
                             ),
                           ],
                         )
