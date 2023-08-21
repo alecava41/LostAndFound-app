@@ -51,21 +51,20 @@ enum ResultOrder {
 }
 
 extension LabelName on ResultOrder {
-  // TODO maybe we can use shorter/meaningful names
   String get name {
     switch (this) {
       case ResultOrder.alphabeticAscending:
-        return 'Alphabetic from A to Z';
+        return 'A to Z';
       case ResultOrder.alphabeticDescending:
-        return 'Alphabetic from Z to A';
+        return 'Z to A';
       case ResultOrder.dateAscending:
-        return 'Ascending for date of insertion';
+        return 'Oldest to Newest';
       case ResultOrder.dateDescending:
-        return 'Descending for date of insertion';
+        return 'Newest to Oldest';
       case ResultOrder.distanceAscending:
-        return 'Ascending for distance';
+        return 'Farthest to Nearest';
       case ResultOrder.distanceDescending:
-        return 'Descending for distance';
+        return 'Nearest to Farthest';
     }
   }
 }

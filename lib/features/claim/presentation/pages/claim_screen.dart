@@ -27,12 +27,14 @@ class ClaimsScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           iconTheme: const IconThemeData(color: Colors.black),
           bottom: const TabBar(tabs: [
+            // TODO (@backToFrancesco) add badge
             Tab(
               child: Text(
                 "Received claims",
                 style: TextStyle(color: Colors.black),
               ),
             ),
+            // TODO (@backToFrancesco) add badge
             Tab(
               child: Text(
                 "Your claims",

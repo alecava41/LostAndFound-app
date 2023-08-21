@@ -72,5 +72,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     );
 
     emit(state.copyWith(authFailureOrSuccess: null));
+
+    // TODO (@alecava41) refresh user_content / home_content after successful login
   }
 }

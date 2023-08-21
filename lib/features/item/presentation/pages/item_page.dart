@@ -361,7 +361,7 @@ class ItemScreen extends StatelessWidget {
 
                     return Container(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                        // TODO if claim already managed it would be better to put the status even in the card
+                        // TODO (@backToFrancesco) if claim already managed it would be better to put the status even in the card
                         child: ClaimedItemCard(
                           token: token,
                           opened: claim.opened,
@@ -405,6 +405,7 @@ class ItemScreen extends StatelessWidget {
         height: 20,
       ),
       claim != null
+      // TODO even if claim already sent, make it clickable and show answer on AnswerQuestionScreen
           ? Padding(
               padding: const EdgeInsets.all(8),
               child: Container(
@@ -443,7 +444,6 @@ class ItemScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    // TODO even if claim already sent, make it clickable and show answer on AnswerQuestionScreen
                     const SizedBox(
                       height: 5,
                     ),

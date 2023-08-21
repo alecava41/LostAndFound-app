@@ -8,6 +8,7 @@ class PersonalizedFormWithTextInsertion extends StatelessWidget {
   final bool isValid;
   final String? errorText;
   final String text;
+  final int maxLines;
 
   const PersonalizedFormWithTextInsertion(
       {super.key,
@@ -16,6 +17,7 @@ class PersonalizedFormWithTextInsertion extends StatelessWidget {
       required this.hintText,
       required this.errorText,
       required this.isValid,
+        this.maxLines = 4,
       required this.showError});
 
   @override
@@ -31,6 +33,7 @@ class PersonalizedFormWithTextInsertion extends StatelessWidget {
           isValid: isValid,
           hintText: hintText,
           text: text,
+          maxLines: maxLines,
         ),
       ],
     );

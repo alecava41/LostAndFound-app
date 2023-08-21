@@ -86,10 +86,10 @@ class InsertItemScreen extends StatelessWidget {
           }
         },
         builder: (ctx, state) {
-          // TODO why is it possible to add multiple rows? (@backToFrancesco)
           var titleField = CustomFieldContainer(
             title: "Title",
             content: PersonalizedFormWithTextInsertion(
+              maxLines: 1,
               showError: state.showError,
               errorText: state.title.value.fold(
                   (failure) => failure.maybeWhen<String?>(validationFailure: (reason) => reason, orElse: () => null),
@@ -105,7 +105,6 @@ class InsertItemScreen extends StatelessWidget {
                 selectedValue: state.type,
                 onChanged: (type) => ctx.read<InsertItemBloc>().add(InsertItemEvent.typeChanged(type))),
           );
-          // TODO why is it possible to add multiple rows? (@backToFrancesco)
           var questionField = CustomFieldContainer(
             title: "Question to verify the ownership",
             content: PersonalizedFormWithTextInsertion(

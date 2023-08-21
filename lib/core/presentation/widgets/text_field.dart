@@ -8,6 +8,7 @@ class PersonalizedTextField extends StatelessWidget {
   final bool isValid;
   final String? errorText;
   final String text;
+  final int maxLines;
 
   const PersonalizedTextField(
       {super.key,
@@ -16,6 +17,7 @@ class PersonalizedTextField extends StatelessWidget {
       required this.showError,
       required this.isValid,
         required this.text,
+        this.maxLines = 4,
       required this.errorText});
 
   @override
@@ -25,7 +27,7 @@ class PersonalizedTextField extends StatelessWidget {
       cursorColor: PersonalizedColor.mainColor,
       onChanged: onTextChanged,
       minLines: 1,
-      maxLines: 4,
+      maxLines: maxLines,
       autovalidateMode: showError == true ? AutovalidateMode.always : AutovalidateMode.disabled,
       validator: (_) => errorText,
       decoration: InputDecoration(

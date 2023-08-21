@@ -77,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                                 width: 25,
                               ),
                               badges.Badge(
-                                // TODO: (@alecava41) add management for sent claims
+                                // TODO (@alecava41) add management for sent claims (+1 if there is an update on sent claims)
                                 badgeContent: Text("${badgeState.unreadReceivedClaims}"),
                                 showBadge: badgeState.unreadReceivedClaims > 0,
                                 position: badges.BadgePosition.topEnd(top: 6, end: 8),

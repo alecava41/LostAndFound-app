@@ -23,8 +23,6 @@ class UpdateItemScreen extends StatelessWidget {
   final int itemId;
   final ImagePicker picker = ImagePicker();
 
-  // TODO (@backToFrancesco) maybe it's better to add item's type anyway (not editable)
-
   UpdateItemScreen({super.key, required this.itemId});
 
   // Upload image from camera or from gallery based on parameter
@@ -198,8 +196,8 @@ class UpdateItemScreen extends StatelessWidget {
                           CustomFieldContainer(
                             title: "Title",
                             content:
-                                // TODO (@backToFrancesco) why is it possible to add multiple lines?
                             PersonalizedFormWithTextInsertion(
+                              maxLines: 1,
                               text: state.title.value
                                   .getOrElse(() => ""),
                               showError: state.showError,
@@ -228,7 +226,6 @@ class UpdateItemScreen extends StatelessWidget {
                             title:
                             "Question to verify the ownership",
                             content:
-                            // TODO (@backToFrancesco) why is it possible to add multiple lines?
                             PersonalizedFormWithTextInsertion(
                               text: state.question.value
                                   .getOrElse(() => ""),
