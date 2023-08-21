@@ -23,6 +23,12 @@ import 'package:lost_and_found/features/authentication/domain/usecases/registrat
 import 'package:lost_and_found/features/authentication/presentation/bloc/login/login_bloc.dart';
 import 'package:dio_http_formatter/dio_http_formatter.dart';
 import 'package:lost_and_found/features/authentication/presentation/bloc/registration/registration_bloc.dart';
+import 'package:lost_and_found/features/badges/data/datasources/badge_client.dart';
+import 'package:lost_and_found/features/badges/data/datasources/badge_data_source.dart';
+import 'package:lost_and_found/features/badges/domain/repositories/badge_repository.dart';
+import 'package:lost_and_found/features/badges/domain/usecases/get_unread_news_usecase.dart';
+import 'package:lost_and_found/features/badges/domain/usecases/get_unread_received_claims_usecase.dart';
+import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/claim/data/datasources/claim_client.dart';
 import 'package:lost_and_found/features/claim/data/datasources/claim_datasource.dart';
 import 'package:lost_and_found/features/claim/domain/repositories/claim_repository.dart';
@@ -34,7 +40,7 @@ import 'package:lost_and_found/features/claim/domain/usecases/manage_claim_useca
 import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc.dart';
 import 'package:lost_and_found/features/item/data/datasources/item_client.dart';
 import 'package:lost_and_found/features/item/data/datasources/item_data_source.dart';
-import 'package:lost_and_found/features/item/data/datasources/read_news_datasource.dart';
+import 'package:lost_and_found/core/data/datasources/news/read_news_datasource.dart';
 import 'package:lost_and_found/features/item/data/repositories/item_repository_impl.dart';
 import 'package:lost_and_found/features/item/domain/repositories/item_repository.dart';
 import 'package:lost_and_found/features/item/domain/usecases/create_item_usecase.dart';
@@ -66,6 +72,7 @@ import 'core/data/datasources/http_interceptor.dart';
 import 'core/data/secure_storage/secure_storage.dart';
 import 'core/domain/repositories/category_repository.dart';
 import 'core/presentation/select_position/bloc/select_position_bloc.dart';
+import 'features/badges/data/repositories/badge_repository_impl.dart';
 import 'features/claim/data/repositories/claim_repository_impl.dart';
 import 'features/claim/presentation/bloc/answer_claim/answer_claim_bloc.dart';
 import 'features/claim/presentation/bloc/answer_question/answer_question_bloc.dart';
@@ -171,6 +178,21 @@ Future<void> init() async {
   // Data sources
   sl.registerLazySingleton<UserDataSource>(() => UserDataSourceImpl(sl()));
 
+  // ** Feature - Badge **
+  // BLoC
+  sl.registerFactory(() => BadgeBloc(getUnreadNewsUseCase: sl(), getUnreadReceivedClaimsUseCase: sl()));
+
+  // Use cases
+  sl.registerLazySingleton(() => GetUnreadNewsUseCase(sl()));
+  sl.registerLazySingleton(() => GetUnreadReceivedClaimsUseCase(sl()));
+
+  // Repositories
+  sl.registerLazySingleton<BadgeRepository>(() => BadgeRepositoryImpl(
+      storage: sl(), networkInfo: sl(), dataSource: sl(), readNewsDataSource: sl(), readClaimDataSource: sl()));
+
+  // Data sources
+  sl.registerLazySingleton<BadgeDataSource>(() => BadgeDataSourceImpl(sl()));
+
   // ** External - Generic **
   // Use cases
   sl.registerLazySingleton(() => GetAddressFromPositionUseCase(sl()));
@@ -212,6 +234,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => PositionClient(sl()));
   sl.registerLazySingleton(() => CategoryClient(sl()));
   sl.registerLazySingleton(() => UserClient(sl()));
+  sl.registerLazySingleton(() => BadgeClient(sl()));
 
   // Global BLoCs
   sl.registerFactory(() => HomeControllerBloc());

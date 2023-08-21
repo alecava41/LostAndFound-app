@@ -9,70 +9,72 @@ class NewsContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<NewsBloc, NewsState>(listener: (ctx, state) {
-      final loadFailureOrSuccess = state.loadFailureOrSuccess;
+    return BlocConsumer<NewsBloc, NewsState>(
+      listener: (ctx, state) {
+        final loadFailureOrSuccess = state.loadFailureOrSuccess;
 
-      if (loadFailureOrSuccess != null) {
-        loadFailureOrSuccess.fold(
-            (failure) => {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      padding: const EdgeInsets.all(30),
-                      backgroundColor: Colors.red,
-                      content: Text(
-                          failure.maybeWhen<String>(
-                              genericFailure: () => 'Server error. Please try again later.',
-                              networkFailure: () => 'No internet connection available. Check your internet connection.',
-                              orElse: () => 'Unknown error'),
-                          style: const TextStyle(fontSize: 20)),
-                    ),
-                  )
-                },
-            (success) => {});
-      }
-    }, builder: (ctx, state) {
-      return SafeArea(
-        top: false,
-        child: RefreshIndicator(
-          onRefresh: () async {
-            Future block = ctx.read<NewsBloc>().stream.first;
-            ctx.read<NewsBloc>().add(const NewsEvent.newsRefreshed());
-            await block;
-          },
-          child: state.isLoading
-              ? const CustomCircularProgress(size: 100)
-              : state.news.isEmpty
-                  ? SizedBox(
-                      height: MediaQuery.of(context).size.height,
-                      child: const SingleChildScrollView(
-                        physics: AlwaysScrollableScrollPhysics(),
-                        child: Center(
-                          child: Column(children: [
-                            SizedBox(
-                              height: 50,
-                            ),
-                            Icon(
-                              Icons.notifications_none,
-                              size: 80,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "There aren't notifications waiting for you",
-                              style: TextStyle(fontSize: 20),
-                              textAlign: TextAlign.center,
-                            ),
-                          ]),
-                        ),
+        if (loadFailureOrSuccess != null) {
+          loadFailureOrSuccess.fold(
+              (failure) => {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        padding: const EdgeInsets.all(30),
+                        backgroundColor: Colors.red,
+                        content: Text(
+                            failure.maybeWhen<String>(
+                                genericFailure: () => 'Server error. Please try again later.',
+                                networkFailure: () => 'No internet connection available. Check your internet connection.',
+                                orElse: () => 'Unknown error'),
+                            style: const TextStyle(fontSize: 20)),
                       ),
                     )
-                  : ListView.builder(
-                      itemCount: state.news.length,
-                      itemBuilder: (context, index) {
-                        final news = state.news[index];
-                        return CustomNotification(
-                          id: news.id,
+                  },
+              (success) => {});
+        }
+      },
+      builder: (ctx, state) {
+        return SafeArea(
+          top: false,
+          child: RefreshIndicator(
+            onRefresh: () async {
+              Future block = ctx.read<NewsBloc>().stream.first;
+              ctx.read<NewsBloc>().add(const NewsEvent.newsRefreshed());
+              await block;
+            },
+            child: state.isLoading
+                ? const CustomCircularProgress(size: 100)
+                : state.news.isEmpty
+                    ? SizedBox(
+                        height: MediaQuery.of(context).size.height,
+                        child: const SingleChildScrollView(
+                          physics: AlwaysScrollableScrollPhysics(),
+                          child: Center(
+                            child: Column(children: [
+                              SizedBox(
+                                height: 50,
+                              ),
+                              Icon(
+                                Icons.notifications_none,
+                                size: 80,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "There aren't notifications waiting for you",
+                                style: TextStyle(fontSize: 20),
+                                textAlign: TextAlign.center,
+                              ),
+                            ]),
+                          ),
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: state.news.length,
+                        itemBuilder: (context, index) {
+                          final news = state.news[index];
+                          return CustomNotification(
+                            id: news.id,
                             subjectItemTitle: news.subject.title,
                             subjectItemType: news.subject.type,
                             hasUserImage: news.targetUser.hasImage,
@@ -80,11 +82,13 @@ class NewsContent extends StatelessWidget {
                             targetUserId: news.targetUser.id,
                             targetUsername: news.targetUser.username,
                             token: state.token,
-                            opened: news.opened);
-                      },
-                    ),
-        ),
-      );
-    });
+                            opened: news.opened,
+                          );
+                        },
+                      ),
+          ),
+        );
+      },
+    );
   }
 }

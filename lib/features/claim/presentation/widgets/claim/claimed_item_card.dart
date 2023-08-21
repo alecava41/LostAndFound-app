@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/claim/domain/entities/claim_received.dart';
 import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
@@ -30,6 +31,7 @@ class ClaimedItemCard extends StatelessWidget {
             splashColor: !claim.opened ? PersonalizedColor.primarySwatch.shade500 : Colors.grey.withOpacity(0.4),
             onTap: () => {
               ctx.read<ClaimBloc>().add(ClaimEvent.claimRead(claim.id)),
+              ctx.read<BadgeBloc>().add(const BadgeEvent.receivedClaimRead()),
               Navigator.push(
                 context,
                 MaterialPageRoute(

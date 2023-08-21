@@ -9,7 +9,6 @@ class SearchState with _$SearchState {
     required CategoryField cat,
     required DateTime? dateTime,
     required ResultOrder order,
-    required OrderFlow orderFlow,
 
     // Search results
     required List<SearchItem> results,
@@ -29,19 +28,44 @@ class SearchState with _$SearchState {
     Either<Failure, Success>? searchFailureOrSuccess,
   }) = _SearchState;
 
-  factory SearchState.initial() => SearchState(
-        itemsToSearch: ItemsTypeField(false, false),
-        pos: PositionField(const LatLng(0, 0)),
-        cat: CategoryField(-1),
-        results: [],
-        dateTime: null,
-        order: ResultOrder.date,
-        orderFlow: OrderFlow.ascending,
+  factory SearchState.initial() =>
+      SearchState(
+          itemsToSearch: ItemsTypeField(false, false),
+          pos: PositionField(const LatLng(0, 0)),
+          cat: CategoryField(-1),
+          results: [],
+          dateTime: null,
+          order: ResultOrder.dateDescending,
       );
 }
 
 enum SearchPageState { loadingPage, resultPage, filterPage }
 
-enum ResultOrder { alphabetic, date, distance }
+enum ResultOrder {
+  alphabeticAscending,
+  alphabeticDescending,
+  dateAscending,
+  dateDescending,
+  distanceAscending,
+  distanceDescending
+}
 
-enum OrderFlow { ascending, descending }
+extension LabelName on ResultOrder {
+  // TODO maybe we can use shorter/meaningful names
+  String get name {
+    switch (this) {
+      case ResultOrder.alphabeticAscending:
+        return 'Alphabetic from A to Z';
+      case ResultOrder.alphabeticDescending:
+        return 'Alphabetic from Z to A';
+      case ResultOrder.dateAscending:
+        return 'Ascending for date of insertion';
+      case ResultOrder.dateDescending:
+        return 'Descending for date of insertion';
+      case ResultOrder.distanceAscending:
+        return 'Ascending for distance';
+      case ResultOrder.distanceDescending:
+        return 'Descending for distance';
+    }
+  }
+}

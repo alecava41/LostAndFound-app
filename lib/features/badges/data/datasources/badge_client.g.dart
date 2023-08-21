@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'category_client.dart';
+part of 'badge_client.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,12 +8,12 @@ part of 'category_client.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _CategoryClient implements CategoryClient {
-  _CategoryClient(
+class _BadgeClient implements BadgeClient {
+  _BadgeClient(
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.178.41:5000/api/categories';
+    baseUrl ??= 'http://192.168.178.41:5000/api';
   }
 
   final Dio _dio;
@@ -21,20 +21,20 @@ class _CategoryClient implements CategoryClient {
   String? baseUrl;
 
   @override
-  Future<List<CategoryDto>> getCategories() async {
+  Future<List<int>> getUnreadNews() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<CategoryDto>>(Options(
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<int>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '',
+              '/items/news',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -43,9 +43,34 @@ class _CategoryClient implements CategoryClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => CategoryDto.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = _result.data!.cast<int>();
+    return value;
+  }
+
+  @override
+  Future<List<int>> getUnreadReceivedClaims() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<int>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/items/claims/ids',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = _result.data!.cast<int>();
     return value;
   }
 

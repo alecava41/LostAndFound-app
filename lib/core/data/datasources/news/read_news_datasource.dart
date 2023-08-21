@@ -1,5 +1,5 @@
-import '../../../../core/data/datasources/database/database.dart';
-import '../models/news/read_news.dart';
+import '../database/database.dart';
+import '../../../../features/item/data/models/news/read_news.dart';
 
 abstract class ReadNewsDataSource {
   Future<void> insertReadNews(int id);

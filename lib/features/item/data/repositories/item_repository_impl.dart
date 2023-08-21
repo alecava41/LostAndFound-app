@@ -7,7 +7,7 @@ import 'package:lost_and_found/features/item/data/adapters/item_from_dto.dart';
 import 'package:lost_and_found/features/item/data/adapters/news_from_dto.dart';
 import 'package:lost_and_found/features/item/data/adapters/search_item_from_dto.dart';
 import 'package:lost_and_found/features/item/data/adapters/user_item_from_dto.dart';
-import 'package:lost_and_found/features/item/data/datasources/read_news_datasource.dart';
+import 'package:lost_and_found/core/data/datasources/news/read_news_datasource.dart';
 import 'package:lost_and_found/features/item/domain/entities/item.dart';
 import 'package:lost_and_found/features/item/domain/entities/search_item.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';

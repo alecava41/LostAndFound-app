@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/notification/news_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
@@ -41,6 +42,7 @@ class CustomNotification extends StatelessWidget {
             child: InkWell(
               onTap: () => {
                 ctx.read<NewsBloc>().add(NewsEvent.newsRead(id)),
+                ctx.read<BadgeBloc>().add(const BadgeEvent.newsRead()),
                 Navigator.push(context, MaterialPageRoute(builder: (_) => ItemScreen(itemId: targetItemId)))
               },
               splashColor: !opened ? PersonalizedColor.primarySwatch.shade500 : Colors.grey.withOpacity(0.4),

@@ -47,7 +47,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           searchSubmitted: () => _onSearchSubmit(emit),
           showFilters: () => _onShowFilters(emit),
           sortParameterChanged: (order) => _onChangeSortingParameter(emit, order),
-          orderFlowParameterChanged: (flow) => _onChangeOrderFlowParameter(emit, flow),
           searchPageChanged: (page) => _onSearchPageChanged(emit, page),
         );
       },
@@ -106,13 +105,14 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     final session = await _secureStorage.getSessionInformation();
 
     // Sort items
-    items = sortItems(items, state.order, state.orderFlow);
+    items = sortItems(items, ResultOrder.dateDescending);
 
     emit(
       state.copyWith(
         searchFailureOrSuccess: searchFailureOrSuccess,
         pageState: pageState,
         results: items,
+        order: ResultOrder.dateDescending,
         hasPerformedFirstSearch: hasPerformedSearch,
         token: session != null ? session.token : "",
         showError: true,
@@ -151,40 +151,26 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   }
 
   void _onChangeSortingParameter(Emitter<SearchState> emit, ResultOrder order) {
-    final items = sortItems(state.results, order, state.orderFlow);
+    final items = sortItems(state.results, order);
     emit(state.copyWith(results: items, order: order));
   }
 
-  void _onChangeOrderFlowParameter(Emitter<SearchState> emit, OrderFlow flow) {
-    final items = sortItems(state.results, state.order, flow);
-    emit(state.copyWith(results: items, orderFlow: flow));
-  }
-
-  List<SearchItem> sortItems(List<SearchItem> items, ResultOrder order, OrderFlow flow) {
+  List<SearchItem> sortItems(List<SearchItem> items, ResultOrder order) {
     List<SearchItem> orderedItems = List.from(items);
 
     switch (order) {
-      case ResultOrder.alphabetic:
-        if (flow == OrderFlow.ascending) {
-          orderedItems.sort((a, b) => a.title.compareTo(b.title));
-        } else {
-          orderedItems.sort((b, a) => a.title.compareTo(b.title));
-        }
-        break;
-      case ResultOrder.date:
-        if (flow == OrderFlow.ascending) {
-          orderedItems.sort((a, b) => a.date.compareTo(b.date));
-        } else {
-          orderedItems.sort((b, a) => a.date.compareTo(b.date));
-        }
-        break;
-      case ResultOrder.distance:
-        if (flow == OrderFlow.ascending) {
-          orderedItems.sort((a, b) => a.distance.compareTo(b.distance));
-        } else {
-          orderedItems.sort((b, a) => a.distance.compareTo(b.distance));
-        }
-        break;
+      case ResultOrder.alphabeticAscending:
+        orderedItems.sort((a, b) => a.title.toLowerCase().compareTo(b.title.toLowerCase()));
+      case ResultOrder.alphabeticDescending:
+        orderedItems.sort((b, a) => a.title.toLowerCase().compareTo(b.title.toLowerCase()));
+      case ResultOrder.dateAscending:
+        orderedItems.sort((a, b) => a.date.compareTo(b.date));
+      case ResultOrder.dateDescending:
+        orderedItems.sort((b, a) => a.date.compareTo(b.date));
+      case ResultOrder.distanceAscending:
+        orderedItems.sort((a, b) => a.distance.compareTo(b.distance));
+      case ResultOrder.distanceDescending:
+        orderedItems.sort((b, a) => a.distance.compareTo(b.distance));
     }
 
     return orderedItems;

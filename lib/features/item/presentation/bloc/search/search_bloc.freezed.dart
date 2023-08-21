@@ -28,7 +28,6 @@ mixin _$SearchEvent {
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
-    required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,7 +42,6 @@ mixin _$SearchEvent {
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
-    TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,7 +56,6 @@ mixin _$SearchEvent {
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
-    TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -74,8 +71,6 @@ mixin _$SearchEvent {
     required TResult Function(_ShowFilters value) showFilters,
     required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
-    required TResult Function(_OrderFlowParameterChanged value)
-        orderFlowParameterChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -90,8 +85,6 @@ mixin _$SearchEvent {
     TResult? Function(_ShowFilters value)? showFilters,
     TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult? Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -106,8 +99,6 @@ mixin _$SearchEvent {
     TResult Function(_ShowFilters value)? showFilters,
     TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -179,7 +170,6 @@ class _$_ResetFilters implements _ResetFilters {
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
-    required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
     return resetFilters();
   }
@@ -197,7 +187,6 @@ class _$_ResetFilters implements _ResetFilters {
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
-    TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
     return resetFilters?.call();
   }
@@ -215,7 +204,6 @@ class _$_ResetFilters implements _ResetFilters {
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
-    TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (resetFilters != null) {
@@ -237,8 +225,6 @@ class _$_ResetFilters implements _ResetFilters {
     required TResult Function(_ShowFilters value) showFilters,
     required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
-    required TResult Function(_OrderFlowParameterChanged value)
-        orderFlowParameterChanged,
   }) {
     return resetFilters(this);
   }
@@ -256,8 +242,6 @@ class _$_ResetFilters implements _ResetFilters {
     TResult? Function(_ShowFilters value)? showFilters,
     TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult? Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
   }) {
     return resetFilters?.call(this);
   }
@@ -275,8 +259,6 @@ class _$_ResetFilters implements _ResetFilters {
     TResult Function(_ShowFilters value)? showFilters,
     TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (resetFilters != null) {
@@ -338,7 +320,6 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
-    required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
     return foundCheckTriggered();
   }
@@ -356,7 +337,6 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
-    TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
     return foundCheckTriggered?.call();
   }
@@ -374,7 +354,6 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
-    TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (foundCheckTriggered != null) {
@@ -396,8 +375,6 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     required TResult Function(_ShowFilters value) showFilters,
     required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
-    required TResult Function(_OrderFlowParameterChanged value)
-        orderFlowParameterChanged,
   }) {
     return foundCheckTriggered(this);
   }
@@ -415,8 +392,6 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult? Function(_ShowFilters value)? showFilters,
     TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult? Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
   }) {
     return foundCheckTriggered?.call(this);
   }
@@ -434,8 +409,6 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult Function(_ShowFilters value)? showFilters,
     TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (foundCheckTriggered != null) {
@@ -497,7 +470,6 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
-    required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
     return lostCheckTriggered();
   }
@@ -515,7 +487,6 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
-    TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
     return lostCheckTriggered?.call();
   }
@@ -533,7 +504,6 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
-    TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (lostCheckTriggered != null) {
@@ -555,8 +525,6 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     required TResult Function(_ShowFilters value) showFilters,
     required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
-    required TResult Function(_OrderFlowParameterChanged value)
-        orderFlowParameterChanged,
   }) {
     return lostCheckTriggered(this);
   }
@@ -574,8 +542,6 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult? Function(_ShowFilters value)? showFilters,
     TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult? Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
   }) {
     return lostCheckTriggered?.call(this);
   }
@@ -593,8 +559,6 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult Function(_ShowFilters value)? showFilters,
     TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (lostCheckTriggered != null) {
@@ -682,7 +646,6 @@ class _$_PositionSelected implements _PositionSelected {
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
-    required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
     return positionSelected(pos);
   }
@@ -700,7 +663,6 @@ class _$_PositionSelected implements _PositionSelected {
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
-    TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
     return positionSelected?.call(pos);
   }
@@ -718,7 +680,6 @@ class _$_PositionSelected implements _PositionSelected {
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
-    TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (positionSelected != null) {
@@ -740,8 +701,6 @@ class _$_PositionSelected implements _PositionSelected {
     required TResult Function(_ShowFilters value) showFilters,
     required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
-    required TResult Function(_OrderFlowParameterChanged value)
-        orderFlowParameterChanged,
   }) {
     return positionSelected(this);
   }
@@ -759,8 +718,6 @@ class _$_PositionSelected implements _PositionSelected {
     TResult? Function(_ShowFilters value)? showFilters,
     TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult? Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
   }) {
     return positionSelected?.call(this);
   }
@@ -778,8 +735,6 @@ class _$_PositionSelected implements _PositionSelected {
     TResult Function(_ShowFilters value)? showFilters,
     TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (positionSelected != null) {
@@ -881,7 +836,6 @@ class _$_CategorySelected implements _CategorySelected {
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
-    required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
     return categorySelected(id, category);
   }
@@ -899,7 +853,6 @@ class _$_CategorySelected implements _CategorySelected {
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
-    TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
     return categorySelected?.call(id, category);
   }
@@ -917,7 +870,6 @@ class _$_CategorySelected implements _CategorySelected {
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
-    TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (categorySelected != null) {
@@ -939,8 +891,6 @@ class _$_CategorySelected implements _CategorySelected {
     required TResult Function(_ShowFilters value) showFilters,
     required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
-    required TResult Function(_OrderFlowParameterChanged value)
-        orderFlowParameterChanged,
   }) {
     return categorySelected(this);
   }
@@ -958,8 +908,6 @@ class _$_CategorySelected implements _CategorySelected {
     TResult? Function(_ShowFilters value)? showFilters,
     TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult? Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
   }) {
     return categorySelected?.call(this);
   }
@@ -977,8 +925,6 @@ class _$_CategorySelected implements _CategorySelected {
     TResult Function(_ShowFilters value)? showFilters,
     TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (categorySelected != null) {
@@ -1073,7 +1019,6 @@ class _$_DateSelected implements _DateSelected {
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
-    required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
     return dateSelected(date);
   }
@@ -1091,7 +1036,6 @@ class _$_DateSelected implements _DateSelected {
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
-    TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
     return dateSelected?.call(date);
   }
@@ -1109,7 +1053,6 @@ class _$_DateSelected implements _DateSelected {
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
-    TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (dateSelected != null) {
@@ -1131,8 +1074,6 @@ class _$_DateSelected implements _DateSelected {
     required TResult Function(_ShowFilters value) showFilters,
     required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
-    required TResult Function(_OrderFlowParameterChanged value)
-        orderFlowParameterChanged,
   }) {
     return dateSelected(this);
   }
@@ -1150,8 +1091,6 @@ class _$_DateSelected implements _DateSelected {
     TResult? Function(_ShowFilters value)? showFilters,
     TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult? Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
   }) {
     return dateSelected?.call(this);
   }
@@ -1169,8 +1108,6 @@ class _$_DateSelected implements _DateSelected {
     TResult Function(_ShowFilters value)? showFilters,
     TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (dateSelected != null) {
@@ -1237,7 +1174,6 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
-    required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
     return searchSubmitted();
   }
@@ -1255,7 +1191,6 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
-    TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
     return searchSubmitted?.call();
   }
@@ -1273,7 +1208,6 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
-    TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (searchSubmitted != null) {
@@ -1295,8 +1229,6 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     required TResult Function(_ShowFilters value) showFilters,
     required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
-    required TResult Function(_OrderFlowParameterChanged value)
-        orderFlowParameterChanged,
   }) {
     return searchSubmitted(this);
   }
@@ -1314,8 +1246,6 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     TResult? Function(_ShowFilters value)? showFilters,
     TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult? Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
   }) {
     return searchSubmitted?.call(this);
   }
@@ -1333,8 +1263,6 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     TResult Function(_ShowFilters value)? showFilters,
     TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (searchSubmitted != null) {
@@ -1396,7 +1324,6 @@ class _$_ShowFilters implements _ShowFilters {
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
-    required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
     return showFilters();
   }
@@ -1414,7 +1341,6 @@ class _$_ShowFilters implements _ShowFilters {
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
-    TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
     return showFilters?.call();
   }
@@ -1432,7 +1358,6 @@ class _$_ShowFilters implements _ShowFilters {
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
-    TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (showFilters != null) {
@@ -1454,8 +1379,6 @@ class _$_ShowFilters implements _ShowFilters {
     required TResult Function(_ShowFilters value) showFilters,
     required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
-    required TResult Function(_OrderFlowParameterChanged value)
-        orderFlowParameterChanged,
   }) {
     return showFilters(this);
   }
@@ -1473,8 +1396,6 @@ class _$_ShowFilters implements _ShowFilters {
     TResult? Function(_ShowFilters value)? showFilters,
     TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult? Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
   }) {
     return showFilters?.call(this);
   }
@@ -1492,8 +1413,6 @@ class _$_ShowFilters implements _ShowFilters {
     TResult Function(_ShowFilters value)? showFilters,
     TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (showFilters != null) {
@@ -1582,7 +1501,6 @@ class _$_SearchPageChanged implements _SearchPageChanged {
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
-    required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
     return searchPageChanged(page);
   }
@@ -1600,7 +1518,6 @@ class _$_SearchPageChanged implements _SearchPageChanged {
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
-    TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
     return searchPageChanged?.call(page);
   }
@@ -1618,7 +1535,6 @@ class _$_SearchPageChanged implements _SearchPageChanged {
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
-    TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (searchPageChanged != null) {
@@ -1640,8 +1556,6 @@ class _$_SearchPageChanged implements _SearchPageChanged {
     required TResult Function(_ShowFilters value) showFilters,
     required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
-    required TResult Function(_OrderFlowParameterChanged value)
-        orderFlowParameterChanged,
   }) {
     return searchPageChanged(this);
   }
@@ -1659,8 +1573,6 @@ class _$_SearchPageChanged implements _SearchPageChanged {
     TResult? Function(_ShowFilters value)? showFilters,
     TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult? Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
   }) {
     return searchPageChanged?.call(this);
   }
@@ -1678,8 +1590,6 @@ class _$_SearchPageChanged implements _SearchPageChanged {
     TResult Function(_ShowFilters value)? showFilters,
     TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (searchPageChanged != null) {
@@ -1774,7 +1684,6 @@ class _$_SortParameterChanged implements _SortParameterChanged {
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
-    required TResult Function(OrderFlow flow) orderFlowParameterChanged,
   }) {
     return sortParameterChanged(order);
   }
@@ -1792,7 +1701,6 @@ class _$_SortParameterChanged implements _SortParameterChanged {
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
-    TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
   }) {
     return sortParameterChanged?.call(order);
   }
@@ -1810,7 +1718,6 @@ class _$_SortParameterChanged implements _SortParameterChanged {
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
-    TResult Function(OrderFlow flow)? orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (sortParameterChanged != null) {
@@ -1832,8 +1739,6 @@ class _$_SortParameterChanged implements _SortParameterChanged {
     required TResult Function(_ShowFilters value) showFilters,
     required TResult Function(_SearchPageChanged value) searchPageChanged,
     required TResult Function(_SortParameterChanged value) sortParameterChanged,
-    required TResult Function(_OrderFlowParameterChanged value)
-        orderFlowParameterChanged,
   }) {
     return sortParameterChanged(this);
   }
@@ -1851,8 +1756,6 @@ class _$_SortParameterChanged implements _SortParameterChanged {
     TResult? Function(_ShowFilters value)? showFilters,
     TResult? Function(_SearchPageChanged value)? searchPageChanged,
     TResult? Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult? Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
   }) {
     return sortParameterChanged?.call(this);
   }
@@ -1870,8 +1773,6 @@ class _$_SortParameterChanged implements _SortParameterChanged {
     TResult Function(_ShowFilters value)? showFilters,
     TResult Function(_SearchPageChanged value)? searchPageChanged,
     TResult Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
     required TResult orElse(),
   }) {
     if (sortParameterChanged != null) {
@@ -1892,209 +1793,13 @@ abstract class _SortParameterChanged implements SearchEvent {
 }
 
 /// @nodoc
-abstract class _$$_OrderFlowParameterChangedCopyWith<$Res> {
-  factory _$$_OrderFlowParameterChangedCopyWith(
-          _$_OrderFlowParameterChanged value,
-          $Res Function(_$_OrderFlowParameterChanged) then) =
-      __$$_OrderFlowParameterChangedCopyWithImpl<$Res>;
-  @useResult
-  $Res call({OrderFlow flow});
-}
-
-/// @nodoc
-class __$$_OrderFlowParameterChangedCopyWithImpl<$Res>
-    extends _$SearchEventCopyWithImpl<$Res, _$_OrderFlowParameterChanged>
-    implements _$$_OrderFlowParameterChangedCopyWith<$Res> {
-  __$$_OrderFlowParameterChangedCopyWithImpl(
-      _$_OrderFlowParameterChanged _value,
-      $Res Function(_$_OrderFlowParameterChanged) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? flow = null,
-  }) {
-    return _then(_$_OrderFlowParameterChanged(
-      null == flow
-          ? _value.flow
-          : flow // ignore: cast_nullable_to_non_nullable
-              as OrderFlow,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_OrderFlowParameterChanged implements _OrderFlowParameterChanged {
-  const _$_OrderFlowParameterChanged(this.flow);
-
-  @override
-  final OrderFlow flow;
-
-  @override
-  String toString() {
-    return 'SearchEvent.orderFlowParameterChanged(flow: $flow)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_OrderFlowParameterChanged &&
-            (identical(other.flow, flow) || other.flow == flow));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, flow);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_OrderFlowParameterChangedCopyWith<_$_OrderFlowParameterChanged>
-      get copyWith => __$$_OrderFlowParameterChangedCopyWithImpl<
-          _$_OrderFlowParameterChanged>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() resetFilters,
-    required TResult Function() foundCheckTriggered,
-    required TResult Function() lostCheckTriggered,
-    required TResult Function(LatLng pos) positionSelected,
-    required TResult Function(int id, String category) categorySelected,
-    required TResult Function(DateTime date) dateSelected,
-    required TResult Function() searchSubmitted,
-    required TResult Function() showFilters,
-    required TResult Function(SearchPageState page) searchPageChanged,
-    required TResult Function(ResultOrder order) sortParameterChanged,
-    required TResult Function(OrderFlow flow) orderFlowParameterChanged,
-  }) {
-    return orderFlowParameterChanged(flow);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? resetFilters,
-    TResult? Function()? foundCheckTriggered,
-    TResult? Function()? lostCheckTriggered,
-    TResult? Function(LatLng pos)? positionSelected,
-    TResult? Function(int id, String category)? categorySelected,
-    TResult? Function(DateTime date)? dateSelected,
-    TResult? Function()? searchSubmitted,
-    TResult? Function()? showFilters,
-    TResult? Function(SearchPageState page)? searchPageChanged,
-    TResult? Function(ResultOrder order)? sortParameterChanged,
-    TResult? Function(OrderFlow flow)? orderFlowParameterChanged,
-  }) {
-    return orderFlowParameterChanged?.call(flow);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? resetFilters,
-    TResult Function()? foundCheckTriggered,
-    TResult Function()? lostCheckTriggered,
-    TResult Function(LatLng pos)? positionSelected,
-    TResult Function(int id, String category)? categorySelected,
-    TResult Function(DateTime date)? dateSelected,
-    TResult Function()? searchSubmitted,
-    TResult Function()? showFilters,
-    TResult Function(SearchPageState page)? searchPageChanged,
-    TResult Function(ResultOrder order)? sortParameterChanged,
-    TResult Function(OrderFlow flow)? orderFlowParameterChanged,
-    required TResult orElse(),
-  }) {
-    if (orderFlowParameterChanged != null) {
-      return orderFlowParameterChanged(flow);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_ResetFilters value) resetFilters,
-    required TResult Function(_FoundCheckTriggered value) foundCheckTriggered,
-    required TResult Function(_LostCheckTriggered value) lostCheckTriggered,
-    required TResult Function(_PositionSelected value) positionSelected,
-    required TResult Function(_CategorySelected value) categorySelected,
-    required TResult Function(_DateSelected value) dateSelected,
-    required TResult Function(_SearchSubmitted value) searchSubmitted,
-    required TResult Function(_ShowFilters value) showFilters,
-    required TResult Function(_SearchPageChanged value) searchPageChanged,
-    required TResult Function(_SortParameterChanged value) sortParameterChanged,
-    required TResult Function(_OrderFlowParameterChanged value)
-        orderFlowParameterChanged,
-  }) {
-    return orderFlowParameterChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ResetFilters value)? resetFilters,
-    TResult? Function(_FoundCheckTriggered value)? foundCheckTriggered,
-    TResult? Function(_LostCheckTriggered value)? lostCheckTriggered,
-    TResult? Function(_PositionSelected value)? positionSelected,
-    TResult? Function(_CategorySelected value)? categorySelected,
-    TResult? Function(_DateSelected value)? dateSelected,
-    TResult? Function(_SearchSubmitted value)? searchSubmitted,
-    TResult? Function(_ShowFilters value)? showFilters,
-    TResult? Function(_SearchPageChanged value)? searchPageChanged,
-    TResult? Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult? Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
-  }) {
-    return orderFlowParameterChanged?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ResetFilters value)? resetFilters,
-    TResult Function(_FoundCheckTriggered value)? foundCheckTriggered,
-    TResult Function(_LostCheckTriggered value)? lostCheckTriggered,
-    TResult Function(_PositionSelected value)? positionSelected,
-    TResult Function(_CategorySelected value)? categorySelected,
-    TResult Function(_DateSelected value)? dateSelected,
-    TResult Function(_SearchSubmitted value)? searchSubmitted,
-    TResult Function(_ShowFilters value)? showFilters,
-    TResult Function(_SearchPageChanged value)? searchPageChanged,
-    TResult Function(_SortParameterChanged value)? sortParameterChanged,
-    TResult Function(_OrderFlowParameterChanged value)?
-        orderFlowParameterChanged,
-    required TResult orElse(),
-  }) {
-    if (orderFlowParameterChanged != null) {
-      return orderFlowParameterChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _OrderFlowParameterChanged implements SearchEvent {
-  const factory _OrderFlowParameterChanged(final OrderFlow flow) =
-      _$_OrderFlowParameterChanged;
-
-  OrderFlow get flow;
-  @JsonKey(ignore: true)
-  _$$_OrderFlowParameterChangedCopyWith<_$_OrderFlowParameterChanged>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 mixin _$SearchState {
 // Search parameters
   ItemsTypeField get itemsToSearch => throw _privateConstructorUsedError;
   PositionField get pos => throw _privateConstructorUsedError;
   CategoryField get cat => throw _privateConstructorUsedError;
   DateTime? get dateTime => throw _privateConstructorUsedError;
-  ResultOrder get order => throw _privateConstructorUsedError;
-  OrderFlow get orderFlow =>
-      throw _privateConstructorUsedError; // Search results
+  ResultOrder get order => throw _privateConstructorUsedError; // Search results
   List<SearchItem> get results =>
       throw _privateConstructorUsedError; // User-friendly fields
   String get category => throw _privateConstructorUsedError;
@@ -2127,7 +1832,6 @@ abstract class $SearchStateCopyWith<$Res> {
       CategoryField cat,
       DateTime? dateTime,
       ResultOrder order,
-      OrderFlow orderFlow,
       List<SearchItem> results,
       String category,
       String address,
@@ -2159,7 +1863,6 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
     Object? cat = null,
     Object? dateTime = freezed,
     Object? order = null,
-    Object? orderFlow = null,
     Object? results = null,
     Object? category = null,
     Object? address = null,
@@ -2193,10 +1896,6 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as ResultOrder,
-      orderFlow: null == orderFlow
-          ? _value.orderFlow
-          : orderFlow // ignore: cast_nullable_to_non_nullable
-              as OrderFlow,
       results: null == results
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
@@ -2259,7 +1958,6 @@ abstract class _$$_SearchStateCopyWith<$Res>
       CategoryField cat,
       DateTime? dateTime,
       ResultOrder order,
-      OrderFlow orderFlow,
       List<SearchItem> results,
       String category,
       String address,
@@ -2289,7 +1987,6 @@ class __$$_SearchStateCopyWithImpl<$Res>
     Object? cat = null,
     Object? dateTime = freezed,
     Object? order = null,
-    Object? orderFlow = null,
     Object? results = null,
     Object? category = null,
     Object? address = null,
@@ -2323,10 +2020,6 @@ class __$$_SearchStateCopyWithImpl<$Res>
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as ResultOrder,
-      orderFlow: null == orderFlow
-          ? _value.orderFlow
-          : orderFlow // ignore: cast_nullable_to_non_nullable
-              as OrderFlow,
       results: null == results
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
@@ -2384,7 +2077,6 @@ class _$_SearchState implements _SearchState {
       required this.cat,
       required this.dateTime,
       required this.order,
-      required this.orderFlow,
       required final List<SearchItem> results,
       this.category = "",
       this.address = "",
@@ -2409,8 +2101,6 @@ class _$_SearchState implements _SearchState {
   final DateTime? dateTime;
   @override
   final ResultOrder order;
-  @override
-  final OrderFlow orderFlow;
 // Search results
   final List<SearchItem> _results;
 // Search results
@@ -2455,7 +2145,7 @@ class _$_SearchState implements _SearchState {
 
   @override
   String toString() {
-    return 'SearchState(itemsToSearch: $itemsToSearch, pos: $pos, cat: $cat, dateTime: $dateTime, order: $order, orderFlow: $orderFlow, results: $results, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, isLoadingPosition: $isLoadingPosition, token: $token, showError: $showError, hasPerformedFirstSearch: $hasPerformedFirstSearch, pageState: $pageState, searchFailureOrSuccess: $searchFailureOrSuccess)';
+    return 'SearchState(itemsToSearch: $itemsToSearch, pos: $pos, cat: $cat, dateTime: $dateTime, order: $order, results: $results, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, isLoadingPosition: $isLoadingPosition, token: $token, showError: $showError, hasPerformedFirstSearch: $hasPerformedFirstSearch, pageState: $pageState, searchFailureOrSuccess: $searchFailureOrSuccess)';
   }
 
   @override
@@ -2470,8 +2160,6 @@ class _$_SearchState implements _SearchState {
             (identical(other.dateTime, dateTime) ||
                 other.dateTime == dateTime) &&
             (identical(other.order, order) || other.order == order) &&
-            (identical(other.orderFlow, orderFlow) ||
-                other.orderFlow == orderFlow) &&
             const DeepCollectionEquality().equals(other._results, _results) &&
             (identical(other.category, category) ||
                 other.category == category) &&
@@ -2502,7 +2190,6 @@ class _$_SearchState implements _SearchState {
       cat,
       dateTime,
       order,
-      orderFlow,
       const DeepCollectionEquality().hash(_results),
       category,
       address,
@@ -2529,7 +2216,6 @@ abstract class _SearchState implements SearchState {
       required final CategoryField cat,
       required final DateTime? dateTime,
       required final ResultOrder order,
-      required final OrderFlow orderFlow,
       required final List<SearchItem> results,
       final String category,
       final String address,
@@ -2552,8 +2238,6 @@ abstract class _SearchState implements SearchState {
   DateTime? get dateTime;
   @override
   ResultOrder get order;
-  @override
-  OrderFlow get orderFlow;
   @override // Search results
   List<SearchItem> get results;
   @override // User-friendly fields

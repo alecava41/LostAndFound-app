@@ -27,15 +27,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
-            homeCreated: () => _onHomeCreatedOrRefreshed(emit, true), homeRefreshed: () => _onHomeCreatedOrRefreshed(emit, false),
-        homeSectionRefreshed: (type) => _onHomeSectionRefreshed(emit, type)
-        );
+            homeCreated: () => _onHomeCreatedOrRefreshed(emit, true),
+            homeRefreshed: () => _onHomeCreatedOrRefreshed(emit, false),
+            homeSectionRefreshed: (type) => _onHomeSectionRefreshed(emit, type));
       },
     );
   }
 
   Future<void> _onHomeCreatedOrRefreshed(Emitter<HomeState> emit, bool creation) async {
     Either<Failure, Success>? loadFailureOrSuccess;
+
+    emit(state.copyWith(hasLoadingError: false));
 
     if (creation) {
       emit(state.copyWith(isLoading: true));
@@ -57,8 +59,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           lostItems: lostItemsResponse.getOrElse(() => []),
           foundItems: foundItemsResponse.getOrElse(() => []),
           homeFailureOrSuccess: loadFailureOrSuccess,
+          hasLoadingError: loadFailureOrSuccess != null ? loadFailureOrSuccess!.isLeft() : false,
           token: session != null ? session.token : ""),
     );
+
     emit(state.copyWith(homeFailureOrSuccess: null));
 
     if (creation) {
@@ -67,9 +71,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future<void> _onHomeSectionRefreshed(Emitter<HomeState> emit, ItemType type) async {
+    // TODO add check if 'hasLoadingError' is true before loading (if so do something?)
     final itemsResponse = await _getUserItemsUseCase(GetUserItemsParams(type: type, last: 0));
 
-    if(itemsResponse.isRight()) {
+    if (itemsResponse.isRight()) {
       if (type == ItemType.found) {
         emit(state.copyWith(foundItems: itemsResponse.getOrElse(() => state.foundItems)));
       } else {

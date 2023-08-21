@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/search/custom_card_search.dart';
-import 'package:lost_and_found/utils/colors.dart';
 
 import '../../bloc/search/search_bloc.dart';
 import 'custom_list_view.dart';
+import 'order_option_button.dart';
 
-class SearchResultScreen extends StatefulWidget {
+class SearchResultScreen extends StatelessWidget {
   const SearchResultScreen({super.key});
-
-  @override
-  State<SearchResultScreen> createState() => _SearchResultScreenState();
-}
-
-class _SearchResultScreenState extends State<SearchResultScreen> {
-  OrdinationType orderResultsOption = OrdinationType.alphabeticalAZ;
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +26,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     style: ElevatedButton.styleFrom(
                       shape: const StadiumBorder(),
                     ),
-                    onPressed: () => ctx
-                        .read<SearchBloc>()
-                        .add(const SearchEvent.showFilters()),
+                    onPressed: () => ctx.read<SearchBloc>().add(const SearchEvent.showFilters()),
                     child: const Row(
                       children: [
                         Icon(
@@ -57,19 +48,22 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 12, 0),
                     child: TextButton(
-                        onPressed: () => onOrderMenuButtonClick(context),
+                        onPressed: () => onOrderMenuButtonClick(context, state.order),
                         child: Row(
-                          
                           children: [
                             const Icon(Icons.list),
-                            const SizedBox(width: 2,),
+                            const SizedBox(
+                              width: 2,
+                            ),
                             Expanded(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(OrderUtils.getOrderLabel(
-                                      orderResultsOption), textAlign: TextAlign.center,),
+                                  Text(
+                                    state.order.name,
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ],
                               ),
                             ),
@@ -124,10 +118,9 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     );
   }
 
-  void onOrderMenuButtonClick(BuildContext context) {
+  void onOrderMenuButtonClick(BuildContext ctx, ResultOrder selectedOrder) {
     showModalBottomSheet<void>(
-      
-      context: context,
+      context: ctx,
       builder: (BuildContext context) {
         return Column(
           mainAxisSize: MainAxisSize.min,
@@ -143,147 +136,62 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               height: 0,
             ),
             OrderOptionButton(
-              text: OrderUtils.getOrderLabel(OrdinationType.alphabeticalAZ),
-              isSelected: orderResultsOption == OrdinationType.alphabeticalAZ
-                  ? true
-                  : false,
-              onClick: () => setState(() {
-                orderResultsOption = OrdinationType.alphabeticalAZ;
-              }),
+              text: ResultOrder.alphabeticAscending.name,
+              isSelected: selectedOrder == ResultOrder.alphabeticAscending,
+              onClick: () =>
+                  ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.alphabeticAscending)),
             ),
             const Divider(
               height: 0,
             ),
             OrderOptionButton(
-              text: OrderUtils.getOrderLabel(OrdinationType.alphabeticalZA),
-              isSelected: orderResultsOption == OrdinationType.alphabeticalZA
-                  ? true
-                  : false,
-              onClick: () => setState(() {
-                orderResultsOption = OrdinationType.alphabeticalZA;
-              }),
+              text: ResultOrder.alphabeticDescending.name,
+              isSelected: selectedOrder == ResultOrder.alphabeticDescending,
+              onClick: () =>
+                  ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.alphabeticDescending)),
             ),
             const Divider(
               height: 0,
             ),
             OrderOptionButton(
-              text: OrderUtils.getOrderLabel(OrdinationType.dateAscending),
-              isSelected: orderResultsOption == OrdinationType.dateAscending
-                  ? true
-                  : false,
-              onClick: () => setState(() {
-                orderResultsOption = OrdinationType.dateAscending;
-              }),
+              text: ResultOrder.dateAscending.name,
+              isSelected: selectedOrder == ResultOrder.dateAscending,
+              onClick: () =>
+                  ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.dateAscending)),
             ),
             const Divider(
               height: 0,
             ),
             OrderOptionButton(
-              text: OrderUtils.getOrderLabel(OrdinationType.dateDescending),
-              isSelected: orderResultsOption == OrdinationType.dateDescending
-                  ? true
-                  : false,
-              onClick: () {
-                setState(() {
-                  orderResultsOption = OrdinationType.dateDescending;
-                });
-              },
+              text: ResultOrder.dateDescending.name,
+              isSelected: selectedOrder == ResultOrder.dateDescending,
+              onClick: () =>
+                  ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.dateDescending)),
             ),
-            const Divider(height: 0,),
+            const Divider(
+              height: 0,
+            ),
             OrderOptionButton(
-              text: OrderUtils.getOrderLabel(OrdinationType.distanceAscending),
-              isSelected: orderResultsOption == OrdinationType.distanceAscending
-                  ? true
-                  : false,
-              onClick: () {
-                setState(() {
-                  orderResultsOption = OrdinationType.distanceAscending;
-                });
-              },
+              text: ResultOrder.distanceAscending.name,
+              isSelected: selectedOrder == ResultOrder.distanceAscending,
+              onClick: () =>
+                  ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.distanceAscending)),
             ),
-            const Divider(height: 0,),
+            const Divider(
+              height: 0,
+            ),
             OrderOptionButton(
-              text: OrderUtils.getOrderLabel(OrdinationType.distanceDescending),
-              isSelected: orderResultsOption == OrdinationType.distanceDescending
-                  ? true
-                  : false,
-              onClick: () {
-                setState(() {
-                  orderResultsOption = OrdinationType.distanceDescending;
-                });
-              },
+              text: ResultOrder.distanceDescending.name,
+              isSelected: selectedOrder == ResultOrder.distanceDescending,
+              onClick: () =>
+                  ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.distanceDescending)),
             ),
-            const SizedBox(height: 5,)
+            const SizedBox(
+              height: 5,
+            )
           ],
         );
       },
     );
-  }
-}
-
-class OrderOptionButton extends StatelessWidget {
-  final String text;
-  final bool isSelected;
-  final VoidCallback onClick;
-
-  const OrderOptionButton(
-      {super.key,
-      required this.text,
-      required this.isSelected,
-      required this.onClick});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: isSelected
-          ? PersonalizedColor.claimAcceptedStatusColor
-          : Colors.transparent,
-      child: InkWell(
-        onTap: () {
-          onClick();
-          Navigator.pop(context);
-        },
-        splashColor: Colors.grey.shade200,
-        child: Container(
-          padding: const EdgeInsets.all(14),
-          alignment: Alignment.center,
-          width: MediaQuery.of(context).size.width,
-          child: Text(
-            text,
-            style:  TextStyle(fontSize: 20, color: Colors.black.withOpacity(0.6)),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-enum OrdinationType {
-  alphabeticalAZ,
-  alphabeticalZA,
-  dateAscending,
-  dateDescending,
-  distanceAscending,
-  distanceDescending
-}
-
-class OrderUtils {
-  static String getOrderLabel(OrdinationType ordinationType) {
-    switch (ordinationType) {
-      case OrdinationType.alphabeticalAZ:
-        return 'Alphabetic from A to Z';
-      case OrdinationType.alphabeticalZA:
-        return 'Alphabetic from Z to A';
-      case OrdinationType.dateAscending:
-        return 'Ascending for date of insertion';
-      case OrdinationType.dateDescending:
-        return 'Descending for date of insertion';
-      case OrdinationType.distanceAscending:
-        return 'Ascending for distance';
-      case OrdinationType.distanceDescending:
-        return 'Descending for distance';
-      default:
-        return '';
-    }
   }
 }

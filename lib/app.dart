@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/config/route_generator.dart';
 import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
+import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/claim_screen.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
@@ -25,31 +28,14 @@ class App extends StatefulWidget {
   State<StatefulWidget> createState() => _Application();
 
 /*
-   TODO (@alecava41) need to add DB support for badges
-      - notifications not read yet;
-      - claims (received not read yet, sent w/ updated not read yet);
-      - chat ??
-      - badges on the bottom_bar
 
    TODO (@alecava41) if app is in foreground, use badges (how?)
       - notification cases
-        - someone has inserted new item which may interest you
-            - update badge number for notifications
-            - mark home_bottom_bar with badge (+ animation)
-        - someone claimed one of your found items
-            - update badge number for total claims (received + sent)
-            - update badge number for received claims
-            - mark home_bottom_bar with badge (+ animation)
-        - someone has updated a claim opened by yourself
-            - update badge number for total claims (received + sent)
-            - update badge number for sent claims
-            - mark home_bottom_bar with badge (+ animation)
         - chat ??
    */
 
 /*
    TODO (@alecava41) if app is in background (notification pop up):
-    1 - check login status;
     2 - use 'topic' to create right navigation
         - check how to handle with BLoC and stuff
         - (firstly create home_controller, then navigate to wanted pages / subpages, need to include the specific info)
@@ -89,6 +75,8 @@ class _Application extends State<App> {
       case NotificationType.sentClaim:
         _handleSentClaimUpdateMessage(int.parse(message.data['item']));
       case NotificationType.chat:
+        // TODO handle chat notification
+        () {};
     }
   }
 
@@ -127,10 +115,13 @@ class _Application extends State<App> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<HomeBloc>(create: (_) => sl<HomeBloc>()..add(const HomeEvent.homeCreated())),
+        BlocProvider<HomeBloc>(
+            create: (_) => sl<HomeBloc>()..add(const HomeEvent.homeCreated())), // TODO move away from here if possible
         BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>()),
-        BlocProvider<UserBloc>(create: (_) => sl<UserBloc>()..add(const UserEvent.contentCreated())),
-        BlocProvider<HomeControllerBloc>(create: (_) => sl<HomeControllerBloc>())
+        BlocProvider<UserBloc>(
+            create: (_) => sl<UserBloc>()..add(const UserEvent.contentCreated())), // TODO move away from here if possible
+        BlocProvider<HomeControllerBloc>(create: (_) => sl<HomeControllerBloc>()),
+        BlocProvider<BadgeBloc>(create: (_) => sl<BadgeBloc>()..add(const BadgeEvent.badgeCreated())),
       ],
       child: MaterialApp(
         locale: DevicePreview.locale(context),
