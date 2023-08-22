@@ -32,7 +32,7 @@ class ClaimedStatusCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: Colors.grey,
+                color: PersonalizedColor.notOpenedColor,
                 width: 0.3,
               ),
             ),

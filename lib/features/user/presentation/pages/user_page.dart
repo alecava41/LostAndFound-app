@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_and_found/features/item/presentation/widgets/home/error_page.dart';
 import 'package:lost_and_found/features/user/presentation/bloc/user/user_bloc.dart';
 
 import '../../../../core/presentation/widgets/custom_circular_progress.dart';
@@ -148,8 +149,8 @@ class UserScreen extends StatelessWidget {
                   ),
                 )
               :
-              // TODO need to handle error on loading (@backToFrancesco)
-      Container(),
+              // TODO (@alecava41) add logic
+              ErrorPage(onRetry: (){}),
     );
   }
 

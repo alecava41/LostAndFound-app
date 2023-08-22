@@ -26,9 +26,9 @@ class ClaimedItemCard extends StatelessWidget {
       builder: (ctx, state) => ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Material(
-          color: !claim.opened ? PersonalizedColor.primarySwatch.shade200 : Colors.white,
+          color: claim.opened ? PersonalizedColor.openedColor : PersonalizedColor.notOpenedColor,
           child: InkWell(
-            splashColor: !claim.opened ? PersonalizedColor.primarySwatch.shade500 : Colors.grey.withOpacity(0.4),
+            splashColor: !claim.opened ? PersonalizedColor.splashGreenColor : PersonalizedColor.splashGreyColor,
             onTap: () => {
               ctx.read<ClaimBloc>().add(ClaimEvent.claimRead(claim.id)),
               ctx.read<BadgeBloc>().add(const BadgeEvent.receivedClaimRead()),
@@ -47,7 +47,7 @@ class ClaimedItemCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
-                  color: PersonalizedColor.mainColor,
+                  color: claim.opened ? PersonalizedColor.borderColorOpened : PersonalizedColor.borderColorNotOpened,
                 ),
               ),
               padding: const EdgeInsets.all(5),
@@ -93,10 +93,38 @@ class ClaimedItemCard extends StatelessWidget {
                             ),
                             Text(
                               "Claimed by: ${claim.user.username}",
-                              style: const TextStyle(fontSize: 13),
+                              style: const TextStyle(fontSize: 13, color: PersonalizedColor.userNameColor),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
+                            Container(
+                            padding: const EdgeInsets.all(3),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: claim.status == ClaimStatus.approved
+                                  ? PersonalizedColor.claimAcceptedStatusColor
+                                  : (claim.status == ClaimStatus.rejected
+                                      ? PersonalizedColor.claimDeniedStatusColor
+                                      : PersonalizedColor.claimWaitingStatusColor),
+                            ),
+                            child: RichText(
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              text: TextSpan(
+                                children: [
+                                  const TextSpan(
+                                    text: "Claim status: ",
+                                    style: TextStyle(fontSize: 13, color: Colors.black),
+                                  ),
+                                  TextSpan(
+                                    text: claim.status.name.toUpperCase(),
+                                    style:
+                                        const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                           ],
                         ),
                       ),

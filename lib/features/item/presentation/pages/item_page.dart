@@ -5,6 +5,7 @@ import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_sc
 import 'package:lost_and_found/features/claim/presentation/pages/answer_question_screen.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/pages/update_item_page.dart';
+import 'package:lost_and_found/features/item/presentation/widgets/insert_item/custom_field_container.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/item/claimed_item_card.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
@@ -134,11 +135,6 @@ class ItemScreen extends StatelessWidget {
                           question: state.item!.question,
                           type: state.item!.type,
                         ),
-                        const Divider(
-                          color: Colors.grey,
-                          thickness: 1,
-                          height: 0,
-                        )
                       ];
 
                       if (isCurrentUserOwner) {
@@ -220,87 +216,79 @@ class ItemScreen extends StatelessWidget {
     final userUrl = "$baseUrl/api/users/${owner.id}/image";
 
     return [
-      const SizedBox(
-        height: 20,
-      ),
-      const Divider(
-        color: Colors.grey,
-        thickness: 1,
-        height: 0,
-      ),
+      
       Container(
         color: Colors.white,
         width: MediaQuery.of(context).size.width,
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Lost by",
-                  style: TextStyle(fontSize: 20),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                // TODO (@backToFrancesco) username in two lines because "send a message" is too large
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Flexible(
-                      child: Row(
-                        children: [
-                          owner.hasImage
-                              ? ImageDialogWidget(
-                                  token: token,
-                                  imageUrl: userUrl,
-                                  errorAsset: 'assets/images/no-user.jpg',
-                                  child: CircularImage(
+          padding: const EdgeInsets.all(10.0),
+          child: CustomFieldContainer(
+            title: "Lost by",
+            content: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  // TODO (@backToFrancesco) username in two lines because "send a message" is too large
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: Row(
+                          children: [
+                            owner.hasImage
+                                ? ImageDialogWidget(
+                                    token: token,
+                                    imageUrl: userUrl,
+                                    errorAsset: 'assets/images/no-user.jpg',
+                                    child: CircularImage(
+                                      hasImage: owner.hasImage,
+                                      imageUrl: userUrl,
+                                      radius: 25,
+                                      token: token,
+                                    ),
+                                  )
+                                : CircularImage(
                                     hasImage: owner.hasImage,
                                     imageUrl: userUrl,
-                                    radius: 40,
+                                    radius: 25,
                                     token: token,
                                   ),
-                                )
-                              : CircularImage(
-                                  hasImage: owner.hasImage,
-                                  imageUrl: userUrl,
-                                  radius: 40,
-                                  token: token,
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                child: Text(
+                                  owner.username,
+                                  style: const TextStyle(fontSize: 16),
                                 ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
-                              child: Text(
-                                owner.username,
-                                style: const TextStyle(fontSize: 20),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        side: const BorderSide(color: PersonalizedColor.mainColor, width: 1.5),
-                        shape: const StadiumBorder(),
-                        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
+                      const SizedBox(width: 10),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          side: const BorderSide(color: PersonalizedColor.mainColor, width: 1.5),
+                          shape: const StadiumBorder(),
+                          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
+                        ),
+                        onPressed: () {}, // TODO (@alecava41) navigate to chat
+                        child: const Text(
+                          'Send a message',
+                          style: TextStyle(fontSize: 14, color: PersonalizedColor.mainColor),
+                        ),
                       ),
-                      onPressed: () {}, // TODO (@alecava41) navigate to chat
-                      child: const Text(
-                        'Send a message',
-                        style: TextStyle(fontSize: 18, color: PersonalizedColor.mainColor),
-                      ),
-                    ),
-                  ],
-                ),
-              ]),
+                    ],
+                  ),
+                ]),
+          ),
         ),
       ),
       const Divider(
