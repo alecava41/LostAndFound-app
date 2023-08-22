@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/config/route_generator.dart';
 import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
+import 'package:lost_and_found/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/claim_screen.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
@@ -30,7 +31,6 @@ class App extends StatefulWidget {
 /*
 
    TODO (@alecava41) if app is in foreground, use badges (how?)
-      - notification cases
         - chat ??
    */
 
@@ -75,7 +75,7 @@ class _Application extends State<App> {
       case NotificationType.sentClaim:
         _handleSentClaimUpdateMessage(int.parse(message.data['item']));
       case NotificationType.chat:
-        // TODO handle chat notification
+        // TODO (@alecava41) handle chat notification
         () {};
     }
   }
@@ -116,12 +116,13 @@ class _Application extends State<App> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<HomeBloc>(
-            create: (_) => sl<HomeBloc>()..add(const HomeEvent.homeCreated())), // TODO move away from here if possible
+            create: (_) => sl<HomeBloc>()..add(const HomeEvent.homeCreated())), // TODO (@alecava41) move away from here if possible
         BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>()),
         BlocProvider<UserBloc>(
-            create: (_) => sl<UserBloc>()..add(const UserEvent.contentCreated())), // TODO move away from here if possible
+            create: (_) => sl<UserBloc>()..add(const UserEvent.contentCreated())), // TODO (@alecava41) move away from here if possible
         BlocProvider<HomeControllerBloc>(create: (_) => sl<HomeControllerBloc>()),
         BlocProvider<BadgeBloc>(create: (_) => sl<BadgeBloc>()..add(const BadgeEvent.badgeCreated())),
+        BlocProvider<ChatBloc>(create: (_) => sl<ChatBloc>()..add(const ChatEvent.chatContentCreated()))
       ],
       child: MaterialApp(
         locale: DevicePreview.locale(context),

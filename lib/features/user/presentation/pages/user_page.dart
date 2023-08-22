@@ -10,8 +10,6 @@ import '../widgets/user/option_item.dart';
 class UserScreen extends StatelessWidget {
   const UserScreen({super.key});
 
-  // TODO (@alecava41 / @backToFrancesco) need to add screen to handle user fields / preferences (notifications, email, ...)
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserBloc, UserState>(

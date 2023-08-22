@@ -12,10 +12,9 @@ class RegistrationButton extends StatelessWidget {
       return ElevatedButton(
         onPressed: () async {
           // Handle notification permissions on iOS
-          // TODO (@alecava41) add check if user wants to be notified
           FirebaseMessaging messaging = FirebaseMessaging.instance;
 
-          NotificationSettings settings = await messaging.requestPermission(
+          await messaging.requestPermission(
             alert: true,
             announcement: false,
             badge: true,
@@ -26,8 +25,7 @@ class RegistrationButton extends StatelessWidget {
           );
 
           if (ctx.mounted) {
-            ctx.read<RegistrationBloc>().add(
-                RegistrationEvent.registrationSubmitted(settings.authorizationStatus == AuthorizationStatus.authorized));
+            ctx.read<RegistrationBloc>().add(const RegistrationEvent.registrationSubmitted());
           }
         },
         style: ElevatedButton.styleFrom(

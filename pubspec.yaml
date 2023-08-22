@@ -72,6 +72,7 @@ dependencies:
   firebase_core: ^2.15.0
   firebase_messaging: ^14.6.5
   badges: ^3.1.1
+  xmpp_plugin: ^2.2.8
 
 dev_dependencies:
   flutter_test:

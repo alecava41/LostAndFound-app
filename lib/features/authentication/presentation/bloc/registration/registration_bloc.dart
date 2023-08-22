@@ -29,13 +29,14 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     on<RegistrationEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
-            registrationSubmitted: (hasNotificationPermissions) => _onRegistrationSubmitted(emit, hasNotificationPermissions),
-            obscurePasswordToggled: () => _onObscurePasswordToggled(emit),
-            obscureConfirmPasswordToggled: () => _onObscureConfirmPasswordToggled(emit),
-            usernameFieldChanged: (username) => _onUsernameFieldChanged(emit, username),
-            emailFieldChanged: (email) => _onEmailFieldChanged(emit, email),
-            passwordFieldChanged: (password) => _onPasswordFieldChanged(emit, password),
-            confirmPasswordFieldChanged: (confirm) => _onConfirmPasswordFieldChanged(emit, confirm));
+          registrationSubmitted: () => _onRegistrationSubmitted(emit),
+          obscurePasswordToggled: () => _onObscurePasswordToggled(emit),
+          obscureConfirmPasswordToggled: () => _onObscureConfirmPasswordToggled(emit),
+          usernameFieldChanged: (username) => _onUsernameFieldChanged(emit, username),
+          emailFieldChanged: (email) => _onEmailFieldChanged(emit, email),
+          passwordFieldChanged: (password) => _onPasswordFieldChanged(emit, password),
+          confirmPasswordFieldChanged: (confirm) => _onConfirmPasswordFieldChanged(emit, confirm),
+        );
       },
     );
   }
@@ -70,7 +71,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
         confirmPassword: RegistrationConfirmPasswordField(state.password.value.getOrElse(() => ""), confirm)));
   }
 
-  Future<void> _onRegistrationSubmitted(Emitter<RegistrationState> emit, bool hasNotificationPermissions) async {
+  Future<void> _onRegistrationSubmitted(Emitter<RegistrationState> emit) async {
     final isUsernameFieldValid = state.username.value.isRight();
     final isEmailFieldValid = state.email.value.isRight();
     final isPasswordFieldValid = state.password.value.isRight();
@@ -87,8 +88,8 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
       );
 
       final params = RegistrationParams(
-          device: hasNotificationPermissions ? (Platform.isAndroid ? 'android' : "ios") : null,
-          token: hasNotificationPermissions ? await FirebaseMessaging.instance.getToken() : null,
+          device: Platform.isAndroid ? 'android' : "ios",
+          token: await FirebaseMessaging.instance.getToken(),
           password: state.password.value.getOrElse(() => ""),
           username: state.username.value.getOrElse(() => ""),
           email: state.email.value.getOrElse(() => ""));

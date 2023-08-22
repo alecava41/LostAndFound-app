@@ -15,13 +15,9 @@ class AnswerClaimScreen extends StatelessWidget {
   final int claimId;
   final bool isClaimAlreadyManaged;
 
-  const AnswerClaimScreen(
-      {super.key,
-      required this.itemId,
-      required this.claimId,
-      required this.isClaimAlreadyManaged});
+  const AnswerClaimScreen({super.key, required this.itemId, required this.claimId, required this.isClaimAlreadyManaged});
 
-  // TODO if claim already managed, it would be better to put response there
+  // TODO (@backToFrancesco) if claim already managed, it would be better to put response there
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +26,7 @@ class AnswerClaimScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            title: const Text(
-              "Answer to claim",
-              style: TextStyle(color: Colors.black),
-            ),
+            title: const Text("Answer to claim", style: TextStyle(color: Colors.black)),
             backgroundColor: Colors.white,
             iconTheme: const IconThemeData(color: Colors.black),
           ),

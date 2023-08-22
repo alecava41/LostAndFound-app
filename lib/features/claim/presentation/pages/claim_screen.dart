@@ -28,6 +28,7 @@ class ClaimsScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           iconTheme: const IconThemeData(color: Colors.black),
           bottom: const TabBar(tabs: [
+            // TODO (@backToFrancesco) add badge
             Tab(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -46,6 +47,7 @@ class ClaimsScreen extends StatelessWidget {
                 ],
               ),
             ),
+            // TODO (@backToFrancesco) add badge
             Tab(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

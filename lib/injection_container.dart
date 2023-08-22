@@ -29,6 +29,9 @@ import 'package:lost_and_found/features/badges/domain/repositories/badge_reposit
 import 'package:lost_and_found/features/badges/domain/usecases/get_unread_news_usecase.dart';
 import 'package:lost_and_found/features/badges/domain/usecases/get_unread_received_claims_usecase.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
+import 'package:lost_and_found/features/chat/data/datasources/chat_client.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/chat_login_usecase.dart';
+import 'package:lost_and_found/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:lost_and_found/features/claim/data/datasources/claim_client.dart';
 import 'package:lost_and_found/features/claim/data/datasources/claim_datasource.dart';
 import 'package:lost_and_found/features/claim/domain/repositories/claim_repository.dart';
@@ -192,6 +195,16 @@ Future<void> init() async {
 
   // Data sources
   sl.registerLazySingleton<BadgeDataSource>(() => BadgeDataSourceImpl(sl()));
+
+  // ** Feature - Chat **
+  // BLoC
+  sl.registerFactory(() => ChatBloc(chatLoginUseCase: sl()));
+
+  // Use cases
+  sl.registerLazySingleton(() => ChatLoginUseCase(sl()));
+
+  // Data sources
+  sl.registerLazySingleton<ChatClient>(() => ChatClientImpl(sl()));
 
   // ** External - Generic **
   // Use cases

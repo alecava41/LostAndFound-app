@@ -18,7 +18,7 @@ class ClaimedItemCard extends StatelessWidget {
 
   const ClaimedItemCard({super.key, required this.token, required this.claim});
 
-  // TODO if claim already managed it would be better to put the status even in the card
+  // TODO (@backToFrancesco) if claim already managed it would be better to put the status even in the card
 
   @override
   Widget build(BuildContext context) {

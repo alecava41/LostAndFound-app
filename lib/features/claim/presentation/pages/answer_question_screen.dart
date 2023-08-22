@@ -189,12 +189,11 @@ class AnswerQuestionScreen extends StatelessWidget {
                                     ),
                                   )
                                 :
-                                // TODO (@backToFrancesco) why is it possible to add multiple lines?
                                 PersonalizedFormWithTextInsertion(
-                                    text: "Your answer",
+                                    text: "",
                                     onTextChanged: (value) =>
                                         ctx.read<AnswerQuestionBloc>().add(AnswerQuestionEvent.answerFieldChanged(value)),
-                                    hintText: "",
+                                    hintText: "Your answer",
                                     errorText: state.answer.value.fold(
                                         (failure) => failure.maybeWhen<String?>(
                                             validationFailure: (reason) => reason, orElse: () => null),
@@ -204,6 +203,11 @@ class AnswerQuestionScreen extends StatelessWidget {
                             const SizedBox(
                               height: 30,
                             ),
+                            // TODO (@backToFrancesco) remove button and replace w/ text
+
+                            /* TODO (@backToFrancesco) add claim status
+                                HINT - state.item!.userClaim!.status.name
+                             */
                             PersonalizedLargeGreenButton(
                                 isActive: !isClaimAlreadyTaken,
                                 onPressed: () => isClaimAlreadyTaken

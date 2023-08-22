@@ -113,6 +113,8 @@ class SearchResultScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+
+          // TODO (@backToFrancesco) add error page
         ],
       ),
     );

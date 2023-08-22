@@ -17,11 +17,16 @@ class SearchOptionScreen extends StatelessWidget {
 
   const SearchOptionScreen({super.key, required this.hasPerformedFirstSearch});
 
+  /* TODO (@alecava41) create completely new filter page
+      - != bloc, pass current search state
+      - on create pass current search params to new bloc
+      - on back_button_pressed do nothing, show results
+      - on search_button_pressed, pass new params and perform search
+   */
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchBloc, SearchState>(builder: (ctx, state) {
-      // TODO cannot handle back button gracefully, not much to do
-
       return SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +43,7 @@ class SearchOptionScreen extends StatelessWidget {
                               onPressed: () => ctx
                                   .read<SearchBloc>()
                                   .add(const SearchEvent.searchPageChanged(SearchPageState.resultPage)),
-                              // TODO replace with something better!
+                              // TODO (@alecava41) replace with something better!
                               icon: const Icon(
                                 Icons.arrow_back,
                                 size: 40,

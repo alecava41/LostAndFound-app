@@ -10,7 +10,7 @@ RegistrationParams _$RegistrationParamsFromJson(Map<String, dynamic> json) =>
     RegistrationParams(
       email: json['email'] as String,
       token: json['token'] as String?,
-      device: json['device'] as String?,
+      device: json['device'] as String,
       username: json['username'] as String,
       password: json['password'] as String,
     );

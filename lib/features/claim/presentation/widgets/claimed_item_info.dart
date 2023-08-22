@@ -31,7 +31,7 @@ class ClaimedItemInfo extends StatelessWidget {
 
     final String userUrl = '$baseUrl/api/users/${user.id}/image';
 
-    // TODO (@backToFrancesco) if the name of item is too long, it can't be read
+    // TODO (@backToFrancesco) if the name of item is too long, it can't be read (max 30 chars)
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +106,7 @@ class ClaimedItemInfo extends StatelessWidget {
                           const SizedBox(
                             width: 8,
                           ),
-                          // TODO (@backToFrancesco) if the username of item is too long, it displays in two lines
+                          // TODO (@backToFrancesco) if the username of item is too long, it displays in two lines (max 30 chars)
                           Flexible(
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
