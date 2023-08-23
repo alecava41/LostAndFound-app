@@ -132,6 +132,7 @@ class ItemScreen extends StatelessWidget {
                           position: state.item!.address,
                           date: state.item!.insertion,
                           category: state.item!.category.name,
+                          // TODO (@alecava41) let question null if the item is reported as lost (not shows question in lost items)
                           question: state.item!.question,
                           type: state.item!.type,
                         ),
@@ -231,7 +232,6 @@ class ItemScreen extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  // TODO (@backToFrancesco) username in two lines because "send a message" is too large
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -301,79 +301,62 @@ class ItemScreen extends StatelessWidget {
 
   List<Widget> _showOwnerFoundItemWidgets(BuildContext context, List<ClaimReceived> claims, String token, int itemId) {
     return [
-      const SizedBox(
-        height: 30,
-      ),
-      const Divider(
-        color: Colors.grey,
-        thickness: 1,
-        height: 0,
-      ),
+      
       Container(
         color: Colors.white,
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.all(10),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Padding(
-            padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.connect_without_contact,
-                  size: 25,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Expanded(
-                    child: Text(
-                  "Item claimed by",
-                  style: TextStyle(fontSize: 18),
-                  overflow: TextOverflow.ellipsis,
-                )),
-              ],
-            ),
+          
+          CustomFieldContainer(
+            title: "Claims for this item",
+            content: claims.isEmpty
+                ? const Center(
+                    child: Column(
+                      children: [
+                        Text(
+                        "No claims received.",
+                        style: TextStyle(fontSize: 18),
+
+                  ),
+                  Icon(Icons.connect_without_contact, size: 50,)
+                      ],
+                    ))
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: claims.length,
+                    itemBuilder: (context, index) {
+                      final claim = claims[index];
+          
+                      return Container(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                          // TODO (@backToFrancesco) if claim already managed it would be better to put the status even in the card
+                          child: ClaimedItemCard(
+                            token: token,
+                            opened: claim.opened,
+                            userId: claim.user.id,
+                            hasImage: claim.user.hasImage,
+                            username: claim.user.username,
+                            onTap: () async {
+                              context.read<ItemBloc>().add(ItemEvent.claimRead(claim.id));
+                              final claimStatus = await Navigator.push<bool?>(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (ctx) => AnswerClaimScreen(
+                                            itemId: itemId,
+                                            claimId: claim.id,
+                                            isClaimAlreadyManaged: claim.status != ClaimStatus.pending,
+                                          )));
+          
+                              if (claimStatus != null && claimStatus && context.mounted) {
+                                context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
+                              }
+                            },
+                          ));
+                    },
+                  ),
           ),
-          claims.isEmpty
-              ? const Center(
-                  child: Text(
-                  "No claims received",
-                  style: TextStyle(fontSize: 18),
-                ))
-              : ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: claims.length,
-                  itemBuilder: (context, index) {
-                    final claim = claims[index];
-
-                    return Container(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                        // TODO (@backToFrancesco) if claim already managed it would be better to put the status even in the card
-                        child: ClaimedItemCard(
-                          token: token,
-                          opened: claim.opened,
-                          userId: claim.user.id,
-                          hasImage: claim.user.hasImage,
-                          username: claim.user.username,
-                          onTap: () async {
-                            context.read<ItemBloc>().add(ItemEvent.claimRead(claim.id));
-                            final claimStatus = await Navigator.push<bool?>(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (ctx) => AnswerClaimScreen(
-                                          itemId: itemId,
-                                          claimId: claim.id,
-                                          isClaimAlreadyManaged: claim.status != ClaimStatus.pending,
-                                        )));
-
-                            if (claimStatus != null && claimStatus && context.mounted) {
-                              context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
-                            }
-                          },
-                        ));
-                  },
-                ),
         ]),
       ),
       const Divider(
