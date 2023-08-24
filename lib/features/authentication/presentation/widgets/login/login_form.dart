@@ -15,7 +15,7 @@ class LoginForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        margin: const EdgeInsets.all(24),
+        margin: const EdgeInsets.all(16),
         child: BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
             final authFailureOrSuccess = state.authFailureOrSuccess;

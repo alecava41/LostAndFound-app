@@ -13,7 +13,7 @@ class _CategoryClient implements CategoryClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://13.53.123.251:5000/api/categories';
+    baseUrl ??= 'http://16.171.57.230:5000/api/categories';
   }
 
   final Dio _dio;

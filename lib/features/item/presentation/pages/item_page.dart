@@ -43,8 +43,10 @@ class ItemScreen extends StatelessWidget {
                 backgroundColor: Colors.red,
                 content: Text(
                     failure.maybeWhen<String>(
-                        genericFailure: () => 'Server error. Please try again later.',
-                        networkFailure: () => 'No internet connection available. Check your internet connection.',
+                        genericFailure: () =>
+                            'Server error. Please try again later.',
+                        networkFailure: () =>
+                            'No internet connection available. Check your internet connection.',
                         validationFailure: (reason) => reason!,
                         orElse: () => "Unknown error"),
                     style: const TextStyle(fontSize: 20)),
@@ -62,16 +64,22 @@ class ItemScreen extends StatelessWidget {
                         backgroundColor: Colors.red,
                         content: Text(
                             failure.maybeWhen<String>(
-                                genericFailure: () => 'Server error. Please try again later.',
-                                networkFailure: () => 'No internet connection available. Check your internet connection.',
+                                genericFailure: () =>
+                                    'Server error. Please try again later.',
+                                networkFailure: () =>
+                                    'No internet connection available. Check your internet connection.',
                                 validationFailure: (reason) => reason!,
                                 orElse: () => "Unknown error"),
                             style: const TextStyle(fontSize: 20)),
                       ),
                     ), (_) {
               // Navigate back to HP + update HP
-              ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.item!.type));
-              context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
+              ctx
+                  .read<HomeBloc>()
+                  .add(HomeEvent.homeSectionRefreshed(state.item!.type));
+              context
+                  .read<HomeControllerBloc>()
+                  .add(const HomeControllerEvent.tabChanged(0));
               Navigator.pop(context);
             });
           }
@@ -84,16 +92,22 @@ class ItemScreen extends StatelessWidget {
                         backgroundColor: Colors.red,
                         content: Text(
                             failure.maybeWhen<String>(
-                                genericFailure: () => 'Server error. Please try again later.',
-                                networkFailure: () => 'No internet connection available. Check your internet connection.',
+                                genericFailure: () =>
+                                    'Server error. Please try again later.',
+                                networkFailure: () =>
+                                    'No internet connection available. Check your internet connection.',
                                 validationFailure: (reason) => reason!,
                                 orElse: () => "Unknown error"),
                             style: const TextStyle(fontSize: 20)),
                       ),
                     ), (_) {
               // Navigate back to HP + update HP
-              ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.item!.type));
-              context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
+              ctx
+                  .read<HomeBloc>()
+                  .add(HomeEvent.homeSectionRefreshed(state.item!.type));
+              context
+                  .read<HomeControllerBloc>()
+                  .add(const HomeControllerEvent.tabChanged(0));
               Navigator.pop(context);
             });
           }
@@ -141,14 +155,24 @@ class ItemScreen extends StatelessWidget {
                       if (isCurrentUserOwner) {
                         if (state.item!.type == ItemType.found) {
                           widgetList += _showOwnerFoundItemWidgets(
-                              ctx, state.item!.claims != null ? state.item!.claims! : [], state.token, itemId);
+                              ctx,
+                              state.item!.claims != null
+                                  ? state.item!.claims!
+                                  : [],
+                              state.token,
+                              itemId);
                         }
                       } else {
                         if (state.item!.type == ItemType.lost) {
-                          widgetList += _showGenericLostItemWidgets(ctx, state.token, state.item!.user);
+                          widgetList += _showGenericLostItemWidgets(
+                              ctx, state.token, state.item!.user);
                         } else {
                           widgetList += _showGenericFoundItemWidgets(
-                              ctx, state.item!.userClaim, state.token, state.item!.user, itemId);
+                              ctx,
+                              state.item!.userClaim,
+                              state.token,
+                              state.item!.user,
+                              itemId);
                         }
                       }
 
@@ -195,8 +219,10 @@ class ItemScreen extends StatelessWidget {
                 ctx.read<ItemBloc>().add(const ItemEvent.itemSolved());
                 break;
               case 'opt2':
-                final changes =
-                    await Navigator.push<bool>(ctx, MaterialPageRoute(builder: (_) => UpdateItemScreen(itemId: itemId)));
+                final changes = await Navigator.push<bool>(
+                    ctx,
+                    MaterialPageRoute(
+                        builder: (_) => UpdateItemScreen(itemId: itemId)));
                 if (changes != null && changes && ctx.mounted) {
                   ctx.read<ItemBloc>().add(ItemEvent.itemCreated(itemId));
                 }
@@ -213,122 +239,132 @@ class ItemScreen extends StatelessWidget {
     }
   }
 
-  List<Widget> _showGenericLostItemWidgets(BuildContext context, String token, User owner) {
+  List<Widget> _showGenericLostItemWidgets(
+      BuildContext context, String token, User owner) {
     final userUrl = "$baseUrl/api/users/${owner.id}/image";
 
     return [
-      
       Container(
         color: Colors.white,
         width: MediaQuery.of(context).size.width,
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: CustomFieldContainer(
-            title: "Lost by",
-            content: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: CustomFieldContainer(
+                title: "Lost by",
+                content: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Flexible(
-                        child: Row(
-                          children: [
-                            owner.hasImage
-                                ? ImageDialogWidget(
-                                    token: token,
-                                    imageUrl: userUrl,
-                                    errorAsset: 'assets/images/no-user.jpg',
-                                    child: CircularImage(
-                                      hasImage: owner.hasImage,
-                                      imageUrl: userUrl,
-                                      radius: 25,
-                                      token: token,
-                                    ),
-                                  )
-                                : CircularImage(
-                                    hasImage: owner.hasImage,
-                                    imageUrl: userUrl,
-                                    radius: 25,
-                                    token: token,
-                                  ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                child: Text(
-                                  owner.username,
-                                  style: const TextStyle(fontSize: 16),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Flexible(
+                            child: Row(
+                              children: [
+                                owner.hasImage
+                                    ? ImageDialogWidget(
+                                        token: token,
+                                        imageUrl: userUrl,
+                                        errorAsset: 'assets/images/no-user.jpg',
+                                        child: CircularImage(
+                                          hasImage: owner.hasImage,
+                                          imageUrl: userUrl,
+                                          radius: 25,
+                                          token: token,
+                                        ),
+                                      )
+                                    : CircularImage(
+                                        hasImage: owner.hasImage,
+                                        imageUrl: userUrl,
+                                        radius: 25,
+                                        token: token,
+                                      ),
+                                const SizedBox(
+                                  width: 5,
                                 ),
-                              ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                    child: Text(
+                                      owner.username,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(width: 10),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              side: const BorderSide(
+                                  color: PersonalizedColor.mainColor, width: 1.5),
+                              shape: const StadiumBorder(),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 15),
+                            ),
+                            onPressed: () {}, // TODO (@alecava41) navigate to chat
+                            child: const Text(
+                              'Send a message',
+                              style: TextStyle(
+                                  fontSize: 14, color: PersonalizedColor.mainColor),
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 10),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          side: const BorderSide(color: PersonalizedColor.mainColor, width: 1.5),
-                          shape: const StadiumBorder(),
-                          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
-                        ),
-                        onPressed: () {}, // TODO (@alecava41) navigate to chat
-                        child: const Text(
-                          'Send a message',
-                          style: TextStyle(fontSize: 14, color: PersonalizedColor.mainColor),
-                        ),
-                      ),
-                    ],
+                      
+                    ]),
+                    
+              ),
+            ),
+            const SizedBox(
+                    height: 10,
                   ),
-                ]),
-          ),
+          ],
         ),
-      ),
-      const Divider(
-        color: Colors.grey,
-        thickness: 1,
-        height: 0,
       ),
     ];
   }
 
-  List<Widget> _showOwnerFoundItemWidgets(BuildContext context, List<ClaimReceived> claims, String token, int itemId) {
+  List<Widget> _showOwnerFoundItemWidgets(BuildContext context,
+      List<ClaimReceived> claims, String token, int itemId) {
     return [
-      
       Container(
         color: Colors.white,
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.all(10),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          
           CustomFieldContainer(
             title: "Claims for this item",
             content: claims.isEmpty
                 ? const Center(
                     child: Column(
-                      children: [
-                        Text(
+                    children: [
+                      Text(
                         "No claims received.",
                         style: TextStyle(fontSize: 18),
-
-                  ),
-                  Icon(Icons.connect_without_contact, size: 50,)
-                      ],
-                    ))
+                      ),
+                      Icon(
+                        Icons.connect_without_contact,
+                        size: 50,
+                      )
+                    ],
+                  ))
                 : ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: claims.length,
                     itemBuilder: (context, index) {
                       final claim = claims[index];
-          
+
                       return Container(
                           padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
                           // TODO (@backToFrancesco) if claim already managed it would be better to put the status even in the card
@@ -339,18 +375,26 @@ class ItemScreen extends StatelessWidget {
                             hasImage: claim.user.hasImage,
                             username: claim.user.username,
                             onTap: () async {
-                              context.read<ItemBloc>().add(ItemEvent.claimRead(claim.id));
+                              context
+                                  .read<ItemBloc>()
+                                  .add(ItemEvent.claimRead(claim.id));
                               final claimStatus = await Navigator.push<bool?>(
                                   context,
                                   MaterialPageRoute(
                                       builder: (ctx) => AnswerClaimScreen(
                                             itemId: itemId,
                                             claimId: claim.id,
-                                            isClaimAlreadyManaged: claim.status != ClaimStatus.pending,
+                                            isClaimAlreadyManaged:
+                                                claim.status !=
+                                                    ClaimStatus.pending,
                                           )));
-          
-                              if (claimStatus != null && claimStatus && context.mounted) {
-                                context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
+
+                              if (claimStatus != null &&
+                                  claimStatus &&
+                                  context.mounted) {
+                                context
+                                    .read<ItemBloc>()
+                                    .add(const ItemEvent.itemRefreshed());
                               }
                             },
                           ));
@@ -367,194 +411,197 @@ class ItemScreen extends StatelessWidget {
     ];
   }
 
-  List<Widget> _showGenericFoundItemWidgets(
-      BuildContext context, ClaimSent? claim, String token, User owner, int itemId) {
+  List<Widget> _showGenericFoundItemWidgets(BuildContext context,
+      ClaimSent? claim, String token, User owner, int itemId) {
     final userUrl = "$baseUrl/api/users/${owner.id}/image";
 
     return [
-      const SizedBox(
-        height: 20,
-      ),
-      claim != null
-      // TODO even if claim already sent, make it clickable and show answer on AnswerQuestionScreen
-          ? Padding(
-              padding: const EdgeInsets.all(8),
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: claim.status == ClaimStatus.approved
-                      ? PersonalizedColor.claimAcceptedStatusColor
-                      : (claim.status == ClaimStatus.pending
-                          ? PersonalizedColor.claimWaitingStatusColor
-                          : PersonalizedColor.claimDeniedStatusColor),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.connect_without_contact,
-                          size: 25,
-                        ),
-                        const SizedBox(width: 5),
-                        RichText(
-                          text: TextSpan(
+      Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            claim != null
+                // TODO even if claim already sent, make it clickable and show answer on AnswerQuestionScreen
+                ? Container(
+                    color: Colors.white,
+                    padding: const EdgeInsets.all(8),
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: claim.status == ClaimStatus.approved
+                            ? PersonalizedColor.claimAcceptedStatusColor
+                            : (claim.status == ClaimStatus.pending
+                                ? PersonalizedColor.claimWaitingStatusColor
+                                : PersonalizedColor.claimDeniedStatusColor),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
                             children: [
-                              const TextSpan(
-                                text: "Claim status ",
-                                style: TextStyle(fontSize: 18, color: Colors.black),
+                              const Icon(
+                                Icons.connect_without_contact,
+                                size: 25,
                               ),
-                              TextSpan(
-                                text: claim.status.name.toUpperCase(),
-                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                              const SizedBox(width: 5),
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    const TextSpan(
+                                      text: "Claim status ",
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.black),
+                                    ),
+                                    TextSpan(
+                                      text: claim.status.name.toUpperCase(),
+                                      style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    claim.status == ClaimStatus.approved
-                        ? Text(
-                            "Your claim has been accepted! Get in touch with ${owner.username} through the chat to arrange the item's return.")
-                        : claim.status == ClaimStatus.rejected
-                            ? Text(
-                                "Unfortunately, your claim has been rejected by ${owner.username}, as the response you provided was not correct.")
-                            : Text("Wait for ${owner.username} to validate to your claim.")
-                  ],
-                ),
-              ),
-            )
-          : Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(children: [
-                Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: const StadiumBorder(),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 18,
-                      ),
-                    ),
-                    onPressed: () async {
-                      final claimStatus = await Navigator.push<bool?>(
-                        context,
-                        MaterialPageRoute(
-                          builder: (ctx) => AnswerQuestionScreen(
-                            itemId: itemId,
-                            isClaimAlreadyTaken: claim?.answer != null,
-                          ),
-                        ),
-                      );
-
-                      if (claimStatus != null && claimStatus && context.mounted) {
-                        context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
-                      }
-                    },
-                    child: const Text(
-                      'Claim the item',
-                      style: TextStyle(fontSize: 22),
-                    ),
-                  ),
-                ),
-              ]),
-            ),
-      const SizedBox(
-        height: 20,
-      ),
-      const Divider(
-        color: Colors.grey,
-        thickness: 1,
-        height: 0,
-      ),
-      Container(
-        color: Colors.white,
-        width: MediaQuery.of(context).size.width,
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Found by",
-                  style: TextStyle(fontSize: 20),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                // TODO (@backToFrancesco) username is in two lines because "send a message" is too large
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Flexible(
-                      child: Row(
-                        children: [
-                          owner.hasImage
-                              ? ImageDialogWidget(
-                                  token: token,
-                                  imageUrl: userUrl,
-                                  errorAsset: 'assets/images/no-user.jpg',
-                                  child: CircularImage(
-                                    imageUrl: userUrl,
-                                    radius: 40,
-                                    token: token,
-                                    hasImage: owner.hasImage,
-                                  ),
-                                )
-                              : CircularImage(
-                                  imageUrl: userUrl,
-                                  radius: 40,
-                                  token: token,
-                                  hasImage: owner.hasImage,
-                                ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
-                              child: Text(
-                                owner.username,
-                                style: const TextStyle(fontSize: 20),
-                              ),
-                            ),
-                          ),
+                          claim.status == ClaimStatus.approved
+                              ? Text(
+                                  "Your claim has been accepted! Get in touch with ${owner.username} through the chat to arrange the item's return.")
+                              : claim.status == ClaimStatus.rejected
+                                  ? Text(
+                                      "Unfortunately, your claim has been rejected by ${owner.username}, as the response you provided was not correct.")
+                                  : Text(
+                                      "Wait for ${owner.username} to validate to your claim.")
                         ],
                       ),
                     ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        side: const BorderSide(color: PersonalizedColor.mainColor, width: 1.5),
-                        shape: const StadiumBorder(),
-                        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
+                  )
+                : Container(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: const StadiumBorder(),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 18,
+                            ),
+                          ),
+                          onPressed: () async {
+                            final claimStatus = await Navigator.push<bool?>(
+                              context,
+                              MaterialPageRoute(
+                                builder: (ctx) => AnswerQuestionScreen(
+                                  itemId: itemId,
+                                  isClaimAlreadyTaken: claim?.answer != null,
+                                ),
+                              ),
+                            );
+
+                            if (claimStatus != null &&
+                                claimStatus &&
+                                context.mounted) {
+                              context
+                                  .read<ItemBloc>()
+                                  .add(const ItemEvent.itemRefreshed());
+                            }
+                          },
+                          child: const Text(
+                            'Claim the item',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
                       ),
-                      onPressed: () {
-                        // TODO (@alecava41) navigate to chat
-                      },
-                      child: const Text(
-                        'Send a message',
-                        style: TextStyle(fontSize: 18, color: PersonalizedColor.mainColor),
-                      ),
-                    ),
-                  ],
+                    ]),
+                  ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: CustomFieldContainer(
+                  title: "Found by",
+                  content: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Flexible(
+                              child: Row(
+                                children: [
+                                  owner.hasImage
+                                      ? ImageDialogWidget(
+                                          token: token,
+                                          imageUrl: userUrl,
+                                          errorAsset:
+                                              'assets/images/no-user.jpg',
+                                          child: CircularImage(
+                                            hasImage: owner.hasImage,
+                                            imageUrl: userUrl,
+                                            radius: 25,
+                                            token: token,
+                                          ),
+                                        )
+                                      : CircularImage(
+                                          hasImage: owner.hasImage,
+                                          imageUrl: userUrl,
+                                          radius: 25,
+                                          token: token,
+                                        ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 0, 0, 10),
+                                      child: Text(
+                                        owner.username,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                side: const BorderSide(
+                                    color: PersonalizedColor.mainColor,
+                                    width: 1.5),
+                                shape: const StadiumBorder(),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 16, horizontal: 15),
+                              ),
+                              onPressed:
+                                  () {}, // TODO (@alecava41) navigate to chat
+                              child: const Text(
+                                'Send a message',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: PersonalizedColor.mainColor),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ]),
                 ),
-              ]),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
         ),
-      ),
-      const Divider(
-        color: Colors.grey,
-        thickness: 1,
-        height: 0,
-      ),
-      const SizedBox(
-        height: 10,
       ),
     ];
   }

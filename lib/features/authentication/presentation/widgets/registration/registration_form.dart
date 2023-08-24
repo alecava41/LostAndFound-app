@@ -16,7 +16,7 @@ class RegistrationForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        margin: const EdgeInsets.all(24),
+        margin: const EdgeInsets.all(16),
         child: BlocListener<RegistrationBloc, RegistrationState>(
           listener: (ctx, state) {
             final regFailureOrSuccess = state.registrationFailureOrSuccess;

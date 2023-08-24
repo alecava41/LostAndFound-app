@@ -83,6 +83,7 @@ class CustomCardSearch extends StatelessWidget {
                       ),
                       Text(
                         "${type[0].toUpperCase()}${type.substring(1)} by $owner",
+                        overflow: TextOverflow.ellipsis,
                         style: const TextStyle(fontSize: 14, color: Colors.black54),
                       )
                     ],
