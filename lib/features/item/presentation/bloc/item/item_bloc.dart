@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lost_and_found/core/data/secure_storage/secure_storage.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/create_room_usecase.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/insert_read_claim_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/delete_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_item_usecase.dart';
@@ -25,19 +27,23 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
   final DeleteItemUseCase _deleteItemUseCase;
   final InsertReadClaimUseCase _insertReadClaimUseCase;
 
+  final CreateRoomUseCase _createRoomUseCase;
+
   final SecureStorage _secureStorage;
 
-  ItemBloc(
-      {required GetItemUseCase getItemUseCase,
-      required SolveItemUseCase solveItemUseCase,
-      required DeleteItemUseCase deleteItemUseCase,
-      required InsertReadClaimUseCase insertReadClaimUseCase,
-      required SecureStorage secureStorage})
-      : _getItemUseCase = getItemUseCase,
+  ItemBloc({
+    required GetItemUseCase getItemUseCase,
+    required SolveItemUseCase solveItemUseCase,
+    required DeleteItemUseCase deleteItemUseCase,
+    required InsertReadClaimUseCase insertReadClaimUseCase,
+    required SecureStorage secureStorage,
+    required CreateRoomUseCase createRoomUseCase,
+  })  : _getItemUseCase = getItemUseCase,
         _solveItemUseCase = solveItemUseCase,
         _deleteItemUseCase = deleteItemUseCase,
         _insertReadClaimUseCase = insertReadClaimUseCase,
         _secureStorage = secureStorage,
+        _createRoomUseCase = createRoomUseCase,
         super(ItemState.initial()) {
     on<ItemEvent>(
       (event, emit) async {
@@ -47,10 +53,28 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
           itemSolved: () => _onItemSolved(emit),
           itemDeleted: () => _onItemDeleted(emit),
           claimRead: (id) => _onClaimRead(emit, id),
+          createChatRoom: (id2, username2) => _onChatRoomCreation(emit, id2, username2),
         );
       },
     );
   }
+
+  Future<void> _onChatRoomCreation(Emitter<ItemState> emit, int id2, username2) async {
+    final params = CreateRoomParams(
+      id1: state.userId,
+      id2: id2,
+      username1: (await _secureStorage.getCredentialsForChatLogin()).second,
+      username2: username2,
+      itemId: state.item!.id,
+    );
+
+    final response = await _createRoomUseCase(params);
+
+    emit(state.copyWith(roomCreationFailureOrSuccess: response));
+    emit(state.copyWith(roomCreationFailureOrSuccess: null));
+  }
+
+  // TODO (@alecava41) when claim managed (both sent or received) need to update it, otherwise if user open it again he will se possibility to manage the claim again
 
   Future<void> _onClaimRead(Emitter<ItemState> emit, int claimId) async {
     final response = await _insertReadClaimUseCase(InsertReadClaimParams(claimId: claimId));

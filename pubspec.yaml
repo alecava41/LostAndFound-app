@@ -69,10 +69,15 @@ dependencies:
   dartx: ^1.2.0
   intl: ^0.18.0
   http: ^1.1.0
+  badges: ^3.1.1
+
+  # Firebase
   firebase_core: ^2.15.0
   firebase_messaging: ^14.6.5
-  badges: ^3.1.1
-  xmpp_plugin: ^2.2.8
+  firebase_auth: ^4.8.0
+  cloud_firestore: ^4.9.0
+  flutter_firebase_chat_core: ^1.6.7
+  flutter_chat_types: ^3.6.2
 
 dev_dependencies:
   flutter_test:

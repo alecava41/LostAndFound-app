@@ -35,22 +35,46 @@ class ItemScreen extends StatelessWidget {
           final loadFailureOrSuccess = state.loadFailureOrSuccess;
           final solveFailureOrSuccess = state.solveFailureOrSuccess;
           final deleteFailureOrSuccess = state.deleteFailureOrSuccess;
+          final roomCreationFailureOrSuccess = state.roomCreationFailureOrSuccess;
+
+          if (roomCreationFailureOrSuccess != null) {
+            roomCreationFailureOrSuccess.fold((failure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  padding: const EdgeInsets.all(30),
+                  backgroundColor: Colors.red,
+                  content: Text(
+                    failure.maybeWhen<String>(
+                        genericFailure: () => 'Server error. Please try again later.',
+                        networkFailure: () => 'No internet connection available. Check your internet connection.',
+                        validationFailure: (reason) => reason!,
+                        orElse: () => "Unknown error"),
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                ),
+              );
+            }, (room) {}
+                // TODO (@alecava41) navigate to chat page
+                // Navigator.of(ctx).push(route)
+                );
+          }
 
           if (loadFailureOrSuccess != null) {
             loadFailureOrSuccess.fold((failure) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                padding: const EdgeInsets.all(30),
-                backgroundColor: Colors.red,
-                content: Text(
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  padding: const EdgeInsets.all(30),
+                  backgroundColor: Colors.red,
+                  content: Text(
                     failure.maybeWhen<String>(
-                        genericFailure: () =>
-                            'Server error. Please try again later.',
-                        networkFailure: () =>
-                            'No internet connection available. Check your internet connection.',
+                        genericFailure: () => 'Server error. Please try again later.',
+                        networkFailure: () => 'No internet connection available. Check your internet connection.',
                         validationFailure: (reason) => reason!,
                         orElse: () => "Unknown error"),
-                    style: const TextStyle(fontSize: 20)),
-              ));
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                ),
+              );
               // Error => navigate back to previous page
               Navigator.pop(ctx);
             }, (_) {});
@@ -64,22 +88,16 @@ class ItemScreen extends StatelessWidget {
                         backgroundColor: Colors.red,
                         content: Text(
                             failure.maybeWhen<String>(
-                                genericFailure: () =>
-                                    'Server error. Please try again later.',
-                                networkFailure: () =>
-                                    'No internet connection available. Check your internet connection.',
+                                genericFailure: () => 'Server error. Please try again later.',
+                                networkFailure: () => 'No internet connection available. Check your internet connection.',
                                 validationFailure: (reason) => reason!,
                                 orElse: () => "Unknown error"),
                             style: const TextStyle(fontSize: 20)),
                       ),
                     ), (_) {
               // Navigate back to HP + update HP
-              ctx
-                  .read<HomeBloc>()
-                  .add(HomeEvent.homeSectionRefreshed(state.item!.type));
-              context
-                  .read<HomeControllerBloc>()
-                  .add(const HomeControllerEvent.tabChanged(0));
+              ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.item!.type));
+              context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
               Navigator.pop(context);
             });
           }
@@ -92,22 +110,16 @@ class ItemScreen extends StatelessWidget {
                         backgroundColor: Colors.red,
                         content: Text(
                             failure.maybeWhen<String>(
-                                genericFailure: () =>
-                                    'Server error. Please try again later.',
-                                networkFailure: () =>
-                                    'No internet connection available. Check your internet connection.',
+                                genericFailure: () => 'Server error. Please try again later.',
+                                networkFailure: () => 'No internet connection available. Check your internet connection.',
                                 validationFailure: (reason) => reason!,
                                 orElse: () => "Unknown error"),
                             style: const TextStyle(fontSize: 20)),
                       ),
                     ), (_) {
               // Navigate back to HP + update HP
-              ctx
-                  .read<HomeBloc>()
-                  .add(HomeEvent.homeSectionRefreshed(state.item!.type));
-              context
-                  .read<HomeControllerBloc>()
-                  .add(const HomeControllerEvent.tabChanged(0));
+              ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.item!.type));
+              context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
               Navigator.pop(context);
             });
           }
@@ -155,24 +167,14 @@ class ItemScreen extends StatelessWidget {
                       if (isCurrentUserOwner) {
                         if (state.item!.type == ItemType.found) {
                           widgetList += _showOwnerFoundItemWidgets(
-                              ctx,
-                              state.item!.claims != null
-                                  ? state.item!.claims!
-                                  : [],
-                              state.token,
-                              itemId);
+                              ctx, state.item!.claims != null ? state.item!.claims! : [], state.token, itemId);
                         }
                       } else {
                         if (state.item!.type == ItemType.lost) {
-                          widgetList += _showGenericLostItemWidgets(
-                              ctx, state.token, state.item!.user);
+                          widgetList += _showGenericLostItemWidgets(ctx, state.token, state.item!.user);
                         } else {
                           widgetList += _showGenericFoundItemWidgets(
-                              ctx,
-                              state.item!.userClaim,
-                              state.token,
-                              state.item!.user,
-                              itemId);
+                              ctx, state.item!.userClaim, state.token, state.item!.user, itemId);
                         }
                       }
 
@@ -213,22 +215,19 @@ class ItemScreen extends StatelessWidget {
             ),
           ],
           onSelected: (String value) async {
-            // Action to be performed when a menu item is selected
             switch (value) {
               case 'opt1':
                 ctx.read<ItemBloc>().add(const ItemEvent.itemSolved());
                 break;
+              case 'opt3':
+                ctx.read<ItemBloc>().add(const ItemEvent.itemDeleted());
+                break;
               case 'opt2':
-                final changes = await Navigator.push<bool>(
-                    ctx,
-                    MaterialPageRoute(
-                        builder: (_) => UpdateItemScreen(itemId: itemId)));
+                final changes =
+                    await Navigator.push<bool>(ctx, MaterialPageRoute(builder: (_) => UpdateItemScreen(itemId: itemId)));
                 if (changes != null && changes && ctx.mounted) {
                   ctx.read<ItemBloc>().add(ItemEvent.itemCreated(itemId));
                 }
-                break;
-              case 'opt3':
-                ctx.read<ItemBloc>().add(const ItemEvent.itemDeleted());
                 break;
             }
           },
@@ -239,8 +238,7 @@ class ItemScreen extends StatelessWidget {
     }
   }
 
-  List<Widget> _showGenericLostItemWidgets(
-      BuildContext context, String token, User owner) {
+  List<Widget> _showGenericLostItemWidgets(BuildContext context, String token, User owner) {
     final userUrl = "$baseUrl/api/users/${owner.id}/image";
 
     return [
@@ -305,37 +303,36 @@ class ItemScreen extends StatelessWidget {
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
-                              side: const BorderSide(
-                                  color: PersonalizedColor.mainColor, width: 1.5),
+                              side: const BorderSide(color: PersonalizedColor.mainColor, width: 1.5),
                               shape: const StadiumBorder(),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 16, horizontal: 15),
+                              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
                             ),
-                            onPressed: () {}, // TODO (@alecava41) navigate to chat
+                            onPressed: () {
+                              context.read<ItemBloc>().add(ItemEvent.createChatRoom(
+                                    owner.id,
+                                    owner.username,
+                                  ));
+                            },
                             child: const Text(
                               'Send a message',
-                              style: TextStyle(
-                                  fontSize: 14, color: PersonalizedColor.mainColor),
+                              style: TextStyle(fontSize: 14, color: PersonalizedColor.mainColor),
                             ),
                           ),
                         ],
                       ),
-                      
                     ]),
-                    
               ),
             ),
             const SizedBox(
-                    height: 10,
-                  ),
+              height: 10,
+            ),
           ],
         ),
       ),
     ];
   }
 
-  List<Widget> _showOwnerFoundItemWidgets(BuildContext context,
-      List<ClaimReceived> claims, String token, int itemId) {
+  List<Widget> _showOwnerFoundItemWidgets(BuildContext context, List<ClaimReceived> claims, String token, int itemId) {
     return [
       Container(
         color: Colors.white,
@@ -375,26 +372,18 @@ class ItemScreen extends StatelessWidget {
                             hasImage: claim.user.hasImage,
                             username: claim.user.username,
                             onTap: () async {
-                              context
-                                  .read<ItemBloc>()
-                                  .add(ItemEvent.claimRead(claim.id));
+                              context.read<ItemBloc>().add(ItemEvent.claimRead(claim.id));
                               final claimStatus = await Navigator.push<bool?>(
                                   context,
                                   MaterialPageRoute(
                                       builder: (ctx) => AnswerClaimScreen(
                                             itemId: itemId,
                                             claimId: claim.id,
-                                            isClaimAlreadyManaged:
-                                                claim.status !=
-                                                    ClaimStatus.pending,
+                                            isClaimAlreadyManaged: claim.status != ClaimStatus.pending,
                                           )));
 
-                              if (claimStatus != null &&
-                                  claimStatus &&
-                                  context.mounted) {
-                                context
-                                    .read<ItemBloc>()
-                                    .add(const ItemEvent.itemRefreshed());
+                              if (claimStatus != null && claimStatus && context.mounted) {
+                                context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
                               }
                             },
                           ));
@@ -411,8 +400,8 @@ class ItemScreen extends StatelessWidget {
     ];
   }
 
-  List<Widget> _showGenericFoundItemWidgets(BuildContext context,
-      ClaimSent? claim, String token, User owner, int itemId) {
+  List<Widget> _showGenericFoundItemWidgets(
+      BuildContext context, ClaimSent? claim, String token, User owner, int itemId) {
     final userUrl = "$baseUrl/api/users/${owner.id}/image";
 
     return [
@@ -450,15 +439,12 @@ class ItemScreen extends StatelessWidget {
                                   children: [
                                     const TextSpan(
                                       text: "Claim status ",
-                                      style: TextStyle(
-                                          fontSize: 18, color: Colors.black),
+                                      style: TextStyle(fontSize: 18, color: Colors.black),
                                     ),
                                     TextSpan(
                                       text: claim.status.name.toUpperCase(),
-                                      style: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
+                                      style:
+                                          const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
                                     ),
                                   ],
                                 ),
@@ -471,8 +457,7 @@ class ItemScreen extends StatelessWidget {
                               : claim.status == ClaimStatus.rejected
                                   ? Text(
                                       "Unfortunately, your claim has been rejected by ${owner.username}, as the response you provided was not correct.")
-                                  : Text(
-                                      "Wait for ${owner.username} to validate to your claim.")
+                                  : Text("Wait for ${owner.username} to validate to your claim.")
                         ],
                       ),
                     ),
@@ -499,12 +484,8 @@ class ItemScreen extends StatelessWidget {
                               ),
                             );
 
-                            if (claimStatus != null &&
-                                claimStatus &&
-                                context.mounted) {
-                              context
-                                  .read<ItemBloc>()
-                                  .add(const ItemEvent.itemRefreshed());
+                            if (claimStatus != null && claimStatus && context.mounted) {
+                              context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
                             }
                           },
                           child: const Text(
@@ -515,7 +496,7 @@ class ItemScreen extends StatelessWidget {
                       ),
                     ]),
                   ),
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -538,8 +519,7 @@ class ItemScreen extends StatelessWidget {
                                       ? ImageDialogWidget(
                                           token: token,
                                           imageUrl: userUrl,
-                                          errorAsset:
-                                              'assets/images/no-user.jpg',
+                                          errorAsset: 'assets/images/no-user.jpg',
                                           child: CircularImage(
                                             hasImage: owner.hasImage,
                                             imageUrl: userUrl,
@@ -558,8 +538,7 @@ class ItemScreen extends StatelessWidget {
                                   ),
                                   Expanded(
                                     child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          0, 0, 0, 10),
+                                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                                       child: Text(
                                         owner.username,
                                         maxLines: 1,
@@ -575,20 +554,19 @@ class ItemScreen extends StatelessWidget {
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
-                                side: const BorderSide(
-                                    color: PersonalizedColor.mainColor,
-                                    width: 1.5),
+                                side: const BorderSide(color: PersonalizedColor.mainColor, width: 1.5),
                                 shape: const StadiumBorder(),
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 16, horizontal: 15),
+                                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
                               ),
-                              onPressed:
-                                  () {}, // TODO (@alecava41) navigate to chat
+                              onPressed: () {
+                                context.read<ItemBloc>().add(ItemEvent.createChatRoom(
+                                      owner.id,
+                                      owner.username,
+                                    ));
+                              },
                               child: const Text(
                                 'Send a message',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    color: PersonalizedColor.mainColor),
+                                style: TextStyle(fontSize: 14, color: PersonalizedColor.mainColor),
                               ),
                             ),
                           ],

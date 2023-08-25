@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/config/route_generator.dart';
 import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
-import 'package:lost_and_found/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/claim_screen.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
@@ -17,6 +16,7 @@ import 'package:lost_and_found/features/user/presentation/bloc/user/user_bloc.da
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
+import 'features/chat/presentation/bloc/inbox/inbox_bloc.dart';
 import 'features/item/presentation/bloc/search/search_bloc.dart';
 import 'injection_container.dart';
 
@@ -115,14 +115,12 @@ class _Application extends State<App> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<HomeBloc>(
-            create: (_) => sl<HomeBloc>()..add(const HomeEvent.homeCreated())), // TODO (@alecava41) move away from here if possible
+        BlocProvider<HomeBloc>(create: (_) => sl<HomeBloc>()..add(const HomeEvent.homeCreated())),
         BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>()),
-        BlocProvider<UserBloc>(
-            create: (_) => sl<UserBloc>()..add(const UserEvent.contentCreated())), // TODO (@alecava41) move away from here if possible
+        BlocProvider<UserBloc>(create: (_) => sl<UserBloc>()..add(const UserEvent.contentCreated())),
         BlocProvider<HomeControllerBloc>(create: (_) => sl<HomeControllerBloc>()),
         BlocProvider<BadgeBloc>(create: (_) => sl<BadgeBloc>()..add(const BadgeEvent.badgeCreated())),
-        BlocProvider<ChatBloc>(create: (_) => sl<ChatBloc>()..add(const ChatEvent.chatContentCreated()))
+        BlocProvider<InboxBloc>(create: (_) => sl<InboxBloc>()..add(const InboxEvent.inboxContentCreated()))
       ],
       child: MaterialApp(
         locale: DevicePreview.locale(context),

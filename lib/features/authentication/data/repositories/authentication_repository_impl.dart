@@ -10,11 +10,11 @@ import 'package:lost_and_found/features/authentication/domain/usecases/login_use
 
 import 'package:lost_and_found/features/authentication/domain/usecases/registration_usecase.dart';
 
-import 'utils.dart';
-import '../secure_storage/secure_storage.dart';
-import '../../domain/usecases/usecase.dart';
-import '../../status/success.dart';
-import '../../domain/repositories/authentication_repository.dart';
+import '../../../../core/data/repositories/utils.dart';
+import '../../../../core/data/secure_storage/secure_storage.dart';
+import '../../../../core/domain/usecases/usecase.dart';
+import '../../../../core/status/success.dart';
+import '../../../../core/domain/repositories/authentication_repository.dart';
 
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
   final NetworkInfo _networkInfo;
@@ -47,6 +47,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
 
         final session = await _dataSource.login(params);
         await _storage.saveSessionInformation(session);
+        await _storage.saveCredentialsForChatLogin(session.email, session.username);
 
         if (!hasCredentials) {
           await _storage.saveLoginInformation(params);

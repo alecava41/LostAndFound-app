@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:dartx/dartx.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:lost_and_found/features/authentication/data/models/session_model.dart';
 
@@ -11,18 +12,29 @@ const String ID = "id";
 const String TOKEN = "token";
 const String EXPIRE = "expire";
 
+const String EMAIL = "email";
+const String USERNAME = "username";
+
 abstract class SecureStorage {
   Future<bool> hasValidSession();
+
   Future<bool> hasCredentials();
-  
+
   Future<void> saveLoginInformation(LoginParams param);
+
   Future<void> saveSessionInformation(SessionModel session);
-  
+
   Future<SessionModel?> getSessionInformation();
+
   Future<LoginParams> getCredentials();
 
   Future<void> removeCredentials();
+
   Future<void> destroySession();
+
+  Future<void> saveCredentialsForChatLogin(String email, String username);
+
+  Future<Pair<String, String>> getCredentialsForChatLogin();
 }
 
 class SecureStorageImpl extends SecureStorage {
@@ -32,9 +44,9 @@ class SecureStorageImpl extends SecureStorage {
 
   @override
   Future<bool> hasValidSession() async {
-    final validData =  await getSessionInformation();
+    final validData = await getSessionInformation();
 
-    if(validData == null) {
+    if (validData == null) {
       return false;
     }
 
@@ -42,7 +54,7 @@ class SecureStorageImpl extends SecureStorage {
     final expireDate = DateTime.fromMillisecondsSinceEpoch(int.parse(expire!), isUtc: true);
     final now = DateTime.now().toUtc();
 
-    if(now.isAfter(expireDate)) {
+    if (now.isAfter(expireDate)) {
       return false;
     }
 
@@ -80,9 +92,11 @@ class SecureStorageImpl extends SecureStorage {
     final id = await _storage.read(key: ID);
     final token = await _storage.read(key: TOKEN);
     final expire = await _storage.read(key: EXPIRE);
+    final username = await _storage.read(key: USERNAME);
+    final email = await _storage.read(key: EMAIL);
 
-    if (id != null && token != null && expire != null) {
-      return SessionModel(token: token, user: int.parse(id), expire: int.parse(expire));
+    if (id != null && token != null && expire != null && username != null && email != null) {
+      return SessionModel(token: token, user: int.parse(id), expire: int.parse(expire), username: username, email: email);
     } else {
       return null;
     }
@@ -99,5 +113,16 @@ class SecureStorageImpl extends SecureStorage {
   Future<void> removeCredentials() async {
     await _storage.delete(key: USER);
     return await _storage.delete(key: PASSWORD);
+  }
+
+  @override
+  Future<void> saveCredentialsForChatLogin(String email, String username) async {
+    await _storage.write(key: EMAIL, value: email);
+    await _storage.write(key: USERNAME, value: username);
+  }
+
+  @override
+  Future<Pair<String, String>> getCredentialsForChatLogin() async {
+    return Pair((await _storage.read(key: EMAIL))!, (await _storage.read(key: USERNAME))!);
   }
 }

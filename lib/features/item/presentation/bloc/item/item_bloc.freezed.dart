@@ -23,6 +23,7 @@ mixin _$ItemEvent {
     required TResult Function() itemSolved,
     required TResult Function(int id) claimRead,
     required TResult Function() itemDeleted,
+    required TResult Function(int otherId, String otherUsername) createChatRoom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$ItemEvent {
     TResult? Function()? itemSolved,
     TResult? Function(int id)? claimRead,
     TResult? Function()? itemDeleted,
+    TResult? Function(int otherId, String otherUsername)? createChatRoom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$ItemEvent {
     TResult Function()? itemSolved,
     TResult Function(int id)? claimRead,
     TResult Function()? itemDeleted,
+    TResult Function(int otherId, String otherUsername)? createChatRoom,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +54,7 @@ mixin _$ItemEvent {
     required TResult Function(_ItemSolved value) itemSolved,
     required TResult Function(_ClaimRead value) claimRead,
     required TResult Function(_ItemDeleted value) itemDeleted,
+    required TResult Function(_CreateChatRoom value) createChatRoom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +64,7 @@ mixin _$ItemEvent {
     TResult? Function(_ItemSolved value)? itemSolved,
     TResult? Function(_ClaimRead value)? claimRead,
     TResult? Function(_ItemDeleted value)? itemDeleted,
+    TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +74,7 @@ mixin _$ItemEvent {
     TResult Function(_ItemSolved value)? itemSolved,
     TResult Function(_ClaimRead value)? claimRead,
     TResult Function(_ItemDeleted value)? itemDeleted,
+    TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -160,6 +166,7 @@ class _$_ItemCreated implements _ItemCreated {
     required TResult Function() itemSolved,
     required TResult Function(int id) claimRead,
     required TResult Function() itemDeleted,
+    required TResult Function(int otherId, String otherUsername) createChatRoom,
   }) {
     return itemCreated(id);
   }
@@ -172,6 +179,7 @@ class _$_ItemCreated implements _ItemCreated {
     TResult? Function()? itemSolved,
     TResult? Function(int id)? claimRead,
     TResult? Function()? itemDeleted,
+    TResult? Function(int otherId, String otherUsername)? createChatRoom,
   }) {
     return itemCreated?.call(id);
   }
@@ -184,6 +192,7 @@ class _$_ItemCreated implements _ItemCreated {
     TResult Function()? itemSolved,
     TResult Function(int id)? claimRead,
     TResult Function()? itemDeleted,
+    TResult Function(int otherId, String otherUsername)? createChatRoom,
     required TResult orElse(),
   }) {
     if (itemCreated != null) {
@@ -200,6 +209,7 @@ class _$_ItemCreated implements _ItemCreated {
     required TResult Function(_ItemSolved value) itemSolved,
     required TResult Function(_ClaimRead value) claimRead,
     required TResult Function(_ItemDeleted value) itemDeleted,
+    required TResult Function(_CreateChatRoom value) createChatRoom,
   }) {
     return itemCreated(this);
   }
@@ -212,6 +222,7 @@ class _$_ItemCreated implements _ItemCreated {
     TResult? Function(_ItemSolved value)? itemSolved,
     TResult? Function(_ClaimRead value)? claimRead,
     TResult? Function(_ItemDeleted value)? itemDeleted,
+    TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) {
     return itemCreated?.call(this);
   }
@@ -224,6 +235,7 @@ class _$_ItemCreated implements _ItemCreated {
     TResult Function(_ItemSolved value)? itemSolved,
     TResult Function(_ClaimRead value)? claimRead,
     TResult Function(_ItemDeleted value)? itemDeleted,
+    TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
   }) {
     if (itemCreated != null) {
@@ -285,6 +297,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     required TResult Function() itemSolved,
     required TResult Function(int id) claimRead,
     required TResult Function() itemDeleted,
+    required TResult Function(int otherId, String otherUsername) createChatRoom,
   }) {
     return itemRefreshed();
   }
@@ -297,6 +310,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     TResult? Function()? itemSolved,
     TResult? Function(int id)? claimRead,
     TResult? Function()? itemDeleted,
+    TResult? Function(int otherId, String otherUsername)? createChatRoom,
   }) {
     return itemRefreshed?.call();
   }
@@ -309,6 +323,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     TResult Function()? itemSolved,
     TResult Function(int id)? claimRead,
     TResult Function()? itemDeleted,
+    TResult Function(int otherId, String otherUsername)? createChatRoom,
     required TResult orElse(),
   }) {
     if (itemRefreshed != null) {
@@ -325,6 +340,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     required TResult Function(_ItemSolved value) itemSolved,
     required TResult Function(_ClaimRead value) claimRead,
     required TResult Function(_ItemDeleted value) itemDeleted,
+    required TResult Function(_CreateChatRoom value) createChatRoom,
   }) {
     return itemRefreshed(this);
   }
@@ -337,6 +353,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     TResult? Function(_ItemSolved value)? itemSolved,
     TResult? Function(_ClaimRead value)? claimRead,
     TResult? Function(_ItemDeleted value)? itemDeleted,
+    TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) {
     return itemRefreshed?.call(this);
   }
@@ -349,6 +366,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     TResult Function(_ItemSolved value)? itemSolved,
     TResult Function(_ClaimRead value)? claimRead,
     TResult Function(_ItemDeleted value)? itemDeleted,
+    TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
   }) {
     if (itemRefreshed != null) {
@@ -405,6 +423,7 @@ class _$_ItemSolved implements _ItemSolved {
     required TResult Function() itemSolved,
     required TResult Function(int id) claimRead,
     required TResult Function() itemDeleted,
+    required TResult Function(int otherId, String otherUsername) createChatRoom,
   }) {
     return itemSolved();
   }
@@ -417,6 +436,7 @@ class _$_ItemSolved implements _ItemSolved {
     TResult? Function()? itemSolved,
     TResult? Function(int id)? claimRead,
     TResult? Function()? itemDeleted,
+    TResult? Function(int otherId, String otherUsername)? createChatRoom,
   }) {
     return itemSolved?.call();
   }
@@ -429,6 +449,7 @@ class _$_ItemSolved implements _ItemSolved {
     TResult Function()? itemSolved,
     TResult Function(int id)? claimRead,
     TResult Function()? itemDeleted,
+    TResult Function(int otherId, String otherUsername)? createChatRoom,
     required TResult orElse(),
   }) {
     if (itemSolved != null) {
@@ -445,6 +466,7 @@ class _$_ItemSolved implements _ItemSolved {
     required TResult Function(_ItemSolved value) itemSolved,
     required TResult Function(_ClaimRead value) claimRead,
     required TResult Function(_ItemDeleted value) itemDeleted,
+    required TResult Function(_CreateChatRoom value) createChatRoom,
   }) {
     return itemSolved(this);
   }
@@ -457,6 +479,7 @@ class _$_ItemSolved implements _ItemSolved {
     TResult? Function(_ItemSolved value)? itemSolved,
     TResult? Function(_ClaimRead value)? claimRead,
     TResult? Function(_ItemDeleted value)? itemDeleted,
+    TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) {
     return itemSolved?.call(this);
   }
@@ -469,6 +492,7 @@ class _$_ItemSolved implements _ItemSolved {
     TResult Function(_ItemSolved value)? itemSolved,
     TResult Function(_ClaimRead value)? claimRead,
     TResult Function(_ItemDeleted value)? itemDeleted,
+    TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
   }) {
     if (itemSolved != null) {
@@ -551,6 +575,7 @@ class _$_ClaimRead implements _ClaimRead {
     required TResult Function() itemSolved,
     required TResult Function(int id) claimRead,
     required TResult Function() itemDeleted,
+    required TResult Function(int otherId, String otherUsername) createChatRoom,
   }) {
     return claimRead(id);
   }
@@ -563,6 +588,7 @@ class _$_ClaimRead implements _ClaimRead {
     TResult? Function()? itemSolved,
     TResult? Function(int id)? claimRead,
     TResult? Function()? itemDeleted,
+    TResult? Function(int otherId, String otherUsername)? createChatRoom,
   }) {
     return claimRead?.call(id);
   }
@@ -575,6 +601,7 @@ class _$_ClaimRead implements _ClaimRead {
     TResult Function()? itemSolved,
     TResult Function(int id)? claimRead,
     TResult Function()? itemDeleted,
+    TResult Function(int otherId, String otherUsername)? createChatRoom,
     required TResult orElse(),
   }) {
     if (claimRead != null) {
@@ -591,6 +618,7 @@ class _$_ClaimRead implements _ClaimRead {
     required TResult Function(_ItemSolved value) itemSolved,
     required TResult Function(_ClaimRead value) claimRead,
     required TResult Function(_ItemDeleted value) itemDeleted,
+    required TResult Function(_CreateChatRoom value) createChatRoom,
   }) {
     return claimRead(this);
   }
@@ -603,6 +631,7 @@ class _$_ClaimRead implements _ClaimRead {
     TResult? Function(_ItemSolved value)? itemSolved,
     TResult? Function(_ClaimRead value)? claimRead,
     TResult? Function(_ItemDeleted value)? itemDeleted,
+    TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) {
     return claimRead?.call(this);
   }
@@ -615,6 +644,7 @@ class _$_ClaimRead implements _ClaimRead {
     TResult Function(_ItemSolved value)? itemSolved,
     TResult Function(_ClaimRead value)? claimRead,
     TResult Function(_ItemDeleted value)? itemDeleted,
+    TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
   }) {
     if (claimRead != null) {
@@ -676,6 +706,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     required TResult Function() itemSolved,
     required TResult Function(int id) claimRead,
     required TResult Function() itemDeleted,
+    required TResult Function(int otherId, String otherUsername) createChatRoom,
   }) {
     return itemDeleted();
   }
@@ -688,6 +719,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     TResult? Function()? itemSolved,
     TResult? Function(int id)? claimRead,
     TResult? Function()? itemDeleted,
+    TResult? Function(int otherId, String otherUsername)? createChatRoom,
   }) {
     return itemDeleted?.call();
   }
@@ -700,6 +732,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     TResult Function()? itemSolved,
     TResult Function(int id)? claimRead,
     TResult Function()? itemDeleted,
+    TResult Function(int otherId, String otherUsername)? createChatRoom,
     required TResult orElse(),
   }) {
     if (itemDeleted != null) {
@@ -716,6 +749,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     required TResult Function(_ItemSolved value) itemSolved,
     required TResult Function(_ClaimRead value) claimRead,
     required TResult Function(_ItemDeleted value) itemDeleted,
+    required TResult Function(_CreateChatRoom value) createChatRoom,
   }) {
     return itemDeleted(this);
   }
@@ -728,6 +762,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     TResult? Function(_ItemSolved value)? itemSolved,
     TResult? Function(_ClaimRead value)? claimRead,
     TResult? Function(_ItemDeleted value)? itemDeleted,
+    TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) {
     return itemDeleted?.call(this);
   }
@@ -740,6 +775,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     TResult Function(_ItemSolved value)? itemSolved,
     TResult Function(_ClaimRead value)? claimRead,
     TResult Function(_ItemDeleted value)? itemDeleted,
+    TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
   }) {
     if (itemDeleted != null) {
@@ -754,6 +790,174 @@ abstract class _ItemDeleted implements ItemEvent {
 }
 
 /// @nodoc
+abstract class _$$_CreateChatRoomCopyWith<$Res> {
+  factory _$$_CreateChatRoomCopyWith(
+          _$_CreateChatRoom value, $Res Function(_$_CreateChatRoom) then) =
+      __$$_CreateChatRoomCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int otherId, String otherUsername});
+}
+
+/// @nodoc
+class __$$_CreateChatRoomCopyWithImpl<$Res>
+    extends _$ItemEventCopyWithImpl<$Res, _$_CreateChatRoom>
+    implements _$$_CreateChatRoomCopyWith<$Res> {
+  __$$_CreateChatRoomCopyWithImpl(
+      _$_CreateChatRoom _value, $Res Function(_$_CreateChatRoom) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? otherId = null,
+    Object? otherUsername = null,
+  }) {
+    return _then(_$_CreateChatRoom(
+      null == otherId
+          ? _value.otherId
+          : otherId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == otherUsername
+          ? _value.otherUsername
+          : otherUsername // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_CreateChatRoom implements _CreateChatRoom {
+  const _$_CreateChatRoom(this.otherId, this.otherUsername);
+
+  @override
+  final int otherId;
+  @override
+  final String otherUsername;
+
+  @override
+  String toString() {
+    return 'ItemEvent.createChatRoom(otherId: $otherId, otherUsername: $otherUsername)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CreateChatRoom &&
+            (identical(other.otherId, otherId) || other.otherId == otherId) &&
+            (identical(other.otherUsername, otherUsername) ||
+                other.otherUsername == otherUsername));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, otherId, otherUsername);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CreateChatRoomCopyWith<_$_CreateChatRoom> get copyWith =>
+      __$$_CreateChatRoomCopyWithImpl<_$_CreateChatRoom>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int id) itemCreated,
+    required TResult Function() itemRefreshed,
+    required TResult Function() itemSolved,
+    required TResult Function(int id) claimRead,
+    required TResult Function() itemDeleted,
+    required TResult Function(int otherId, String otherUsername) createChatRoom,
+  }) {
+    return createChatRoom(otherId, otherUsername);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int id)? itemCreated,
+    TResult? Function()? itemRefreshed,
+    TResult? Function()? itemSolved,
+    TResult? Function(int id)? claimRead,
+    TResult? Function()? itemDeleted,
+    TResult? Function(int otherId, String otherUsername)? createChatRoom,
+  }) {
+    return createChatRoom?.call(otherId, otherUsername);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int id)? itemCreated,
+    TResult Function()? itemRefreshed,
+    TResult Function()? itemSolved,
+    TResult Function(int id)? claimRead,
+    TResult Function()? itemDeleted,
+    TResult Function(int otherId, String otherUsername)? createChatRoom,
+    required TResult orElse(),
+  }) {
+    if (createChatRoom != null) {
+      return createChatRoom(otherId, otherUsername);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ItemCreated value) itemCreated,
+    required TResult Function(_ItemRefreshed value) itemRefreshed,
+    required TResult Function(_ItemSolved value) itemSolved,
+    required TResult Function(_ClaimRead value) claimRead,
+    required TResult Function(_ItemDeleted value) itemDeleted,
+    required TResult Function(_CreateChatRoom value) createChatRoom,
+  }) {
+    return createChatRoom(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ItemCreated value)? itemCreated,
+    TResult? Function(_ItemRefreshed value)? itemRefreshed,
+    TResult? Function(_ItemSolved value)? itemSolved,
+    TResult? Function(_ClaimRead value)? claimRead,
+    TResult? Function(_ItemDeleted value)? itemDeleted,
+    TResult? Function(_CreateChatRoom value)? createChatRoom,
+  }) {
+    return createChatRoom?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ItemCreated value)? itemCreated,
+    TResult Function(_ItemRefreshed value)? itemRefreshed,
+    TResult Function(_ItemSolved value)? itemSolved,
+    TResult Function(_ClaimRead value)? claimRead,
+    TResult Function(_ItemDeleted value)? itemDeleted,
+    TResult Function(_CreateChatRoom value)? createChatRoom,
+    required TResult orElse(),
+  }) {
+    if (createChatRoom != null) {
+      return createChatRoom(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CreateChatRoom implements ItemEvent {
+  const factory _CreateChatRoom(final int otherId, final String otherUsername) =
+      _$_CreateChatRoom;
+
+  int get otherId;
+  String get otherUsername;
+  @JsonKey(ignore: true)
+  _$$_CreateChatRoomCopyWith<_$_CreateChatRoom> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ItemState {
   Item? get item => throw _privateConstructorUsedError;
   int get userId => throw _privateConstructorUsedError;
@@ -764,6 +968,8 @@ mixin _$ItemState {
   Either<Failure, Success>? get solveFailureOrSuccess =>
       throw _privateConstructorUsedError;
   Either<Failure, Success>? get deleteFailureOrSuccess =>
+      throw _privateConstructorUsedError;
+  Either<Failure, Room>? get roomCreationFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -783,7 +989,8 @@ abstract class $ItemStateCopyWith<$Res> {
       bool isLoading,
       Either<Failure, Success>? loadFailureOrSuccess,
       Either<Failure, Success>? solveFailureOrSuccess,
-      Either<Failure, Success>? deleteFailureOrSuccess});
+      Either<Failure, Success>? deleteFailureOrSuccess,
+      Either<Failure, Room>? roomCreationFailureOrSuccess});
 }
 
 /// @nodoc
@@ -806,6 +1013,7 @@ class _$ItemStateCopyWithImpl<$Res, $Val extends ItemState>
     Object? loadFailureOrSuccess = freezed,
     Object? solveFailureOrSuccess = freezed,
     Object? deleteFailureOrSuccess = freezed,
+    Object? roomCreationFailureOrSuccess = freezed,
   }) {
     return _then(_value.copyWith(
       item: freezed == item
@@ -836,6 +1044,10 @@ class _$ItemStateCopyWithImpl<$Res, $Val extends ItemState>
           ? _value.deleteFailureOrSuccess
           : deleteFailureOrSuccess // ignore: cast_nullable_to_non_nullable
               as Either<Failure, Success>?,
+      roomCreationFailureOrSuccess: freezed == roomCreationFailureOrSuccess
+          ? _value.roomCreationFailureOrSuccess
+          : roomCreationFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Either<Failure, Room>?,
     ) as $Val);
   }
 }
@@ -854,7 +1066,8 @@ abstract class _$$_ItemStateCopyWith<$Res> implements $ItemStateCopyWith<$Res> {
       bool isLoading,
       Either<Failure, Success>? loadFailureOrSuccess,
       Either<Failure, Success>? solveFailureOrSuccess,
-      Either<Failure, Success>? deleteFailureOrSuccess});
+      Either<Failure, Success>? deleteFailureOrSuccess,
+      Either<Failure, Room>? roomCreationFailureOrSuccess});
 }
 
 /// @nodoc
@@ -875,6 +1088,7 @@ class __$$_ItemStateCopyWithImpl<$Res>
     Object? loadFailureOrSuccess = freezed,
     Object? solveFailureOrSuccess = freezed,
     Object? deleteFailureOrSuccess = freezed,
+    Object? roomCreationFailureOrSuccess = freezed,
   }) {
     return _then(_$_ItemState(
       item: freezed == item
@@ -905,6 +1119,10 @@ class __$$_ItemStateCopyWithImpl<$Res>
           ? _value.deleteFailureOrSuccess
           : deleteFailureOrSuccess // ignore: cast_nullable_to_non_nullable
               as Either<Failure, Success>?,
+      roomCreationFailureOrSuccess: freezed == roomCreationFailureOrSuccess
+          ? _value.roomCreationFailureOrSuccess
+          : roomCreationFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Either<Failure, Room>?,
     ));
   }
 }
@@ -915,17 +1133,19 @@ class _$_ItemState implements _ItemState {
   const _$_ItemState(
       {required this.item,
       required this.userId,
-      required this.token,
+      this.token = "",
       this.isLoading = true,
       this.loadFailureOrSuccess,
       this.solveFailureOrSuccess,
-      this.deleteFailureOrSuccess});
+      this.deleteFailureOrSuccess,
+      this.roomCreationFailureOrSuccess});
 
   @override
   final Item? item;
   @override
   final int userId;
   @override
+  @JsonKey()
   final String token;
   @override
   @JsonKey()
@@ -936,10 +1156,12 @@ class _$_ItemState implements _ItemState {
   final Either<Failure, Success>? solveFailureOrSuccess;
   @override
   final Either<Failure, Success>? deleteFailureOrSuccess;
+  @override
+  final Either<Failure, Room>? roomCreationFailureOrSuccess;
 
   @override
   String toString() {
-    return 'ItemState(item: $item, userId: $userId, token: $token, isLoading: $isLoading, loadFailureOrSuccess: $loadFailureOrSuccess, solveFailureOrSuccess: $solveFailureOrSuccess, deleteFailureOrSuccess: $deleteFailureOrSuccess)';
+    return 'ItemState(item: $item, userId: $userId, token: $token, isLoading: $isLoading, loadFailureOrSuccess: $loadFailureOrSuccess, solveFailureOrSuccess: $solveFailureOrSuccess, deleteFailureOrSuccess: $deleteFailureOrSuccess, roomCreationFailureOrSuccess: $roomCreationFailureOrSuccess)';
   }
 
   @override
@@ -957,12 +1179,24 @@ class _$_ItemState implements _ItemState {
             (identical(other.solveFailureOrSuccess, solveFailureOrSuccess) ||
                 other.solveFailureOrSuccess == solveFailureOrSuccess) &&
             (identical(other.deleteFailureOrSuccess, deleteFailureOrSuccess) ||
-                other.deleteFailureOrSuccess == deleteFailureOrSuccess));
+                other.deleteFailureOrSuccess == deleteFailureOrSuccess) &&
+            (identical(other.roomCreationFailureOrSuccess,
+                    roomCreationFailureOrSuccess) ||
+                other.roomCreationFailureOrSuccess ==
+                    roomCreationFailureOrSuccess));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, item, userId, token, isLoading,
-      loadFailureOrSuccess, solveFailureOrSuccess, deleteFailureOrSuccess);
+  int get hashCode => Object.hash(
+      runtimeType,
+      item,
+      userId,
+      token,
+      isLoading,
+      loadFailureOrSuccess,
+      solveFailureOrSuccess,
+      deleteFailureOrSuccess,
+      roomCreationFailureOrSuccess);
 
   @JsonKey(ignore: true)
   @override
@@ -973,13 +1207,15 @@ class _$_ItemState implements _ItemState {
 
 abstract class _ItemState implements ItemState {
   const factory _ItemState(
-      {required final Item? item,
-      required final int userId,
-      required final String token,
-      final bool isLoading,
-      final Either<Failure, Success>? loadFailureOrSuccess,
-      final Either<Failure, Success>? solveFailureOrSuccess,
-      final Either<Failure, Success>? deleteFailureOrSuccess}) = _$_ItemState;
+          {required final Item? item,
+          required final int userId,
+          final String token,
+          final bool isLoading,
+          final Either<Failure, Success>? loadFailureOrSuccess,
+          final Either<Failure, Success>? solveFailureOrSuccess,
+          final Either<Failure, Success>? deleteFailureOrSuccess,
+          final Either<Failure, Room>? roomCreationFailureOrSuccess}) =
+      _$_ItemState;
 
   @override
   Item? get item;
@@ -995,6 +1231,8 @@ abstract class _ItemState implements ItemState {
   Either<Failure, Success>? get solveFailureOrSuccess;
   @override
   Either<Failure, Success>? get deleteFailureOrSuccess;
+  @override
+  Either<Failure, Room>? get roomCreationFailureOrSuccess;
   @override
   @JsonKey(ignore: true)
   _$$_ItemStateCopyWith<_$_ItemState> get copyWith =>

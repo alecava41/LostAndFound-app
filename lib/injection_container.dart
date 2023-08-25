@@ -16,7 +16,7 @@ import 'package:lost_and_found/core/presentation/home_controller/bloc/home_contr
 import 'package:lost_and_found/core/presentation/select_category/bloc/category_bloc.dart';
 import 'package:lost_and_found/features/authentication/data/datasources/auth_client.dart';
 import 'package:lost_and_found/features/authentication/data/datasources/authentication_data_source.dart';
-import 'package:lost_and_found/core/data/repositories/authentication_repository_impl.dart';
+import 'package:lost_and_found/features/authentication/data/repositories/authentication_repository_impl.dart';
 import 'package:lost_and_found/core/domain/repositories/authentication_repository.dart';
 import 'package:lost_and_found/features/authentication/domain/usecases/login_usecase.dart';
 import 'package:lost_and_found/features/authentication/domain/usecases/registration_usecase.dart';
@@ -29,9 +29,16 @@ import 'package:lost_and_found/features/badges/domain/repositories/badge_reposit
 import 'package:lost_and_found/features/badges/domain/usecases/get_unread_news_usecase.dart';
 import 'package:lost_and_found/features/badges/domain/usecases/get_unread_received_claims_usecase.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
-import 'package:lost_and_found/features/chat/data/datasources/chat_client.dart';
-import 'package:lost_and_found/features/chat/domain/usecases/chat_login_usecase.dart';
-import 'package:lost_and_found/features/chat/presentation/bloc/chat_bloc.dart';
+import 'package:lost_and_found/features/chat/data/datasources/chat_data_source.dart';
+import 'package:lost_and_found/features/chat/data/repositories/chat_repository_impl.dart';
+import 'package:lost_and_found/features/chat/domain/repositories/chat_repository.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/create_room_usecase.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/get_room_messages_usecase.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/login_chat_usecase.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/registration_chat_usecase.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/send_message_usecase.dart';
+import 'package:lost_and_found/features/chat/presentation/bloc/chat/chat_bloc.dart';
+import 'package:lost_and_found/features/chat/presentation/bloc/inbox/inbox_bloc.dart';
 import 'package:lost_and_found/features/claim/data/datasources/claim_client.dart';
 import 'package:lost_and_found/features/claim/data/datasources/claim_datasource.dart';
 import 'package:lost_and_found/features/claim/domain/repositories/claim_repository.dart';
@@ -76,6 +83,7 @@ import 'core/data/secure_storage/secure_storage.dart';
 import 'core/domain/repositories/category_repository.dart';
 import 'core/presentation/select_position/bloc/select_position_bloc.dart';
 import 'features/badges/data/repositories/badge_repository_impl.dart';
+import 'features/chat/domain/usecases/get_user_rooms_usecase.dart';
 import 'features/claim/data/repositories/claim_repository_impl.dart';
 import 'features/claim/presentation/bloc/answer_claim/answer_claim_bloc.dart';
 import 'features/claim/presentation/bloc/answer_question/answer_question_bloc.dart';
@@ -106,11 +114,13 @@ Future<void> init() async {
   sl.registerFactory(
       () => SearchBloc(searchItemsUseCase: sl(), secureStorage: sl(), getAddressFromPositionUseCase: sl()));
   sl.registerFactory(() => ItemBloc(
-      getItemUseCase: sl(),
-      secureStorage: sl(),
-      solveItemUseCase: sl(),
-      deleteItemUseCase: sl(),
-      insertReadClaimUseCase: sl()));
+        getItemUseCase: sl(),
+        secureStorage: sl(),
+        solveItemUseCase: sl(),
+        deleteItemUseCase: sl(),
+        insertReadClaimUseCase: sl(),
+        createRoomUseCase: sl(),
+      ));
   sl.registerFactory(
       () => InsertItemBloc(createItemUseCase: sl(), getAddressFromPositionUseCase: sl(), uploadItemImageUseCase: sl()));
   sl.registerFactory(() => UpdateItemBloc(
@@ -198,13 +208,22 @@ Future<void> init() async {
 
   // ** Feature - Chat **
   // BLoC
-  sl.registerFactory(() => ChatBloc(chatLoginUseCase: sl()));
+  sl.registerFactory(() => InboxBloc(loginChatUseCase: sl(), getUserRoomsUseCase: sl(), storage: sl()));
+  sl.registerFactory(() => ChatBloc(getRoomMessagesUseCase: sl(), getItemUseCase: sl(), sendMessageUseCase: sl(), storage: sl()));
 
   // Use cases
-  sl.registerLazySingleton(() => ChatLoginUseCase(sl()));
+  sl.registerLazySingleton(() => LoginChatUseCase(sl()));
+  sl.registerLazySingleton(() => RegistrationChatUseCase(sl()));
+  sl.registerLazySingleton(() => GetUserRoomsUseCase(sl()));
+  sl.registerLazySingleton(() => CreateRoomUseCase(sl()));
+  sl.registerLazySingleton(() => GetRoomMessagesUseCase(sl()));
+  sl.registerLazySingleton(() => SendMessageUseCase(sl()));
+
+  // Repositories
+  sl.registerLazySingleton<ChatRepository>(() => ChatRepositoryImpl(sl(), sl(), sl()));
 
   // Data sources
-  sl.registerLazySingleton<ChatClient>(() => ChatClientImpl(sl()));
+  sl.registerLazySingleton<ChatDataSource>(() => ChatDataSourceImpl());
 
   // ** External - Generic **
   // Use cases

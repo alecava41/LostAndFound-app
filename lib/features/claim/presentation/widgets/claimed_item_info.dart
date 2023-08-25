@@ -12,8 +12,7 @@ import '../../../item/domain/entities/item.dart';
 class ClaimedItemInfo extends StatelessWidget {
   final Item item;
   final String token;
-  final String
-      subject; // either the owner of the object or the user that claimed it
+  final String subject; // either the owner of the object or the user that claimed it
   final int? claimIdx;
 
   const ClaimedItemInfo({
@@ -28,8 +27,7 @@ class ClaimedItemInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final String itemUrl = '$baseUrl/api/items/${item.id}/image';
 
-    final User user =
-        claimIdx != null ? item.claims![claimIdx!].user : item.user;
+    final User user = claimIdx != null ? item.claims![claimIdx!].user : item.user;
 
     final String userUrl = '$baseUrl/api/users/${user.id}/image';
 
@@ -52,13 +50,12 @@ class ClaimedItemInfo extends StatelessWidget {
                       httpHeaders: {
                         "Authorization": "Bearer $token",
                       },
-                      placeholder: (context, _) =>
-                          const CustomCircularProgress(size: 75),
-                      errorWidget: (context, url, error) =>
-                          Image.asset("assets/images/no-item.png"),
+                      placeholder: (context, _) => const CustomCircularProgress(size: 75),
+                      errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
                       imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                     ),
-                  ))
+                  ),
+                )
               : Image.asset("assets/images/no-item.png"),
         ),
         Expanded(
