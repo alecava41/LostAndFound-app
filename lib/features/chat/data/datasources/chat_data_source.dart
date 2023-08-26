@@ -16,7 +16,7 @@ abstract class ChatDataSource {
   Stream<List<Room>> getUserRooms();
 
   Future<Room> createRoom(CreateRoomParams params);
-  
+
   Future<Pair<Room, Stream<List<Message>>>> getRoomMessages(GetRoomMessagesParams params);
 
   Future<void> sendMessage(SendMessageParams params);
@@ -34,7 +34,7 @@ class ChatDataSourceImpl implements ChatDataSource {
       types.User(
         firstName: params.username,
         id: credentials.user!.uid,
-        // imageUrl: 'https://i.pravatar.cc/300?u=$_email',
+        lastName: "",
       ),
     );
   }
@@ -54,23 +54,34 @@ class ChatDataSourceImpl implements ChatDataSource {
 
   @override
   Future<Room> createRoom(CreateRoomParams params) async {
-    final users = await FirebaseChatCore.instance.users().first;
-    final rooms = await FirebaseChatCore.instance.rooms().first;
+    final users = (await FirebaseChatCore.instance.getFirebaseFirestore().collection("users").get())
+        .docs
+        .map((e) => Pair(e.id, e.data()['firstName'] as String));
 
-    if (rooms.any((room) => room.name == "${params.id1}-${params.itemId}-${params.id2}")) {
-      return rooms.firstWhere((room) => room.name == "${params.id1}-${params.itemId}-${params.id2}");
+    final rooms = (await FirebaseChatCore.instance.getFirebaseFirestore().collection("rooms").get())
+        .docs
+        .map((e) => Pair(e.id, e.data()['name'] as String));
+
+    if (rooms.any((room) => room.second == "${params.id1}-${params.itemId}-${params.id2}")) {
+      return types.Room(
+          id: rooms.firstWhere((e) => e.second == "${params.id1}-${params.itemId}-${params.id2}").first,
+          type: RoomType.group,
+          users: const []);
     }
 
-    return await FirebaseChatCore.instance.createGroupRoom(name: "${params.id1}-${params.itemId}-${params.id2}", users: [
-      users.firstWhere((user) => user.firstName == params.username1),
-      users.firstWhere((user) => user.firstName == params.username2)
-    ], metadata: {
-      "id1": params.id1,
-      "id2": params.id2,
-      "username1": params.username1,
-      "username2": params.username2,
-      "item": params.itemId
-    });
+    return await FirebaseChatCore.instance.createGroupRoom(
+      name: "${params.id1}-${params.itemId}-${params.id2}",
+      users: [
+        types.User(id: users.firstWhere((user) => user.second == params.username2).first),
+      ],
+      metadata: {
+        "id1": params.id1,
+        "id2": params.id2,
+        "username1": params.username1,
+        "username2": params.username2,
+        "item": params.itemId
+      },
+    );
   }
 
   @override
@@ -81,6 +92,6 @@ class ChatDataSourceImpl implements ChatDataSource {
 
   @override
   Future<void> sendMessage(SendMessageParams params) async {
-   FirebaseChatCore.instance.sendMessage(params.message, params.roomId);
+    FirebaseChatCore.instance.sendMessage(params.message, params.roomId);
   }
 }

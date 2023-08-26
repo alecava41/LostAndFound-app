@@ -2,6 +2,7 @@ import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart';
+import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:lost_and_found/features/chat/presentation/bloc/inbox/inbox_bloc.dart';
 
 import '../widgets/inbox/inbox_item.dart';
@@ -33,7 +34,7 @@ class InboxScreen extends StatelessWidget {
           state.hasLoginOrLoadingError
               ? Container() // TODO @(backToFrancesco) build retry screen
               : StreamBuilder<List<Room>>(
-                  stream: state.userRooms,
+                  stream: FirebaseChatCore.instance.rooms(),
                   initialData: const [],
                   builder: (context, snapshot) {
                     if (!snapshot.hasData || snapshot.data!.isEmpty) {

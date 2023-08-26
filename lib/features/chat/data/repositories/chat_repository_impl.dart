@@ -73,15 +73,15 @@ class ChatRepositoryImpl implements ChatRepository {
 
   @override
   Future<Either<Failure, Room>> createRoom(CreateRoomParams params) async {
-    try {
+    // try {
       if (await _networkInfo.isConnected) {
         return Right(await _dataSource.createRoom(params));
       } else {
         return const Left(Failure.networkFailure());
       }
-    } on Exception catch (e) {
-      return Left(mapExceptionToFailure(e));
-    }
+    // } on Exception catch (e) {
+    //   return Left(mapExceptionToFailure(e));
+    // }
   }
 
   @override
