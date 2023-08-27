@@ -38,19 +38,18 @@ class CustomNotification extends StatelessWidget {
       return Column(
         children: [
           Material(
-            color: !opened ? PersonalizedColor.primarySwatch.shade200 : Colors.white,
+            color: opened ? PersonalizedColor.openedColor :  PersonalizedColor.notOpenedColor,
             child: InkWell(
               onTap: () => {
                 ctx.read<NewsBloc>().add(NewsEvent.newsRead(id)),
                 ctx.read<BadgeBloc>().add(const BadgeEvent.newsRead()),
                 Navigator.push(context, MaterialPageRoute(builder: (_) => ItemScreen(itemId: targetItemId)))
               },
-              splashColor: !opened ? PersonalizedColor.primarySwatch.shade500 : Colors.grey.withOpacity(0.4),
+              splashColor: opened ? PersonalizedColor.splashGreyColor : PersonalizedColor.splashGreenColor,
               child: SizedBox(
                 height: 100,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  //child: Flexible(
                   child: Row(
                     children: [
                       CircularImage(

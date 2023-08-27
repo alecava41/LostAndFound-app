@@ -23,7 +23,7 @@ class OrderOptionButton extends StatelessWidget {
           onClick();
           Navigator.pop(context);
         },
-        splashColor: Colors.grey.shade200,
+        splashColor: PersonalizedColor.splashGreyColor,
         child: Container(
           padding: const EdgeInsets.all(14),
           alignment: Alignment.center,

@@ -17,6 +17,7 @@ import '../../../../utils/colors.dart';
 import '../../domain/entities/item.dart';
 import '../bloc/home/home_bloc.dart';
 import '../bloc/item/item_bloc.dart';
+import '../widgets/item/claim_status_button.dart';
 import '../widgets/item/image_item.dart';
 import '../widgets/item/info_item.dart';
 import '../widgets/notifications/circular_image_avatar.dart';
@@ -414,53 +415,7 @@ class ItemScreen extends StatelessWidget {
                 ? Container(
                     color: Colors.white,
                     padding: const EdgeInsets.all(8),
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: claim.status == ClaimStatus.approved
-                            ? PersonalizedColor.claimAcceptedStatusColor
-                            : (claim.status == ClaimStatus.pending
-                                ? PersonalizedColor.claimWaitingStatusColor
-                                : PersonalizedColor.claimDeniedStatusColor),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.connect_without_contact,
-                                size: 25,
-                              ),
-                              const SizedBox(width: 5),
-                              RichText(
-                                text: TextSpan(
-                                  children: [
-                                    const TextSpan(
-                                      text: "Claim status ",
-                                      style: TextStyle(fontSize: 18, color: Colors.black),
-                                    ),
-                                    TextSpan(
-                                      text: claim.status.name.toUpperCase(),
-                                      style:
-                                          const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          claim.status == ClaimStatus.approved
-                              ? Text(
-                                  "Your claim has been accepted! Get in touch with ${owner.username} through the chat to arrange the item's return.")
-                              : claim.status == ClaimStatus.rejected
-                                  ? Text(
-                                      "Unfortunately, your claim has been rejected by ${owner.username}, as the response you provided was not correct.")
-                                  : Text("Wait for ${owner.username} to validate to your claim.")
-                        ],
-                      ),
-                    ),
+                    child: ClaimStatusButton(owner: owner.username, status: claim.status, ),
                   )
                 : Container(
                     padding: const EdgeInsets.all(8.0),

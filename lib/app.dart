@@ -50,7 +50,8 @@ class _Application extends State<App> {
 
   Future<void> setupInteractedMessage() async {
     // Get any messages which caused the application to open from a terminated state.
-    RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
 
     if (initialMessage != null) {
       _handleMessage(initialMessage);
@@ -65,13 +66,17 @@ class _Application extends State<App> {
         ? NotificationType.item
         : (message.data['topic'] == 'newClaim'
             ? NotificationType.newClaim
-            : (message.data['topic'] == 'sentClaim' ? NotificationType.sentClaim : NotificationType.chat));
+            : (message.data['topic'] == 'sentClaim'
+                ? NotificationType.sentClaim
+                : NotificationType.chat));
 
     switch (topic) {
       case NotificationType.item:
-        _handleItemMessage(int.parse(message.data['news']), int.parse(message.data['item']));
+        _handleItemMessage(
+            int.parse(message.data['news']), int.parse(message.data['item']));
       case NotificationType.newClaim:
-        _handleNewClaimMessage(int.parse(message.data['claim']), int.parse(message.data['item']));
+        _handleNewClaimMessage(
+            int.parse(message.data['claim']), int.parse(message.data['item']));
       case NotificationType.sentClaim:
         _handleSentClaimUpdateMessage(int.parse(message.data['item']));
       case NotificationType.chat:
@@ -81,12 +86,15 @@ class _Application extends State<App> {
   }
 
   void _handleItemMessage(int newsId, int itemId) {
-    navigatorKey.currentState?.pushNamed('/notifications', arguments: NotificationsScreenArguments(newNewsId: newsId));
-    navigatorKey.currentState?.push(MaterialPageRoute(builder: (_) => ItemScreen(itemId: itemId)));
+    navigatorKey.currentState?.pushNamed('/notifications',
+        arguments: NotificationsScreenArguments(newNewsId: newsId));
+    navigatorKey.currentState
+        ?.push(MaterialPageRoute(builder: (_) => ItemScreen(itemId: itemId)));
   }
 
   void _handleNewClaimMessage(int claimId, int itemId) {
-    navigatorKey.currentState?.pushNamed('/claims', arguments: ClaimsScreenArguments(claimId: claimId, tab: null));
+    navigatorKey.currentState?.pushNamed('/claims',
+        arguments: ClaimsScreenArguments(claimId: claimId, tab: null));
     navigatorKey.currentState?.push(
       MaterialPageRoute(
         builder: (_) => AnswerClaimScreen(
@@ -99,7 +107,8 @@ class _Application extends State<App> {
   }
 
   void _handleSentClaimUpdateMessage(int itemId) {
-    navigatorKey.currentState?.pushNamed('/claims', arguments: const ClaimsScreenArguments(claimId: null, tab: 0));
+    navigatorKey.currentState?.pushNamed('/claims',
+        arguments: const ClaimsScreenArguments(claimId: null, tab: 0));
     navigatorKey.currentState?.push(MaterialPageRoute(
       builder: (_) => ItemScreen(itemId: itemId),
     ));
@@ -115,25 +124,33 @@ class _Application extends State<App> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<HomeBloc>(create: (_) => sl<HomeBloc>()..add(const HomeEvent.homeCreated())),
+        BlocProvider<HomeBloc>(
+            create: (_) => sl<HomeBloc>()..add(const HomeEvent.homeCreated())),
         BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>()),
-        BlocProvider<UserBloc>(create: (_) => sl<UserBloc>()..add(const UserEvent.contentCreated())),
-        BlocProvider<HomeControllerBloc>(create: (_) => sl<HomeControllerBloc>()),
-        BlocProvider<BadgeBloc>(create: (_) => sl<BadgeBloc>()..add(const BadgeEvent.badgeCreated())),
-        BlocProvider<InboxBloc>(create: (_) => sl<InboxBloc>()..add(const InboxEvent.inboxContentCreated()))
+        BlocProvider<UserBloc>(
+            create: (_) =>
+                sl<UserBloc>()..add(const UserEvent.contentCreated())),
+        BlocProvider<HomeControllerBloc>(
+            create: (_) => sl<HomeControllerBloc>()),
+        BlocProvider<BadgeBloc>(
+            create: (_) =>
+                sl<BadgeBloc>()..add(const BadgeEvent.badgeCreated())),
+        BlocProvider<InboxBloc>(
+            create: (_) =>
+                sl<InboxBloc>()..add(const InboxEvent.inboxContentCreated()))
       ],
       child: MaterialApp(
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
-        title: 'Lost&Found',
-        navigatorKey: navigatorKey,
-        theme: ThemeData(
-          primarySwatch: PersonalizedColor.primarySwatch,
-        ),
-        // Initially display FirstPage
-        initialRoute: initialRoute,
-        onGenerateRoute: RouteGenerator.generateRoute,
-      ),
+  locale: DevicePreview.locale(context),
+  builder: DevicePreview.appBuilder,
+  title: 'Lost&Found',
+  navigatorKey: navigatorKey,
+  theme: ThemeData(
+    primarySwatch: PersonalizedColor.primarySwatch,
+  ),
+  initialRoute: initialRoute,
+  onGenerateRoute: RouteGenerator.generateRoute,
+)
+
     );
   }
 }

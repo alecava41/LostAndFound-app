@@ -112,21 +112,19 @@ class CustomCardHome extends StatelessWidget {
               ],
             ),
           ),
-          Positioned.fill(
-            bottom: -1,
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ItemScreen(
-                                itemId: id,
-                              )));
-                },
-                borderRadius: BorderRadius.circular(24.0),
-              ),
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              splashColor: PersonalizedColor.splashGreyColor,
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ItemScreen(
+                              itemId: id,
+                            )));
+              },
+              borderRadius: BorderRadius.circular(24.0),
             ),
           ),
         ],

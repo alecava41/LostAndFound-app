@@ -78,6 +78,7 @@ dependencies:
   cloud_firestore: ^4.9.0
   flutter_firebase_chat_core: ^1.6.7
   flutter_chat_types: ^3.6.2
+  sizer: ^2.0.15
 
 dev_dependencies:
   flutter_test:

@@ -24,15 +24,18 @@ class ClaimedStatusCard extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Material(
-        color: Colors.white,
+        color: PersonalizedColor.openedColor,
         child: InkWell(
-          splashColor: Colors.grey.withOpacity(0.4),
-          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ItemScreen(itemId: claim.item.id))),
+          splashColor: PersonalizedColor.splashGreyColor,
+          onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) => ItemScreen(itemId: claim.item.id))),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: PersonalizedColor.notOpenedColor,
+                color: PersonalizedColor.borderColorOpened,
                 width: 0.3,
               ),
             ),
@@ -45,17 +48,23 @@ class ClaimedStatusCard extends StatelessWidget {
                   height: 70,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: claim.item.hasImage ? CachedNetworkImage(
-                      imageUrl: "$baseUrl/api/items/${claim.item.id}/image",
-                      fit: BoxFit.cover,
-                      httpHeaders: {
-                        "Authorization": "Bearer $token",
-                      },
-                      progressIndicatorBuilder: (context, url, downloadProgress) =>
-                          const CustomCircularProgress(size: 35),
-                      errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
-                      imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-                    ) : Image.asset("assets/images/no-item.png"),
+                    child: claim.item.hasImage
+                        ? CachedNetworkImage(
+                            imageUrl:
+                                "$baseUrl/api/items/${claim.item.id}/image",
+                            fit: BoxFit.cover,
+                            httpHeaders: {
+                              "Authorization": "Bearer $token",
+                            },
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    const CustomCircularProgress(size: 35),
+                            errorWidget: (context, url, error) =>
+                                Image.asset("assets/images/no-item.png"),
+                            imageRenderMethodForWeb:
+                                ImageRenderMethodForWeb.HttpGet,
+                          )
+                        : Image.asset("assets/images/no-item.png"),
                   ),
                 ),
                 Expanded(
@@ -83,7 +92,8 @@ class ClaimedStatusCard extends StatelessWidget {
                                   ? PersonalizedColor.claimAcceptedStatusColor
                                   : (claim.status == ClaimStatus.rejected
                                       ? PersonalizedColor.claimDeniedStatusColor
-                                      : PersonalizedColor.claimWaitingStatusColor),
+                                      : PersonalizedColor
+                                          .claimWaitingStatusColor),
                             ),
                             child: RichText(
                               maxLines: 1,
@@ -92,12 +102,15 @@ class ClaimedStatusCard extends StatelessWidget {
                                 children: [
                                   const TextSpan(
                                     text: "Claim status: ",
-                                    style: TextStyle(fontSize: 13, color: Colors.black),
+                                    style: TextStyle(
+                                        fontSize: 13, color: Colors.black),
                                   ),
                                   TextSpan(
                                     text: claim.status.name.toUpperCase(),
-                                    style:
-                                        const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
+                                    style: const TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
                                   ),
                                 ],
                               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/utils/colors.dart';
 
 class CategoryItem extends StatelessWidget {
   final String categoryName;
@@ -26,7 +27,7 @@ class CategoryItem extends StatelessWidget {
           color: Colors.white,
           child: InkWell(
             onTap: onTap,
-            splashColor: Colors.grey.withOpacity(0.4),
+            splashColor: PersonalizedColor.splashGreyColor,
             child: SizedBox(
               height: 80,
               child: Row(

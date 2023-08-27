@@ -79,7 +79,7 @@ class _ChatScreenState extends State<ChatScreen> {
         toolbarHeight: 60,
         title: InkWell(
           onTap: () => showImageDialog(widget.userToImage),
-          splashColor: Colors.grey, // Specify the splashColor here
+          splashColor: PersonalizedColor.splashGreyColor, // Specify the splashColor here
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(

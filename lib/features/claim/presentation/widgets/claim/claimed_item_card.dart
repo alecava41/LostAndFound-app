@@ -18,8 +18,6 @@ class ClaimedItemCard extends StatelessWidget {
 
   const ClaimedItemCard({super.key, required this.token, required this.claim});
 
-  // TODO (@backToFrancesco) if claim already managed it would be better to put the status even in the card
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ClaimBloc, ClaimState>(
@@ -47,6 +45,7 @@ class ClaimedItemCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
+                  width: 0.3,
                   color: claim.opened ? PersonalizedColor.borderColorOpened : PersonalizedColor.borderColorNotOpened,
                 ),
               ),
