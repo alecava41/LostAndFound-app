@@ -28,21 +28,6 @@ class App extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _Application();
-
-/*
-
-   TODO (@alecava41) if app is in foreground, use badges (how?)
-        - chat ??
-   */
-
-/*
-   TODO (@alecava41) if app is in background (notification pop up):
-    2 - use 'topic' to create right navigation
-        - check how to handle with BLoC and stuff
-        - (firstly create home_controller, then navigate to wanted pages / subpages, need to include the specific info)
-    3 - notification cases
-        - chat ??
-   */
 }
 
 class _Application extends State<App> {
