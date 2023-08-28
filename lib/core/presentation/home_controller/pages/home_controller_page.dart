@@ -49,6 +49,7 @@ class HomeControllerScreen extends StatelessWidget {
                   const BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline_outlined), label: "Insert"),
                   BottomNavigationBarItem(
                       icon: badges.Badge(
+                        showBadge: badgeState.hasUnreadChats,
                         position: badges.BadgePosition.topEnd(top: 0, end: -1),
                         child: const Icon(Icons.mail),
                       ),

@@ -20,9 +20,15 @@ class SendMessageUseCase implements UseCase<Success, SendMessageParams> {
 class SendMessageParams {
   final PartialText message;
   final String roomId;
+  final int senderId;
+  final int receiverId;
+  final int itemId;
 
   const SendMessageParams({
     required this.message,
+    required this.senderId,
     required this.roomId,
+    required this.receiverId,
+    required this.itemId,
   });
 }

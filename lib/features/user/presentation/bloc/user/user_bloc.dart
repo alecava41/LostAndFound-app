@@ -12,6 +12,7 @@ import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../../core/status/failures.dart';
 import '../../../../../core/status/success.dart';
+import '../../../../chat/domain/usecases/logout_chat_usecase.dart';
 import '../../../domain/entities/user.dart';
 import '../../../domain/usecases/get_user_info_usecase.dart';
 import '../../../domain/usecases/upload_user_image_usecase.dart';
@@ -25,6 +26,7 @@ part 'user_state.dart';
 class UserBloc extends Bloc<UserEvent, UserState> {
   final GetUserInfoUseCase _getUserInfoUseCase;
   final LogoutUseCase _logoutUseCase;
+  final LogoutChatUseCase _logoutChatUseCase;
   final SecureStorage _secureStorage;
   final UploadUserImageUseCase _uploadUserImageUseCase;
 
@@ -32,10 +34,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       {required GetUserInfoUseCase getUserInfoUseCase,
       required UploadUserImageUseCase uploadUserImageUseCase,
       required LogoutUseCase logoutUseCase,
+      required LogoutChatUseCase logoutChatUseCase,
       required SecureStorage secureStorage})
       : _getUserInfoUseCase = getUserInfoUseCase,
         _logoutUseCase = logoutUseCase,
         _uploadUserImageUseCase = uploadUserImageUseCase,
+        _logoutChatUseCase = logoutChatUseCase,
         _secureStorage = secureStorage,
         super(UserState.initial()) {
     on<UserEvent>(
@@ -50,7 +54,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   Future<void> _onLogout(Emitter<UserState> emit) async {
     final response = await _logoutUseCase(NoParams());
-    emit(state.copyWith(logoutFailureOrSuccess: response));
+    final chatResponse = await _logoutChatUseCase(NoParams());
+
+    emit(
+      state.copyWith(
+        logoutFailureOrSuccess: response.isLeft() || chatResponse.isLeft()
+            ? const Left(Failure.genericFailure())
+            : const Right(Success.genericSuccess()),
+      ),
+    );
   }
 
   Future<void> _onContentCreated(Emitter<UserState> emit) async {

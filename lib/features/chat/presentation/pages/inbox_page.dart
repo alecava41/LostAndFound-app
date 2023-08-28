@@ -65,13 +65,20 @@ class InboxScreen extends StatelessWidget {
                             final id2 = room.metadata!["id2"] as int;
                             final username2 = room.metadata!["username2"] as String;
 
+                            final lastMessageId = room.metadata!["lastMessageId"] as String?;
+                            bool hasReadLastMessage = true;
+
+                            if (lastMessageId != null) {
+                              hasReadLastMessage = (room.metadata!["last-${state.currentId}"] as String?) == lastMessageId;
+                            }
+
                             final itemId = int.parse(room.name!.split('-')[1]);
 
                             return InboxItem(
                               otherUserId: id1 == state.currentId ? id2 : id1,
                               roomName: id1 == state.currentId ? username2 : username1,
                               lastMessage: room.metadata!["lastMessage"] ?? "",
-                              open: true,
+                              opened: hasReadLastMessage,
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(

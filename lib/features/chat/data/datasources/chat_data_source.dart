@@ -2,11 +2,16 @@ import 'package:dartx/dartx.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart';
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
+import 'package:lost_and_found/core/domain/usecases/usecase.dart';
+import 'package:lost_and_found/features/chat/data/models/send_notification_body.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/create_room_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/get_room_messages_usecase.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/read_chat_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/registration_chat_usecase.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:lost_and_found/features/chat/domain/usecases/send_message_usecase.dart';
+
+import 'chat_client.dart';
 
 abstract class ChatDataSource {
   Future<void> register(RegistrationChatParams params);
@@ -20,9 +25,18 @@ abstract class ChatDataSource {
   Future<Pair<Room, Stream<List<Message>>>> getRoomMessages(GetRoomMessagesParams params);
 
   Future<void> sendMessage(SendMessageParams params);
+
+  Future<void> readChat(ReadChatParams params);
+
+  Future<void> logout(NoParams params);
+
 }
 
 class ChatDataSourceImpl implements ChatDataSource {
+  final ChatClient _client;
+
+  ChatDataSourceImpl(this._client);
+
   @override
   Future<void> register(RegistrationChatParams params) async {
     final credentials = await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -45,6 +59,11 @@ class ChatDataSourceImpl implements ChatDataSource {
       email: email,
       password: password,
     );
+  }
+
+  @override
+  Future<void> logout(NoParams params) async {
+    await FirebaseAuth.instance.signOut();
   }
 
   @override
@@ -81,6 +100,10 @@ class ChatDataSourceImpl implements ChatDataSource {
         "username2": params.username2,
         "item": params.itemId,
         "active": false,
+        "lastMessage": null,
+        "lastMessageId": null,
+        "last-${params.id1}": null,
+        "last-${params.id2}": null
       },
     );
   }
@@ -93,15 +116,54 @@ class ChatDataSourceImpl implements ChatDataSource {
 
   @override
   Future<void> sendMessage(SendMessageParams params) async {
+    // Send message
     FirebaseChatCore.instance.sendMessage(params.message, params.roomId);
 
-    // Workaround to have active rooms and "last message" without Cloud Functions
-    await FirebaseChatCore.instance
-        .getFirebaseFirestore()
-        .collection("rooms")
-        .doc(params.roomId)
-        .update({"metadata.active": true, "metadata.lastMessage": params.message.text});
+    // Retrieve lastMessage id
+    final messageId = (await FirebaseChatCore.instance
+            .getFirebaseFirestore()
+            .collection("rooms/${params.roomId}/messages")
+            .orderBy("createdAt", descending: true)
+            .limit(1)
+            .get())
+        .docs
+        .first
+        .id;
 
-    FirebaseChatCore.instance.firebaseUser?.uid;
+    // Workaround to have active rooms, "last message" and "chats to be read" without Cloud Functions
+    await FirebaseChatCore.instance.getFirebaseFirestore().collection("rooms").doc(params.roomId).update(
+      {
+        "metadata.active": true,
+        "metadata.lastMessage": params.message.text,
+        "metadata.lastMessageId": messageId,
+        "metadata.last-${params.senderId}": messageId
+      },
+    );
+
+    // Let the server send the push notification to the other user
+    await _client.sendNotification(SendNotificationBody(
+      receiver: params.receiverId,
+      room: params.roomId,
+      item: params.itemId,
+    ));
+  }
+
+  @override
+  Future<void> readChat(ReadChatParams params) async {
+    // Retrieve lastMessage id
+    final messageId = (await FirebaseChatCore.instance
+            .getFirebaseFirestore()
+            .collection("rooms/${params.roomId}/messages")
+            .orderBy("createdAt", descending: true)
+            .limit(1)
+            .get())
+        .docs
+        .first
+        .id;
+
+    // Send the the user's last read message to the last message
+    await FirebaseChatCore.instance.getFirebaseFirestore().collection("rooms").doc(params.roomId).update(
+      {"metadata.last-${params.currentId}": messageId},
+    );
   }
 }

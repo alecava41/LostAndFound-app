@@ -5,7 +5,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:lost_and_found/features/authentication/data/models/session_model.dart';
-import 'package:lost_and_found/features/authentication/domain/usecases/login_usecase.dart';
 import 'package:lost_and_found/utils/constants.dart';
 import '../secure_storage/secure_storage.dart';
 
@@ -30,7 +29,7 @@ class HttpInterceptor extends Interceptor {
     if (await _storage.containsKey(key: TOKEN)) {
       final token = await _storage.read(key: TOKEN);
       final expire = await _storage.read(key: EXPIRE);
-      final expireDate = DateTime.fromMillisecondsSinceEpoch(int.parse(expire!), isUtc: true);
+      final expireDate = DateTime.fromMillisecondsSinceEpoch(int.parse(expire!) * 1000, isUtc: true);
       final now = DateTime.now().toUtc();
 
       if (now.isBefore(expireDate)) {
@@ -40,8 +39,13 @@ class HttpInterceptor extends Interceptor {
         final psw = await _storage.read(key: PASSWORD);
 
         if (user != null && psw != null) {
-          final response =
-              await http.post(Uri.parse("$baseUrl/auth/login"), body: LoginParams(user: user, password: psw));
+          final response = await http.post(Uri.parse("$baseUrl/auth/login"),
+              body: jsonEncode(
+                {
+                  "user": user,
+                  "password": psw,
+                },
+              ));
 
           if (response.statusCode == 200) {
             final session = SessionModel.fromJson(jsonDecode(response.body));

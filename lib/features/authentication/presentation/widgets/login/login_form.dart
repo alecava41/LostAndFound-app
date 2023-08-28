@@ -41,12 +41,12 @@ class LoginForm extends StatelessWidget {
                         )
                       },
                   (success) => {
+                        Navigator.popUntil(context, (route) => route.isFirst),
+                        Navigator.of(context).pushReplacementNamed('/'),
+
                         // Update home/user content
                         context.read<HomeBloc>().add(const HomeEvent.homeRefreshed()),
                         context.read<UserBloc>().add(const UserEvent.contentCreated()),
-
-                        Navigator.popUntil(context, (route) => route.isFirst),
-                        Navigator.of(context).pushReplacementNamed('/')
                       });
             }
           },

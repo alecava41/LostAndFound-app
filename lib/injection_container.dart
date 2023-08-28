@@ -29,12 +29,15 @@ import 'package:lost_and_found/features/badges/domain/repositories/badge_reposit
 import 'package:lost_and_found/features/badges/domain/usecases/get_unread_news_usecase.dart';
 import 'package:lost_and_found/features/badges/domain/usecases/get_unread_received_claims_usecase.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
+import 'package:lost_and_found/features/chat/data/datasources/chat_client.dart';
 import 'package:lost_and_found/features/chat/data/datasources/chat_data_source.dart';
 import 'package:lost_and_found/features/chat/data/repositories/chat_repository_impl.dart';
 import 'package:lost_and_found/features/chat/domain/repositories/chat_repository.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/create_room_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/get_room_messages_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/login_chat_usecase.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/logout_chat_usecase.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/read_chat_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/registration_chat_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/send_message_usecase.dart';
 import 'package:lost_and_found/features/chat/presentation/bloc/chat/chat_bloc.dart';
@@ -175,8 +178,12 @@ Future<void> init() async {
 
   // ** Feature - User **
   // BLoC
-  sl.registerFactory(
-      () => UserBloc(getUserInfoUseCase: sl(), secureStorage: sl(), logoutUseCase: sl(), uploadUserImageUseCase: sl()));
+  sl.registerFactory(() => UserBloc(
+      getUserInfoUseCase: sl(),
+      secureStorage: sl(),
+      logoutUseCase: sl(),
+      uploadUserImageUseCase: sl(),
+      logoutChatUseCase: sl()));
   sl.registerFactory(() => ChangePasswordBloc(updatePasswordUseCase: sl(), storage: sl(), loginUseCase: sl()));
 
   // Use Cases
@@ -193,7 +200,7 @@ Future<void> init() async {
 
   // ** Feature - Badge **
   // BLoC
-  sl.registerFactory(() => BadgeBloc(getUnreadNewsUseCase: sl(), getUnreadReceivedClaimsUseCase: sl()));
+  sl.registerFactory(() => BadgeBloc(getUnreadNewsUseCase: sl(), getUnreadReceivedClaimsUseCase: sl(), getUserRoomsUseCase: sl(), storage: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetUnreadNewsUseCase(sl()));
@@ -208,22 +215,35 @@ Future<void> init() async {
 
   // ** Feature - Chat **
   // BLoC
-  sl.registerFactory(() => InboxBloc(loginChatUseCase: sl(), getUserRoomsUseCase: sl(), storage: sl()));
-  sl.registerFactory(() => ChatBloc(getRoomMessagesUseCase: sl(), getItemUseCase: sl(), sendMessageUseCase: sl(), storage: sl()));
+  sl.registerFactory(() => InboxBloc(
+        loginChatUseCase: sl(),
+        getUserRoomsUseCase: sl(),
+        storage: sl(),
+      ));
+
+  sl.registerFactory(() => ChatBloc(
+        getRoomMessagesUseCase: sl(),
+        getItemUseCase: sl(),
+        sendMessageUseCase: sl(),
+        storage: sl(),
+        readChatUseCase: sl(),
+      ));
 
   // Use cases
   sl.registerLazySingleton(() => LoginChatUseCase(sl()));
+  sl.registerLazySingleton(() => LogoutChatUseCase(sl()));
   sl.registerLazySingleton(() => RegistrationChatUseCase(sl()));
   sl.registerLazySingleton(() => GetUserRoomsUseCase(sl()));
   sl.registerLazySingleton(() => CreateRoomUseCase(sl()));
   sl.registerLazySingleton(() => GetRoomMessagesUseCase(sl()));
   sl.registerLazySingleton(() => SendMessageUseCase(sl()));
+  sl.registerLazySingleton(() => ReadChatUseCase(sl()));
 
   // Repositories
   sl.registerLazySingleton<ChatRepository>(() => ChatRepositoryImpl(sl(), sl(), sl()));
 
   // Data sources
-  sl.registerLazySingleton<ChatDataSource>(() => ChatDataSourceImpl());
+  sl.registerLazySingleton<ChatDataSource>(() => ChatDataSourceImpl(sl()));
 
   // ** External - Generic **
   // Use cases
@@ -267,6 +287,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => CategoryClient(sl()));
   sl.registerLazySingleton(() => UserClient(sl()));
   sl.registerLazySingleton(() => BadgeClient(sl()));
+  sl.registerLazySingleton(() => ChatClient(sl()));
 
   // Global BLoCs
   sl.registerFactory(() => HomeControllerBloc());

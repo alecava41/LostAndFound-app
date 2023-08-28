@@ -7,7 +7,9 @@ import 'package:lost_and_found/core/domain/usecases/usecase.dart';
 import 'package:lost_and_found/features/badges/domain/usecases/get_unread_news_usecase.dart';
 import 'package:lost_and_found/features/badges/domain/usecases/get_unread_received_claims_usecase.dart';
 
+import '../../../../core/data/secure_storage/secure_storage.dart';
 import '../../../../utils/constants.dart';
+import '../../../chat/domain/usecases/get_user_rooms_usecase.dart';
 
 part 'badge_bloc.freezed.dart';
 
@@ -18,12 +20,19 @@ part 'badge_state.dart';
 class BadgeBloc extends Bloc<BadgeEvent, BadgeState> {
   final GetUnreadNewsUseCase _getUnreadNewsUseCase;
   final GetUnreadReceivedClaimsUseCase _getUnreadReceivedClaimsUseCase;
+  final GetUserRoomsUseCase _getUserRoomsUseCase;
 
-  BadgeBloc(
-      {required GetUnreadNewsUseCase getUnreadNewsUseCase,
-      required GetUnreadReceivedClaimsUseCase getUnreadReceivedClaimsUseCase})
-      : _getUnreadNewsUseCase = getUnreadNewsUseCase,
+  final SecureStorage _storage;
+
+  BadgeBloc({
+    required GetUnreadNewsUseCase getUnreadNewsUseCase,
+    required GetUnreadReceivedClaimsUseCase getUnreadReceivedClaimsUseCase,
+    required GetUserRoomsUseCase getUserRoomsUseCase,
+    required SecureStorage storage,
+  })  : _getUnreadNewsUseCase = getUnreadNewsUseCase,
         _getUnreadReceivedClaimsUseCase = getUnreadReceivedClaimsUseCase,
+        _getUserRoomsUseCase = getUserRoomsUseCase,
+        _storage = storage,
         super(BadgeState.initial()) {
     on<BadgeEvent>(
       (event, emit) async {
@@ -33,6 +42,9 @@ class BadgeBloc extends Bloc<BadgeEvent, BadgeState> {
           receivedClaimRead: () => _onReceivedClaimRead(emit),
           newNews: () => _onNewNews(emit),
           newReceivedClaim: () => _onNewReceivedClaim(emit),
+          sentClaimUpdate: () => _onSentClaimUpdate(emit),
+          sentClaimRead: () => _onSentClaimRead(emit),
+          chatUpdate: (hasUnreadChats) => _onChatUpdate(emit, hasUnreadChats)
         );
       },
     );
@@ -49,13 +61,24 @@ class BadgeBloc extends Bloc<BadgeEvent, BadgeState> {
           add(const BadgeEvent.newNews());
         case NotificationType.newClaim:
           add(const BadgeEvent.newReceivedClaim());
+        case NotificationType.sentClaim:
+          add(const BadgeEvent.sentClaimUpdate());
         case NotificationType.chat:
-          // TODO handle chat notification
-          () {};
-        default:
-          break;
+          () => null;
       }
     });
+  }
+
+  void _onChatUpdate(Emitter<BadgeState> emit, bool hasChatUpdates) {
+    emit(state.copyWith(hasUnreadChats: hasChatUpdates));
+  }
+
+  void _onSentClaimRead(Emitter<BadgeState> emit) {
+    emit(state.copyWith(hasUnreadSentClaims: false));
+  }
+
+  void _onSentClaimUpdate(Emitter<BadgeState> emit) {
+    emit(state.copyWith(hasUnreadSentClaims: true));
   }
 
   void _onNewNews(Emitter<BadgeState> emit) {
@@ -81,9 +104,29 @@ class BadgeBloc extends Bloc<BadgeEvent, BadgeState> {
     final int unreadNews = unreadNewsResponse.fold((_) => 0, (number) => number);
     final int unreadReceivedClaims = unreadReceivedClaimsResponse.fold((_) => 0, (number) => number);
 
+    final session = await _storage.getSessionInformation();
+
     emit(state.copyWith(
       unreadNews: unreadNews,
       unreadReceivedClaims: unreadReceivedClaims,
     ));
+
+    final roomsResponse = await _getUserRoomsUseCase(NoParams());
+    roomsResponse.fold(
+      (_) => null,
+      (roomsStream) => roomsStream.listen(
+        (rooms) {
+          if (rooms.any((room) =>
+              (room.metadata!["id1"] == session!.user &&
+                  room.metadata!["last-${session.user}"] != room.metadata!["lastMessageId"]) ||
+              (room.metadata!["id2"] == session.user &&
+                  room.metadata!["last-${session.user}"] != room.metadata!["lastMessageId"]))) {
+            add(const BadgeEvent.chatUpdate(true));
+          } else {
+            add(const BadgeEvent.chatUpdate(false));
+          }
+        },
+      ),
+    );
   }
 }

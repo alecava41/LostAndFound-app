@@ -20,18 +20,21 @@ mixin _$ChatEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String roomId, int itemId) chatContentCreated,
     required TResult Function(PartialText message) messageSent,
+    required TResult Function() chatRead,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String roomId, int itemId)? chatContentCreated,
     TResult? Function(PartialText message)? messageSent,
+    TResult? Function()? chatRead,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String roomId, int itemId)? chatContentCreated,
     TResult Function(PartialText message)? messageSent,
+    TResult Function()? chatRead,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$ChatEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_ChatContentCreated value) chatContentCreated,
     required TResult Function(_MessageSent value) messageSent,
+    required TResult Function(_ChatRead value) chatRead,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChatContentCreated value)? chatContentCreated,
     TResult? Function(_MessageSent value)? messageSent,
+    TResult? Function(_ChatRead value)? chatRead,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChatContentCreated value)? chatContentCreated,
     TResult Function(_MessageSent value)? messageSent,
+    TResult Function(_ChatRead value)? chatRead,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -148,6 +154,7 @@ class _$_ChatContentCreated implements _ChatContentCreated {
   TResult when<TResult extends Object?>({
     required TResult Function(String roomId, int itemId) chatContentCreated,
     required TResult Function(PartialText message) messageSent,
+    required TResult Function() chatRead,
   }) {
     return chatContentCreated(roomId, itemId);
   }
@@ -157,6 +164,7 @@ class _$_ChatContentCreated implements _ChatContentCreated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String roomId, int itemId)? chatContentCreated,
     TResult? Function(PartialText message)? messageSent,
+    TResult? Function()? chatRead,
   }) {
     return chatContentCreated?.call(roomId, itemId);
   }
@@ -166,6 +174,7 @@ class _$_ChatContentCreated implements _ChatContentCreated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String roomId, int itemId)? chatContentCreated,
     TResult Function(PartialText message)? messageSent,
+    TResult Function()? chatRead,
     required TResult orElse(),
   }) {
     if (chatContentCreated != null) {
@@ -179,6 +188,7 @@ class _$_ChatContentCreated implements _ChatContentCreated {
   TResult map<TResult extends Object?>({
     required TResult Function(_ChatContentCreated value) chatContentCreated,
     required TResult Function(_MessageSent value) messageSent,
+    required TResult Function(_ChatRead value) chatRead,
   }) {
     return chatContentCreated(this);
   }
@@ -188,6 +198,7 @@ class _$_ChatContentCreated implements _ChatContentCreated {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChatContentCreated value)? chatContentCreated,
     TResult? Function(_MessageSent value)? messageSent,
+    TResult? Function(_ChatRead value)? chatRead,
   }) {
     return chatContentCreated?.call(this);
   }
@@ -197,6 +208,7 @@ class _$_ChatContentCreated implements _ChatContentCreated {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChatContentCreated value)? chatContentCreated,
     TResult Function(_MessageSent value)? messageSent,
+    TResult Function(_ChatRead value)? chatRead,
     required TResult orElse(),
   }) {
     if (chatContentCreated != null) {
@@ -283,6 +295,7 @@ class _$_MessageSent implements _MessageSent {
   TResult when<TResult extends Object?>({
     required TResult Function(String roomId, int itemId) chatContentCreated,
     required TResult Function(PartialText message) messageSent,
+    required TResult Function() chatRead,
   }) {
     return messageSent(message);
   }
@@ -292,6 +305,7 @@ class _$_MessageSent implements _MessageSent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String roomId, int itemId)? chatContentCreated,
     TResult? Function(PartialText message)? messageSent,
+    TResult? Function()? chatRead,
   }) {
     return messageSent?.call(message);
   }
@@ -301,6 +315,7 @@ class _$_MessageSent implements _MessageSent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String roomId, int itemId)? chatContentCreated,
     TResult Function(PartialText message)? messageSent,
+    TResult Function()? chatRead,
     required TResult orElse(),
   }) {
     if (messageSent != null) {
@@ -314,6 +329,7 @@ class _$_MessageSent implements _MessageSent {
   TResult map<TResult extends Object?>({
     required TResult Function(_ChatContentCreated value) chatContentCreated,
     required TResult Function(_MessageSent value) messageSent,
+    required TResult Function(_ChatRead value) chatRead,
   }) {
     return messageSent(this);
   }
@@ -323,6 +339,7 @@ class _$_MessageSent implements _MessageSent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChatContentCreated value)? chatContentCreated,
     TResult? Function(_MessageSent value)? messageSent,
+    TResult? Function(_ChatRead value)? chatRead,
   }) {
     return messageSent?.call(this);
   }
@@ -332,6 +349,7 @@ class _$_MessageSent implements _MessageSent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChatContentCreated value)? chatContentCreated,
     TResult Function(_MessageSent value)? messageSent,
+    TResult Function(_ChatRead value)? chatRead,
     required TResult orElse(),
   }) {
     if (messageSent != null) {
@@ -348,6 +366,114 @@ abstract class _MessageSent implements ChatEvent {
   @JsonKey(ignore: true)
   _$$_MessageSentCopyWith<_$_MessageSent> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ChatReadCopyWith<$Res> {
+  factory _$$_ChatReadCopyWith(
+          _$_ChatRead value, $Res Function(_$_ChatRead) then) =
+      __$$_ChatReadCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ChatReadCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$_ChatRead>
+    implements _$$_ChatReadCopyWith<$Res> {
+  __$$_ChatReadCopyWithImpl(
+      _$_ChatRead _value, $Res Function(_$_ChatRead) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ChatRead implements _ChatRead {
+  const _$_ChatRead();
+
+  @override
+  String toString() {
+    return 'ChatEvent.chatRead()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ChatRead);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String roomId, int itemId) chatContentCreated,
+    required TResult Function(PartialText message) messageSent,
+    required TResult Function() chatRead,
+  }) {
+    return chatRead();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String roomId, int itemId)? chatContentCreated,
+    TResult? Function(PartialText message)? messageSent,
+    TResult? Function()? chatRead,
+  }) {
+    return chatRead?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String roomId, int itemId)? chatContentCreated,
+    TResult Function(PartialText message)? messageSent,
+    TResult Function()? chatRead,
+    required TResult orElse(),
+  }) {
+    if (chatRead != null) {
+      return chatRead();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ChatContentCreated value) chatContentCreated,
+    required TResult Function(_MessageSent value) messageSent,
+    required TResult Function(_ChatRead value) chatRead,
+  }) {
+    return chatRead(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ChatContentCreated value)? chatContentCreated,
+    TResult? Function(_MessageSent value)? messageSent,
+    TResult? Function(_ChatRead value)? chatRead,
+  }) {
+    return chatRead?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ChatContentCreated value)? chatContentCreated,
+    TResult Function(_MessageSent value)? messageSent,
+    TResult Function(_ChatRead value)? chatRead,
+    required TResult orElse(),
+  }) {
+    if (chatRead != null) {
+      return chatRead(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ChatRead implements ChatEvent {
+  const factory _ChatRead() = _$_ChatRead;
 }
 
 /// @nodoc

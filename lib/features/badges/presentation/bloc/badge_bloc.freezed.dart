@@ -23,6 +23,9 @@ mixin _$BadgeEvent {
     required TResult Function() receivedClaimRead,
     required TResult Function() newNews,
     required TResult Function() newReceivedClaim,
+    required TResult Function() sentClaimUpdate,
+    required TResult Function() sentClaimRead,
+    required TResult Function(bool hasUnreadChats) chatUpdate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +35,9 @@ mixin _$BadgeEvent {
     TResult? Function()? receivedClaimRead,
     TResult? Function()? newNews,
     TResult? Function()? newReceivedClaim,
+    TResult? Function()? sentClaimUpdate,
+    TResult? Function()? sentClaimRead,
+    TResult? Function(bool hasUnreadChats)? chatUpdate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +47,9 @@ mixin _$BadgeEvent {
     TResult Function()? receivedClaimRead,
     TResult Function()? newNews,
     TResult Function()? newReceivedClaim,
+    TResult Function()? sentClaimUpdate,
+    TResult Function()? sentClaimRead,
+    TResult Function(bool hasUnreadChats)? chatUpdate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +60,9 @@ mixin _$BadgeEvent {
     required TResult Function(_ReceivedClaimRead value) receivedClaimRead,
     required TResult Function(_NewNews value) newNews,
     required TResult Function(_NewReceivedClaim value) newReceivedClaim,
+    required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
+    required TResult Function(_SentClaimRead value) sentClaimRead,
+    required TResult Function(_ChatUpdate value) chatUpdate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +72,9 @@ mixin _$BadgeEvent {
     TResult? Function(_ReceivedClaimRead value)? receivedClaimRead,
     TResult? Function(_NewNews value)? newNews,
     TResult? Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult? Function(_SentClaimRead value)? sentClaimRead,
+    TResult? Function(_ChatUpdate value)? chatUpdate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +84,9 @@ mixin _$BadgeEvent {
     TResult Function(_ReceivedClaimRead value)? receivedClaimRead,
     TResult Function(_NewNews value)? newNews,
     TResult Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult Function(_SentClaimRead value)? sentClaimRead,
+    TResult Function(_ChatUpdate value)? chatUpdate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -135,6 +153,9 @@ class _$_BadgeCreated implements _BadgeCreated {
     required TResult Function() receivedClaimRead,
     required TResult Function() newNews,
     required TResult Function() newReceivedClaim,
+    required TResult Function() sentClaimUpdate,
+    required TResult Function() sentClaimRead,
+    required TResult Function(bool hasUnreadChats) chatUpdate,
   }) {
     return badgeCreated();
   }
@@ -147,6 +168,9 @@ class _$_BadgeCreated implements _BadgeCreated {
     TResult? Function()? receivedClaimRead,
     TResult? Function()? newNews,
     TResult? Function()? newReceivedClaim,
+    TResult? Function()? sentClaimUpdate,
+    TResult? Function()? sentClaimRead,
+    TResult? Function(bool hasUnreadChats)? chatUpdate,
   }) {
     return badgeCreated?.call();
   }
@@ -159,6 +183,9 @@ class _$_BadgeCreated implements _BadgeCreated {
     TResult Function()? receivedClaimRead,
     TResult Function()? newNews,
     TResult Function()? newReceivedClaim,
+    TResult Function()? sentClaimUpdate,
+    TResult Function()? sentClaimRead,
+    TResult Function(bool hasUnreadChats)? chatUpdate,
     required TResult orElse(),
   }) {
     if (badgeCreated != null) {
@@ -175,6 +202,9 @@ class _$_BadgeCreated implements _BadgeCreated {
     required TResult Function(_ReceivedClaimRead value) receivedClaimRead,
     required TResult Function(_NewNews value) newNews,
     required TResult Function(_NewReceivedClaim value) newReceivedClaim,
+    required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
+    required TResult Function(_SentClaimRead value) sentClaimRead,
+    required TResult Function(_ChatUpdate value) chatUpdate,
   }) {
     return badgeCreated(this);
   }
@@ -187,6 +217,9 @@ class _$_BadgeCreated implements _BadgeCreated {
     TResult? Function(_ReceivedClaimRead value)? receivedClaimRead,
     TResult? Function(_NewNews value)? newNews,
     TResult? Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult? Function(_SentClaimRead value)? sentClaimRead,
+    TResult? Function(_ChatUpdate value)? chatUpdate,
   }) {
     return badgeCreated?.call(this);
   }
@@ -199,6 +232,9 @@ class _$_BadgeCreated implements _BadgeCreated {
     TResult Function(_ReceivedClaimRead value)? receivedClaimRead,
     TResult Function(_NewNews value)? newNews,
     TResult Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult Function(_SentClaimRead value)? sentClaimRead,
+    TResult Function(_ChatUpdate value)? chatUpdate,
     required TResult orElse(),
   }) {
     if (badgeCreated != null) {
@@ -255,6 +291,9 @@ class _$_NewsRead implements _NewsRead {
     required TResult Function() receivedClaimRead,
     required TResult Function() newNews,
     required TResult Function() newReceivedClaim,
+    required TResult Function() sentClaimUpdate,
+    required TResult Function() sentClaimRead,
+    required TResult Function(bool hasUnreadChats) chatUpdate,
   }) {
     return newsRead();
   }
@@ -267,6 +306,9 @@ class _$_NewsRead implements _NewsRead {
     TResult? Function()? receivedClaimRead,
     TResult? Function()? newNews,
     TResult? Function()? newReceivedClaim,
+    TResult? Function()? sentClaimUpdate,
+    TResult? Function()? sentClaimRead,
+    TResult? Function(bool hasUnreadChats)? chatUpdate,
   }) {
     return newsRead?.call();
   }
@@ -279,6 +321,9 @@ class _$_NewsRead implements _NewsRead {
     TResult Function()? receivedClaimRead,
     TResult Function()? newNews,
     TResult Function()? newReceivedClaim,
+    TResult Function()? sentClaimUpdate,
+    TResult Function()? sentClaimRead,
+    TResult Function(bool hasUnreadChats)? chatUpdate,
     required TResult orElse(),
   }) {
     if (newsRead != null) {
@@ -295,6 +340,9 @@ class _$_NewsRead implements _NewsRead {
     required TResult Function(_ReceivedClaimRead value) receivedClaimRead,
     required TResult Function(_NewNews value) newNews,
     required TResult Function(_NewReceivedClaim value) newReceivedClaim,
+    required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
+    required TResult Function(_SentClaimRead value) sentClaimRead,
+    required TResult Function(_ChatUpdate value) chatUpdate,
   }) {
     return newsRead(this);
   }
@@ -307,6 +355,9 @@ class _$_NewsRead implements _NewsRead {
     TResult? Function(_ReceivedClaimRead value)? receivedClaimRead,
     TResult? Function(_NewNews value)? newNews,
     TResult? Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult? Function(_SentClaimRead value)? sentClaimRead,
+    TResult? Function(_ChatUpdate value)? chatUpdate,
   }) {
     return newsRead?.call(this);
   }
@@ -319,6 +370,9 @@ class _$_NewsRead implements _NewsRead {
     TResult Function(_ReceivedClaimRead value)? receivedClaimRead,
     TResult Function(_NewNews value)? newNews,
     TResult Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult Function(_SentClaimRead value)? sentClaimRead,
+    TResult Function(_ChatUpdate value)? chatUpdate,
     required TResult orElse(),
   }) {
     if (newsRead != null) {
@@ -375,6 +429,9 @@ class _$_ReceivedClaimRead implements _ReceivedClaimRead {
     required TResult Function() receivedClaimRead,
     required TResult Function() newNews,
     required TResult Function() newReceivedClaim,
+    required TResult Function() sentClaimUpdate,
+    required TResult Function() sentClaimRead,
+    required TResult Function(bool hasUnreadChats) chatUpdate,
   }) {
     return receivedClaimRead();
   }
@@ -387,6 +444,9 @@ class _$_ReceivedClaimRead implements _ReceivedClaimRead {
     TResult? Function()? receivedClaimRead,
     TResult? Function()? newNews,
     TResult? Function()? newReceivedClaim,
+    TResult? Function()? sentClaimUpdate,
+    TResult? Function()? sentClaimRead,
+    TResult? Function(bool hasUnreadChats)? chatUpdate,
   }) {
     return receivedClaimRead?.call();
   }
@@ -399,6 +459,9 @@ class _$_ReceivedClaimRead implements _ReceivedClaimRead {
     TResult Function()? receivedClaimRead,
     TResult Function()? newNews,
     TResult Function()? newReceivedClaim,
+    TResult Function()? sentClaimUpdate,
+    TResult Function()? sentClaimRead,
+    TResult Function(bool hasUnreadChats)? chatUpdate,
     required TResult orElse(),
   }) {
     if (receivedClaimRead != null) {
@@ -415,6 +478,9 @@ class _$_ReceivedClaimRead implements _ReceivedClaimRead {
     required TResult Function(_ReceivedClaimRead value) receivedClaimRead,
     required TResult Function(_NewNews value) newNews,
     required TResult Function(_NewReceivedClaim value) newReceivedClaim,
+    required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
+    required TResult Function(_SentClaimRead value) sentClaimRead,
+    required TResult Function(_ChatUpdate value) chatUpdate,
   }) {
     return receivedClaimRead(this);
   }
@@ -427,6 +493,9 @@ class _$_ReceivedClaimRead implements _ReceivedClaimRead {
     TResult? Function(_ReceivedClaimRead value)? receivedClaimRead,
     TResult? Function(_NewNews value)? newNews,
     TResult? Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult? Function(_SentClaimRead value)? sentClaimRead,
+    TResult? Function(_ChatUpdate value)? chatUpdate,
   }) {
     return receivedClaimRead?.call(this);
   }
@@ -439,6 +508,9 @@ class _$_ReceivedClaimRead implements _ReceivedClaimRead {
     TResult Function(_ReceivedClaimRead value)? receivedClaimRead,
     TResult Function(_NewNews value)? newNews,
     TResult Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult Function(_SentClaimRead value)? sentClaimRead,
+    TResult Function(_ChatUpdate value)? chatUpdate,
     required TResult orElse(),
   }) {
     if (receivedClaimRead != null) {
@@ -494,6 +566,9 @@ class _$_NewNews implements _NewNews {
     required TResult Function() receivedClaimRead,
     required TResult Function() newNews,
     required TResult Function() newReceivedClaim,
+    required TResult Function() sentClaimUpdate,
+    required TResult Function() sentClaimRead,
+    required TResult Function(bool hasUnreadChats) chatUpdate,
   }) {
     return newNews();
   }
@@ -506,6 +581,9 @@ class _$_NewNews implements _NewNews {
     TResult? Function()? receivedClaimRead,
     TResult? Function()? newNews,
     TResult? Function()? newReceivedClaim,
+    TResult? Function()? sentClaimUpdate,
+    TResult? Function()? sentClaimRead,
+    TResult? Function(bool hasUnreadChats)? chatUpdate,
   }) {
     return newNews?.call();
   }
@@ -518,6 +596,9 @@ class _$_NewNews implements _NewNews {
     TResult Function()? receivedClaimRead,
     TResult Function()? newNews,
     TResult Function()? newReceivedClaim,
+    TResult Function()? sentClaimUpdate,
+    TResult Function()? sentClaimRead,
+    TResult Function(bool hasUnreadChats)? chatUpdate,
     required TResult orElse(),
   }) {
     if (newNews != null) {
@@ -534,6 +615,9 @@ class _$_NewNews implements _NewNews {
     required TResult Function(_ReceivedClaimRead value) receivedClaimRead,
     required TResult Function(_NewNews value) newNews,
     required TResult Function(_NewReceivedClaim value) newReceivedClaim,
+    required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
+    required TResult Function(_SentClaimRead value) sentClaimRead,
+    required TResult Function(_ChatUpdate value) chatUpdate,
   }) {
     return newNews(this);
   }
@@ -546,6 +630,9 @@ class _$_NewNews implements _NewNews {
     TResult? Function(_ReceivedClaimRead value)? receivedClaimRead,
     TResult? Function(_NewNews value)? newNews,
     TResult? Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult? Function(_SentClaimRead value)? sentClaimRead,
+    TResult? Function(_ChatUpdate value)? chatUpdate,
   }) {
     return newNews?.call(this);
   }
@@ -558,6 +645,9 @@ class _$_NewNews implements _NewNews {
     TResult Function(_ReceivedClaimRead value)? receivedClaimRead,
     TResult Function(_NewNews value)? newNews,
     TResult Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult Function(_SentClaimRead value)? sentClaimRead,
+    TResult Function(_ChatUpdate value)? chatUpdate,
     required TResult orElse(),
   }) {
     if (newNews != null) {
@@ -614,6 +704,9 @@ class _$_NewReceivedClaim implements _NewReceivedClaim {
     required TResult Function() receivedClaimRead,
     required TResult Function() newNews,
     required TResult Function() newReceivedClaim,
+    required TResult Function() sentClaimUpdate,
+    required TResult Function() sentClaimRead,
+    required TResult Function(bool hasUnreadChats) chatUpdate,
   }) {
     return newReceivedClaim();
   }
@@ -626,6 +719,9 @@ class _$_NewReceivedClaim implements _NewReceivedClaim {
     TResult? Function()? receivedClaimRead,
     TResult? Function()? newNews,
     TResult? Function()? newReceivedClaim,
+    TResult? Function()? sentClaimUpdate,
+    TResult? Function()? sentClaimRead,
+    TResult? Function(bool hasUnreadChats)? chatUpdate,
   }) {
     return newReceivedClaim?.call();
   }
@@ -638,6 +734,9 @@ class _$_NewReceivedClaim implements _NewReceivedClaim {
     TResult Function()? receivedClaimRead,
     TResult Function()? newNews,
     TResult Function()? newReceivedClaim,
+    TResult Function()? sentClaimUpdate,
+    TResult Function()? sentClaimRead,
+    TResult Function(bool hasUnreadChats)? chatUpdate,
     required TResult orElse(),
   }) {
     if (newReceivedClaim != null) {
@@ -654,6 +753,9 @@ class _$_NewReceivedClaim implements _NewReceivedClaim {
     required TResult Function(_ReceivedClaimRead value) receivedClaimRead,
     required TResult Function(_NewNews value) newNews,
     required TResult Function(_NewReceivedClaim value) newReceivedClaim,
+    required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
+    required TResult Function(_SentClaimRead value) sentClaimRead,
+    required TResult Function(_ChatUpdate value) chatUpdate,
   }) {
     return newReceivedClaim(this);
   }
@@ -666,6 +768,9 @@ class _$_NewReceivedClaim implements _NewReceivedClaim {
     TResult? Function(_ReceivedClaimRead value)? receivedClaimRead,
     TResult? Function(_NewNews value)? newNews,
     TResult? Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult? Function(_SentClaimRead value)? sentClaimRead,
+    TResult? Function(_ChatUpdate value)? chatUpdate,
   }) {
     return newReceivedClaim?.call(this);
   }
@@ -678,6 +783,9 @@ class _$_NewReceivedClaim implements _NewReceivedClaim {
     TResult Function(_ReceivedClaimRead value)? receivedClaimRead,
     TResult Function(_NewNews value)? newNews,
     TResult Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult Function(_SentClaimRead value)? sentClaimRead,
+    TResult Function(_ChatUpdate value)? chatUpdate,
     required TResult orElse(),
   }) {
     if (newReceivedClaim != null) {
@@ -692,9 +800,457 @@ abstract class _NewReceivedClaim implements BadgeEvent {
 }
 
 /// @nodoc
+abstract class _$$_SentClaimUpdateCopyWith<$Res> {
+  factory _$$_SentClaimUpdateCopyWith(
+          _$_SentClaimUpdate value, $Res Function(_$_SentClaimUpdate) then) =
+      __$$_SentClaimUpdateCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_SentClaimUpdateCopyWithImpl<$Res>
+    extends _$BadgeEventCopyWithImpl<$Res, _$_SentClaimUpdate>
+    implements _$$_SentClaimUpdateCopyWith<$Res> {
+  __$$_SentClaimUpdateCopyWithImpl(
+      _$_SentClaimUpdate _value, $Res Function(_$_SentClaimUpdate) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_SentClaimUpdate implements _SentClaimUpdate {
+  const _$_SentClaimUpdate();
+
+  @override
+  String toString() {
+    return 'BadgeEvent.sentClaimUpdate()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_SentClaimUpdate);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() badgeCreated,
+    required TResult Function() newsRead,
+    required TResult Function() receivedClaimRead,
+    required TResult Function() newNews,
+    required TResult Function() newReceivedClaim,
+    required TResult Function() sentClaimUpdate,
+    required TResult Function() sentClaimRead,
+    required TResult Function(bool hasUnreadChats) chatUpdate,
+  }) {
+    return sentClaimUpdate();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? badgeCreated,
+    TResult? Function()? newsRead,
+    TResult? Function()? receivedClaimRead,
+    TResult? Function()? newNews,
+    TResult? Function()? newReceivedClaim,
+    TResult? Function()? sentClaimUpdate,
+    TResult? Function()? sentClaimRead,
+    TResult? Function(bool hasUnreadChats)? chatUpdate,
+  }) {
+    return sentClaimUpdate?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? badgeCreated,
+    TResult Function()? newsRead,
+    TResult Function()? receivedClaimRead,
+    TResult Function()? newNews,
+    TResult Function()? newReceivedClaim,
+    TResult Function()? sentClaimUpdate,
+    TResult Function()? sentClaimRead,
+    TResult Function(bool hasUnreadChats)? chatUpdate,
+    required TResult orElse(),
+  }) {
+    if (sentClaimUpdate != null) {
+      return sentClaimUpdate();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_BadgeCreated value) badgeCreated,
+    required TResult Function(_NewsRead value) newsRead,
+    required TResult Function(_ReceivedClaimRead value) receivedClaimRead,
+    required TResult Function(_NewNews value) newNews,
+    required TResult Function(_NewReceivedClaim value) newReceivedClaim,
+    required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
+    required TResult Function(_SentClaimRead value) sentClaimRead,
+    required TResult Function(_ChatUpdate value) chatUpdate,
+  }) {
+    return sentClaimUpdate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_BadgeCreated value)? badgeCreated,
+    TResult? Function(_NewsRead value)? newsRead,
+    TResult? Function(_ReceivedClaimRead value)? receivedClaimRead,
+    TResult? Function(_NewNews value)? newNews,
+    TResult? Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult? Function(_SentClaimRead value)? sentClaimRead,
+    TResult? Function(_ChatUpdate value)? chatUpdate,
+  }) {
+    return sentClaimUpdate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_BadgeCreated value)? badgeCreated,
+    TResult Function(_NewsRead value)? newsRead,
+    TResult Function(_ReceivedClaimRead value)? receivedClaimRead,
+    TResult Function(_NewNews value)? newNews,
+    TResult Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult Function(_SentClaimRead value)? sentClaimRead,
+    TResult Function(_ChatUpdate value)? chatUpdate,
+    required TResult orElse(),
+  }) {
+    if (sentClaimUpdate != null) {
+      return sentClaimUpdate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SentClaimUpdate implements BadgeEvent {
+  const factory _SentClaimUpdate() = _$_SentClaimUpdate;
+}
+
+/// @nodoc
+abstract class _$$_SentClaimReadCopyWith<$Res> {
+  factory _$$_SentClaimReadCopyWith(
+          _$_SentClaimRead value, $Res Function(_$_SentClaimRead) then) =
+      __$$_SentClaimReadCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_SentClaimReadCopyWithImpl<$Res>
+    extends _$BadgeEventCopyWithImpl<$Res, _$_SentClaimRead>
+    implements _$$_SentClaimReadCopyWith<$Res> {
+  __$$_SentClaimReadCopyWithImpl(
+      _$_SentClaimRead _value, $Res Function(_$_SentClaimRead) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_SentClaimRead implements _SentClaimRead {
+  const _$_SentClaimRead();
+
+  @override
+  String toString() {
+    return 'BadgeEvent.sentClaimRead()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_SentClaimRead);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() badgeCreated,
+    required TResult Function() newsRead,
+    required TResult Function() receivedClaimRead,
+    required TResult Function() newNews,
+    required TResult Function() newReceivedClaim,
+    required TResult Function() sentClaimUpdate,
+    required TResult Function() sentClaimRead,
+    required TResult Function(bool hasUnreadChats) chatUpdate,
+  }) {
+    return sentClaimRead();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? badgeCreated,
+    TResult? Function()? newsRead,
+    TResult? Function()? receivedClaimRead,
+    TResult? Function()? newNews,
+    TResult? Function()? newReceivedClaim,
+    TResult? Function()? sentClaimUpdate,
+    TResult? Function()? sentClaimRead,
+    TResult? Function(bool hasUnreadChats)? chatUpdate,
+  }) {
+    return sentClaimRead?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? badgeCreated,
+    TResult Function()? newsRead,
+    TResult Function()? receivedClaimRead,
+    TResult Function()? newNews,
+    TResult Function()? newReceivedClaim,
+    TResult Function()? sentClaimUpdate,
+    TResult Function()? sentClaimRead,
+    TResult Function(bool hasUnreadChats)? chatUpdate,
+    required TResult orElse(),
+  }) {
+    if (sentClaimRead != null) {
+      return sentClaimRead();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_BadgeCreated value) badgeCreated,
+    required TResult Function(_NewsRead value) newsRead,
+    required TResult Function(_ReceivedClaimRead value) receivedClaimRead,
+    required TResult Function(_NewNews value) newNews,
+    required TResult Function(_NewReceivedClaim value) newReceivedClaim,
+    required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
+    required TResult Function(_SentClaimRead value) sentClaimRead,
+    required TResult Function(_ChatUpdate value) chatUpdate,
+  }) {
+    return sentClaimRead(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_BadgeCreated value)? badgeCreated,
+    TResult? Function(_NewsRead value)? newsRead,
+    TResult? Function(_ReceivedClaimRead value)? receivedClaimRead,
+    TResult? Function(_NewNews value)? newNews,
+    TResult? Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult? Function(_SentClaimRead value)? sentClaimRead,
+    TResult? Function(_ChatUpdate value)? chatUpdate,
+  }) {
+    return sentClaimRead?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_BadgeCreated value)? badgeCreated,
+    TResult Function(_NewsRead value)? newsRead,
+    TResult Function(_ReceivedClaimRead value)? receivedClaimRead,
+    TResult Function(_NewNews value)? newNews,
+    TResult Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult Function(_SentClaimRead value)? sentClaimRead,
+    TResult Function(_ChatUpdate value)? chatUpdate,
+    required TResult orElse(),
+  }) {
+    if (sentClaimRead != null) {
+      return sentClaimRead(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SentClaimRead implements BadgeEvent {
+  const factory _SentClaimRead() = _$_SentClaimRead;
+}
+
+/// @nodoc
+abstract class _$$_ChatUpdateCopyWith<$Res> {
+  factory _$$_ChatUpdateCopyWith(
+          _$_ChatUpdate value, $Res Function(_$_ChatUpdate) then) =
+      __$$_ChatUpdateCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool hasUnreadChats});
+}
+
+/// @nodoc
+class __$$_ChatUpdateCopyWithImpl<$Res>
+    extends _$BadgeEventCopyWithImpl<$Res, _$_ChatUpdate>
+    implements _$$_ChatUpdateCopyWith<$Res> {
+  __$$_ChatUpdateCopyWithImpl(
+      _$_ChatUpdate _value, $Res Function(_$_ChatUpdate) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? hasUnreadChats = null,
+  }) {
+    return _then(_$_ChatUpdate(
+      null == hasUnreadChats
+          ? _value.hasUnreadChats
+          : hasUnreadChats // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ChatUpdate implements _ChatUpdate {
+  const _$_ChatUpdate(this.hasUnreadChats);
+
+  @override
+  final bool hasUnreadChats;
+
+  @override
+  String toString() {
+    return 'BadgeEvent.chatUpdate(hasUnreadChats: $hasUnreadChats)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ChatUpdate &&
+            (identical(other.hasUnreadChats, hasUnreadChats) ||
+                other.hasUnreadChats == hasUnreadChats));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, hasUnreadChats);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ChatUpdateCopyWith<_$_ChatUpdate> get copyWith =>
+      __$$_ChatUpdateCopyWithImpl<_$_ChatUpdate>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() badgeCreated,
+    required TResult Function() newsRead,
+    required TResult Function() receivedClaimRead,
+    required TResult Function() newNews,
+    required TResult Function() newReceivedClaim,
+    required TResult Function() sentClaimUpdate,
+    required TResult Function() sentClaimRead,
+    required TResult Function(bool hasUnreadChats) chatUpdate,
+  }) {
+    return chatUpdate(hasUnreadChats);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? badgeCreated,
+    TResult? Function()? newsRead,
+    TResult? Function()? receivedClaimRead,
+    TResult? Function()? newNews,
+    TResult? Function()? newReceivedClaim,
+    TResult? Function()? sentClaimUpdate,
+    TResult? Function()? sentClaimRead,
+    TResult? Function(bool hasUnreadChats)? chatUpdate,
+  }) {
+    return chatUpdate?.call(hasUnreadChats);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? badgeCreated,
+    TResult Function()? newsRead,
+    TResult Function()? receivedClaimRead,
+    TResult Function()? newNews,
+    TResult Function()? newReceivedClaim,
+    TResult Function()? sentClaimUpdate,
+    TResult Function()? sentClaimRead,
+    TResult Function(bool hasUnreadChats)? chatUpdate,
+    required TResult orElse(),
+  }) {
+    if (chatUpdate != null) {
+      return chatUpdate(hasUnreadChats);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_BadgeCreated value) badgeCreated,
+    required TResult Function(_NewsRead value) newsRead,
+    required TResult Function(_ReceivedClaimRead value) receivedClaimRead,
+    required TResult Function(_NewNews value) newNews,
+    required TResult Function(_NewReceivedClaim value) newReceivedClaim,
+    required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
+    required TResult Function(_SentClaimRead value) sentClaimRead,
+    required TResult Function(_ChatUpdate value) chatUpdate,
+  }) {
+    return chatUpdate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_BadgeCreated value)? badgeCreated,
+    TResult? Function(_NewsRead value)? newsRead,
+    TResult? Function(_ReceivedClaimRead value)? receivedClaimRead,
+    TResult? Function(_NewNews value)? newNews,
+    TResult? Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult? Function(_SentClaimRead value)? sentClaimRead,
+    TResult? Function(_ChatUpdate value)? chatUpdate,
+  }) {
+    return chatUpdate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_BadgeCreated value)? badgeCreated,
+    TResult Function(_NewsRead value)? newsRead,
+    TResult Function(_ReceivedClaimRead value)? receivedClaimRead,
+    TResult Function(_NewNews value)? newNews,
+    TResult Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult Function(_SentClaimRead value)? sentClaimRead,
+    TResult Function(_ChatUpdate value)? chatUpdate,
+    required TResult orElse(),
+  }) {
+    if (chatUpdate != null) {
+      return chatUpdate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ChatUpdate implements BadgeEvent {
+  const factory _ChatUpdate(final bool hasUnreadChats) = _$_ChatUpdate;
+
+  bool get hasUnreadChats;
+  @JsonKey(ignore: true)
+  _$$_ChatUpdateCopyWith<_$_ChatUpdate> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$BadgeState {
   int get unreadNews => throw _privateConstructorUsedError;
   int get unreadReceivedClaims => throw _privateConstructorUsedError;
+  bool get hasUnreadChats => throw _privateConstructorUsedError;
+  bool get hasUnreadSentClaims => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BadgeStateCopyWith<BadgeState> get copyWith =>
@@ -707,7 +1263,11 @@ abstract class $BadgeStateCopyWith<$Res> {
           BadgeState value, $Res Function(BadgeState) then) =
       _$BadgeStateCopyWithImpl<$Res, BadgeState>;
   @useResult
-  $Res call({int unreadNews, int unreadReceivedClaims});
+  $Res call(
+      {int unreadNews,
+      int unreadReceivedClaims,
+      bool hasUnreadChats,
+      bool hasUnreadSentClaims});
 }
 
 /// @nodoc
@@ -725,6 +1285,8 @@ class _$BadgeStateCopyWithImpl<$Res, $Val extends BadgeState>
   $Res call({
     Object? unreadNews = null,
     Object? unreadReceivedClaims = null,
+    Object? hasUnreadChats = null,
+    Object? hasUnreadSentClaims = null,
   }) {
     return _then(_value.copyWith(
       unreadNews: null == unreadNews
@@ -735,6 +1297,14 @@ class _$BadgeStateCopyWithImpl<$Res, $Val extends BadgeState>
           ? _value.unreadReceivedClaims
           : unreadReceivedClaims // ignore: cast_nullable_to_non_nullable
               as int,
+      hasUnreadChats: null == hasUnreadChats
+          ? _value.hasUnreadChats
+          : hasUnreadChats // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasUnreadSentClaims: null == hasUnreadSentClaims
+          ? _value.hasUnreadSentClaims
+          : hasUnreadSentClaims // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -747,7 +1317,11 @@ abstract class _$$_BadgeStateCopyWith<$Res>
       __$$_BadgeStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int unreadNews, int unreadReceivedClaims});
+  $Res call(
+      {int unreadNews,
+      int unreadReceivedClaims,
+      bool hasUnreadChats,
+      bool hasUnreadSentClaims});
 }
 
 /// @nodoc
@@ -763,6 +1337,8 @@ class __$$_BadgeStateCopyWithImpl<$Res>
   $Res call({
     Object? unreadNews = null,
     Object? unreadReceivedClaims = null,
+    Object? hasUnreadChats = null,
+    Object? hasUnreadSentClaims = null,
   }) {
     return _then(_$_BadgeState(
       unreadNews: null == unreadNews
@@ -773,6 +1349,14 @@ class __$$_BadgeStateCopyWithImpl<$Res>
           ? _value.unreadReceivedClaims
           : unreadReceivedClaims // ignore: cast_nullable_to_non_nullable
               as int,
+      hasUnreadChats: null == hasUnreadChats
+          ? _value.hasUnreadChats
+          : hasUnreadChats // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasUnreadSentClaims: null == hasUnreadSentClaims
+          ? _value.hasUnreadSentClaims
+          : hasUnreadSentClaims // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -781,16 +1365,23 @@ class __$$_BadgeStateCopyWithImpl<$Res>
 
 class _$_BadgeState implements _BadgeState {
   const _$_BadgeState(
-      {required this.unreadNews, required this.unreadReceivedClaims});
+      {required this.unreadNews,
+      required this.unreadReceivedClaims,
+      required this.hasUnreadChats,
+      required this.hasUnreadSentClaims});
 
   @override
   final int unreadNews;
   @override
   final int unreadReceivedClaims;
+  @override
+  final bool hasUnreadChats;
+  @override
+  final bool hasUnreadSentClaims;
 
   @override
   String toString() {
-    return 'BadgeState(unreadNews: $unreadNews, unreadReceivedClaims: $unreadReceivedClaims)';
+    return 'BadgeState(unreadNews: $unreadNews, unreadReceivedClaims: $unreadReceivedClaims, hasUnreadChats: $hasUnreadChats, hasUnreadSentClaims: $hasUnreadSentClaims)';
   }
 
   @override
@@ -801,12 +1392,16 @@ class _$_BadgeState implements _BadgeState {
             (identical(other.unreadNews, unreadNews) ||
                 other.unreadNews == unreadNews) &&
             (identical(other.unreadReceivedClaims, unreadReceivedClaims) ||
-                other.unreadReceivedClaims == unreadReceivedClaims));
+                other.unreadReceivedClaims == unreadReceivedClaims) &&
+            (identical(other.hasUnreadChats, hasUnreadChats) ||
+                other.hasUnreadChats == hasUnreadChats) &&
+            (identical(other.hasUnreadSentClaims, hasUnreadSentClaims) ||
+                other.hasUnreadSentClaims == hasUnreadSentClaims));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, unreadNews, unreadReceivedClaims);
+  int get hashCode => Object.hash(runtimeType, unreadNews, unreadReceivedClaims,
+      hasUnreadChats, hasUnreadSentClaims);
 
   @JsonKey(ignore: true)
   @override
@@ -818,12 +1413,18 @@ class _$_BadgeState implements _BadgeState {
 abstract class _BadgeState implements BadgeState {
   const factory _BadgeState(
       {required final int unreadNews,
-      required final int unreadReceivedClaims}) = _$_BadgeState;
+      required final int unreadReceivedClaims,
+      required final bool hasUnreadChats,
+      required final bool hasUnreadSentClaims}) = _$_BadgeState;
 
   @override
   int get unreadNews;
   @override
   int get unreadReceivedClaims;
+  @override
+  bool get hasUnreadChats;
+  @override
+  bool get hasUnreadSentClaims;
   @override
   @JsonKey(ignore: true)
   _$$_BadgeStateCopyWith<_$_BadgeState> get copyWith =>
