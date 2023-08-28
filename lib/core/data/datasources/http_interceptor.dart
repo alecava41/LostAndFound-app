@@ -33,7 +33,7 @@ class HttpInterceptor extends Interceptor {
       final expireDate = DateTime.fromMillisecondsSinceEpoch(int.parse(expire!), isUtc: true);
       final now = DateTime.now().toUtc();
 
-      if (now.isAfter(expireDate)) {
+      if (now.isBefore(expireDate)) {
         options.headers.addAll({'Authorization': 'Bearer $token'});
       } else {
         final user = await _storage.read(key: USER);

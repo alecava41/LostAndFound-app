@@ -359,6 +359,7 @@ mixin _$ChatState {
   String? get currentUsername =>
       throw _privateConstructorUsedError; // UI params
   bool get hasLoadingError => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
   String get token => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -377,6 +378,7 @@ abstract class $ChatStateCopyWith<$Res> {
       Item? item,
       String? currentUsername,
       bool hasLoadingError,
+      bool isLoading,
       String token});
 }
 
@@ -398,6 +400,7 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
     Object? item = freezed,
     Object? currentUsername = freezed,
     Object? hasLoadingError = null,
+    Object? isLoading = null,
     Object? token = null,
   }) {
     return _then(_value.copyWith(
@@ -421,6 +424,10 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
           ? _value.hasLoadingError
           : hasLoadingError // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -442,6 +449,7 @@ abstract class _$$_ChatStateCopyWith<$Res> implements $ChatStateCopyWith<$Res> {
       Item? item,
       String? currentUsername,
       bool hasLoadingError,
+      bool isLoading,
       String token});
 }
 
@@ -461,6 +469,7 @@ class __$$_ChatStateCopyWithImpl<$Res>
     Object? item = freezed,
     Object? currentUsername = freezed,
     Object? hasLoadingError = null,
+    Object? isLoading = null,
     Object? token = null,
   }) {
     return _then(_$_ChatState(
@@ -484,6 +493,10 @@ class __$$_ChatStateCopyWithImpl<$Res>
           ? _value.hasLoadingError
           : hasLoadingError // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -501,6 +514,7 @@ class _$_ChatState implements _ChatState {
       required this.item,
       required this.currentUsername,
       this.hasLoadingError = false,
+      this.isLoading = false,
       this.token = ""});
 
 // Chat params
@@ -518,11 +532,14 @@ class _$_ChatState implements _ChatState {
   final bool hasLoadingError;
   @override
   @JsonKey()
+  final bool isLoading;
+  @override
+  @JsonKey()
   final String token;
 
   @override
   String toString() {
-    return 'ChatState(messages: $messages, room: $room, item: $item, currentUsername: $currentUsername, hasLoadingError: $hasLoadingError, token: $token)';
+    return 'ChatState(messages: $messages, room: $room, item: $item, currentUsername: $currentUsername, hasLoadingError: $hasLoadingError, isLoading: $isLoading, token: $token)';
   }
 
   @override
@@ -538,12 +555,14 @@ class _$_ChatState implements _ChatState {
                 other.currentUsername == currentUsername) &&
             (identical(other.hasLoadingError, hasLoadingError) ||
                 other.hasLoadingError == hasLoadingError) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.token, token) || other.token == token));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, messages, room, item,
-      currentUsername, hasLoadingError, token);
+      currentUsername, hasLoadingError, isLoading, token);
 
   @JsonKey(ignore: true)
   @override
@@ -559,6 +578,7 @@ abstract class _ChatState implements ChatState {
       required final Item? item,
       required final String? currentUsername,
       final bool hasLoadingError,
+      final bool isLoading,
       final String token}) = _$_ChatState;
 
   @override // Chat params
@@ -571,6 +591,8 @@ abstract class _ChatState implements ChatState {
   String? get currentUsername;
   @override // UI params
   bool get hasLoadingError;
+  @override
+  bool get isLoading;
   @override
   String get token;
   @override

@@ -11,6 +11,7 @@ class ChatState with _$ChatState {
 
     // UI params
     @Default(false) bool hasLoadingError,
+    @Default(false) bool isLoading,
     @Default("") String token,
   }) = _ChatState;
 

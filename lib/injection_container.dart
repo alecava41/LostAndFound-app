@@ -97,8 +97,8 @@ final sl = GetIt.instance;
 Future<void> init() async {
   // ** Feature - Authentication **
   // BLoC
-  sl.registerFactory(() => LoginBloc(loginUseCase: sl()));
-  sl.registerFactory(() => RegistrationBloc(registrationUseCase: sl()));
+  sl.registerFactory(() => LoginBloc(loginUseCase: sl(), loginChatUseCase: sl()));
+  sl.registerFactory(() => RegistrationBloc(registrationUseCase: sl(), registrationChatUseCase: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => LoginUseCase(sl()));

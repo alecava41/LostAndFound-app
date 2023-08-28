@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:lost_and_found/core/domain/usecases/usecase.dart';
 import 'package:lost_and_found/core/status/success.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/login_chat_usecase.dart';
 
 import '../../../../../core/status/failures.dart';
 import '../../../domain/fields/login/login_password.dart';
@@ -18,9 +20,11 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginUseCase _loginUseCase;
+  final LoginChatUseCase _loginChatUseCase;
 
-  LoginBloc({required LoginUseCase loginUseCase})
+  LoginBloc({required LoginUseCase loginUseCase, required LoginChatUseCase loginChatUseCase})
       : _loginUseCase = loginUseCase,
+        _loginChatUseCase = loginChatUseCase,
         super(LoginState.initial()) {
     on<LoginEvent>(
       (event, emit) async {
@@ -64,15 +68,22 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
       final loginResponse = await _loginUseCase(params);
       loginResponse.fold(
-          (failure) => authFailureOrSuccess = Left(failure), (success) => authFailureOrSuccess = Right(success));
+        (failure) => authFailureOrSuccess = Left(failure),
+        (success) async {
+          await _loginChatUseCase(NoParams());
+          authFailureOrSuccess = Right(success);
+        },
+      );
     }
 
     emit(
-      state.copyWith(isSubmitting: false, showErrorMessage: true, authFailureOrSuccess: authFailureOrSuccess),
+      state.copyWith(
+        isSubmitting: false,
+        showErrorMessage: true,
+        authFailureOrSuccess: authFailureOrSuccess,
+      ),
     );
 
     emit(state.copyWith(authFailureOrSuccess: null));
-
-    // TODO (@alecava41) refresh user_content / home_content after successful login
   }
 }

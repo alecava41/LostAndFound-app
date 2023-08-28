@@ -4,6 +4,8 @@ import 'package:lost_and_found/features/authentication/presentation/widgets/logi
 import 'package:lost_and_found/features/authentication/presentation/widgets/login/password_input.dart';
 import 'package:lost_and_found/features/authentication/presentation/widgets/login/sign_up.dart';
 import 'package:lost_and_found/features/authentication/presentation/widgets/login/user_input.dart';
+import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
+import 'package:lost_and_found/features/user/presentation/bloc/user/user_bloc.dart';
 
 import '../../../../../widgets/title_logo.dart';
 import '../../bloc/login/login_bloc.dart';
@@ -39,6 +41,10 @@ class LoginForm extends StatelessWidget {
                         )
                       },
                   (success) => {
+                        // Update home/user content
+                        context.read<HomeBloc>().add(const HomeEvent.homeRefreshed()),
+                        context.read<UserBloc>().add(const UserEvent.contentCreated()),
+
                         Navigator.popUntil(context, (route) => route.isFirst),
                         Navigator.of(context).pushReplacementNamed('/')
                       });

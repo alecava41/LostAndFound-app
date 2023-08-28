@@ -13,7 +13,7 @@ class _AuthClient implements AuthClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://16.171.238.138:5000/auth';
+    baseUrl ??= 'http://13.48.24.33:5000/auth';
   }
 
   final Dio _dio;

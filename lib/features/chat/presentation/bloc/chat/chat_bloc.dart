@@ -48,6 +48,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   }
 
   Future<void> _onInboxContentCreated(Emitter<ChatState> emit, roomId, itemId) async {
+    emit(state.copyWith(isLoading: true));
+
     final messagesResponse = await _getRoomMessagesUseCase(GetRoomMessagesParams(roomId: roomId));
     final itemResponse = await _getItemUseCase(GetItemParams(id: itemId));
     final session = await _storage.getSessionInformation();
@@ -62,6 +64,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
     emit(
       state.copyWith(
+          isLoading: false,
           messages: messages,
           room: room,
           hasLoadingError: messagesResponse.isLeft() || itemResponse.isLeft(),

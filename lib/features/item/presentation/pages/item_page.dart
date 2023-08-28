@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
+import 'package:lost_and_found/features/chat/presentation/pages/chat_page.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_question_screen.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
@@ -54,10 +55,9 @@ class ItemScreen extends StatelessWidget {
                   ),
                 ),
               );
-            }, (room) {}
-                // TODO (@alecava41) navigate to chat page
-                // Navigator.of(ctx).push(route)
-                );
+            }, (room) {
+              Navigator.of(ctx).push(MaterialPageRoute(builder: (_) => ChatScreen(roomId: room.id, itemId: itemId)));
+            });
           }
 
           if (loadFailureOrSuccess != null) {
@@ -415,7 +415,10 @@ class ItemScreen extends StatelessWidget {
                 ? Container(
                     color: Colors.white,
                     padding: const EdgeInsets.all(8),
-                    child: ClaimStatusButton(owner: owner.username, status: claim.status, ),
+                    child: ClaimStatusButton(
+                      owner: owner.username,
+                      status: claim.status,
+                    ),
                   )
                 : Container(
                     padding: const EdgeInsets.all(8.0),

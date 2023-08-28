@@ -79,7 +79,8 @@ class ChatDataSourceImpl implements ChatDataSource {
         "id2": params.id2,
         "username1": params.username1,
         "username2": params.username2,
-        "item": params.itemId
+        "item": params.itemId,
+        "active": false,
       },
     );
   }
@@ -93,5 +94,14 @@ class ChatDataSourceImpl implements ChatDataSource {
   @override
   Future<void> sendMessage(SendMessageParams params) async {
     FirebaseChatCore.instance.sendMessage(params.message, params.roomId);
+
+    // Workaround to have active rooms and "last message" without Cloud Functions
+    await FirebaseChatCore.instance
+        .getFirebaseFirestore()
+        .collection("rooms")
+        .doc(params.roomId)
+        .update({"metadata.active": true, "metadata.lastMessage": params.message.text});
+
+    FirebaseChatCore.instance.firebaseUser?.uid;
   }
 }

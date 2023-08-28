@@ -10,6 +10,7 @@ import 'package:lost_and_found/features/authentication/domain/fields/registratio
 
 import '../../../../../core/status/failures.dart';
 import '../../../../../core/status/success.dart';
+import '../../../../chat/domain/usecases/registration_chat_usecase.dart';
 import '../../../domain/fields/registration/registration_confirm_password.dart';
 import '../../../domain/fields/registration/registration_password.dart';
 import '../../../domain/usecases/registration_usecase.dart';
@@ -22,9 +23,13 @@ part 'registration_state.dart';
 
 class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
   final RegistrationUseCase _registrationUseCase;
+  final RegistrationChatUseCase _registrationChatUseCase;
 
-  RegistrationBloc({required RegistrationUseCase registrationUseCase})
-      : _registrationUseCase = registrationUseCase,
+  RegistrationBloc({
+    required RegistrationUseCase registrationUseCase,
+    required RegistrationChatUseCase registrationChatUseCase,
+  })  : _registrationUseCase = registrationUseCase,
+        _registrationChatUseCase = registrationChatUseCase,
         super(RegistrationState.initial()) {
     on<RegistrationEvent>(
       (event, emit) async {
@@ -94,9 +99,9 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
           username: state.username.value.getOrElse(() => ""),
           email: state.email.value.getOrElse(() => ""));
 
-      final loginResponse = await _registrationUseCase(params);
+      final registrationResponse = await _registrationUseCase(params);
 
-      loginResponse.fold((failure) {
+      registrationResponse.fold((failure) {
         failure.maybeWhen(
             duplicateRecordFailure: (reason) {
               if (reason == "username") {
@@ -112,7 +117,11 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
             orElse: () {});
 
         registrationFailureOrSuccess = Left(failure);
-      }, (success) => registrationFailureOrSuccess = Right(success));
+      }, (success) async {
+        await _registrationChatUseCase(
+            RegistrationChatParams(email: params.email, password: params.password, username: params.username));
+        registrationFailureOrSuccess = Right(success);
+      });
     }
 
     emit(
