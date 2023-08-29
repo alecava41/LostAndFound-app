@@ -13,7 +13,7 @@ class _PositionClient implements PositionClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://13.48.24.33:5000/api/position';
+    baseUrl ??= 'http://192.168.178.41:5000/api/position';
   }
 
   final Dio _dio;

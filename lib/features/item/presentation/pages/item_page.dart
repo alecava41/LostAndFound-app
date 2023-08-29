@@ -159,7 +159,6 @@ class ItemScreen extends StatelessWidget {
                           position: state.item!.address,
                           date: state.item!.insertion,
                           category: state.item!.category.name,
-                          // TODO (@alecava41) let question null if the item is reported as lost (not shows question in lost items)
                           question: state.item!.question,
                           type: state.item!.type,
                         ),

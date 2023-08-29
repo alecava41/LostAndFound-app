@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/config/route_generator.dart';
 import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
+import 'package:lost_and_found/features/chat/presentation/pages/chat_page.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/claim_screen.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
@@ -28,21 +29,6 @@ class App extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _Application();
-
-/*
-
-   TODO (@alecava41) if app is in foreground, use badges (how?)
-        - chat ??
-   */
-
-/*
-   TODO (@alecava41) if app is in background (notification pop up):
-    2 - use 'topic' to create right navigation
-        - check how to handle with BLoC and stuff
-        - (firstly create home_controller, then navigate to wanted pages / subpages, need to include the specific info)
-    3 - notification cases
-        - chat ??
-   */
 }
 
 class _Application extends State<App> {
@@ -51,8 +37,7 @@ class _Application extends State<App> {
 
   Future<void> setupInteractedMessage() async {
     // Get any messages which caused the application to open from a terminated state.
-    RemoteMessage? initialMessage =
-        await FirebaseMessaging.instance.getInitialMessage();
+    RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
 
     if (initialMessage != null) {
       _handleMessage(initialMessage);
@@ -67,35 +52,34 @@ class _Application extends State<App> {
         ? NotificationType.item
         : (message.data['topic'] == 'newClaim'
             ? NotificationType.newClaim
-            : (message.data['topic'] == 'sentClaim'
-                ? NotificationType.sentClaim
-                : NotificationType.chat));
+            : (message.data['topic'] == 'sentClaim' ? NotificationType.sentClaim : NotificationType.chat));
 
     switch (topic) {
       case NotificationType.item:
-        _handleItemMessage(
-            int.parse(message.data['news']), int.parse(message.data['item']));
+        _handleItemMessage(int.parse(message.data['news']), int.parse(message.data['item']));
       case NotificationType.newClaim:
-        _handleNewClaimMessage(
-            int.parse(message.data['claim']), int.parse(message.data['item']));
+        _handleNewClaimMessage(int.parse(message.data['claim']), int.parse(message.data['item']));
       case NotificationType.sentClaim:
         _handleSentClaimUpdateMessage(int.parse(message.data['item']));
       case NotificationType.chat:
-        // TODO (@alecava41) handle chat notification
-        () {};
+        _handleChatMessage(int.parse(message.data["item"]), message.data["room"]);
     }
   }
 
   void _handleItemMessage(int newsId, int itemId) {
-    navigatorKey.currentState?.pushNamed('/notifications',
-        arguments: NotificationsScreenArguments(newNewsId: newsId));
-    navigatorKey.currentState
-        ?.push(MaterialPageRoute(builder: (_) => ItemScreen(itemId: itemId)));
+    navigatorKey.currentState?.pushNamed(
+      '/notifications',
+      arguments: NotificationsScreenArguments(newNewsId: newsId),
+    );
+    navigatorKey.currentState?.push(
+      MaterialPageRoute(
+        builder: (_) => ItemScreen(itemId: itemId),
+      ),
+    );
   }
 
   void _handleNewClaimMessage(int claimId, int itemId) {
-    navigatorKey.currentState?.pushNamed('/claims',
-        arguments: ClaimsScreenArguments(claimId: claimId, tab: null));
+    navigatorKey.currentState?.pushNamed('/claims', arguments: ClaimsScreenArguments(claimId: claimId, tab: null));
     navigatorKey.currentState?.push(
       MaterialPageRoute(
         builder: (_) => AnswerClaimScreen(
@@ -108,11 +92,21 @@ class _Application extends State<App> {
   }
 
   void _handleSentClaimUpdateMessage(int itemId) {
-    navigatorKey.currentState?.pushNamed('/claims',
-        arguments: const ClaimsScreenArguments(claimId: null, tab: 0));
-    navigatorKey.currentState?.push(MaterialPageRoute(
-      builder: (_) => ItemScreen(itemId: itemId),
-    ));
+    navigatorKey.currentState?.pushNamed('/claims', arguments: const ClaimsScreenArguments(claimId: null, tab: 0));
+    navigatorKey.currentState?.push(
+      MaterialPageRoute(
+        builder: (_) => ItemScreen(itemId: itemId),
+      ),
+    );
+  }
+
+  void _handleChatMessage(int itemId, String roomId) {
+    navigatorKey.currentState?.push(
+      MaterialPageRoute(
+        builder: (_) => ChatScreen(itemId: itemId, roomId: roomId),
+      ),
+    );
+    navigatorKey.currentContext?.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(3));
   }
 
   @override
@@ -125,21 +119,12 @@ class _Application extends State<App> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider<HomeBloc>(
-              create: (_) =>
-                  sl<HomeBloc>()..add(const HomeEvent.homeCreated())),
+          BlocProvider<HomeBloc>(create: (_) => sl<HomeBloc>()..add(const HomeEvent.homeCreated())),
           BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>()),
-          BlocProvider<UserBloc>(
-              create: (_) =>
-                  sl<UserBloc>()..add(const UserEvent.contentCreated())),
-          BlocProvider<HomeControllerBloc>(
-              create: (_) => sl<HomeControllerBloc>()),
-          BlocProvider<BadgeBloc>(
-              create: (_) =>
-                  sl<BadgeBloc>()..add(const BadgeEvent.badgeCreated())),
-          BlocProvider<InboxBloc>(
-              create: (_) =>
-                  sl<InboxBloc>()..add(const InboxEvent.inboxContentCreated()))
+          BlocProvider<UserBloc>(create: (_) => sl<UserBloc>()..add(const UserEvent.contentCreated())),
+          BlocProvider<HomeControllerBloc>(create: (_) => sl<HomeControllerBloc>()),
+          BlocProvider<BadgeBloc>(create: (_) => sl<BadgeBloc>()..add(const BadgeEvent.badgeCreated())),
+          BlocProvider<InboxBloc>(create: (_) => sl<InboxBloc>()..add(const InboxEvent.inboxContentCreated()))
         ],
         child: Sizer(builder: (context, orientation, deviceType) {
           return MaterialApp(

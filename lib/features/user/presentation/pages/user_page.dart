@@ -146,9 +146,7 @@ class UserScreen extends StatelessWidget {
                     ],
                   ),
                 )
-              :
-              // TODO (@alecava41) add logic
-              ErrorPage(onRetry: (){}),
+              : ErrorPage(onRetry: () => ctx.read<UserBloc>().add(const UserEvent.contentCreated())),
     );
   }
 

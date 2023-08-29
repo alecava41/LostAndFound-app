@@ -7,15 +7,10 @@ import '../../../../../utils/colors.dart';
 
 class InboxItem extends StatelessWidget {
   final int otherUserId;
-
   final String token;
-
   final String roomName;
-
   final String lastMessage;
-
-  final bool open;
-
+  final bool opened;
   final VoidCallback onTap;
 
   const InboxItem({
@@ -24,17 +19,17 @@ class InboxItem extends StatelessWidget {
     required this.token,
     required this.roomName,
     required this.lastMessage,
-    required this.open,
+    required this.opened,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: open ? PersonalizedColor.primarySwatch.shade200 : Colors.white,
+      color: !opened ? PersonalizedColor.primarySwatch.shade200 : Colors.white,
       child: InkWell(
         onTap: onTap,
-        splashColor: open ? PersonalizedColor.primarySwatch.shade500 : Colors.grey.withOpacity(0.4),
+        splashColor: !opened ? PersonalizedColor.primarySwatch.shade500 : Colors.grey.withOpacity(0.4),
         child: Column(
           children: [
             Padding(

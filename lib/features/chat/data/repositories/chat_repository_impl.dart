@@ -9,6 +9,7 @@ import 'package:lost_and_found/core/status/success.dart';
 import 'package:lost_and_found/features/chat/data/datasources/chat_data_source.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/create_room_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/get_room_messages_usecase.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/read_chat_usecase.dart';
 
 import 'package:lost_and_found/features/chat/domain/usecases/registration_chat_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/send_message_usecase.dart';
@@ -73,7 +74,7 @@ class ChatRepositoryImpl implements ChatRepository {
 
   @override
   Future<Either<Failure, Room>> createRoom(CreateRoomParams params) async {
-     try {
+    try {
       if (await _networkInfo.isConnected) {
         return Right(await _dataSource.createRoom(params));
       } else {
@@ -103,11 +104,39 @@ class ChatRepositoryImpl implements ChatRepository {
       if (await _networkInfo.isConnected) {
         await _dataSource.sendMessage(params);
         return const Right(Success.genericSuccess());
-    } else {
-    return const Left(Failure.networkFailure());
-    }
+      } else {
+        return const Left(Failure.networkFailure());
+      }
     } on Exception catch (e) {
-    return Left(mapExceptionToFailure(e));
+      return Left(mapExceptionToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> readChat(ReadChatParams params) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        await _dataSource.readChat(params);
+        return const Right(Success.genericSuccess());
+      } else {
+        return const Left(Failure.networkFailure());
+      }
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> logout(NoParams params) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        await _dataSource.logout(NoParams());
+        return const Right(Success.genericSuccess());
+      } else {
+        return const Left(Failure.networkFailure());
+      }
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
     }
   }
 }

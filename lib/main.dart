@@ -25,9 +25,9 @@ void main() async {
   String initialRoute = "/tutorial";
 
   final response = await sl<LoginUseCase>()(null);
+  await sl<LoginChatUseCase>()(NoParams());
 
-  response.fold((_) {}, (success) async {
-    await sl<LoginChatUseCase>()(NoParams());
+  response.fold((_) => null, (success) {
     initialRoute = "/";
   });
 

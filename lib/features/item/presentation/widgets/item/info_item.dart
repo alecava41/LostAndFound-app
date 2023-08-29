@@ -43,8 +43,8 @@ class InfoItem extends StatelessWidget {
           InfoItemField(icon: Icons.calendar_month, title: "Date of insertion", content: DateFormat("dd/MM/yyyy").format(date)),
           const SizedBox(height: 10),
           InfoItemField(icon: Icons.category, title: "Category", content: category),
-          question != null ? const SizedBox(height: 10) : Container(),
-          question != null
+          question != null && type == ItemType.found ? const SizedBox(height: 10) : Container(),
+          question != null && type == ItemType.found
               ? InfoItemField(icon: Icons.connect_without_contact, title: "Question to verify the ownership", content: question!)
               : Container(),
         
