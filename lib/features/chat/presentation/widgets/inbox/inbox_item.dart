@@ -46,6 +46,7 @@ class InboxItem extends StatelessWidget {
                           token: token,
                           imageUrl: "$baseUrl/api/users/$otherUserId/image",
                           hasImage: true,
+                          radius: 30,
                           errorAsset: "assets/images/no-user.jpg"),
                     ),
                   ),

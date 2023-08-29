@@ -92,7 +92,7 @@ class _ClaimClient implements ClaimClient {
   }
 
   @override
-  Future<void> createClaim(
+  Future<ItemDto> createClaim(
     int itemId,
     CreateClaimBody body,
   ) async {
@@ -101,26 +101,29 @@ class _ClaimClient implements ClaimClient {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    await _dio.fetch<void>(_setStreamType<void>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<ItemDto>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          '/items/${itemId}/claims',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
+            .compose(
+              _dio.options,
+              '/items/${itemId}/claims',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ItemDto.fromJson(_result.data!);
+    return value;
   }
 
   @override
-  Future<void> manageClaim(
+  Future<ItemDto> manageClaim(
     int userId,
     int itemId,
     int claimId,
@@ -131,22 +134,25 @@ class _ClaimClient implements ClaimClient {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    await _dio.fetch<void>(_setStreamType<void>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<ItemDto>(Options(
       method: 'PATCH',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          '/users/${userId}/items/${itemId}/claims/${claimId}',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
+            .compose(
+              _dio.options,
+              '/users/${userId}/items/${itemId}/claims/${claimId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ItemDto.fromJson(_result.data!);
+    return value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

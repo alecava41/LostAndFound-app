@@ -170,6 +170,7 @@ mixin _$InboxState {
   int get currentId => throw _privateConstructorUsedError;
   bool get hasLoginOrLoadingError => throw _privateConstructorUsedError;
   String get token => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $InboxStateCopyWith<InboxState> get copyWith =>
@@ -186,7 +187,8 @@ abstract class $InboxStateCopyWith<$Res> {
       {Stream<List<Room>> userRooms,
       int currentId,
       bool hasLoginOrLoadingError,
-      String token});
+      String token,
+      bool isLoading});
 }
 
 /// @nodoc
@@ -206,6 +208,7 @@ class _$InboxStateCopyWithImpl<$Res, $Val extends InboxState>
     Object? currentId = null,
     Object? hasLoginOrLoadingError = null,
     Object? token = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
       userRooms: null == userRooms
@@ -224,6 +227,10 @@ class _$InboxStateCopyWithImpl<$Res, $Val extends InboxState>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -240,7 +247,8 @@ abstract class _$$_InboxStateCopyWith<$Res>
       {Stream<List<Room>> userRooms,
       int currentId,
       bool hasLoginOrLoadingError,
-      String token});
+      String token,
+      bool isLoading});
 }
 
 /// @nodoc
@@ -258,6 +266,7 @@ class __$$_InboxStateCopyWithImpl<$Res>
     Object? currentId = null,
     Object? hasLoginOrLoadingError = null,
     Object? token = null,
+    Object? isLoading = null,
   }) {
     return _then(_$_InboxState(
       userRooms: null == userRooms
@@ -276,6 +285,10 @@ class __$$_InboxStateCopyWithImpl<$Res>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -287,7 +300,8 @@ class _$_InboxState implements _InboxState {
       {required this.userRooms,
       required this.currentId,
       this.hasLoginOrLoadingError = false,
-      this.token = ""});
+      this.token = "",
+      this.isLoading = false});
 
   @override
   final Stream<List<Room>> userRooms;
@@ -299,10 +313,13 @@ class _$_InboxState implements _InboxState {
   @override
   @JsonKey()
   final String token;
+  @override
+  @JsonKey()
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'InboxState(userRooms: $userRooms, currentId: $currentId, hasLoginOrLoadingError: $hasLoginOrLoadingError, token: $token)';
+    return 'InboxState(userRooms: $userRooms, currentId: $currentId, hasLoginOrLoadingError: $hasLoginOrLoadingError, token: $token, isLoading: $isLoading)';
   }
 
   @override
@@ -316,12 +333,14 @@ class _$_InboxState implements _InboxState {
                 other.currentId == currentId) &&
             (identical(other.hasLoginOrLoadingError, hasLoginOrLoadingError) ||
                 other.hasLoginOrLoadingError == hasLoginOrLoadingError) &&
-            (identical(other.token, token) || other.token == token));
+            (identical(other.token, token) || other.token == token) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, userRooms, currentId, hasLoginOrLoadingError, token);
+  int get hashCode => Object.hash(runtimeType, userRooms, currentId,
+      hasLoginOrLoadingError, token, isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -335,7 +354,8 @@ abstract class _InboxState implements InboxState {
       {required final Stream<List<Room>> userRooms,
       required final int currentId,
       final bool hasLoginOrLoadingError,
-      final String token}) = _$_InboxState;
+      final String token,
+      final bool isLoading}) = _$_InboxState;
 
   @override
   Stream<List<Room>> get userRooms;
@@ -345,6 +365,8 @@ abstract class _InboxState implements InboxState {
   bool get hasLoginOrLoadingError;
   @override
   String get token;
+  @override
+  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$_InboxStateCopyWith<_$_InboxState> get copyWith =>

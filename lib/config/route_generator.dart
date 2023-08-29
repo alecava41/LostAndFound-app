@@ -12,10 +12,9 @@ import '../features/user/presentation/pages/change_password_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    // Getting arguments passed in while calling Navigator.pushNamed
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (builder) => const HomeControllerScreen());
+        return MaterialPageRoute(builder: (builder) => HomeControllerScreen());
       case '/tutorial':
         return MaterialPageRoute(builder: (_) => const InfoScreen());
       case '/register':

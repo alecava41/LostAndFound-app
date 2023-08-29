@@ -16,8 +16,7 @@ class AnswerQuestionScreen extends StatelessWidget {
   final int itemId;
   final bool isClaimAlreadyTaken;
 
-  const AnswerQuestionScreen(
-      {super.key, required this.itemId, required this.isClaimAlreadyTaken});
+  const AnswerQuestionScreen({super.key, required this.itemId, required this.isClaimAlreadyTaken});
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +33,7 @@ class AnswerQuestionScreen extends StatelessWidget {
             iconTheme: const IconThemeData(color: Colors.black),
           ),
           body: BlocProvider(
-              create: (_) => sl<AnswerQuestionBloc>()
-                ..add(AnswerQuestionEvent.contentCreated(itemId)),
+              create: (_) => sl<AnswerQuestionBloc>()..add(AnswerQuestionEvent.contentCreated(itemId)),
               child: BlocConsumer<AnswerQuestionBloc, AnswerQuestionState>(
                 listener: (ctx, state) {
                   final loadFailureOrSuccess = state.loadFailureOrSuccess;
@@ -50,8 +48,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                                   backgroundColor: Colors.red,
                                   content: Text(
                                       failure.maybeWhen<String>(
-                                          genericFailure: () =>
-                                              'Server error. Please try again later.',
+                                          genericFailure: () => 'Server error. Please try again later.',
                                           networkFailure: () =>
                                               'No internet connection available. Check your internet connection.',
                                           orElse: () => "Unknown error"),
@@ -72,8 +69,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                                   backgroundColor: Colors.red,
                                   content: Text(
                                       failure.maybeWhen<String>(
-                                          genericFailure: () =>
-                                              'Server error. Please try again later.',
+                                          genericFailure: () => 'Server error. Please try again later.',
                                           networkFailure: () =>
                                               'No internet connection available. Check your internet connection.',
                                           orElse: () => "Unknown error"),
@@ -81,10 +77,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                                 ),
                               )
                             },
-                        (_) => {
-                              // boolean argument denotes outcome of claim (Y => claim created, N/null => claim not created)
-                              Navigator.pop(context, true)
-                            });
+                        (updatedItem) => {Navigator.pop(context, updatedItem)});
                   }
                 },
                 builder: (ctx, state) => state.isLoading
@@ -110,10 +103,8 @@ class AnswerQuestionScreen extends StatelessWidget {
                                     width: 20,
                                   ),
                                   InkWell(
-                                    onTap: () => ctx
-                                        .read<AnswerQuestionBloc>()
-                                        .add(const AnswerQuestionEvent
-                                            .infoTriggered()),
+                                    onTap: () =>
+                                        ctx.read<AnswerQuestionBloc>().add(const AnswerQuestionEvent.infoTriggered()),
                                     child: const Icon(
                                       Icons.info,
                                       size: 30,
@@ -125,8 +116,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                             ),
                             state.isInfoOpen
                                 ? Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                                     child: Container(
                                       decoration: BoxDecoration(
                                         color: Colors.blue.shade100,
@@ -157,14 +147,13 @@ class AnswerQuestionScreen extends StatelessWidget {
                               title: "Question",
                               content: Text(
                                 state.item!.question!,
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                             ),
                             const SizedBox(
                               height: 10,
                             ),
-                            !isClaimAlreadyTaken
+                            isClaimAlreadyTaken
                                 ? CustomFieldContainer(
                                     title: "Answer",
                                     content: Text(
@@ -180,16 +169,11 @@ class AnswerQuestionScreen extends StatelessWidget {
                                         text: "",
                                         onTextChanged: (value) => ctx
                                             .read<AnswerQuestionBloc>()
-                                            .add(
-                                                AnswerQuestionEvent
-                                                    .answerFieldChanged(value)),
+                                            .add(AnswerQuestionEvent.answerFieldChanged(value)),
                                         hintText: "Your answer",
                                         errorText: state.answer.value.fold(
-                                            (failure) => failure
-                                                .maybeWhen<String?>(
-                                                    validationFailure:
-                                                        (reason) => reason,
-                                                    orElse: () => null),
+                                            (failure) => failure.maybeWhen<String?>(
+                                                validationFailure: (reason) => reason, orElse: () => null),
                                             (r) => null),
                                         isValid: state.answer.value.isRight(),
                                         showError: state.showErrorMessage),
@@ -204,16 +188,11 @@ class AnswerQuestionScreen extends StatelessWidget {
                                       padding: const EdgeInsets.all(3),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        color: state.item!.userClaim!.status ==
-                                                ClaimStatus.approved
-                                            ? PersonalizedColor
-                                                .claimAcceptedStatusColor
-                                            : (state.item!.userClaim!.status ==
-                                                    ClaimStatus.rejected
-                                                ? PersonalizedColor
-                                                    .claimDeniedStatusColor
-                                                : PersonalizedColor
-                                                    .claimWaitingStatusColor),
+                                        color: state.item!.userClaim!.status == ClaimStatus.approved
+                                            ? PersonalizedColor.claimAcceptedStatusColor
+                                            : (state.item!.userClaim!.status == ClaimStatus.rejected
+                                                ? PersonalizedColor.claimDeniedStatusColor
+                                                : PersonalizedColor.claimWaitingStatusColor),
                                       ),
                                       child: RichText(
                                         maxLines: 1,
@@ -221,12 +200,9 @@ class AnswerQuestionScreen extends StatelessWidget {
                                         text: TextSpan(
                                           children: [
                                             TextSpan(
-                                              text: state
-                                                  .item!.userClaim!.status.name,
+                                              text: state.item!.userClaim!.status.name,
                                               style: const TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.black),
+                                                  fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
                                             ),
                                           ],
                                         ),
@@ -238,9 +214,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                                     isActive: !isClaimAlreadyTaken,
                                     onPressed: () => isClaimAlreadyTaken
                                         ? ()
-                                        : ctx.read<AnswerQuestionBloc>().add(
-                                            const AnswerQuestionEvent
-                                                .claimCreated()),
+                                        : ctx.read<AnswerQuestionBloc>().add(const AnswerQuestionEvent.claimCreated()),
                                     text: const Text(
                                       "Send",
                                       style: TextStyle(fontSize: 20),

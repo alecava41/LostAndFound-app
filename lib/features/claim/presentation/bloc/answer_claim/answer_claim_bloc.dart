@@ -67,7 +67,7 @@ class AnswerClaimBloc extends Bloc<AnswerClaimEvent, AnswerClaimState> {
   }
 
   Future<void> _onClaimDecisionTaken(Emitter<AnswerClaimState> emit, ClaimStatus status, int claimId) async {
-    Either<Failure, Success>? claimFailureOrSuccess;
+    Either<Failure, Item>? claimFailureOrSuccess;
 
     emit(state.copyWith(isLoading: true));
 
@@ -75,7 +75,7 @@ class AnswerClaimBloc extends Bloc<AnswerClaimEvent, AnswerClaimState> {
 
     final claimResponse = await _manageClaimUseCase(params);
     claimResponse.fold(
-        (failure) => claimFailureOrSuccess = Left(failure), (success) => claimFailureOrSuccess = Right(success));
+        (failure) => claimFailureOrSuccess = Left(failure), (item) => claimFailureOrSuccess = Right(item));
 
     emit(
       state.copyWith(isLoading: false, claimFailureOrSuccess: claimFailureOrSuccess),

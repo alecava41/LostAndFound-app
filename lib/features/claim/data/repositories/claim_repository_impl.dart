@@ -7,6 +7,8 @@ import 'package:lost_and_found/features/claim/data/adapters/claim_received_from_
 import 'package:lost_and_found/features/claim/data/adapters/claim_sent_from_dto.dart';
 import 'package:lost_and_found/features/claim/domain/entities/claim_received.dart';
 import 'package:lost_and_found/features/claim/domain/entities/claim_sent.dart';
+import 'package:lost_and_found/features/item/data/adapters/item_from_dto.dart';
+import 'package:lost_and_found/features/item/domain/entities/item.dart' as item;
 import 'package:lost_and_found/features/claim/domain/repositories/claim_repository.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/create_claim_usecase.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/get_received_claims_usecase.dart';
@@ -79,11 +81,11 @@ class ClaimRepositoryImpl implements ClaimRepository {
   }
 
   @override
-  Future<Either<Failure, Success>> createClaim(CreateClaimParams params) async {
+  Future<Either<Failure, item.Item>> createClaim(CreateClaimParams params) async {
     try {
       if (await _networkInfo.isConnected) {
-        _dataSource.createClaim(params);
-        return const Right(Success.genericSuccess());
+        final itemDto = await _dataSource.createClaim(params);
+        return Right(itemDto.toDomain());
       } else {
         return const Left(Failure.networkFailure());
       }
@@ -93,7 +95,7 @@ class ClaimRepositoryImpl implements ClaimRepository {
   }
 
   @override
-  Future<Either<Failure, Success>> manageClaim(ManageClaimParams params) async {
+  Future<Either<Failure, item.Item>> manageClaim(ManageClaimParams params) async {
     try {
       if (await _networkInfo.isConnected) {
         final session = await _storage.getSessionInformation();
@@ -102,8 +104,8 @@ class ClaimRepositoryImpl implements ClaimRepository {
           throw UserNotAuthorizedException();
         }
 
-        await _dataSource.manageClaim(params, session.user);
-        return const Right(Success.genericSuccess());
+        final updatedItem = await _dataSource.manageClaim(params, session.user);
+        return Right(updatedItem.toDomain());
       } else {
         return const Left(Failure.networkFailure());
       }

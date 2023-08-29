@@ -19,6 +19,9 @@ class ChatScreen extends StatelessWidget {
   final String roomId;
   final int itemId;
 
+  // TODO maybe better to insert also item name
+  // TODO if no claim, button to go to item page?
+
   const ChatScreen({
     super.key,
     required this.roomId,

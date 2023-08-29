@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 
 class CircularImage extends StatelessWidget {
   final String token;
@@ -26,7 +27,8 @@ class CircularImage extends StatelessWidget {
         httpHeaders: {
           "Authorization": "Bearer $token",
         },
-        progressIndicatorBuilder: (context, url, downloadProgress) => const CircularProgressIndicator(value: null),
+        progressIndicatorBuilder: (context, url, downloadProgress) =>
+            SizedBox(height: radius * 2, width: radius * 2, child: CustomCircularProgress(size: radius)),
         errorWidget: (context, url, error) => CircleAvatar(
           radius: radius,
           backgroundImage: Image.asset(errorAsset).image,

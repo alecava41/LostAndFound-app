@@ -5,15 +5,19 @@ import 'package:badges/badges.dart' as badges;
 import 'package:lost_and_found/features/chat/presentation/pages/inbox_page.dart';
 
 import '../../../../features/badges/presentation/bloc/badge_bloc.dart';
+import '../../../../features/chat/presentation/bloc/inbox/inbox_bloc.dart';
 import '../../../../features/item/presentation/pages/fake_insert_page_item.dart';
 import '../../../../features/item/presentation/pages/home_page.dart';
 import '../../../../features/item/presentation/pages/search_page.dart';
+import '../../../../features/user/presentation/bloc/user/user_bloc.dart';
 import '../../../../features/user/presentation/pages/user_page.dart';
 import '../../../../utils/colors.dart';
 import '../bloc/home_controller_bloc.dart';
 
 class HomeControllerScreen extends StatelessWidget {
-  const HomeControllerScreen({super.key});
+  final List<bool> hasPageBeenInitialized = [true, true, true, false, false];
+
+  HomeControllerScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +38,20 @@ class HomeControllerScreen extends StatelessWidget {
               body: pages[state.tabIndex],
               bottomNavigationBar: BottomNavigationBar(
                 currentIndex: state.tabIndex,
-                onTap: (index) => ctx.read<HomeControllerBloc>().add(HomeControllerEvent.tabChanged(index)),
+                onTap: (index) {
+                  if (!hasPageBeenInitialized[index]) {
+                    switch (index) {
+                      case 3:
+                        ctx.read<InboxBloc>().add(const InboxEvent.inboxContentCreated());
+                      case 4:
+                        ctx.read<UserBloc>().add(const UserEvent.contentCreated());
+                    }
+
+                    hasPageBeenInitialized[index] = true;
+                  }
+
+                  ctx.read<HomeControllerBloc>().add(HomeControllerEvent.tabChanged(index));
+                },
                 selectedItemColor: PersonalizedColor.mainColor,
                 unselectedItemColor: Colors.grey,
                 items: [
