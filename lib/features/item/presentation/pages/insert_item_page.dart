@@ -158,7 +158,14 @@ class InsertItemScreen extends StatelessWidget {
                   appBar: AppBar(
                     leading: IconButton(
                       icon: const Icon(Icons.arrow_back),
-                      onPressed: () => showDialogExit(context),
+                      onPressed: () {
+                        if (!state.isInitial()) {
+                          showDialogExit(context);
+                        } else {
+                          context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
+                          Navigator.pop(ctx);
+                        }
+                      },
                     ),
                     iconTheme: const IconThemeData(color: Colors.black),
                     title: const Text(
