@@ -15,65 +15,64 @@ class RegistrationForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        margin: const EdgeInsets.all(16),
-        child: BlocListener<RegistrationBloc, RegistrationState>(
-          listener: (ctx, state) {
-            final regFailureOrSuccess = state.registrationFailureOrSuccess;
-
-            if (regFailureOrSuccess != null) {
-              regFailureOrSuccess.fold(
-                  (failure) => failure.maybeWhen(
-                      genericFailure: () => ScaffoldMessenger.of(context).showSnackBar(
+    return Center(
+      child: SingleChildScrollView(
+        child: Container(
+          
+          //color: Colors.amber,
+          margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+          child: BlocListener<RegistrationBloc, RegistrationState>(
+            listener: (ctx, state) {
+              final regFailureOrSuccess = state.registrationFailureOrSuccess;
+      
+              if (regFailureOrSuccess != null) {
+                regFailureOrSuccess.fold(
+                    (failure) => failure.maybeWhen(
+                        genericFailure: () => ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                backgroundColor: Colors.red,
+                                content: Text('Server error. Please try again later.', style: TextStyle(fontSize: 20)),
+                              ),
+                            ),
+                        networkFailure: () => ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                backgroundColor: Colors.red,
+                                content: Text('No internet connection available. Check your internet connection.',
+                                    style: TextStyle(fontSize: 20)),
+                              ),
+                            ),
+                        orElse: () {}),
+                    (_) => {
+                          ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              backgroundColor: Colors.red,
-                              content: Text('Server error. Please try again later.', style: TextStyle(fontSize: 20)),
+                              content: Text('Successful sign up', style: TextStyle(fontSize: 20)),
                             ),
                           ),
-                      networkFailure: () => ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              backgroundColor: Colors.red,
-                              content: Text('No internet connection available. Check your internet connection.',
-                                  style: TextStyle(fontSize: 20)),
-                            ),
-                          ),
-                      orElse: () {}),
-                  (_) => {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Successful sign up', style: TextStyle(fontSize: 20)),
-                          ),
-                        ),
-                        Navigator.pushReplacementNamed(ctx, '/login')
-                      });
-            }
-          },
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              titleLogoHorizontal(),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SizedBox(height: 8.w),
-                  UsernameInput(),
-                  SizedBox(height: 10),
-                  EmailInput(),
-                  SizedBox(height: 10),
-                  PasswordInput(),
-                  SizedBox(height: 10),
-                  ConfirmPasswordInput(),
-                  SizedBox(height: 4.h),
-                  RegistrationButton(),
-                ],
-              ),
-              const SizedBox(height: 15),
-              const SignInText(),
-            ],
+                          Navigator.pushReplacementNamed(ctx, '/login')
+                        });
+              }
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(height: 3.5.h,),
+                titleLogoHorizontal(),
+                SizedBox(height: 6.w),
+                UsernameInput(),
+                SizedBox(height: 12),
+                EmailInput(),
+                SizedBox(height: 12),
+                PasswordInput(),
+                SizedBox(height: 12),
+                ConfirmPasswordInput(),
+                SizedBox(height: 4.h),
+                RegistrationButton(),
+                const SizedBox(height: 15),
+                const SignInText(),
+              ],
+            ),
           ),
         ),
       ),

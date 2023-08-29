@@ -23,20 +23,22 @@ class _InfoScreenState extends State<InfoScreen> {
     return SafeArea(
         child: Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              SizedBox(height: 2.5.h,),
-              titleLogoHorizontal(),
-              _carouselSlider(),
-              SizedBox(
-                height: 3.h,
-              ),
-              _loginButton(),
-              SizedBox(height: 1.h),
-              _registerButton()
-            ]),
+        child: Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                SizedBox(height: 2.5.h,),
+                titleLogoHorizontal(),
+                _carouselSlider(),
+                SizedBox(
+                  height: 3.h,
+                ),
+                _loginButton(),
+                SizedBox(height: 1.h),
+                _registerButton()
+              ]),
+        ),
       ),
     ));
   }
