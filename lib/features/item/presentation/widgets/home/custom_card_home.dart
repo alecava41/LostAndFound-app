@@ -5,6 +5,7 @@ import 'package:lost_and_found/core/presentation/widgets/custom_circular_progres
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/utils/constants.dart';
+import 'package:lost_and_found/utils/screen_size.dart';
 
 class CustomCardHome extends StatelessWidget {
   final int id;
@@ -24,8 +25,8 @@ class CustomCardHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 240,
-      width: 165,
+      height: ScreenSize.isBigSmartphoneDevice(context)? 240 : ScreenSize.isMediumSmartphoneDevice(context)? 200 : 180,
+      width: ScreenSize.isBigSmartphoneDevice(context)? 165 : ScreenSize.isMediumSmartphoneDevice(context)? 150 : 130,
       child: Stack(
         children: [
           Card(
@@ -35,44 +36,46 @@ class CustomCardHome extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(24.0),
-                    child: SizedBox(
-                      height: 150.0,
-                      width: 150.0,
-                      child: hasImage
-                          ? CachedNetworkImage(
-                              imageUrl: "$baseUrl/api/items/$id/image",
-                              fit: BoxFit.cover,
-                              httpHeaders: {
-                                "Authorization": "Bearer $token",
-                              },
-                              placeholder: (context, _) =>
-                                  const CustomCircularProgress(size: 75.0),
-                              errorWidget: (context, url, error) => Image.asset(
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(24.0),
+                      child: SizedBox(
+                        height: ScreenSize.isBigSmartphoneDevice(context)? 150 : ScreenSize.isMediumSmartphoneDevice(context)? 130 : 100,
+                        width: ScreenSize.isBigSmartphoneDevice(context)? 150 : ScreenSize.isMediumSmartphoneDevice(context)? 130 : 100,
+                        child: hasImage
+                            ? CachedNetworkImage(
+                                imageUrl: "$baseUrl/api/items/$id/image",
+                                fit: BoxFit.cover,
+                                httpHeaders: {
+                                  "Authorization": "Bearer $token",
+                                },
+                                placeholder: (context, _) =>
+                                    const CustomCircularProgress(size: 75.0),
+                                errorWidget: (context, url, error) => Image.asset(
+                                  "assets/images/no-item.png",
+                                  fit: BoxFit.cover,
+                                ),
+                                imageRenderMethodForWeb:
+                                    ImageRenderMethodForWeb.HttpGet,
+                              )
+                            : Image.asset(
                                 "assets/images/no-item.png",
                                 fit: BoxFit.cover,
                               ),
-                              imageRenderMethodForWeb:
-                                  ImageRenderMethodForWeb.HttpGet,
-                            )
-                          : Image.asset(
-                              "assets/images/no-item.png",
-                              fit: BoxFit.cover,
-                            ),
+                      ),
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      top: 8, left: 18, bottom: 5, right: 18),
+                      top: 0, left: 18, bottom: 5, right: 18),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(text,
-                          style: const TextStyle(fontSize: 16.0),
+                          style: TextStyle(fontSize: ScreenSize.isBigSmartphoneDevice(context)? 18 : ScreenSize.isMediumSmartphoneDevice(context)? 16 : 15,),
                           overflow: TextOverflow.ellipsis),
                       const SizedBox(
                         height: 5,

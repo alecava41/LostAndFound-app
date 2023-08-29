@@ -4,6 +4,8 @@ import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.da
 import 'package:lost_and_found/features/item/presentation/widgets/home/custom_card_home.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/home/no_item_message.dart';
 
+import '../../../../../utils/screen_size.dart';
+
 class FoundItemsContainer extends StatelessWidget {
   const FoundItemsContainer({super.key});
 
@@ -22,7 +24,7 @@ class FoundItemsContainer extends StatelessWidget {
                   ? Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 0, 25),
             child: SizedBox(
-              height: 240,
+              height: ScreenSize.isBigSmartphoneDevice(context)? 240 : ScreenSize.isMediumSmartphoneDevice(context)? 210 : 180,
               child: state.foundItems.isNotEmpty
                   ? ListView(
                 scrollDirection: Axis.horizontal,

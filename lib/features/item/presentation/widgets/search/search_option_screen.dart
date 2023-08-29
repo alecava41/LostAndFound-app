@@ -11,6 +11,7 @@ import '../../../../../core/presentation/widgets/large_green_button.dart';
 import '../../../../../core/presentation/widgets/select_date_form.dart';
 import '../../../../../core/presentation/widgets/select_position_button.dart';
 import '../../../../../utils/colors.dart';
+import '../../../../../utils/screen_size.dart';
 
 class SearchOptionScreen extends StatelessWidget {
   final bool hasPerformedFirstSearch;
@@ -27,6 +28,7 @@ class SearchOptionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchBloc, SearchState>(builder: (ctx, state) {
+      var sizedBox = SizedBox(height: ScreenSize.isBigSmartphoneDevice(context)? 35 : ScreenSize.isMediumSmartphoneDevice(context)? 25 : 10,);
       return SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +86,7 @@ class SearchOptionScreen extends StatelessWidget {
               errorText: state.itemsToSearch.value.fold(
                   (failure) => failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""), (_) => ""),
             ),
-            const SizedBox(height: 40),
+            sizedBox,
             SelectPositionButton(
               isLoadingAddress: state.isLoadingPosition,
               address: state.address,
@@ -98,7 +100,7 @@ class SearchOptionScreen extends StatelessWidget {
               errorText: state.pos.value.fold(
                   (failure) => failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""), (_) => ""),
             ),
-            const SizedBox(height: 40),
+            sizedBox,
             CategorySelectionForm(
               onTap: (value) => ctx.read<SearchBloc>().add(SearchEvent.categorySelected(value.first, value.second)),
               category: state.category,
@@ -106,12 +108,12 @@ class SearchOptionScreen extends StatelessWidget {
               errorText: state.cat.value.fold(
                   (failure) => failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""), (_) => ""),
             ),
-            const SizedBox(height: 40),
+            sizedBox,
             DateSelectionForm(
               date: state.dateTime,
               onTap: (value) => ctx.read<SearchBloc>().add(SearchEvent.dateSelected(value)),
             ),
-            const SizedBox(height: 40),
+            sizedBox,
             PersonalizedLargeGreenButton(
               onPressed: () => ctx.read<SearchBloc>().add(const SearchEvent.searchSubmitted()),
               text: const Text("Show result", style: TextStyle(fontSize: 20, color: Colors.white)),

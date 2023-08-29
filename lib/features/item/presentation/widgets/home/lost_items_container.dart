@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/home/custom_card_home.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/home/no_item_message.dart';
+import 'package:sizer/sizer.dart';
+
+import '../../../../../utils/screen_size.dart';
 
 class LostItemsContainer extends StatelessWidget {
   const LostItemsContainer({super.key});
@@ -22,9 +25,9 @@ class LostItemsContainer extends StatelessWidget {
           ),
           state.lostItems.isNotEmpty
               ? Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 25),
+                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: SizedBox(
-                      height: 240,
+                      height: ScreenSize.isBigSmartphoneDevice(context)? 230 : ScreenSize.isMediumSmartphoneDevice(context)? 200 : 170,
                       width: MediaQuery.of(context).size.width,
                       child: ListView(
                         scrollDirection: Axis.horizontal,
@@ -40,11 +43,12 @@ class LostItemsContainer extends StatelessWidget {
                       )),
                 )
               : const Padding(
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 30),
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                   child: NoItemMessage(
                     icon: Icons.sentiment_very_satisfied_rounded,
                     message: "You have no lost item!",
                   )),
+                SizedBox(height: 4.h,)
         ],
       );
     });

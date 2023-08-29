@@ -134,7 +134,7 @@ class ItemScreen extends StatelessWidget {
             return SafeArea(
               top: false,
               child: Scaffold(
-                backgroundColor: PersonalizedColor.backGroundColor,
+                backgroundColor: Colors.white,
                 appBar: AppBar(
                   backgroundColor: Colors.white,
                   iconTheme: const IconThemeData(color: Colors.black),

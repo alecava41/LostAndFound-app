@@ -4,6 +4,7 @@ import 'package:lost_and_found/core/presentation/widgets/custom_circular_progres
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/home/error_page.dart';
+import 'package:sizer/sizer.dart';
 
 import '../widgets/home/clickable_circular_button.dart';
 import '../widgets/home/found_items_container.dart';
@@ -52,11 +53,13 @@ class HomeScreen extends StatelessWidget {
                 await block;
               },
               child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(height: 3.h,),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 50, 20, 50),
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,9 +91,11 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ],
                           )
+                          
                         ],
                       ),
                     ),
+                    SizedBox(height: 4.h,),
                     const LostItemsContainer(),
                     const FoundItemsContainer(),
                   ],
