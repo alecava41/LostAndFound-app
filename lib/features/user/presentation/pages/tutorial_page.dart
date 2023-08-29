@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/utils/colors.dart';
-import 'package:lost_and_found/widgets/carousel_item.dart';
 
+import '../../../../core/presentation/tutorial/widgets/carousel_item.dart';
 import '../widgets/user/faq_tile.dart';
 
 class TutorialScreen extends StatefulWidget {

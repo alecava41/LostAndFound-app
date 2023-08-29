@@ -1,9 +1,6 @@
 import 'package:flutter/widgets.dart';
 
 class ScreenSize{
-
-  
-
   static bool isSmallSmartphoneDevice (context) {
     double screenHeight = MediaQuery.of(context).size.height;
     return screenHeight < 700; 

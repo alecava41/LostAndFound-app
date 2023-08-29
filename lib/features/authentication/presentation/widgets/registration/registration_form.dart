@@ -7,8 +7,9 @@ import 'package:lost_and_found/features/authentication/presentation/widgets/regi
 import 'package:lost_and_found/features/authentication/presentation/widgets/registration/registration_button.dart';
 import 'package:lost_and_found/features/authentication/presentation/widgets/registration/sign_in_text.dart';
 import 'package:lost_and_found/features/authentication/presentation/widgets/registration/username_input.dart';
-import 'package:lost_and_found/widgets/title_logo.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../../../../core/presentation/widgets/title_logo.dart';
 
 class RegistrationForm extends StatelessWidget {
   const RegistrationForm({super.key});
@@ -60,15 +61,15 @@ class RegistrationForm extends StatelessWidget {
                 SizedBox(height: 3.5.h,),
                 titleLogoHorizontal(),
                 SizedBox(height: 6.w),
-                UsernameInput(),
-                SizedBox(height: 12),
-                EmailInput(),
-                SizedBox(height: 12),
-                PasswordInput(),
-                SizedBox(height: 12),
-                ConfirmPasswordInput(),
+                const UsernameInput(),
+                const SizedBox(height: 12),
+                const EmailInput(),
+                const SizedBox(height: 12),
+                const PasswordInput(),
+                const SizedBox(height: 12),
+                const ConfirmPasswordInput(),
                 SizedBox(height: 4.h),
-                RegistrationButton(),
+                const RegistrationButton(),
                 const SizedBox(height: 15),
                 const SignInText(),
               ],

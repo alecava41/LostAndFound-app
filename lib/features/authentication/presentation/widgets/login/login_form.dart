@@ -8,7 +8,8 @@ import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.da
 import 'package:lost_and_found/features/user/presentation/bloc/user/user_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../../widgets/title_logo.dart';
+import '../../../../../core/presentation/home_controller/bloc/home_controller_bloc.dart';
+import '../../../../../core/presentation/widgets/title_logo.dart';
 import '../../bloc/login/login_bloc.dart';
 
 class LoginForm extends StatelessWidget {
