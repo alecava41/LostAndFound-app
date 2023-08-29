@@ -8,6 +8,7 @@ import 'package:lost_and_found/features/authentication/presentation/widgets/regi
 import 'package:lost_and_found/features/authentication/presentation/widgets/registration/sign_in_text.dart';
 import 'package:lost_and_found/features/authentication/presentation/widgets/registration/username_input.dart';
 import 'package:lost_and_found/widgets/title_logo.dart';
+import 'package:sizer/sizer.dart';
 
 class RegistrationForm extends StatelessWidget {
   const RegistrationForm({super.key});
@@ -16,6 +17,7 @@ class RegistrationForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
+        width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.all(16),
         child: BlocListener<RegistrationBloc, RegistrationState>(
           listener: (ctx, state) {
@@ -49,13 +51,15 @@ class RegistrationForm extends StatelessWidget {
             }
           },
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
             children: [
               titleLogoHorizontal(),
-              const Column(
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SizedBox(height: 80),
+                  SizedBox(height: 8.w),
                   UsernameInput(),
                   SizedBox(height: 10),
                   EmailInput(),
@@ -63,11 +67,11 @@ class RegistrationForm extends StatelessWidget {
                   PasswordInput(),
                   SizedBox(height: 10),
                   ConfirmPasswordInput(),
-                  SizedBox(height: 60),
+                  SizedBox(height: 4.h),
                   RegistrationButton(),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 15),
               const SignInText(),
             ],
           ),

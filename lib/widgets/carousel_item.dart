@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 Widget carouselItem(String imagePath, String title, String description) {
   return Padding(
@@ -9,8 +10,8 @@ Widget carouselItem(String imagePath, String title, String description) {
         Center(
           child: Image(
             image: AssetImage(imagePath),
-            height: 300.0,
-            width: 300.0,
+            height: 40.h,
+            width: 70.w,
           ),
         ),
         Text(

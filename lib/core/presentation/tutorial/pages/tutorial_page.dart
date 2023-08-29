@@ -4,6 +4,7 @@ import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/widgets/carousel_item.dart';
 import 'package:lost_and_found/widgets/large_white_button.dart';
 import 'package:lost_and_found/widgets/title_logo.dart';
+import 'package:sizer/sizer.dart';
 
 class InfoScreen extends StatefulWidget {
   const InfoScreen({super.key});
@@ -22,22 +23,20 @@ class _InfoScreenState extends State<InfoScreen> {
     return SafeArea(
         child: Scaffold(
       body: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.all(24),
-          child: Column(
-              //crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                titleLogoHorizontal(),
-                _carouselSlider(),
-                const SizedBox(
-                  height: 25,
-                ),
-                _loginButton(),
-                const SizedBox(height: 20),
-                _registerButton()
-              ]),
-        ),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              SizedBox(height: 2.5.h,),
+              titleLogoHorizontal(),
+              _carouselSlider(),
+              SizedBox(
+                height: 3.h,
+              ),
+              _loginButton(),
+              SizedBox(height: 1.h),
+              _registerButton()
+            ]),
       ),
     ));
   }
@@ -67,7 +66,7 @@ class _InfoScreenState extends State<InfoScreen> {
     return Column(
       children: [
         SizedBox(
-          height: 360.0,
+          height: 50.h,
           child: PageView(
             physics: const ClampingScrollPhysics(),
             controller: _pageController,

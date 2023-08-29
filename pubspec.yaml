@@ -66,6 +66,7 @@ dependencies:
   intl: ^0.18.0
   http: ^1.1.0
   badges: ^3.1.1
+  sizer: ^2.0.15
 
   # Firebase
   firebase_core: ^2.15.0
@@ -75,7 +76,7 @@ dependencies:
   flutter_firebase_chat_core: ^1.6.7
   flutter_chat_types: ^3.6.2
 
-  sizer: ^2.0.15
+  
 
 dev_dependencies:
   flutter_test:
