@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
+import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
@@ -27,10 +29,10 @@ class ClaimedStatusCard extends StatelessWidget {
         color: PersonalizedColor.openedColor,
         child: InkWell(
           splashColor: PersonalizedColor.splashGreyColor,
-          onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (_) => ItemScreen(itemId: claim.item.id))),
+          onTap: () => {
+            context.read<BadgeBloc>().add(const BadgeEvent.sentClaimRead()),
+            Navigator.push(context, MaterialPageRoute(builder: (_) => ItemScreen(itemId: claim.item.id)))
+          },
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -50,19 +52,15 @@ class ClaimedStatusCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     child: claim.item.hasImage
                         ? CachedNetworkImage(
-                            imageUrl:
-                                "$baseUrl/api/items/${claim.item.id}/image",
+                            imageUrl: "$baseUrl/api/items/${claim.item.id}/image",
                             fit: BoxFit.cover,
                             httpHeaders: {
                               "Authorization": "Bearer $token",
                             },
-                            progressIndicatorBuilder:
-                                (context, url, downloadProgress) =>
-                                    const CustomCircularProgress(size: 35),
-                            errorWidget: (context, url, error) =>
-                                Image.asset("assets/images/no-item.png"),
-                            imageRenderMethodForWeb:
-                                ImageRenderMethodForWeb.HttpGet,
+                            progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                const CustomCircularProgress(size: 35),
+                            errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
+                            imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                           )
                         : Image.asset("assets/images/no-item.png"),
                   ),
@@ -92,8 +90,7 @@ class ClaimedStatusCard extends StatelessWidget {
                                   ? PersonalizedColor.claimAcceptedStatusColor
                                   : (claim.status == ClaimStatus.rejected
                                       ? PersonalizedColor.claimDeniedStatusColor
-                                      : PersonalizedColor
-                                          .claimWaitingStatusColor),
+                                      : PersonalizedColor.claimWaitingStatusColor),
                             ),
                             child: RichText(
                               maxLines: 1,
@@ -102,15 +99,12 @@ class ClaimedStatusCard extends StatelessWidget {
                                 children: [
                                   const TextSpan(
                                     text: "Claim status: ",
-                                    style: TextStyle(
-                                        fontSize: 13, color: Colors.black),
+                                    style: TextStyle(fontSize: 13, color: Colors.black),
                                   ),
                                   TextSpan(
                                     text: claim.status.name.toUpperCase(),
-                                    style: const TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
+                                    style:
+                                        const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
                                   ),
                                 ],
                               ),

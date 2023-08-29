@@ -23,9 +23,9 @@ class SearchState with _$SearchState {
 
     // Fields to handle real search
     @Default(false) bool showError,
-    @Default(false) bool hasPerformedFirstSearch,
+    @Default(false) bool hasSearchError,
+    @Default(false) bool isLoadingResults,
     @Default(SearchPageState.filterPage) SearchPageState pageState,
-    Either<Failure, Success>? searchFailureOrSuccess,
   }) = _SearchState;
 
   factory SearchState.initial() =>

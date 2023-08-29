@@ -14,16 +14,7 @@ import '../../../../../utils/colors.dart';
 import '../../../../../utils/screen_size.dart';
 
 class SearchOptionScreen extends StatelessWidget {
-  final bool hasPerformedFirstSearch;
-
-  const SearchOptionScreen({super.key, required this.hasPerformedFirstSearch});
-
-  /* TODO (@alecava41) create completely new filter page
-      - != bloc, pass current search state
-      - on create pass current search params to new bloc
-      - on back_button_pressed do nothing, show results
-      - on search_button_pressed, pass new params and perform search
-   */
+  const SearchOptionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,26 +29,9 @@ class SearchOptionScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+                  const Row(
                     children: [
-                      hasPerformedFirstSearch
-                          ? IconButton(
-                              onPressed: () => ctx
-                                  .read<SearchBloc>()
-                                  .add(const SearchEvent.searchPageChanged(SearchPageState.resultPage)),
-                              // TODO (@alecava41) replace with something better!
-                              icon: const Icon(
-                                Icons.arrow_back,
-                                size: 40,
-                              ),
-                            )
-                          : Container(),
-                      hasPerformedFirstSearch
-                          ? const SizedBox(
-                              width: 5,
-                            )
-                          : Container(),
-                      const Text(
+                      Text(
                         "Filters",
                         style: TextStyle(fontSize: 40),
                       ),

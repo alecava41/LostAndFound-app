@@ -6,6 +6,7 @@ import 'package:lost_and_found/core/presentation/widgets/custom_circular_progres
 import 'package:lost_and_found/features/chat/presentation/bloc/inbox/inbox_bloc.dart';
 import 'package:lost_and_found/features/chat/presentation/pages/chat_page.dart';
 
+import '../../../../core/presentation/widgets/error_page.dart';
 import '../widgets/inbox/inbox_item.dart';
 
 class InboxScreen extends StatelessWidget {
@@ -35,7 +36,9 @@ class InboxScreen extends StatelessWidget {
           state.isLoading
               ? const Expanded(child: CustomCircularProgress(size: 100))
               : state.hasLoginOrLoadingError
-                  ? Container() // TODO @(backToFrancesco) build retry screen
+                  ? ErrorPage(
+                      onRetry: () => ctx.read<InboxBloc>().add(const InboxEvent.inboxContentCreated()),
+                    )
                   : StreamBuilder<List<Room>>(
                       stream: state.userRooms,
                       initialData: const [],

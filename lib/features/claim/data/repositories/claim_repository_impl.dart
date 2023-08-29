@@ -105,7 +105,19 @@ class ClaimRepositoryImpl implements ClaimRepository {
         }
 
         final updatedItem = await _dataSource.manageClaim(params, session.user);
-        return Right(updatedItem.toDomain());
+        final domainUpdatedItem = updatedItem.toDomain();
+
+        if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
+          final readClaims = await _readClaimsDataSource.getReadClaims();
+
+          for (var claim in domainUpdatedItem.claims!) {
+            if (readClaims.contains(claim.id)) {
+              claim.opened = true;
+            }
+          }
+        }
+
+        return Right(domainUpdatedItem);
       } else {
         return const Left(Failure.networkFailure());
       }

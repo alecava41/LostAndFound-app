@@ -210,7 +210,6 @@ class AnswerQuestionScreen extends StatelessWidget {
                                     ),
                                   )
                                 : PersonalizedLargeGreenButton(
-                                    //TODO (@alecava): inactive if answer is empty --> error text should appear when clicking on it with empty answer
                                     isActive: !isClaimAlreadyTaken,
                                     onPressed: () => isClaimAlreadyTaken
                                         ? ()

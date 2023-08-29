@@ -7,6 +7,7 @@ import 'package:lost_and_found/core/presentation/widgets/image_dialog.dart';
 import 'package:lost_and_found/features/chat/presentation/bloc/chat/chat_bloc.dart' as chat;
 import 'package:lost_and_found/features/claim/domain/entities/claim_received.dart';
 import 'package:lost_and_found/features/claim/domain/entities/claim_sent.dart' as sent;
+import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
@@ -19,8 +20,7 @@ class ChatScreen extends StatelessWidget {
   final String roomId;
   final int itemId;
 
-  // TODO maybe better to insert also item name
-  // TODO if no claim, button to go to item page?
+  // TODO if no claim, button to go to item page? (or maybe better to insert item name on AppBar?)
 
   const ChatScreen({
     super.key,
@@ -36,8 +36,9 @@ class ChatScreen extends StatelessWidget {
         listener: (ctx, state) {},
         builder: (ctx, state) {
           if (state.hasLoadingError) {
-            // TODO (@backToFrancesco) create retry screen
-            return Container();
+            return ErrorPage(
+              onRetry: () => ctx.read<chat.ChatBloc>().add(chat.ChatEvent.chatContentCreated(roomId, itemId)),
+            );
           }
 
           if (state.isLoading || state.room == null) {

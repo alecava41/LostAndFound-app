@@ -1810,10 +1810,9 @@ mixin _$SearchState {
   String get token =>
       throw _privateConstructorUsedError; // Fields to handle real search
   bool get showError => throw _privateConstructorUsedError;
-  bool get hasPerformedFirstSearch => throw _privateConstructorUsedError;
+  bool get hasSearchError => throw _privateConstructorUsedError;
+  bool get isLoadingResults => throw _privateConstructorUsedError;
   SearchPageState get pageState => throw _privateConstructorUsedError;
-  Either<Failure, Success>? get searchFailureOrSuccess =>
-      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SearchStateCopyWith<SearchState> get copyWith =>
@@ -1840,9 +1839,9 @@ abstract class $SearchStateCopyWith<$Res> {
       bool isLoadingPosition,
       String token,
       bool showError,
-      bool hasPerformedFirstSearch,
-      SearchPageState pageState,
-      Either<Failure, Success>? searchFailureOrSuccess});
+      bool hasSearchError,
+      bool isLoadingResults,
+      SearchPageState pageState});
 }
 
 /// @nodoc
@@ -1871,9 +1870,9 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
     Object? isLoadingPosition = null,
     Object? token = null,
     Object? showError = null,
-    Object? hasPerformedFirstSearch = null,
+    Object? hasSearchError = null,
+    Object? isLoadingResults = null,
     Object? pageState = null,
-    Object? searchFailureOrSuccess = freezed,
   }) {
     return _then(_value.copyWith(
       itemsToSearch: null == itemsToSearch
@@ -1928,18 +1927,18 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.showError
           : showError // ignore: cast_nullable_to_non_nullable
               as bool,
-      hasPerformedFirstSearch: null == hasPerformedFirstSearch
-          ? _value.hasPerformedFirstSearch
-          : hasPerformedFirstSearch // ignore: cast_nullable_to_non_nullable
+      hasSearchError: null == hasSearchError
+          ? _value.hasSearchError
+          : hasSearchError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingResults: null == isLoadingResults
+          ? _value.isLoadingResults
+          : isLoadingResults // ignore: cast_nullable_to_non_nullable
               as bool,
       pageState: null == pageState
           ? _value.pageState
           : pageState // ignore: cast_nullable_to_non_nullable
               as SearchPageState,
-      searchFailureOrSuccess: freezed == searchFailureOrSuccess
-          ? _value.searchFailureOrSuccess
-          : searchFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
     ) as $Val);
   }
 }
@@ -1966,9 +1965,9 @@ abstract class _$$_SearchStateCopyWith<$Res>
       bool isLoadingPosition,
       String token,
       bool showError,
-      bool hasPerformedFirstSearch,
-      SearchPageState pageState,
-      Either<Failure, Success>? searchFailureOrSuccess});
+      bool hasSearchError,
+      bool isLoadingResults,
+      SearchPageState pageState});
 }
 
 /// @nodoc
@@ -1995,9 +1994,9 @@ class __$$_SearchStateCopyWithImpl<$Res>
     Object? isLoadingPosition = null,
     Object? token = null,
     Object? showError = null,
-    Object? hasPerformedFirstSearch = null,
+    Object? hasSearchError = null,
+    Object? isLoadingResults = null,
     Object? pageState = null,
-    Object? searchFailureOrSuccess = freezed,
   }) {
     return _then(_$_SearchState(
       itemsToSearch: null == itemsToSearch
@@ -2052,18 +2051,18 @@ class __$$_SearchStateCopyWithImpl<$Res>
           ? _value.showError
           : showError // ignore: cast_nullable_to_non_nullable
               as bool,
-      hasPerformedFirstSearch: null == hasPerformedFirstSearch
-          ? _value.hasPerformedFirstSearch
-          : hasPerformedFirstSearch // ignore: cast_nullable_to_non_nullable
+      hasSearchError: null == hasSearchError
+          ? _value.hasSearchError
+          : hasSearchError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingResults: null == isLoadingResults
+          ? _value.isLoadingResults
+          : isLoadingResults // ignore: cast_nullable_to_non_nullable
               as bool,
       pageState: null == pageState
           ? _value.pageState
           : pageState // ignore: cast_nullable_to_non_nullable
               as SearchPageState,
-      searchFailureOrSuccess: freezed == searchFailureOrSuccess
-          ? _value.searchFailureOrSuccess
-          : searchFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
     ));
   }
 }
@@ -2085,9 +2084,9 @@ class _$_SearchState implements _SearchState {
       this.isLoadingPosition = false,
       this.token = "",
       this.showError = false,
-      this.hasPerformedFirstSearch = false,
-      this.pageState = SearchPageState.filterPage,
-      this.searchFailureOrSuccess})
+      this.hasSearchError = false,
+      this.isLoadingResults = false,
+      this.pageState = SearchPageState.filterPage})
       : _results = results;
 
 // Search parameters
@@ -2136,16 +2135,17 @@ class _$_SearchState implements _SearchState {
   final bool showError;
   @override
   @JsonKey()
-  final bool hasPerformedFirstSearch;
+  final bool hasSearchError;
+  @override
+  @JsonKey()
+  final bool isLoadingResults;
   @override
   @JsonKey()
   final SearchPageState pageState;
-  @override
-  final Either<Failure, Success>? searchFailureOrSuccess;
 
   @override
   String toString() {
-    return 'SearchState(itemsToSearch: $itemsToSearch, pos: $pos, cat: $cat, dateTime: $dateTime, order: $order, results: $results, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, isLoadingPosition: $isLoadingPosition, token: $token, showError: $showError, hasPerformedFirstSearch: $hasPerformedFirstSearch, pageState: $pageState, searchFailureOrSuccess: $searchFailureOrSuccess)';
+    return 'SearchState(itemsToSearch: $itemsToSearch, pos: $pos, cat: $cat, dateTime: $dateTime, order: $order, results: $results, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, isLoadingPosition: $isLoadingPosition, token: $token, showError: $showError, hasSearchError: $hasSearchError, isLoadingResults: $isLoadingResults, pageState: $pageState)';
   }
 
   @override
@@ -2173,13 +2173,12 @@ class _$_SearchState implements _SearchState {
             (identical(other.token, token) || other.token == token) &&
             (identical(other.showError, showError) ||
                 other.showError == showError) &&
-            (identical(
-                    other.hasPerformedFirstSearch, hasPerformedFirstSearch) ||
-                other.hasPerformedFirstSearch == hasPerformedFirstSearch) &&
+            (identical(other.hasSearchError, hasSearchError) ||
+                other.hasSearchError == hasSearchError) &&
+            (identical(other.isLoadingResults, isLoadingResults) ||
+                other.isLoadingResults == isLoadingResults) &&
             (identical(other.pageState, pageState) ||
-                other.pageState == pageState) &&
-            (identical(other.searchFailureOrSuccess, searchFailureOrSuccess) ||
-                other.searchFailureOrSuccess == searchFailureOrSuccess));
+                other.pageState == pageState));
   }
 
   @override
@@ -2198,9 +2197,9 @@ class _$_SearchState implements _SearchState {
       isLoadingPosition,
       token,
       showError,
-      hasPerformedFirstSearch,
-      pageState,
-      searchFailureOrSuccess);
+      hasSearchError,
+      isLoadingResults,
+      pageState);
 
   @JsonKey(ignore: true)
   @override
@@ -2224,9 +2223,9 @@ abstract class _SearchState implements SearchState {
       final bool isLoadingPosition,
       final String token,
       final bool showError,
-      final bool hasPerformedFirstSearch,
-      final SearchPageState pageState,
-      final Either<Failure, Success>? searchFailureOrSuccess}) = _$_SearchState;
+      final bool hasSearchError,
+      final bool isLoadingResults,
+      final SearchPageState pageState}) = _$_SearchState;
 
   @override // Search parameters
   ItemsTypeField get itemsToSearch;
@@ -2255,11 +2254,11 @@ abstract class _SearchState implements SearchState {
   @override // Fields to handle real search
   bool get showError;
   @override
-  bool get hasPerformedFirstSearch;
+  bool get hasSearchError;
+  @override
+  bool get isLoadingResults;
   @override
   SearchPageState get pageState;
-  @override
-  Either<Failure, Success>? get searchFailureOrSuccess;
   @override
   @JsonKey(ignore: true)
   _$$_SearchStateCopyWith<_$_SearchState> get copyWith =>

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
-import 'package:lost_and_found/features/item/presentation/widgets/home/error_page.dart';
+import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:sizer/sizer.dart';
 
 import '../widgets/home/clickable_circular_button.dart';
@@ -80,8 +80,8 @@ class HomeScreen extends StatelessWidget {
                                 width: 25,
                               ),
                               badges.Badge(
-                                // TODO (@alecava41) add management for sent claims (+1 if there is an update on sent claims)
-                                badgeContent: Text("${badgeState.unreadReceivedClaims}"),
+                                badgeContent:
+                                    Text("${badgeState.unreadReceivedClaims + (badgeState.hasUnreadSentClaims ? 1 : 0)}"),
                                 showBadge: badgeState.unreadReceivedClaims > 0,
                                 position: badges.BadgePosition.topEnd(top: 6, end: 8),
                                 child: ClickableCircularButton(
@@ -91,7 +91,7 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ],
                           )
-                          
+
                         ],
                       ),
                     ),

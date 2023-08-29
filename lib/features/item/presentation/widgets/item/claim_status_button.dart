@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/domain/entities/claim_status.dart';
 import '../../../../../utils/colors.dart';
+import '../../../../claim/presentation/pages/answer_question_screen.dart';
 
 class ClaimStatusButton extends StatelessWidget {
   final ClaimStatus status;
   final String owner;
+  final int itemId;
 
   const ClaimStatusButton({
     super.key,
     required this.status,
     required this.owner,
+    required this.itemId,
   });
 
   @override
@@ -25,8 +28,15 @@ class ClaimStatusButton extends StatelessWidget {
                 : PersonalizedColor.claimDeniedStatusColor),
         child: InkWell(
           onTap: () {
-            // TODO (@alecava41): go to the page where the user can see his response
-            //Navigator.push(context, route)
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (ctx) => AnswerQuestionScreen(
+                  itemId: itemId,
+                  isClaimAlreadyTaken: true,
+                ),
+              ),
+            );
           },
           splashColor: PersonalizedColor.splashGreyColor,
           child: Container(
@@ -52,15 +62,11 @@ class ClaimStatusButton extends StatelessWidget {
                               children: [
                                 const TextSpan(
                                   text: "Claim status: ",
-                                  style: TextStyle(
-                                      fontSize: 18, color: Colors.black),
+                                  style: TextStyle(fontSize: 18, color: Colors.black),
                                 ),
                                 TextSpan(
                                   text: status.name.toUpperCase(),
-                                  style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
+                                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
                                 ),
                               ],
                             ),
@@ -84,19 +90,16 @@ class ClaimStatusButton extends StatelessWidget {
                             child: status == ClaimStatus.approved
                                 ? Text(
                                     "Your claim has been accepted! Get in touch with $owner through the chat to arrange the item's return.",
-                                    style:
-                                        const TextStyle(color: Colors.black54),
+                                    style: const TextStyle(color: Colors.black54),
                                   )
                                 : status == ClaimStatus.rejected
                                     ? Text(
                                         "Unfortunately, your claim has been rejected by $owner, as the response you provided was not correct.",
-                                        style: const TextStyle(
-                                            color: Colors.black54),
+                                        style: const TextStyle(color: Colors.black54),
                                       )
                                     : Text(
                                         "Wait for $owner to validate to your claim.",
-                                        style: const TextStyle(
-                                            color: Colors.black54),
+                                        style: const TextStyle(color: Colors.black54),
                                       ),
                           ),
                         ],

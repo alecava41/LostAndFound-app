@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_and_found/features/item/presentation/widgets/home/error_page.dart';
+import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/features/user/presentation/bloc/user/user_bloc.dart';
 
 import '../../../../core/presentation/widgets/custom_circular_progress.dart';

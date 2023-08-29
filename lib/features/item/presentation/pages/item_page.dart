@@ -136,6 +136,7 @@ class ItemScreen extends StatelessWidget {
               child: Scaffold(
                 backgroundColor: Colors.white,
                 appBar: AppBar(
+                  title: const Text("Item details"),
                   backgroundColor: Colors.white,
                   iconTheme: const IconThemeData(color: Colors.black),
                   actions: _showOwnerMenu(ctx, isCurrentUserOwner),
@@ -366,7 +367,6 @@ class ItemScreen extends StatelessWidget {
 
                         return Container(
                           padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                          // TODO (@backToFrancesco) if claim already managed it would be better to put the status even in the card
                           child: ClaimedItemCard(
                             token: token,
                             opened: claim.opened,
@@ -376,18 +376,21 @@ class ItemScreen extends StatelessWidget {
                             onTap: () async {
                               context.read<ItemBloc>().add(ItemEvent.claimRead(claim.id));
                               final updatedItem = await Navigator.push<Item?>(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (ctx) => AnswerClaimScreen(
-                                            itemId: itemId,
-                                            claimId: claim.id,
-                                            isClaimAlreadyManaged: claim.status != ClaimStatus.pending,
-                                          )));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (ctx) => AnswerClaimScreen(
+                                    itemId: itemId,
+                                    claimId: claim.id,
+                                    isClaimAlreadyManaged: claim.status != ClaimStatus.pending,
+                                  ),
+                                ),
+                              );
 
                               if (updatedItem != null && context.mounted) {
                                 context.read<ItemBloc>().add(ItemEvent.claimUpdated(updatedItem));
                               }
                             },
+                            status: claim.status,
                           ),
                         );
                       },
@@ -414,13 +417,13 @@ class ItemScreen extends StatelessWidget {
         child: Column(
           children: [
             claim != null
-                // TODO even if claim already sent, make it clickable and show answer on AnswerQuestionScreen
                 ? Container(
                     color: Colors.white,
                     padding: const EdgeInsets.all(8),
                     child: ClaimStatusButton(
                       owner: owner.username,
                       status: claim.status,
+                      itemId: itemId,
                     ),
                   )
                 : Container(

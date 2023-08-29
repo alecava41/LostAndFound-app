@@ -13,16 +13,19 @@ class ClaimedItemCard extends StatelessWidget {
   final bool opened;
   final bool hasImage;
   final String token;
+  final ClaimStatus status;
   final VoidCallback onTap;
 
-  const ClaimedItemCard(
-      {super.key,
-      required this.userId,
-      required this.username,
-      required this.hasImage,
-      required this.opened,
-      required this.token,
-      required this.onTap});
+  const ClaimedItemCard({
+    super.key,
+    required this.userId,
+    required this.username,
+    required this.hasImage,
+    required this.opened,
+    required this.token,
+    required this.onTap,
+    required this.status,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,7 @@ class ClaimedItemCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
                 width: 0.3,
-                color: opened? PersonalizedColor.borderColorOpened : PersonalizedColor.borderColorNotOpened,
+                color: opened ? PersonalizedColor.borderColorOpened : PersonalizedColor.borderColorNotOpened,
               ),
             ),
             padding: const EdgeInsets.all(5),
@@ -80,30 +83,28 @@ class ClaimedItemCard extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          // TODO (@alecava41): add logic for claim status (maybe we need to modify the field of the card?)
                           Container(
                             padding: const EdgeInsets.all(3),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: /*claim.status*/ ClaimStatus.approved == ClaimStatus.approved
+                              color: status == ClaimStatus.approved
                                   ? PersonalizedColor.claimAcceptedStatusColor
-                                  : (/*claim.status*/ ClaimStatus.rejected== ClaimStatus.rejected
+                                  : (status == ClaimStatus.rejected
                                       ? PersonalizedColor.claimDeniedStatusColor
                                       : PersonalizedColor.claimWaitingStatusColor),
                             ),
                             child: RichText(
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              text: const TextSpan(
+                              text: TextSpan(
                                 children: [
-                                  TextSpan(
+                                  const TextSpan(
                                     text: "Claim status: ",
                                     style: TextStyle(fontSize: 13, color: Colors.black),
                                   ),
                                   TextSpan(
-                                    text: /*claim.status.name.toUpperCase()*/ "ACCEPTED",
-                                    style:
-                                        TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
+                                    text: status.name.toUpperCase(),
+                                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
                                   ),
                                 ],
                               ),

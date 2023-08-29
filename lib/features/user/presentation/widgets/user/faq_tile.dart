@@ -4,7 +4,7 @@ class FaqTile extends StatefulWidget {
   final String question;
   final String answer;
 
-  const FaqTile({required this.question, required this.answer});
+  const FaqTile({super.key, required this.question, required this.answer});
 
   @override
   _FaqTile createState() => _FaqTile();

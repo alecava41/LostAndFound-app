@@ -66,18 +66,23 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   }
 
   Future<void> _onSearchSubmit(Emitter<SearchState> emit) async {
+    emit(
+      state.copyWith(
+        isLoadingResults: true,
+        hasSearchError: false,
+      ),
+    );
+
     final isTypeValid = state.itemsToSearch.value.isRight();
     final isPositionValid = state.pos.value.isRight();
     final isCategoryValid = state.cat.value.isRight();
-
-    bool hasPerformedSearch = false;
 
     Either<Failure, Success>? searchFailureOrSuccess;
     List<SearchItem> items = [];
     SearchPageState pageState = state.pageState;
 
     if (isTypeValid && isPositionValid && isCategoryValid) {
-      emit(state.copyWith(pageState: SearchPageState.loadingPage, searchFailureOrSuccess: null));
+      emit(state.copyWith(pageState: SearchPageState.loadingPage));
 
       final itemsToSearch = state.itemsToSearch.value.getOrElse(() => const Pair(false, false));
       final pos = state.pos.value.getOrElse(() => const LatLng(0, 0));
@@ -98,7 +103,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         searchFailureOrSuccess = const Right(Success.genericSuccess());
         items = searchItems;
         pageState = SearchPageState.resultPage;
-        hasPerformedSearch = true;
       });
     }
 
@@ -109,17 +113,15 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
     emit(
       state.copyWith(
-        searchFailureOrSuccess: searchFailureOrSuccess,
         pageState: pageState,
         results: items,
         order: ResultOrder.dateDescending,
-        hasPerformedFirstSearch: hasPerformedSearch,
         token: session != null ? session.token : "",
         showError: true,
+        isLoadingResults: false,
+        hasSearchError: searchFailureOrSuccess?.isLeft() ?? false
       ),
     );
-
-    emit(state.copyWith(searchFailureOrSuccess: null));
   }
 
   void _onDateSelected(Emitter<SearchState> emit, DateTime date) {

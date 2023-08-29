@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
+import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/search/custom_card_search.dart';
+import 'package:lost_and_found/features/item/presentation/widgets/search/filters_screen.dart';
 
 import '../../bloc/search/search_bloc.dart';
 import 'custom_list_view.dart';
@@ -28,7 +31,7 @@ class SearchResultScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       shape: const StadiumBorder(),
                     ),
-                    onPressed: () => ctx.read<SearchBloc>().add(const SearchEvent.showFilters()),
+                    onPressed: () => Navigator.push(ctx, MaterialPageRoute(builder: (_) => const FiltersScreen())),
                     child: const Row(
                       children: [
                         Icon(
@@ -81,42 +84,45 @@ class SearchResultScreen extends StatelessWidget {
             thickness: 1,
             height: 0,
           ),
-          state.results.isNotEmpty
-              ? Expanded(
-                  child: CustomScrollableListView(
-                  itemList: state.results
-                      .map(
-                        (item) => CustomCardSearch(
-                            id: item.id,
-                            hasImage: item.hasImage,
-                            text: item.title,
-                            type: item.type.name,
-                            owner: item.user.username,
-                            token: state.token),
-                      )
-                      .toList(),
-                ))
-              : const Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.search_off_rounded,
-                        size: 80,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "No matching items found with your parameters. Try with more general ones.",
-                        style: TextStyle(fontSize: 20),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-
-          // TODO (@backToFrancesco) add error page
+          state.hasSearchError
+              ? ErrorPage(onRetry: () => ctx.read<SearchBloc>().add(const SearchEvent.searchSubmitted()))
+              : (state.isLoadingResults
+                  ? const CustomCircularProgress(size: 100)
+                  : state.results.isNotEmpty
+                      ? Expanded(
+                          child: CustomScrollableListView(
+                            itemList: state.results
+                                .map(
+                                  (item) => CustomCardSearch(
+                                      id: item.id,
+                                      hasImage: item.hasImage,
+                                      text: item.title,
+                                      type: item.type.name,
+                                      owner: item.user.username,
+                                      token: state.token),
+                                )
+                                .toList(),
+                          ),
+                        )
+                      : const Padding(
+                          padding: EdgeInsets.all(20),
+                          child: Column(
+                            children: [
+                              Icon(
+                                Icons.search_off_rounded,
+                                size: 80,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "No matching items found with your parameters. Try with more general ones.",
+                                style: TextStyle(fontSize: 20),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        )),
         ],
       ),
     );

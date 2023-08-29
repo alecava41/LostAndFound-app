@@ -71,7 +71,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future<void> _onHomeSectionRefreshed(Emitter<HomeState> emit, ItemType type) async {
-    // TODO (@alecava41) add check if 'hasLoadingError' is true before loading (if so, do something (?))
     final itemsResponse = await _getUserItemsUseCase(GetUserItemsParams(type: type, last: 0));
 
     if (itemsResponse.isRight()) {

@@ -11,33 +11,7 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SearchBloc, SearchState>(
-      listener: (ctx, state) {
-        if (state.searchFailureOrSuccess != null) {
-          state.searchFailureOrSuccess!.fold(
-              (failure) => {
-                    failure.maybeWhen(
-                      validationFailure: (_) {},
-                      orElse: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            padding: const EdgeInsets.all(30),
-                            backgroundColor: Colors.red,
-                            content: Text(
-                                failure.maybeWhen<String>(
-                                    genericFailure: () => 'Server error. Please try again later.',
-                                    networkFailure: () =>
-                                        'No internet connection available. Check your internet connection.',
-                                    orElse: () => 'Unknown error'),
-                                style: const TextStyle(fontSize: 20)),
-                          ),
-                        );
-                      },
-                    )
-                  },
-              (_) {});
-        }
-      },
+    return BlocBuilder<SearchBloc, SearchState>(
       builder: (ctx, state) {
         switch (state.pageState) {
           case SearchPageState.loadingPage:
@@ -45,7 +19,7 @@ class SearchScreen extends StatelessWidget {
           case SearchPageState.resultPage:
             return const SearchResultScreen();
           case SearchPageState.filterPage:
-            return SearchOptionScreen(hasPerformedFirstSearch: state.hasPerformedFirstSearch);
+            return const SearchOptionScreen();
         }
       },
     );

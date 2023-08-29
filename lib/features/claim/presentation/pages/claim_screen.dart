@@ -19,7 +19,6 @@ class ClaimsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<BadgeBloc, BadgeState>(
       builder: (ctx, state) => DefaultTabController(
-        // TODO maybe DefaultTabController not needed
         length: 2,
         child: Scaffold(
           backgroundColor: PersonalizedColor.backGroundColor,
@@ -71,7 +70,7 @@ class ClaimsScreen extends StatelessWidget {
                   ),
                 )
               ],
-              onTap: (value) { // TODO not working properly with swipe
+              onTap: (value) {
                 if (value == 1) {
                   ctx.read<BadgeBloc>().add(const BadgeEvent.sentClaimRead());
                 }
