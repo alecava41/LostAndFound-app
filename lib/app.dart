@@ -29,6 +29,9 @@ class App extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _Application();
+
+  // TODO (@alecava41) check snackbar content (remove loadFailureOrSuccess and replace with ErrorPage + check error_handling)
+  // TODO status bar not showing properly after navigating back to certain pages
 }
 
 class _Application extends State<App> {
