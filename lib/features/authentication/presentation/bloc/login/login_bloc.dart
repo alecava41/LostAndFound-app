@@ -69,11 +69,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final loginResponse = await _loginUseCase(params);
       loginResponse.fold(
         (failure) => authFailureOrSuccess = Left(failure),
-        (success) async {
-          await _loginChatUseCase(NoParams());
+        (success) {
           authFailureOrSuccess = Right(success);
         },
       );
+
+      if (loginResponse.isRight()) {
+        await _loginChatUseCase(NoParams());
+      }
     }
 
     emit(

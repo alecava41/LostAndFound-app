@@ -45,9 +45,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
-            contentCreated: () => _onContentCreated(emit),
-            imageChanged: (path) => _onImageChanged(emit, path),
-            logout: () => _onLogout(emit));
+          contentCreated: () => _onContentCreated(emit),
+          imageChanged: (path) => _onImageChanged(emit, path),
+          logout: () => _onLogout(emit),
+        );
       },
     );
   }
@@ -63,6 +64,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             : const Right(Success.genericSuccess()),
       ),
     );
+
+    emit(state.copyWith(logoutFailureOrSuccess: null));
   }
 
   Future<void> _onContentCreated(Emitter<UserState> emit) async {
