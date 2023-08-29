@@ -8,6 +8,7 @@ class InboxState with _$InboxState {
 
     @Default(false) bool hasLoginOrLoadingError,
     @Default("") String token,
+    @Default(false) bool isLoading,
   }) = _InboxState;
 
   factory InboxState.initial() => const InboxState(

@@ -74,7 +74,7 @@ class AnswerQuestionBloc extends Bloc<AnswerQuestionEvent, AnswerQuestionState> 
   Future<void> _onClaimSubmitted(Emitter<AnswerQuestionState> emit) async {
     final isAnswerValid = state.answer.value.isRight();
 
-    Either<Failure, Success>? claimFailureOrSuccess;
+    Either<Failure, Item>? claimFailureOrSuccess;
 
     if (isAnswerValid) {
       emit(
@@ -88,7 +88,7 @@ class AnswerQuestionBloc extends Bloc<AnswerQuestionEvent, AnswerQuestionState> 
 
       final claimResponse = await _createClaimUseCase(params);
       claimResponse.fold(
-          (failure) => claimFailureOrSuccess = Left(failure), (success) => claimFailureOrSuccess = Right(success));
+          (failure) => claimFailureOrSuccess = Left(failure), (item) => claimFailureOrSuccess = Right(item));
     }
 
     emit(

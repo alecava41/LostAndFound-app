@@ -338,31 +338,33 @@ class ItemScreen extends StatelessWidget {
         color: Colors.white,
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.all(10),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          CustomFieldContainer(
-            title: "Claims for this item",
-            content: claims.isEmpty
-                ? const Center(
-                    child: Column(
-                    children: [
-                      Text(
-                        "No claims received.",
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      Icon(
-                        Icons.connect_without_contact,
-                        size: 50,
-                      )
-                    ],
-                  ))
-                : ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: claims.length,
-                    itemBuilder: (context, index) {
-                      final claim = claims[index];
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomFieldContainer(
+              title: "Claims for this item",
+              content: claims.isEmpty
+                  ? const Center(
+                      child: Column(
+                      children: [
+                        Text(
+                          "No claims received.",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        Icon(
+                          Icons.connect_without_contact,
+                          size: 50,
+                        )
+                      ],
+                    ))
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: claims.length,
+                      itemBuilder: (context, index) {
+                        final claim = claims[index];
 
-                      return Container(
+                        return Container(
                           padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
                           // TODO (@backToFrancesco) if claim already managed it would be better to put the status even in the card
                           child: ClaimedItemCard(
@@ -373,7 +375,7 @@ class ItemScreen extends StatelessWidget {
                             username: claim.user.username,
                             onTap: () async {
                               context.read<ItemBloc>().add(ItemEvent.claimRead(claim.id));
-                              final claimStatus = await Navigator.push<bool?>(
+                              final updatedItem = await Navigator.push<Item?>(
                                   context,
                                   MaterialPageRoute(
                                       builder: (ctx) => AnswerClaimScreen(
@@ -382,15 +384,17 @@ class ItemScreen extends StatelessWidget {
                                             isClaimAlreadyManaged: claim.status != ClaimStatus.pending,
                                           )));
 
-                              if (claimStatus != null && claimStatus && context.mounted) {
-                                context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
+                              if (updatedItem != null && context.mounted) {
+                                context.read<ItemBloc>().add(ItemEvent.claimUpdated(updatedItem));
                               }
                             },
-                          ));
-                    },
-                  ),
-          ),
-        ]),
+                          ),
+                        );
+                      },
+                    ),
+            ),
+          ],
+        ),
       ),
       const Divider(
         color: Colors.grey,
@@ -421,37 +425,36 @@ class ItemScreen extends StatelessWidget {
                   )
                 : Container(
                     padding: const EdgeInsets.all(8.0),
-                    child: Row(children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: const StadiumBorder(),
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 18,
-                            ),
-                          ),
-                          onPressed: () async {
-                            final claimStatus = await Navigator.push<bool?>(
-                              context,
-                              MaterialPageRoute(
-                                builder: (ctx) => AnswerQuestionScreen(
-                                  itemId: itemId,
-                                  isClaimAlreadyTaken: claim?.answer != null,
-                                ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: const StadiumBorder(),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 18,
                               ),
-                            );
+                            ),
+                            onPressed: () async {
+                              final updatedItem = await Navigator.push<Item?>(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (ctx) => AnswerQuestionScreen(
+                                    itemId: itemId,
+                                    isClaimAlreadyTaken: claim?.answer != null,
+                                  ),
+                                ),
+                              );
 
-                            if (claimStatus != null && claimStatus && context.mounted) {
-                              context.read<ItemBloc>().add(const ItemEvent.itemRefreshed());
-                            }
-                          },
-                          child: const Text(
-                            'Claim the item',
-                            style: TextStyle(fontSize: 20),
+                              if (updatedItem != null && context.mounted) {
+                                context.read<ItemBloc>().add(ItemEvent.claimUpdated(updatedItem));
+                              }
+                            },
+                            child: const Text('Claim the item', style: TextStyle(fontSize: 20)),
                           ),
                         ),
-                      ),
-                    ]),
+                      ],
+                    ),
                   ),
             SizedBox(
               width: MediaQuery.of(context).size.width,
@@ -460,75 +463,76 @@ class ItemScreen extends StatelessWidget {
                 child: CustomFieldContainer(
                   title: "Found by",
                   content: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              child: Row(
-                                children: [
-                                  owner.hasImage
-                                      ? ImageDialogWidget(
-                                          token: token,
-                                          imageUrl: userUrl,
-                                          errorAsset: 'assets/images/no-user.jpg',
-                                          child: CircularImage(
-                                            hasImage: owner.hasImage,
-                                            imageUrl: userUrl,
-                                            radius: 25,
-                                            token: token,
-                                          ),
-                                        )
-                                      : CircularImage(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Flexible(
+                            child: Row(
+                              children: [
+                                owner.hasImage
+                                    ? ImageDialogWidget(
+                                        token: token,
+                                        imageUrl: userUrl,
+                                        errorAsset: 'assets/images/no-user.jpg',
+                                        child: CircularImage(
                                           hasImage: owner.hasImage,
                                           imageUrl: userUrl,
                                           radius: 25,
                                           token: token,
                                         ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                      child: Text(
-                                        owner.username,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(fontSize: 16),
+                                      )
+                                    : CircularImage(
+                                        hasImage: owner.hasImage,
+                                        imageUrl: userUrl,
+                                        radius: 25,
+                                        token: token,
                                       ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                    child: Text(
+                                      owner.username,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(fontSize: 16),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(width: 10),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                side: const BorderSide(color: PersonalizedColor.mainColor, width: 1.5),
-                                shape: const StadiumBorder(),
-                                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
-                              ),
-                              onPressed: () {
-                                context.read<ItemBloc>().add(ItemEvent.createChatRoom(
-                                      owner.id,
-                                      owner.username,
-                                    ));
-                              },
-                              child: const Text(
-                                'Send a message',
-                                style: TextStyle(fontSize: 14, color: PersonalizedColor.mainColor),
-                              ),
+                          ),
+                          const SizedBox(width: 10),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              side: const BorderSide(color: PersonalizedColor.mainColor, width: 1.5),
+                              shape: const StadiumBorder(),
+                              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
                             ),
-                          ],
-                        ),
-                      ]),
+                            onPressed: () {
+                              context.read<ItemBloc>().add(ItemEvent.createChatRoom(
+                                    owner.id,
+                                    owner.username,
+                                  ));
+                            },
+                            child: const Text(
+                              'Send a message',
+                              style: TextStyle(fontSize: 14, color: PersonalizedColor.mainColor),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

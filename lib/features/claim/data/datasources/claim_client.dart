@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:lost_and_found/features/item/data/models/item/item_dto.dart';
 import 'package:retrofit/http.dart';
 
 import '../../../../utils/constants.dart';
@@ -20,8 +21,8 @@ abstract class ClaimClient {
   Future<List<ClaimSentDto>> getSentClaims(@Query("last") int last, {@Query("type") String type = "sent"});
 
   @POST('/items/{itemId}/claims')
-  Future<void> createClaim(@Path() int itemId, @Body() CreateClaimBody body);
+  Future<ItemDto> createClaim(@Path() int itemId, @Body() CreateClaimBody body);
 
   @PATCH('/users/{userId}/items/{itemId}/claims/{claimId}')
-  Future<void> manageClaim(@Path() int userId, @Path() int itemId, @Path() int claimId, @Body() ManageClaimBody body);
+  Future<ItemDto> manageClaim(@Path() int userId, @Path() int itemId, @Path() int claimId, @Body() ManageClaimBody body);
 }

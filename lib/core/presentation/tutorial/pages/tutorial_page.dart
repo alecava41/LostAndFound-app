@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 import 'package:lost_and_found/utils/colors.dart';
-import 'package:lost_and_found/widgets/carousel_item.dart';
-import 'package:lost_and_found/widgets/large_white_button.dart';
-import 'package:lost_and_found/widgets/title_logo.dart';
 import 'package:sizer/sizer.dart';
+
+import '../widgets/carousel_item.dart';
+import '../widgets/large_white_button.dart';
+import '../../widgets/title_logo.dart';
 
 class InfoScreen extends StatefulWidget {
   const InfoScreen({super.key});
@@ -23,22 +24,19 @@ class _InfoScreenState extends State<InfoScreen> {
     return SafeArea(
         child: Scaffold(
       body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                SizedBox(height: 2.5.h,),
-                titleLogoHorizontal(),
-                _carouselSlider(),
-                SizedBox(
-                  height: 3.h,
-                ),
-                _loginButton(),
-                SizedBox(height: 1.h),
-                _registerButton()
-              ]),
-        ),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, mainAxisSize: MainAxisSize.max, children: [
+          SizedBox(
+            height: 2.5.h,
+          ),
+          titleLogoHorizontal(),
+          _carouselSlider(),
+          SizedBox(
+            height: 3.h,
+          ),
+          _loginButton(),
+          SizedBox(height: 1.h),
+          _registerButton()
+        ]),
       ),
     ));
   }
@@ -80,13 +78,9 @@ class _InfoScreenState extends State<InfoScreen> {
             children: <Widget>[
               carouselItem('assets/images/input_item.png', 'Report a Lost Item',
                   'Input the item details in the app to report it as lost.'),
-              carouselItem(
-                  'assets/images/report_item.png',
-                  'Report a Found Item',
+              carouselItem('assets/images/report_item.png', 'Report a Found Item',
                   'Notify others by reporting a found item\nthrough the app.'),
-              carouselItem(
-                  'assets/images/return_item.png',
-                  'Arrange Item Return',
+              carouselItem('assets/images/return_item.png', 'Arrange Item Return',
                   'Connect with the finder via messaging to arrange\na safe meetup location for item return.'),
             ],
           ),
@@ -114,14 +108,16 @@ class _InfoScreenState extends State<InfoScreen> {
   }
 
   _registerButton() {
-    return 
-    PersonalizedLargeGreenButton(onPressed: () {
+    return PersonalizedLargeGreenButton(
+      onPressed: () {
         Navigator.of(context).pushNamed(
           '/register',
         );
-      }, text: const Text(
+      },
+      text: const Text(
         "Sign Up",
         style: TextStyle(fontSize: 20, color: Colors.white),
-      ),);
+      ),
+    );
   }
 }

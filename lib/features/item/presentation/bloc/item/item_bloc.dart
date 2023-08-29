@@ -54,9 +54,14 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
           itemDeleted: () => _onItemDeleted(emit),
           claimRead: (id) => _onClaimRead(emit, id),
           createChatRoom: (id2, username2) => _onChatRoomCreation(emit, id2, username2),
+          claimUpdated: (updatedItem) => _onClaimUpdate(emit, updatedItem),
         );
       },
     );
+  }
+
+  void _onClaimUpdate(Emitter<ItemState> emit, Item updatedItem) {
+    emit(state.copyWith(item: updatedItem));
   }
 
   Future<void> _onChatRoomCreation(Emitter<ItemState> emit, int id2, username2) async {
@@ -73,8 +78,6 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     emit(state.copyWith(roomCreationFailureOrSuccess: response));
     emit(state.copyWith(roomCreationFailureOrSuccess: null));
   }
-
-  // TODO (@alecava41) when claim managed (both sent or received) need to update it, otherwise if user open it again he will se possibility to manage the claim again
 
   Future<void> _onClaimRead(Emitter<ItemState> emit, int claimId) async {
     final response = await _insertReadClaimUseCase(InsertReadClaimParams(claimId: claimId));

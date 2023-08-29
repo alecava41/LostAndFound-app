@@ -9,6 +9,8 @@ import 'order_option_button.dart';
 class SearchResultScreen extends StatelessWidget {
   const SearchResultScreen({super.key});
 
+  // TODO maybe better to add also distance and date of upload (otherwise sorting by the other parameters (date/distance) would not have a visual impact)
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchBloc, SearchState>(

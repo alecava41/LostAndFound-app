@@ -488,7 +488,7 @@ mixin _$AnswerClaimState {
   bool get isInfoOpen => throw _privateConstructorUsedError;
   Either<Failure, Success>? get loadFailureOrSuccess =>
       throw _privateConstructorUsedError;
-  Either<Failure, Success>? get claimFailureOrSuccess =>
+  Either<Failure, Item>? get claimFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -508,7 +508,7 @@ abstract class $AnswerClaimStateCopyWith<$Res> {
       bool isLoading,
       bool isInfoOpen,
       Either<Failure, Success>? loadFailureOrSuccess,
-      Either<Failure, Success>? claimFailureOrSuccess});
+      Either<Failure, Item>? claimFailureOrSuccess});
 }
 
 /// @nodoc
@@ -555,7 +555,7 @@ class _$AnswerClaimStateCopyWithImpl<$Res, $Val extends AnswerClaimState>
       claimFailureOrSuccess: freezed == claimFailureOrSuccess
           ? _value.claimFailureOrSuccess
           : claimFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
+              as Either<Failure, Item>?,
     ) as $Val);
   }
 }
@@ -574,7 +574,7 @@ abstract class _$$_AnswerClaimStateCopyWith<$Res>
       bool isLoading,
       bool isInfoOpen,
       Either<Failure, Success>? loadFailureOrSuccess,
-      Either<Failure, Success>? claimFailureOrSuccess});
+      Either<Failure, Item>? claimFailureOrSuccess});
 }
 
 /// @nodoc
@@ -619,7 +619,7 @@ class __$$_AnswerClaimStateCopyWithImpl<$Res>
       claimFailureOrSuccess: freezed == claimFailureOrSuccess
           ? _value.claimFailureOrSuccess
           : claimFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
+              as Either<Failure, Item>?,
     ));
   }
 }
@@ -648,7 +648,7 @@ class _$_AnswerClaimState implements _AnswerClaimState {
   @override
   final Either<Failure, Success>? loadFailureOrSuccess;
   @override
-  final Either<Failure, Success>? claimFailureOrSuccess;
+  final Either<Failure, Item>? claimFailureOrSuccess;
 
   @override
   String toString() {
@@ -690,7 +690,7 @@ abstract class _AnswerClaimState implements AnswerClaimState {
           final bool isLoading,
           final bool isInfoOpen,
           final Either<Failure, Success>? loadFailureOrSuccess,
-          final Either<Failure, Success>? claimFailureOrSuccess}) =
+          final Either<Failure, Item>? claimFailureOrSuccess}) =
       _$_AnswerClaimState;
 
   @override
@@ -704,7 +704,7 @@ abstract class _AnswerClaimState implements AnswerClaimState {
   @override
   Either<Failure, Success>? get loadFailureOrSuccess;
   @override
-  Either<Failure, Success>? get claimFailureOrSuccess;
+  Either<Failure, Item>? get claimFailureOrSuccess;
   @override
   @JsonKey(ignore: true)
   _$$_AnswerClaimStateCopyWith<_$_AnswerClaimState> get copyWith =>

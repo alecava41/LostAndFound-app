@@ -24,7 +24,7 @@ class LoginForm extends StatelessWidget {
           child: BlocListener<LoginBloc, LoginState>(
             listener: (context, state) {
               final authFailureOrSuccess = state.authFailureOrSuccess;
-      
+
               if (authFailureOrSuccess != null) {
                 authFailureOrSuccess.fold(
                     (failure) => {
@@ -44,12 +44,13 @@ class LoginForm extends StatelessWidget {
                           )
                         },
                     (success) => {
-                          // Update home/user content
-                          context.read<HomeBloc>().add(const HomeEvent.homeRefreshed()),
-                          context.read<UserBloc>().add(const UserEvent.contentCreated()),
-      
                           Navigator.popUntil(context, (route) => route.isFirst),
-                          Navigator.of(context).pushReplacementNamed('/')
+                          Navigator.of(context).pushReplacementNamed('/'),
+
+                          // Update home/user content
+                          context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0)),
+                          context.read<HomeBloc>().add(const HomeEvent.homeCreated()),
+                          context.read<UserBloc>().add(const UserEvent.contentCreated()),
                         });
               }
             },

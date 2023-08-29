@@ -616,7 +616,7 @@ mixin _$AnswerQuestionState {
   bool get isInfoOpen => throw _privateConstructorUsedError;
   Either<Failure, Success>? get loadFailureOrSuccess =>
       throw _privateConstructorUsedError;
-  Either<Failure, Success>? get claimFailureOrSuccess =>
+  Either<Failure, Item>? get claimFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -638,7 +638,7 @@ abstract class $AnswerQuestionStateCopyWith<$Res> {
       bool showErrorMessage,
       bool isInfoOpen,
       Either<Failure, Success>? loadFailureOrSuccess,
-      Either<Failure, Success>? claimFailureOrSuccess});
+      Either<Failure, Item>? claimFailureOrSuccess});
 }
 
 /// @nodoc
@@ -695,7 +695,7 @@ class _$AnswerQuestionStateCopyWithImpl<$Res, $Val extends AnswerQuestionState>
       claimFailureOrSuccess: freezed == claimFailureOrSuccess
           ? _value.claimFailureOrSuccess
           : claimFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
+              as Either<Failure, Item>?,
     ) as $Val);
   }
 }
@@ -716,7 +716,7 @@ abstract class _$$_AnswerQuestionStateCopyWith<$Res>
       bool showErrorMessage,
       bool isInfoOpen,
       Either<Failure, Success>? loadFailureOrSuccess,
-      Either<Failure, Success>? claimFailureOrSuccess});
+      Either<Failure, Item>? claimFailureOrSuccess});
 }
 
 /// @nodoc
@@ -771,7 +771,7 @@ class __$$_AnswerQuestionStateCopyWithImpl<$Res>
       claimFailureOrSuccess: freezed == claimFailureOrSuccess
           ? _value.claimFailureOrSuccess
           : claimFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
+              as Either<Failure, Item>?,
     ));
   }
 }
@@ -807,7 +807,7 @@ class _$_AnswerQuestionState implements _AnswerQuestionState {
   @override
   final Either<Failure, Success>? loadFailureOrSuccess;
   @override
-  final Either<Failure, Success>? claimFailureOrSuccess;
+  final Either<Failure, Item>? claimFailureOrSuccess;
 
   @override
   String toString() {
@@ -863,7 +863,7 @@ abstract class _AnswerQuestionState implements AnswerQuestionState {
           final bool showErrorMessage,
           final bool isInfoOpen,
           final Either<Failure, Success>? loadFailureOrSuccess,
-          final Either<Failure, Success>? claimFailureOrSuccess}) =
+          final Either<Failure, Item>? claimFailureOrSuccess}) =
       _$_AnswerQuestionState;
 
   @override
@@ -881,7 +881,7 @@ abstract class _AnswerQuestionState implements AnswerQuestionState {
   @override
   Either<Failure, Success>? get loadFailureOrSuccess;
   @override
-  Either<Failure, Success>? get claimFailureOrSuccess;
+  Either<Failure, Item>? get claimFailureOrSuccess;
   @override
   @JsonKey(ignore: true)
   _$$_AnswerQuestionStateCopyWith<_$_AnswerQuestionState> get copyWith =>

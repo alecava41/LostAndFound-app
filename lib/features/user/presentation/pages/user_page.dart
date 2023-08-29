@@ -141,7 +141,7 @@ class UserScreen extends StatelessWidget {
                           optionName: "Logout",
                           showArrow: false,
                           onTap: () {
-                            showLogoutDialog(context);
+                            showLogoutDialog(ctx);
                           })
                     ],
                   ),

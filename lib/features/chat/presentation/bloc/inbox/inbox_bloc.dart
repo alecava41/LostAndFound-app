@@ -40,6 +40,8 @@ class InboxBloc extends Bloc<InboxEvent, InboxState> {
   }
 
   Future<void> _onInboxContentCreated(Emitter<InboxState> emit) async {
+    emit(state.copyWith(isLoading: true));
+
     final loginResponse = await _loginChatUseCase(NoParams());
     Either<Failure, Stream<List<Room>>> roomsResponse = const Left(Failure.genericFailure());
 
@@ -51,6 +53,7 @@ class InboxBloc extends Bloc<InboxEvent, InboxState> {
 
     emit(
       state.copyWith(
+        isLoading: false,
         hasLoginOrLoadingError: loginResponse.isLeft() || roomsResponse.isLeft(),
         userRooms: roomsResponse.getOrElse(() => const Stream.empty()),
         token: session?.token ?? "",

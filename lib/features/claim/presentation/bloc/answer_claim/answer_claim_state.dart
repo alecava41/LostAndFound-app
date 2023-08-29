@@ -9,7 +9,7 @@ class AnswerClaimState with _$AnswerClaimState {
     @Default(true) bool isLoading,
     @Default(false) bool isInfoOpen,
     Either<Failure, Success>? loadFailureOrSuccess,
-    Either<Failure, Success>? claimFailureOrSuccess,
+    Either<Failure, Item>? claimFailureOrSuccess,
   }) = _AnswerClaimState;
 
   factory AnswerClaimState.initial() => const AnswerClaimState(

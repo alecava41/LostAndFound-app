@@ -6,21 +6,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/config/route_generator.dart';
 import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
-import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/chat/presentation/pages/chat_page.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/claim_screen.dart';
-import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 import 'package:lost_and_found/features/item/presentation/pages/notifications_page.dart';
-import 'package:lost_and_found/features/user/presentation/bloc/user/user_bloc.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/utils/constants.dart';
-
-import 'features/chat/presentation/bloc/inbox/inbox_bloc.dart';
-import 'features/item/presentation/bloc/search/search_bloc.dart';
-import 'injection_container.dart';
 import 'package:sizer/sizer.dart';
+
+import 'features/badges/presentation/bloc/badge_bloc.dart';
+import 'features/chat/presentation/bloc/inbox/inbox_bloc.dart';
+import 'features/item/presentation/bloc/home/home_bloc.dart';
+import 'features/item/presentation/bloc/search/search_bloc.dart';
+import 'features/user/presentation/bloc/user/user_bloc.dart';
+import 'injection_container.dart';
 
 class App extends StatefulWidget {
   final String initialRoute;
@@ -119,15 +119,19 @@ class _Application extends State<App> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<HomeBloc>(create: (_) => sl<HomeBloc>()..add(const HomeEvent.homeCreated())),
+        BlocProvider<HomeBloc>(create: (_) => sl<HomeBloc>()),
         BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>()),
-        BlocProvider<UserBloc>(create: (_) => sl<UserBloc>()..add(const UserEvent.contentCreated())),
+        BlocProvider<UserBloc>(create: (_) => sl<UserBloc>()),
         BlocProvider<HomeControllerBloc>(create: (_) => sl<HomeControllerBloc>()),
         BlocProvider<BadgeBloc>(create: (_) => sl<BadgeBloc>()..add(const BadgeEvent.badgeCreated())),
-        BlocProvider<InboxBloc>(create: (_) => sl<InboxBloc>()..add(const InboxEvent.inboxContentCreated()))
+        BlocProvider<InboxBloc>(create: (_) => sl<InboxBloc>())
       ],
       child: Sizer(
         builder: (context, orientation, deviceType) {
+          if (initialRoute == "/") {
+            context.read<HomeBloc>().add(const HomeEvent.homeCreated());
+          }
+
           return MaterialApp(
             locale: DevicePreview.locale(context),
             builder: DevicePreview.appBuilder,

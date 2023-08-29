@@ -22,6 +22,7 @@ mixin _$ItemEvent {
     required TResult Function() itemRefreshed,
     required TResult Function() itemSolved,
     required TResult Function(int id) claimRead,
+    required TResult Function(Item updatedItem) claimUpdated,
     required TResult Function() itemDeleted,
     required TResult Function(int otherId, String otherUsername) createChatRoom,
   }) =>
@@ -32,6 +33,7 @@ mixin _$ItemEvent {
     TResult? Function()? itemRefreshed,
     TResult? Function()? itemSolved,
     TResult? Function(int id)? claimRead,
+    TResult? Function(Item updatedItem)? claimUpdated,
     TResult? Function()? itemDeleted,
     TResult? Function(int otherId, String otherUsername)? createChatRoom,
   }) =>
@@ -42,6 +44,7 @@ mixin _$ItemEvent {
     TResult Function()? itemRefreshed,
     TResult Function()? itemSolved,
     TResult Function(int id)? claimRead,
+    TResult Function(Item updatedItem)? claimUpdated,
     TResult Function()? itemDeleted,
     TResult Function(int otherId, String otherUsername)? createChatRoom,
     required TResult orElse(),
@@ -53,6 +56,7 @@ mixin _$ItemEvent {
     required TResult Function(_ItemRefreshed value) itemRefreshed,
     required TResult Function(_ItemSolved value) itemSolved,
     required TResult Function(_ClaimRead value) claimRead,
+    required TResult Function(_ClaimCreated value) claimUpdated,
     required TResult Function(_ItemDeleted value) itemDeleted,
     required TResult Function(_CreateChatRoom value) createChatRoom,
   }) =>
@@ -63,6 +67,7 @@ mixin _$ItemEvent {
     TResult? Function(_ItemRefreshed value)? itemRefreshed,
     TResult? Function(_ItemSolved value)? itemSolved,
     TResult? Function(_ClaimRead value)? claimRead,
+    TResult? Function(_ClaimCreated value)? claimUpdated,
     TResult? Function(_ItemDeleted value)? itemDeleted,
     TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) =>
@@ -73,6 +78,7 @@ mixin _$ItemEvent {
     TResult Function(_ItemRefreshed value)? itemRefreshed,
     TResult Function(_ItemSolved value)? itemSolved,
     TResult Function(_ClaimRead value)? claimRead,
+    TResult Function(_ClaimCreated value)? claimUpdated,
     TResult Function(_ItemDeleted value)? itemDeleted,
     TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
@@ -165,6 +171,7 @@ class _$_ItemCreated implements _ItemCreated {
     required TResult Function() itemRefreshed,
     required TResult Function() itemSolved,
     required TResult Function(int id) claimRead,
+    required TResult Function(Item updatedItem) claimUpdated,
     required TResult Function() itemDeleted,
     required TResult Function(int otherId, String otherUsername) createChatRoom,
   }) {
@@ -178,6 +185,7 @@ class _$_ItemCreated implements _ItemCreated {
     TResult? Function()? itemRefreshed,
     TResult? Function()? itemSolved,
     TResult? Function(int id)? claimRead,
+    TResult? Function(Item updatedItem)? claimUpdated,
     TResult? Function()? itemDeleted,
     TResult? Function(int otherId, String otherUsername)? createChatRoom,
   }) {
@@ -191,6 +199,7 @@ class _$_ItemCreated implements _ItemCreated {
     TResult Function()? itemRefreshed,
     TResult Function()? itemSolved,
     TResult Function(int id)? claimRead,
+    TResult Function(Item updatedItem)? claimUpdated,
     TResult Function()? itemDeleted,
     TResult Function(int otherId, String otherUsername)? createChatRoom,
     required TResult orElse(),
@@ -208,6 +217,7 @@ class _$_ItemCreated implements _ItemCreated {
     required TResult Function(_ItemRefreshed value) itemRefreshed,
     required TResult Function(_ItemSolved value) itemSolved,
     required TResult Function(_ClaimRead value) claimRead,
+    required TResult Function(_ClaimCreated value) claimUpdated,
     required TResult Function(_ItemDeleted value) itemDeleted,
     required TResult Function(_CreateChatRoom value) createChatRoom,
   }) {
@@ -221,6 +231,7 @@ class _$_ItemCreated implements _ItemCreated {
     TResult? Function(_ItemRefreshed value)? itemRefreshed,
     TResult? Function(_ItemSolved value)? itemSolved,
     TResult? Function(_ClaimRead value)? claimRead,
+    TResult? Function(_ClaimCreated value)? claimUpdated,
     TResult? Function(_ItemDeleted value)? itemDeleted,
     TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) {
@@ -234,6 +245,7 @@ class _$_ItemCreated implements _ItemCreated {
     TResult Function(_ItemRefreshed value)? itemRefreshed,
     TResult Function(_ItemSolved value)? itemSolved,
     TResult Function(_ClaimRead value)? claimRead,
+    TResult Function(_ClaimCreated value)? claimUpdated,
     TResult Function(_ItemDeleted value)? itemDeleted,
     TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
@@ -296,6 +308,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     required TResult Function() itemRefreshed,
     required TResult Function() itemSolved,
     required TResult Function(int id) claimRead,
+    required TResult Function(Item updatedItem) claimUpdated,
     required TResult Function() itemDeleted,
     required TResult Function(int otherId, String otherUsername) createChatRoom,
   }) {
@@ -309,6 +322,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     TResult? Function()? itemRefreshed,
     TResult? Function()? itemSolved,
     TResult? Function(int id)? claimRead,
+    TResult? Function(Item updatedItem)? claimUpdated,
     TResult? Function()? itemDeleted,
     TResult? Function(int otherId, String otherUsername)? createChatRoom,
   }) {
@@ -322,6 +336,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     TResult Function()? itemRefreshed,
     TResult Function()? itemSolved,
     TResult Function(int id)? claimRead,
+    TResult Function(Item updatedItem)? claimUpdated,
     TResult Function()? itemDeleted,
     TResult Function(int otherId, String otherUsername)? createChatRoom,
     required TResult orElse(),
@@ -339,6 +354,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     required TResult Function(_ItemRefreshed value) itemRefreshed,
     required TResult Function(_ItemSolved value) itemSolved,
     required TResult Function(_ClaimRead value) claimRead,
+    required TResult Function(_ClaimCreated value) claimUpdated,
     required TResult Function(_ItemDeleted value) itemDeleted,
     required TResult Function(_CreateChatRoom value) createChatRoom,
   }) {
@@ -352,6 +368,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     TResult? Function(_ItemRefreshed value)? itemRefreshed,
     TResult? Function(_ItemSolved value)? itemSolved,
     TResult? Function(_ClaimRead value)? claimRead,
+    TResult? Function(_ClaimCreated value)? claimUpdated,
     TResult? Function(_ItemDeleted value)? itemDeleted,
     TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) {
@@ -365,6 +382,7 @@ class _$_ItemRefreshed implements _ItemRefreshed {
     TResult Function(_ItemRefreshed value)? itemRefreshed,
     TResult Function(_ItemSolved value)? itemSolved,
     TResult Function(_ClaimRead value)? claimRead,
+    TResult Function(_ClaimCreated value)? claimUpdated,
     TResult Function(_ItemDeleted value)? itemDeleted,
     TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
@@ -422,6 +440,7 @@ class _$_ItemSolved implements _ItemSolved {
     required TResult Function() itemRefreshed,
     required TResult Function() itemSolved,
     required TResult Function(int id) claimRead,
+    required TResult Function(Item updatedItem) claimUpdated,
     required TResult Function() itemDeleted,
     required TResult Function(int otherId, String otherUsername) createChatRoom,
   }) {
@@ -435,6 +454,7 @@ class _$_ItemSolved implements _ItemSolved {
     TResult? Function()? itemRefreshed,
     TResult? Function()? itemSolved,
     TResult? Function(int id)? claimRead,
+    TResult? Function(Item updatedItem)? claimUpdated,
     TResult? Function()? itemDeleted,
     TResult? Function(int otherId, String otherUsername)? createChatRoom,
   }) {
@@ -448,6 +468,7 @@ class _$_ItemSolved implements _ItemSolved {
     TResult Function()? itemRefreshed,
     TResult Function()? itemSolved,
     TResult Function(int id)? claimRead,
+    TResult Function(Item updatedItem)? claimUpdated,
     TResult Function()? itemDeleted,
     TResult Function(int otherId, String otherUsername)? createChatRoom,
     required TResult orElse(),
@@ -465,6 +486,7 @@ class _$_ItemSolved implements _ItemSolved {
     required TResult Function(_ItemRefreshed value) itemRefreshed,
     required TResult Function(_ItemSolved value) itemSolved,
     required TResult Function(_ClaimRead value) claimRead,
+    required TResult Function(_ClaimCreated value) claimUpdated,
     required TResult Function(_ItemDeleted value) itemDeleted,
     required TResult Function(_CreateChatRoom value) createChatRoom,
   }) {
@@ -478,6 +500,7 @@ class _$_ItemSolved implements _ItemSolved {
     TResult? Function(_ItemRefreshed value)? itemRefreshed,
     TResult? Function(_ItemSolved value)? itemSolved,
     TResult? Function(_ClaimRead value)? claimRead,
+    TResult? Function(_ClaimCreated value)? claimUpdated,
     TResult? Function(_ItemDeleted value)? itemDeleted,
     TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) {
@@ -491,6 +514,7 @@ class _$_ItemSolved implements _ItemSolved {
     TResult Function(_ItemRefreshed value)? itemRefreshed,
     TResult Function(_ItemSolved value)? itemSolved,
     TResult Function(_ClaimRead value)? claimRead,
+    TResult Function(_ClaimCreated value)? claimUpdated,
     TResult Function(_ItemDeleted value)? itemDeleted,
     TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
@@ -574,6 +598,7 @@ class _$_ClaimRead implements _ClaimRead {
     required TResult Function() itemRefreshed,
     required TResult Function() itemSolved,
     required TResult Function(int id) claimRead,
+    required TResult Function(Item updatedItem) claimUpdated,
     required TResult Function() itemDeleted,
     required TResult Function(int otherId, String otherUsername) createChatRoom,
   }) {
@@ -587,6 +612,7 @@ class _$_ClaimRead implements _ClaimRead {
     TResult? Function()? itemRefreshed,
     TResult? Function()? itemSolved,
     TResult? Function(int id)? claimRead,
+    TResult? Function(Item updatedItem)? claimUpdated,
     TResult? Function()? itemDeleted,
     TResult? Function(int otherId, String otherUsername)? createChatRoom,
   }) {
@@ -600,6 +626,7 @@ class _$_ClaimRead implements _ClaimRead {
     TResult Function()? itemRefreshed,
     TResult Function()? itemSolved,
     TResult Function(int id)? claimRead,
+    TResult Function(Item updatedItem)? claimUpdated,
     TResult Function()? itemDeleted,
     TResult Function(int otherId, String otherUsername)? createChatRoom,
     required TResult orElse(),
@@ -617,6 +644,7 @@ class _$_ClaimRead implements _ClaimRead {
     required TResult Function(_ItemRefreshed value) itemRefreshed,
     required TResult Function(_ItemSolved value) itemSolved,
     required TResult Function(_ClaimRead value) claimRead,
+    required TResult Function(_ClaimCreated value) claimUpdated,
     required TResult Function(_ItemDeleted value) itemDeleted,
     required TResult Function(_CreateChatRoom value) createChatRoom,
   }) {
@@ -630,6 +658,7 @@ class _$_ClaimRead implements _ClaimRead {
     TResult? Function(_ItemRefreshed value)? itemRefreshed,
     TResult? Function(_ItemSolved value)? itemSolved,
     TResult? Function(_ClaimRead value)? claimRead,
+    TResult? Function(_ClaimCreated value)? claimUpdated,
     TResult? Function(_ItemDeleted value)? itemDeleted,
     TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) {
@@ -643,6 +672,7 @@ class _$_ClaimRead implements _ClaimRead {
     TResult Function(_ItemRefreshed value)? itemRefreshed,
     TResult Function(_ItemSolved value)? itemSolved,
     TResult Function(_ClaimRead value)? claimRead,
+    TResult Function(_ClaimCreated value)? claimUpdated,
     TResult Function(_ItemDeleted value)? itemDeleted,
     TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
@@ -660,6 +690,170 @@ abstract class _ClaimRead implements ItemEvent {
   int get id;
   @JsonKey(ignore: true)
   _$$_ClaimReadCopyWith<_$_ClaimRead> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ClaimCreatedCopyWith<$Res> {
+  factory _$$_ClaimCreatedCopyWith(
+          _$_ClaimCreated value, $Res Function(_$_ClaimCreated) then) =
+      __$$_ClaimCreatedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Item updatedItem});
+}
+
+/// @nodoc
+class __$$_ClaimCreatedCopyWithImpl<$Res>
+    extends _$ItemEventCopyWithImpl<$Res, _$_ClaimCreated>
+    implements _$$_ClaimCreatedCopyWith<$Res> {
+  __$$_ClaimCreatedCopyWithImpl(
+      _$_ClaimCreated _value, $Res Function(_$_ClaimCreated) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? updatedItem = null,
+  }) {
+    return _then(_$_ClaimCreated(
+      null == updatedItem
+          ? _value.updatedItem
+          : updatedItem // ignore: cast_nullable_to_non_nullable
+              as Item,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ClaimCreated implements _ClaimCreated {
+  const _$_ClaimCreated(this.updatedItem);
+
+  @override
+  final Item updatedItem;
+
+  @override
+  String toString() {
+    return 'ItemEvent.claimUpdated(updatedItem: $updatedItem)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ClaimCreated &&
+            (identical(other.updatedItem, updatedItem) ||
+                other.updatedItem == updatedItem));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, updatedItem);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ClaimCreatedCopyWith<_$_ClaimCreated> get copyWith =>
+      __$$_ClaimCreatedCopyWithImpl<_$_ClaimCreated>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int id) itemCreated,
+    required TResult Function() itemRefreshed,
+    required TResult Function() itemSolved,
+    required TResult Function(int id) claimRead,
+    required TResult Function(Item updatedItem) claimUpdated,
+    required TResult Function() itemDeleted,
+    required TResult Function(int otherId, String otherUsername) createChatRoom,
+  }) {
+    return claimUpdated(updatedItem);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int id)? itemCreated,
+    TResult? Function()? itemRefreshed,
+    TResult? Function()? itemSolved,
+    TResult? Function(int id)? claimRead,
+    TResult? Function(Item updatedItem)? claimUpdated,
+    TResult? Function()? itemDeleted,
+    TResult? Function(int otherId, String otherUsername)? createChatRoom,
+  }) {
+    return claimUpdated?.call(updatedItem);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int id)? itemCreated,
+    TResult Function()? itemRefreshed,
+    TResult Function()? itemSolved,
+    TResult Function(int id)? claimRead,
+    TResult Function(Item updatedItem)? claimUpdated,
+    TResult Function()? itemDeleted,
+    TResult Function(int otherId, String otherUsername)? createChatRoom,
+    required TResult orElse(),
+  }) {
+    if (claimUpdated != null) {
+      return claimUpdated(updatedItem);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ItemCreated value) itemCreated,
+    required TResult Function(_ItemRefreshed value) itemRefreshed,
+    required TResult Function(_ItemSolved value) itemSolved,
+    required TResult Function(_ClaimRead value) claimRead,
+    required TResult Function(_ClaimCreated value) claimUpdated,
+    required TResult Function(_ItemDeleted value) itemDeleted,
+    required TResult Function(_CreateChatRoom value) createChatRoom,
+  }) {
+    return claimUpdated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ItemCreated value)? itemCreated,
+    TResult? Function(_ItemRefreshed value)? itemRefreshed,
+    TResult? Function(_ItemSolved value)? itemSolved,
+    TResult? Function(_ClaimRead value)? claimRead,
+    TResult? Function(_ClaimCreated value)? claimUpdated,
+    TResult? Function(_ItemDeleted value)? itemDeleted,
+    TResult? Function(_CreateChatRoom value)? createChatRoom,
+  }) {
+    return claimUpdated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ItemCreated value)? itemCreated,
+    TResult Function(_ItemRefreshed value)? itemRefreshed,
+    TResult Function(_ItemSolved value)? itemSolved,
+    TResult Function(_ClaimRead value)? claimRead,
+    TResult Function(_ClaimCreated value)? claimUpdated,
+    TResult Function(_ItemDeleted value)? itemDeleted,
+    TResult Function(_CreateChatRoom value)? createChatRoom,
+    required TResult orElse(),
+  }) {
+    if (claimUpdated != null) {
+      return claimUpdated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClaimCreated implements ItemEvent {
+  const factory _ClaimCreated(final Item updatedItem) = _$_ClaimCreated;
+
+  Item get updatedItem;
+  @JsonKey(ignore: true)
+  _$$_ClaimCreatedCopyWith<_$_ClaimCreated> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -705,6 +899,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     required TResult Function() itemRefreshed,
     required TResult Function() itemSolved,
     required TResult Function(int id) claimRead,
+    required TResult Function(Item updatedItem) claimUpdated,
     required TResult Function() itemDeleted,
     required TResult Function(int otherId, String otherUsername) createChatRoom,
   }) {
@@ -718,6 +913,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     TResult? Function()? itemRefreshed,
     TResult? Function()? itemSolved,
     TResult? Function(int id)? claimRead,
+    TResult? Function(Item updatedItem)? claimUpdated,
     TResult? Function()? itemDeleted,
     TResult? Function(int otherId, String otherUsername)? createChatRoom,
   }) {
@@ -731,6 +927,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     TResult Function()? itemRefreshed,
     TResult Function()? itemSolved,
     TResult Function(int id)? claimRead,
+    TResult Function(Item updatedItem)? claimUpdated,
     TResult Function()? itemDeleted,
     TResult Function(int otherId, String otherUsername)? createChatRoom,
     required TResult orElse(),
@@ -748,6 +945,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     required TResult Function(_ItemRefreshed value) itemRefreshed,
     required TResult Function(_ItemSolved value) itemSolved,
     required TResult Function(_ClaimRead value) claimRead,
+    required TResult Function(_ClaimCreated value) claimUpdated,
     required TResult Function(_ItemDeleted value) itemDeleted,
     required TResult Function(_CreateChatRoom value) createChatRoom,
   }) {
@@ -761,6 +959,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     TResult? Function(_ItemRefreshed value)? itemRefreshed,
     TResult? Function(_ItemSolved value)? itemSolved,
     TResult? Function(_ClaimRead value)? claimRead,
+    TResult? Function(_ClaimCreated value)? claimUpdated,
     TResult? Function(_ItemDeleted value)? itemDeleted,
     TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) {
@@ -774,6 +973,7 @@ class _$_ItemDeleted implements _ItemDeleted {
     TResult Function(_ItemRefreshed value)? itemRefreshed,
     TResult Function(_ItemSolved value)? itemSolved,
     TResult Function(_ClaimRead value)? claimRead,
+    TResult Function(_ClaimCreated value)? claimUpdated,
     TResult Function(_ItemDeleted value)? itemDeleted,
     TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
@@ -866,6 +1066,7 @@ class _$_CreateChatRoom implements _CreateChatRoom {
     required TResult Function() itemRefreshed,
     required TResult Function() itemSolved,
     required TResult Function(int id) claimRead,
+    required TResult Function(Item updatedItem) claimUpdated,
     required TResult Function() itemDeleted,
     required TResult Function(int otherId, String otherUsername) createChatRoom,
   }) {
@@ -879,6 +1080,7 @@ class _$_CreateChatRoom implements _CreateChatRoom {
     TResult? Function()? itemRefreshed,
     TResult? Function()? itemSolved,
     TResult? Function(int id)? claimRead,
+    TResult? Function(Item updatedItem)? claimUpdated,
     TResult? Function()? itemDeleted,
     TResult? Function(int otherId, String otherUsername)? createChatRoom,
   }) {
@@ -892,6 +1094,7 @@ class _$_CreateChatRoom implements _CreateChatRoom {
     TResult Function()? itemRefreshed,
     TResult Function()? itemSolved,
     TResult Function(int id)? claimRead,
+    TResult Function(Item updatedItem)? claimUpdated,
     TResult Function()? itemDeleted,
     TResult Function(int otherId, String otherUsername)? createChatRoom,
     required TResult orElse(),
@@ -909,6 +1112,7 @@ class _$_CreateChatRoom implements _CreateChatRoom {
     required TResult Function(_ItemRefreshed value) itemRefreshed,
     required TResult Function(_ItemSolved value) itemSolved,
     required TResult Function(_ClaimRead value) claimRead,
+    required TResult Function(_ClaimCreated value) claimUpdated,
     required TResult Function(_ItemDeleted value) itemDeleted,
     required TResult Function(_CreateChatRoom value) createChatRoom,
   }) {
@@ -922,6 +1126,7 @@ class _$_CreateChatRoom implements _CreateChatRoom {
     TResult? Function(_ItemRefreshed value)? itemRefreshed,
     TResult? Function(_ItemSolved value)? itemSolved,
     TResult? Function(_ClaimRead value)? claimRead,
+    TResult? Function(_ClaimCreated value)? claimUpdated,
     TResult? Function(_ItemDeleted value)? itemDeleted,
     TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) {
@@ -935,6 +1140,7 @@ class _$_CreateChatRoom implements _CreateChatRoom {
     TResult Function(_ItemRefreshed value)? itemRefreshed,
     TResult Function(_ItemSolved value)? itemSolved,
     TResult Function(_ClaimRead value)? claimRead,
+    TResult Function(_ClaimCreated value)? claimUpdated,
     TResult Function(_ItemDeleted value)? itemDeleted,
     TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),

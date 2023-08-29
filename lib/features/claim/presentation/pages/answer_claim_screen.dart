@@ -73,10 +73,7 @@ class AnswerClaimScreen extends StatelessWidget {
                             ),
                           )
                         },
-                    (_) => {
-                          // boolean argument denotes outcome of claim (Y => claim managed, N/null => claim not managed)
-                          Navigator.pop(context, true)
-                        });
+                    (updatedItem) => {Navigator.pop(context, updatedItem)});
               }
             },
             builder: (ctx, state) {
