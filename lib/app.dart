@@ -118,15 +118,16 @@ class _Application extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider<HomeBloc>(create: (_) => sl<HomeBloc>()..add(const HomeEvent.homeCreated())),
-          BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>()),
-          BlocProvider<UserBloc>(create: (_) => sl<UserBloc>()..add(const UserEvent.contentCreated())),
-          BlocProvider<HomeControllerBloc>(create: (_) => sl<HomeControllerBloc>()),
-          BlocProvider<BadgeBloc>(create: (_) => sl<BadgeBloc>()..add(const BadgeEvent.badgeCreated())),
-          BlocProvider<InboxBloc>(create: (_) => sl<InboxBloc>()..add(const InboxEvent.inboxContentCreated()))
-        ],
-        child: Sizer(builder: (context, orientation, deviceType) {
+      providers: [
+        BlocProvider<HomeBloc>(create: (_) => sl<HomeBloc>()..add(const HomeEvent.homeCreated())),
+        BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>()),
+        BlocProvider<UserBloc>(create: (_) => sl<UserBloc>()..add(const UserEvent.contentCreated())),
+        BlocProvider<HomeControllerBloc>(create: (_) => sl<HomeControllerBloc>()),
+        BlocProvider<BadgeBloc>(create: (_) => sl<BadgeBloc>()..add(const BadgeEvent.badgeCreated())),
+        BlocProvider<InboxBloc>(create: (_) => sl<InboxBloc>()..add(const InboxEvent.inboxContentCreated()))
+      ],
+      child: Sizer(
+        builder: (context, orientation, deviceType) {
           return MaterialApp(
             locale: DevicePreview.locale(context),
             builder: DevicePreview.appBuilder,
@@ -138,6 +139,8 @@ class _Application extends State<App> {
             initialRoute: initialRoute,
             onGenerateRoute: RouteGenerator.generateRoute,
           );
-        }));
+        },
+      ),
+    );
   }
 }

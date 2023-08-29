@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import 'package:lost_and_found/features/authentication/presentation/widgets/login/login_button.dart';
 import 'package:lost_and_found/features/authentication/presentation/widgets/login/password_input.dart';
 import 'package:lost_and_found/features/authentication/presentation/widgets/login/sign_up.dart';
@@ -41,12 +42,13 @@ class LoginForm extends StatelessWidget {
                       )
                     },
                 (success) => {
+                      Navigator.popUntil(context, (route) => route.isFirst),
+                      Navigator.of(context).pushReplacementNamed('/'),
+
                       // Update home/user content
+                      context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0)),
                       context.read<HomeBloc>().add(const HomeEvent.homeRefreshed()),
                       context.read<UserBloc>().add(const UserEvent.contentCreated()),
-
-                      Navigator.popUntil(context, (route) => route.isFirst),
-                      Navigator.of(context).pushReplacementNamed('/')
                     });
           }
         },
