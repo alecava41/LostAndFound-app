@@ -246,7 +246,7 @@ class InsertItemScreen extends StatelessWidget {
                           removeAllOption: true,
                         ),
                         const SizedBox(
-                          height: 40,
+                          height: 10,
                         ),
                         createButton,
                         const SizedBox(

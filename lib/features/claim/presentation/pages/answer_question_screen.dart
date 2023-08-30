@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/insert_item/custom_field_container.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../../core/domain/entities/claim_status.dart';
 import '../../../../core/presentation/widgets/custom_circular_progress.dart';
@@ -16,7 +17,8 @@ class AnswerQuestionScreen extends StatelessWidget {
   final int itemId;
   final bool isClaimAlreadyTaken;
 
-  const AnswerQuestionScreen({super.key, required this.itemId, required this.isClaimAlreadyTaken});
+  const AnswerQuestionScreen(
+      {super.key, required this.itemId, required this.isClaimAlreadyTaken});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,8 @@ class AnswerQuestionScreen extends StatelessWidget {
             iconTheme: const IconThemeData(color: Colors.black),
           ),
           body: BlocProvider(
-              create: (_) => sl<AnswerQuestionBloc>()..add(AnswerQuestionEvent.contentCreated(itemId)),
+              create: (_) => sl<AnswerQuestionBloc>()
+                ..add(AnswerQuestionEvent.contentCreated(itemId)),
               child: BlocConsumer<AnswerQuestionBloc, AnswerQuestionState>(
                 listener: (ctx, state) {
                   final loadFailureOrSuccess = state.loadFailureOrSuccess;
@@ -48,7 +51,8 @@ class AnswerQuestionScreen extends StatelessWidget {
                                   backgroundColor: Colors.red,
                                   content: Text(
                                       failure.maybeWhen<String>(
-                                          genericFailure: () => 'Server error. Please try again later.',
+                                          genericFailure: () =>
+                                              'Server error. Please try again later.',
                                           networkFailure: () =>
                                               'No internet connection available. Check your internet connection.',
                                           orElse: () => "Unknown error"),
@@ -69,7 +73,8 @@ class AnswerQuestionScreen extends StatelessWidget {
                                   backgroundColor: Colors.red,
                                   content: Text(
                                       failure.maybeWhen<String>(
-                                          genericFailure: () => 'Server error. Please try again later.',
+                                          genericFailure: () =>
+                                              'Server error. Please try again later.',
                                           networkFailure: () =>
                                               'No internet connection available. Check your internet connection.',
                                           orElse: () => "Unknown error"),
@@ -102,21 +107,27 @@ class AnswerQuestionScreen extends StatelessWidget {
                                   const SizedBox(
                                     width: 20,
                                   ),
-                                  InkWell(
-                                    onTap: () =>
-                                        ctx.read<AnswerQuestionBloc>().add(const AnswerQuestionEvent.infoTriggered()),
-                                    child: const Icon(
-                                      Icons.info,
-                                      size: 30,
-                                      color: Color.fromRGBO(144, 202, 249, 1),
-                                    ),
-                                  ),
+                                  isClaimAlreadyTaken
+                                      ? Container()
+                                      : InkWell(
+                                          onTap: () => ctx
+                                              .read<AnswerQuestionBloc>()
+                                              .add(const AnswerQuestionEvent
+                                                  .infoTriggered()),
+                                          child: const Icon(
+                                            Icons.info,
+                                            size: 30,
+                                            color: Color.fromRGBO(
+                                                144, 202, 249, 1),
+                                          ),
+                                        ),
                                 ],
                               ),
                             ),
                             state.isInfoOpen
                                 ? Padding(
-                                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 0, 10),
                                     child: Container(
                                       decoration: BoxDecoration(
                                         color: Colors.blue.shade100,
@@ -147,7 +158,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                               title: "Question",
                               content: Text(
                                 state.item!.question!,
-                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontSize: 16),
                               ),
                             ),
                             const SizedBox(
@@ -159,7 +170,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                                     content: Text(
                                       state.item!.userClaim!.answer!,
                                       style: const TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 16,
                                       ),
                                     ),
                                   )
@@ -169,17 +180,22 @@ class AnswerQuestionScreen extends StatelessWidget {
                                         text: "",
                                         onTextChanged: (value) => ctx
                                             .read<AnswerQuestionBloc>()
-                                            .add(AnswerQuestionEvent.answerFieldChanged(value)),
+                                            .add(
+                                                AnswerQuestionEvent
+                                                    .answerFieldChanged(value)),
                                         hintText: "Your answer",
                                         errorText: state.answer.value.fold(
-                                            (failure) => failure.maybeWhen<String?>(
-                                                validationFailure: (reason) => reason, orElse: () => null),
+                                            (failure) => failure
+                                                .maybeWhen<String?>(
+                                                    validationFailure:
+                                                        (reason) => reason,
+                                                    orElse: () => null),
                                             (r) => null),
                                         isValid: state.answer.value.isRight(),
                                         showError: state.showErrorMessage),
                                   ),
                             SizedBox(
-                              height: isClaimAlreadyTaken ? 10 : 30,
+                              height: isClaimAlreadyTaken ? 10 : 3.h,
                             ),
                             isClaimAlreadyTaken
                                 ? ClaimInfoField(
@@ -188,32 +204,95 @@ class AnswerQuestionScreen extends StatelessWidget {
                                       padding: const EdgeInsets.all(3),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        color: state.item!.userClaim!.status == ClaimStatus.approved
-                                            ? PersonalizedColor.claimAcceptedStatusColor
-                                            : (state.item!.userClaim!.status == ClaimStatus.rejected
-                                                ? PersonalizedColor.claimDeniedStatusColor
-                                                : PersonalizedColor.claimWaitingStatusColor),
+                                        color: state.item!.userClaim!.status ==
+                                                ClaimStatus.approved
+                                            ? PersonalizedColor
+                                                .claimAcceptedStatusColor
+                                            : (state.item!.userClaim!.status ==
+                                                    ClaimStatus.rejected
+                                                ? PersonalizedColor
+                                                    .claimDeniedStatusColor
+                                                : PersonalizedColor
+                                                    .claimWaitingStatusColor),
                                       ),
-                                      child: RichText(
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        text: TextSpan(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                        Row(
                                           children: [
-                                            TextSpan(
-                                              text: state.item!.userClaim!.status.name,
-                                              style: const TextStyle(
-                                                  fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                                            const SizedBox(width: 25,),
+                                            RichText(
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: state.item!.userClaim!
+                                                        .status.name
+                                                        .toUpperCase(),
+                                                    style: const TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Colors.black),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),
-                                      ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.info_outline_rounded,
+                                              size: 20,
+                                              color: Colors.black54,
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Expanded(
+                                              child: state.item!.userClaim!
+                                                          .status ==
+                                                      ClaimStatus.approved
+                                                  ? Text(
+                                                      "Your claim has been accepted! Get in touch with ${state.item!.user.username} through the chat to arrange the item's return.",
+                                                      style: const TextStyle(
+                                                          color:
+                                                              Colors.black54),
+                                                    )
+                                                  : state.item!.userClaim!
+                                                              .status ==
+                                                          ClaimStatus.rejected
+                                                      ? Text(
+                                                          "Unfortunately, your claim has been rejected by ${state.item!.user.username}.",
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .black54),
+                                                        )
+                                                      : Text(
+                                                          "Wait for ${state.item!.user.username} to validate to your claim.",
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .black54),
+                                                        ),
+                                            ),
+                                          ],
+                                        ),
+                                      ]),
                                     ),
                                   )
                                 : PersonalizedLargeGreenButton(
                                     isActive: !isClaimAlreadyTaken,
                                     onPressed: () => isClaimAlreadyTaken
                                         ? ()
-                                        : ctx.read<AnswerQuestionBloc>().add(const AnswerQuestionEvent.claimCreated()),
+                                        : ctx.read<AnswerQuestionBloc>().add(
+                                            const AnswerQuestionEvent
+                                                .claimCreated()),
                                     text: const Text(
                                       "Send",
                                       style: TextStyle(fontSize: 20),

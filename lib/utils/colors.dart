@@ -18,7 +18,7 @@ class PersonalizedColor {
   static const nClaimsColor = Color.fromRGBO(255, 213, 79, 1);
   static const claimWaitingStatusColor = Color.fromRGBO(255, 213, 79, 1);
   static const claimAcceptedStatusColor = Color.fromRGBO(28, 136, 111, 0.3);
-  static const claimDeniedStatusColor = Color.fromRGBO(239, 83, 80, 1);
+  static const claimDeniedStatusColor = Color.fromRGBO(240, 66, 63, 0.637);
   static final splashGreyColor =
       const Color.fromARGB(255, 158, 158, 158).withOpacity(0.4);
   static final splashGreenColor = PersonalizedColor.primarySwatch.shade500;

@@ -138,7 +138,7 @@ class _Application extends State<App> {
           return MaterialApp(
             locale: DevicePreview.locale(context),
             builder: DevicePreview.appBuilder,
-            title: 'Lost&Found',
+            title: 'Lost and Found',
             navigatorKey: navigatorKey,
             theme: ThemeData(
               primarySwatch: PersonalizedColor.primarySwatch,

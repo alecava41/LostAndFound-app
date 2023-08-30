@@ -94,7 +94,7 @@ class ClaimStatusButton extends StatelessWidget {
                                   )
                                 : status == ClaimStatus.rejected
                                     ? Text(
-                                        "Unfortunately, your claim has been rejected by $owner, as the response you provided was not correct.",
+                                        "Unfortunately, your claim has been rejected by $owner.",
                                         style: const TextStyle(color: Colors.black54),
                                       )
                                     : Text(

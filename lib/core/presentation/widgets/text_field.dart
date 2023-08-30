@@ -24,6 +24,7 @@ class PersonalizedTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       initialValue: text,
+      textCapitalization: TextCapitalization.sentences,
       cursorColor: PersonalizedColor.mainColor,
       onChanged: onTextChanged,
       minLines: 1,
