@@ -1165,12 +1165,12 @@ abstract class _CreateChatRoom implements ItemEvent {
 
 /// @nodoc
 mixin _$ItemState {
+// Domain fields
   Item? get item => throw _privateConstructorUsedError;
-  int get userId => throw _privateConstructorUsedError;
+  int get userId => throw _privateConstructorUsedError; // UI fields
   String get token => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  Either<Failure, Success>? get loadFailureOrSuccess =>
-      throw _privateConstructorUsedError;
+  bool get hasLoadingError => throw _privateConstructorUsedError;
   Either<Failure, Success>? get solveFailureOrSuccess =>
       throw _privateConstructorUsedError;
   Either<Failure, Success>? get deleteFailureOrSuccess =>
@@ -1193,7 +1193,7 @@ abstract class $ItemStateCopyWith<$Res> {
       int userId,
       String token,
       bool isLoading,
-      Either<Failure, Success>? loadFailureOrSuccess,
+      bool hasLoadingError,
       Either<Failure, Success>? solveFailureOrSuccess,
       Either<Failure, Success>? deleteFailureOrSuccess,
       Either<Failure, Room>? roomCreationFailureOrSuccess});
@@ -1216,7 +1216,7 @@ class _$ItemStateCopyWithImpl<$Res, $Val extends ItemState>
     Object? userId = null,
     Object? token = null,
     Object? isLoading = null,
-    Object? loadFailureOrSuccess = freezed,
+    Object? hasLoadingError = null,
     Object? solveFailureOrSuccess = freezed,
     Object? deleteFailureOrSuccess = freezed,
     Object? roomCreationFailureOrSuccess = freezed,
@@ -1238,10 +1238,10 @@ class _$ItemStateCopyWithImpl<$Res, $Val extends ItemState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      loadFailureOrSuccess: freezed == loadFailureOrSuccess
-          ? _value.loadFailureOrSuccess
-          : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
+      hasLoadingError: null == hasLoadingError
+          ? _value.hasLoadingError
+          : hasLoadingError // ignore: cast_nullable_to_non_nullable
+              as bool,
       solveFailureOrSuccess: freezed == solveFailureOrSuccess
           ? _value.solveFailureOrSuccess
           : solveFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -1270,7 +1270,7 @@ abstract class _$$_ItemStateCopyWith<$Res> implements $ItemStateCopyWith<$Res> {
       int userId,
       String token,
       bool isLoading,
-      Either<Failure, Success>? loadFailureOrSuccess,
+      bool hasLoadingError,
       Either<Failure, Success>? solveFailureOrSuccess,
       Either<Failure, Success>? deleteFailureOrSuccess,
       Either<Failure, Room>? roomCreationFailureOrSuccess});
@@ -1291,7 +1291,7 @@ class __$$_ItemStateCopyWithImpl<$Res>
     Object? userId = null,
     Object? token = null,
     Object? isLoading = null,
-    Object? loadFailureOrSuccess = freezed,
+    Object? hasLoadingError = null,
     Object? solveFailureOrSuccess = freezed,
     Object? deleteFailureOrSuccess = freezed,
     Object? roomCreationFailureOrSuccess = freezed,
@@ -1313,10 +1313,10 @@ class __$$_ItemStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      loadFailureOrSuccess: freezed == loadFailureOrSuccess
-          ? _value.loadFailureOrSuccess
-          : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
+      hasLoadingError: null == hasLoadingError
+          ? _value.hasLoadingError
+          : hasLoadingError // ignore: cast_nullable_to_non_nullable
+              as bool,
       solveFailureOrSuccess: freezed == solveFailureOrSuccess
           ? _value.solveFailureOrSuccess
           : solveFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -1341,15 +1341,17 @@ class _$_ItemState implements _ItemState {
       required this.userId,
       this.token = "",
       this.isLoading = true,
-      this.loadFailureOrSuccess,
+      this.hasLoadingError = false,
       this.solveFailureOrSuccess,
       this.deleteFailureOrSuccess,
       this.roomCreationFailureOrSuccess});
 
+// Domain fields
   @override
   final Item? item;
   @override
   final int userId;
+// UI fields
   @override
   @JsonKey()
   final String token;
@@ -1357,7 +1359,8 @@ class _$_ItemState implements _ItemState {
   @JsonKey()
   final bool isLoading;
   @override
-  final Either<Failure, Success>? loadFailureOrSuccess;
+  @JsonKey()
+  final bool hasLoadingError;
   @override
   final Either<Failure, Success>? solveFailureOrSuccess;
   @override
@@ -1367,7 +1370,7 @@ class _$_ItemState implements _ItemState {
 
   @override
   String toString() {
-    return 'ItemState(item: $item, userId: $userId, token: $token, isLoading: $isLoading, loadFailureOrSuccess: $loadFailureOrSuccess, solveFailureOrSuccess: $solveFailureOrSuccess, deleteFailureOrSuccess: $deleteFailureOrSuccess, roomCreationFailureOrSuccess: $roomCreationFailureOrSuccess)';
+    return 'ItemState(item: $item, userId: $userId, token: $token, isLoading: $isLoading, hasLoadingError: $hasLoadingError, solveFailureOrSuccess: $solveFailureOrSuccess, deleteFailureOrSuccess: $deleteFailureOrSuccess, roomCreationFailureOrSuccess: $roomCreationFailureOrSuccess)';
   }
 
   @override
@@ -1380,8 +1383,8 @@ class _$_ItemState implements _ItemState {
             (identical(other.token, token) || other.token == token) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.loadFailureOrSuccess, loadFailureOrSuccess) ||
-                other.loadFailureOrSuccess == loadFailureOrSuccess) &&
+            (identical(other.hasLoadingError, hasLoadingError) ||
+                other.hasLoadingError == hasLoadingError) &&
             (identical(other.solveFailureOrSuccess, solveFailureOrSuccess) ||
                 other.solveFailureOrSuccess == solveFailureOrSuccess) &&
             (identical(other.deleteFailureOrSuccess, deleteFailureOrSuccess) ||
@@ -1399,7 +1402,7 @@ class _$_ItemState implements _ItemState {
       userId,
       token,
       isLoading,
-      loadFailureOrSuccess,
+      hasLoadingError,
       solveFailureOrSuccess,
       deleteFailureOrSuccess,
       roomCreationFailureOrSuccess);
@@ -1417,22 +1420,22 @@ abstract class _ItemState implements ItemState {
           required final int userId,
           final String token,
           final bool isLoading,
-          final Either<Failure, Success>? loadFailureOrSuccess,
+          final bool hasLoadingError,
           final Either<Failure, Success>? solveFailureOrSuccess,
           final Either<Failure, Success>? deleteFailureOrSuccess,
           final Either<Failure, Room>? roomCreationFailureOrSuccess}) =
       _$_ItemState;
 
-  @override
+  @override // Domain fields
   Item? get item;
   @override
   int get userId;
-  @override
+  @override // UI fields
   String get token;
   @override
   bool get isLoading;
   @override
-  Either<Failure, Success>? get loadFailureOrSuccess;
+  bool get hasLoadingError;
   @override
   Either<Failure, Success>? get solveFailureOrSuccess;
   @override

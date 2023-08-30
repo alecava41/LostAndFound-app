@@ -2,6 +2,7 @@ import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/select_category/bloc/category_bloc.dart';
+import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
 import '../../../../injection_container.dart';
@@ -16,16 +17,7 @@ class CategorySelectionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<CategoryBloc>(
         create: (_) => sl<CategoryBloc>()..add(const CategoryEvent.categoryCreated()),
-        child: BlocConsumer<CategoryBloc, CategoryState>(
-          listener: (ctx, state) {
-            if (state.loadFailureOrSuccess != null && state.loadFailureOrSuccess!.isLeft()) {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                padding: EdgeInsets.all(30),
-                backgroundColor: Colors.red,
-                content: Text('Server error. Please try again later.', style: TextStyle(fontSize: 20)),
-              ));
-            }
-          },
+        child: BlocBuilder<CategoryBloc, CategoryState>(
           builder: (ctx, state) {
             return Scaffold(
                 backgroundColor: PersonalizedColor.backGroundColor,
@@ -42,6 +34,8 @@ class CategorySelectionScreen extends StatelessWidget {
                     return const Center(
                       child: CircularProgressIndicator(value: null),
                     );
+                  } else if (state.hasLoadingError) {
+                    return ErrorPage(onRetry: () => ctx.read<CategoryBloc>().add(const CategoryEvent.categoryCreated()));
                   } else {
                     return SingleChildScrollView(
                       child: Column(

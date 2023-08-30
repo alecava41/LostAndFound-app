@@ -18,7 +18,7 @@ class UpdateItemState with _$UpdateItemState {
     @Default("") String category,
     @Default("") String address,
     @Default(false) showError,
-    @Default(false) isLoading,
+    @Default(true) isLoading,
     @Default(false) isLoadingPosition,
     @Default(false) hasDeletedOriginalImage,
     @Default(false) hasChangedSomething,
@@ -28,7 +28,7 @@ class UpdateItemState with _$UpdateItemState {
     @Default(false) bool hasLocationPermissions,
 
     // Network operations
-    Either<Failure, Success>? loadFailureOrSuccess,
+    @Default(false) bool hasLoadingError,
     Either<Failure, Success>? updateFailureOrSuccess,
     Either<Failure, Success>? imageUploadFailureOrSuccess,
   }) = _UpdateItemState;

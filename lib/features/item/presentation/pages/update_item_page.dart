@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
+import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/update_item/update_item_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/insert_item/radio_buttons_form.dart';
+import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import '../../../../core/presentation/select_category/widgets/select_category_form.dart';
@@ -57,34 +59,7 @@ class UpdateItemScreen extends StatelessWidget {
       create: (_) => sl<UpdateItemBloc>()..add(UpdateItemEvent.contentCreated(itemId)),
       child: BlocConsumer<UpdateItemBloc, UpdateItemState>(
         listener: (ctx, state) {
-          final loadFailureOrSuccess = state.loadFailureOrSuccess;
           final updateFailureOrSuccess = state.updateFailureOrSuccess;
-
-          if (loadFailureOrSuccess != null) {
-            loadFailureOrSuccess.fold(
-                (failure) => {
-                      failure.maybeWhen(
-                          validationFailure: (_) {},
-                          orElse: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                padding: const EdgeInsets.all(30),
-                                backgroundColor: Colors.red,
-                                content: Text(
-                                    failure.maybeWhen<String>(
-                                        genericFailure: () => 'Server error. Please try again later.',
-                                        networkFailure: () =>
-                                            'No internet connection available. Check your internet connection.',
-                                        orElse: () => "Unknown error"),
-                                    style: const TextStyle(fontSize: 20)),
-                              ),
-                            );
-                          }),
-                      // Error while loading item, closing page
-                      Navigator.pop(ctx, false)
-                    },
-                (_) => {});
-          }
 
           if (updateFailureOrSuccess != null) {
             updateFailureOrSuccess.fold(
@@ -147,8 +122,9 @@ class UpdateItemScreen extends StatelessWidget {
                 ),
                 body: state.isLoading
                     ? const CustomCircularProgress(size: 100)
-                    : (state.item != null
-                        ? SingleChildScrollView(
+                    : state.hasLoadingError
+                        ? ErrorPage(onRetry: () => ctx.read<UpdateItemBloc>().add(UpdateItemEvent.contentCreated(itemId)))
+                        : SingleChildScrollView(
                             child: Column(children: [
                               UploadImageForm(
                                   onSelectUploadMethod: () => chooseMediaDialog(ctx),
@@ -234,7 +210,7 @@ class UpdateItemScreen extends StatelessWidget {
                                     (failure) =>
                                         failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""),
                                     (_) => ""),
-                                startingPosition: state.pos.value.getOrElse(() => const LatLng(0, 0)),
+                                startingPosition: state.pos.value.getOrElse(() => defaultPosition),
                                 isLoadingAddress: state.isLoadingPosition,
                                 address: state.address,
                                 onPositionSelected: (LatLng? pos) {
@@ -289,8 +265,7 @@ class UpdateItemScreen extends StatelessWidget {
                                 height: 50,
                               ),
                             ]),
-                          )
-                        : Container()),
+                          ),
               ),
             ),
           ),

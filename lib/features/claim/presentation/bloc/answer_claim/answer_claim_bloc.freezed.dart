@@ -482,12 +482,11 @@ abstract class _InfoTriggered implements AnswerClaimEvent {
 
 /// @nodoc
 mixin _$AnswerClaimState {
+  Item? get item => throw _privateConstructorUsedError; // UI params
   String get token => throw _privateConstructorUsedError;
-  Item? get item => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isInfoOpen => throw _privateConstructorUsedError;
-  Either<Failure, Success>? get loadFailureOrSuccess =>
-      throw _privateConstructorUsedError;
+  bool get hasLoadingError => throw _privateConstructorUsedError;
   Either<Failure, Item>? get claimFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
@@ -503,11 +502,11 @@ abstract class $AnswerClaimStateCopyWith<$Res> {
       _$AnswerClaimStateCopyWithImpl<$Res, AnswerClaimState>;
   @useResult
   $Res call(
-      {String token,
-      Item? item,
+      {Item? item,
+      String token,
       bool isLoading,
       bool isInfoOpen,
-      Either<Failure, Success>? loadFailureOrSuccess,
+      bool hasLoadingError,
       Either<Failure, Item>? claimFailureOrSuccess});
 }
 
@@ -524,22 +523,22 @@ class _$AnswerClaimStateCopyWithImpl<$Res, $Val extends AnswerClaimState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
     Object? item = freezed,
+    Object? token = null,
     Object? isLoading = null,
     Object? isInfoOpen = null,
-    Object? loadFailureOrSuccess = freezed,
+    Object? hasLoadingError = null,
     Object? claimFailureOrSuccess = freezed,
   }) {
     return _then(_value.copyWith(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       item: freezed == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as Item?,
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -548,10 +547,10 @@ class _$AnswerClaimStateCopyWithImpl<$Res, $Val extends AnswerClaimState>
           ? _value.isInfoOpen
           : isInfoOpen // ignore: cast_nullable_to_non_nullable
               as bool,
-      loadFailureOrSuccess: freezed == loadFailureOrSuccess
-          ? _value.loadFailureOrSuccess
-          : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
+      hasLoadingError: null == hasLoadingError
+          ? _value.hasLoadingError
+          : hasLoadingError // ignore: cast_nullable_to_non_nullable
+              as bool,
       claimFailureOrSuccess: freezed == claimFailureOrSuccess
           ? _value.claimFailureOrSuccess
           : claimFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -569,11 +568,11 @@ abstract class _$$_AnswerClaimStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String token,
-      Item? item,
+      {Item? item,
+      String token,
       bool isLoading,
       bool isInfoOpen,
-      Either<Failure, Success>? loadFailureOrSuccess,
+      bool hasLoadingError,
       Either<Failure, Item>? claimFailureOrSuccess});
 }
 
@@ -588,22 +587,22 @@ class __$$_AnswerClaimStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
     Object? item = freezed,
+    Object? token = null,
     Object? isLoading = null,
     Object? isInfoOpen = null,
-    Object? loadFailureOrSuccess = freezed,
+    Object? hasLoadingError = null,
     Object? claimFailureOrSuccess = freezed,
   }) {
     return _then(_$_AnswerClaimState(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       item: freezed == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as Item?,
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -612,10 +611,10 @@ class __$$_AnswerClaimStateCopyWithImpl<$Res>
           ? _value.isInfoOpen
           : isInfoOpen // ignore: cast_nullable_to_non_nullable
               as bool,
-      loadFailureOrSuccess: freezed == loadFailureOrSuccess
-          ? _value.loadFailureOrSuccess
-          : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
+      hasLoadingError: null == hasLoadingError
+          ? _value.hasLoadingError
+          : hasLoadingError // ignore: cast_nullable_to_non_nullable
+              as bool,
       claimFailureOrSuccess: freezed == claimFailureOrSuccess
           ? _value.claimFailureOrSuccess
           : claimFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -628,17 +627,19 @@ class __$$_AnswerClaimStateCopyWithImpl<$Res>
 
 class _$_AnswerClaimState implements _AnswerClaimState {
   const _$_AnswerClaimState(
-      {required this.token,
-      required this.item,
+      {required this.item,
+      this.token = "",
       this.isLoading = true,
       this.isInfoOpen = false,
-      this.loadFailureOrSuccess,
+      this.hasLoadingError = false,
       this.claimFailureOrSuccess});
 
   @override
-  final String token;
-  @override
   final Item? item;
+// UI params
+  @override
+  @JsonKey()
+  final String token;
   @override
   @JsonKey()
   final bool isLoading;
@@ -646,13 +647,14 @@ class _$_AnswerClaimState implements _AnswerClaimState {
   @JsonKey()
   final bool isInfoOpen;
   @override
-  final Either<Failure, Success>? loadFailureOrSuccess;
+  @JsonKey()
+  final bool hasLoadingError;
   @override
   final Either<Failure, Item>? claimFailureOrSuccess;
 
   @override
   String toString() {
-    return 'AnswerClaimState(token: $token, item: $item, isLoading: $isLoading, isInfoOpen: $isInfoOpen, loadFailureOrSuccess: $loadFailureOrSuccess, claimFailureOrSuccess: $claimFailureOrSuccess)';
+    return 'AnswerClaimState(item: $item, token: $token, isLoading: $isLoading, isInfoOpen: $isInfoOpen, hasLoadingError: $hasLoadingError, claimFailureOrSuccess: $claimFailureOrSuccess)';
   }
 
   @override
@@ -660,21 +662,21 @@ class _$_AnswerClaimState implements _AnswerClaimState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AnswerClaimState &&
-            (identical(other.token, token) || other.token == token) &&
             (identical(other.item, item) || other.item == item) &&
+            (identical(other.token, token) || other.token == token) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isInfoOpen, isInfoOpen) ||
                 other.isInfoOpen == isInfoOpen) &&
-            (identical(other.loadFailureOrSuccess, loadFailureOrSuccess) ||
-                other.loadFailureOrSuccess == loadFailureOrSuccess) &&
+            (identical(other.hasLoadingError, hasLoadingError) ||
+                other.hasLoadingError == hasLoadingError) &&
             (identical(other.claimFailureOrSuccess, claimFailureOrSuccess) ||
                 other.claimFailureOrSuccess == claimFailureOrSuccess));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, item, isLoading,
-      isInfoOpen, loadFailureOrSuccess, claimFailureOrSuccess);
+  int get hashCode => Object.hash(runtimeType, item, token, isLoading,
+      isInfoOpen, hasLoadingError, claimFailureOrSuccess);
 
   @JsonKey(ignore: true)
   @override
@@ -685,24 +687,24 @@ class _$_AnswerClaimState implements _AnswerClaimState {
 
 abstract class _AnswerClaimState implements AnswerClaimState {
   const factory _AnswerClaimState(
-          {required final String token,
-          required final Item? item,
+          {required final Item? item,
+          final String token,
           final bool isLoading,
           final bool isInfoOpen,
-          final Either<Failure, Success>? loadFailureOrSuccess,
+          final bool hasLoadingError,
           final Either<Failure, Item>? claimFailureOrSuccess}) =
       _$_AnswerClaimState;
 
   @override
-  String get token;
-  @override
   Item? get item;
+  @override // UI params
+  String get token;
   @override
   bool get isLoading;
   @override
   bool get isInfoOpen;
   @override
-  Either<Failure, Success>? get loadFailureOrSuccess;
+  bool get hasLoadingError;
   @override
   Either<Failure, Item>? get claimFailureOrSuccess;
   @override

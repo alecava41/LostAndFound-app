@@ -3,13 +3,14 @@ part of 'user_bloc.dart';
 @freezed
 class UserState with _$UserState {
   const factory UserState({
-
+    // Domain fields
     required User? user,
     required String? imagePath,
 
+    // UI fields
     @Default(false) isLoading,
     @Default("") String token,
-    Either<Failure, Success>? loadFailureOrSuccess,
+    @Default(false) bool hasLoadingError,
     Either<Failure, Success>? logoutFailureOrSuccess,
     Either<Failure, Success>? imageUploadFailureOrSuccess
   }) = _UserState;

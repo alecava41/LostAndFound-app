@@ -1,13 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_notifications_usecase.dart';
 
 import '../../../../../core/data/secure_storage/secure_storage.dart';
-import '../../../../../core/status/failures.dart';
-import '../../../../../core/status/success.dart';
 import '../../../domain/entities/news.dart';
 import '../../../domain/usecases/insert_read_news_usecase.dart';
 
@@ -54,20 +51,16 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
   }
 
   Future<void> _onNewsCreatedOrRefreshed(Emitter<NewsState> emit, int? newNewsId) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isLoading: true, hasLoadingError: false));
 
-    Either<Failure, Success>? loadFailureOrSuccess;
 
     final newsResponse = await _getUserNotificationsUseCase(GetUserNotificationsParams(last: 0));
-
-    newsResponse.fold((failure) => loadFailureOrSuccess = Left(failure),
-        (success) => loadFailureOrSuccess = const Right(Success.genericSuccess()));
     final session = await _secureStorage.getSessionInformation();
 
     emit(
       state.copyWith(
         isLoading: false,
-        loadFailureOrSuccess: loadFailureOrSuccess,
+        hasLoadingError: newsResponse.isLeft(),
         news: newsResponse.getOrElse(() => []),
         token: session != null ? session.token : "",
       ),

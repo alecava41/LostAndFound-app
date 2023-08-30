@@ -34,6 +34,9 @@ class SelectPositionBloc extends Bloc<SelectPositionEvent, SelectPositionState> 
     );
   }
 
+  // TODO we can decide whether if trying to access current position or not at the beginning (maybe we can try if we already have the permissions)
+  // TODO "Use my current location" may mislead user (he may expect to select his current position without pressing "Choose this position')
+
   Future<void> _onSelectCurrentPosition(Emitter<SelectPositionState> emit) async {
     final isDeviceConnected = await _networkInfo.isConnected;
     bool isServiceFailure = false;

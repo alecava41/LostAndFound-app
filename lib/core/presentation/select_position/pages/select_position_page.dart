@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -43,8 +42,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
 
           final positionFailureOrSuccess = state.positionFailureOrSuccess;
           if (positionFailureOrSuccess != null) {
-            positionFailureOrSuccess.fold(
-                    (failure) {
+            positionFailureOrSuccess.fold((failure) {
               if (!state.hasPermissions) {
                 if (!state.isPermissionPermanentlyNegated) {
                   showLocationPermissionDeniedDialog(context);

@@ -43,13 +43,14 @@ class AnswerQuestionBloc extends Bloc<AnswerQuestionEvent, AnswerQuestionState> 
   }
 
   Future<void> _onContentCreated(Emitter<AnswerQuestionState> emit, int itemId) async {
-    Either<Failure, Success>? loadFailureOrSuccess;
+    emit(state.copyWith(isLoading: true, hasLoadingError: false));
+
     Item? item;
 
     final itemResponse = await _getItemUseCase(GetItemParams(id: itemId));
-    itemResponse.fold((failure) => loadFailureOrSuccess = Left(failure), (it) {
-      loadFailureOrSuccess = const Right(Success.genericSuccess());
+    final Either<Failure, Success> loadFailureOrSuccess = itemResponse.fold((failure) => Left(failure), (it) {
       item = it;
+      return const Right(Success.genericSuccess());
     });
 
     final session = await _storage.getSessionInformation();
@@ -57,7 +58,7 @@ class AnswerQuestionBloc extends Bloc<AnswerQuestionEvent, AnswerQuestionState> 
     emit(
       state.copyWith(
           isLoading: false,
-          loadFailureOrSuccess: loadFailureOrSuccess,
+          hasLoadingError: loadFailureOrSuccess.isLeft(),
           item: item,
           token: session != null ? session.token : ""),
     );
@@ -80,7 +81,6 @@ class AnswerQuestionBloc extends Bloc<AnswerQuestionEvent, AnswerQuestionState> 
       emit(
         state.copyWith(
           isLoading: true,
-          loadFailureOrSuccess: null,
         ),
       );
 

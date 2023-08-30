@@ -72,23 +72,20 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     emit(state.copyWith(isLoading: true));
 
     User? user;
-    Either<Failure, Success>? request;
 
     final userResponse = await _getUserInfoUseCase(NoParams());
-    userResponse.fold((failure) => request = Left(failure), (it) {
+    userResponse.fold((failure) => null, (it) {
       user = it;
-      request = const Right(Success.genericSuccess());
     });
 
     final session = await _secureStorage.getSessionInformation();
 
     emit(state.copyWith(
       isLoading: false,
-      loadFailureOrSuccess: request,
+      hasLoadingError: userResponse.isLeft(),
       user: user,
       token: session != null ? session.token : "",
     ));
-    emit(state.copyWith(loadFailureOrSuccess: null));
   }
 
   Future<void> _onImageChanged(Emitter<UserState> emit, String? path) async {

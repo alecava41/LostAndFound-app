@@ -631,8 +631,7 @@ mixin _$ClaimState {
   String get token => throw _privateConstructorUsedError;
   bool get isLoadingReceived => throw _privateConstructorUsedError;
   bool get isLoadingSent => throw _privateConstructorUsedError;
-  Either<Failure, Success>? get loadFailureOrSuccess =>
-      throw _privateConstructorUsedError;
+  bool get hasLoadingError => throw _privateConstructorUsedError;
   bool? get needToSwitchTab => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -652,7 +651,7 @@ abstract class $ClaimStateCopyWith<$Res> {
       String token,
       bool isLoadingReceived,
       bool isLoadingSent,
-      Either<Failure, Success>? loadFailureOrSuccess,
+      bool hasLoadingError,
       bool? needToSwitchTab});
 }
 
@@ -674,7 +673,7 @@ class _$ClaimStateCopyWithImpl<$Res, $Val extends ClaimState>
     Object? token = null,
     Object? isLoadingReceived = null,
     Object? isLoadingSent = null,
-    Object? loadFailureOrSuccess = freezed,
+    Object? hasLoadingError = null,
     Object? needToSwitchTab = freezed,
   }) {
     return _then(_value.copyWith(
@@ -698,10 +697,10 @@ class _$ClaimStateCopyWithImpl<$Res, $Val extends ClaimState>
           ? _value.isLoadingSent
           : isLoadingSent // ignore: cast_nullable_to_non_nullable
               as bool,
-      loadFailureOrSuccess: freezed == loadFailureOrSuccess
-          ? _value.loadFailureOrSuccess
-          : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
+      hasLoadingError: null == hasLoadingError
+          ? _value.hasLoadingError
+          : hasLoadingError // ignore: cast_nullable_to_non_nullable
+              as bool,
       needToSwitchTab: freezed == needToSwitchTab
           ? _value.needToSwitchTab
           : needToSwitchTab // ignore: cast_nullable_to_non_nullable
@@ -724,7 +723,7 @@ abstract class _$$_ClaimStateCopyWith<$Res>
       String token,
       bool isLoadingReceived,
       bool isLoadingSent,
-      Either<Failure, Success>? loadFailureOrSuccess,
+      bool hasLoadingError,
       bool? needToSwitchTab});
 }
 
@@ -744,7 +743,7 @@ class __$$_ClaimStateCopyWithImpl<$Res>
     Object? token = null,
     Object? isLoadingReceived = null,
     Object? isLoadingSent = null,
-    Object? loadFailureOrSuccess = freezed,
+    Object? hasLoadingError = null,
     Object? needToSwitchTab = freezed,
   }) {
     return _then(_$_ClaimState(
@@ -768,10 +767,10 @@ class __$$_ClaimStateCopyWithImpl<$Res>
           ? _value.isLoadingSent
           : isLoadingSent // ignore: cast_nullable_to_non_nullable
               as bool,
-      loadFailureOrSuccess: freezed == loadFailureOrSuccess
-          ? _value.loadFailureOrSuccess
-          : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
+      hasLoadingError: null == hasLoadingError
+          ? _value.hasLoadingError
+          : hasLoadingError // ignore: cast_nullable_to_non_nullable
+              as bool,
       needToSwitchTab: freezed == needToSwitchTab
           ? _value.needToSwitchTab
           : needToSwitchTab // ignore: cast_nullable_to_non_nullable
@@ -789,7 +788,7 @@ class _$_ClaimState implements _ClaimState {
       this.token = "",
       this.isLoadingReceived = false,
       this.isLoadingSent = false,
-      this.loadFailureOrSuccess,
+      this.hasLoadingError = false,
       this.needToSwitchTab = null})
       : _claimsReceived = claimsReceived,
         _claimsSent = claimsSent;
@@ -823,14 +822,15 @@ class _$_ClaimState implements _ClaimState {
   @JsonKey()
   final bool isLoadingSent;
   @override
-  final Either<Failure, Success>? loadFailureOrSuccess;
+  @JsonKey()
+  final bool hasLoadingError;
   @override
   @JsonKey()
   final bool? needToSwitchTab;
 
   @override
   String toString() {
-    return 'ClaimState(claimsReceived: $claimsReceived, claimsSent: $claimsSent, token: $token, isLoadingReceived: $isLoadingReceived, isLoadingSent: $isLoadingSent, loadFailureOrSuccess: $loadFailureOrSuccess, needToSwitchTab: $needToSwitchTab)';
+    return 'ClaimState(claimsReceived: $claimsReceived, claimsSent: $claimsSent, token: $token, isLoadingReceived: $isLoadingReceived, isLoadingSent: $isLoadingSent, hasLoadingError: $hasLoadingError, needToSwitchTab: $needToSwitchTab)';
   }
 
   @override
@@ -847,8 +847,8 @@ class _$_ClaimState implements _ClaimState {
                 other.isLoadingReceived == isLoadingReceived) &&
             (identical(other.isLoadingSent, isLoadingSent) ||
                 other.isLoadingSent == isLoadingSent) &&
-            (identical(other.loadFailureOrSuccess, loadFailureOrSuccess) ||
-                other.loadFailureOrSuccess == loadFailureOrSuccess) &&
+            (identical(other.hasLoadingError, hasLoadingError) ||
+                other.hasLoadingError == hasLoadingError) &&
             (identical(other.needToSwitchTab, needToSwitchTab) ||
                 other.needToSwitchTab == needToSwitchTab));
   }
@@ -861,7 +861,7 @@ class _$_ClaimState implements _ClaimState {
       token,
       isLoadingReceived,
       isLoadingSent,
-      loadFailureOrSuccess,
+      hasLoadingError,
       needToSwitchTab);
 
   @JsonKey(ignore: true)
@@ -878,7 +878,7 @@ abstract class _ClaimState implements ClaimState {
       final String token,
       final bool isLoadingReceived,
       final bool isLoadingSent,
-      final Either<Failure, Success>? loadFailureOrSuccess,
+      final bool hasLoadingError,
       final bool? needToSwitchTab}) = _$_ClaimState;
 
   @override // Page content
@@ -892,7 +892,7 @@ abstract class _ClaimState implements ClaimState {
   @override
   bool get isLoadingSent;
   @override
-  Either<Failure, Success>? get loadFailureOrSuccess;
+  bool get hasLoadingError;
   @override
   bool? get needToSwitchTab;
   @override

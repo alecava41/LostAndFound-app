@@ -3,7 +3,7 @@ import 'package:lost_and_found/core/presentation/tutorial/pages/tutorial_page.da
 import 'package:lost_and_found/features/authentication/presentation/pages/login_page.dart';
 import 'package:lost_and_found/features/authentication/presentation/pages/registration_page.dart';
 import 'package:lost_and_found/features/item/presentation/pages/notifications_page.dart';
-import 'package:lost_and_found/features/claim/presentation/pages/claim_screen.dart';
+import 'package:lost_and_found/features/claim/presentation/pages/claims_screen.dart';
 import 'package:lost_and_found/features/item/presentation/pages/insert_item_page.dart';
 import 'package:lost_and_found/features/user/presentation/pages/tutorial_page.dart';
 

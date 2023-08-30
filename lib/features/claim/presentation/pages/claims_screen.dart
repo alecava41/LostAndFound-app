@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/widgets/claim/claim_received_content.dart';
@@ -86,33 +87,13 @@ class ClaimsScreen extends StatelessWidget {
                   if (state.needToSwitchTab != null && state.needToSwitchTab!) {
                     DefaultTabController.of(ctx).animateTo(DefaultTabController.of(ctx).length - 1);
                   }
-
-                  final loadFailureOrSuccess = state.loadFailureOrSuccess;
-
-                  if (loadFailureOrSuccess != null) {
-                    loadFailureOrSuccess.fold(
-                        (failure) => {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  padding: const EdgeInsets.all(30),
-                                  backgroundColor: Colors.red,
-                                  content: Text(
-                                      failure.maybeWhen<String>(
-                                          genericFailure: () => 'Server error. Please try again later.',
-                                          networkFailure: () =>
-                                              'No internet connection available. Check your internet connection.',
-                                          orElse: () => 'Unknown error'),
-                                      style: const TextStyle(fontSize: 20)),
-                                ),
-                              )
-                            },
-                        (success) => null);
-                  }
                 },
-                builder: (ctx, state) => TabBarView(
-                  controller: DefaultTabController.of(ctx),
-                  children: const [ClaimReceivedContent(), ClaimSentContent()],
-                ),
+                builder: (ctx, state) => state.hasLoadingError
+                    ? ErrorPage(onRetry: () => ctx.read<ClaimBloc>().add(ClaimEvent.claimContentCreated(tab, newClaimId)))
+                    : TabBarView(
+                        controller: DefaultTabController.of(ctx),
+                        children: const [ClaimReceivedContent(), ClaimSentContent()],
+                      ),
               ),
             ),
           ),

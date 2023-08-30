@@ -434,12 +434,12 @@ abstract class _ImageSelected implements UserEvent {
 
 /// @nodoc
 mixin _$UserState {
+// Domain fields
   User? get user => throw _privateConstructorUsedError;
-  String? get imagePath => throw _privateConstructorUsedError;
+  String? get imagePath => throw _privateConstructorUsedError; // UI fields
   dynamic get isLoading => throw _privateConstructorUsedError;
   String get token => throw _privateConstructorUsedError;
-  Either<Failure, Success>? get loadFailureOrSuccess =>
-      throw _privateConstructorUsedError;
+  bool get hasLoadingError => throw _privateConstructorUsedError;
   Either<Failure, Success>? get logoutFailureOrSuccess =>
       throw _privateConstructorUsedError;
   Either<Failure, Success>? get imageUploadFailureOrSuccess =>
@@ -460,7 +460,7 @@ abstract class $UserStateCopyWith<$Res> {
       String? imagePath,
       dynamic isLoading,
       String token,
-      Either<Failure, Success>? loadFailureOrSuccess,
+      bool hasLoadingError,
       Either<Failure, Success>? logoutFailureOrSuccess,
       Either<Failure, Success>? imageUploadFailureOrSuccess});
 }
@@ -482,7 +482,7 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
     Object? imagePath = freezed,
     Object? isLoading = freezed,
     Object? token = null,
-    Object? loadFailureOrSuccess = freezed,
+    Object? hasLoadingError = null,
     Object? logoutFailureOrSuccess = freezed,
     Object? imageUploadFailureOrSuccess = freezed,
   }) {
@@ -503,10 +503,10 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
-      loadFailureOrSuccess: freezed == loadFailureOrSuccess
-          ? _value.loadFailureOrSuccess
-          : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
+      hasLoadingError: null == hasLoadingError
+          ? _value.hasLoadingError
+          : hasLoadingError // ignore: cast_nullable_to_non_nullable
+              as bool,
       logoutFailureOrSuccess: freezed == logoutFailureOrSuccess
           ? _value.logoutFailureOrSuccess
           : logoutFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -531,7 +531,7 @@ abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
       String? imagePath,
       dynamic isLoading,
       String token,
-      Either<Failure, Success>? loadFailureOrSuccess,
+      bool hasLoadingError,
       Either<Failure, Success>? logoutFailureOrSuccess,
       Either<Failure, Success>? imageUploadFailureOrSuccess});
 }
@@ -551,7 +551,7 @@ class __$$_UserStateCopyWithImpl<$Res>
     Object? imagePath = freezed,
     Object? isLoading = freezed,
     Object? token = null,
-    Object? loadFailureOrSuccess = freezed,
+    Object? hasLoadingError = null,
     Object? logoutFailureOrSuccess = freezed,
     Object? imageUploadFailureOrSuccess = freezed,
   }) {
@@ -569,10 +569,10 @@ class __$$_UserStateCopyWithImpl<$Res>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
-      loadFailureOrSuccess: freezed == loadFailureOrSuccess
-          ? _value.loadFailureOrSuccess
-          : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
+      hasLoadingError: null == hasLoadingError
+          ? _value.hasLoadingError
+          : hasLoadingError // ignore: cast_nullable_to_non_nullable
+              as bool,
       logoutFailureOrSuccess: freezed == logoutFailureOrSuccess
           ? _value.logoutFailureOrSuccess
           : logoutFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -593,14 +593,16 @@ class _$_UserState implements _UserState {
       required this.imagePath,
       this.isLoading = false,
       this.token = "",
-      this.loadFailureOrSuccess,
+      this.hasLoadingError = false,
       this.logoutFailureOrSuccess,
       this.imageUploadFailureOrSuccess});
 
+// Domain fields
   @override
   final User? user;
   @override
   final String? imagePath;
+// UI fields
   @override
   @JsonKey()
   final dynamic isLoading;
@@ -608,7 +610,8 @@ class _$_UserState implements _UserState {
   @JsonKey()
   final String token;
   @override
-  final Either<Failure, Success>? loadFailureOrSuccess;
+  @JsonKey()
+  final bool hasLoadingError;
   @override
   final Either<Failure, Success>? logoutFailureOrSuccess;
   @override
@@ -616,7 +619,7 @@ class _$_UserState implements _UserState {
 
   @override
   String toString() {
-    return 'UserState(user: $user, imagePath: $imagePath, isLoading: $isLoading, token: $token, loadFailureOrSuccess: $loadFailureOrSuccess, logoutFailureOrSuccess: $logoutFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
+    return 'UserState(user: $user, imagePath: $imagePath, isLoading: $isLoading, token: $token, hasLoadingError: $hasLoadingError, logoutFailureOrSuccess: $logoutFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
   }
 
   @override
@@ -629,8 +632,8 @@ class _$_UserState implements _UserState {
                 other.imagePath == imagePath) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             (identical(other.token, token) || other.token == token) &&
-            (identical(other.loadFailureOrSuccess, loadFailureOrSuccess) ||
-                other.loadFailureOrSuccess == loadFailureOrSuccess) &&
+            (identical(other.hasLoadingError, hasLoadingError) ||
+                other.hasLoadingError == hasLoadingError) &&
             (identical(other.logoutFailureOrSuccess, logoutFailureOrSuccess) ||
                 other.logoutFailureOrSuccess == logoutFailureOrSuccess) &&
             (identical(other.imageUploadFailureOrSuccess,
@@ -646,7 +649,7 @@ class _$_UserState implements _UserState {
       imagePath,
       const DeepCollectionEquality().hash(isLoading),
       token,
-      loadFailureOrSuccess,
+      hasLoadingError,
       logoutFailureOrSuccess,
       imageUploadFailureOrSuccess);
 
@@ -663,21 +666,21 @@ abstract class _UserState implements UserState {
           required final String? imagePath,
           final dynamic isLoading,
           final String token,
-          final Either<Failure, Success>? loadFailureOrSuccess,
+          final bool hasLoadingError,
           final Either<Failure, Success>? logoutFailureOrSuccess,
           final Either<Failure, Success>? imageUploadFailureOrSuccess}) =
       _$_UserState;
 
-  @override
+  @override // Domain fields
   User? get user;
   @override
   String? get imagePath;
-  @override
+  @override // UI fields
   dynamic get isLoading;
   @override
   String get token;
   @override
-  Either<Failure, Success>? get loadFailureOrSuccess;
+  bool get hasLoadingError;
   @override
   Either<Failure, Success>? get logoutFailureOrSuccess;
   @override

@@ -7,6 +7,8 @@ import '../widgets/user/faq_tile.dart';
 class TutorialScreen extends StatefulWidget {
   const TutorialScreen({super.key});
 
+  // TODO cannot see the slider completely on my phone [@alecava41]
+
   @override
   State<TutorialScreen> createState() => _TutorialScreen();
 }
@@ -44,7 +46,7 @@ class _TutorialScreen extends State<TutorialScreen> {
       child: Scaffold(
         backgroundColor: PersonalizedColor.mainColor,
         appBar: AppBar(
-          title: const Text("Tutorial"),
+          title: const Text("Tutorial", style: TextStyle(color: Colors.black)),
           backgroundColor: Colors.white,
           iconTheme: const IconThemeData(color: Colors.black),
         ),

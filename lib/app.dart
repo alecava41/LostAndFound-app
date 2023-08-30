@@ -8,7 +8,7 @@ import 'package:lost_and_found/config/route_generator.dart';
 import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import 'package:lost_and_found/features/chat/presentation/pages/chat_page.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
-import 'package:lost_and_found/features/claim/presentation/pages/claim_screen.dart';
+import 'package:lost_and_found/features/claim/presentation/pages/claims_screen.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 import 'package:lost_and_found/features/item/presentation/pages/notifications_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
@@ -30,8 +30,9 @@ class App extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _Application();
 
-  // TODO (@alecava41) check snackbar content (remove loadFailureOrSuccess and replace with ErrorPage + check error_handling)
   // TODO status bar not showing properly after navigating back to certain pages
+  // TODO we may provide a quick way to start a chat directly on a claim (after it has been approved for example)
+  // TODO since now even sent claims are clickable, why don't we take user to his sent claim instead of going into item page (from sent claims screen, we can save a click)
 }
 
 class _Application extends State<App> {

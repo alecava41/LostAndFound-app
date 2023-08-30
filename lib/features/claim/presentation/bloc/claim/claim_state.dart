@@ -11,7 +11,7 @@ class ClaimState with _$ClaimState {
     @Default("") String token,
     @Default(false) bool isLoadingReceived,
     @Default(false) bool isLoadingSent,
-    Either<Failure, Success>? loadFailureOrSuccess,
+    @Default(false) bool hasLoadingError,
     @Default(null) bool? needToSwitchTab,
 
   }) = _ClaimState;

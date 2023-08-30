@@ -468,11 +468,11 @@ abstract class _NewsRead implements NewsEvent {
 
 /// @nodoc
 mixin _$NewsState {
-  List<News> get news => throw _privateConstructorUsedError;
+// Domain fields
+  List<News> get news => throw _privateConstructorUsedError; // UI fields
   String get token => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  Either<Failure, Success>? get loadFailureOrSuccess =>
-      throw _privateConstructorUsedError;
+  bool get hasLoadingError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NewsStateCopyWith<NewsState> get copyWith =>
@@ -485,10 +485,7 @@ abstract class $NewsStateCopyWith<$Res> {
       _$NewsStateCopyWithImpl<$Res, NewsState>;
   @useResult
   $Res call(
-      {List<News> news,
-      String token,
-      bool isLoading,
-      Either<Failure, Success>? loadFailureOrSuccess});
+      {List<News> news, String token, bool isLoading, bool hasLoadingError});
 }
 
 /// @nodoc
@@ -507,7 +504,7 @@ class _$NewsStateCopyWithImpl<$Res, $Val extends NewsState>
     Object? news = null,
     Object? token = null,
     Object? isLoading = null,
-    Object? loadFailureOrSuccess = freezed,
+    Object? hasLoadingError = null,
   }) {
     return _then(_value.copyWith(
       news: null == news
@@ -522,10 +519,10 @@ class _$NewsStateCopyWithImpl<$Res, $Val extends NewsState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      loadFailureOrSuccess: freezed == loadFailureOrSuccess
-          ? _value.loadFailureOrSuccess
-          : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
+      hasLoadingError: null == hasLoadingError
+          ? _value.hasLoadingError
+          : hasLoadingError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -538,10 +535,7 @@ abstract class _$$_NewsStateCopyWith<$Res> implements $NewsStateCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {List<News> news,
-      String token,
-      bool isLoading,
-      Either<Failure, Success>? loadFailureOrSuccess});
+      {List<News> news, String token, bool isLoading, bool hasLoadingError});
 }
 
 /// @nodoc
@@ -558,7 +552,7 @@ class __$$_NewsStateCopyWithImpl<$Res>
     Object? news = null,
     Object? token = null,
     Object? isLoading = null,
-    Object? loadFailureOrSuccess = freezed,
+    Object? hasLoadingError = null,
   }) {
     return _then(_$_NewsState(
       news: null == news
@@ -573,10 +567,10 @@ class __$$_NewsStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      loadFailureOrSuccess: freezed == loadFailureOrSuccess
-          ? _value.loadFailureOrSuccess
-          : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
+      hasLoadingError: null == hasLoadingError
+          ? _value.hasLoadingError
+          : hasLoadingError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -588,10 +582,12 @@ class _$_NewsState implements _NewsState {
       {required final List<News> news,
       this.token = "",
       this.isLoading = false,
-      this.loadFailureOrSuccess})
+      this.hasLoadingError = false})
       : _news = news;
 
+// Domain fields
   final List<News> _news;
+// Domain fields
   @override
   List<News> get news {
     if (_news is EqualUnmodifiableListView) return _news;
@@ -599,6 +595,7 @@ class _$_NewsState implements _NewsState {
     return EqualUnmodifiableListView(_news);
   }
 
+// UI fields
   @override
   @JsonKey()
   final String token;
@@ -606,11 +603,12 @@ class _$_NewsState implements _NewsState {
   @JsonKey()
   final bool isLoading;
   @override
-  final Either<Failure, Success>? loadFailureOrSuccess;
+  @JsonKey()
+  final bool hasLoadingError;
 
   @override
   String toString() {
-    return 'NewsState(news: $news, token: $token, isLoading: $isLoading, loadFailureOrSuccess: $loadFailureOrSuccess)';
+    return 'NewsState(news: $news, token: $token, isLoading: $isLoading, hasLoadingError: $hasLoadingError)';
   }
 
   @override
@@ -622,8 +620,8 @@ class _$_NewsState implements _NewsState {
             (identical(other.token, token) || other.token == token) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.loadFailureOrSuccess, loadFailureOrSuccess) ||
-                other.loadFailureOrSuccess == loadFailureOrSuccess));
+            (identical(other.hasLoadingError, hasLoadingError) ||
+                other.hasLoadingError == hasLoadingError));
   }
 
   @override
@@ -632,7 +630,7 @@ class _$_NewsState implements _NewsState {
       const DeepCollectionEquality().hash(_news),
       token,
       isLoading,
-      loadFailureOrSuccess);
+      hasLoadingError);
 
   @JsonKey(ignore: true)
   @override
@@ -646,16 +644,16 @@ abstract class _NewsState implements NewsState {
       {required final List<News> news,
       final String token,
       final bool isLoading,
-      final Either<Failure, Success>? loadFailureOrSuccess}) = _$_NewsState;
+      final bool hasLoadingError}) = _$_NewsState;
 
-  @override
+  @override // Domain fields
   List<News> get news;
-  @override
+  @override // UI fields
   String get token;
   @override
   bool get isLoading;
   @override
-  Either<Failure, Success>? get loadFailureOrSuccess;
+  bool get hasLoadingError;
   @override
   @JsonKey(ignore: true)
   _$$_NewsStateCopyWith<_$_NewsState> get copyWith =>

@@ -1256,11 +1256,12 @@ abstract class _RegistrationSubmitted implements RegistrationEvent {
 
 /// @nodoc
 mixin _$RegistrationState {
+// Registration domain fields
   RegistrationUsernameField get username => throw _privateConstructorUsedError;
   RegistrationEmailField get email => throw _privateConstructorUsedError;
   RegistrationPasswordField get password => throw _privateConstructorUsedError;
   RegistrationConfirmPasswordField get confirmPassword =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // UI fields
   bool get isSubmitting => throw _privateConstructorUsedError;
   bool get showErrorMessage => throw _privateConstructorUsedError;
   bool get obscurePassword => throw _privateConstructorUsedError;
@@ -1451,6 +1452,7 @@ class _$_RegistrationState implements _RegistrationState {
       this.obscureConfirmPassword = true,
       this.registrationFailureOrSuccess});
 
+// Registration domain fields
   @override
   final RegistrationUsernameField username;
   @override
@@ -1459,6 +1461,7 @@ class _$_RegistrationState implements _RegistrationState {
   final RegistrationPasswordField password;
   @override
   final RegistrationConfirmPasswordField confirmPassword;
+// UI fields
   @override
   @JsonKey()
   final bool isSubmitting;
@@ -1539,7 +1542,7 @@ abstract class _RegistrationState implements RegistrationState {
           final Either<Failure, Success>? registrationFailureOrSuccess}) =
       _$_RegistrationState;
 
-  @override
+  @override // Registration domain fields
   RegistrationUsernameField get username;
   @override
   RegistrationEmailField get email;
@@ -1547,7 +1550,7 @@ abstract class _RegistrationState implements RegistrationState {
   RegistrationPasswordField get password;
   @override
   RegistrationConfirmPasswordField get confirmPassword;
-  @override
+  @override // UI fields
   bool get isSubmitting;
   @override
   bool get showErrorMessage;

@@ -25,7 +25,7 @@ class NotificationsScreen extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (_) => sl<NewsBloc>()..add(NewsEvent.newsCreated(newNewsId)),
-        child: const NewsContent(),
+        child: NewsContent(newNewsId: newNewsId),
       ),
     );
   }

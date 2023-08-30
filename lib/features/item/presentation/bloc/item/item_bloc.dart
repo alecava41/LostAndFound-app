@@ -48,8 +48,8 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     on<ItemEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
-          itemCreated: (id) => _onItemCreated(emit, id),
-          itemRefreshed: () => _onItemRefreshed(emit),
+          itemCreated: (id) => _onItemCreatedOrRefreshed(emit, id),
+          itemRefreshed: () => _onItemCreatedOrRefreshed(emit, state.item!.id),
           itemSolved: () => _onItemSolved(emit),
           itemDeleted: () => _onItemDeleted(emit),
           claimRead: (id) => _onClaimRead(emit, id),
@@ -89,40 +89,14 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     });
   }
 
-  Future<void> _onItemCreated(Emitter<ItemState> emit, int id) async {
-    emit(state.copyWith(isLoading: true));
+  Future<void> _onItemCreatedOrRefreshed(Emitter<ItemState> emit, int id) async {
+    emit(state.copyWith(isLoading: true, hasLoadingError: false));
 
     Item? item;
-    Either<Failure, Success>? request;
 
     final itemResponse = await _getItemUseCase(GetItemParams(id: id));
-    itemResponse.fold((failure) => request = Left(failure), (it) {
+    itemResponse.fold((failure) => null, (it) {
       item = it;
-      request = const Right(Success.genericSuccess());
-    });
-
-    final session = await _secureStorage.getSessionInformation();
-
-    emit(state.copyWith(
-      isLoading: false,
-      loadFailureOrSuccess: request,
-      item: item,
-      token: session != null ? session.token : "",
-      userId: session != null ? session.user : 0,
-    ));
-    emit(state.copyWith(loadFailureOrSuccess: null));
-  }
-
-  Future<void> _onItemRefreshed(Emitter<ItemState> emit) async {
-    emit(state.copyWith(isLoading: true));
-
-    Item? item;
-    Either<Failure, Success>? request;
-
-    final itemResponse = await _getItemUseCase(GetItemParams(id: state.item!.id));
-    itemResponse.fold((failure) => request = Left(failure), (it) {
-      item = it;
-      request = const Right(Success.genericSuccess());
     });
 
     final session = await _secureStorage.getSessionInformation();
@@ -130,13 +104,12 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     emit(
       state.copyWith(
         isLoading: false,
-        loadFailureOrSuccess: request,
+        hasLoadingError: itemResponse.isLeft(),
         item: item,
         token: session != null ? session.token : "",
         userId: session != null ? session.user : 0,
       ),
     );
-    emit(state.copyWith(loadFailureOrSuccess: null));
   }
 
   Future<void> _onItemSolved(Emitter<ItemState> emit) async {

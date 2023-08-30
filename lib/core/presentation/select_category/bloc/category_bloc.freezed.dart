@@ -168,8 +168,7 @@ abstract class _CategoryCreated implements CategoryEvent {
 mixin _$CategoryState {
   List<Category> get categories => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  Either<Failure, Success>? get loadFailureOrSuccess =>
-      throw _privateConstructorUsedError;
+  bool get hasLoadingError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CategoryStateCopyWith<CategoryState> get copyWith =>
@@ -182,10 +181,7 @@ abstract class $CategoryStateCopyWith<$Res> {
           CategoryState value, $Res Function(CategoryState) then) =
       _$CategoryStateCopyWithImpl<$Res, CategoryState>;
   @useResult
-  $Res call(
-      {List<Category> categories,
-      bool isLoading,
-      Either<Failure, Success>? loadFailureOrSuccess});
+  $Res call({List<Category> categories, bool isLoading, bool hasLoadingError});
 }
 
 /// @nodoc
@@ -203,7 +199,7 @@ class _$CategoryStateCopyWithImpl<$Res, $Val extends CategoryState>
   $Res call({
     Object? categories = null,
     Object? isLoading = null,
-    Object? loadFailureOrSuccess = freezed,
+    Object? hasLoadingError = null,
   }) {
     return _then(_value.copyWith(
       categories: null == categories
@@ -214,10 +210,10 @@ class _$CategoryStateCopyWithImpl<$Res, $Val extends CategoryState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      loadFailureOrSuccess: freezed == loadFailureOrSuccess
-          ? _value.loadFailureOrSuccess
-          : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
+      hasLoadingError: null == hasLoadingError
+          ? _value.hasLoadingError
+          : hasLoadingError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -230,10 +226,7 @@ abstract class _$$_CategoryStateCopyWith<$Res>
       __$$_CategoryStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<Category> categories,
-      bool isLoading,
-      Either<Failure, Success>? loadFailureOrSuccess});
+  $Res call({List<Category> categories, bool isLoading, bool hasLoadingError});
 }
 
 /// @nodoc
@@ -249,7 +242,7 @@ class __$$_CategoryStateCopyWithImpl<$Res>
   $Res call({
     Object? categories = null,
     Object? isLoading = null,
-    Object? loadFailureOrSuccess = freezed,
+    Object? hasLoadingError = null,
   }) {
     return _then(_$_CategoryState(
       categories: null == categories
@@ -260,10 +253,10 @@ class __$$_CategoryStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      loadFailureOrSuccess: freezed == loadFailureOrSuccess
-          ? _value.loadFailureOrSuccess
-          : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
+      hasLoadingError: null == hasLoadingError
+          ? _value.hasLoadingError
+          : hasLoadingError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -274,7 +267,7 @@ class _$_CategoryState implements _CategoryState {
   const _$_CategoryState(
       {required final List<Category> categories,
       this.isLoading = true,
-      this.loadFailureOrSuccess})
+      this.hasLoadingError = false})
       : _categories = categories;
 
   final List<Category> _categories;
@@ -289,11 +282,12 @@ class _$_CategoryState implements _CategoryState {
   @JsonKey()
   final bool isLoading;
   @override
-  final Either<Failure, Success>? loadFailureOrSuccess;
+  @JsonKey()
+  final bool hasLoadingError;
 
   @override
   String toString() {
-    return 'CategoryState(categories: $categories, isLoading: $isLoading, loadFailureOrSuccess: $loadFailureOrSuccess)';
+    return 'CategoryState(categories: $categories, isLoading: $isLoading, hasLoadingError: $hasLoadingError)';
   }
 
   @override
@@ -305,8 +299,8 @@ class _$_CategoryState implements _CategoryState {
                 .equals(other._categories, _categories) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.loadFailureOrSuccess, loadFailureOrSuccess) ||
-                other.loadFailureOrSuccess == loadFailureOrSuccess));
+            (identical(other.hasLoadingError, hasLoadingError) ||
+                other.hasLoadingError == hasLoadingError));
   }
 
   @override
@@ -314,7 +308,7 @@ class _$_CategoryState implements _CategoryState {
       runtimeType,
       const DeepCollectionEquality().hash(_categories),
       isLoading,
-      loadFailureOrSuccess);
+      hasLoadingError);
 
   @JsonKey(ignore: true)
   @override
@@ -327,14 +321,14 @@ abstract class _CategoryState implements CategoryState {
   const factory _CategoryState(
       {required final List<Category> categories,
       final bool isLoading,
-      final Either<Failure, Success>? loadFailureOrSuccess}) = _$_CategoryState;
+      final bool hasLoadingError}) = _$_CategoryState;
 
   @override
   List<Category> get categories;
   @override
   bool get isLoading;
   @override
-  Either<Failure, Success>? get loadFailureOrSuccess;
+  bool get hasLoadingError;
   @override
   @JsonKey(ignore: true)
   _$$_CategoryStateCopyWith<_$_CategoryState> get copyWith =>

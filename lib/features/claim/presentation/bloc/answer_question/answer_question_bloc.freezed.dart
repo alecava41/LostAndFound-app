@@ -608,14 +608,14 @@ abstract class _InfoTriggered implements AnswerQuestionEvent {
 
 /// @nodoc
 mixin _$AnswerQuestionState {
+// Domain params
   AnswerField get answer => throw _privateConstructorUsedError;
+  Item? get item => throw _privateConstructorUsedError; // UI params
   String get token => throw _privateConstructorUsedError;
-  Item? get item => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get hasLoadingError => throw _privateConstructorUsedError;
   bool get showErrorMessage => throw _privateConstructorUsedError;
   bool get isInfoOpen => throw _privateConstructorUsedError;
-  Either<Failure, Success>? get loadFailureOrSuccess =>
-      throw _privateConstructorUsedError;
   Either<Failure, Item>? get claimFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
@@ -632,12 +632,12 @@ abstract class $AnswerQuestionStateCopyWith<$Res> {
   @useResult
   $Res call(
       {AnswerField answer,
-      String token,
       Item? item,
+      String token,
       bool isLoading,
+      bool hasLoadingError,
       bool showErrorMessage,
       bool isInfoOpen,
-      Either<Failure, Success>? loadFailureOrSuccess,
       Either<Failure, Item>? claimFailureOrSuccess});
 }
 
@@ -655,12 +655,12 @@ class _$AnswerQuestionStateCopyWithImpl<$Res, $Val extends AnswerQuestionState>
   @override
   $Res call({
     Object? answer = null,
-    Object? token = null,
     Object? item = freezed,
+    Object? token = null,
     Object? isLoading = null,
+    Object? hasLoadingError = null,
     Object? showErrorMessage = null,
     Object? isInfoOpen = null,
-    Object? loadFailureOrSuccess = freezed,
     Object? claimFailureOrSuccess = freezed,
   }) {
     return _then(_value.copyWith(
@@ -668,17 +668,21 @@ class _$AnswerQuestionStateCopyWithImpl<$Res, $Val extends AnswerQuestionState>
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
               as AnswerField,
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       item: freezed == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as Item?,
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasLoadingError: null == hasLoadingError
+          ? _value.hasLoadingError
+          : hasLoadingError // ignore: cast_nullable_to_non_nullable
               as bool,
       showErrorMessage: null == showErrorMessage
           ? _value.showErrorMessage
@@ -688,10 +692,6 @@ class _$AnswerQuestionStateCopyWithImpl<$Res, $Val extends AnswerQuestionState>
           ? _value.isInfoOpen
           : isInfoOpen // ignore: cast_nullable_to_non_nullable
               as bool,
-      loadFailureOrSuccess: freezed == loadFailureOrSuccess
-          ? _value.loadFailureOrSuccess
-          : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
       claimFailureOrSuccess: freezed == claimFailureOrSuccess
           ? _value.claimFailureOrSuccess
           : claimFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -710,12 +710,12 @@ abstract class _$$_AnswerQuestionStateCopyWith<$Res>
   @useResult
   $Res call(
       {AnswerField answer,
-      String token,
       Item? item,
+      String token,
       bool isLoading,
+      bool hasLoadingError,
       bool showErrorMessage,
       bool isInfoOpen,
-      Either<Failure, Success>? loadFailureOrSuccess,
       Either<Failure, Item>? claimFailureOrSuccess});
 }
 
@@ -731,12 +731,12 @@ class __$$_AnswerQuestionStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? answer = null,
-    Object? token = null,
     Object? item = freezed,
+    Object? token = null,
     Object? isLoading = null,
+    Object? hasLoadingError = null,
     Object? showErrorMessage = null,
     Object? isInfoOpen = null,
-    Object? loadFailureOrSuccess = freezed,
     Object? claimFailureOrSuccess = freezed,
   }) {
     return _then(_$_AnswerQuestionState(
@@ -744,17 +744,21 @@ class __$$_AnswerQuestionStateCopyWithImpl<$Res>
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
               as AnswerField,
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
       item: freezed == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as Item?,
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasLoadingError: null == hasLoadingError
+          ? _value.hasLoadingError
+          : hasLoadingError // ignore: cast_nullable_to_non_nullable
               as bool,
       showErrorMessage: null == showErrorMessage
           ? _value.showErrorMessage
@@ -764,10 +768,6 @@ class __$$_AnswerQuestionStateCopyWithImpl<$Res>
           ? _value.isInfoOpen
           : isInfoOpen // ignore: cast_nullable_to_non_nullable
               as bool,
-      loadFailureOrSuccess: freezed == loadFailureOrSuccess
-          ? _value.loadFailureOrSuccess
-          : loadFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
       claimFailureOrSuccess: freezed == claimFailureOrSuccess
           ? _value.claimFailureOrSuccess
           : claimFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -781,23 +781,29 @@ class __$$_AnswerQuestionStateCopyWithImpl<$Res>
 class _$_AnswerQuestionState implements _AnswerQuestionState {
   const _$_AnswerQuestionState(
       {required this.answer,
-      required this.token,
       required this.item,
+      this.token = "",
       this.isLoading = true,
+      this.hasLoadingError = false,
       this.showErrorMessage = false,
       this.isInfoOpen = false,
-      this.loadFailureOrSuccess,
       this.claimFailureOrSuccess});
 
+// Domain params
   @override
   final AnswerField answer;
   @override
-  final String token;
-  @override
   final Item? item;
+// UI params
+  @override
+  @JsonKey()
+  final String token;
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final bool hasLoadingError;
   @override
   @JsonKey()
   final bool showErrorMessage;
@@ -805,13 +811,11 @@ class _$_AnswerQuestionState implements _AnswerQuestionState {
   @JsonKey()
   final bool isInfoOpen;
   @override
-  final Either<Failure, Success>? loadFailureOrSuccess;
-  @override
   final Either<Failure, Item>? claimFailureOrSuccess;
 
   @override
   String toString() {
-    return 'AnswerQuestionState(answer: $answer, token: $token, item: $item, isLoading: $isLoading, showErrorMessage: $showErrorMessage, isInfoOpen: $isInfoOpen, loadFailureOrSuccess: $loadFailureOrSuccess, claimFailureOrSuccess: $claimFailureOrSuccess)';
+    return 'AnswerQuestionState(answer: $answer, item: $item, token: $token, isLoading: $isLoading, hasLoadingError: $hasLoadingError, showErrorMessage: $showErrorMessage, isInfoOpen: $isInfoOpen, claimFailureOrSuccess: $claimFailureOrSuccess)';
   }
 
   @override
@@ -820,31 +824,23 @@ class _$_AnswerQuestionState implements _AnswerQuestionState {
         (other.runtimeType == runtimeType &&
             other is _$_AnswerQuestionState &&
             (identical(other.answer, answer) || other.answer == answer) &&
-            (identical(other.token, token) || other.token == token) &&
             (identical(other.item, item) || other.item == item) &&
+            (identical(other.token, token) || other.token == token) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.hasLoadingError, hasLoadingError) ||
+                other.hasLoadingError == hasLoadingError) &&
             (identical(other.showErrorMessage, showErrorMessage) ||
                 other.showErrorMessage == showErrorMessage) &&
             (identical(other.isInfoOpen, isInfoOpen) ||
                 other.isInfoOpen == isInfoOpen) &&
-            (identical(other.loadFailureOrSuccess, loadFailureOrSuccess) ||
-                other.loadFailureOrSuccess == loadFailureOrSuccess) &&
             (identical(other.claimFailureOrSuccess, claimFailureOrSuccess) ||
                 other.claimFailureOrSuccess == claimFailureOrSuccess));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      answer,
-      token,
-      item,
-      isLoading,
-      showErrorMessage,
-      isInfoOpen,
-      loadFailureOrSuccess,
-      claimFailureOrSuccess);
+  int get hashCode => Object.hash(runtimeType, answer, item, token, isLoading,
+      hasLoadingError, showErrorMessage, isInfoOpen, claimFailureOrSuccess);
 
   @JsonKey(ignore: true)
   @override
@@ -857,29 +853,29 @@ class _$_AnswerQuestionState implements _AnswerQuestionState {
 abstract class _AnswerQuestionState implements AnswerQuestionState {
   const factory _AnswerQuestionState(
           {required final AnswerField answer,
-          required final String token,
           required final Item? item,
+          final String token,
           final bool isLoading,
+          final bool hasLoadingError,
           final bool showErrorMessage,
           final bool isInfoOpen,
-          final Either<Failure, Success>? loadFailureOrSuccess,
           final Either<Failure, Item>? claimFailureOrSuccess}) =
       _$_AnswerQuestionState;
 
-  @override
+  @override // Domain params
   AnswerField get answer;
   @override
+  Item? get item;
+  @override // UI params
   String get token;
   @override
-  Item? get item;
-  @override
   bool get isLoading;
+  @override
+  bool get hasLoadingError;
   @override
   bool get showErrorMessage;
   @override
   bool get isInfoOpen;
-  @override
-  Either<Failure, Success>? get loadFailureOrSuccess;
   @override
   Either<Failure, Item>? get claimFailureOrSuccess;
   @override

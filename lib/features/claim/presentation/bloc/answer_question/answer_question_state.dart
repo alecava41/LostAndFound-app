@@ -4,13 +4,16 @@ part of 'answer_question_bloc.dart';
 @freezed
 class AnswerQuestionState with _$AnswerQuestionState {
   const factory AnswerQuestionState({
+    // Domain params
     required AnswerField answer,
-    required String token,
     required Item? item,
+
+    // UI params
+    @Default("") String token,
     @Default(true) bool isLoading,
+    @Default(false) bool hasLoadingError,
     @Default(false) bool showErrorMessage,
     @Default(false) bool isInfoOpen,
-    Either<Failure, Success>? loadFailureOrSuccess,
     Either<Failure, Item>? claimFailureOrSuccess,
   }) = _AnswerQuestionState;
 

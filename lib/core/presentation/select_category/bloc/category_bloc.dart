@@ -1,14 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lost_and_found/core/domain/usecases/get_categories_usecase.dart';
 import 'package:lost_and_found/core/domain/usecases/usecase.dart';
 
 import '../../../domain/entities/category.dart';
-import '../../../status/failures.dart';
-import '../../../status/success.dart';
 
 part 'category_bloc.freezed.dart';
 
@@ -30,7 +27,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   }
 
   Future<void> _onCategoryCreated(Emitter<CategoryState> emit) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isLoading: true, hasLoadingError: false));
 
     final categoriesOrFailure = await _getCategoriesUseCase(NoParams());
     List<Category> categories = [];
@@ -39,9 +36,9 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     categories.insert(0, const Category(id: 0, name: "All", icon: 0xe1f7));
 
     emit(state.copyWith(
-        isLoading: false,
-        categories: categories,
-        loadFailureOrSuccess:
-            categoriesOrFailure.isLeft() ? const Left(Failure.networkFailure()) : const Right(Success.genericSuccess())));
+      isLoading: false,
+      categories: categories,
+      hasLoadingError: categoriesOrFailure.isLeft(),
+    ));
   }
 }

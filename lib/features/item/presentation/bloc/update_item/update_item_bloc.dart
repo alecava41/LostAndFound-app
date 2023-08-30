@@ -68,35 +68,35 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
   }
 
   Future<void> _onContentCreated(Emitter<UpdateItemState> emit, int id) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isLoading: true, hasLoadingError: false));
 
     item_entity.Item? item;
     TitleField title = TitleField("");
     QuestionField question = QuestionField("");
-    Either<Failure, Success>? request;
 
     final itemResponse = await _getItemUseCase(GetItemParams(id: id));
-    itemResponse.fold((failure) => request = Left(failure), (it) {
+    itemResponse.fold((failure) => null, (it) {
       item = it;
       question = QuestionField(it.question != null ? it.question! : "");
       title = TitleField(it.title);
-      request = const Right(Success.genericSuccess());
     });
 
     final session = await _secureStorage.getSessionInformation();
 
-    emit(state.copyWith(
+    emit(
+      state.copyWith(
         isLoading: false,
-        loadFailureOrSuccess: request,
+        hasLoadingError: itemResponse.isLeft(),
         item: item,
         token: session != null ? session.token : "",
         question: question,
         title: title,
         cat: CategoryField(item != null ? item!.category.id : -1),
         category: item != null ? item!.category.name : "",
-        pos: PositionField(item != null ? LatLng(item!.position.Y, item!.position.X) : const LatLng(0, 0)),
-        address: item != null ? item!.address : ""));
-    emit(state.copyWith(loadFailureOrSuccess: null));
+        pos: PositionField(item != null ? LatLng(item!.position.X, item!.position.Y) : defaultPosition),
+        address: item != null ? item!.address : "",
+      ),
+    );
   }
 
   void _onCategoryChanged(Emitter<UpdateItemState> emit, int catId, String category) {
@@ -112,7 +112,7 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
   }
 
   void _onQuestionChanged(Emitter<UpdateItemState> emit, String input) {
-    emit(state.copyWith(question: QuestionField(input),hasChangedSomething: true));
+    emit(state.copyWith(question: QuestionField(input), hasChangedSomething: true));
   }
 
   Future<void> _onUpdateSubmitted(Emitter<UpdateItemState> emit) async {
@@ -127,7 +127,7 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
     if ((isItemLostValid || isItemFoundValid) && isCategoryValid && isPositionValid) {
       emit(state.copyWith(isLoading: true, updateFailureOrSuccess: null));
 
-      final pos = state.pos.value.getOrElse(() => const LatLng(0, 0));
+      final pos = state.pos.value.getOrElse(() => defaultPosition);
 
       final params = UpdateItemParams(
           category: state.cat.value.getOrElse(() => 0),
@@ -166,9 +166,7 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
         updateFailureOrSuccess: updateFailureOrSuccess,
         imageUploadFailureOrSuccess: imageFailureOrSuccess));
 
-    emit(state.copyWith(
-        updateFailureOrSuccess: null,
-        imageUploadFailureOrSuccess: null));
+    emit(state.copyWith(updateFailureOrSuccess: null, imageUploadFailureOrSuccess: null));
   }
 
   Future<void> _onPositionSelected(Emitter<UpdateItemState> emit, LatLng pos) async {

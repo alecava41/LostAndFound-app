@@ -42,13 +42,16 @@ class AnswerClaimBloc extends Bloc<AnswerClaimEvent, AnswerClaimState> {
   }
 
   Future<void> _onContentCreated(Emitter<AnswerClaimState> emit, int itemId) async {
-    Either<Failure, Success>? loadFailureOrSuccess;
+    emit(state.copyWith(isLoading: true, hasLoadingError: false));
+
     Item? item;
 
     final itemResponse = await _getItemUseCase(GetItemParams(id: itemId));
-    itemResponse.fold((failure) => loadFailureOrSuccess = Left(failure), (it) {
-      loadFailureOrSuccess = const Right(Success.genericSuccess());
+    final Either<Failure, Success> loadFailureOrSuccess = itemResponse.fold((failure) {
+      return Left(failure);
+    }, (it) {
       item = it;
+      return const Right(Success.genericSuccess());
     });
 
     final session = await _storage.getSessionInformation();
@@ -56,7 +59,7 @@ class AnswerClaimBloc extends Bloc<AnswerClaimEvent, AnswerClaimState> {
     emit(
       state.copyWith(
           isLoading: false,
-          loadFailureOrSuccess: loadFailureOrSuccess,
+          hasLoadingError: loadFailureOrSuccess.isLeft(),
           item: item,
           token: session != null ? session.token : ""),
     );
@@ -74,8 +77,7 @@ class AnswerClaimBloc extends Bloc<AnswerClaimEvent, AnswerClaimState> {
     final params = ManageClaimParams(itemId: state.item!.id, status: status, claimId: claimId);
 
     final claimResponse = await _manageClaimUseCase(params);
-    claimResponse.fold(
-        (failure) => claimFailureOrSuccess = Left(failure), (item) => claimFailureOrSuccess = Right(item));
+    claimResponse.fold((failure) => claimFailureOrSuccess = Left(failure), (item) => claimFailureOrSuccess = Right(item));
 
     emit(
       state.copyWith(isLoading: false, claimFailureOrSuccess: claimFailureOrSuccess),

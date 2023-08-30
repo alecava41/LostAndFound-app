@@ -39,7 +39,7 @@ class InboxItem extends StatelessWidget {
                   ImageDialogWidget(
                     imageUrl: "$baseUrl/api/users/$otherUserId/image",
                     token: token,
-                    errorAsset: 'assets/images/no-item.png',
+                    errorAsset: 'assets/images/no-user.jpg',
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: CircularImage(

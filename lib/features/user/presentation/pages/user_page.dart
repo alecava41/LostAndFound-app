@@ -13,141 +13,140 @@ class UserScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserBloc, UserState>(
-      listener: (ctx, state) {
-        final imageFailureOrSuccess = state.imageUploadFailureOrSuccess;
-        final logoutFailureOrSuccess = state.logoutFailureOrSuccess;
+        listener: (ctx, state) {
+          final imageFailureOrSuccess = state.imageUploadFailureOrSuccess;
+          final logoutFailureOrSuccess = state.logoutFailureOrSuccess;
 
-        if (imageFailureOrSuccess != null) {
-          imageFailureOrSuccess.fold(
-              (failure) => ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      action: SnackBarAction(
-                        label: 'Retry',
-                        onPressed: () => ctx.read<UserBloc>().add(UserEvent.imageChanged(state.imagePath)),
+          if (imageFailureOrSuccess != null) {
+            imageFailureOrSuccess.fold(
+                (failure) => ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        action: SnackBarAction(
+                          label: 'Retry',
+                          onPressed: () => ctx.read<UserBloc>().add(UserEvent.imageChanged(state.imagePath)),
+                        ),
+                        padding: const EdgeInsets.all(30),
+                        backgroundColor: Colors.red,
+                        content: Text(
+                            failure.maybeWhen<String>(
+                                genericFailure: () => 'Server error. Please try again later.',
+                                networkFailure: () => 'No internet connection available. Check your internet connection.',
+                                orElse: () => "Unknown error"),
+                            style: const TextStyle(fontSize: 20)),
                       ),
-                      padding: const EdgeInsets.all(30),
-                      backgroundColor: Colors.red,
-                      content: Text(
-                          failure.maybeWhen<String>(
-                              genericFailure: () => 'Server error. Please try again later.',
-                              networkFailure: () => 'No internet connection available. Check your internet connection.',
-                              orElse: () => "Unknown error"),
-                          style: const TextStyle(fontSize: 20)),
                     ),
-                  ),
-              (_) => {});
-        }
+                (_) => {});
+          }
 
-        if (logoutFailureOrSuccess != null) {
-          logoutFailureOrSuccess.fold(
-              (failure) => ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      padding: const EdgeInsets.all(30),
-                      backgroundColor: Colors.red,
-                      content: Text(
-                          failure.maybeWhen<String>(
-                              genericFailure: () => 'Server error. Please try again later.',
-                              networkFailure: () => 'No internet connection available. Check your internet connection.',
-                              orElse: () => "Unknown error"),
-                          style: const TextStyle(fontSize: 20)),
+          if (logoutFailureOrSuccess != null) {
+            logoutFailureOrSuccess.fold(
+                (failure) => ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        padding: const EdgeInsets.all(30),
+                        backgroundColor: Colors.red,
+                        content: Text(
+                            failure.maybeWhen<String>(
+                                genericFailure: () => 'Server error. Please try again later.',
+                                networkFailure: () => 'No internet connection available. Check your internet connection.',
+                                orElse: () => "Unknown error"),
+                            style: const TextStyle(fontSize: 20)),
+                      ),
                     ),
-                  ),
-              (_) => {
-                    // Go back to login page, remove all history
-                    Navigator.popUntil(context, (route) => route.isFirst),
-                    Navigator.pushReplacementNamed(context, "/tutorial")
-                  });
-        }
-      },
-      builder: (ctx, state) => state.isLoading
-          ? const CustomCircularProgress(size: 100)
-          : state.user != null
-              ? SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Container(
-                        color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(15, 25, 0, 0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                "Profile",
-                                style: TextStyle(fontSize: 40),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                                child: Row(
-                                  children: [
-                                    Flexible(
-                                      child: Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          EditableCircularImage(
-                                            token: state.token,
-                                            userId: state.user!.id,
-                                            onImageChange: (String? path) =>
-                                                ctx.read<UserBloc>().add(UserEvent.imageChanged(path)),
-                                            radius: 60,
-                                            hasImage: state.user!.hasImage,
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          Expanded(
-                                            child: Padding(
-                                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                                              child: Text(
-                                                state.user!.username,
-                                                style: const TextStyle(fontSize: 25),
+                (_) => {
+                      // Go back to login page, remove all history
+                      Navigator.popUntil(context, (route) => route.isFirst),
+                      Navigator.pushReplacementNamed(context, "/tutorial")
+                    });
+          }
+        },
+        builder: (ctx, state) => state.isLoading
+            ? const CustomCircularProgress(size: 100)
+            : state.hasLoadingError
+                ? ErrorPage(onRetry: () => ctx.read<UserBloc>().add(const UserEvent.contentCreated()))
+                : SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          color: Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(15, 25, 0, 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Profile",
+                                  style: TextStyle(fontSize: 40),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                                  child: Row(
+                                    children: [
+                                      Flexible(
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            EditableCircularImage(
+                                              token: state.token,
+                                              userId: state.user!.id,
+                                              onImageChange: (String? path) =>
+                                                  ctx.read<UserBloc>().add(UserEvent.imageChanged(path)),
+                                              radius: 60,
+                                              hasImage: state.user!.hasImage,
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                                child: Text(
+                                                  state.user!.username,
+                                                  style: const TextStyle(fontSize: 25),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      const Divider(
-                        color: Colors.grey,
-                        thickness: 1,
-                        height: 0,
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      const Divider(
-                        color: Colors.grey,
-                        thickness: 1,
-                        height: 0,
-                      ),
-                      OptionItem(
-                          optionName: "Change password",
-                          onTap: () => Navigator.of(ctx).pushNamed(
-                                '/options/changePassword',
-                              )),
-                      OptionItem(
-                          optionName: "Tutorial",
-                          onTap: () => Navigator.of(ctx).pushNamed(
-                                '/options/tutorial',
-                              )),
-                      OptionItem(
-                          optionName: "Logout",
-                          showArrow: false,
-                          onTap: () {
-                            showLogoutDialog(ctx);
-                          })
-                    ],
-                  ),
-                )
-              : ErrorPage(onRetry: () => ctx.read<UserBloc>().add(const UserEvent.contentCreated())),
-    );
+                        const Divider(
+                          color: Colors.grey,
+                          thickness: 1,
+                          height: 0,
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        const Divider(
+                          color: Colors.grey,
+                          thickness: 1,
+                          height: 0,
+                        ),
+                        OptionItem(
+                            optionName: "Change password",
+                            onTap: () => Navigator.of(ctx).pushNamed(
+                                  '/options/changePassword',
+                                )),
+                        OptionItem(
+                            optionName: "Tutorial",
+                            onTap: () => Navigator.of(ctx).pushNamed(
+                                  '/options/tutorial',
+                                )),
+                        OptionItem(
+                            optionName: "Logout",
+                            showArrow: false,
+                            onTap: () {
+                              showLogoutDialog(ctx);
+                            })
+                      ],
+                    ),
+                  ));
   }
 
   void showLogoutDialog(BuildContext context) {
