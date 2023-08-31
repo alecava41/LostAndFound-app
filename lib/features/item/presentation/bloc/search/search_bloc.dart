@@ -89,7 +89,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
       final params = SearchItemsParams(
           last: 0,
-          range: 100,
+          range: 400,
           X: pos.longitude,
           Y: pos.latitude,
           type: itemsToSearch.first && itemsToSearch.second

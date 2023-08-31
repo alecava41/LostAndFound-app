@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
@@ -13,21 +14,26 @@ class CustomCardSearch extends StatelessWidget {
   final String owner;
   final String type;
   final String token;
+  final DateTime date;
+  final double distance;
   final bool hasImage;
 
-  const CustomCardSearch(
-      {super.key,
-      required this.hasImage,
-      required this.id,
-      required this.text,
-      required this.type,
-      required this.owner,
-      required this.token});
+  const CustomCardSearch({
+    super.key,
+    required this.hasImage,
+    required this.id,
+    required this.text,
+    required this.type,
+    required this.owner,
+    required this.date,
+    required this.distance,
+    required this.token,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 240,
+      height: 250,
       width: 165,
       child: Stack(
         children: [
@@ -52,15 +58,13 @@ class CustomCardSearch extends StatelessWidget {
                               httpHeaders: {
                                 "Authorization": "Bearer $token",
                               },
-                              progressIndicatorBuilder:
-                                  (context, url, downloadProgress) =>
-                                      const CustomCircularProgress(size: 75),
+                              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                  const CustomCircularProgress(size: 75),
                               errorWidget: (context, url, error) => Image.asset(
                                 "assets/images/no-item.png",
                                 fit: BoxFit.cover,
                               ),
-                              imageRenderMethodForWeb:
-                                  ImageRenderMethodForWeb.HttpGet,
+                              imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                             )
                           : Image.asset(
                               "assets/images/no-item.png",
@@ -70,19 +74,21 @@ class CustomCardSearch extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(
-                      top: 8, left: 18, bottom: 5, right: 18),
+                  padding: const EdgeInsets.only(top: 8, left: 18, bottom: 5, right: 18),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(text,
-                          style: const TextStyle(fontSize: 16.0),
-                          overflow: TextOverflow.ellipsis),
+                      Text(text, style: const TextStyle(fontSize: 16.0), overflow: TextOverflow.ellipsis),
                       const SizedBox(
                         height: 5,
                       ),
                       Text(
-                        "${type[0].toUpperCase()}${type.substring(1)} by $owner",
+                        DateFormat("dd/MM/yyyy").format(date),
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 14, color: Colors.black54),
+                      ),
+                      Text(
+                        "${distance.toInt()}m away",
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(fontSize: 14, color: Colors.black54),
                       )
@@ -107,15 +113,14 @@ class CustomCardSearch extends StatelessWidget {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black
-                          .withOpacity(0.3), // Colore e opacità dell'ombra
-                      spreadRadius: 2, // Distanza di diffusione dell'ombra
-                      blurRadius: 4, // Raggio di sfocatura dell'ombra
-                      offset: const Offset(0, 2), // Posizione dell'ombra (x, y)
+                      color: Colors.black.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
-                child:  Center(
+                child: Center(
                   child: Text(
                     "${type[0].toUpperCase()}${type.substring(1)}",
                     style: const TextStyle(color: Colors.white, fontSize: 16),
@@ -129,11 +134,13 @@ class CustomCardSearch extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ItemScreen(
-                                itemId: id,
-                              )));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ItemScreen(
+                        itemId: id,
+                      ),
+                    ),
+                  );
                 },
                 borderRadius: BorderRadius.circular(24.0),
               ),
