@@ -3,7 +3,7 @@ import 'package:latlong2/latlong.dart';
 
 
 // flutter pub run build_runner watch --delete-conflicting-outputs NON CANCELLARE!!!!
-const String baseUrl = "http://13.51.173.204:5000";
+const String baseUrl = "http://16.16.64.106:5000";
 
 const defaultPosition = LatLng(43.102107520506756, 12.349117446797067);
 

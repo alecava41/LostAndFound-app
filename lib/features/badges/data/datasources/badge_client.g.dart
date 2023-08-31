@@ -13,7 +13,7 @@ class _BadgeClient implements BadgeClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://13.51.173.204:5000/api';
+    baseUrl ??= 'http://16.16.64.106:5000/api';
   }
 
   final Dio _dio;

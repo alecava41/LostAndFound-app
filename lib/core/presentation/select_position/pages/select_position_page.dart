@@ -33,11 +33,10 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
         listener: (ctx, state) {
           if (markerPos.latitude != state.userCurrentPos.latitude) {
             setState(() {
-              markerPos = state.userCurrentPos;
+              markerPos =  LatLng(state.userCurrentPos.latitude, state.userCurrentPos.longitude);
             });
 
-            mapController.animatedZoomOut();
-            mapController.centerOnPoint(LatLng(markerPos.latitude, markerPos.longitude), zoom: 10);
+            mapController.centerOnPoint(LatLng(markerPos.latitude, markerPos.longitude), zoom: 17);
           }
 
           final positionFailureOrSuccess = state.positionFailureOrSuccess;
@@ -83,10 +82,12 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                             child: FlutterMap(
                               mapController: mapController.mapController,
                               options: MapOptions(
+                                maxZoom: 18,
                                   onMapReady: () {
                                     if (markerPos != defaultPosition) {
+                                      mapController.animatedZoomOut();
                                       mapController.centerOnPoint(LatLng(markerPos.latitude, markerPos.longitude),
-                                          zoom: 10);
+                                          zoom: 17);
                                     }
                                   },
                                   interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
@@ -109,11 +110,16 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                       width: 200.0,
                                       height: 200.0,
                                       point: markerPos,
-                                      builder: (ctx) => const Icon(
-                                        Icons.location_on,
-                                        color: Color.fromRGBO(47, 122, 106, 1),
-                                        weight: 10,
-                                        size: 80,
+                                      builder: (ctx) =>
+
+                                      const Padding(
+                                        padding: EdgeInsets.fromLTRB(0, 0, 0, 65),
+                                        child: Icon(
+                                          Icons.location_on,
+                                          color: Color.fromRGBO(47, 122, 106, 1),
+                                          weight: 10,
+                                          size: 80,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -145,6 +151,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                 children: [
                                   TextButton(
                                     onPressed: () async {
+                                      mapController.animatedZoomOut();
                                       ctx
                                           .read<SelectPositionBloc>()
                                           .add(const SelectPositionEvent.selectCurrentPosition());

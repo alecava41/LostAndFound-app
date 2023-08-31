@@ -34,58 +34,41 @@ class SelectPositionBloc extends Bloc<SelectPositionEvent, SelectPositionState> 
     );
   }
 
-  // TODO we can decide whether if trying to access current position or not at the beginning (maybe we can try if we already have the permissions)
   // TODO "Use my current location" may mislead user (he may expect to select his current position without pressing "Choose this position')
 
   Future<void> _onSelectCurrentPosition(Emitter<SelectPositionState> emit) async {
     final isDeviceConnected = await _networkInfo.isConnected;
     bool isServiceFailure = false;
     bool isPermissionPermanentlyDeniedFailure = false;
+    LatLng pos = state.userCurrentPos;
 
     Either<Failure, Success>? positionFailureOrSuccess;
 
-    final serviceOrFailure = await _geolocationService.getGeoPosition();
+    final serviceOrFailure = await _geolocationService.getGeoPosition(true);
     serviceOrFailure.fold(
         (failure) => {
               (isServiceFailure, isPermissionPermanentlyDeniedFailure) = _mapFailureToState(failure),
               positionFailureOrSuccess = const Left(Failure.genericFailure())
             },
-        (success) => positionFailureOrSuccess =
-            isDeviceConnected ? const Right(Success.genericSuccess()) : const Left(Failure.genericFailure()));
-
+        (position) => {
+              positionFailureOrSuccess =
+                  isDeviceConnected ? const Right(Success.genericSuccess()) : const Left(Failure.genericFailure()),
+              pos = LatLng(position.latitude, position.longitude)
+            });
 
     emit(state.copyWith(
-        hasPermissions: isPermissionPermanentlyDeniedFailure == false,
-        isDeviceConnected: isDeviceConnected,
-        isServiceAvailable: isServiceFailure == false,
-        isPermissionPermanentlyNegated: isPermissionPermanentlyDeniedFailure,
-        positionFailureOrSuccess: positionFailureOrSuccess));
-
-    final positionOrFailure = await _geolocationService.getGeoPosition();
-    positionOrFailure.fold(
-        (failure) => {},
-        (pos) => emit(state.copyWith(
-              userCurrentPos: LatLng(pos.latitude, pos.longitude),
-              lastPositionUpdate: DateTime.now(),
-            )));
+      hasPermissions: isPermissionPermanentlyDeniedFailure == false,
+      isDeviceConnected: isDeviceConnected,
+      isServiceAvailable: isServiceFailure == false,
+      userCurrentPos: pos,
+      lastPositionUpdate: DateTime.now(),
+      isPermissionPermanentlyNegated: isPermissionPermanentlyDeniedFailure,
+      positionFailureOrSuccess: positionFailureOrSuccess,
+    ));
   }
 
   Future<void> _onSelectPositionCreated(Emitter<SelectPositionState> emit, LatLng pos) async {
-    final isDeviceConnected = await _networkInfo.isConnected;
-    bool isServiceFailure = false;
-    bool isPermissionPermanentlyDeniedFailure = false;
-
-    final positionOrFailure = await _geolocationService.getGeoPosition();
-    positionOrFailure.fold(
-        (failure) => (isServiceFailure, isPermissionPermanentlyDeniedFailure) = _mapFailureToState(failure),
-        (success) => {});
-
-    emit(state.copyWith(
-        hasPermissions: isPermissionPermanentlyDeniedFailure == false,
-        isDeviceConnected: isDeviceConnected,
-        isServiceAvailable: isServiceFailure == false,
-        isPermissionPermanentlyNegated: isPermissionPermanentlyDeniedFailure,
-        userCurrentPos: pos));
+    emit(state.copyWith(userCurrentPos: pos));
   }
 
   (bool, bool) _mapFailureToState(Failure failure) {
