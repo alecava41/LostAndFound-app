@@ -23,6 +23,7 @@ mixin _$UserItemDto {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   int get claims => throw _privateConstructorUsedError;
+  int get approvedClaims => throw _privateConstructorUsedError;
   bool get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +38,7 @@ abstract class $UserItemDtoCopyWith<$Res> {
           UserItemDto value, $Res Function(UserItemDto) then) =
       _$UserItemDtoCopyWithImpl<$Res, UserItemDto>;
   @useResult
-  $Res call({int id, String title, int claims, bool image});
+  $Res call({int id, String title, int claims, int approvedClaims, bool image});
 }
 
 /// @nodoc
@@ -56,6 +57,7 @@ class _$UserItemDtoCopyWithImpl<$Res, $Val extends UserItemDto>
     Object? id = null,
     Object? title = null,
     Object? claims = null,
+    Object? approvedClaims = null,
     Object? image = null,
   }) {
     return _then(_value.copyWith(
@@ -70,6 +72,10 @@ class _$UserItemDtoCopyWithImpl<$Res, $Val extends UserItemDto>
       claims: null == claims
           ? _value.claims
           : claims // ignore: cast_nullable_to_non_nullable
+              as int,
+      approvedClaims: null == approvedClaims
+          ? _value.approvedClaims
+          : approvedClaims // ignore: cast_nullable_to_non_nullable
               as int,
       image: null == image
           ? _value.image
@@ -87,7 +93,7 @@ abstract class _$$$UserItemDtoCopyWith<$Res>
       __$$$UserItemDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title, int claims, bool image});
+  $Res call({int id, String title, int claims, int approvedClaims, bool image});
 }
 
 /// @nodoc
@@ -104,6 +110,7 @@ class __$$$UserItemDtoCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? claims = null,
+    Object? approvedClaims = null,
     Object? image = null,
   }) {
     return _then(_$$UserItemDto(
@@ -118,6 +125,10 @@ class __$$$UserItemDtoCopyWithImpl<$Res>
       claims: null == claims
           ? _value.claims
           : claims // ignore: cast_nullable_to_non_nullable
+              as int,
+      approvedClaims: null == approvedClaims
+          ? _value.approvedClaims
+          : approvedClaims // ignore: cast_nullable_to_non_nullable
               as int,
       image: null == image
           ? _value.image
@@ -134,6 +145,7 @@ class _$$UserItemDto implements $UserItemDto {
       {required this.id,
       required this.title,
       required this.claims,
+      required this.approvedClaims,
       required this.image});
 
   factory _$$UserItemDto.fromJson(Map<String, dynamic> json) =>
@@ -146,11 +158,13 @@ class _$$UserItemDto implements $UserItemDto {
   @override
   final int claims;
   @override
+  final int approvedClaims;
+  @override
   final bool image;
 
   @override
   String toString() {
-    return 'UserItemDto(id: $id, title: $title, claims: $claims, image: $image)';
+    return 'UserItemDto(id: $id, title: $title, claims: $claims, approvedClaims: $approvedClaims, image: $image)';
   }
 
   @override
@@ -161,12 +175,15 @@ class _$$UserItemDto implements $UserItemDto {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.claims, claims) || other.claims == claims) &&
+            (identical(other.approvedClaims, approvedClaims) ||
+                other.approvedClaims == approvedClaims) &&
             (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, claims, image);
+  int get hashCode =>
+      Object.hash(runtimeType, id, title, claims, approvedClaims, image);
 
   @JsonKey(ignore: true)
   @override
@@ -187,6 +204,7 @@ abstract class $UserItemDto implements UserItemDto {
       {required final int id,
       required final String title,
       required final int claims,
+      required final int approvedClaims,
       required final bool image}) = _$$UserItemDto;
 
   factory $UserItemDto.fromJson(Map<String, dynamic> json) =
@@ -198,6 +216,8 @@ abstract class $UserItemDto implements UserItemDto {
   String get title;
   @override
   int get claims;
+  @override
+  int get approvedClaims;
   @override
   bool get image;
   @override

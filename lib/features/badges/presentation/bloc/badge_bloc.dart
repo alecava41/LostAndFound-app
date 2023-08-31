@@ -44,7 +44,8 @@ class BadgeBloc extends Bloc<BadgeEvent, BadgeState> {
           newReceivedClaim: () => _onNewReceivedClaim(emit),
           sentClaimUpdate: () => _onSentClaimUpdate(emit),
           sentClaimRead: () => _onSentClaimRead(emit),
-          chatUpdate: (hasUnreadChats) => _onChatUpdate(emit, hasUnreadChats)
+          chatUpdate: (hasUnreadChats) => _onChatUpdate(emit, hasUnreadChats),
+            restoreInitial: () => emit(BadgeState.initial())
         );
       },
     );

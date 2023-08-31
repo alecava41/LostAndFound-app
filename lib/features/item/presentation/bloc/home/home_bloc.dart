@@ -27,9 +27,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
-            homeCreated: () => _onHomeCreatedOrRefreshed(emit, true),
-            homeRefreshed: () => _onHomeCreatedOrRefreshed(emit, false),
-            homeSectionRefreshed: (type) => _onHomeSectionRefreshed(emit, type));
+          homeCreated: () => _onHomeCreatedOrRefreshed(emit, true),
+          homeRefreshed: () => _onHomeCreatedOrRefreshed(emit, false),
+          homeSectionRefreshed: (type) => _onHomeSectionRefreshed(emit, type),
+          restoreInitial: () => emit(HomeState.initial()),
+        );
       },
     );
   }

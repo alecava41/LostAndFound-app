@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/utils/colors.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../../core/presentation/tutorial/widgets/carousel_item.dart';
 import '../widgets/user/faq_tile.dart';
 
 class TutorialScreen extends StatefulWidget {
   const TutorialScreen({super.key});
-
-  // TODO cannot see the slider completely on my phone [@alecava41]
 
   @override
   State<TutorialScreen> createState() => _TutorialScreen();
@@ -110,7 +109,7 @@ class _TutorialScreen extends State<TutorialScreen> {
       child: Column(
         children: [
           SizedBox(
-            height: 360.0,
+            height: 50.h,
             child: PageView(
               physics: const ClampingScrollPhysics(),
               controller: _pageController,

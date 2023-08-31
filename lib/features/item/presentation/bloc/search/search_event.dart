@@ -12,4 +12,5 @@ class SearchEvent with _$SearchEvent {
   const factory SearchEvent.showFilters() = _ShowFilters;
   const factory SearchEvent.searchPageChanged(SearchPageState page) = _SearchPageChanged;
   const factory SearchEvent.sortParameterChanged(ResultOrder order) = _SortParameterChanged;
+  const factory SearchEvent.restoreInitial() = _RestoreInitial;
 }

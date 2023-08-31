@@ -27,7 +27,11 @@ class LostItemsContainer extends StatelessWidget {
               ? Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: SizedBox(
-                      height: ScreenSize.isBigSmartphoneDevice(context)? 230 : ScreenSize.isMediumSmartphoneDevice(context)? 200 : 170,
+                      height: ScreenSize.isBigSmartphoneDevice(context)
+                          ? 230
+                          : ScreenSize.isMediumSmartphoneDevice(context)
+                              ? 200
+                              : 170,
                       width: MediaQuery.of(context).size.width,
                       child: ListView(
                         scrollDirection: Axis.horizontal,
@@ -38,6 +42,7 @@ class LostItemsContainer extends StatelessWidget {
                                   claims: item.claims,
                                   token: state.token,
                                   hasImage: item.hasImage,
+                                  approvedClaims: item.approvedClaims,
                                 ))
                             .toList(),
                       )),
@@ -48,7 +53,9 @@ class LostItemsContainer extends StatelessWidget {
                     icon: Icons.sentiment_very_satisfied_rounded,
                     message: "You have no lost item!",
                   )),
-                SizedBox(height: 4.h,)
+          SizedBox(
+            height: 4.h,
+          )
         ],
       );
     });

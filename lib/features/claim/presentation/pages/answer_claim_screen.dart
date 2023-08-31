@@ -9,6 +9,7 @@ import '../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../core/presentation/widgets/large_green_button.dart';
 import '../../../../injection_container.dart';
 import '../../../../utils/colors.dart';
+import '../../../chat/presentation/pages/chat_page.dart';
 import '../widgets/claimed_item_info.dart';
 
 class AnswerClaimScreen extends StatelessWidget {
@@ -34,6 +35,28 @@ class AnswerClaimScreen extends StatelessWidget {
           child: BlocConsumer<AnswerClaimBloc, AnswerClaimState>(
             listener: (ctx, state) {
               final claimFailureOrSuccess = state.claimFailureOrSuccess;
+              final roomCreationFailureOrSuccess = state.roomCreationFailureOrSuccess;
+
+              if (roomCreationFailureOrSuccess != null) {
+                roomCreationFailureOrSuccess.fold((failure) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      padding: const EdgeInsets.all(30),
+                      backgroundColor: Colors.red,
+                      content: Text(
+                        failure.maybeWhen<String>(
+                            genericFailure: () => 'Server error. Please try again later.',
+                            networkFailure: () => 'No internet connection available. Check your internet connection.',
+                            validationFailure: (reason) => reason!,
+                            orElse: () => "Unknown error"),
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  );
+                }, (room) {
+                  Navigator.of(ctx).push(MaterialPageRoute(builder: (_) => ChatScreen(roomId: room.id, itemId: itemId)));
+                });
+              }
 
               if (claimFailureOrSuccess != null) {
                 claimFailureOrSuccess.fold(
@@ -155,13 +178,19 @@ class AnswerClaimScreen extends StatelessWidget {
                                       )
                                     : Container(),
                                 ClaimInfoField(
-                                  title: "Item claimed",
+                                  title:
+                                      "Item claimed by ${state.item!.claims!.firstWhere((element) => element.id == claimId).user.username}",
                                   content: ClaimedItemInfo(
                                     token: state.token,
                                     item: state.item!,
                                     subject:
                                         state.item!.claims!.firstWhere((element) => element.id == claimId).user.username,
                                     claimIdx: state.item!.claims!.indexWhere((element) => element.id == claimId),
+                                    otherUserId:
+                                        state.item!.claims!.firstWhere((element) => element.id == claimId).user.id,
+                                    otherUserUsername:
+                                        state.item!.claims!.firstWhere((element) => element.id == claimId).user.username,
+                                    isQuestionScreen: false,
                                   ),
                                 ),
                                 const SizedBox(

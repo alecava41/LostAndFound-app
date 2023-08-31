@@ -29,7 +29,6 @@ abstract class ChatDataSource {
   Future<void> readChat(ReadChatParams params);
 
   Future<void> logout(NoParams params);
-
 }
 
 class ChatDataSourceImpl implements ChatDataSource {
@@ -81,7 +80,9 @@ class ChatDataSourceImpl implements ChatDataSource {
         .docs
         .map((e) => Pair(e.id, e.data()['name'] as String));
 
-    if (rooms.any((room) => room.second == "${params.id1}-${params.itemId}-${params.id2}")) {
+    if (rooms.any((room) =>
+        room.second == "${params.id1}-${params.itemId}-${params.id2}" ||
+        room.second == "${params.id2}-${params.itemId}-${params.id1}")) {
       return types.Room(
           id: rooms.firstWhere((e) => e.second == "${params.id1}-${params.itemId}-${params.id2}").first,
           type: RoomType.group,
@@ -151,19 +152,21 @@ class ChatDataSourceImpl implements ChatDataSource {
   @override
   Future<void> readChat(ReadChatParams params) async {
     // Retrieve lastMessage id
-    final messageId = (await FirebaseChatCore.instance
+    final messages = (await FirebaseChatCore.instance
             .getFirebaseFirestore()
             .collection("rooms/${params.roomId}/messages")
             .orderBy("createdAt", descending: true)
             .limit(1)
             .get())
-        .docs
-        .first
-        .id;
+        .docs;
 
-    // Send the the user's last read message to the last message
-    await FirebaseChatCore.instance.getFirebaseFirestore().collection("rooms").doc(params.roomId).update(
-      {"metadata.last-${params.currentId}": messageId},
-    );
+    if (messages.isNotEmpty) {
+      final messageId = messages.first.id;
+
+      // Set the user's last read message to the last message
+      await FirebaseChatCore.instance.getFirebaseFirestore().collection("rooms").doc(params.roomId).update(
+        {"metadata.last-${params.currentId}": messageId},
+      );
+    }
   }
 }

@@ -457,24 +457,12 @@ class ItemScreen extends StatelessWidget {
                           Flexible(
                             child: Row(
                               children: [
-                                owner.hasImage
-                                    ? ImageDialogWidget(
-                                        token: token,
-                                        imageUrl: userUrl,
-                                        errorAsset: 'assets/images/no-user.jpg',
-                                        child: CircularImage(
-                                          hasImage: owner.hasImage,
-                                          imageUrl: userUrl,
-                                          radius: 25,
-                                          token: token,
-                                        ),
-                                      )
-                                    : CircularImage(
-                                        hasImage: owner.hasImage,
-                                        imageUrl: userUrl,
-                                        radius: 25,
-                                        token: token,
-                                      ),
+                                CircularImage(
+                                  hasImage: owner.hasImage,
+                                  imageUrl: userUrl,
+                                  radius: 25,
+                                  token: token,
+                                ),
                                 const SizedBox(
                                   width: 5,
                                 ),

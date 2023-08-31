@@ -15,6 +15,7 @@ class AnswerQuestionState with _$AnswerQuestionState {
     @Default(false) bool showErrorMessage,
     @Default(false) bool isInfoOpen,
     Either<Failure, Item>? claimFailureOrSuccess,
+    Either<Failure, Room>? roomCreationFailureOrSuccess,
   }) = _AnswerQuestionState;
 
   factory AnswerQuestionState.initial() => AnswerQuestionState(

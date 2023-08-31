@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lost_and_found/core/presentation/widgets/circular_image_avatar.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
-import '../../../../../core/presentation/widgets/image_dialog.dart';
 import '../../../../../utils/colors.dart';
 
 class InboxItem extends StatelessWidget {
@@ -23,6 +22,8 @@ class InboxItem extends StatelessWidget {
     required this.onTap,
   });
 
+  // TODO insert name/image of the item somewhere
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -36,19 +37,14 @@ class InboxItem extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  ImageDialogWidget(
-                    imageUrl: "$baseUrl/api/users/$otherUserId/image",
-                    token: token,
-                    errorAsset: 'assets/images/no-user.jpg',
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: CircularImage(
-                          token: token,
-                          imageUrl: "$baseUrl/api/users/$otherUserId/image",
-                          hasImage: true,
-                          radius: 30,
-                          errorAsset: "assets/images/no-user.jpg"),
-                    ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CircularImage(
+                        token: token,
+                        imageUrl: "$baseUrl/api/users/$otherUserId/image",
+                        hasImage: true,
+                        radius: 30,
+                        errorAsset: "assets/images/no-user.jpg"),
                   ),
                   Expanded(
                     child: Padding(

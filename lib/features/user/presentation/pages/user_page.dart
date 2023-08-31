@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
+import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/features/user/presentation/bloc/user/user_bloc.dart';
 
+import '../../../../core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import '../../../../core/presentation/widgets/custom_circular_progress.dart';
+import '../../../badges/presentation/bloc/badge_bloc.dart';
+import '../../../chat/presentation/bloc/inbox/inbox_bloc.dart';
+import '../../../item/presentation/bloc/search/search_bloc.dart';
 import '../widgets/user/editable_circular_image.dart';
 import '../widgets/user/option_item.dart';
 
@@ -53,6 +58,13 @@ class UserScreen extends StatelessWidget {
                       ),
                     ),
                 (_) => {
+                  ctx.read<HomeBloc>().add(const HomeEvent.restoreInitial()),
+                  ctx.read<SearchBloc>().add(const SearchEvent.restoreInitial()),
+                  ctx.read<HomeControllerBloc>().add(const HomeControllerEvent.restoreInitial()),
+                  ctx.read<BadgeBloc>().add(const BadgeEvent.restoreInitial()),
+                  ctx.read<InboxBloc>().add(const InboxEvent.restoreInitial()),
+                  ctx.read<UserBloc>().add(const UserEvent.restoreInitial()),
+
                       // Go back to login page, remove all history
                       Navigator.popUntil(context, (route) => route.isFirst),
                       Navigator.pushReplacementNamed(context, "/tutorial")

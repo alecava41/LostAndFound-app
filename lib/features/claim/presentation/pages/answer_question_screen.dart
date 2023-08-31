@@ -10,6 +10,7 @@ import '../../../../core/presentation/widgets/insert_string_form.dart';
 import '../../../../core/presentation/widgets/large_green_button.dart';
 import '../../../../injection_container.dart';
 import '../../../../utils/colors.dart';
+import '../../../chat/presentation/pages/chat_page.dart';
 import '../bloc/answer_question/answer_question_bloc.dart';
 import '../widgets/claim_info_field.dart';
 import '../widgets/claimed_item_info.dart';
@@ -39,6 +40,29 @@ class AnswerQuestionScreen extends StatelessWidget {
               child: BlocConsumer<AnswerQuestionBloc, AnswerQuestionState>(
                 listener: (ctx, state) {
                   final claimFailureOrSuccess = state.claimFailureOrSuccess;
+                  final roomCreationFailureOrSuccess = state.roomCreationFailureOrSuccess;
+
+                  if (roomCreationFailureOrSuccess != null) {
+                    roomCreationFailureOrSuccess.fold((failure) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          padding: const EdgeInsets.all(30),
+                          backgroundColor: Colors.red,
+                          content: Text(
+                            failure.maybeWhen<String>(
+                                genericFailure: () => 'Server error. Please try again later.',
+                                networkFailure: () => 'No internet connection available. Check your internet connection.',
+                                validationFailure: (reason) => reason!,
+                                orElse: () => "Unknown error"),
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                        ),
+                      );
+                    }, (room) {
+                      Navigator.of(ctx)
+                          .push(MaterialPageRoute(builder: (_) => ChatScreen(roomId: room.id, itemId: itemId)));
+                    });
+                  }
 
                   if (claimFailureOrSuccess != null) {
                     claimFailureOrSuccess.fold(
@@ -71,9 +95,6 @@ class AnswerQuestionScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const SizedBox(
-                                  height: 20,
-                                ),
                                 Padding(
                                   padding: const EdgeInsets.fromLTRB(5, 0, 5, 10),
                                   child: Row(
@@ -124,13 +145,15 @@ class AnswerQuestionScreen extends StatelessWidget {
                                     token: state.token,
                                     subject: state.item!.user.username,
                                     claimIdx: null,
+                                    otherUserId: state.item!.user.id,
+                                    otherUserUsername: state.item!.user.username, isQuestionScreen: true,
                                   ),
                                 ),
                                 const SizedBox(
                                   height: 10,
                                 ),
                                 CustomFieldContainer(
-                                  title: "Question",
+                                  title: "Question of ${state.item!.user.username}",
                                   content: Text(
                                     state.item!.question!,
                                     style: const TextStyle(fontSize: 16),
@@ -141,7 +164,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                                 ),
                                 isClaimAlreadyTaken
                                     ? CustomFieldContainer(
-                                        title: "Answer",
+                                        title: "Your answer",
                                         content: Text(
                                           state.item!.userClaim!.answer!,
                                           style: const TextStyle(

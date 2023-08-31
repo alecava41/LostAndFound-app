@@ -26,6 +26,7 @@ mixin _$BadgeEvent {
     required TResult Function() sentClaimUpdate,
     required TResult Function() sentClaimRead,
     required TResult Function(bool hasUnreadChats) chatUpdate,
+    required TResult Function() restoreInitial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +39,7 @@ mixin _$BadgeEvent {
     TResult? Function()? sentClaimUpdate,
     TResult? Function()? sentClaimRead,
     TResult? Function(bool hasUnreadChats)? chatUpdate,
+    TResult? Function()? restoreInitial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +52,7 @@ mixin _$BadgeEvent {
     TResult Function()? sentClaimUpdate,
     TResult Function()? sentClaimRead,
     TResult Function(bool hasUnreadChats)? chatUpdate,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,6 +66,7 @@ mixin _$BadgeEvent {
     required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
     required TResult Function(_SentClaimRead value) sentClaimRead,
     required TResult Function(_ChatUpdate value) chatUpdate,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +79,7 @@ mixin _$BadgeEvent {
     TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult? Function(_SentClaimRead value)? sentClaimRead,
     TResult? Function(_ChatUpdate value)? chatUpdate,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +92,7 @@ mixin _$BadgeEvent {
     TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult Function(_SentClaimRead value)? sentClaimRead,
     TResult Function(_ChatUpdate value)? chatUpdate,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -156,6 +162,7 @@ class _$_BadgeCreated implements _BadgeCreated {
     required TResult Function() sentClaimUpdate,
     required TResult Function() sentClaimRead,
     required TResult Function(bool hasUnreadChats) chatUpdate,
+    required TResult Function() restoreInitial,
   }) {
     return badgeCreated();
   }
@@ -171,6 +178,7 @@ class _$_BadgeCreated implements _BadgeCreated {
     TResult? Function()? sentClaimUpdate,
     TResult? Function()? sentClaimRead,
     TResult? Function(bool hasUnreadChats)? chatUpdate,
+    TResult? Function()? restoreInitial,
   }) {
     return badgeCreated?.call();
   }
@@ -186,6 +194,7 @@ class _$_BadgeCreated implements _BadgeCreated {
     TResult Function()? sentClaimUpdate,
     TResult Function()? sentClaimRead,
     TResult Function(bool hasUnreadChats)? chatUpdate,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) {
     if (badgeCreated != null) {
@@ -205,6 +214,7 @@ class _$_BadgeCreated implements _BadgeCreated {
     required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
     required TResult Function(_SentClaimRead value) sentClaimRead,
     required TResult Function(_ChatUpdate value) chatUpdate,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) {
     return badgeCreated(this);
   }
@@ -220,6 +230,7 @@ class _$_BadgeCreated implements _BadgeCreated {
     TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult? Function(_SentClaimRead value)? sentClaimRead,
     TResult? Function(_ChatUpdate value)? chatUpdate,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) {
     return badgeCreated?.call(this);
   }
@@ -235,6 +246,7 @@ class _$_BadgeCreated implements _BadgeCreated {
     TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult Function(_SentClaimRead value)? sentClaimRead,
     TResult Function(_ChatUpdate value)? chatUpdate,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) {
     if (badgeCreated != null) {
@@ -294,6 +306,7 @@ class _$_NewsRead implements _NewsRead {
     required TResult Function() sentClaimUpdate,
     required TResult Function() sentClaimRead,
     required TResult Function(bool hasUnreadChats) chatUpdate,
+    required TResult Function() restoreInitial,
   }) {
     return newsRead();
   }
@@ -309,6 +322,7 @@ class _$_NewsRead implements _NewsRead {
     TResult? Function()? sentClaimUpdate,
     TResult? Function()? sentClaimRead,
     TResult? Function(bool hasUnreadChats)? chatUpdate,
+    TResult? Function()? restoreInitial,
   }) {
     return newsRead?.call();
   }
@@ -324,6 +338,7 @@ class _$_NewsRead implements _NewsRead {
     TResult Function()? sentClaimUpdate,
     TResult Function()? sentClaimRead,
     TResult Function(bool hasUnreadChats)? chatUpdate,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) {
     if (newsRead != null) {
@@ -343,6 +358,7 @@ class _$_NewsRead implements _NewsRead {
     required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
     required TResult Function(_SentClaimRead value) sentClaimRead,
     required TResult Function(_ChatUpdate value) chatUpdate,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) {
     return newsRead(this);
   }
@@ -358,6 +374,7 @@ class _$_NewsRead implements _NewsRead {
     TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult? Function(_SentClaimRead value)? sentClaimRead,
     TResult? Function(_ChatUpdate value)? chatUpdate,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) {
     return newsRead?.call(this);
   }
@@ -373,6 +390,7 @@ class _$_NewsRead implements _NewsRead {
     TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult Function(_SentClaimRead value)? sentClaimRead,
     TResult Function(_ChatUpdate value)? chatUpdate,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) {
     if (newsRead != null) {
@@ -432,6 +450,7 @@ class _$_ReceivedClaimRead implements _ReceivedClaimRead {
     required TResult Function() sentClaimUpdate,
     required TResult Function() sentClaimRead,
     required TResult Function(bool hasUnreadChats) chatUpdate,
+    required TResult Function() restoreInitial,
   }) {
     return receivedClaimRead();
   }
@@ -447,6 +466,7 @@ class _$_ReceivedClaimRead implements _ReceivedClaimRead {
     TResult? Function()? sentClaimUpdate,
     TResult? Function()? sentClaimRead,
     TResult? Function(bool hasUnreadChats)? chatUpdate,
+    TResult? Function()? restoreInitial,
   }) {
     return receivedClaimRead?.call();
   }
@@ -462,6 +482,7 @@ class _$_ReceivedClaimRead implements _ReceivedClaimRead {
     TResult Function()? sentClaimUpdate,
     TResult Function()? sentClaimRead,
     TResult Function(bool hasUnreadChats)? chatUpdate,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) {
     if (receivedClaimRead != null) {
@@ -481,6 +502,7 @@ class _$_ReceivedClaimRead implements _ReceivedClaimRead {
     required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
     required TResult Function(_SentClaimRead value) sentClaimRead,
     required TResult Function(_ChatUpdate value) chatUpdate,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) {
     return receivedClaimRead(this);
   }
@@ -496,6 +518,7 @@ class _$_ReceivedClaimRead implements _ReceivedClaimRead {
     TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult? Function(_SentClaimRead value)? sentClaimRead,
     TResult? Function(_ChatUpdate value)? chatUpdate,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) {
     return receivedClaimRead?.call(this);
   }
@@ -511,6 +534,7 @@ class _$_ReceivedClaimRead implements _ReceivedClaimRead {
     TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult Function(_SentClaimRead value)? sentClaimRead,
     TResult Function(_ChatUpdate value)? chatUpdate,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) {
     if (receivedClaimRead != null) {
@@ -569,6 +593,7 @@ class _$_NewNews implements _NewNews {
     required TResult Function() sentClaimUpdate,
     required TResult Function() sentClaimRead,
     required TResult Function(bool hasUnreadChats) chatUpdate,
+    required TResult Function() restoreInitial,
   }) {
     return newNews();
   }
@@ -584,6 +609,7 @@ class _$_NewNews implements _NewNews {
     TResult? Function()? sentClaimUpdate,
     TResult? Function()? sentClaimRead,
     TResult? Function(bool hasUnreadChats)? chatUpdate,
+    TResult? Function()? restoreInitial,
   }) {
     return newNews?.call();
   }
@@ -599,6 +625,7 @@ class _$_NewNews implements _NewNews {
     TResult Function()? sentClaimUpdate,
     TResult Function()? sentClaimRead,
     TResult Function(bool hasUnreadChats)? chatUpdate,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) {
     if (newNews != null) {
@@ -618,6 +645,7 @@ class _$_NewNews implements _NewNews {
     required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
     required TResult Function(_SentClaimRead value) sentClaimRead,
     required TResult Function(_ChatUpdate value) chatUpdate,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) {
     return newNews(this);
   }
@@ -633,6 +661,7 @@ class _$_NewNews implements _NewNews {
     TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult? Function(_SentClaimRead value)? sentClaimRead,
     TResult? Function(_ChatUpdate value)? chatUpdate,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) {
     return newNews?.call(this);
   }
@@ -648,6 +677,7 @@ class _$_NewNews implements _NewNews {
     TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult Function(_SentClaimRead value)? sentClaimRead,
     TResult Function(_ChatUpdate value)? chatUpdate,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) {
     if (newNews != null) {
@@ -707,6 +737,7 @@ class _$_NewReceivedClaim implements _NewReceivedClaim {
     required TResult Function() sentClaimUpdate,
     required TResult Function() sentClaimRead,
     required TResult Function(bool hasUnreadChats) chatUpdate,
+    required TResult Function() restoreInitial,
   }) {
     return newReceivedClaim();
   }
@@ -722,6 +753,7 @@ class _$_NewReceivedClaim implements _NewReceivedClaim {
     TResult? Function()? sentClaimUpdate,
     TResult? Function()? sentClaimRead,
     TResult? Function(bool hasUnreadChats)? chatUpdate,
+    TResult? Function()? restoreInitial,
   }) {
     return newReceivedClaim?.call();
   }
@@ -737,6 +769,7 @@ class _$_NewReceivedClaim implements _NewReceivedClaim {
     TResult Function()? sentClaimUpdate,
     TResult Function()? sentClaimRead,
     TResult Function(bool hasUnreadChats)? chatUpdate,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) {
     if (newReceivedClaim != null) {
@@ -756,6 +789,7 @@ class _$_NewReceivedClaim implements _NewReceivedClaim {
     required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
     required TResult Function(_SentClaimRead value) sentClaimRead,
     required TResult Function(_ChatUpdate value) chatUpdate,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) {
     return newReceivedClaim(this);
   }
@@ -771,6 +805,7 @@ class _$_NewReceivedClaim implements _NewReceivedClaim {
     TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult? Function(_SentClaimRead value)? sentClaimRead,
     TResult? Function(_ChatUpdate value)? chatUpdate,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) {
     return newReceivedClaim?.call(this);
   }
@@ -786,6 +821,7 @@ class _$_NewReceivedClaim implements _NewReceivedClaim {
     TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult Function(_SentClaimRead value)? sentClaimRead,
     TResult Function(_ChatUpdate value)? chatUpdate,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) {
     if (newReceivedClaim != null) {
@@ -845,6 +881,7 @@ class _$_SentClaimUpdate implements _SentClaimUpdate {
     required TResult Function() sentClaimUpdate,
     required TResult Function() sentClaimRead,
     required TResult Function(bool hasUnreadChats) chatUpdate,
+    required TResult Function() restoreInitial,
   }) {
     return sentClaimUpdate();
   }
@@ -860,6 +897,7 @@ class _$_SentClaimUpdate implements _SentClaimUpdate {
     TResult? Function()? sentClaimUpdate,
     TResult? Function()? sentClaimRead,
     TResult? Function(bool hasUnreadChats)? chatUpdate,
+    TResult? Function()? restoreInitial,
   }) {
     return sentClaimUpdate?.call();
   }
@@ -875,6 +913,7 @@ class _$_SentClaimUpdate implements _SentClaimUpdate {
     TResult Function()? sentClaimUpdate,
     TResult Function()? sentClaimRead,
     TResult Function(bool hasUnreadChats)? chatUpdate,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) {
     if (sentClaimUpdate != null) {
@@ -894,6 +933,7 @@ class _$_SentClaimUpdate implements _SentClaimUpdate {
     required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
     required TResult Function(_SentClaimRead value) sentClaimRead,
     required TResult Function(_ChatUpdate value) chatUpdate,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) {
     return sentClaimUpdate(this);
   }
@@ -909,6 +949,7 @@ class _$_SentClaimUpdate implements _SentClaimUpdate {
     TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult? Function(_SentClaimRead value)? sentClaimRead,
     TResult? Function(_ChatUpdate value)? chatUpdate,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) {
     return sentClaimUpdate?.call(this);
   }
@@ -924,6 +965,7 @@ class _$_SentClaimUpdate implements _SentClaimUpdate {
     TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult Function(_SentClaimRead value)? sentClaimRead,
     TResult Function(_ChatUpdate value)? chatUpdate,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) {
     if (sentClaimUpdate != null) {
@@ -983,6 +1025,7 @@ class _$_SentClaimRead implements _SentClaimRead {
     required TResult Function() sentClaimUpdate,
     required TResult Function() sentClaimRead,
     required TResult Function(bool hasUnreadChats) chatUpdate,
+    required TResult Function() restoreInitial,
   }) {
     return sentClaimRead();
   }
@@ -998,6 +1041,7 @@ class _$_SentClaimRead implements _SentClaimRead {
     TResult? Function()? sentClaimUpdate,
     TResult? Function()? sentClaimRead,
     TResult? Function(bool hasUnreadChats)? chatUpdate,
+    TResult? Function()? restoreInitial,
   }) {
     return sentClaimRead?.call();
   }
@@ -1013,6 +1057,7 @@ class _$_SentClaimRead implements _SentClaimRead {
     TResult Function()? sentClaimUpdate,
     TResult Function()? sentClaimRead,
     TResult Function(bool hasUnreadChats)? chatUpdate,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) {
     if (sentClaimRead != null) {
@@ -1032,6 +1077,7 @@ class _$_SentClaimRead implements _SentClaimRead {
     required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
     required TResult Function(_SentClaimRead value) sentClaimRead,
     required TResult Function(_ChatUpdate value) chatUpdate,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) {
     return sentClaimRead(this);
   }
@@ -1047,6 +1093,7 @@ class _$_SentClaimRead implements _SentClaimRead {
     TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult? Function(_SentClaimRead value)? sentClaimRead,
     TResult? Function(_ChatUpdate value)? chatUpdate,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) {
     return sentClaimRead?.call(this);
   }
@@ -1062,6 +1109,7 @@ class _$_SentClaimRead implements _SentClaimRead {
     TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult Function(_SentClaimRead value)? sentClaimRead,
     TResult Function(_ChatUpdate value)? chatUpdate,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) {
     if (sentClaimRead != null) {
@@ -1148,6 +1196,7 @@ class _$_ChatUpdate implements _ChatUpdate {
     required TResult Function() sentClaimUpdate,
     required TResult Function() sentClaimRead,
     required TResult Function(bool hasUnreadChats) chatUpdate,
+    required TResult Function() restoreInitial,
   }) {
     return chatUpdate(hasUnreadChats);
   }
@@ -1163,6 +1212,7 @@ class _$_ChatUpdate implements _ChatUpdate {
     TResult? Function()? sentClaimUpdate,
     TResult? Function()? sentClaimRead,
     TResult? Function(bool hasUnreadChats)? chatUpdate,
+    TResult? Function()? restoreInitial,
   }) {
     return chatUpdate?.call(hasUnreadChats);
   }
@@ -1178,6 +1228,7 @@ class _$_ChatUpdate implements _ChatUpdate {
     TResult Function()? sentClaimUpdate,
     TResult Function()? sentClaimRead,
     TResult Function(bool hasUnreadChats)? chatUpdate,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) {
     if (chatUpdate != null) {
@@ -1197,6 +1248,7 @@ class _$_ChatUpdate implements _ChatUpdate {
     required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
     required TResult Function(_SentClaimRead value) sentClaimRead,
     required TResult Function(_ChatUpdate value) chatUpdate,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) {
     return chatUpdate(this);
   }
@@ -1212,6 +1264,7 @@ class _$_ChatUpdate implements _ChatUpdate {
     TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult? Function(_SentClaimRead value)? sentClaimRead,
     TResult? Function(_ChatUpdate value)? chatUpdate,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) {
     return chatUpdate?.call(this);
   }
@@ -1227,6 +1280,7 @@ class _$_ChatUpdate implements _ChatUpdate {
     TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
     TResult Function(_SentClaimRead value)? sentClaimRead,
     TResult Function(_ChatUpdate value)? chatUpdate,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) {
     if (chatUpdate != null) {
@@ -1243,6 +1297,150 @@ abstract class _ChatUpdate implements BadgeEvent {
   @JsonKey(ignore: true)
   _$$_ChatUpdateCopyWith<_$_ChatUpdate> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RestoreInitialCopyWith<$Res> {
+  factory _$$_RestoreInitialCopyWith(
+          _$_RestoreInitial value, $Res Function(_$_RestoreInitial) then) =
+      __$$_RestoreInitialCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_RestoreInitialCopyWithImpl<$Res>
+    extends _$BadgeEventCopyWithImpl<$Res, _$_RestoreInitial>
+    implements _$$_RestoreInitialCopyWith<$Res> {
+  __$$_RestoreInitialCopyWithImpl(
+      _$_RestoreInitial _value, $Res Function(_$_RestoreInitial) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_RestoreInitial implements _RestoreInitial {
+  const _$_RestoreInitial();
+
+  @override
+  String toString() {
+    return 'BadgeEvent.restoreInitial()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_RestoreInitial);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() badgeCreated,
+    required TResult Function() newsRead,
+    required TResult Function() receivedClaimRead,
+    required TResult Function() newNews,
+    required TResult Function() newReceivedClaim,
+    required TResult Function() sentClaimUpdate,
+    required TResult Function() sentClaimRead,
+    required TResult Function(bool hasUnreadChats) chatUpdate,
+    required TResult Function() restoreInitial,
+  }) {
+    return restoreInitial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? badgeCreated,
+    TResult? Function()? newsRead,
+    TResult? Function()? receivedClaimRead,
+    TResult? Function()? newNews,
+    TResult? Function()? newReceivedClaim,
+    TResult? Function()? sentClaimUpdate,
+    TResult? Function()? sentClaimRead,
+    TResult? Function(bool hasUnreadChats)? chatUpdate,
+    TResult? Function()? restoreInitial,
+  }) {
+    return restoreInitial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? badgeCreated,
+    TResult Function()? newsRead,
+    TResult Function()? receivedClaimRead,
+    TResult Function()? newNews,
+    TResult Function()? newReceivedClaim,
+    TResult Function()? sentClaimUpdate,
+    TResult Function()? sentClaimRead,
+    TResult Function(bool hasUnreadChats)? chatUpdate,
+    TResult Function()? restoreInitial,
+    required TResult orElse(),
+  }) {
+    if (restoreInitial != null) {
+      return restoreInitial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_BadgeCreated value) badgeCreated,
+    required TResult Function(_NewsRead value) newsRead,
+    required TResult Function(_ReceivedClaimRead value) receivedClaimRead,
+    required TResult Function(_NewNews value) newNews,
+    required TResult Function(_NewReceivedClaim value) newReceivedClaim,
+    required TResult Function(_SentClaimUpdate value) sentClaimUpdate,
+    required TResult Function(_SentClaimRead value) sentClaimRead,
+    required TResult Function(_ChatUpdate value) chatUpdate,
+    required TResult Function(_RestoreInitial value) restoreInitial,
+  }) {
+    return restoreInitial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_BadgeCreated value)? badgeCreated,
+    TResult? Function(_NewsRead value)? newsRead,
+    TResult? Function(_ReceivedClaimRead value)? receivedClaimRead,
+    TResult? Function(_NewNews value)? newNews,
+    TResult? Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult? Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult? Function(_SentClaimRead value)? sentClaimRead,
+    TResult? Function(_ChatUpdate value)? chatUpdate,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
+  }) {
+    return restoreInitial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_BadgeCreated value)? badgeCreated,
+    TResult Function(_NewsRead value)? newsRead,
+    TResult Function(_ReceivedClaimRead value)? receivedClaimRead,
+    TResult Function(_NewNews value)? newNews,
+    TResult Function(_NewReceivedClaim value)? newReceivedClaim,
+    TResult Function(_SentClaimUpdate value)? sentClaimUpdate,
+    TResult Function(_SentClaimRead value)? sentClaimRead,
+    TResult Function(_ChatUpdate value)? chatUpdate,
+    TResult Function(_RestoreInitial value)? restoreInitial,
+    required TResult orElse(),
+  }) {
+    if (restoreInitial != null) {
+      return restoreInitial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RestoreInitial implements BadgeEvent {
+  const factory _RestoreInitial() = _$_RestoreInitial;
 }
 
 /// @nodoc

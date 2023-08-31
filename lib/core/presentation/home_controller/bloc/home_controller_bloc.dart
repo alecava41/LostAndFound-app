@@ -15,6 +15,7 @@ class HomeControllerBloc extends Bloc<HomeControllerEvent, HomeControllerState> 
       (event, emit) async {
         await event.when<FutureOr<void>>(
           tabChanged: (idx) => _onTabChanged(emit, idx),
+          restoreInitial: () => emit(HomeControllerState.initial()),
         );
       },
     );

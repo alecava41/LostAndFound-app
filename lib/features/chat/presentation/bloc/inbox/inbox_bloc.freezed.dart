@@ -19,32 +19,38 @@ mixin _$InboxEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() inboxContentCreated,
+    required TResult Function() restoreInitial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? inboxContentCreated,
+    TResult? Function()? restoreInitial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? inboxContentCreated,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InboxContentCreated value) inboxContentCreated,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InboxContentCreated value)? inboxContentCreated,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InboxContentCreated value)? inboxContentCreated,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -107,6 +113,7 @@ class _$_InboxContentCreated implements _InboxContentCreated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() inboxContentCreated,
+    required TResult Function() restoreInitial,
   }) {
     return inboxContentCreated();
   }
@@ -115,6 +122,7 @@ class _$_InboxContentCreated implements _InboxContentCreated {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? inboxContentCreated,
+    TResult? Function()? restoreInitial,
   }) {
     return inboxContentCreated?.call();
   }
@@ -123,6 +131,7 @@ class _$_InboxContentCreated implements _InboxContentCreated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? inboxContentCreated,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) {
     if (inboxContentCreated != null) {
@@ -135,6 +144,7 @@ class _$_InboxContentCreated implements _InboxContentCreated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InboxContentCreated value) inboxContentCreated,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) {
     return inboxContentCreated(this);
   }
@@ -143,6 +153,7 @@ class _$_InboxContentCreated implements _InboxContentCreated {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InboxContentCreated value)? inboxContentCreated,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) {
     return inboxContentCreated?.call(this);
   }
@@ -151,6 +162,7 @@ class _$_InboxContentCreated implements _InboxContentCreated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InboxContentCreated value)? inboxContentCreated,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) {
     if (inboxContentCreated != null) {
@@ -162,6 +174,108 @@ class _$_InboxContentCreated implements _InboxContentCreated {
 
 abstract class _InboxContentCreated implements InboxEvent {
   const factory _InboxContentCreated() = _$_InboxContentCreated;
+}
+
+/// @nodoc
+abstract class _$$_RestoreInitialCopyWith<$Res> {
+  factory _$$_RestoreInitialCopyWith(
+          _$_RestoreInitial value, $Res Function(_$_RestoreInitial) then) =
+      __$$_RestoreInitialCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_RestoreInitialCopyWithImpl<$Res>
+    extends _$InboxEventCopyWithImpl<$Res, _$_RestoreInitial>
+    implements _$$_RestoreInitialCopyWith<$Res> {
+  __$$_RestoreInitialCopyWithImpl(
+      _$_RestoreInitial _value, $Res Function(_$_RestoreInitial) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_RestoreInitial implements _RestoreInitial {
+  const _$_RestoreInitial();
+
+  @override
+  String toString() {
+    return 'InboxEvent.restoreInitial()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_RestoreInitial);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() inboxContentCreated,
+    required TResult Function() restoreInitial,
+  }) {
+    return restoreInitial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? inboxContentCreated,
+    TResult? Function()? restoreInitial,
+  }) {
+    return restoreInitial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? inboxContentCreated,
+    TResult Function()? restoreInitial,
+    required TResult orElse(),
+  }) {
+    if (restoreInitial != null) {
+      return restoreInitial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InboxContentCreated value) inboxContentCreated,
+    required TResult Function(_RestoreInitial value) restoreInitial,
+  }) {
+    return restoreInitial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InboxContentCreated value)? inboxContentCreated,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
+  }) {
+    return restoreInitial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InboxContentCreated value)? inboxContentCreated,
+    TResult Function(_RestoreInitial value)? restoreInitial,
+    required TResult orElse(),
+  }) {
+    if (restoreInitial != null) {
+      return restoreInitial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RestoreInitial implements InboxEvent {
+  const factory _RestoreInitial() = _$_RestoreInitial;
 }
 
 /// @nodoc

@@ -6,4 +6,5 @@ class AnswerQuestionEvent with _$AnswerQuestionEvent {
   const factory AnswerQuestionEvent.answerFieldChanged(String answer) = _AnswerFieldChanged;
   const factory AnswerQuestionEvent.claimCreated() = _ClaimCreated;
   const factory AnswerQuestionEvent.infoTriggered() = _InfoTriggered;
+  const factory AnswerQuestionEvent.createChatRoom(int id, String username) = _CreateChatRoom;
 }

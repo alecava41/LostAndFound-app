@@ -34,6 +34,7 @@ class InboxBloc extends Bloc<InboxEvent, InboxState> {
           (event, emit) async {
         await event.when<FutureOr<void>>(
           inboxContentCreated: () => _onInboxContentCreated(emit),
+          restoreInitial: () => emit(InboxState.initial()),
         );
       },
     );

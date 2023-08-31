@@ -10,6 +10,7 @@ class UserItemDto with _$UserItemDto {
     required int id,
     required String title,
     required int claims,
+    required int approvedClaims,
     required bool image,
   }) = $UserItemDto;
 

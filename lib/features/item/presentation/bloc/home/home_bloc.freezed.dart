@@ -21,6 +21,7 @@ mixin _$HomeEvent {
     required TResult Function() homeCreated,
     required TResult Function() homeRefreshed,
     required TResult Function(ItemType type) homeSectionRefreshed,
+    required TResult Function() restoreInitial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$HomeEvent {
     TResult? Function()? homeCreated,
     TResult? Function()? homeRefreshed,
     TResult? Function(ItemType type)? homeSectionRefreshed,
+    TResult? Function()? restoreInitial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$HomeEvent {
     TResult Function()? homeCreated,
     TResult Function()? homeRefreshed,
     TResult Function(ItemType type)? homeSectionRefreshed,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$HomeEvent {
     required TResult Function(_HomeCreated value) homeCreated,
     required TResult Function(_HomeRefreshed value) homeRefreshed,
     required TResult Function(_HomeSectionRefreshed value) homeSectionRefreshed,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$HomeEvent {
     TResult? Function(_HomeCreated value)? homeCreated,
     TResult? Function(_HomeRefreshed value)? homeRefreshed,
     TResult? Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$HomeEvent {
     TResult Function(_HomeCreated value)? homeCreated,
     TResult Function(_HomeRefreshed value)? homeRefreshed,
     TResult Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,6 +126,7 @@ class _$_HomeCreated implements _HomeCreated {
     required TResult Function() homeCreated,
     required TResult Function() homeRefreshed,
     required TResult Function(ItemType type) homeSectionRefreshed,
+    required TResult Function() restoreInitial,
   }) {
     return homeCreated();
   }
@@ -130,6 +137,7 @@ class _$_HomeCreated implements _HomeCreated {
     TResult? Function()? homeCreated,
     TResult? Function()? homeRefreshed,
     TResult? Function(ItemType type)? homeSectionRefreshed,
+    TResult? Function()? restoreInitial,
   }) {
     return homeCreated?.call();
   }
@@ -140,6 +148,7 @@ class _$_HomeCreated implements _HomeCreated {
     TResult Function()? homeCreated,
     TResult Function()? homeRefreshed,
     TResult Function(ItemType type)? homeSectionRefreshed,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) {
     if (homeCreated != null) {
@@ -154,6 +163,7 @@ class _$_HomeCreated implements _HomeCreated {
     required TResult Function(_HomeCreated value) homeCreated,
     required TResult Function(_HomeRefreshed value) homeRefreshed,
     required TResult Function(_HomeSectionRefreshed value) homeSectionRefreshed,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) {
     return homeCreated(this);
   }
@@ -164,6 +174,7 @@ class _$_HomeCreated implements _HomeCreated {
     TResult? Function(_HomeCreated value)? homeCreated,
     TResult? Function(_HomeRefreshed value)? homeRefreshed,
     TResult? Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) {
     return homeCreated?.call(this);
   }
@@ -174,6 +185,7 @@ class _$_HomeCreated implements _HomeCreated {
     TResult Function(_HomeCreated value)? homeCreated,
     TResult Function(_HomeRefreshed value)? homeRefreshed,
     TResult Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) {
     if (homeCreated != null) {
@@ -228,6 +240,7 @@ class _$_HomeRefreshed implements _HomeRefreshed {
     required TResult Function() homeCreated,
     required TResult Function() homeRefreshed,
     required TResult Function(ItemType type) homeSectionRefreshed,
+    required TResult Function() restoreInitial,
   }) {
     return homeRefreshed();
   }
@@ -238,6 +251,7 @@ class _$_HomeRefreshed implements _HomeRefreshed {
     TResult? Function()? homeCreated,
     TResult? Function()? homeRefreshed,
     TResult? Function(ItemType type)? homeSectionRefreshed,
+    TResult? Function()? restoreInitial,
   }) {
     return homeRefreshed?.call();
   }
@@ -248,6 +262,7 @@ class _$_HomeRefreshed implements _HomeRefreshed {
     TResult Function()? homeCreated,
     TResult Function()? homeRefreshed,
     TResult Function(ItemType type)? homeSectionRefreshed,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) {
     if (homeRefreshed != null) {
@@ -262,6 +277,7 @@ class _$_HomeRefreshed implements _HomeRefreshed {
     required TResult Function(_HomeCreated value) homeCreated,
     required TResult Function(_HomeRefreshed value) homeRefreshed,
     required TResult Function(_HomeSectionRefreshed value) homeSectionRefreshed,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) {
     return homeRefreshed(this);
   }
@@ -272,6 +288,7 @@ class _$_HomeRefreshed implements _HomeRefreshed {
     TResult? Function(_HomeCreated value)? homeCreated,
     TResult? Function(_HomeRefreshed value)? homeRefreshed,
     TResult? Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) {
     return homeRefreshed?.call(this);
   }
@@ -282,6 +299,7 @@ class _$_HomeRefreshed implements _HomeRefreshed {
     TResult Function(_HomeCreated value)? homeCreated,
     TResult Function(_HomeRefreshed value)? homeRefreshed,
     TResult Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) {
     if (homeRefreshed != null) {
@@ -363,6 +381,7 @@ class _$_HomeSectionRefreshed implements _HomeSectionRefreshed {
     required TResult Function() homeCreated,
     required TResult Function() homeRefreshed,
     required TResult Function(ItemType type) homeSectionRefreshed,
+    required TResult Function() restoreInitial,
   }) {
     return homeSectionRefreshed(type);
   }
@@ -373,6 +392,7 @@ class _$_HomeSectionRefreshed implements _HomeSectionRefreshed {
     TResult? Function()? homeCreated,
     TResult? Function()? homeRefreshed,
     TResult? Function(ItemType type)? homeSectionRefreshed,
+    TResult? Function()? restoreInitial,
   }) {
     return homeSectionRefreshed?.call(type);
   }
@@ -383,6 +403,7 @@ class _$_HomeSectionRefreshed implements _HomeSectionRefreshed {
     TResult Function()? homeCreated,
     TResult Function()? homeRefreshed,
     TResult Function(ItemType type)? homeSectionRefreshed,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) {
     if (homeSectionRefreshed != null) {
@@ -397,6 +418,7 @@ class _$_HomeSectionRefreshed implements _HomeSectionRefreshed {
     required TResult Function(_HomeCreated value) homeCreated,
     required TResult Function(_HomeRefreshed value) homeRefreshed,
     required TResult Function(_HomeSectionRefreshed value) homeSectionRefreshed,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) {
     return homeSectionRefreshed(this);
   }
@@ -407,6 +429,7 @@ class _$_HomeSectionRefreshed implements _HomeSectionRefreshed {
     TResult? Function(_HomeCreated value)? homeCreated,
     TResult? Function(_HomeRefreshed value)? homeRefreshed,
     TResult? Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) {
     return homeSectionRefreshed?.call(this);
   }
@@ -417,6 +440,7 @@ class _$_HomeSectionRefreshed implements _HomeSectionRefreshed {
     TResult Function(_HomeCreated value)? homeCreated,
     TResult Function(_HomeRefreshed value)? homeRefreshed,
     TResult Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) {
     if (homeSectionRefreshed != null) {
@@ -434,6 +458,120 @@ abstract class _HomeSectionRefreshed implements HomeEvent {
   @JsonKey(ignore: true)
   _$$_HomeSectionRefreshedCopyWith<_$_HomeSectionRefreshed> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RestoreInitialCopyWith<$Res> {
+  factory _$$_RestoreInitialCopyWith(
+          _$_RestoreInitial value, $Res Function(_$_RestoreInitial) then) =
+      __$$_RestoreInitialCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_RestoreInitialCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$_RestoreInitial>
+    implements _$$_RestoreInitialCopyWith<$Res> {
+  __$$_RestoreInitialCopyWithImpl(
+      _$_RestoreInitial _value, $Res Function(_$_RestoreInitial) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_RestoreInitial implements _RestoreInitial {
+  const _$_RestoreInitial();
+
+  @override
+  String toString() {
+    return 'HomeEvent.restoreInitial()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_RestoreInitial);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() homeCreated,
+    required TResult Function() homeRefreshed,
+    required TResult Function(ItemType type) homeSectionRefreshed,
+    required TResult Function() restoreInitial,
+  }) {
+    return restoreInitial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? homeCreated,
+    TResult? Function()? homeRefreshed,
+    TResult? Function(ItemType type)? homeSectionRefreshed,
+    TResult? Function()? restoreInitial,
+  }) {
+    return restoreInitial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? homeCreated,
+    TResult Function()? homeRefreshed,
+    TResult Function(ItemType type)? homeSectionRefreshed,
+    TResult Function()? restoreInitial,
+    required TResult orElse(),
+  }) {
+    if (restoreInitial != null) {
+      return restoreInitial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_HomeCreated value) homeCreated,
+    required TResult Function(_HomeRefreshed value) homeRefreshed,
+    required TResult Function(_HomeSectionRefreshed value) homeSectionRefreshed,
+    required TResult Function(_RestoreInitial value) restoreInitial,
+  }) {
+    return restoreInitial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_HomeCreated value)? homeCreated,
+    TResult? Function(_HomeRefreshed value)? homeRefreshed,
+    TResult? Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
+  }) {
+    return restoreInitial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_HomeCreated value)? homeCreated,
+    TResult Function(_HomeRefreshed value)? homeRefreshed,
+    TResult Function(_HomeSectionRefreshed value)? homeSectionRefreshed,
+    TResult Function(_RestoreInitial value)? restoreInitial,
+    required TResult orElse(),
+  }) {
+    if (restoreInitial != null) {
+      return restoreInitial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RestoreInitial implements HomeEvent {
+  const factory _RestoreInitial() = _$_RestoreInitial;
 }
 
 /// @nodoc

@@ -31,8 +31,10 @@ class App extends StatefulWidget {
   State<StatefulWidget> createState() => _Application();
 
   // TODO status bar not showing properly after navigating back to certain pages
-  // TODO we may provide a quick way to start a chat directly on a claim (after it has been approved for example)
-  // TODO since now even sent claims are clickable, why don't we take user to his sent claim instead of going into item page (from sent claims screen, we can save a click)
+
+  // TODO refresh received claims page after managing a claim
+
+  // TODO refresh sent claims page after receiving notification
 }
 
 class _Application extends State<App> {
@@ -127,7 +129,7 @@ class _Application extends State<App> {
         BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>()),
         BlocProvider<UserBloc>(create: (_) => sl<UserBloc>()),
         BlocProvider<HomeControllerBloc>(create: (_) => sl<HomeControllerBloc>()),
-        BlocProvider<BadgeBloc>(create: (_) => sl<BadgeBloc>()..add(const BadgeEvent.badgeCreated())),
+        BlocProvider<BadgeBloc>(create: (_) => sl<BadgeBloc>()),
         BlocProvider<InboxBloc>(create: (_) => sl<InboxBloc>())
       ],
       child: Sizer(

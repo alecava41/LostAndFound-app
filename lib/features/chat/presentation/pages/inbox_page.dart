@@ -12,6 +12,7 @@ import '../widgets/inbox/inbox_item.dart';
 class InboxScreen extends StatelessWidget {
   const InboxScreen({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<InboxBloc, InboxState>(
@@ -63,8 +64,6 @@ class InboxScreen extends StatelessWidget {
                               itemCount: activeRooms.length,
                               itemBuilder: (context, index) {
                                 final room = activeRooms[index];
-
-                                // TODO maybe better to add also item title in InboxItem?
 
                                 // Metadata handling
                                 final id1 = room.metadata!["id1"] as int;

@@ -48,6 +48,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           showFilters: () => _onShowFilters(emit),
           sortParameterChanged: (order) => _onChangeSortingParameter(emit, order),
           searchPageChanged: (page) => _onSearchPageChanged(emit, page),
+          restoreInitial: () => emit(SearchState.initial()),
         );
       },
     );

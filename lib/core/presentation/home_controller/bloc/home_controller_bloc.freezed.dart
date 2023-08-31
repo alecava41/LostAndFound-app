@@ -16,42 +16,43 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeControllerEvent {
-  int get index => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int index) tabChanged,
+    required TResult Function() restoreInitial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int index)? tabChanged,
+    TResult? Function()? restoreInitial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int index)? tabChanged,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeControllerTabChanged value) tabChanged,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_HomeControllerTabChanged value)? tabChanged,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_HomeControllerTabChanged value)? tabChanged,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $HomeControllerEventCopyWith<HomeControllerEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -60,8 +61,6 @@ abstract class $HomeControllerEventCopyWith<$Res> {
   factory $HomeControllerEventCopyWith(
           HomeControllerEvent value, $Res Function(HomeControllerEvent) then) =
       _$HomeControllerEventCopyWithImpl<$Res, HomeControllerEvent>;
-  @useResult
-  $Res call({int index});
 }
 
 /// @nodoc
@@ -73,29 +72,14 @@ class _$HomeControllerEventCopyWithImpl<$Res, $Val extends HomeControllerEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? index = null,
-  }) {
-    return _then(_value.copyWith(
-      index: null == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_HomeControllerTabChangedCopyWith<$Res>
-    implements $HomeControllerEventCopyWith<$Res> {
+abstract class _$$_HomeControllerTabChangedCopyWith<$Res> {
   factory _$$_HomeControllerTabChangedCopyWith(
           _$_HomeControllerTabChanged value,
           $Res Function(_$_HomeControllerTabChanged) then) =
       __$$_HomeControllerTabChangedCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({int index});
 }
@@ -157,6 +141,7 @@ class _$_HomeControllerTabChanged implements _HomeControllerTabChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int index) tabChanged,
+    required TResult Function() restoreInitial,
   }) {
     return tabChanged(index);
   }
@@ -165,6 +150,7 @@ class _$_HomeControllerTabChanged implements _HomeControllerTabChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int index)? tabChanged,
+    TResult? Function()? restoreInitial,
   }) {
     return tabChanged?.call(index);
   }
@@ -173,6 +159,7 @@ class _$_HomeControllerTabChanged implements _HomeControllerTabChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int index)? tabChanged,
+    TResult Function()? restoreInitial,
     required TResult orElse(),
   }) {
     if (tabChanged != null) {
@@ -185,6 +172,7 @@ class _$_HomeControllerTabChanged implements _HomeControllerTabChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeControllerTabChanged value) tabChanged,
+    required TResult Function(_RestoreInitial value) restoreInitial,
   }) {
     return tabChanged(this);
   }
@@ -193,6 +181,7 @@ class _$_HomeControllerTabChanged implements _HomeControllerTabChanged {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_HomeControllerTabChanged value)? tabChanged,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
   }) {
     return tabChanged?.call(this);
   }
@@ -201,6 +190,7 @@ class _$_HomeControllerTabChanged implements _HomeControllerTabChanged {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_HomeControllerTabChanged value)? tabChanged,
+    TResult Function(_RestoreInitial value)? restoreInitial,
     required TResult orElse(),
   }) {
     if (tabChanged != null) {
@@ -214,12 +204,112 @@ abstract class _HomeControllerTabChanged implements HomeControllerEvent {
   const factory _HomeControllerTabChanged(final int index) =
       _$_HomeControllerTabChanged;
 
-  @override
   int get index;
-  @override
   @JsonKey(ignore: true)
   _$$_HomeControllerTabChangedCopyWith<_$_HomeControllerTabChanged>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RestoreInitialCopyWith<$Res> {
+  factory _$$_RestoreInitialCopyWith(
+          _$_RestoreInitial value, $Res Function(_$_RestoreInitial) then) =
+      __$$_RestoreInitialCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_RestoreInitialCopyWithImpl<$Res>
+    extends _$HomeControllerEventCopyWithImpl<$Res, _$_RestoreInitial>
+    implements _$$_RestoreInitialCopyWith<$Res> {
+  __$$_RestoreInitialCopyWithImpl(
+      _$_RestoreInitial _value, $Res Function(_$_RestoreInitial) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_RestoreInitial implements _RestoreInitial {
+  const _$_RestoreInitial();
+
+  @override
+  String toString() {
+    return 'HomeControllerEvent.restoreInitial()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_RestoreInitial);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int index) tabChanged,
+    required TResult Function() restoreInitial,
+  }) {
+    return restoreInitial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int index)? tabChanged,
+    TResult? Function()? restoreInitial,
+  }) {
+    return restoreInitial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int index)? tabChanged,
+    TResult Function()? restoreInitial,
+    required TResult orElse(),
+  }) {
+    if (restoreInitial != null) {
+      return restoreInitial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_HomeControllerTabChanged value) tabChanged,
+    required TResult Function(_RestoreInitial value) restoreInitial,
+  }) {
+    return restoreInitial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_HomeControllerTabChanged value)? tabChanged,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
+  }) {
+    return restoreInitial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_HomeControllerTabChanged value)? tabChanged,
+    TResult Function(_RestoreInitial value)? restoreInitial,
+    required TResult orElse(),
+  }) {
+    if (restoreInitial != null) {
+      return restoreInitial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RestoreInitial implements HomeControllerEvent {
+  const factory _RestoreInitial() = _$_RestoreInitial;
 }
 
 /// @nodoc

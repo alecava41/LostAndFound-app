@@ -48,6 +48,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           contentCreated: () => _onContentCreated(emit),
           imageChanged: (path) => _onImageChanged(emit, path),
           logout: () => _onLogout(emit),
+          restoreInitial: () => emit(UserState.initial()),
         );
       },
     );

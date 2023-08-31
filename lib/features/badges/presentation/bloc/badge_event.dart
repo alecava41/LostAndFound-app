@@ -10,4 +10,5 @@ class BadgeEvent with _$BadgeEvent {
   const factory BadgeEvent.sentClaimUpdate() = _SentClaimUpdate;
   const factory BadgeEvent.sentClaimRead() = _SentClaimRead;
   const factory BadgeEvent.chatUpdate(bool hasUnreadChats) = _ChatUpdate;
+  const factory BadgeEvent.restoreInitial() = _RestoreInitial;
 }

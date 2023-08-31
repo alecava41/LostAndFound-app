@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
-import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
+import 'package:lost_and_found/features/claim/presentation/pages/answer_question_screen.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
 import '../../../../../core/domain/entities/claim_status.dart';
@@ -31,7 +31,13 @@ class ClaimedStatusCard extends StatelessWidget {
           splashColor: PersonalizedColor.splashGreyColor,
           onTap: () => {
             context.read<BadgeBloc>().add(const BadgeEvent.sentClaimRead()),
-            Navigator.push(context, MaterialPageRoute(builder: (_) => ItemScreen(itemId: claim.item.id)))
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => AnswerQuestionScreen(
+                          itemId: claim.item.id,
+                          isClaimAlreadyTaken: claim.status != ClaimStatus.pending,
+                        )))
           },
           child: Container(
             decoration: BoxDecoration(

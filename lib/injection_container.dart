@@ -159,8 +159,8 @@ Future<void> init() async {
   // BLoC
   sl.registerFactory(() => ClaimBloc(
       getReceivedClaimsUseCase: sl(), getSentClaimsUseCase: sl(), secureStorage: sl(), insertReadClaimUseCase: sl()));
-  sl.registerFactory(() => AnswerQuestionBloc(storage: sl(), createClaimUseCase: sl(), getItemUseCase: sl()));
-  sl.registerFactory(() => AnswerClaimBloc(getItemUseCase: sl(), storage: sl(), manageClaimUseCase: sl()));
+  sl.registerFactory(() => AnswerQuestionBloc(storage: sl(), createClaimUseCase: sl(), getItemUseCase: sl(), createRoomUseCase: sl()));
+  sl.registerFactory(() => AnswerClaimBloc(getItemUseCase: sl(), storage: sl(), manageClaimUseCase: sl(), createRoomUseCase: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetReceivedClaimsUseCase(sl()));

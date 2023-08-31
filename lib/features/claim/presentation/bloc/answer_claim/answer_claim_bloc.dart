@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lost_and_found/core/status/success.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/manage_claim_usecase.dart';
@@ -9,6 +10,7 @@ import 'package:lost_and_found/features/claim/domain/usecases/manage_claim_useca
 import '../../../../../core/data/secure_storage/secure_storage.dart';
 import '../../../../../core/domain/entities/claim_status.dart';
 import '../../../../../core/status/failures.dart';
+import '../../../../chat/domain/usecases/create_room_usecase.dart';
 import '../../../../item/domain/entities/item.dart';
 import '../../../../item/domain/usecases/get_item_usecase.dart';
 
@@ -21,24 +23,45 @@ part 'answer_claim_state.dart';
 class AnswerClaimBloc extends Bloc<AnswerClaimEvent, AnswerClaimState> {
   final GetItemUseCase _getItemUseCase;
   final SecureStorage _storage;
+  final CreateRoomUseCase _createRoomUseCase;
   final ManageClaimUseCase _manageClaimUseCase;
 
-  AnswerClaimBloc(
-      {required GetItemUseCase getItemUseCase,
-      required SecureStorage storage,
-      required ManageClaimUseCase manageClaimUseCase})
-      : _getItemUseCase = getItemUseCase,
+  AnswerClaimBloc({
+    required GetItemUseCase getItemUseCase,
+    required SecureStorage storage,
+    required ManageClaimUseCase manageClaimUseCase,
+    required CreateRoomUseCase createRoomUseCase,
+  })  : _getItemUseCase = getItemUseCase,
         _storage = storage,
         _manageClaimUseCase = manageClaimUseCase,
+        _createRoomUseCase = createRoomUseCase,
         super(AnswerClaimState.initial()) {
     on<AnswerClaimEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
             contentCreated: (itemId) => _onContentCreated(emit, itemId),
             claimDecisionTaken: (status, claimId) => _onClaimDecisionTaken(emit, status, claimId),
-            infoTriggered: () => _onInfoTriggered(emit));
+            infoTriggered: () => _onInfoTriggered(emit),
+            createChatRoom: (int id, String username) => _onChatRoomCreation(emit, id, username));
       },
     );
+  }
+
+  Future<void> _onChatRoomCreation(Emitter<AnswerClaimState> emit, int id2, username2) async {
+    final userId = (await _storage.getSessionInformation())!.user;
+
+    final params = CreateRoomParams(
+      id1: userId,
+      id2: id2,
+      username1: (await _storage.getCredentialsForChatLogin()).second,
+      username2: username2,
+      itemId: state.item!.id,
+    );
+
+    final response = await _createRoomUseCase(params);
+
+    emit(state.copyWith(roomCreationFailureOrSuccess: response));
+    emit(state.copyWith(roomCreationFailureOrSuccess: null));
   }
 
   Future<void> _onContentCreated(Emitter<AnswerClaimState> emit, int itemId) async {

@@ -3,15 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
-import 'package:lost_and_found/core/presentation/widgets/image_dialog.dart';
 import 'package:lost_and_found/features/chat/presentation/bloc/chat/chat_bloc.dart' as chat;
 import 'package:lost_and_found/features/claim/domain/entities/claim_received.dart';
 import 'package:lost_and_found/features/claim/domain/entities/claim_sent.dart' as sent;
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
+import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc.dart';
+import 'package:lost_and_found/features/item/presentation/widgets/notifications/circular_image_avatar.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
-import '../../../../core/presentation/widgets/circular_image_avatar.dart';
 import '../../../../injection_container.dart';
 import '../../../claim/presentation/widgets/claim/claimed_item_card.dart';
 import '../../../claim/presentation/widgets/claim/claimed_status_card.dart';
@@ -30,8 +30,12 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<chat.ChatBloc>()..add(chat.ChatEvent.chatContentCreated(roomId, itemId)),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<chat.ChatBloc>(
+            create: (_) => sl<chat.ChatBloc>()..add(chat.ChatEvent.chatContentCreated(roomId, itemId))),
+        BlocProvider<ClaimBloc>(create: (_) => sl<ClaimBloc>())
+      ],
       child: BlocConsumer<chat.ChatBloc, chat.ChatState>(
         listener: (ctx, state) {},
         builder: (ctx, state) {
@@ -47,6 +51,9 @@ class ChatScreen extends StatelessWidget {
 
           final room = state.room!;
           final currentUser = room.users.firstWhere((user) => user.firstName == state.currentUsername);
+          final currentUserId = (room.metadata!["username1"]! == state.currentUsername
+              ? room.metadata!["id1"]!
+              : room.metadata!["id2"]!) as int;
 
           final otherUser = room.users.firstWhere((user) => user.firstName != state.currentUsername);
           final otherUserId = (room.metadata!["username1"]! != state.currentUsername
@@ -64,28 +71,7 @@ class ChatScreen extends StatelessWidget {
             },
             child: Scaffold(
               appBar: AppBar(
-                toolbarHeight: 60,
-                title: ImageDialogWidget(
-                  token: state.token,
-                  errorAsset: "assets/images/no-user.jpg",
-                  imageUrl: "$baseUrl/api/users/$otherUserId/image",
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Text(otherUser.firstName!, style: const TextStyle(color: Colors.black, fontSize: 25)),
-                        const SizedBox(width: 6),
-                        CircularImage(
-                          radius: 22,
-                          token: state.token,
-                          hasImage: true,
-                          errorAsset: "assets/images/no-user.jpg",
-                          imageUrl: '$baseUrl/api/users/$otherUserId/image',
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                title: Text(otherUser.firstName!, style: const TextStyle(color: Colors.black, fontSize: 25)),
                 backgroundColor: Colors.white,
                 iconTheme: const IconThemeData(color: Colors.black),
               ),
@@ -127,6 +113,19 @@ class ChatScreen extends StatelessWidget {
                       initialData: const [],
                       stream: state.messages,
                       builder: (context, snapshot) => Chat(
+                        showUserAvatars: true,
+                        avatarBuilder: (userId) {
+                          final id = userId == currentUser.id ? currentUserId : otherUserId;
+                          return Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                            child: CircularImage(
+                              token: state.token,
+                              hasImage: true,
+                              imageUrl: "$baseUrl/api/users/$id}/image",
+                              radius: 20,
+                            ),
+                          );
+                        },
                         theme: const DefaultChatTheme(
                           //inputBackgroundColor: Colors.white
                           primaryColor: PersonalizedColor.mainColor,
