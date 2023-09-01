@@ -213,8 +213,8 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Location Permissions Denied'),
-          content: const Text('Location permissions are required to use your current location.'),
+          title: const Text('Location Permission Required'),
+          content: const Text('Location permission is required to use your current location.'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
@@ -233,9 +233,9 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Location Permissions Permanently Denied'),
+          title: const Text('Location Permission Required'),
           content: const Text(
-              'Location permissions are required to use your current location. Please go to app settings and enable location permissions.'),
+              'Location permission is required to use your current location.\n\nPlease go to app settings and enable it.'),
           actions: <Widget>[
             TextButton(
               onPressed: () {

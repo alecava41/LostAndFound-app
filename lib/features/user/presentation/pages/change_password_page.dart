@@ -101,7 +101,7 @@ class ChangePasswordScreen extends StatelessWidget {
                               height: 20,
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(12.0),
+                              padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
                               child: TextFormField(
                                 onChanged: (value) => ctx
                                     .read<ChangePasswordBloc>()
@@ -133,11 +133,9 @@ class ChangePasswordScreen extends StatelessWidget {
                                     state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
                               ),
                             ),
-                            const SizedBox(
-                              height: 15,
-                            ),
+                            const SizedBox(height: 12),
                             Padding(
-                              padding: const EdgeInsets.all(12.0),
+                              padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
                               child: TextFormField(
                                 onChanged: (value) => ctx
                                     .read<ChangePasswordBloc>()
@@ -169,12 +167,11 @@ class ChangePasswordScreen extends StatelessWidget {
                                     state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
                               ),
                             ),
-                            const SizedBox(
-                              height: 15,
-                            ),
+                            const SizedBox(height: 12),
                             Padding(
-                              padding: const EdgeInsets.all(12.0),
+                              padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
                               child: TextFormField(
+                                textInputAction: TextInputAction.done,
                                 onChanged: (value) => ctx
                                     .read<ChangePasswordBloc>()
                                     .add(ChangePasswordEvent.confirmPasswordFieldChanged(value)),
@@ -205,9 +202,7 @@ class ChangePasswordScreen extends StatelessWidget {
                                     state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
                               ),
                             ),
-                            const SizedBox(
-                              height: 15,
-                            ),
+                            const SizedBox(height: 10),
                             Row(
                               children: [
                                 Expanded(

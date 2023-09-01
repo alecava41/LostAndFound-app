@@ -9,7 +9,9 @@ import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.da
 import 'package:lost_and_found/features/item/presentation/bloc/update_item/update_item_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/insert_item/radio_buttons_form.dart';
 import 'package:lost_and_found/utils/constants.dart';
+import 'package:permission_handler/permission_handler.dart';
 
+import '../../../../core/presentation/dialogs/camera_permission.dart';
 import '../../../../core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import '../../../../core/presentation/select_category/widgets/select_category_form.dart';
 import '../../../../core/presentation/widgets/confirm_exit_dialog.dart';
@@ -28,19 +30,45 @@ class UpdateItemScreen extends StatelessWidget {
   UpdateItemScreen({super.key, required this.itemId});
 
   // Upload image from camera or from gallery based on parameter
-  Future getImage(ImageSource media, Function(XFile? image) callback) async {
-    var img = await picker.pickImage(source: media);
-    callback(img);
+  Future<void> getImage(ImageSource media, Function(String? path) callback, context) async {
+    bool hasPermission = true;
+
+    if (media == ImageSource.camera) {
+      Permission permission = Permission.camera;
+      PermissionStatus permissionStatus = await permission.status;
+
+      if (permissionStatus.isPermanentlyDenied) {
+        showCameraPermissionPermanentlyDeniedDialog(context);
+        hasPermission = false;
+      } else if (permissionStatus.isDenied) {
+        permissionStatus = await permission.request();
+
+        if (permissionStatus == PermissionStatus.denied) {
+          showCameraPermissionDeniedDialog(context);
+          hasPermission = false;
+        } else if (permissionStatus == PermissionStatus.permanentlyDenied) {
+          showCameraPermissionPermanentlyDeniedDialog(context);
+          hasPermission = false;
+        }
+      }
+    }
+
+    if (hasPermission) {
+      var img = await picker.pickImage(source: media);
+      callback(img?.path);
+    }
   }
 
-  void onTapGallery(BuildContext ctx) {
+  Future<void> onTapGallery(BuildContext ctx) async {
     Navigator.pop(ctx);
-    getImage(ImageSource.gallery, (image) => ctx.read<UpdateItemBloc>().add(UpdateItemEvent.imageSelected(image!.path)));
+    await getImage(ImageSource.gallery,
+        (path) => path != null ? ctx.read<UpdateItemBloc>().add(UpdateItemEvent.imageSelected(path)) : {}, ctx);
   }
 
-  void onTapCamera(BuildContext ctx) {
+  Future<void> onTapCamera(BuildContext ctx) async {
     Navigator.pop(ctx);
-    getImage(ImageSource.camera, (image) => ctx.read<UpdateItemBloc>().add(UpdateItemEvent.imageSelected(image!.path)));
+    await getImage(ImageSource.camera,
+        (path) => path != null ? ctx.read<UpdateItemBloc>().add(UpdateItemEvent.imageSelected(path)) : {}, ctx);
   }
 
   void onConfirm(BuildContext context) {

@@ -36,7 +36,7 @@ class ClaimedStatusCard extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (_) => AnswerQuestionScreen(
                           itemId: claim.item.id,
-                          isClaimAlreadyTaken: claim.status != ClaimStatus.pending,
+                          isClaimAlreadyTaken: true,
                         )))
           },
           child: Container(
