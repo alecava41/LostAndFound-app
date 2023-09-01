@@ -102,7 +102,7 @@ class CustomCardHome extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                        if (claims > 0 && approvedClaims == 0)
+                        if (claims > 0)
                           Row(
                             children: [
                               Expanded(
@@ -133,8 +133,7 @@ class CustomCardHome extends StatelessWidget {
                               ),
                             ],
                           )
-                          // TODO error on server, need to fix approvedClaims
-                        else
+                        else if (approvedClaims > 0)
                           Row(
                             children: [
                               Expanded(

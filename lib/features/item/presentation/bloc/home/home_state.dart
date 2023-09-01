@@ -9,7 +9,6 @@ class HomeState with _$HomeState {
     // Additional parameters
     @Default("") String token,
     @Default(false) bool isLoading,
-    Either<Failure, Success>? homeFailureOrSuccess,
     @Default(false) bool hasLoadingError,
   }) = _HomeState;
 

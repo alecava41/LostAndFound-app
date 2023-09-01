@@ -36,14 +36,16 @@ class LostItemsContainer extends StatelessWidget {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: state.lostItems
-                            .map((item) => CustomCardHome(
-                                  id: item.id,
-                                  text: item.title,
-                                  claims: item.claims,
-                                  token: state.token,
-                                  hasImage: item.hasImage,
-                                  approvedClaims: item.approvedClaims,
-                                ))
+                            .map(
+                              (item) => CustomCardHome(
+                                id: item.id,
+                                text: item.title,
+                                claims: item.claims,
+                                token: state.token,
+                                hasImage: item.hasImage,
+                                approvedClaims: item.approvedClaims,
+                              ),
+                            )
                             .toList(),
                       )),
                 )

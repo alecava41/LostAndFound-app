@@ -18,10 +18,8 @@ class GetUserItemsUseCase implements UseCase<List<UserItem>, GetUserItemsParams>
 
 class GetUserItemsParams {
   final ItemType type;
-  final int last;
 
   GetUserItemsParams({
     required this.type,
-    required this.last
   });
 }

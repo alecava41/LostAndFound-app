@@ -13,7 +13,7 @@ class _ItemClient implements ItemClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://16.16.64.106:5000/api';
+    baseUrl ??= 'http://192.168.178.41:5000/api';
   }
 
   final Dio _dio;
@@ -24,13 +24,9 @@ class _ItemClient implements ItemClient {
   Future<List<UserItemDto>> getUserItems(
     int userId,
     String type,
-    int last,
   ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'type': type,
-      r'last': last,
-    };
+    final queryParameters = <String, dynamic>{r'type': type};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio

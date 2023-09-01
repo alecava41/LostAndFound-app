@@ -35,6 +35,8 @@ class App extends StatefulWidget {
   // TODO refresh received claims page after managing a claim
 
   // TODO refresh sent claims page after receiving notification
+
+  // TODO move camera permissions handling on domain layer (just like position)
 }
 
 class _Application extends State<App> {

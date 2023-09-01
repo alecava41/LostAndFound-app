@@ -581,8 +581,6 @@ mixin _$HomeState {
       throw _privateConstructorUsedError; // Additional parameters
   String get token => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  Either<Failure, Success>? get homeFailureOrSuccess =>
-      throw _privateConstructorUsedError;
   bool get hasLoadingError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -600,7 +598,6 @@ abstract class $HomeStateCopyWith<$Res> {
       List<UserItem> foundItems,
       String token,
       bool isLoading,
-      Either<Failure, Success>? homeFailureOrSuccess,
       bool hasLoadingError});
 }
 
@@ -621,7 +618,6 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? foundItems = null,
     Object? token = null,
     Object? isLoading = null,
-    Object? homeFailureOrSuccess = freezed,
     Object? hasLoadingError = null,
   }) {
     return _then(_value.copyWith(
@@ -641,10 +637,6 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      homeFailureOrSuccess: freezed == homeFailureOrSuccess
-          ? _value.homeFailureOrSuccess
-          : homeFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
       hasLoadingError: null == hasLoadingError
           ? _value.hasLoadingError
           : hasLoadingError // ignore: cast_nullable_to_non_nullable
@@ -665,7 +657,6 @@ abstract class _$$_HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
       List<UserItem> foundItems,
       String token,
       bool isLoading,
-      Either<Failure, Success>? homeFailureOrSuccess,
       bool hasLoadingError});
 }
 
@@ -684,7 +675,6 @@ class __$$_HomeStateCopyWithImpl<$Res>
     Object? foundItems = null,
     Object? token = null,
     Object? isLoading = null,
-    Object? homeFailureOrSuccess = freezed,
     Object? hasLoadingError = null,
   }) {
     return _then(_$_HomeState(
@@ -704,10 +694,6 @@ class __$$_HomeStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      homeFailureOrSuccess: freezed == homeFailureOrSuccess
-          ? _value.homeFailureOrSuccess
-          : homeFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Either<Failure, Success>?,
       hasLoadingError: null == hasLoadingError
           ? _value.hasLoadingError
           : hasLoadingError // ignore: cast_nullable_to_non_nullable
@@ -724,7 +710,6 @@ class _$_HomeState implements _HomeState {
       required final List<UserItem> foundItems,
       this.token = "",
       this.isLoading = false,
-      this.homeFailureOrSuccess,
       this.hasLoadingError = false})
       : _lostItems = lostItems,
         _foundItems = foundItems;
@@ -753,14 +738,12 @@ class _$_HomeState implements _HomeState {
   @JsonKey()
   final bool isLoading;
   @override
-  final Either<Failure, Success>? homeFailureOrSuccess;
-  @override
   @JsonKey()
   final bool hasLoadingError;
 
   @override
   String toString() {
-    return 'HomeState(lostItems: $lostItems, foundItems: $foundItems, token: $token, isLoading: $isLoading, homeFailureOrSuccess: $homeFailureOrSuccess, hasLoadingError: $hasLoadingError)';
+    return 'HomeState(lostItems: $lostItems, foundItems: $foundItems, token: $token, isLoading: $isLoading, hasLoadingError: $hasLoadingError)';
   }
 
   @override
@@ -775,8 +758,6 @@ class _$_HomeState implements _HomeState {
             (identical(other.token, token) || other.token == token) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.homeFailureOrSuccess, homeFailureOrSuccess) ||
-                other.homeFailureOrSuccess == homeFailureOrSuccess) &&
             (identical(other.hasLoadingError, hasLoadingError) ||
                 other.hasLoadingError == hasLoadingError));
   }
@@ -788,7 +769,6 @@ class _$_HomeState implements _HomeState {
       const DeepCollectionEquality().hash(_foundItems),
       token,
       isLoading,
-      homeFailureOrSuccess,
       hasLoadingError);
 
   @JsonKey(ignore: true)
@@ -804,7 +784,6 @@ abstract class _HomeState implements HomeState {
       required final List<UserItem> foundItems,
       final String token,
       final bool isLoading,
-      final Either<Failure, Success>? homeFailureOrSuccess,
       final bool hasLoadingError}) = _$_HomeState;
 
   @override
@@ -815,8 +794,6 @@ abstract class _HomeState implements HomeState {
   String get token;
   @override
   bool get isLoading;
-  @override
-  Either<Failure, Success>? get homeFailureOrSuccess;
   @override
   bool get hasLoadingError;
   @override

@@ -369,7 +369,7 @@ class ItemScreen extends StatelessWidget {
                       child: Column(
                       children: [
                         Text(
-                          "No claims received.",
+                          "No claims received yet.",
                           style: TextStyle(fontSize: 18),
                         ),
                         Icon(

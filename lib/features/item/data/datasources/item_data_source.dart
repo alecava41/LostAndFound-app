@@ -37,7 +37,7 @@ class ItemDataSourceImpl implements ItemDataSource {
 
   @override
   Future<List<UserItemDto>> getUserItems(GetUserItemsParams params, int userId) async {
-    return _client.getUserItems(userId, params.type.name, params.last).catchError(handleError<List<UserItemDto>>);
+    return _client.getUserItems(userId, params.type.name).catchError(handleError<List<UserItemDto>>);
   }
 
   @override

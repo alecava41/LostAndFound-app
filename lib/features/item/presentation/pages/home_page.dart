@@ -16,25 +16,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeBloc, HomeState>(
-      listener: (ctx, state) {
-        final loadFailureOrSuccess = state.homeFailureOrSuccess;
-
-        if (loadFailureOrSuccess != null) {
-          loadFailureOrSuccess.fold((failure) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              padding: const EdgeInsets.all(30),
-              backgroundColor: Colors.red,
-              content: Text(
-                  failure.maybeWhen<String>(
-                      genericFailure: () => 'Server error. Please try again later.',
-                      networkFailure: () => 'No internet connection available. Check your internet connection.',
-                      orElse: () => "Unknown error"),
-                  style: const TextStyle(fontSize: 20)),
-            ));
-          }, (_) {});
-        }
-      },
+    return BlocBuilder<HomeBloc, HomeState>(
       builder: (ctx, state) {
         return BlocBuilder<BadgeBloc, BadgeState>(
           builder: (badgeCtx, badgeState) {

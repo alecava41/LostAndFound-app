@@ -22,7 +22,6 @@ abstract class ItemClient {
   Future<List<UserItemDto>> getUserItems(
     @Path() int userId,
     @Query("type") String type,
-    @Query("last") int last,
   );
 
   @GET('/users/{userId}/items/news')
