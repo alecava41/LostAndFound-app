@@ -17,6 +17,7 @@ import '../widgets/insert_item/upload_image_form.dart';
 import '../../../../injection_container.dart';
 import '../../../../utils/colors.dart';
 import '../widgets/insert_item/radio_buttons_form.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class InsertItemScreen extends StatelessWidget {
   final ImagePicker picker = ImagePicker();
@@ -24,23 +25,50 @@ class InsertItemScreen extends StatelessWidget {
   InsertItemScreen({super.key});
 
   // Upload image from camera or from gallery based on parameter
-  Future getImage(ImageSource media, Function(String? path) callback) async {
+  Future getImage(ImageSource media, Function(String? path) callback, context) async {
+    
+    Permission permission = Permission.camera;
+    PermissionStatus permissionStatus = await permission.status;
+
+    if(permissionStatus.isDenied){
+      permissionStatus = await permission.request();
+      if(permissionStatus == PermissionStatus.permanentlyDenied){
+        showCameraPermissionPermanentlyDeniedDialog(context);
+      }
+      if(permissionStatus == PermissionStatus.denied){
+        permissionStatus = await permission.request();
+
+      }
+
+    }
     var img = await picker.pickImage(source: media);
+    
+
     callback(img?.path);
   }
 
   void onTapGallery(BuildContext ctx) {
     Navigator.pop(ctx);
-    getImage(ImageSource.gallery, (path) => ctx.read<InsertItemBloc>().add(InsertItemEvent.imageSelected(path!)));
+    getImage(
+        ImageSource.gallery,
+        (path) => ctx
+            .read<InsertItemBloc>()
+            .add(InsertItemEvent.imageSelected(path!)), ctx);
   }
 
   void onTapCamera(BuildContext ctx) {
     Navigator.pop(ctx);
-    getImage(ImageSource.camera, (path) => ctx.read<InsertItemBloc>().add(InsertItemEvent.imageSelected(path!)));
+    getImage(
+        ImageSource.camera,
+        (path) => ctx
+            .read<InsertItemBloc>()
+            .add(InsertItemEvent.imageSelected(path!)), ctx);
   }
 
   void onConfirm(BuildContext context) {
-    context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
+    context
+        .read<HomeControllerBloc>()
+        .add(const HomeControllerEvent.tabChanged(0));
     Navigator.pop(context);
     Navigator.pop(context);
   }
@@ -69,7 +97,8 @@ class InsertItemScreen extends StatelessWidget {
                                 backgroundColor: Colors.red,
                                 content: Text(
                                     failure.maybeWhen<String>(
-                                        genericFailure: () => 'Server error. Please try again later.',
+                                        genericFailure: () =>
+                                            'Server error. Please try again later.',
                                         networkFailure: () =>
                                             'No internet connection available. Check your internet connection.',
                                         orElse: () => "Unknown error"),
@@ -79,8 +108,12 @@ class InsertItemScreen extends StatelessWidget {
                           })
                     },
                 (_) => {
-                      ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.type)),
-                      ctx.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0)),
+                      ctx
+                          .read<HomeBloc>()
+                          .add(HomeEvent.homeSectionRefreshed(state.type)),
+                      ctx
+                          .read<HomeControllerBloc>()
+                          .add(const HomeControllerEvent.tabChanged(0)),
                       Navigator.pop(ctx)
                     });
           }
@@ -92,9 +125,13 @@ class InsertItemScreen extends StatelessWidget {
               maxLines: 1,
               showError: state.showError,
               errorText: state.title.value.fold(
-                  (failure) => failure.maybeWhen<String?>(validationFailure: (reason) => reason, orElse: () => null),
+                  (failure) => failure.maybeWhen<String?>(
+                      validationFailure: (reason) => reason,
+                      orElse: () => null),
                   (r) => null),
-              onTextChanged: (input) => ctx.read<InsertItemBloc>().add(InsertItemEvent.titleChanged(input)),
+              onTextChanged: (input) => ctx
+                  .read<InsertItemBloc>()
+                  .add(InsertItemEvent.titleChanged(input)),
               isValid: state.title.value.isRight(),
               hintText: "e.g. Iphone 12 black",
             ),
@@ -103,17 +140,23 @@ class InsertItemScreen extends StatelessWidget {
             title: "The item has been",
             content: PersonalizedRadioButtonsForm(
                 selectedValue: state.type,
-                onChanged: (type) => ctx.read<InsertItemBloc>().add(InsertItemEvent.typeChanged(type))),
+                onChanged: (type) => ctx
+                    .read<InsertItemBloc>()
+                    .add(InsertItemEvent.typeChanged(type))),
           );
           var questionField = CustomFieldContainer(
             title: "Question to verify the ownership",
             content: PersonalizedFormWithTextInsertion(
               hintText: "e.g. Any device scratches? Where?",
               isValid: state.question.value.isRight(),
-              onTextChanged: (input) => ctx.read<InsertItemBloc>().add(InsertItemEvent.questionChanged(input)),
+              onTextChanged: (input) => ctx
+                  .read<InsertItemBloc>()
+                  .add(InsertItemEvent.questionChanged(input)),
               showError: state.showError,
               errorText: state.question.value.fold(
-                  (failure) => failure.maybeWhen<String?>(validationFailure: (reason) => reason, orElse: () => null),
+                  (failure) => failure.maybeWhen<String?>(
+                      validationFailure: (reason) => reason,
+                      orElse: () => null),
                   (r) => null),
             ),
           );
@@ -124,7 +167,9 @@ class InsertItemScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: ElevatedButton(
-                      onPressed: () => ctx.read<InsertItemBloc>().add(const InsertItemEvent.insertSubmitted()),
+                      onPressed: () => ctx
+                          .read<InsertItemBloc>()
+                          .add(const InsertItemEvent.insertSubmitted()),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: PersonalizedColor.mainColor,
                         shape: const StadiumBorder(),
@@ -144,7 +189,9 @@ class InsertItemScreen extends StatelessWidget {
                 showDialogExit(context);
                 return false;
               } else {
-                context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
+                context
+                    .read<HomeControllerBloc>()
+                    .add(const HomeControllerEvent.tabChanged(0));
                 Navigator.pop(ctx);
                 return true;
               }
@@ -162,7 +209,9 @@ class InsertItemScreen extends StatelessWidget {
                         if (!state.isInitial()) {
                           showDialogExit(context);
                         } else {
-                          context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
+                          context
+                              .read<HomeControllerBloc>()
+                              .add(const HomeControllerEvent.tabChanged(0));
                           Navigator.pop(ctx);
                         }
                       },
@@ -179,7 +228,9 @@ class InsertItemScreen extends StatelessWidget {
                       children: [
                         UploadImageForm(
                           onSelectUploadMethod: () => chooseMediaDialog(ctx),
-                          onDeletePhoto: () => ctx.read<InsertItemBloc>().add(const InsertItemEvent.imageDeleted()),
+                          onDeletePhoto: () => ctx
+                              .read<InsertItemBloc>()
+                              .add(const InsertItemEvent.imageDeleted()),
                           imagePath: state.imagePath,
                         ),
                         customDivider(),
@@ -205,7 +256,9 @@ class InsertItemScreen extends StatelessWidget {
                                       height: 15,
                                     )
                                   : Container(),
-                              state.type == ItemType.found ? questionField : Container(),
+                              state.type == ItemType.found
+                                  ? questionField
+                                  : Container(),
                               const SizedBox(
                                 height: 10,
                               ),
@@ -220,28 +273,34 @@ class InsertItemScreen extends StatelessWidget {
                           address: state.address,
                           onPositionSelected: (LatLng? pos) {
                             if (pos != null) {
-                              ctx
-                                  .read<InsertItemBloc>()
-                                  .add(InsertItemEvent.positionSelected(LatLng(pos.latitude, pos.longitude)));
+                              ctx.read<InsertItemBloc>().add(
+                                  InsertItemEvent.positionSelected(
+                                      LatLng(pos.latitude, pos.longitude)));
                             }
                           },
                           showError: state.showError,
                           errorText: state.pos.value.fold(
-                              (failure) => failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""),
+                              (failure) => failure.maybeWhen(
+                                  validationFailure: (reason) => reason!,
+                                  orElse: () => ""),
                               (_) => ""),
-                          startingPosition: state.pos.value.getOrElse(() => const LatLng(0, 0)),
+                          startingPosition: state.pos.value
+                              .getOrElse(() => const LatLng(0, 0)),
                           isLoadingAddress: state.isLoadingPosition,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         CategorySelectionForm(
-                          onTap: (value) =>
-                              ctx.read<InsertItemBloc>().add(InsertItemEvent.categorySelected(value.first, value.second)),
+                          onTap: (value) => ctx.read<InsertItemBloc>().add(
+                              InsertItemEvent.categorySelected(
+                                  value.first, value.second)),
                           category: state.category,
                           showError: state.showError,
                           errorText: state.cat.value.fold(
-                              (failure) => failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""),
+                              (failure) => failure.maybeWhen(
+                                  validationFailure: (reason) => reason!,
+                                  orElse: () => ""),
                               (_) => ""),
                           removeAllOption: true,
                         ),
@@ -277,7 +336,9 @@ class InsertItemScreen extends StatelessWidget {
     showDialog(
         context: context,
         builder: (BuildContext ctx) {
-          return MediaSelectionDialog(onTapGallery: () => onTapGallery(context), onTapCamera: () => onTapCamera(context));
+          return MediaSelectionDialog(
+              onTapGallery: () => onTapGallery(context),
+              onTapCamera: () => onTapCamera(context));
         });
   }
 
@@ -286,7 +347,33 @@ class InsertItemScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext ctx) {
-        return ConfirmExitDialog(onConfirm: () => onConfirm(context), onCancel: () => onCancel(context));
+        return ConfirmExitDialog(
+            onConfirm: () => onConfirm(context),
+            onCancel: () => onCancel(context));
+      },
+    );
+  }
+
+  void showCameraPermissionPermanentlyDeniedDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Camera Permission Required'),
+          content: const Text(
+            'To take pictures you need to allow camera permissions for Lost and Found app.\n\n'
+            'Please go to the app settings and enable the camera permission.',
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                // Close the dialog
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
       },
     );
   }
