@@ -137,6 +137,8 @@ class AnswerClaimScreen extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
+                                    const Icon(Icons.connect_without_contact, size: 25,),
+                                    const SizedBox(width: 5,),
                                     const Text(
                                       "Claim decision",
                                       style: TextStyle(fontSize: 30),
@@ -197,7 +199,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                   height: 10,
                                 ),
                                 ClaimInfoField(
-                                  title: "Question",
+                                  title: "Your question",
                                   content: Text(
                                     state.item!.question!,
                                     style: const TextStyle(
@@ -209,7 +211,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                   height: 10,
                                 ),
                                 ClaimInfoField(
-                                  title: "Answer",
+                                  title: "Answer of ${state.item!.claims!.firstWhere((element) => element.id == claimId).user.username}",
                                   content: Text(
                                     state.item!.claims!.firstWhere((element) => element.id == claimId).answer,
                                     style: const TextStyle(fontSize: 16),

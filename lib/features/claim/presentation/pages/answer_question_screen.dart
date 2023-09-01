@@ -99,6 +99,8 @@ class AnswerQuestionScreen extends StatelessWidget {
                                   padding: const EdgeInsets.fromLTRB(5, 0, 5, 10),
                                   child: Row(
                                     children: [
+                                      Icon(Icons.connect_without_contact, size: 25,),
+                                      SizedBox(width: 5,),
                                       const Text(
                                         "Claim item",
                                         style: TextStyle(fontSize: 30),

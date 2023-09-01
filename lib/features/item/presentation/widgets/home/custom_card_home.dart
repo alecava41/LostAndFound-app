@@ -114,11 +114,13 @@ class CustomCardHome extends StatelessWidget {
                                   ),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       const Icon(
                                         Icons.connect_without_contact,
-                                        size: 15,
+                                        size: 12.5,
                                       ),
+                                      const SizedBox(width: 2,),
                                       Text(
                                         " $claims claim${claims > 1 ? "s" : ""}",
                                         style: const TextStyle(
@@ -143,12 +145,14 @@ class CustomCardHome extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: const Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(
                                         Icons.connect_without_contact,
-                                        size: 15,
+                                        size: 12.5,
                                       ),
+                                      SizedBox(width: 2,),
                                       Text(
                                         "Resolved",
                                         style: TextStyle(

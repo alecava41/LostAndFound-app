@@ -8,12 +8,14 @@ class ClaimStatusButton extends StatelessWidget {
   final ClaimStatus status;
   final String owner;
   final int itemId;
+  final bool isCliccable;
 
   const ClaimStatusButton({
     super.key,
     required this.status,
     required this.owner,
-    required this.itemId,
+    required this.itemId,  this.isCliccable = true,
+    
   });
 
   @override
@@ -27,7 +29,7 @@ class ClaimStatusButton extends StatelessWidget {
                 ? PersonalizedColor.claimWaitingStatusColor
                 : PersonalizedColor.claimDeniedStatusColor),
         child: InkWell(
-          onTap: () {
+          onTap: isCliccable? () {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -37,7 +39,7 @@ class ClaimStatusButton extends StatelessWidget {
                 ),
               ),
             );
-          },
+          } : null,
           splashColor: PersonalizedColor.splashGreyColor,
           child: Container(
             padding: const EdgeInsets.fromLTRB(12, 12, 4, 12),
@@ -107,10 +109,10 @@ class ClaimStatusButton extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Icon(
+                isCliccable? const Icon(
                   Icons.chevron_right,
                   size: 50,
-                )
+                ) : Container()
               ],
             ),
           ),
