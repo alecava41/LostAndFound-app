@@ -7,7 +7,6 @@ import '../../../../core/status/failures.dart';
 import '../../../../core/status/success.dart';
 import '../repositories/user_repository.dart';
 
-
 class UploadUserImageUseCase implements UseCase<Success, UploadUserImageParams> {
   final UserRepository repository;
 
@@ -20,11 +19,7 @@ class UploadUserImageUseCase implements UseCase<Success, UploadUserImageParams> 
 }
 
 class UploadUserImageParams {
-  final int userId;
   final File image;
 
-  UploadUserImageParams({
-    required this.userId,
-    required this.image
-  });
+  UploadUserImageParams({required this.image});
 }

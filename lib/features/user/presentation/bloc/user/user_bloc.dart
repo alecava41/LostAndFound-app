@@ -93,7 +93,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     Either<Failure, Success>? imgFailureOrSuccess;
 
     if (path != null) {
-      final params = UploadUserImageParams(userId: state.user!.id, image: File(path));
+      final params = UploadUserImageParams(image: File(path));
       final response = await _uploadUserImageUseCase(params);
       imgFailureOrSuccess = response.fold((failure) => Left(failure), (success) {
         path = null;
@@ -106,7 +106,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     emit(state.copyWith(
         imageUploadFailureOrSuccess: imgFailureOrSuccess,
-        imagePath: path,
+        imagePath: imgFailureOrSuccess != null && imgFailureOrSuccess.isLeft() ? null : path,
         user: state.user == null
             ? null
             : User(

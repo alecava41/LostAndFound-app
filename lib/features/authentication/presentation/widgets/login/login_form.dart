@@ -31,20 +31,19 @@ class LoginForm extends StatelessWidget {
                     (failure) => {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              padding: const EdgeInsets.all(30),
                               backgroundColor: Colors.red,
                               content: Text(
-                                  failure.maybeWhen<String>(
-                                      passwordMismatchFailure: () => 'Invalid credentials. Please try again.',
-                                      genericFailure: () => 'Server error. Please try again later.',
-                                      networkFailure: () =>
-                                          'No internet connection available. Check your internet connection.',
-                                      orElse: () => "Unknown error"),
-                                  style: const TextStyle(fontSize: 20)),
+                                failure.maybeWhen<String>(
+                                    passwordMismatchFailure: () => 'Invalid credentials. Please try again.',
+                                    genericFailure: () => 'Server error. Please try again later.',
+                                    networkFailure: () =>
+                                        'No internet connection available. Check your internet connection.',
+                                    orElse: () => "Unknown error"),
+                              ),
                             ),
                           )
                         },
-                    (success) => {
+                    (_) => {
                           Navigator.popUntil(context, (route) => route.isFirst),
                           Navigator.of(context).pushReplacementNamed('/'),
 

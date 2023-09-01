@@ -41,7 +41,6 @@ class AnswerClaimScreen extends StatelessWidget {
                 roomCreationFailureOrSuccess.fold((failure) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      padding: const EdgeInsets.all(30),
                       backgroundColor: Colors.red,
                       content: Text(
                         failure.maybeWhen<String>(
@@ -49,7 +48,6 @@ class AnswerClaimScreen extends StatelessWidget {
                             networkFailure: () => 'No internet connection available. Check your internet connection.',
                             validationFailure: (reason) => reason!,
                             orElse: () => "Unknown error"),
-                        style: const TextStyle(fontSize: 20),
                       ),
                     ),
                   );
@@ -63,19 +61,26 @@ class AnswerClaimScreen extends StatelessWidget {
                     (failure) => {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              padding: const EdgeInsets.all(30),
                               backgroundColor: Colors.red,
                               content: Text(
-                                  failure.maybeWhen<String>(
-                                      genericFailure: () => 'Server error. Please try again later.',
-                                      networkFailure: () =>
-                                          'No internet connection available. Check your internet connection.',
-                                      orElse: () => "Unknown error"),
-                                  style: const TextStyle(fontSize: 20)),
+                                failure.maybeWhen<String>(
+                                    genericFailure: () => 'Server error. Please try again later.',
+                                    networkFailure: () =>
+                                        'No internet connection available. Check your internet connection.',
+                                    orElse: () => "Unknown error"),
+                              ),
                             ),
                           )
                         },
-                    (updatedItem) => {Navigator.pop(context, updatedItem)});
+                    (updatedItem) => {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              backgroundColor: Colors.green,
+                              content: Text("Claim successfully managed"),
+                            ),
+                          ),
+                          Navigator.pop(context, updatedItem)
+                        });
               }
             },
             builder: (ctx, state) {
@@ -137,8 +142,13 @@ class AnswerClaimScreen extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    const Icon(Icons.connect_without_contact, size: 25,),
-                                    const SizedBox(width: 5,),
+                                    const Icon(
+                                      Icons.connect_without_contact,
+                                      size: 25,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
                                     const Text(
                                       "Claim decision",
                                       style: TextStyle(fontSize: 30),
@@ -211,7 +221,8 @@ class AnswerClaimScreen extends StatelessWidget {
                                   height: 10,
                                 ),
                                 ClaimInfoField(
-                                  title: "Answer of ${state.item!.claims!.firstWhere((element) => element.id == claimId).user.username}",
+                                  title:
+                                      "Answer of ${state.item!.claims!.firstWhere((element) => element.id == claimId).user.username}",
                                   content: Text(
                                     state.item!.claims!.firstWhere((element) => element.id == claimId).answer,
                                     style: const TextStyle(fontSize: 16),

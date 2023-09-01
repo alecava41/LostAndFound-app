@@ -26,44 +26,52 @@ class UserScreen extends StatelessWidget {
             imageFailureOrSuccess.fold(
                 (failure) => ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        action: SnackBarAction(
-                          label: 'Retry',
-                          onPressed: () => ctx.read<UserBloc>().add(UserEvent.imageChanged(state.imagePath)),
-                        ),
-                        padding: const EdgeInsets.all(30),
                         backgroundColor: Colors.red,
                         content: Text(
-                            failure.maybeWhen<String>(
-                                genericFailure: () => 'Server error. Please try again later.',
-                                networkFailure: () => 'No internet connection available. Check your internet connection.',
-                                orElse: () => "Unknown error"),
-                            style: const TextStyle(fontSize: 20)),
+                          failure.maybeWhen<String>(
+                              genericFailure: () => 'Server error. Please try again later.',
+                              networkFailure: () => 'No internet connection available. Check your internet connection.',
+                              orElse: () => "Unknown error"),
+                        ),
                       ),
                     ),
-                (_) => {});
+                (_) => {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Colors.green,
+                          content: Text("Image uploaded successfully"),
+                        ),
+                      ),
+                    });
           }
 
           if (logoutFailureOrSuccess != null) {
             logoutFailureOrSuccess.fold(
                 (failure) => ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        padding: const EdgeInsets.all(30),
                         backgroundColor: Colors.red,
                         content: Text(
-                            failure.maybeWhen<String>(
-                                genericFailure: () => 'Server error. Please try again later.',
-                                networkFailure: () => 'No internet connection available. Check your internet connection.',
-                                orElse: () => "Unknown error"),
-                            style: const TextStyle(fontSize: 20)),
+                          failure.maybeWhen<String>(
+                              genericFailure: () => 'Server error. Please try again later.',
+                              networkFailure: () => 'No internet connection available. Check your internet connection.',
+                              orElse: () => "Unknown error"),
+                        ),
                       ),
                     ),
                 (_) => {
-                  ctx.read<HomeBloc>().add(const HomeEvent.restoreInitial()),
-                  ctx.read<SearchBloc>().add(const SearchEvent.restoreInitial()),
-                  ctx.read<HomeControllerBloc>().add(const HomeControllerEvent.restoreInitial()),
-                  ctx.read<BadgeBloc>().add(const BadgeEvent.restoreInitial()),
-                  ctx.read<InboxBloc>().add(const InboxEvent.restoreInitial()),
-                  ctx.read<UserBloc>().add(const UserEvent.restoreInitial()),
+                      ctx.read<HomeBloc>().add(const HomeEvent.restoreInitial()),
+                      ctx.read<SearchBloc>().add(const SearchEvent.restoreInitial()),
+                      ctx.read<HomeControllerBloc>().add(const HomeControllerEvent.restoreInitial()),
+                      ctx.read<BadgeBloc>().add(const BadgeEvent.restoreInitial()),
+                      ctx.read<InboxBloc>().add(const InboxEvent.restoreInitial()),
+                      ctx.read<UserBloc>().add(const UserEvent.restoreInitial()),
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text("Successful logout"),
+                        ),
+                      ),
 
                       // Go back to login page, remove all history
                       Navigator.popUntil(context, (route) => route.isFirst),

@@ -19,34 +19,33 @@ class RegistrationForm extends StatelessWidget {
     return Center(
       child: SingleChildScrollView(
         child: Container(
-          
           //color: Colors.amber,
           margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
           child: BlocListener<RegistrationBloc, RegistrationState>(
             listener: (ctx, state) {
               final regFailureOrSuccess = state.registrationFailureOrSuccess;
-      
+
               if (regFailureOrSuccess != null) {
                 regFailureOrSuccess.fold(
                     (failure) => failure.maybeWhen(
                         genericFailure: () => ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 backgroundColor: Colors.red,
-                                content: Text('Server error. Please try again later.', style: TextStyle(fontSize: 20)),
+                                content: Text('Server error. Please try again later.'),
                               ),
                             ),
                         networkFailure: () => ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 backgroundColor: Colors.red,
-                                content: Text('No internet connection available. Check your internet connection.',
-                                    style: TextStyle(fontSize: 20)),
+                                content: Text('No internet connection available. Check your internet connection.'),
                               ),
                             ),
                         orElse: () {}),
                     (_) => {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text('Successful sign up', style: TextStyle(fontSize: 20)),
+                              backgroundColor: Colors.green,
+                              content: Text('Successful sign up'),
                             ),
                           ),
                           Navigator.pushReplacementNamed(ctx, '/login')
@@ -58,7 +57,9 @@ class RegistrationForm extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(height: 3.5.h,),
+                SizedBox(
+                  height: 3.5.h,
+                ),
                 titleLogoHorizontal(),
                 SizedBox(height: 6.w),
                 const UsernameInput(),

@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_notifications_usecase.dart';
 
 import '../../../../../core/data/secure_storage/secure_storage.dart';
+import '../../../../../core/domain/usecases/usecase.dart';
 import '../../../domain/entities/news.dart';
 import '../../../domain/usecases/insert_read_news_usecase.dart';
 
@@ -54,7 +55,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     emit(state.copyWith(isLoading: true, hasLoadingError: false));
 
 
-    final newsResponse = await _getUserNotificationsUseCase(GetUserNotificationsParams(last: 0));
+    final newsResponse = await _getUserNotificationsUseCase(NoParams());
     final session = await _secureStorage.getSessionInformation();
 
     emit(

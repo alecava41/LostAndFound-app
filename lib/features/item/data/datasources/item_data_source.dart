@@ -4,11 +4,11 @@ import 'package:lost_and_found/features/item/domain/usecases/create_item_usecase
 import 'package:lost_and_found/features/item/domain/usecases/delete_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_items_usecase.dart';
-import 'package:lost_and_found/features/item/domain/usecases/get_user_notifications_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/update_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/upload_item_image_usecase.dart';
 
 import '../../../../core/data/datasources/utils.dart';
+import '../../../../core/domain/usecases/usecase.dart';
 import '../../domain/usecases/delete_item_image_usecase.dart';
 import '../../domain/usecases/search_items_usecase.dart';
 import '../../domain/usecases/solve_item_usecase.dart';
@@ -18,16 +18,16 @@ import '../models/search_item/search_item_dto.dart';
 import 'item_client.dart';
 
 abstract class ItemDataSource {
-  Future<List<UserItemDto>> getUserItems(GetUserItemsParams params, int userId);
-  Future<List<NewsDto>> getUserNotifications(GetUserNotificationsParams params, int userId);
+  Future<List<UserItemDto>> getUserItems(GetUserItemsParams params);
+  Future<List<NewsDto>> getUserNotifications(NoParams params);
   Future<List<SearchItemDto>> searchItems(SearchItemsParams params);
   Future<ItemDto> getItem(GetItemParams params);
-  Future<ItemResponseDto> createItem(CreateItemParams params, int userId);
-  Future<void> uploadItemImage(UploadItemImageParams params, int userId);
-  Future<void> solveItem(SolveItemParams params, int userId);
-  Future<void> deleteItem(DeleteItemParams params, int userId);
-  Future<void> updateItem(UpdateItemParams params, int userId);
-  Future<void> deleteItemImage(DeleteItemImageParams params, int userId);
+  Future<ItemResponseDto> createItem(CreateItemParams params);
+  Future<void> uploadItemImage(UploadItemImageParams params);
+  Future<void> solveItem(SolveItemParams params);
+  Future<void> deleteItem(DeleteItemParams params);
+  Future<void> updateItem(UpdateItemParams params);
+  Future<void> deleteItemImage(DeleteItemImageParams params);
 }
 
 class ItemDataSourceImpl implements ItemDataSource {
@@ -36,20 +36,19 @@ class ItemDataSourceImpl implements ItemDataSource {
   ItemDataSourceImpl(this._client);
 
   @override
-  Future<List<UserItemDto>> getUserItems(GetUserItemsParams params, int userId) async {
-    return _client.getUserItems(userId, params.type.name).catchError(handleError<List<UserItemDto>>);
+  Future<List<UserItemDto>> getUserItems(GetUserItemsParams params) async {
+    return _client.getUserItems(params.type.name).catchError(handleError<List<UserItemDto>>);
   }
 
   @override
-  Future<List<NewsDto>> getUserNotifications(GetUserNotificationsParams params, int userId) {
-     return _client.getNews(userId, params.last).catchError(handleError<List<NewsDto>>);
+  Future<List<NewsDto>> getUserNotifications(NoParams params) {
+     return _client.getNews().catchError(handleError<List<NewsDto>>);
   }
 
   @override
   Future<List<SearchItemDto>> searchItems(SearchItemsParams params) {
     return _client.getItems(
       params.type.name,
-      params.last,
       params.X,
       params.Y,
       params.range,
@@ -64,32 +63,32 @@ class ItemDataSourceImpl implements ItemDataSource {
   }
 
   @override
-  Future<ItemResponseDto> createItem(CreateItemParams params, int userId) {
-    return _client.createItem(userId, params).catchError(handleError<ItemResponseDto>);
+  Future<ItemResponseDto> createItem(CreateItemParams params) {
+    return _client.createItem(params).catchError(handleError<ItemResponseDto>);
   }
 
   @override
-  Future<void> uploadItemImage(UploadItemImageParams params, int userId) {
-    return _client.uploadItemImage(userId, params.itemId, params.image).catchError(handleError<void>);
+  Future<void> uploadItemImage(UploadItemImageParams params) {
+    return _client.uploadItemImage(params.itemId, params.image).catchError(handleError<void>);
   }
 
   @override
-  Future<void> solveItem(SolveItemParams params, int userId) {
-    return _client.solveItem(userId, params.itemId).catchError(handleError<void>);
+  Future<void> solveItem(SolveItemParams params) {
+    return _client.solveItem(params.itemId).catchError(handleError<void>);
   }
 
   @override
-  Future<void> deleteItem(DeleteItemParams params, int userId) {
-    return _client.deleteItem(userId, params.itemId).catchError(handleError<void>);
+  Future<void> deleteItem(DeleteItemParams params) {
+    return _client.deleteItem(params.itemId).catchError(handleError<void>);
   }
 
   @override
-  Future<void> updateItem(UpdateItemParams params, int userId) {
-    return _client.updateItem(userId, params.itemId, params).catchError(handleError<void>);
+  Future<void> updateItem(UpdateItemParams params) {
+    return _client.updateItem(params.itemId, params).catchError(handleError<void>);
   }
 
   @override
-  Future<void> deleteItemImage(DeleteItemImageParams params, int userId) {
-    return _client.deleteItemImage(userId, params.itemId).catchError(handleError<void>);
+  Future<void> deleteItemImage(DeleteItemImageParams params) {
+    return _client.deleteItemImage(params.itemId).catchError(handleError<void>);
   }
 }

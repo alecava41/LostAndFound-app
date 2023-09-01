@@ -35,7 +35,9 @@ class ChatScreen extends StatelessWidget {
         BlocProvider<ClaimBloc>(create: (_) => sl<ClaimBloc>())
       ],
       child: BlocConsumer<chat.ChatBloc, chat.ChatState>(
-        listener: (ctx, state) {},
+        listener: (ctx, state) {
+
+        },
         builder: (ctx, state) {
           if (state.hasLoadingError) {
             return ErrorPage(

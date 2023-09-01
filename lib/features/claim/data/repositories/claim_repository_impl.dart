@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
-import 'package:lost_and_found/core/status/exceptions.dart';
 import 'package:lost_and_found/core/status/failures.dart';
 import 'package:lost_and_found/core/status/success.dart';
 import 'package:lost_and_found/features/claim/data/adapters/claim_received_from_dto.dart';
@@ -11,13 +10,11 @@ import 'package:lost_and_found/features/item/data/adapters/item_from_dto.dart';
 import 'package:lost_and_found/features/item/domain/entities/item.dart' as item;
 import 'package:lost_and_found/features/claim/domain/repositories/claim_repository.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/create_claim_usecase.dart';
-import 'package:lost_and_found/features/claim/domain/usecases/get_received_claims_usecase.dart';
-import 'package:lost_and_found/features/claim/domain/usecases/get_sent_claims_usecase.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/insert_read_claim_usecase.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/manage_claim_usecase.dart';
 
 import '../../../../core/data/repositories/utils.dart';
-import '../../../../core/data/secure_storage/secure_storage.dart';
+import '../../../../core/domain/usecases/usecase.dart';
 import '../../../../core/network/network_info.dart';
 import '../datasources/claim_datasource.dart';
 import '../../../../core/data/datasources/claim/read_claim_datasource.dart';
@@ -26,20 +23,17 @@ class ClaimRepositoryImpl implements ClaimRepository {
   final ClaimDataSource _dataSource;
   final NetworkInfo _networkInfo;
   final ReadClaimDataSource _readClaimsDataSource;
-  final SecureStorage _storage;
 
-  ClaimRepositoryImpl(
-      {required ClaimDataSource dataSource,
-      required NetworkInfo networkInfo,
-      required ReadClaimDataSource readClaimsDataSource,
-      required SecureStorage storage})
-      : _dataSource = dataSource,
+  ClaimRepositoryImpl({
+    required ClaimDataSource dataSource,
+    required NetworkInfo networkInfo,
+    required ReadClaimDataSource readClaimsDataSource,
+  })  : _dataSource = dataSource,
         _networkInfo = networkInfo,
-        _readClaimsDataSource = readClaimsDataSource,
-        _storage = storage;
+        _readClaimsDataSource = readClaimsDataSource;
 
   @override
-  Future<Either<Failure, List<ClaimReceived>>> getReceivedClaims(GetReceivedClaimsParams params) async {
+  Future<Either<Failure, List<ClaimReceived>>> getReceivedClaims(NoParams params) async {
     try {
       if (await _networkInfo.isConnected) {
         final receivedClaims = await _dataSource.getReceivedClaims(params);
@@ -65,7 +59,7 @@ class ClaimRepositoryImpl implements ClaimRepository {
   }
 
   @override
-  Future<Either<Failure, List<ClaimSent>>> getSentClaims(GetSentClaimsParams params) async {
+  Future<Either<Failure, List<ClaimSent>>> getSentClaims(NoParams params) async {
     try {
       if (await _networkInfo.isConnected) {
         final sentClaims = await _dataSource.getSentClaims(params);
@@ -98,13 +92,7 @@ class ClaimRepositoryImpl implements ClaimRepository {
   Future<Either<Failure, item.Item>> manageClaim(ManageClaimParams params) async {
     try {
       if (await _networkInfo.isConnected) {
-        final session = await _storage.getSessionInformation();
-
-        if (session == null) {
-          throw UserNotAuthorizedException();
-        }
-
-        final updatedItem = await _dataSource.manageClaim(params, session.user);
+        final updatedItem = await _dataSource.manageClaim(params);
         final domainUpdatedItem = updatedItem.toDomain();
 
         if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
@@ -129,8 +117,8 @@ class ClaimRepositoryImpl implements ClaimRepository {
   @override
   Future<Either<Failure, Success>> insertReadClaim(InsertReadClaimParams params) async {
     try {
-        await _readClaimsDataSource.insertReadClaim(params.claimId);
-        return const Right(Success.genericSuccess());
+      await _readClaimsDataSource.insertReadClaim(params.claimId);
+      return const Right(Success.genericSuccess());
     } on Exception catch (e) {
       return Left(mapExceptionToFailure(e));
     }

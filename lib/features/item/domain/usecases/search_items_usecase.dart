@@ -17,7 +17,6 @@ class SearchItemsUseCase implements UseCase<List<SearchItem>, SearchItemsParams>
 }
 
 class SearchItemsParams {
-  final int last;
   final int range;
   final double X;
   final double Y;
@@ -26,7 +25,6 @@ class SearchItemsParams {
   final DateTime? date;
 
   SearchItemsParams({
-    required this.last,
     required this.range,
     required this.X,
     required this.Y,

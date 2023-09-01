@@ -21,23 +21,26 @@ class ChangePasswordScreen extends StatelessWidget {
                   validationFailure: (_) {},
                   orElse: () => ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      action: SnackBarAction(
-                        label: 'Retry',
-                        onPressed: () =>
-                            ctx.read<ChangePasswordBloc>().add(const ChangePasswordEvent.changePasswordSubmitted()),
-                      ),
-                      padding: const EdgeInsets.all(30),
                       backgroundColor: Colors.red,
                       content: Text(
-                          failure.maybeWhen<String>(
-                              genericFailure: () => 'Server error. Please try again later.',
-                              networkFailure: () => 'No internet connection available. Check your internet connection.',
-                              orElse: () => "Unknown error"),
-                          style: const TextStyle(fontSize: 20)),
+                        failure.maybeWhen<String>(
+                            genericFailure: () => 'Server error. Please try again later.',
+                            networkFailure: () => 'No internet connection available. Check your internet connection.',
+                            orElse: () => "Unknown error"),
+                      ),
                     ),
                   ),
                 ),
-                (_) => Navigator.pop(context),
+                (_) => {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: Colors.red,
+                      content: Text("Password successfully updated"),
+                    ),
+                  ),
+
+                  Navigator.pop(context)
+                },
               );
             }
           },

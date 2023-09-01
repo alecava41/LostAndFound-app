@@ -21,10 +21,7 @@ class _ItemClient implements ItemClient {
   String? baseUrl;
 
   @override
-  Future<List<UserItemDto>> getUserItems(
-    int userId,
-    String type,
-  ) async {
+  Future<List<UserItemDto>> getUserItems(String type) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'type': type};
     final _headers = <String, dynamic>{};
@@ -37,7 +34,7 @@ class _ItemClient implements ItemClient {
     )
             .compose(
               _dio.options,
-              '/users/${userId}/items',
+              '/users/items',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -53,12 +50,9 @@ class _ItemClient implements ItemClient {
   }
 
   @override
-  Future<List<NewsDto>> getNews(
-    int userId,
-    int last,
-  ) async {
+  Future<List<NewsDto>> getNews({String model = "all"}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'last': last};
+    final queryParameters = <String, dynamic>{r'model': model};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
@@ -69,7 +63,7 @@ class _ItemClient implements ItemClient {
     )
             .compose(
               _dio.options,
-              '/users/${userId}/items/news',
+              '/users/items/news',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -87,7 +81,6 @@ class _ItemClient implements ItemClient {
   @override
   Future<List<SearchItemDto>> getItems(
     String type,
-    int last,
     double X,
     double Y,
     int range,
@@ -97,7 +90,6 @@ class _ItemClient implements ItemClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'type': type,
-      r'last': last,
       r'X': X,
       r'Y': Y,
       r'range': range,
@@ -158,10 +150,7 @@ class _ItemClient implements ItemClient {
   }
 
   @override
-  Future<ItemResponseDto> createItem(
-    int userId,
-    CreateItemParams params,
-  ) async {
+  Future<ItemResponseDto> createItem(CreateItemParams params) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -175,7 +164,7 @@ class _ItemClient implements ItemClient {
     )
             .compose(
               _dio.options,
-              '/users/${userId}/items',
+              '/users/items',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -190,7 +179,6 @@ class _ItemClient implements ItemClient {
 
   @override
   Future<void> uploadItemImage(
-    int userId,
     int itemId,
     File image,
   ) async {
@@ -213,7 +201,7 @@ class _ItemClient implements ItemClient {
     )
         .compose(
           _dio.options,
-          '/users/${userId}/items/${itemId}/image',
+          '/users/items/${itemId}/image',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -225,10 +213,7 @@ class _ItemClient implements ItemClient {
   }
 
   @override
-  Future<void> solveItem(
-    int userId,
-    int itemId,
-  ) async {
+  Future<void> solveItem(int itemId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -240,7 +225,7 @@ class _ItemClient implements ItemClient {
     )
         .compose(
           _dio.options,
-          '/users/${userId}/items/${itemId}/status',
+          '/users/items/${itemId}/status',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -252,10 +237,7 @@ class _ItemClient implements ItemClient {
   }
 
   @override
-  Future<void> deleteItem(
-    int userId,
-    int itemId,
-  ) async {
+  Future<void> deleteItem(int itemId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -267,7 +249,7 @@ class _ItemClient implements ItemClient {
     )
         .compose(
           _dio.options,
-          '/users/${userId}/items/${itemId}',
+          '/users/items/${itemId}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -280,7 +262,6 @@ class _ItemClient implements ItemClient {
 
   @override
   Future<void> updateItem(
-    int userId,
     int itemId,
     UpdateItemParams params,
   ) async {
@@ -296,7 +277,7 @@ class _ItemClient implements ItemClient {
     )
         .compose(
           _dio.options,
-          '/users/${userId}/items/${itemId}',
+          '/users/items/${itemId}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -308,10 +289,7 @@ class _ItemClient implements ItemClient {
   }
 
   @override
-  Future<void> deleteItemImage(
-    int userId,
-    int itemId,
-  ) async {
+  Future<void> deleteItemImage(int itemId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -323,7 +301,7 @@ class _ItemClient implements ItemClient {
     )
         .compose(
           _dio.options,
-          '/users/${userId}/items/${itemId}/image',
+          '/users/items/${itemId}/image',
           queryParameters: queryParameters,
           data: _data,
         )

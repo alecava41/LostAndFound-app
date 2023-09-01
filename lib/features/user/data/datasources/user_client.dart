@@ -18,16 +18,10 @@ abstract class UserClient {
     @Path() int userId,
   );
 
-  @POST('/users/{userId}/image')
+  @POST('/users/image')
   @MultiPart()
-  Future<void> uploadUserImage(
-      @Path("userId") int userId,
-      @Part() File image,
-      );
+  Future<void> uploadUserImage(@Part() File image);
 
-  @PATCH('/users/{userId}/password')
-  Future<void> updatePassword(
-      @Path() int userId,
-      @Body() UpdatePasswordParams params
-      );
+  @PATCH('/users/password')
+  Future<void> updatePassword(@Body() UpdatePasswordParams params);
 }

@@ -148,8 +148,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => InsertReadNewsUseCase(sl()));
 
   // Repository
-  sl.registerLazySingleton<ItemRepository>(() => ItemRepositoryImpl(
-      dataSource: sl(), storage: sl(), networkInfo: sl(), readNewsDataSource: sl(), readClaimDataSource: sl()));
+  sl.registerLazySingleton<ItemRepository>(
+      () => ItemRepositoryImpl(dataSource: sl(), networkInfo: sl(), readNewsDataSource: sl(), readClaimDataSource: sl()));
 
   // Data source
   sl.registerLazySingleton<ItemDataSource>(() => ItemDataSourceImpl(sl()));
@@ -159,8 +159,10 @@ Future<void> init() async {
   // BLoC
   sl.registerFactory(() => ClaimBloc(
       getReceivedClaimsUseCase: sl(), getSentClaimsUseCase: sl(), secureStorage: sl(), insertReadClaimUseCase: sl()));
-  sl.registerFactory(() => AnswerQuestionBloc(storage: sl(), createClaimUseCase: sl(), getItemUseCase: sl(), createRoomUseCase: sl()));
-  sl.registerFactory(() => AnswerClaimBloc(getItemUseCase: sl(), storage: sl(), manageClaimUseCase: sl(), createRoomUseCase: sl()));
+  sl.registerFactory(
+      () => AnswerQuestionBloc(storage: sl(), createClaimUseCase: sl(), getItemUseCase: sl(), createRoomUseCase: sl()));
+  sl.registerFactory(
+      () => AnswerClaimBloc(getItemUseCase: sl(), storage: sl(), manageClaimUseCase: sl(), createRoomUseCase: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetReceivedClaimsUseCase(sl()));
@@ -171,7 +173,7 @@ Future<void> init() async {
 
   // Repository
   sl.registerLazySingleton<ClaimRepository>(
-      () => ClaimRepositoryImpl(dataSource: sl(), networkInfo: sl(), readClaimsDataSource: sl(), storage: sl()));
+      () => ClaimRepositoryImpl(dataSource: sl(), networkInfo: sl(), readClaimsDataSource: sl()));
 
   // Data source
   sl.registerLazySingleton<ClaimDataSource>(() => ClaimDataSourceImpl(sl()));
@@ -200,7 +202,8 @@ Future<void> init() async {
 
   // ** Feature - Badge **
   // BLoC
-  sl.registerFactory(() => BadgeBloc(getUnreadNewsUseCase: sl(), getUnreadReceivedClaimsUseCase: sl(), getUserRoomsUseCase: sl(), storage: sl()));
+  sl.registerFactory(() => BadgeBloc(
+      getUnreadNewsUseCase: sl(), getUnreadReceivedClaimsUseCase: sl(), getUserRoomsUseCase: sl(), storage: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetUnreadNewsUseCase(sl()));

@@ -9,9 +9,9 @@ part 'badge_client.g.dart';
 abstract class BadgeClient {
   factory BadgeClient(Dio dio, {String baseUrl}) = _BadgeClient;
 
-  @GET('/items/news')
-  Future<List<int>> getUnreadNews();
+  @GET('/users/items/news')
+  Future<List<int>> getUnreadNews({@Query("model") String model = "ids"});
 
-  @GET('/items/claims/ids')
-  Future<List<int>> getUnreadReceivedClaims();
+  @GET('/users/items/claims')
+  Future<List<int>> getUnreadReceivedClaims({@Query("model") String model = "ids"});
 }

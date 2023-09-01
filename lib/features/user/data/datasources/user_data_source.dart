@@ -9,7 +9,7 @@ import '../models/get_user/user_dto.dart';
 abstract class UserDataSource {
   Future<UserDto> getUserInfo(NoParams params, int userId);
   Future<void> uploadUserImage(UploadUserImageParams params);
-  Future<void> updatePassword(UpdatePasswordParams params, int userId);
+  Future<void> updatePassword(UpdatePasswordParams params);
 }
 
 class UserDataSourceImpl implements UserDataSource {
@@ -24,12 +24,12 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<void> uploadUserImage(UploadUserImageParams params) {
-    return _client.uploadUserImage(params.userId, params.image).catchError(handleError<void>);
+    return _client.uploadUserImage(params.image).catchError(handleError<void>);
   }
 
   @override
-  Future<void> updatePassword(UpdatePasswordParams params, int userId) {
-    return _client.updatePassword(userId, params).catchError(handleError<void>);
+  Future<void> updatePassword(UpdatePasswordParams params) {
+    return _client.updatePassword(params).catchError(handleError<void>);
   }
 
 }

@@ -89,7 +89,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       final pos = state.pos.value.getOrElse(() => const LatLng(0, 0));
 
       final params = SearchItemsParams(
-          last: 0,
           range: 400,
           X: pos.longitude,
           Y: pos.latitude,

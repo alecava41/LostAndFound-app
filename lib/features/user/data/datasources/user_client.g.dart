@@ -48,10 +48,7 @@ class _UserClient implements UserClient {
   }
 
   @override
-  Future<void> uploadUserImage(
-    int userId,
-    File image,
-  ) async {
+  Future<void> uploadUserImage(File image) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -71,7 +68,7 @@ class _UserClient implements UserClient {
     )
         .compose(
           _dio.options,
-          '/users/${userId}/image',
+          '/users/image',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -83,10 +80,7 @@ class _UserClient implements UserClient {
   }
 
   @override
-  Future<void> updatePassword(
-    int userId,
-    UpdatePasswordParams params,
-  ) async {
+  Future<void> updatePassword(UpdatePasswordParams params) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -99,7 +93,7 @@ class _UserClient implements UserClient {
     )
         .compose(
           _dio.options,
-          '/users/${userId}/password',
+          '/users/password',
           queryParameters: queryParameters,
           data: _data,
         )

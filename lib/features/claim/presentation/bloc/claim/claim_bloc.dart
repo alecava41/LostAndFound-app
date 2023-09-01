@@ -8,6 +8,7 @@ import 'package:lost_and_found/features/claim/domain/usecases/get_sent_claims_us
 
 import 'package:lost_and_found/features/item/domain/entities/item.dart' as item;
 
+import '../../../../../core/domain/usecases/usecase.dart';
 import '../../../domain/entities/claim_sent.dart';
 import '../../../domain/entities/claim_received.dart';
 import '../../../domain/usecases/insert_read_claim_usecase.dart';
@@ -59,8 +60,8 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
   Future<void> _onClaimCreated(Emitter<ClaimState> emit, int? tab, int? newClaimId) async {
     emit(state.copyWith(isLoadingReceived: true, isLoadingSent: true, hasLoadingError: false));
 
-    final receivedClaimsResponse = await _getReceivedClaimsUseCase(GetReceivedClaimsParams(last: 0));
-    final sentClaimsResponse = await _getSentClaimsUseCase(GetSentClaimsParams(last: 0));
+    final receivedClaimsResponse = await _getReceivedClaimsUseCase(NoParams());
+    final sentClaimsResponse = await _getSentClaimsUseCase(NoParams());
 
     final session = await _secureStorage.getSessionInformation();
 
@@ -109,7 +110,7 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
         ),
       );
     } else {
-      final receivedClaimsResponse = await _getReceivedClaimsUseCase(GetReceivedClaimsParams(last: 0));
+      final receivedClaimsResponse = await _getReceivedClaimsUseCase(NoParams());
 
       emit(
         state.copyWith(
@@ -124,7 +125,7 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
   Future<void> _onSentClaimRefreshed(Emitter<ClaimState> emit) async {
     emit(state.copyWith(isLoadingSent: true, hasLoadingError: false));
 
-    final sentClaimsResponse = await _getSentClaimsUseCase(GetSentClaimsParams(last: 0));
+    final sentClaimsResponse = await _getSentClaimsUseCase(NoParams());
 
     emit(
       state.copyWith(

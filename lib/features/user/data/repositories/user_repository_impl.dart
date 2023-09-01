@@ -23,9 +23,7 @@ class UserRepositoryImpl implements UserRepository {
   final SecureStorage _storage;
 
   UserRepositoryImpl(
-      {required UserDataSource dataSource,
-      required SecureStorage storage,
-      required NetworkInfo networkInfo})
+      {required UserDataSource dataSource, required SecureStorage storage, required NetworkInfo networkInfo})
       : _networkInfo = networkInfo,
         _dataSource = dataSource,
         _storage = storage;
@@ -69,14 +67,7 @@ class UserRepositoryImpl implements UserRepository {
   Future<Either<Failure, Success>> updatePassword(UpdatePasswordParams params) async {
     try {
       if (await _networkInfo.isConnected) {
-        final session = await _storage.getSessionInformation();
-
-        if (session == null) {
-          throw UserNotAuthorizedException();
-        }
-
-        await _dataSource.updatePassword(params, session.user);
-
+        await _dataSource.updatePassword(params);
         return const Right(Success.genericSuccess());
       } else {
         return const Left(Failure.networkFailure());

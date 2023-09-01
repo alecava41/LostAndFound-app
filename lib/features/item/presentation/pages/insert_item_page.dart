@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -94,20 +93,22 @@ class InsertItemScreen extends StatelessWidget {
                           orElse: () {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                padding: const EdgeInsets.all(30),
                                 backgroundColor: Colors.red,
                                 content: Text(
-                                    failure.maybeWhen<String>(
-                                        genericFailure: () => 'Server error. Please try again later.',
-                                        networkFailure: () =>
-                                            'No internet connection available. Check your internet connection.',
-                                        orElse: () => "Unknown error"),
-                                    style: const TextStyle(fontSize: 20)),
+                                  failure.maybeWhen<String>(
+                                      genericFailure: () => 'Server error. Please try again later.',
+                                      networkFailure: () =>
+                                          'No internet connection available. Check your internet connection.',
+                                      orElse: () => "Unknown error"),
+                                ),
                               ),
                             );
                           })
                     },
                 (_) => {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(backgroundColor: Colors.green, content: Text("Item successfully created")),
+                      ),
                       ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.type)),
                       ctx.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0)),
                       Navigator.pop(ctx)

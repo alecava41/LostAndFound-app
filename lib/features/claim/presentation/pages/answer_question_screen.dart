@@ -46,7 +46,6 @@ class AnswerQuestionScreen extends StatelessWidget {
                     roomCreationFailureOrSuccess.fold((failure) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          padding: const EdgeInsets.all(30),
                           backgroundColor: Colors.red,
                           content: Text(
                             failure.maybeWhen<String>(
@@ -54,7 +53,6 @@ class AnswerQuestionScreen extends StatelessWidget {
                                 networkFailure: () => 'No internet connection available. Check your internet connection.',
                                 validationFailure: (reason) => reason!,
                                 orElse: () => "Unknown error"),
-                            style: const TextStyle(fontSize: 20),
                           ),
                         ),
                       );
@@ -69,7 +67,6 @@ class AnswerQuestionScreen extends StatelessWidget {
                         (failure) => {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  padding: const EdgeInsets.all(30),
                                   backgroundColor: Colors.red,
                                   content: Text(
                                       failure.maybeWhen<String>(
@@ -81,7 +78,17 @@ class AnswerQuestionScreen extends StatelessWidget {
                                 ),
                               )
                             },
-                        (updatedItem) => {Navigator.pop(context, updatedItem)});
+                        (updatedItem) => {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              backgroundColor: Colors.green,
+                              content: Text("Claim successfully created"),
+                            ),
+                          ),
+
+
+                          Navigator.pop(context, updatedItem),
+                        });
                   }
                 },
                 builder: (ctx, state) => state.isLoading

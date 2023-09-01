@@ -21,9 +21,9 @@ class _BadgeClient implements BadgeClient {
   String? baseUrl;
 
   @override
-  Future<List<int>> getUnreadNews() async {
+  Future<List<int>> getUnreadNews({String model = "ids"}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'model': model};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
@@ -34,7 +34,7 @@ class _BadgeClient implements BadgeClient {
     )
             .compose(
               _dio.options,
-              '/items/news',
+              '/users/items/news',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -48,9 +48,9 @@ class _BadgeClient implements BadgeClient {
   }
 
   @override
-  Future<List<int>> getUnreadReceivedClaims() async {
+  Future<List<int>> getUnreadReceivedClaims({String model = "ids"}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'model': model};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
@@ -61,7 +61,7 @@ class _BadgeClient implements BadgeClient {
     )
             .compose(
               _dio.options,
-              '/items/claims/ids',
+              '/users/items/claims',
               queryParameters: queryParameters,
               data: _data,
             )

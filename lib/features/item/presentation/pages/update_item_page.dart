@@ -94,20 +94,25 @@ class UpdateItemScreen extends StatelessWidget {
                 (failure) => {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          padding: const EdgeInsets.all(30),
                           backgroundColor: Colors.red,
                           content: Text(
-                              failure.maybeWhen<String>(
-                                  genericFailure: () => 'Server error. Please try again later.',
-                                  networkFailure: () =>
-                                      'No internet connection available. Check your internet connection.',
-                                  validationFailure: (reason) => reason!,
-                                  orElse: () => "Unknown error"),
-                              style: const TextStyle(fontSize: 20)),
+                            failure.maybeWhen<String>(
+                                genericFailure: () => 'Server error. Please try again later.',
+                                networkFailure: () => 'No internet connection available. Check your internet connection.',
+                                validationFailure: (reason) => reason!,
+                                orElse: () => "Unknown error"),
+                          ),
                         ),
                       )
                     },
                 (_) => {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Colors.green,
+                          content: Text("Item successfully updated"),
+                        ),
+                      ),
+
                       // Update lost/found item on HP
                       ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.item!.type)),
                       Navigator.pop(ctx, true)

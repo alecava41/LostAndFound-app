@@ -5,15 +5,14 @@ import 'package:lost_and_found/features/claim/domain/usecases/create_claim_useca
 import 'package:lost_and_found/features/claim/domain/usecases/insert_read_claim_usecase.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/manage_claim_usecase.dart';
 
+import '../../../../core/domain/usecases/usecase.dart';
 import '../../../../core/status/failures.dart';
 import '../../../../core/status/success.dart';
 import '../entities/claim_sent.dart';
-import '../usecases/get_received_claims_usecase.dart';
-import '../usecases/get_sent_claims_usecase.dart';
 
 abstract class ClaimRepository {
-  Future<Either<Failure, List<ClaimReceived>>> getReceivedClaims(GetReceivedClaimsParams params);
-  Future<Either<Failure, List<ClaimSent>>> getSentClaims(GetSentClaimsParams params);
+  Future<Either<Failure, List<ClaimReceived>>> getReceivedClaims(NoParams params);
+  Future<Either<Failure, List<ClaimSent>>> getSentClaims(NoParams params);
   Future<Either<Failure, item.Item>> createClaim(CreateClaimParams params);
   Future<Either<Failure, item.Item>> manageClaim(ManageClaimParams params);
   Future<Either<Failure, Success>> insertReadClaim(InsertReadClaimParams params);

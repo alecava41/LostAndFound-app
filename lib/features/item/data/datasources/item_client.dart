@@ -18,70 +18,53 @@ part 'item_client.g.dart';
 abstract class ItemClient {
   factory ItemClient(Dio dio, {String baseUrl}) = _ItemClient;
 
-  @GET('/users/{userId}/items')
+  @GET('/users/items')
   Future<List<UserItemDto>> getUserItems(
-    @Path() int userId,
     @Query("type") String type,
   );
 
-  @GET('/users/{userId}/items/news')
-  Future<List<NewsDto>> getNews(
-      @Path() int userId,
-      @Query("last") int last,
-      );
+  @GET('/users/items/news')
+  Future<List<NewsDto>> getNews({@Query("model") String model = "all"});
 
   @GET('/items')
-  Future<List<SearchItemDto>> getItems(
-      @Query("type") String type,
-      @Query("last") int last,
-      @Query("X") double X,
-      @Query("Y") double Y,
-      @Query("range") int range,
-      @Query("category") int category,
-      @Query("after") DateTime? date
-      );
+  Future<List<SearchItemDto>> getItems(@Query("type") String type, @Query("X") double X, @Query("Y") double Y,
+      @Query("range") int range, @Query("category") int category, @Query("after") DateTime? date);
 
   @GET('/items/{itemId}')
   Future<ItemDto> getItem(
-      @Path("itemId") int id,
-      );
+    @Path("itemId") int id,
+  );
 
-  @POST('/users/{userId}/items')
+  @POST('/users/items')
   Future<ItemResponseDto> createItem(
-      @Path("userId") int userId,
-      @Body() CreateItemParams params,
-      );
+    @Body() CreateItemParams params,
+  );
 
-  @POST('/users/{userId}/items/{itemId}/image')
+  @POST('/users/items/{itemId}/image')
   @MultiPart()
   Future<void> uploadItemImage(
-      @Path("userId") int userId,
-      @Path("itemId") int itemId,
-      @Part() File image,
-      );
+    @Path("itemId") int itemId,
+    @Part() File image,
+  );
 
-  @PATCH('/users/{userId}/items/{itemId}/status')
+  @PATCH('/users/items/{itemId}/status')
   Future<void> solveItem(
-      @Path("userId") int userId,
-      @Path("itemId") int itemId,
-      );
+    @Path("itemId") int itemId,
+  );
 
-  @DELETE('/users/{userId}/items/{itemId}')
+  @DELETE('/users/items/{itemId}')
   Future<void> deleteItem(
-      @Path("userId") int userId,
-      @Path("itemId") int itemId,
-      );
+    @Path("itemId") int itemId,
+  );
 
-  @PATCH('/users/{userId}/items/{itemId}')
+  @PATCH('/users/items/{itemId}')
   Future<void> updateItem(
-      @Path("userId") int userId,
-      @Path("itemId") int itemId,
-      @Body() UpdateItemParams params,
-      );
+    @Path("itemId") int itemId,
+    @Body() UpdateItemParams params,
+  );
 
-  @DELETE('/users/{userId}/items/{itemId}/image')
+  @DELETE('/users/items/{itemId}/image')
   Future<void> deleteItemImage(
-      @Path("userId") int userId,
-      @Path("itemId") int itemId,
-      );
+    @Path("itemId") int itemId,
+  );
 }

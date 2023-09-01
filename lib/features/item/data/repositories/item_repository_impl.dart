@@ -17,7 +17,6 @@ import 'package:lost_and_found/features/item/domain/usecases/create_item_usecase
 import 'package:lost_and_found/features/item/domain/usecases/delete_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_user_items_usecase.dart';
-import 'package:lost_and_found/features/item/domain/usecases/get_user_notifications_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/insert_read_news_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/search_items_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/solve_item_usecase.dart';
@@ -25,28 +24,24 @@ import 'package:lost_and_found/features/item/domain/usecases/update_item_usecase
 import 'package:lost_and_found/features/item/domain/usecases/upload_item_image_usecase.dart';
 
 import '../../../../core/data/repositories/utils.dart';
-import '../../../../core/data/secure_storage/secure_storage.dart';
+import '../../../../core/domain/usecases/usecase.dart';
 import '../../../../core/network/network_info.dart';
-import '../../../../core/status/exceptions.dart';
 import '../../domain/usecases/delete_item_image_usecase.dart';
 import '../datasources/item_data_source.dart';
 
 class ItemRepositoryImpl implements ItemRepository {
   final NetworkInfo _networkInfo;
   final ItemDataSource _dataSource;
-  final SecureStorage _storage;
   final ReadNewsDataSource _readNewsDataSource;
   final ReadClaimDataSource _readClaimDataSource;
 
   ItemRepositoryImpl(
       {required ItemDataSource dataSource,
-      required SecureStorage storage,
       required NetworkInfo networkInfo,
       required ReadNewsDataSource readNewsDataSource,
       required ReadClaimDataSource readClaimDataSource})
       : _networkInfo = networkInfo,
         _dataSource = dataSource,
-        _storage = storage,
         _readNewsDataSource = readNewsDataSource,
         _readClaimDataSource = readClaimDataSource;
 
@@ -54,13 +49,7 @@ class ItemRepositoryImpl implements ItemRepository {
   Future<Either<Failure, List<UserItem>>> getUserItems(GetUserItemsParams params) async {
     try {
       if (await _networkInfo.isConnected) {
-        final session = await _storage.getSessionInformation();
-
-        if (session == null) {
-          throw UserNotAuthorizedException();
-        }
-
-        final items = await _dataSource.getUserItems(params, session.user);
+        final items = await _dataSource.getUserItems(params);
         final domainItems = items.map((item) => item.toDomain()).toList();
 
         return Right(domainItems);
@@ -73,16 +62,10 @@ class ItemRepositoryImpl implements ItemRepository {
   }
 
   @override
-  Future<Either<Failure, List<News>>> getUserNotifications(GetUserNotificationsParams params) async {
+  Future<Either<Failure, List<News>>> getUserNotifications(NoParams params) async {
     try {
       if (await _networkInfo.isConnected) {
-        final session = await _storage.getSessionInformation();
-
-        if (session == null) {
-          throw UserNotAuthorizedException();
-        }
-
-        final news = await _dataSource.getUserNotifications(params, session.user);
+        final news = await _dataSource.getUserNotifications(params);
         final domainNews = news.map((news) => news.toDomain()).toList();
 
         if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android) {
@@ -152,13 +135,7 @@ class ItemRepositoryImpl implements ItemRepository {
   Future<Either<Failure, int>> createItem(CreateItemParams params) async {
     try {
       if (await _networkInfo.isConnected) {
-        final session = await _storage.getSessionInformation();
-
-        if (session == null) {
-          throw UserNotAuthorizedException();
-        }
-
-        final newItem = await _dataSource.createItem(params, session.user);
+        final newItem = await _dataSource.createItem(params);
 
         return Right(newItem.id);
       } else {
@@ -173,14 +150,7 @@ class ItemRepositoryImpl implements ItemRepository {
   Future<Either<Failure, Success>> uploadItemImage(UploadItemImageParams params) async {
     try {
       if (await _networkInfo.isConnected) {
-        final session = await _storage.getSessionInformation();
-
-        if (session == null) {
-          throw UserNotAuthorizedException();
-        }
-
-        await _dataSource.uploadItemImage(params, session.user);
-
+        await _dataSource.uploadItemImage(params);
         return const Right(Success.genericSuccess());
       } else {
         return const Left(Failure.networkFailure());
@@ -194,14 +164,7 @@ class ItemRepositoryImpl implements ItemRepository {
   Future<Either<Failure, Success>> solveItem(SolveItemParams params) async {
     try {
       if (await _networkInfo.isConnected) {
-        final session = await _storage.getSessionInformation();
-
-        if (session == null) {
-          throw UserNotAuthorizedException();
-        }
-
-        await _dataSource.solveItem(params, session.user);
-
+        await _dataSource.solveItem(params);
         return const Right(Success.genericSuccess());
       } else {
         return const Left(Failure.networkFailure());
@@ -215,14 +178,7 @@ class ItemRepositoryImpl implements ItemRepository {
   Future<Either<Failure, Success>> deleteItem(DeleteItemParams params) async {
     try {
       if (await _networkInfo.isConnected) {
-        final session = await _storage.getSessionInformation();
-
-        if (session == null) {
-          throw UserNotAuthorizedException();
-        }
-
-        await _dataSource.deleteItem(params, session.user);
-
+        await _dataSource.deleteItem(params);
         return const Right(Success.genericSuccess());
       } else {
         return const Left(Failure.networkFailure());
@@ -236,14 +192,7 @@ class ItemRepositoryImpl implements ItemRepository {
   Future<Either<Failure, Success>> updateItem(UpdateItemParams params) async {
     try {
       if (await _networkInfo.isConnected) {
-        final session = await _storage.getSessionInformation();
-
-        if (session == null) {
-          throw UserNotAuthorizedException();
-        }
-
-        await _dataSource.updateItem(params, session.user);
-
+        await _dataSource.updateItem(params);
         return const Right(Success.genericSuccess());
       } else {
         return const Left(Failure.networkFailure());
@@ -257,13 +206,7 @@ class ItemRepositoryImpl implements ItemRepository {
   Future<Either<Failure, Success>> deleteItemImage(DeleteItemImageParams params) async {
     try {
       if (await _networkInfo.isConnected) {
-        final session = await _storage.getSessionInformation();
-
-        if (session == null) {
-          throw UserNotAuthorizedException();
-        }
-
-        await _dataSource.deleteItemImage(params, session.user);
+        await _dataSource.deleteItemImage(params);
         return const Right(Success.genericSuccess());
       } else {
         return const Left(Failure.networkFailure());

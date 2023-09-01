@@ -21,14 +21,14 @@ class _ClaimClient implements ClaimClient {
   String? baseUrl;
 
   @override
-  Future<List<ClaimReceivedDto>> getReceivedClaims(
-    int last, {
+  Future<List<ClaimReceivedDto>> getReceivedClaims({
     String type = "received",
+    String model = "all",
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'last': last,
       r'type': type,
+      r'model': model,
     };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
@@ -40,7 +40,7 @@ class _ClaimClient implements ClaimClient {
     )
             .compose(
               _dio.options,
-              '/items/claims',
+              '/users/items/claims',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -57,14 +57,14 @@ class _ClaimClient implements ClaimClient {
   }
 
   @override
-  Future<List<ClaimSentDto>> getSentClaims(
-    int last, {
+  Future<List<ClaimSentDto>> getSentClaims({
     String type = "sent",
+    String model = "all",
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'last': last,
       r'type': type,
+      r'model': model,
     };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
@@ -76,7 +76,7 @@ class _ClaimClient implements ClaimClient {
     )
             .compose(
               _dio.options,
-              '/items/claims',
+              '/users/items/claims',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -124,7 +124,6 @@ class _ClaimClient implements ClaimClient {
 
   @override
   Future<ItemDto> manageClaim(
-    int userId,
     int itemId,
     int claimId,
     ManageClaimBody body,
@@ -142,7 +141,7 @@ class _ClaimClient implements ClaimClient {
     )
             .compose(
               _dio.options,
-              '/users/${userId}/items/${itemId}/claims/${claimId}',
+              '/users/items/${itemId}/claims/${claimId}',
               queryParameters: queryParameters,
               data: _data,
             )

@@ -14,15 +14,15 @@ part 'claim_client.g.dart';
 abstract class ClaimClient {
   factory ClaimClient(Dio dio, {String baseUrl}) = _ClaimClient;
 
-  @GET('/items/claims')
-  Future<List<ClaimReceivedDto>> getReceivedClaims(@Query("last") int last, {@Query("type") String type = "received"});
+  @GET('/users/items/claims')
+  Future<List<ClaimReceivedDto>> getReceivedClaims({@Query("type") String type = "received", @Query("model") String model = "all"});
 
-  @GET('/items/claims')
-  Future<List<ClaimSentDto>> getSentClaims(@Query("last") int last, {@Query("type") String type = "sent"});
+  @GET('/users/items/claims')
+  Future<List<ClaimSentDto>> getSentClaims({@Query("type") String type = "sent", @Query("model") String model = "all"});
 
   @POST('/items/{itemId}/claims')
   Future<ItemDto> createClaim(@Path() int itemId, @Body() CreateClaimBody body);
 
-  @PATCH('/users/{userId}/items/{itemId}/claims/{claimId}')
-  Future<ItemDto> manageClaim(@Path() int userId, @Path() int itemId, @Path() int claimId, @Body() ManageClaimBody body);
+  @PATCH('/users/items/{itemId}/claims/{claimId}')
+  Future<ItemDto> manageClaim(@Path() int itemId, @Path() int claimId, @Body() ManageClaimBody body);
 }
