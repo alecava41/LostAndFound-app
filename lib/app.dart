@@ -31,10 +31,6 @@ class App extends StatefulWidget {
   State<StatefulWidget> createState() => _Application();
 
   // TODO status bar not showing properly after navigating back to certain pages
-
-  // TODO refresh received claims page after managing a claim
-
-  // TODO refresh sent claims page after receiving notification
 }
 
 class _Application extends State<App> {

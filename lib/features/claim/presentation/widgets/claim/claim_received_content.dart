@@ -13,7 +13,7 @@ class ClaimReceivedContent extends StatelessWidget {
       builder: (ctx, state) => RefreshIndicator(
         onRefresh: () async {
           Future block = ctx.read<ClaimBloc>().stream.first;
-          ctx.read<ClaimBloc>().add(const ClaimEvent.receivedClaimsRefreshed());
+          ctx.read<ClaimBloc>().add(const ClaimEvent.receivedClaimsRefreshed(null));
           await block;
         },
         child: state.isLoadingReceived

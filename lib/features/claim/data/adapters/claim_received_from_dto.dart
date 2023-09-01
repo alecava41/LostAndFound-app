@@ -6,8 +6,8 @@ extension ClaimReceivedFromDto on ClaimReceivedDto {
   ClaimReceived toDomain() {
     return ClaimReceived(
       id: id,
-      item: Item(id: item.id, title: item.title),
-      user: User(id: user.id, username: user.username, hasImage: user.image),
+      item: ReceivedItem(id: item.id, title: item.title),
+      user: ReceivedUser(id: user.id, username: user.username, hasImage: user.image),
       opened: false,
       status: status == ClaimStatus.pending.name ? ClaimStatus.pending : (status == ClaimStatus.approved.name ? ClaimStatus.approved : ClaimStatus.rejected),
     );

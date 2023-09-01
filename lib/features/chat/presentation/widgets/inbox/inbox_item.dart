@@ -22,7 +22,7 @@ class InboxItem extends StatelessWidget {
     required this.onTap,
   });
 
-  // TODO insert name/image of the item somewhere
+  // TODO (@backToFrancesco) insert name/image of the item somewhere
 
   @override
   Widget build(BuildContext context) {

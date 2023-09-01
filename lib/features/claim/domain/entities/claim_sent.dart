@@ -2,7 +2,7 @@ import '../../../../core/domain/entities/claim_status.dart';
 
 class ClaimSent {
   final int id;
-  final Item item;
+  final SentItem item;
   final ClaimStatus status;
 
   ClaimSent({
@@ -12,10 +12,10 @@ class ClaimSent {
   });
 }
 
-class Item {
+class SentItem {
   final int id;
   final String title;
   final bool hasImage;
 
-  Item({required this.id, required this.title, required this.hasImage});
+  SentItem({required this.id, required this.title, required this.hasImage});
 }

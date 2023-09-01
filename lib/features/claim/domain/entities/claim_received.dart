@@ -2,8 +2,8 @@ import '../../../../core/domain/entities/claim_status.dart';
 
 class ClaimReceived {
   final int id;
-  final Item item;
-  final User user;
+  final ReceivedItem item;
+  final ReceivedUser user;
   final ClaimStatus status;
   bool opened;
 
@@ -16,17 +16,17 @@ class ClaimReceived {
   });
 }
 
-class Item {
+class ReceivedItem {
   final int id;
   final String title;
 
-  Item({required this.id, required this.title});
+  ReceivedItem({required this.id, required this.title});
 }
 
-class User {
+class ReceivedUser {
   final int id;
   final String username;
   final bool hasImage;
 
-  User({required this.id, required this.username, required this.hasImage});
+  ReceivedUser({required this.id, required this.username, required this.hasImage});
 }

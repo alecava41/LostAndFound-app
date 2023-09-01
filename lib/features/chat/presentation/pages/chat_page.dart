@@ -20,8 +20,6 @@ class ChatScreen extends StatelessWidget {
   final String roomId;
   final int itemId;
 
-  // TODO if no claim, button to go to item page? (or maybe better to insert item name on AppBar?)
-
   const ChatScreen({
     super.key,
     required this.roomId,
@@ -85,8 +83,8 @@ class ChatScreen extends StatelessWidget {
                             token: state.token,
                             claim: ClaimReceived(
                               id: receivedClaim.id,
-                              item: Item(id: state.item!.id, title: state.item!.title),
-                              user: User(
+                              item: ReceivedItem(id: state.item!.id, title: state.item!.title),
+                              user: ReceivedUser(
                                   id: receivedClaim.user.id,
                                   hasImage: receivedClaim.user.hasImage,
                                   username: receivedClaim.user.username),
@@ -103,11 +101,13 @@ class ChatScreen extends StatelessWidget {
                                 claim: sent.ClaimSent(
                                     status: sentClaim.status,
                                     id: sentClaim.id,
-                                    item: sent.Item(
+                                    item: sent.SentItem(
                                         id: state.item!.id, title: state.item!.title, hasImage: state.item!.hasImage)),
                                 token: state.token,
                               ))
-                          : Container()),
+                          :
+                  // TODO (@backToFrancesco) if no claim, box with item image + name + arrow (same style of claim card) + on click go to item page
+                  Container()),
                   Expanded(
                     child: StreamBuilder<List<types.Message>>(
                       initialData: const [],

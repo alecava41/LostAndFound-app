@@ -6,6 +6,8 @@ import 'package:lost_and_found/core/data/secure_storage/secure_storage.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/get_received_claims_usecase.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/get_sent_claims_usecase.dart';
 
+import 'package:lost_and_found/features/item/domain/entities/item.dart' as item;
+
 import '../../../domain/entities/claim_sent.dart';
 import '../../../domain/entities/claim_received.dart';
 import '../../../domain/usecases/insert_read_claim_usecase.dart';
@@ -36,7 +38,7 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
       (event, emit) async {
         await event.when<FutureOr<void>>(
           claimContentCreated: (tab, newClaimId) => _onClaimCreated(emit, tab, newClaimId),
-          receivedClaimsRefreshed: () => _onReceivedClaimRefreshed(emit),
+          receivedClaimsRefreshed: (item) => _onReceivedClaimRefreshed(emit, item),
           sentClaimsRefreshed: () => _onSentClaimRefreshed(emit),
           claimRead: (id) => _onClaimRead(emit, id),
         );
@@ -82,18 +84,41 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
     }
   }
 
-  Future<void> _onReceivedClaimRefreshed(Emitter<ClaimState> emit) async {
+  Future<void> _onReceivedClaimRefreshed(Emitter<ClaimState> emit, item.Item? newItem) async {
     emit(state.copyWith(isLoadingReceived: true, hasLoadingError: false));
 
-    final receivedClaimsResponse = await _getReceivedClaimsUseCase(GetReceivedClaimsParams(last: 0));
+    if (newItem != null) {
+      final newClaims = newItem.claims!;
 
-    emit(
-      state.copyWith(
-        isLoadingReceived: false,
-        claimsReceived: receivedClaimsResponse.getOrElse(() => []),
-        hasLoadingError: receivedClaimsResponse.isLeft(),
-      ),
-    );
+      for (var claim in newClaims) {
+        final claimIdx = state.claimsReceived.indexWhere((element) => element.id == claim.id);
+        claim.opened = state.claimsReceived[claimIdx].opened;
+      }
+
+      emit(
+        state.copyWith(
+          isLoadingReceived: false,
+          claimsReceived: newClaims
+              .map((e) => ClaimReceived(
+                  id: e.id,
+                  item: ReceivedItem(id: newItem.id, title: newItem.title),
+                  user: ReceivedUser(id: e.user.id, username: e.user.username, hasImage: e.user.hasImage),
+                  opened: e.opened,
+                  status: e.status))
+              .toList(),
+        ),
+      );
+    } else {
+      final receivedClaimsResponse = await _getReceivedClaimsUseCase(GetReceivedClaimsParams(last: 0));
+
+      emit(
+        state.copyWith(
+          isLoadingReceived: false,
+          claimsReceived: receivedClaimsResponse.getOrElse(() => []),
+          hasLoadingError: receivedClaimsResponse.isLeft(),
+        ),
+      );
+    }
   }
 
   Future<void> _onSentClaimRefreshed(Emitter<ClaimState> emit) async {

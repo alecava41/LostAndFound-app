@@ -6,7 +6,7 @@ extension ClaimSentFromDto on ClaimSentDto {
   ClaimSent toDomain() {
     return ClaimSent(
       id: id,
-      item: Item(id: item.id, title: item.title, hasImage: item.image),
+      item: SentItem(id: item.id, title: item.title, hasImage: item.image),
       status: status == ClaimStatus.pending.name
           ? ClaimStatus.pending
           : (status == ClaimStatus.rejected.name ? ClaimStatus.rejected : ClaimStatus.approved)

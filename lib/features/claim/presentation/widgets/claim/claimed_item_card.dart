@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/claim/domain/entities/claim_received.dart';
+import 'package:lost_and_found/features/item/domain/entities/item.dart' as item;
 import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
 
@@ -27,10 +28,11 @@ class ClaimedItemCard extends StatelessWidget {
           color: claim.opened ? PersonalizedColor.openedColor : PersonalizedColor.notOpenedColor,
           child: InkWell(
             splashColor: !claim.opened ? PersonalizedColor.splashGreenColor : PersonalizedColor.splashGreyColor,
-            onTap: () => {
-              ctx.read<ClaimBloc>().add(ClaimEvent.claimRead(claim.id)),
-              ctx.read<BadgeBloc>().add(const BadgeEvent.receivedClaimRead()),
-              Navigator.push(
+            onTap: () async {
+              ctx.read<ClaimBloc>().add(ClaimEvent.claimRead(claim.id));
+              ctx.read<BadgeBloc>().add(const BadgeEvent.receivedClaimRead());
+
+              final updatedItem = await Navigator.push<item.Item?>(
                 context,
                 MaterialPageRoute(
                   builder: (_) => AnswerClaimScreen(
@@ -39,7 +41,13 @@ class ClaimedItemCard extends StatelessWidget {
                     isClaimAlreadyManaged: claim.status != ClaimStatus.pending,
                   ),
                 ),
-              )
+              );
+
+              if (updatedItem != null && context.mounted) {
+                context
+                    .read<ClaimBloc>()
+                    .add(ClaimEvent.receivedClaimsRefreshed(updatedItem));
+              }
             },
             child: Container(
               decoration: BoxDecoration(
@@ -97,33 +105,33 @@ class ClaimedItemCard extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                             Container(
-                            padding: const EdgeInsets.all(3),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: claim.status == ClaimStatus.approved
-                                  ? PersonalizedColor.claimAcceptedStatusColor
-                                  : (claim.status == ClaimStatus.rejected
-                                      ? PersonalizedColor.claimDeniedStatusColor
-                                      : PersonalizedColor.claimWaitingStatusColor),
-                            ),
-                            child: RichText(
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              text: TextSpan(
-                                children: [
-                                  const TextSpan(
-                                    text: "Claim status: ",
-                                    style: TextStyle(fontSize: 13, color: Colors.black),
-                                  ),
-                                  TextSpan(
-                                    text: claim.status.name.toUpperCase(),
-                                    style:
-                                        const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
-                                  ),
-                                ],
+                              padding: const EdgeInsets.all(3),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: claim.status == ClaimStatus.approved
+                                    ? PersonalizedColor.claimAcceptedStatusColor
+                                    : (claim.status == ClaimStatus.rejected
+                                        ? PersonalizedColor.claimDeniedStatusColor
+                                        : PersonalizedColor.claimWaitingStatusColor),
+                              ),
+                              child: RichText(
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                text: TextSpan(
+                                  children: [
+                                    const TextSpan(
+                                      text: "Claim status: ",
+                                      style: TextStyle(fontSize: 13, color: Colors.black),
+                                    ),
+                                    TextSpan(
+                                      text: claim.status.name.toUpperCase(),
+                                      style:
+                                          const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
                           ],
                         ),
                       ),
