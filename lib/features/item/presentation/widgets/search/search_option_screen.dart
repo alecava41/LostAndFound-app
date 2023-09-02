@@ -33,7 +33,7 @@ class SearchOptionScreen extends StatelessWidget {
                     children: [
                       Text(
                         "Filters",
-                        style: TextStyle(fontSize: 40),
+                        style: TextStyle(fontSize: 30),
                       ),
                     ],
                   ),

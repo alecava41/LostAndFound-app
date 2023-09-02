@@ -20,7 +20,7 @@ class LostItemsContainer extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(20, 0, 0, 10),
             child: Text(
               "Your lost items",
-              style: TextStyle(fontSize: 25),
+              style: TextStyle(fontSize: 20),
             ),
           ),
           state.lostItems.isNotEmpty

@@ -10,11 +10,9 @@ class OptionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const divider = Divider(
-      color: Colors.grey,
-      thickness: 1,
-      height: 0,
-    );
+    const divider =  Divider(
+            height: 0,
+          );
 
     return Column(
       children: [

@@ -142,8 +142,6 @@ class ItemScreen extends StatelessWidget {
                           hasImage: state.item!.hasImage,
                         ),
                         const Divider(
-                          color: Colors.grey,
-                          thickness: 1,
                           height: 0,
                         ),
                         InfoItem(
@@ -391,8 +389,6 @@ class ItemScreen extends StatelessWidget {
         ),
       ),
       const Divider(
-        color: Colors.grey,
-        thickness: 1,
         height: 0,
       ),
     ];

@@ -35,8 +35,6 @@ class CategorySelectionForm extends StatelessWidget {
     return Column(
       children: [
         const Divider(
-          color: Colors.grey,
-          thickness: 1,
           height: 0,
         ),
         Material(
@@ -61,7 +59,7 @@ class CategorySelectionForm extends StatelessWidget {
                             children: [
                               Text(
                                 "Category",
-                                style: TextStyle(fontSize: 25),
+                                style: TextStyle(fontSize: 22),
                               ),
                             ],
                           ),
@@ -103,8 +101,6 @@ class CategorySelectionForm extends StatelessWidget {
           ),
         ),
         const Divider(
-          color: Colors.grey,
-          thickness: 1,
           height: 0,
         ),
       ],

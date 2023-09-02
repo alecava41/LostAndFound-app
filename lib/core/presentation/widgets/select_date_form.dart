@@ -20,8 +20,6 @@ class DateSelectionForm extends StatelessWidget {
     return Column(
       children: [
         const Divider(
-          color: Colors.grey,
-          thickness: 1,
           height: 0,
         ),
         Ink(
@@ -42,7 +40,7 @@ class DateSelectionForm extends StatelessWidget {
                       children: [
                         Text(
                           "Date",
-                          style: TextStyle(fontSize: 25),
+                          style: TextStyle(fontSize: 22),
                         ),
                         Text("e.g. date of upload"),
                       ],
@@ -70,8 +68,6 @@ class DateSelectionForm extends StatelessWidget {
           ),
         ),
         const Divider(
-          color: Colors.grey,
-          thickness: 1,
           height: 0,
         ),
       ],

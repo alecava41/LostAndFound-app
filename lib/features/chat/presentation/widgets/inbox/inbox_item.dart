@@ -33,52 +33,96 @@ class InboxItem extends StatelessWidget {
         splashColor: !opened ? PersonalizedColor.primarySwatch.shade500 : Colors.grey.withOpacity(0.4),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: CircularImage(
-                        token: token,
-                        imageUrl: "$baseUrl/api/users/$otherUserId/image",
-                        hasImage: true,
-                        radius: 30,
-                        errorAsset: "assets/images/no-user.jpg"),
-                  ),
-                  Expanded(
-                    child: Padding(
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              //mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Row(
                         children: [
-                          Text(
-                            roomName,
-                            style: const TextStyle(fontSize: 26.5),
-                            overflow: TextOverflow.ellipsis,
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: CircularImage(
+                                token: token,
+                                imageUrl: "$baseUrl/api/users/$otherUserId/image",
+                                hasImage: true,
+                                radius: 25,
+                                errorAsset: "assets/images/no-user.jpg"),
                           ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            lastMessage,
-                            overflow: TextOverflow.ellipsis,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  roomName,
+                                  style: const TextStyle(fontSize: 18),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  lastMessage,
+                                  overflow: TextOverflow.ellipsis,
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),
                     ),
-                  )
-                ],
-              ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 4, 12, 4),
+                  child: Container(
+                    width: 80,
+                    //color: Colors.amber,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: /*
+                              TODO (@alecava41): image
+                              claim.item.hasImage
+                                  ? CachedNetworkImage(
+                                      imageUrl: "$baseUrl/api/items/${claim.item.id}/image",
+                                      fit: BoxFit.cover,
+                                      httpHeaders: {
+                                        "Authorization": "Bearer $token",
+                                      },
+                                      progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                          const CustomCircularProgress(size: 35),
+                                      errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
+                                      imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+                                    )
+                                  : */Image.asset("assets/images/no-item.png"),
+                            ),
+                          ),
+                          Text("Item's name", style: TextStyle(color: Colors.black45, overflow: TextOverflow.ellipsis, fontSize: 12),),
+                          
+                      ],
+                      
+                    ),
+                  ),
+                ),
+               
+              ],
+              
             ),
-            const Divider(
-              color: Colors.grey,
-              thickness: 1,
-              height: 0,
-            ),
+            Divider(height: 1,),
           ],
         ),
       ),
+      
     );
   }
 }

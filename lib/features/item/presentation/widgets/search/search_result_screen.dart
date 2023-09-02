@@ -78,8 +78,6 @@ class SearchResultScreen extends StatelessWidget {
             ),
           ),
           const Divider(
-            color: Colors.grey,
-            thickness: 1,
             height: 0,
           ),
           state.hasSearchError

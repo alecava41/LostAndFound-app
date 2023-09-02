@@ -25,8 +25,6 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
     return Column(
       children: [
         const Divider(
-          color: Colors.grey,
-          thickness: 1,
           height: 0,
         ),
         Container(
@@ -40,7 +38,7 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(15, 8, 0, 0),
                 child: Text(
                   'Items',
-                  style: TextStyle(fontSize: 25),
+                  style: TextStyle(fontSize: 22),
                 ),
               ),
               Row(
@@ -87,8 +85,6 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
           ),
         ),
         const Divider(
-          color: Colors.grey,
-          thickness: 1,
           height: 0,
         ),
       ],

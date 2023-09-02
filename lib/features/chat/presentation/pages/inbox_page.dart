@@ -25,13 +25,11 @@ class InboxScreen extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(15, 25, 0, 10),
               child: Text(
                 "Messages",
-                style: TextStyle(fontSize: 40),
+                style: TextStyle(fontSize: 30),
               ),
             ),
           ),
           const Divider(
-            color: Colors.grey,
-            thickness: 1,
             height: 0,
           ),
           state.isLoading

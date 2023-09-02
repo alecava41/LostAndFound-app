@@ -46,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text("Home", style: TextStyle(fontSize: 40)),
+                          const Text("Home", style: TextStyle(fontSize: 30)),
                           Row(
                             children: [
                               badges.Badge(

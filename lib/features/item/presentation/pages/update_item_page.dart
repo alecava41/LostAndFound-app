@@ -309,8 +309,6 @@ class UpdateItemScreen extends StatelessWidget {
 
   Divider customDivider() {
     return const Divider(
-      color: Colors.grey,
-      thickness: 1,
       height: 0,
     );
   }

@@ -30,8 +30,6 @@ class SelectPositionButton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Divider(
-          color: Colors.grey,
-          thickness: 1,
           height: 0,
         ),
         Ink(
@@ -64,7 +62,7 @@ class SelectPositionButton extends StatelessWidget {
                         children: [
                           const Text(
                             "Position",
-                            style: TextStyle(fontSize: 25),
+                            style: TextStyle(fontSize: 22),
                           ),
                           const Text("e.g. where the item has been found or lost"),
                           const SizedBox(
@@ -119,8 +117,6 @@ class SelectPositionButton extends StatelessWidget {
           ),
         ),
         const Divider(
-          color: Colors.grey,
-          thickness: 1,
           height: 0,
         ),
       ],

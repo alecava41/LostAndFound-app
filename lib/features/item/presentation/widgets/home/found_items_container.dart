@@ -17,7 +17,7 @@ class FoundItemsContainer extends StatelessWidget {
         children: [
           const Padding(
             padding: EdgeInsets.fromLTRB(20, 0, 0, 10),
-            child: Text("Your found items", style: TextStyle(fontSize: 25),
+            child: Text("Your found items", style: TextStyle(fontSize: 20),
             ),
           ),
           state.foundItems.isNotEmpty
