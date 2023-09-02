@@ -59,6 +59,10 @@ class UserScreen extends StatelessWidget {
                       ),
                     ),
                 (_) => {
+                      // Go back to login page, remove all history
+                      Navigator.popUntil(context, (route) => route.isFirst),
+                      Navigator.pushReplacementNamed(context, "/tutorial"),
+
                       ctx.read<HomeBloc>().add(const HomeEvent.restoreInitial()),
                       ctx.read<SearchBloc>().add(const SearchEvent.restoreInitial()),
                       ctx.read<HomeControllerBloc>().add(const HomeControllerEvent.restoreInitial()),
@@ -68,14 +72,10 @@ class UserScreen extends StatelessWidget {
 
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          backgroundColor: Colors.red,
+                          backgroundColor: Colors.green,
                           content: Text("Successful logout"),
                         ),
                       ),
-
-                      // Go back to login page, remove all history
-                      Navigator.popUntil(context, (route) => route.isFirst),
-                      Navigator.pushReplacementNamed(context, "/tutorial")
                     });
           }
         },

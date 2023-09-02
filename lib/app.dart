@@ -31,6 +31,8 @@ class App extends StatefulWidget {
   State<StatefulWidget> createState() => _Application();
 
   // TODO status bar not showing properly after navigating back to certain pages
+
+  // TODO as an additional help, we can add a map on "item details" page, so when user presses on the position he can see a map with a marker on the place!
 }
 
 class _Application extends State<App> {
@@ -132,6 +134,7 @@ class _Application extends State<App> {
         builder: (context, orientation, deviceType) {
           if (initialRoute == "/") {
             context.read<HomeBloc>().add(const HomeEvent.homeCreated());
+            context.read<BadgeBloc>().add(const BadgeEvent.badgeCreated());
           }
 
           return MaterialApp(

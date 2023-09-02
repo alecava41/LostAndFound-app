@@ -123,7 +123,7 @@ class ChatScreen extends StatelessWidget {
                             child: CircularImage(
                               token: state.token,
                               hasImage: true,
-                              imageUrl: "$baseUrl/api/users/$id}/image",
+                              imageUrl: "$baseUrl/api/users/$id/image",
                               radius: 20,
                             ),
                           );
