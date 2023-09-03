@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/widgets/claim/claimed_item_card.dart';
+import 'package:lost_and_found/features/claim/presentation/widgets/claim/info_claims_box.dart';
 
 class ClaimReceivedContent extends StatelessWidget {
   const ClaimReceivedContent({super.key});
@@ -13,7 +14,9 @@ class ClaimReceivedContent extends StatelessWidget {
       builder: (ctx, state) => RefreshIndicator(
         onRefresh: () async {
           Future block = ctx.read<ClaimBloc>().stream.first;
-          ctx.read<ClaimBloc>().add(const ClaimEvent.receivedClaimsRefreshed(null));
+          ctx
+              .read<ClaimBloc>()
+              .add(const ClaimEvent.receivedClaimsRefreshed(null));
           await block;
         },
         child: state.isLoadingReceived
@@ -44,18 +47,29 @@ class ClaimReceivedContent extends StatelessWidget {
                       ),
                     ),
                   )
-                : ListView.builder(
-                    itemCount: state.claimsReceived.length,
-                    itemBuilder: (context, index) {
-                      final claim = state.claimsReceived[index];
-                      return Container(
-                        padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                        child: ClaimedItemCard(
-                          claim: claim,
-                          token: state.token,
+                : Column(
+                    children: [
+                      
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: state.claimsReceived.length,
+                          itemBuilder: (context, index) {
+                            final claim = state.claimsReceived[index];
+                            return Container(
+                              padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                              child: ClaimedItemCard(
+                                claim: claim,
+                                token: state.token,
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
+                      ),
+                      const InfoClaimsBox(
+                          text:
+                          "In this section there are the claims, made by other users, for the items you have found."
+                              ),
+                    ],
                   ),
       ),
     );

@@ -106,8 +106,8 @@ class AnswerQuestionScreen extends StatelessWidget {
                                   padding: const EdgeInsets.fromLTRB(5, 0, 5, 10),
                                   child: Row(
                                     children: [
-                                      Icon(Icons.connect_without_contact, size: 25,),
-                                      SizedBox(width: 5,),
+                                      const Icon(Icons.connect_without_contact, size: 25,),
+                                      const SizedBox(width: 5,),
                                       const Text(
                                         "Claim item",
                                         style: TextStyle(fontSize: 30),
@@ -135,13 +135,13 @@ class AnswerQuestionScreen extends StatelessWidget {
                                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            color: Colors.blue.shade100,
+                                            color: PersonalizedColor.infoColor,
                                             borderRadius: BorderRadius.circular(10),
                                           ),
                                           child: const Padding(
                                             padding: EdgeInsets.all(10.0),
                                             child: Text(
-                                              "To claim the item, please answer the following question correctly. If you can provide the correct answer, who found the item will proceed to give it back to you.",
+                                              "To claim the item, please answer the following question correctly. If you can provide the correct answer, who found the item will proceed to give it back to you.", style: TextStyle(color: Colors.black54),
                                             ),
                                           ),
                                         ),
@@ -241,7 +241,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                                             Row(
                                               children: [
                                                 const Icon(
-                                                  Icons.info_outline_rounded,
+                                                  Icons.info,
                                                   size: 20,
                                                   color: Colors.black54,
                                                 ),

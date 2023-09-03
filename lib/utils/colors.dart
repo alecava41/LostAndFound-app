@@ -27,4 +27,5 @@ class PersonalizedColor {
   static const borderColorOpened = Colors.black26;
   static const borderColorNotOpened = PersonalizedColor.mainColor;
   static const userNameColor = Colors.black54;
+  static const infoColor = Color.fromRGBO(187, 222, 251, 1);
 }

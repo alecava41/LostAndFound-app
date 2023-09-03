@@ -49,7 +49,7 @@ class CustomNotification extends StatelessWidget {
               child: SizedBox(
                 height: 100,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(14.0),
                   child: Row(
                     children: [
                       CircularImage(
@@ -100,10 +100,7 @@ class CustomNotification extends StatelessWidget {
               ),
             ),
           ),
-          //  ),
           const Divider(
-            color: Colors.grey,
-            thickness: 1,
             height: 0,
           ),
         ],

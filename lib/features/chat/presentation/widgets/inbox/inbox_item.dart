@@ -38,45 +38,46 @@ class InboxItem extends StatelessWidget {
               //mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: CircularImage(
+                Expanded(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            CircularImage(
                                 token: token,
                                 imageUrl: "$baseUrl/api/users/$otherUserId/image",
                                 hasImage: true,
                                 radius: 25,
                                 errorAsset: "assets/images/no-user.jpg"),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  roomName,
-                                  style: const TextStyle(fontSize: 18),
-                                  overflow: TextOverflow.ellipsis,
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      roomName,
+                                      style: const TextStyle(fontSize: 18),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      lastMessage,
+                                      overflow: TextOverflow.ellipsis,
+                                    )
+                                  ],
                                 ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  lastMessage,
-                                  overflow: TextOverflow.ellipsis,
-                                )
-                              ],
-                            ),
-                          )
-                        ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 4, 12, 4),
@@ -118,7 +119,7 @@ class InboxItem extends StatelessWidget {
               ],
               
             ),
-            Divider(height: 1,),
+            const Divider(height: 1,),
           ],
         ),
       ),

@@ -177,13 +177,13 @@ class AnswerClaimScreen extends StatelessWidget {
                                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            color: Colors.blue.shade100,
+                                            color: PersonalizedColor.infoColor,
                                             borderRadius: BorderRadius.circular(10),
                                           ),
                                           child: const Padding(
                                             padding: EdgeInsets.all(10.0),
                                             child: Text(
-                                              "Please review the answer received and make a decision to either accept or decline the claim for the item. If the provided answer is correct, you can proceed with returning the item to its rightful owner.",
+                                              "Please review the answer received and make a decision to either accept or decline the claim for the item. If the provided answer is correct, you can proceed with returning the item to its rightful owner.", style: TextStyle(color: Colors.black54),
                                             ),
                                           ),
                                         ),
@@ -284,7 +284,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                               Row(
                                                 children: [
                                                   const Icon(
-                                                    Icons.info_outline_rounded,
+                                                    Icons.info,
                                                     size: 20,
                                                     color: Colors.black54,
                                                   ),

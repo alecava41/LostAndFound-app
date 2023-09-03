@@ -81,7 +81,7 @@ class ClaimStatusButton extends StatelessWidget {
                       Row(
                         children: [
                           const Icon(
-                            Icons.info_outline_rounded,
+                            Icons.info,
                             size: 20,
                             color: Colors.black54,
                           ),

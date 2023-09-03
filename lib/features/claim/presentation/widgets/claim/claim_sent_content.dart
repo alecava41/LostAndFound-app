@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/widgets/claim/claimed_status_card.dart';
+import 'package:lost_and_found/features/claim/presentation/widgets/claim/info_claims_box.dart';
 
 import '../../../../../core/presentation/widgets/custom_circular_progress.dart';
 
@@ -47,19 +48,26 @@ class ClaimSentContent extends StatelessWidget {
                       ),
                     ),
                   )
-                : ListView.builder(
-                    itemCount: state.claimsSent.length,
-                    itemBuilder: (context, index) {
-                      final claim = state.claimsSent[index];
-                      return Container(
-                        padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                        child: ClaimedStatusCard(
-                          token: state.token,
-                          claim: claim,
+                : Column(
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount: state.claimsSent.length,
+                          itemBuilder: (context, index) {
+                            final claim = state.claimsSent[index];
+                            return Container(
+                              padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                              child: ClaimedStatusCard(
+                                token: state.token,
+                                claim: claim,
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
+                    ),
+                      const InfoClaimsBox(text: "In this section there are the claims you have made for the items founded by other users.")
+                  ],
+                ),
       ),
     );
   }
