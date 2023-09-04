@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/core/presentation/widgets/circular_image_avatar.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
+import '../../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../../utils/colors.dart';
 
 class InboxItem extends StatelessWidget {
@@ -10,6 +13,8 @@ class InboxItem extends StatelessWidget {
   final String roomName;
   final String lastMessage;
   final bool opened;
+  final int itemId;
+  final String itemTitle;
   final VoidCallback onTap;
 
   const InboxItem({
@@ -20,9 +25,9 @@ class InboxItem extends StatelessWidget {
     required this.lastMessage,
     required this.opened,
     required this.onTap,
+    required this.itemId,
+    required this.itemTitle,
   });
-
-  // TODO (@backToFrancesco) insert name/image of the item somewhere
 
   @override
   Widget build(BuildContext context) {
@@ -81,49 +86,45 @@ class InboxItem extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 4, 12, 4),
-                  child: Container(
+                  child: SizedBox(
                     width: 80,
                     //color: Colors.amber,
                     child: Column(
                       children: [
                         SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: /*
-                              TODO (@alecava41): image
-                              claim.item.hasImage
-                                  ? CachedNetworkImage(
-                                      imageUrl: "$baseUrl/api/items/${claim.item.id}/image",
-                                      fit: BoxFit.cover,
-                                      httpHeaders: {
-                                        "Authorization": "Bearer $token",
-                                      },
-                                      progressIndicatorBuilder: (context, url, downloadProgress) =>
-                                          const CustomCircularProgress(size: 35),
-                                      errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
-                                      imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-                                    )
-                                  : */Image.asset("assets/images/no-item.png"),
+                          width: 50,
+                          height: 50,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: CachedNetworkImage(
+                              imageUrl: "$baseUrl/api/items/$itemId/image",
+                              fit: BoxFit.cover,
+                              httpHeaders: {
+                                "Authorization": "Bearer $token",
+                              },
+                              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                  const CustomCircularProgress(size: 25),
+                              errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
+                              imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                             ),
                           ),
-                          Text("Item's name", style: TextStyle(color: Colors.black45, overflow: TextOverflow.ellipsis, fontSize: 12),),
-                          
+                        ),
+                        Text(
+                          itemTitle,
+                          style: const TextStyle(color: Colors.black45, overflow: TextOverflow.ellipsis, fontSize: 12),
+                        ),
                       ],
-                      
                     ),
                   ),
                 ),
-               
               ],
-              
             ),
-            const Divider(height: 1,),
+            const Divider(
+              height: 1,
+            ),
           ],
         ),
       ),
-      
     );
   }
 }

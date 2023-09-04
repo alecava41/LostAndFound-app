@@ -33,7 +33,7 @@ class CustomCardSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 250,
+      height: 253,
       width: 165,
       child: Stack(
         children: [

@@ -100,6 +100,7 @@ class ChatDataSourceImpl implements ChatDataSource {
         "username1": params.username1,
         "username2": params.username2,
         "item": params.itemId,
+        "title": params.itemName,
         "active": false,
         "lastMessage": null,
         "lastMessageId": null,

@@ -56,6 +56,7 @@ class AnswerClaimBloc extends Bloc<AnswerClaimEvent, AnswerClaimState> {
       username1: (await _storage.getCredentialsForChatLogin()).second,
       username2: username2,
       itemId: state.item!.id,
+      itemName: state.item!.title,
     );
 
     final response = await _createRoomUseCase(params);

@@ -12,7 +12,6 @@ import '../widgets/inbox/inbox_item.dart';
 class InboxScreen extends StatelessWidget {
   const InboxScreen({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<InboxBloc, InboxState>(
@@ -43,6 +42,7 @@ class InboxScreen extends StatelessWidget {
                       initialData: const [],
                       builder: (context, snapshot) {
                         if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                          // TODO (@backToFrancesco) can we do something better?
                           return const Padding(
                             padding: EdgeInsets.fromLTRB(0, 60, 0, 0),
                             child: Text("No chat yet", style: TextStyle(fontSize: 30)),
@@ -51,6 +51,7 @@ class InboxScreen extends StatelessWidget {
                           final activeRooms = snapshot.data!.filter((room) => room.metadata!["active"]! as bool).toList();
 
                           if (activeRooms.isEmpty) {
+                            // TODO (@backToFrancesco) can we do something better?
                             return const Padding(
                               padding: EdgeInsets.fromLTRB(0, 60, 0, 0),
                               child: Text("No chat yet", style: TextStyle(fontSize: 30)),
@@ -78,6 +79,7 @@ class InboxScreen extends StatelessWidget {
                                 }
 
                                 final itemId = int.parse(room.name!.split('-')[1]);
+                                final itemName = room.metadata!["title"] as String;
 
                                 return InboxItem(
                                   otherUserId: id1 == state.currentId ? id2 : id1,
@@ -92,6 +94,8 @@ class InboxScreen extends StatelessWidget {
                                     );
                                   },
                                   token: state.token,
+                                  itemId: itemId,
+                                  itemTitle: itemName,
                                 );
                               },
                             ),

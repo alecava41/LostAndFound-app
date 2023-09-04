@@ -71,6 +71,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
       username1: (await _secureStorage.getCredentialsForChatLogin()).second,
       username2: username2,
       itemId: state.item!.id,
+      itemName: state.item!.title,
     );
 
     final response = await _createRoomUseCase(params);

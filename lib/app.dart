@@ -33,6 +33,18 @@ class App extends StatefulWidget {
 
   // TODO status bar not showing properly after navigating back to certain pages
 
+  // TODO check image upload (seems not working)
+
+  // TODO check chat bug (log as backToFrancesco), then try to chat with alecava41
+
+  // TODO make loading screens more "sectorized"
+
+  // TODO translations
+
+  // TODO fix snackbar colors
+
+  // TODO dark theme and switch
+
   // TODO as an additional help, we can add a map on "item details" page, so when user presses on the position he can see a map with a marker on the place!
 }
 

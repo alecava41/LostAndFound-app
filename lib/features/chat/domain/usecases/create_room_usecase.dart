@@ -22,6 +22,7 @@ class CreateRoomParams {
   final String username1;
   final String username2;
   final int itemId;
+  final String itemName;
 
   const CreateRoomParams({
     required this.id1,
@@ -29,5 +30,6 @@ class CreateRoomParams {
     required this.username1,
     required this.username2,
     required this.itemId,
+    required this.itemName,
   });
 }
