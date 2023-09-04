@@ -35,11 +35,11 @@ class App extends StatefulWidget {
 
   // TODO check image upload (seems not working)
 
-  // TODO check chat bug (log as backToFrancesco), then try to chat with alecava41
-
   // TODO make loading screens more "sectorized"
 
-  // TODO translations
+  // TODO add more categories
+
+  // TODO translation (app + notifications)
 
   // TODO dark theme and switch
 

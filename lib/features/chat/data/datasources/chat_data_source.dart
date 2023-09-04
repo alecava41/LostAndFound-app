@@ -84,7 +84,11 @@ class ChatDataSourceImpl implements ChatDataSource {
         room.second == "${params.id1}-${params.itemId}-${params.id2}" ||
         room.second == "${params.id2}-${params.itemId}-${params.id1}")) {
       return types.Room(
-          id: rooms.firstWhere((e) => e.second == "${params.id1}-${params.itemId}-${params.id2}").first,
+          id: rooms
+              .firstWhere((e) =>
+                  e.second == "${params.id1}-${params.itemId}-${params.id2}" ||
+                  e.second == "${params.id2}-${params.itemId}-${params.id1}")
+              .first,
           type: RoomType.group,
           users: const []);
     }

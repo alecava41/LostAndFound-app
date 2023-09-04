@@ -1,13 +1,21 @@
-
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 
+import '../../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../../utils/colors.dart';
+import '../../../../../utils/constants.dart';
 
 class NotClaimedItemCard extends StatelessWidget {
-
+  final int itemId;
+  final String itemName;
+  final String token;
 
   const NotClaimedItemCard({
-
+    required this.itemId,
+    required this.itemName,
+    required this.token,
     super.key,
   });
 
@@ -20,15 +28,14 @@ class NotClaimedItemCard extends StatelessWidget {
         child: InkWell(
           splashColor: PersonalizedColor.splashGreyColor,
           onTap: () => {
-            /* TODO (@alecava41 add logic)
-            context.read<BadgeBloc>().add(const BadgeEvent.sentClaimRead()),
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (_) => AnswerQuestionScreen(
-                          itemId: claim.item.id,
-                          isClaimAlreadyTaken: true,
-                        )))*/
+              context,
+              MaterialPageRoute(
+                builder: (_) => ItemScreen(
+                  itemId: itemId,
+                ),
+              ),
+            )
           },
           child: Container(
             decoration: BoxDecoration(
@@ -47,21 +54,17 @@ class NotClaimedItemCard extends StatelessWidget {
                   height: 70,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: /*
-                    TODO (@alecava41): image
-                    claim.item.hasImage
-                        ? CachedNetworkImage(
-                            imageUrl: "$baseUrl/api/items/${claim.item.id}/image",
-                            fit: BoxFit.cover,
-                            httpHeaders: {
-                              "Authorization": "Bearer $token",
-                            },
-                            progressIndicatorBuilder: (context, url, downloadProgress) =>
-                                const CustomCircularProgress(size: 35),
-                            errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
-                            imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-                          )
-                        : */Image.asset("assets/images/no-item.png"),
+                    child: CachedNetworkImage(
+                      imageUrl: "$baseUrl/api/items/$itemId/image",
+                      fit: BoxFit.cover,
+                      httpHeaders: {
+                        "Authorization": "Bearer $token",
+                      },
+                      progressIndicatorBuilder: (context, url, downloadProgress) =>
+                          const CustomCircularProgress(size: 35),
+                      errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
+                      imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+                    ),
                   ),
                 ),
                 Expanded(
@@ -75,14 +78,12 @@ class NotClaimedItemCard extends StatelessWidget {
                         children: [
                           Flexible(
                             child: Text(
-                              //claim.item.title,
-                              "Item's name",
+                              itemName,
                               style: const TextStyle(fontSize: 17),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                             ),
                           ),
-                          
                         ],
                       ),
                     ),

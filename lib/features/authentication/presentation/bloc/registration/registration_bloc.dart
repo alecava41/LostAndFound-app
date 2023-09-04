@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -93,7 +92,6 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
       );
 
       final params = RegistrationParams(
-          device: Platform.isAndroid ? 'android' : "ios",
           token: await FirebaseMessaging.instance.getToken(),
           password: state.password.value.getOrElse(() => ""),
           username: state.username.value.getOrElse(() => ""),
