@@ -65,7 +65,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         ? state.room!.metadata!["id1"]!
         : state.room!.metadata!["id2"]!) as int;
 
-    // TODO what if message wouldn't send correct?
     await _sendMessageUseCase(SendMessageParams(
       message: message,
       roomId: state.room!.id,

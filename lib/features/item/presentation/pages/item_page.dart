@@ -150,6 +150,7 @@ class ItemScreen extends StatelessWidget {
                                 category: state.item!.category.name,
                                 question: state.item!.question,
                                 type: state.item!.type,
+                                coordinates: state.item!.position,
                               ),
                             ];
 

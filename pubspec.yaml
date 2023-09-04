@@ -77,7 +77,7 @@ dependencies:
   flutter_firebase_chat_core: ^1.6.7
   flutter_chat_types: ^3.6.2
 
-  
+  map_launcher: ^2.5.0+1
 
 dev_dependencies:
   flutter_test:
