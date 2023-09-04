@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
@@ -20,10 +19,6 @@ class HomeScreen extends StatelessWidget {
       builder: (ctx, state) {
         return BlocBuilder<BadgeBloc, BadgeState>(
           builder: (badgeCtx, badgeState) {
-            if (state.isLoading) {
-              return const CustomCircularProgress(size: 100);
-            }
-
             if (state.hasLoadingError) {
               return ErrorPage(onRetry: () => ctx.read<HomeBloc>().add(const HomeEvent.homeRefreshed()));
             }

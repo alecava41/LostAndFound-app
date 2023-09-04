@@ -29,10 +29,8 @@ class UserScreen extends StatelessWidget {
                         backgroundColor: Colors.red,
                         content: Text(
                           failure.maybeWhen<String>(
-                              genericFailure: () =>
-                                  'Server error. Please try again later.',
-                              networkFailure: () =>
-                                  'No internet connection available. Check your internet connection.',
+                              genericFailure: () => 'Server error. Please try again later.',
+                              networkFailure: () => 'No internet connection available. Check your internet connection.',
                               orElse: () => "Unknown error"),
                         ),
                       ),
@@ -54,10 +52,8 @@ class UserScreen extends StatelessWidget {
                         backgroundColor: Colors.red,
                         content: Text(
                           failure.maybeWhen<String>(
-                              genericFailure: () =>
-                                  'Server error. Please try again later.',
-                              networkFailure: () =>
-                                  'No internet connection available. Check your internet connection.',
+                              genericFailure: () => 'Server error. Please try again later.',
+                              networkFailure: () => 'No internet connection available. Check your internet connection.',
                               orElse: () => "Unknown error"),
                         ),
                       ),
@@ -67,24 +63,12 @@ class UserScreen extends StatelessWidget {
                       Navigator.popUntil(context, (route) => route.isFirst),
                       Navigator.pushReplacementNamed(context, "/tutorial"),
 
-                      ctx
-                          .read<HomeBloc>()
-                          .add(const HomeEvent.restoreInitial()),
-                      ctx
-                          .read<SearchBloc>()
-                          .add(const SearchEvent.restoreInitial()),
-                      ctx
-                          .read<HomeControllerBloc>()
-                          .add(const HomeControllerEvent.restoreInitial()),
-                      ctx
-                          .read<BadgeBloc>()
-                          .add(const BadgeEvent.restoreInitial()),
-                      ctx
-                          .read<InboxBloc>()
-                          .add(const InboxEvent.restoreInitial()),
-                      ctx
-                          .read<UserBloc>()
-                          .add(const UserEvent.restoreInitial()),
+                      ctx.read<HomeBloc>().add(const HomeEvent.restoreInitial()),
+                      ctx.read<SearchBloc>().add(const SearchEvent.restoreInitial()),
+                      ctx.read<HomeControllerBloc>().add(const HomeControllerEvent.restoreInitial()),
+                      ctx.read<BadgeBloc>().add(const BadgeEvent.restoreInitial()),
+                      ctx.read<InboxBloc>().add(const InboxEvent.restoreInitial()),
+                      ctx.read<UserBloc>().add(const UserEvent.restoreInitial()),
 
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
@@ -95,100 +79,90 @@ class UserScreen extends StatelessWidget {
                     });
           }
         },
-        builder: (ctx, state) => state.isLoading
-            ? const CustomCircularProgress(size: 100)
-            : state.hasLoadingError
-                ? ErrorPage(
-                    onRetry: () => ctx
-                        .read<UserBloc>()
-                        .add(const UserEvent.contentCreated()))
-                : SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Container(
-                          color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(15, 25, 0, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Profile",
-                                  style: TextStyle(fontSize: 30),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                                  child: Row(
-                                    children: [
-                                      Flexible(
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            EditableCircularImage(
-                                              token: state.token,
-                                              userId: state.user!.id,
-                                              onImageChange: (String? path) =>
-                                                  ctx.read<UserBloc>().add(
-                                                      UserEvent.imageChanged(
-                                                          path)),
-                                              radius: 60,
-                                              hasImage: state.user!.hasImage,
-                                            ),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                            Expanded(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        0, 10, 0, 0),
-                                                child: Text(
-                                                  state.user!.username,
-                                                  style: const TextStyle(
-                                                      fontSize: 25),
+        builder: (ctx, state) => state.hasLoadingError
+            ? ErrorPage(onRetry: () => ctx.read<UserBloc>().add(const UserEvent.contentCreated()))
+            : SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 25, 0, 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Profile",
+                              style: TextStyle(fontSize: 30),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                              child: state.isLoading
+                                  ? const CustomCircularProgress(size: 120)
+                                  : Row(
+                                      children: [
+                                        Flexible(
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              EditableCircularImage(
+                                                token: state.token,
+                                                userId: state.user!.id,
+                                                onImageChange: (String? path) =>
+                                                    ctx.read<UserBloc>().add(UserEvent.imageChanged(path)),
+                                                radius: 60,
+                                                hasImage: state.user!.hasImage,
+                                              ),
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                                  child: Text(
+                                                    state.user!.username,
+                                                    style: const TextStyle(fontSize: 25),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
+                                      ],
+                                    ),
+                            )
+                          ],
                         ),
-                        const Divider(
-                          height: 0,
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        const Divider(
-                          height: 0,
-                        ),
-                        OptionItem(
-                            optionName: "Change password",
-                            onTap: () => Navigator.of(ctx).pushNamed(
-                                  '/options/changePassword',
-                                )),
-                        OptionItem(
-                            optionName: "Tutorial",
-                            onTap: () => Navigator.of(ctx).pushNamed(
-                                  '/options/tutorial',
-                                )),
-                        OptionItem(
-                            optionName: "Logout",
-                            showArrow: false,
-                            onTap: () {
-                              showLogoutDialog(ctx);
-                            })
-                      ],
+                      ),
                     ),
-                  ));
+                    const Divider(
+                      height: 0,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const Divider(
+                      height: 0,
+                    ),
+                    OptionItem(
+                        optionName: "Change password",
+                        onTap: () => Navigator.of(ctx).pushNamed(
+                              '/options/changePassword',
+                            )),
+                    OptionItem(
+                        optionName: "Tutorial",
+                        onTap: () => Navigator.of(ctx).pushNamed(
+                              '/options/tutorial',
+                            )),
+                    OptionItem(
+                        optionName: "Logout",
+                        showArrow: false,
+                        onTap: () {
+                          showLogoutDialog(ctx);
+                        })
+                  ],
+                ),
+              ));
   }
 
   void showLogoutDialog(BuildContext context) {

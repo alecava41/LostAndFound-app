@@ -115,63 +115,62 @@ class ItemScreen extends StatelessWidget {
           }
         },
         builder: (ctx, state) {
-          if (state.isLoading) {
-            return const CustomCircularProgress(size: 100);
-          } else if (state.hasLoadingError) {
+          if (state.hasLoadingError) {
             return ErrorPage(onRetry: () => ctx.read<ItemBloc>().add(ItemEvent.itemCreated(itemId)));
           } else {
-            final isCurrentUserOwner = state.item!.user.id == state.userId;
+            final isCurrentUserOwner = state.isLoading ? null : state.item!.user.id == state.userId;
 
             return SafeArea(
-              
               child: Scaffold(
                 backgroundColor: Colors.white,
                 appBar: AppBar(
                   title: const Text("Item details", style: TextStyle(color: Colors.black)),
                   backgroundColor: Colors.white,
                   iconTheme: const IconThemeData(color: Colors.black),
-                  actions: _showOwnerMenu(ctx, isCurrentUserOwner),
+                  actions: state.isLoading ? null : _showOwnerMenu(ctx, isCurrentUserOwner!),
                 ),
-                body: SingleChildScrollView(
-                  child: Column(
-                    children: () {
-                      var widgetList = <Widget>[
-                        ImageItem(
-                          token: state.token,
-                          itemId: state.item!.id,
-                          hasImage: state.item!.hasImage,
-                        ),
-                        const Divider(
-                          height: 0,
-                        ),
-                        InfoItem(
-                          title: state.item!.title,
-                          position: state.item!.address,
-                          date: state.item!.insertion,
-                          category: state.item!.category.name,
-                          question: state.item!.question,
-                          type: state.item!.type,
-                        ),
-                      ];
+                body: state.isLoading
+                    ? const CustomCircularProgress(size: 100)
+                    : SingleChildScrollView(
+                        child: Column(
+                          children: () {
+                            var widgetList = <Widget>[
+                              ImageItem(
+                                token: state.token,
+                                itemId: state.item!.id,
+                                hasImage: state.item!.hasImage,
+                              ),
+                              const Divider(
+                                height: 0,
+                              ),
+                              InfoItem(
+                                title: state.item!.title,
+                                position: state.item!.address,
+                                date: state.item!.insertion,
+                                category: state.item!.category.name,
+                                question: state.item!.question,
+                                type: state.item!.type,
+                              ),
+                            ];
 
-                      if (isCurrentUserOwner) {
-                        if (state.item!.type == ItemType.found) {
-                          widgetList += _showOwnerFoundItemWidgets(
-                              ctx, state.item!.claims != null ? state.item!.claims! : [], state.token, itemId);
-                        }
-                      } else {
-                        if (state.item!.type == ItemType.lost) {
-                          widgetList += _showGenericLostItemWidgets(ctx, state.token, state.item!.user);
-                        } else {
-                          widgetList += _showGenericFoundItemWidgets(
-                              ctx, state.item!.userClaim, state.token, state.item!.user, itemId);
-                        }
-                      }
+                            if (isCurrentUserOwner!) {
+                              if (state.item!.type == ItemType.found) {
+                                widgetList += _showOwnerFoundItemWidgets(
+                                    ctx, state.item!.claims != null ? state.item!.claims! : [], state.token, itemId);
+                              }
+                            } else {
+                              if (state.item!.type == ItemType.lost) {
+                                widgetList += _showGenericLostItemWidgets(ctx, state.token, state.item!.user);
+                              } else {
+                                widgetList += _showGenericFoundItemWidgets(
+                                    ctx, state.item!.userClaim, state.token, state.item!.user, itemId);
+                              }
+                            }
 
-                      return widgetList;
-                    }(),
-                  ),
-                ),
+                            return widgetList;
+                          }(),
+                        ),
+                      ),
               ),
             );
           }

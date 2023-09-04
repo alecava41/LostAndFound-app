@@ -33,17 +33,20 @@ class App extends StatefulWidget {
 
   // TODO status bar not showing properly after navigating back to certain pages
 
-  // TODO check image upload (seems not working)
-
-  // TODO make loading screens more "sectorized"
-
   // TODO add more categories
+
+/*******************************************************
+ * TODO UPLOAD NEW VERSION OF DB ON REAL SERVER
+ * TODO REMOVE 'device' FIELD FROM USERS TABLE ON DB
+ */
 
   // TODO translation (app + notifications)
 
   // TODO dark theme and switch
 
   // TODO as an additional help, we can add a map on "item details" page, so when user presses on the position he can see a map with a marker on the place!
+
+  // TODO (@backToFrancesco) maybe dividers are too much bright? For instance, when there is an unread news (dark green) I cannot see the difference between the objects of the list
 }
 
 class _Application extends State<App> {
