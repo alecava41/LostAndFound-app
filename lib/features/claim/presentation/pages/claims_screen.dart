@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
@@ -23,8 +24,12 @@ class ClaimsScreen extends StatelessWidget {
         length: 2,
         child: SafeArea(
           child: Scaffold(
-            backgroundColor: PersonalizedColor.backGroundColor,
+            backgroundColor: PersonalizedColor.backgroundColor,
             appBar: AppBar(
+              systemOverlayStyle: const SystemUiOverlayStyle(
+                  statusBarColor: Colors.white,
+                  statusBarBrightness: Brightness.light,
+                  statusBarIconBrightness: Brightness.dark),
               title: const Text(
                 "Claims",
                 style: TextStyle(color: Colors.black),

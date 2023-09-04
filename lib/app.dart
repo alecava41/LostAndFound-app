@@ -31,20 +31,13 @@ class App extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _Application();
 
-  // TODO status bar not showing properly after navigating back to certain pages (only in release mode)
-
   // TODO add more categories
-
-/*******************************************************
- * TODO UPLOAD NEW VERSION OF DB ON REAL SERVER
- * TODO REMOVE 'device' FIELD FROM USERS TABLE ON DB
- */
 
   // TODO translation (app + notifications)
 
-  // TODO dark theme and switch
+  // TODO dark theme + switch
 
-  // TODO fix this on iOS (https://pub.dev/packages/map_launcher#for-ios-add-url-schemes-in-infoplist-file)
+  // TODO (map) fix this on iOS (https://pub.dev/packages/map_launcher#for-ios-add-url-schemes-in-infoplist-file)
 
   // TODO (@backToFrancesco) maybe dividers are too much thin? For instance, when there is an unread news (dark green) I cannot see the difference between the objects of the list
 }

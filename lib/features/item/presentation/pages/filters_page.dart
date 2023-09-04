@@ -1,17 +1,18 @@
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/search/search_bloc.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
-import '../../../../../core/presentation/select_category/widgets/select_category_form.dart';
-import '../../../../../core/presentation/widgets/check_boxes_form.dart';
-import '../../../../../core/presentation/widgets/large_green_button.dart';
-import '../../../../../core/presentation/widgets/select_date_form.dart';
-import '../../../../../core/presentation/widgets/select_position_button.dart';
-import '../../../../../utils/colors.dart';
-import '../../../../../utils/screen_size.dart';
+import '../../../../core/presentation/select_category/widgets/select_category_form.dart';
+import '../../../../core/presentation/widgets/check_boxes_form.dart';
+import '../../../../core/presentation/widgets/large_green_button.dart';
+import '../../../../core/presentation/widgets/select_date_form.dart';
+import '../../../../core/presentation/widgets/select_position_button.dart';
+import '../../../../utils/colors.dart';
+import '../../../../utils/screen_size.dart';
 
 class FiltersScreen extends StatelessWidget {
   const FiltersScreen({super.key});
@@ -29,8 +30,12 @@ class FiltersScreen extends StatelessWidget {
       builder: (ctx, state) {
         return SafeArea(
           child: Scaffold(
-            backgroundColor: PersonalizedColor.backGroundColor,
+            backgroundColor: PersonalizedColor.backgroundColor,
             appBar: AppBar(
+              systemOverlayStyle: const SystemUiOverlayStyle(
+                  statusBarColor: Colors.white,
+                  statusBarBrightness: Brightness.light,
+                  statusBarIconBrightness: Brightness.dark),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () => Navigator.pop(ctx),

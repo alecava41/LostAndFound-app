@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
@@ -33,7 +34,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
         listener: (ctx, state) {
           if (markerPos.latitude != state.userCurrentPos.latitude) {
             setState(() {
-              markerPos =  LatLng(state.userCurrentPos.latitude, state.userCurrentPos.longitude);
+              markerPos = LatLng(state.userCurrentPos.latitude, state.userCurrentPos.longitude);
             });
 
             mapController.centerOnPoint(LatLng(markerPos.latitude, markerPos.longitude), zoom: 17);
@@ -58,10 +59,13 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
         },
         builder: (ctx, state) {
           return SafeArea(
-            
             minimum: EdgeInsets.zero,
             child: Scaffold(
                 appBar: AppBar(
+                  systemOverlayStyle: const SystemUiOverlayStyle(
+                      statusBarColor: Colors.white,
+                      statusBarBrightness: Brightness.light,
+                      statusBarIconBrightness: Brightness.dark),
                   iconTheme: const IconThemeData(color: Colors.black),
                   title: const Text(
                     "Select position",
@@ -82,7 +86,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                             child: FlutterMap(
                               mapController: mapController.mapController,
                               options: MapOptions(
-                                maxZoom: 18,
+                                  maxZoom: 18,
                                   onMapReady: () {
                                     if (markerPos != defaultPosition) {
                                       mapController.animatedZoomOut();
@@ -110,9 +114,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                       width: 200.0,
                                       height: 200.0,
                                       point: markerPos,
-                                      builder: (ctx) =>
-
-                                      const Padding(
+                                      builder: (ctx) => const Padding(
                                         padding: EdgeInsets.fromLTRB(0, 0, 0, 65),
                                         child: Icon(
                                           Icons.location_on,

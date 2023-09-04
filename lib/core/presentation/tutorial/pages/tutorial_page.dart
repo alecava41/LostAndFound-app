@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:sizer/sizer.dart';
@@ -22,23 +23,30 @@ class _InfoScreenState extends State<InfoScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      child: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: const SystemUiOverlayStyle(
+            statusBarColor: Colors.white,
+            statusBarBrightness: Brightness.light,
+            statusBarIconBrightness: Brightness.dark),
         child: Scaffold(
-      body: SingleChildScrollView(
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, mainAxisSize: MainAxisSize.max, children: [
-          SizedBox(
-            height: 2.5.h,
+          body: SingleChildScrollView(
+            child: Column(mainAxisAlignment: MainAxisAlignment.center, mainAxisSize: MainAxisSize.max, children: [
+              SizedBox(
+                height: 2.5.h,
+              ),
+              titleLogoHorizontal(),
+              _carouselSlider(),
+              SizedBox(
+                height: 3.h,
+              ),
+              _loginButton(),
+              SizedBox(height: 1.h),
+              _registerButton()
+            ]),
           ),
-          titleLogoHorizontal(),
-          _carouselSlider(),
-          SizedBox(
-            height: 3.h,
-          ),
-          _loginButton(),
-          SizedBox(height: 1.h),
-          _registerButton()
-        ]),
+        ),
       ),
-    ));
+    );
   }
 
   Widget _indicator(bool isActive) {

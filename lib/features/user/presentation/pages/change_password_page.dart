@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/user/presentation/bloc/change_password/change_password_bloc.dart';
 
@@ -48,6 +49,10 @@ class ChangePasswordScreen extends StatelessWidget {
                 onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
                 child: Scaffold(
                   appBar: AppBar(
+                    systemOverlayStyle: const SystemUiOverlayStyle(
+                        statusBarColor: Colors.white,
+                        statusBarBrightness: Brightness.light,
+                        statusBarIconBrightness: Brightness.dark),
                     backgroundColor: Colors.white,
                     title: const Text(
                       "Change password",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/insert_item/custom_field_container.dart';
@@ -28,6 +29,10 @@ class AnswerQuestionScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
+            systemOverlayStyle: const SystemUiOverlayStyle(
+                statusBarColor: Colors.white,
+                statusBarBrightness: Brightness.light,
+                statusBarIconBrightness: Brightness.dark),
             title: const Text(
               "Answer claim question",
               style: TextStyle(color: Colors.black),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:sizer/sizer.dart';
 
@@ -45,6 +46,10 @@ class _TutorialScreen extends State<TutorialScreen> {
       child: Scaffold(
         backgroundColor: PersonalizedColor.mainColor,
         appBar: AppBar(
+          systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarColor: Colors.white,
+              statusBarBrightness: Brightness.light,
+              statusBarIconBrightness: Brightness.dark),
           title: const Text("Tutorial", style: TextStyle(color: Colors.black)),
           backgroundColor: Colors.white,
           iconTheme: const IconThemeData(color: Colors.black),

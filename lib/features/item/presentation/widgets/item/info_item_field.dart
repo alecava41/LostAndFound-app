@@ -61,7 +61,7 @@ class InfoItemField extends StatelessWidget {
                         recognizer: TapGestureRecognizer()..onTap = onTapField,
                         style: TextStyle(
                           fontSize: 16,
-                          color: onTapField != null ? Colors.blueAccent : null,
+                          color: onTapField != null ? Colors.blueAccent : Colors.black,
                           decoration: onTapField != null ? TextDecoration.underline : null,
                         )),
                   )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/registration/registration_bloc.dart';
@@ -15,6 +16,10 @@ class RegistrationScreen extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            systemOverlayStyle: const SystemUiOverlayStyle(
+                statusBarColor: Colors.white,
+                statusBarBrightness: Brightness.light,
+                statusBarIconBrightness: Brightness.dark),
             backgroundColor: Colors.transparent,
             elevation: 0,
             iconTheme: const IconThemeData(color: Colors.black),

@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/search/custom_card_search.dart';
-import 'package:lost_and_found/features/item/presentation/widgets/search/filters_screen.dart';
 
 import '../../bloc/search/search_bloc.dart';
+import '../../pages/filters_page.dart';
 import 'custom_list_view.dart';
 import 'order_option_button.dart';
 

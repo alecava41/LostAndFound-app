@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
@@ -124,6 +125,10 @@ class ItemScreen extends StatelessWidget {
               child: Scaffold(
                 backgroundColor: Colors.white,
                 appBar: AppBar(
+                  systemOverlayStyle: const SystemUiOverlayStyle(
+                      statusBarColor: Colors.white,
+                      statusBarBrightness: Brightness.light,
+                      statusBarIconBrightness: Brightness.dark),
                   title: const Text("Item details", style: TextStyle(color: Colors.black)),
                   backgroundColor: Colors.white,
                   iconTheme: const IconThemeData(color: Colors.black),

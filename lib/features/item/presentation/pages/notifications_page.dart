@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/notification/news_bloc.dart';
 import 'package:lost_and_found/utils/colors.dart';
@@ -15,8 +16,12 @@ class NotificationsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: PersonalizedColor.backGroundColor,
+        backgroundColor: PersonalizedColor.backgroundColor,
         appBar: AppBar(
+          systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarColor: Colors.white,
+              statusBarBrightness: Brightness.light,
+              statusBarIconBrightness: Brightness.dark),
           title: const Text(
             "Notifications",
             style: TextStyle(color: Colors.black),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
@@ -133,8 +134,12 @@ class UpdateItemScreen extends StatelessWidget {
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
             child: SafeArea(
               child: Scaffold(
-                backgroundColor: PersonalizedColor.backGroundColor,
+                backgroundColor: PersonalizedColor.backgroundColor,
                 appBar: AppBar(
+                  systemOverlayStyle: const SystemUiOverlayStyle(
+                      statusBarColor: Colors.white,
+                      statusBarBrightness: Brightness.light,
+                      statusBarIconBrightness: Brightness.dark),
                   leading: IconButton(
                     icon: const Icon(Icons.arrow_back),
                     onPressed: () {

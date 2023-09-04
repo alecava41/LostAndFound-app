@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
@@ -69,6 +70,10 @@ class ChatScreen extends StatelessWidget {
             },
             child: Scaffold(
               appBar: AppBar(
+                systemOverlayStyle: const SystemUiOverlayStyle(
+                    statusBarColor: Colors.white,
+                    statusBarBrightness: Brightness.light,
+                    statusBarIconBrightness: Brightness.dark),
                 title: Text(otherUser.firstName!, style: const TextStyle(color: Colors.black, fontSize: 18)),
                 backgroundColor: Colors.white,
                 iconTheme: const IconThemeData(color: Colors.black),
@@ -77,7 +82,7 @@ class ChatScreen extends StatelessWidget {
                 children: [
                   receivedClaim != null
                       ? Container(
-                          color: PersonalizedColor.backGroundColor,
+                          color: PersonalizedColor.backgroundColor,
                           padding: const EdgeInsets.fromLTRB(8, 8, 8, 2),
                           child: ClaimedItemCard(
                             token: state.token,
@@ -94,7 +99,7 @@ class ChatScreen extends StatelessWidget {
                           ),
                         )
                       : Container(
-                          color: PersonalizedColor.backGroundColor,
+                          color: PersonalizedColor.backgroundColor,
                           padding: const EdgeInsets.fromLTRB(8, 8, 8, 2),
                           child: sentClaim != null
                               ? ClaimedStatusCard(
@@ -138,7 +143,7 @@ class ChatScreen extends StatelessWidget {
                           secondaryColor: Colors.white,
                           inputBackgroundColor: Colors.white,
                           inputTextColor: Colors.black,
-                          backgroundColor: PersonalizedColor.backGroundColor,
+                          backgroundColor: PersonalizedColor.backgroundColor,
                           inputMargin: const EdgeInsets.fromLTRB(5, 5, 5, 10),
                         ),
                         messages: snapshot.data ?? [],

@@ -1,5 +1,6 @@
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/select_category/bloc/category_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
@@ -20,8 +21,14 @@ class CategorySelectionScreen extends StatelessWidget {
         child: BlocBuilder<CategoryBloc, CategoryState>(
           builder: (ctx, state) {
             return Scaffold(
-                backgroundColor: PersonalizedColor.backGroundColor,
+                backgroundColor: PersonalizedColor.backgroundColor,
                 appBar: AppBar(
+                  systemOverlayStyle: const SystemUiOverlayStyle(
+                      statusBarColor: Colors.white,
+                      statusBarBrightness: Brightness.light,
+                      statusBarIconBrightness: Brightness.dark
+
+                  ),
                   title: const Text(
                     'Choose a category',
                     style: TextStyle(color: Colors.black),
