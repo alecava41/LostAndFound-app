@@ -34,7 +34,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 (_) => {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      backgroundColor: Colors.red,
+                      backgroundColor: Colors.green,
                       content: Text("Password successfully updated"),
                     ),
                   ),

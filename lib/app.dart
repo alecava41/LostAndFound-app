@@ -41,8 +41,6 @@ class App extends StatefulWidget {
 
   // TODO translations
 
-  // TODO fix snackbar colors
-
   // TODO dark theme and switch
 
   // TODO as an additional help, we can add a map on "item details" page, so when user presses on the position he can see a map with a marker on the place!
