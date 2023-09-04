@@ -182,7 +182,7 @@ class InsertItemScreen extends StatelessWidget {
             child: GestureDetector(
               onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
               child: SafeArea(
-                top: false,
+                
                 child: Scaffold(
                   backgroundColor: PersonalizedColor.backGroundColor,
                   appBar: AppBar(

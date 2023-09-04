@@ -67,6 +67,7 @@ dependencies:
   http: ^1.1.0
   badges: ^3.1.1
   sizer: ^2.0.15
+  google_fonts: ^5.1.0
 
   # Firebase
   firebase_core: ^2.15.0

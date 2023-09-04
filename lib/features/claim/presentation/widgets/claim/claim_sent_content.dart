@@ -65,7 +65,7 @@ class ClaimSentContent extends StatelessWidget {
                           },
                         ),
                     ),
-                      const InfoClaimsBox(text: "In this section there are the claims you have made for the items founded by other users.")
+                      const InfoClaimsBox(text: "In this section there are the claims you have made for items founded by other users.")
                   ],
                 ),
       ),

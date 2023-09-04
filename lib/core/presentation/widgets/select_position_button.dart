@@ -64,7 +64,7 @@ class SelectPositionButton extends StatelessWidget {
                             "Position",
                             style: TextStyle(fontSize: 22),
                           ),
-                          const Text("e.g. where the item has been found or lost"),
+                          const Text("e.g. where the item has been found or lost", style: TextStyle(color: Colors.black54),),
                           const SizedBox(
                             height: 20,
                           ),

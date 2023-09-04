@@ -123,7 +123,7 @@ class ItemScreen extends StatelessWidget {
             final isCurrentUserOwner = state.item!.user.id == state.userId;
 
             return SafeArea(
-              top: false,
+              
               child: Scaffold(
                 backgroundColor: Colors.white,
                 appBar: AppBar(

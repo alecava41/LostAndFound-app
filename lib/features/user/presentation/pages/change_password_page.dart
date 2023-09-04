@@ -56,7 +56,6 @@ class ChangePasswordScreen extends StatelessWidget {
                     iconTheme: const IconThemeData(color: Colors.black),
                   ),
                   body: SafeArea(
-                      top: false,
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

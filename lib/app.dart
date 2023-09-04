@@ -4,6 +4,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lost_and_found/config/route_generator.dart';
 import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import 'package:lost_and_found/features/chat/presentation/pages/chat_page.dart';
@@ -143,6 +144,7 @@ class _Application extends State<App> {
             title: 'Lost and Found',
             navigatorKey: navigatorKey,
             theme: ThemeData(
+              fontFamily: GoogleFonts.roboto().fontFamily,
               primarySwatch: PersonalizedColor.primarySwatch,
             ),
             initialRoute: initialRoute,

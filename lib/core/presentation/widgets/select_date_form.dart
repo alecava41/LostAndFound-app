@@ -42,7 +42,7 @@ class DateSelectionForm extends StatelessWidget {
                           "Date",
                           style: TextStyle(fontSize: 22),
                         ),
-                        Text("e.g. date of upload"),
+                        Text("e.g. date of upload", style: TextStyle(color: Colors.black54),),
                       ],
                     ),
                     Row(

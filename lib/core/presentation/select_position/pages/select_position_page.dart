@@ -58,7 +58,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
         },
         builder: (ctx, state) {
           return SafeArea(
-            top: false,
+            
             minimum: EdgeInsets.zero,
             child: Scaffold(
                 appBar: AppBar(

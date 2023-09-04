@@ -28,7 +28,6 @@ class FiltersScreen extends StatelessWidget {
     return BlocBuilder<SearchBloc, SearchState>(
       builder: (ctx, state) {
         return SafeArea(
-          top: false,
           child: Scaffold(
             backgroundColor: PersonalizedColor.backGroundColor,
             appBar: AppBar(

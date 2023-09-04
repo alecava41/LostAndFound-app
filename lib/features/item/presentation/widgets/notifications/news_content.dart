@@ -15,7 +15,6 @@ class NewsContent extends StatelessWidget {
     return BlocBuilder<NewsBloc, NewsState>(
       builder: (ctx, state) {
         return SafeArea(
-          top: false,
           child: RefreshIndicator(
             onRefresh: () async {
               Future block = ctx.read<NewsBloc>().stream.first;
