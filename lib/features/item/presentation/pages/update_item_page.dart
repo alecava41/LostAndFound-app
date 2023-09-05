@@ -274,7 +274,7 @@ class UpdateItemScreen extends StatelessWidget {
                                 removeAllOption: true,
                               ),
                               const SizedBox(
-                                height: 40,
+                                height: 10,
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
