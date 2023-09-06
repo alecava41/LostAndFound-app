@@ -28,7 +28,7 @@ class FiltersScreen extends StatelessWidget {
     );
     return BlocConsumer<SearchBloc, SearchState>(
       listener: (ctx, state) {
-        if(state.searchFailureOrSuccess != null && state.searchFailureOrSuccess!.isRight()) {
+        if (state.searchFailureOrSuccess != null && state.searchFailureOrSuccess!.isRight()) {
           Navigator.pop(ctx);
         }
       },
@@ -43,10 +43,6 @@ class FiltersScreen extends StatelessWidget {
             child: Scaffold(
               backgroundColor: PersonalizedColor.backgroundColor,
               appBar: AppBar(
-                systemOverlayStyle: const SystemUiOverlayStyle(
-                    statusBarColor: Colors.white,
-                    statusBarBrightness: Brightness.light,
-                    statusBarIconBrightness: Brightness.dark),
                 leading: IconButton(
                   icon: const Icon(Icons.arrow_back),
                   onPressed: () => Navigator.pop(ctx),
@@ -131,8 +127,7 @@ class FiltersScreen extends StatelessWidget {
                     ),
                     sizedBox,
                     PersonalizedLargeGreenButton(
-                      onPressed: () =>
-                          {ctx.read<SearchBloc>().add(const SearchEvent.searchSubmitted())},
+                      onPressed: () => {ctx.read<SearchBloc>().add(const SearchEvent.searchSubmitted())},
                       text: const Text("Show result", style: TextStyle(fontSize: 20, color: Colors.white)),
                     )
                   ],

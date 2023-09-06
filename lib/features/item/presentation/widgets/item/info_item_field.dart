@@ -57,14 +57,25 @@ class InfoItemField extends StatelessWidget {
                 Expanded(
                   child: RichText(
                     text: TextSpan(
-                        text: content,
-                        recognizer: TapGestureRecognizer()..onTap = onTapField,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: onTapField != null ? Colors.blueAccent : Colors.black,
-                          decoration: onTapField != null ? TextDecoration.underline : null,
-                        )),
-                  )
+                      text: content,
+                      style: const TextStyle(fontSize: 16, color: Colors.black),
+                      children: onTapField != null
+                          ? <TextSpan>[
+                              const TextSpan(text: " (", style: TextStyle(fontSize: 16, color: Colors.black)),
+                              TextSpan(
+                                text: "Open map",
+                                recognizer: TapGestureRecognizer()..onTap = onTapField,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: onTapField != null ? Colors.blueAccent : Colors.black,
+                                  decoration: onTapField != null ? TextDecoration.underline : null,
+                                ),
+                              ),
+                              const TextSpan(text: ")", style: TextStyle(fontSize: 16, color: Colors.black))
+                            ]
+                          : [],
+                    ),
+                  ),
                 ),
               ],
             ),
