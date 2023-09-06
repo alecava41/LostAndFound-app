@@ -13,6 +13,7 @@ class PasswordInput extends StatelessWidget {
           context.read<RegistrationBloc>().add(RegistrationEvent.passwordFieldChanged(value)),
         },
         decoration: InputDecoration(
+          errorMaxLines: 3,
           hintText: "Password",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),

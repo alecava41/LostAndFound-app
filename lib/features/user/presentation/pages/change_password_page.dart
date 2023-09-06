@@ -150,6 +150,7 @@ class ChangePasswordScreen extends StatelessWidget {
                                       .read<ChangePasswordBloc>()
                                       .add(ChangePasswordEvent.newPasswordFieldChanged(value)),
                                   decoration: InputDecoration(
+                                    errorMaxLines: 3,
                                     prefixIcon: const Icon(Icons.lock),
                                     hintText: "New password",
                                     border: OutlineInputBorder(

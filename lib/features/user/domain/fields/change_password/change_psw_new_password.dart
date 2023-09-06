@@ -15,11 +15,11 @@ class ChangePswNewPasswordField extends Equatable {
 }
 
 Either<Failure, String> _validateNewPasswordField(String input) {
-  const passwordRegex = r"""^.{8,30}$""";
+  const passwordRegex = r"""^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$""";
 
   if (RegExp(passwordRegex).hasMatch(input)) {
     return Right(input);
   } else {
-    return const Left(Failure.validationFailure("Password must contain at least 8 characters, up to 30."));
+    return const Left(Failure.validationFailure("Password must contain at least 8 characters, using uppercase, lowercase and numeric characters."));
   }
 }
