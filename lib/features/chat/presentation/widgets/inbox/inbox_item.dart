@@ -51,11 +51,12 @@ class InboxItem extends StatelessWidget {
                         child: Row(
                           children: [
                             CircularImage(
-                                token: token,
-                                imageUrl: "$baseUrl/api/users/$otherUserId/image",
-                                hasImage: true,
-                                radius: 25,
-                                errorAsset: "assets/images/no-user.jpg"),
+                              token: token,
+                              imageUrl: "$baseUrl/api/users/$otherUserId/image",
+                              hasImage: true,
+                              radius: 25,
+                              errorImage: noUserImage,
+                            ),
                             Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -104,7 +105,7 @@ class InboxItem extends StatelessWidget {
                               },
                               progressIndicatorBuilder: (context, url, downloadProgress) =>
                                   const CustomCircularProgress(size: 25),
-                              errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
+                              errorWidget: (context, url, error) => noItemImage,
                               imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                             ),
                           ),

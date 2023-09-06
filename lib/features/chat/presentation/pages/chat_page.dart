@@ -39,8 +39,22 @@ class ChatScreen extends StatelessWidget {
       child: BlocBuilder<chat.ChatBloc, chat.ChatState>(
         builder: (ctx, state) {
           if (state.hasLoadingError) {
-            return ErrorPage(
-              onRetry: () => ctx.read<chat.ChatBloc>().add(chat.ChatEvent.chatContentCreated(roomId, itemId)),
+            return AnnotatedRegion(
+              value: const SystemUiOverlayStyle(
+                statusBarColor: Colors.white,
+                statusBarBrightness: Brightness.light,
+                statusBarIconBrightness: Brightness.dark,
+              ),
+              child: SafeArea(
+                child: Scaffold(
+                  appBar: AppBar(
+                    backgroundColor: Colors.white,
+                    iconTheme: const IconThemeData(color: Colors.black),
+                  ),
+                  body: ErrorPage(
+                      onRetry: () => ctx.read<chat.ChatBloc>().add(chat.ChatEvent.chatContentCreated(roomId, itemId))),
+                ),
+              ),
             );
           }
 
@@ -63,98 +77,104 @@ class ChatScreen extends StatelessWidget {
               state.item!.claims?.firstWhere((receivedClaim) => receivedClaim.user.username == otherUser.firstName);
           final sentClaim = state.item!.userClaim;
 
-          return WillPopScope(
-            onWillPop: () async {
-              ctx.read<chat.ChatBloc>().add(const chat.ChatEvent.chatRead());
-              return true;
-            },
-            child: SafeArea(
-              child: Scaffold(
-                appBar: AppBar(
-                  systemOverlayStyle: const SystemUiOverlayStyle(
-                      statusBarColor: Colors.white,
-                      statusBarBrightness: Brightness.light,
-                      statusBarIconBrightness: Brightness.dark),
-                  title: Text(otherUser.firstName!, style: const TextStyle(color: Colors.black, fontSize: 18)),
-                  backgroundColor: Colors.white,
-                  iconTheme: const IconThemeData(color: Colors.black),
-                ),
-                body: Column(
-                  children: [
-                    receivedClaim != null
-                        ? Container(
-                            color: PersonalizedColor.backgroundColor,
-                            padding: const EdgeInsets.fromLTRB(8, 8, 8, 2),
-                            child: ClaimedItemCard(
-                              token: state.token,
-                              claim: ClaimReceived(
-                                id: receivedClaim.id,
-                                item: ReceivedItem(id: state.item!.id, title: state.item!.title),
-                                user: ReceivedUser(
-                                    id: receivedClaim.user.id,
-                                    hasImage: receivedClaim.user.hasImage,
-                                    username: receivedClaim.user.username),
-                                status: receivedClaim.status,
-                                opened: receivedClaim.opened,
-                              ),
-                            ),
-                          )
-                        : Container(
-                            color: PersonalizedColor.backgroundColor,
-                            padding: const EdgeInsets.fromLTRB(8, 8, 8, 2),
-                            child: sentClaim != null
-                                ? ClaimedStatusCard(
-                                    claim: sent.ClaimSent(
-                                        status: sentClaim.status,
-                                        id: sentClaim.id,
-                                        item: sent.SentItem(
-                                            id: state.item!.id, title: state.item!.title, hasImage: state.item!.hasImage)),
-                                    token: state.token,
-                                  )
-                                : NotClaimedItemCard(
-                                    itemId: state.item!.id,
-                                    itemName: state.item!.title,
-                                    token: state.token,
-                                  ),
-                          ),
-                    Expanded(
-                      child: StreamBuilder<List<types.Message>>(
-                        initialData: const [],
-                        stream: state.messages,
-                        builder: (context, snapshot) => Chat(
-                          showUserAvatars: true,
-                          avatarBuilder: (userId) {
-                            final id = userId == currentUser.id ? currentUserId : otherUserId;
-                            return Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                              child: CircularImage(
+          return AnnotatedRegion(
+            value: const SystemUiOverlayStyle(
+              statusBarColor: Colors.white,
+              statusBarBrightness: Brightness.light,
+              statusBarIconBrightness: Brightness.dark,
+            ),
+            child: WillPopScope(
+              onWillPop: () async {
+                ctx.read<chat.ChatBloc>().add(const chat.ChatEvent.chatRead());
+                return true;
+              },
+              child: SafeArea(
+                child: Scaffold(
+                  appBar: AppBar(
+                    title: Text(otherUser.firstName!, style: const TextStyle(color: Colors.black, fontSize: 18)),
+                    backgroundColor: Colors.white,
+                    iconTheme: const IconThemeData(color: Colors.black),
+                  ),
+                  body: Column(
+                    children: [
+                      receivedClaim != null
+                          ? Container(
+                              color: PersonalizedColor.backgroundColor,
+                              padding: const EdgeInsets.fromLTRB(8, 8, 8, 2),
+                              child: ClaimedItemCard(
                                 token: state.token,
-                                hasImage: true,
-                                imageUrl: "$baseUrl/api/users/$id/image",
-                                radius: 20,
+                                claim: ClaimReceived(
+                                  id: receivedClaim.id,
+                                  item: ReceivedItem(id: state.item!.id, title: state.item!.title),
+                                  user: ReceivedUser(
+                                      id: receivedClaim.user.id,
+                                      hasImage: receivedClaim.user.hasImage,
+                                      username: receivedClaim.user.username),
+                                  status: receivedClaim.status,
+                                  opened: receivedClaim.opened,
+                                ),
                               ),
-                            );
-                          },
-                          theme: DefaultChatTheme(
-                            inputBorderRadius: const BorderRadius.all(Radius.circular(60)),
-                            inputContainerDecoration: BoxDecoration(
-                                border: Border.all(width: 0.1, color: Colors.black54),
-                                borderRadius: const BorderRadius.all(Radius.circular(60))),
-                            primaryColor: PersonalizedColor.mainColor,
-                            secondaryColor: Colors.white,
-                            inputBackgroundColor: Colors.white,
-                            inputTextColor: Colors.black,
-                            backgroundColor: PersonalizedColor.backgroundColor,
-                            inputMargin: const EdgeInsets.fromLTRB(5, 5, 5, 10),
+                            )
+                          : Container(
+                              color: PersonalizedColor.backgroundColor,
+                              padding: const EdgeInsets.fromLTRB(8, 8, 8, 2),
+                              child: sentClaim != null
+                                  ? ClaimedStatusCard(
+                                      claim: sent.ClaimSent(
+                                          status: sentClaim.status,
+                                          id: sentClaim.id,
+                                          item: sent.SentItem(
+                                              id: state.item!.id,
+                                              title: state.item!.title,
+                                              hasImage: state.item!.hasImage)),
+                                      token: state.token,
+                                    )
+                                  : NotClaimedItemCard(
+                                      itemId: state.item!.id,
+                                      itemName: state.item!.title,
+                                      token: state.token,
+                                    ),
+                            ),
+                      Expanded(
+                        child: StreamBuilder<List<types.Message>>(
+                          initialData: const [],
+                          stream: state.messages,
+                          builder: (context, snapshot) => Chat(
+                            showUserAvatars: true,
+                            avatarBuilder: (userId) {
+                              final id = userId == currentUser.id ? currentUserId : otherUserId;
+                              return Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                child: CircularImage(
+                                  token: state.token,
+                                  hasImage: true,
+                                  imageUrl: "$baseUrl/api/users/$id/image",
+                                  radius: 20,
+                                ),
+                              );
+                            },
+                            theme: DefaultChatTheme(
+                              inputBorderRadius: const BorderRadius.all(Radius.circular(60)),
+                              inputContainerDecoration: BoxDecoration(
+                                  border: Border.all(width: 0.1, color: Colors.black54),
+                                  borderRadius: const BorderRadius.all(Radius.circular(60))),
+                              primaryColor: PersonalizedColor.mainColor,
+                              secondaryColor: Colors.white,
+                              inputBackgroundColor: Colors.white,
+                              inputTextColor: Colors.black,
+                              backgroundColor: PersonalizedColor.backgroundColor,
+                              inputMargin: const EdgeInsets.fromLTRB(5, 5, 5, 10),
+                            ),
+                            messages: snapshot.data ?? [],
+                            onSendPressed: (message) =>
+                                ctx.read<chat.ChatBloc>().add(chat.ChatEvent.messageSent(message)),
+                            user: currentUser,
+                            //showUserAvatars: true,
                           ),
-                          messages: snapshot.data ?? [],
-                          onSendPressed: (message) => ctx.read<chat.ChatBloc>().add(chat.ChatEvent.messageSent(message)),
-                          user: currentUser,
-                          //showUserAvatars: true,
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

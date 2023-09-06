@@ -34,7 +34,9 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 3.h,),
+                    SizedBox(
+                      height: 3.h,
+                    ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(15, 0, 20, 0),
                       child: Row(
@@ -68,11 +70,12 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ],
                           )
-
                         ],
                       ),
                     ),
-                    SizedBox(height: 4.h,),
+                    SizedBox(
+                      height: 4.h,
+                    ),
                     const LostItemsContainer(),
                     const FoundItemsContainer(),
                   ],

@@ -60,16 +60,10 @@ class CustomCardSearch extends StatelessWidget {
                               },
                               progressIndicatorBuilder: (context, url, downloadProgress) =>
                                   const CustomCircularProgress(size: 75),
-                              errorWidget: (context, url, error) => Image.asset(
-                                "assets/images/no-item.png",
-                                fit: BoxFit.cover,
-                              ),
+                              errorWidget: (context, url, error) => noItemImage,
                               imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                             )
-                          : Image.asset(
-                              "assets/images/no-item.png",
-                              fit: BoxFit.cover,
-                            ),
+                          : noItemImage,
                     ),
                   ),
                 ),

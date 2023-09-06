@@ -5,6 +5,7 @@ import 'package:lost_and_found/features/claim/presentation/widgets/claim/claimed
 import 'package:lost_and_found/features/claim/presentation/widgets/claim/info_claims_box.dart';
 
 import '../../../../../core/presentation/widgets/custom_circular_progress.dart';
+import '../../../../../core/presentation/widgets/no_content_page.dart';
 
 class ClaimSentContent extends StatelessWidget {
   const ClaimSentContent({super.key});
@@ -25,26 +26,11 @@ class ClaimSentContent extends StatelessWidget {
                     height: MediaQuery.of(context).size.height,
                     child: const SingleChildScrollView(
                       physics: AlwaysScrollableScrollPhysics(),
-                      child: Center(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 50,
-                            ),
-                            Icon(
-                              Icons.connect_without_contact,
-                              size: 80,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "You have not claimed any item yet",
-                              style: TextStyle(fontSize: 20),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
+                      child: NoContentPage(
+                        image: 'assets/images/no-created-claims.png',
+                        title: 'No open claims',
+                        subtitle:
+                        'Your claims will be displayed as soon as you claim a found item',
                       ),
                     ),
                   )

@@ -12,12 +12,7 @@ class ImageItem extends StatelessWidget {
   final bool hasImage;
   final String token;
 
-  const ImageItem(
-      {Key? key,
-      required this.itemId,
-      required this.token,
-      required this.hasImage})
-      : super(key: key);
+  const ImageItem({Key? key, required this.itemId, required this.token, required this.hasImage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +23,7 @@ class ImageItem extends StatelessWidget {
         key: Key(randomString()),
         imageUrl: imageUrl,
         token: token,
-        errorAsset: 'assets/images/no-item.png',
+        errorImage: noItemImage,
         child: Container(
           color: Colors.white,
           width: MediaQuery.of(context).size.width,
@@ -39,22 +34,18 @@ class ImageItem extends StatelessWidget {
             httpHeaders: {
               "Authorization": "Bearer $token",
             },
-            progressIndicatorBuilder: (context, url, downloadProgress) =>
-                const CustomCircularProgress(size: 150),
-            errorWidget: (context, url, error) =>
-                Image.asset("assets/images/no-item.png"),
+            progressIndicatorBuilder: (context, url, downloadProgress) => const CustomCircularProgress(size: 150),
+            errorWidget: (context, url, error) => noItemImage,
             imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
           ),
         ),
       );
     } else {
       return SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: 300,
-          child: Image.asset(
-            "assets/images/no-item.png",
-            fit: BoxFit.cover,
-          ));
+        width: MediaQuery.of(context).size.width,
+        height: 300,
+        child: noItemImage,
+      );
     }
   }
 }

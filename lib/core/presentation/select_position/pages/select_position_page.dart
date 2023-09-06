@@ -58,152 +58,155 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
           }
         },
         builder: (ctx, state) {
-          return SafeArea(
-            minimum: EdgeInsets.zero,
-            child: Scaffold(
-                appBar: AppBar(
-                  systemOverlayStyle: const SystemUiOverlayStyle(
-                      statusBarColor: Colors.white,
-                      statusBarBrightness: Brightness.light,
-                      statusBarIconBrightness: Brightness.dark),
-                  iconTheme: const IconThemeData(color: Colors.black),
-                  title: const Text(
-                    "Select position",
-                    style: TextStyle(
-                      color: Colors.black,
+          return AnnotatedRegion(
+            value: const SystemUiOverlayStyle(
+              statusBarColor: Colors.white,
+              statusBarBrightness: Brightness.light,
+              statusBarIconBrightness: Brightness.dark,
+            ),
+            child: SafeArea(
+              minimum: EdgeInsets.zero,
+              child: Scaffold(
+                  appBar: AppBar(
+                    iconTheme: const IconThemeData(color: Colors.black),
+                    title: const Text(
+                      "Select position",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
                     ),
+                    backgroundColor: Colors.white,
                   ),
-                  backgroundColor: Colors.white,
-                ),
-                body: Stack(
-                  children: [
-                    Stack(
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 150),
-                            child: FlutterMap(
-                              mapController: mapController.mapController,
-                              options: MapOptions(
-                                  maxZoom: 18,
-                                  onMapReady: () {
-                                    if (markerPos != defaultPosition) {
-                                      mapController.animatedZoomOut();
-                                      mapController.centerOnPoint(LatLng(markerPos.latitude, markerPos.longitude),
-                                          zoom: 17);
-                                    }
-                                  },
-                                  interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
-                                  center: center,
-                                  zoom: 5.5,
-                                  onPositionChanged: (MapPosition position, bool gesture) {
-                                    // Update marker position based on the map center
-                                    setState(() {
-                                      markerPos = LatLng(position.center!.latitude, position.center!.longitude);
-                                    });
-                                  }),
-                              children: [
-                                TileLayer(
-                                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                                  userAgentPackageName: 'it.fabc.lostandfound',
-                                ),
-                                MarkerLayer(
-                                  markers: [
-                                    Marker(
-                                      width: 200.0,
-                                      height: 200.0,
-                                      point: markerPos,
-                                      builder: (ctx) => const Padding(
-                                        padding: EdgeInsets.fromLTRB(0, 0, 0, 65),
-                                        child: Icon(
-                                          Icons.location_on,
-                                          color: Color.fromRGBO(47, 122, 106, 1),
-                                          weight: 10,
-                                          size: 80,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Positioned(
-                        bottom: 0.0,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: 200.0,
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20.0),
-                                  topRight: Radius.circular(20.0),
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  TextButton(
-                                    onPressed: () async {
-                                      mapController.animatedZoomOut();
-                                      ctx
-                                          .read<SelectPositionBloc>()
-                                          .add(const SelectPositionEvent.selectCurrentPosition());
+                  body: Stack(
+                    children: [
+                      Stack(
+                        children: [
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 150),
+                              child: FlutterMap(
+                                mapController: mapController.mapController,
+                                options: MapOptions(
+                                    maxZoom: 18,
+                                    onMapReady: () {
+                                      if (markerPos != defaultPosition) {
+                                        mapController.animatedZoomOut();
+                                        mapController.centerOnPoint(LatLng(markerPos.latitude, markerPos.longitude),
+                                            zoom: 17);
+                                      }
                                     },
-                                    child: const Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.navigation,
-                                          size: 30,
-                                        ),
-                                        SizedBox(width: 8.0),
-                                        Text(
-                                          'Use my current location',
-                                          style: TextStyle(
-                                            decoration: TextDecoration.underline,
-                                            fontSize: 18,
+                                    interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
+                                    center: center,
+                                    zoom: 5.5,
+                                    onPositionChanged: (MapPosition position, bool gesture) {
+                                      // Update marker position based on the map center
+                                      setState(() {
+                                        markerPos = LatLng(position.center!.latitude, position.center!.longitude);
+                                      });
+                                    }),
+                                children: [
+                                  TileLayer(
+                                    urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                    userAgentPackageName: 'it.fabc.lostandfound',
+                                  ),
+                                  MarkerLayer(
+                                    markers: [
+                                      Marker(
+                                        width: 200.0,
+                                        height: 200.0,
+                                        point: markerPos,
+                                        builder: (ctx) => const Padding(
+                                          padding: EdgeInsets.fromLTRB(0, 0, 0, 65),
+                                          child: Icon(
+                                            Icons.location_on,
+                                            color: Color.fromRGBO(47, 122, 106, 1),
+                                            weight: 10,
+                                            size: 80,
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(18),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: ElevatedButton(
-                                              onPressed: () {
-                                                Navigator.pop(context, markerPos);
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                shape: const StadiumBorder(),
-                                                padding: const EdgeInsets.symmetric(vertical: 18),
-                                              ),
-                                              child: const Text(
-                                                'Choose this position',
-                                                style: TextStyle(fontSize: 20),
-                                              )),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
                             ),
-                          ],
-                        ))
-                  ],
-                )),
+                          ),
+                        ],
+                      ),
+                      Positioned(
+                          bottom: 0.0,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 200.0,
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20.0),
+                                    topRight: Radius.circular(20.0),
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    TextButton(
+                                      onPressed: () async {
+                                        mapController.animatedZoomOut();
+                                        ctx
+                                            .read<SelectPositionBloc>()
+                                            .add(const SelectPositionEvent.selectCurrentPosition());
+                                      },
+                                      child: const Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.navigation,
+                                            size: 30,
+                                          ),
+                                          SizedBox(width: 8.0),
+                                          Text(
+                                            'Use my current location',
+                                            style: TextStyle(
+                                              decoration: TextDecoration.underline,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(18),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: ElevatedButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context, markerPos);
+                                                },
+                                                style: ElevatedButton.styleFrom(
+                                                  shape: const StadiumBorder(),
+                                                  padding: const EdgeInsets.symmetric(vertical: 18),
+                                                ),
+                                                child: const Text(
+                                                  'Choose this position',
+                                                  style: TextStyle(fontSize: 20),
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ))
+                    ],
+                  )),
+            ),
           );
         },
       ),

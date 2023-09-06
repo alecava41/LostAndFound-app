@@ -7,7 +7,7 @@ class CircularImage extends StatelessWidget {
   final String token;
   final String imageUrl;
   final double radius;
-  final String errorAsset;
+  final Image errorImage;
   final bool hasImage;
 
   const CircularImage({
@@ -15,7 +15,7 @@ class CircularImage extends StatelessWidget {
     required this.token,
     required this.imageUrl,
     required this.hasImage,
-    required this.errorAsset,
+    required this.errorImage,
     this.radius = 50,
   });
 
@@ -31,7 +31,7 @@ class CircularImage extends StatelessWidget {
             SizedBox(height: radius * 2, width: radius * 2, child: CustomCircularProgress(size: radius)),
         errorWidget: (context, url, error) => CircleAvatar(
           radius: radius,
-          backgroundImage: Image.asset(errorAsset).image,
+          backgroundImage: errorImage.image,
         ),
         imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
         imageBuilder: (ctx, imageProvider) => CircleAvatar(
@@ -42,7 +42,7 @@ class CircularImage extends StatelessWidget {
     } else {
       return CircleAvatar(
         radius: radius,
-        backgroundImage: Image.asset(errorAsset).image,
+        backgroundImage: errorImage.image,
       );
     }
   }

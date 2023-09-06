@@ -62,10 +62,10 @@ class ClaimedItemCard extends StatelessWidget {
                             },
                             progressIndicatorBuilder: (context, url, downloadProgress) =>
                                 const CustomCircularProgress(size: 35),
-                            errorWidget: (context, url, error) => Image.asset('assets/images/no-user.jpg'),
+                            errorWidget: (context, url, error) => noUserImage,
                             imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                           )
-                        : Image.asset('assets/images/no-user.jpg'),
+                        : noUserImage,
                   ),
                 ),
                 Expanded(

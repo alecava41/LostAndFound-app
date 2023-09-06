@@ -53,7 +53,7 @@ class UploadImageForm extends StatelessWidget {
                             },
                             progressIndicatorBuilder: (context, url, downloadProgress) =>
                                 const CustomCircularProgress(size: 150),
-                            errorWidget: (context, url, error) => Image.asset("assets/images/no-item.png"),
+                            errorWidget: (context, url, error) => noItemImage,
                             imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                           )
                         : () {

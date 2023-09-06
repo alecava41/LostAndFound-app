@@ -42,45 +42,48 @@ class _TutorialScreen extends State<TutorialScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: PersonalizedColor.mainColor,
-        appBar: AppBar(
-          systemOverlayStyle: const SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
-              statusBarBrightness: Brightness.light,
-              statusBarIconBrightness: Brightness.dark),
-          title: const Text("Tutorial", style: TextStyle(color: Colors.black)),
-          backgroundColor: Colors.white,
-          iconTheme: const IconThemeData(color: Colors.black),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _carouselSlider(),
-              const SizedBox(
-                height: 25,
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  children: [
-                    ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: qaList.length,
-                      itemBuilder: (context, index) {
-                        return qaList[index];
-                      },
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    )
-                  ],
+    return AnnotatedRegion(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: PersonalizedColor.mainColor,
+          appBar: AppBar(
+            title: const Text("Tutorial", style: TextStyle(color: Colors.black)),
+            backgroundColor: Colors.white,
+            iconTheme: const IconThemeData(color: Colors.black),
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _carouselSlider(),
+                const SizedBox(
+                  height: 25,
                 ),
-              ),
-            ],
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: qaList.length,
+                        itemBuilder: (context, index) {
+                          return qaList[index];
+                        },
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

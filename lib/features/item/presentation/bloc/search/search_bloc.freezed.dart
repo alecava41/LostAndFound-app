@@ -2029,7 +2029,8 @@ mixin _$SearchState {
   bool get isConnected => throw _privateConstructorUsedError;
   bool get hasLocationPermissions => throw _privateConstructorUsedError;
   bool get isLoadingPosition => throw _privateConstructorUsedError;
-  String get token =>
+  String get token => throw _privateConstructorUsedError;
+  Either<Failure, Success>? get searchFailureOrSuccess =>
       throw _privateConstructorUsedError; // Fields to handle real search
   bool get showError => throw _privateConstructorUsedError;
   bool get hasSearchError => throw _privateConstructorUsedError;
@@ -2060,6 +2061,7 @@ abstract class $SearchStateCopyWith<$Res> {
       bool hasLocationPermissions,
       bool isLoadingPosition,
       String token,
+      Either<Failure, Success>? searchFailureOrSuccess,
       bool showError,
       bool hasSearchError,
       bool isLoadingResults,
@@ -2091,6 +2093,7 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
     Object? hasLocationPermissions = null,
     Object? isLoadingPosition = null,
     Object? token = null,
+    Object? searchFailureOrSuccess = freezed,
     Object? showError = null,
     Object? hasSearchError = null,
     Object? isLoadingResults = null,
@@ -2145,6 +2148,10 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
+      searchFailureOrSuccess: freezed == searchFailureOrSuccess
+          ? _value.searchFailureOrSuccess
+          : searchFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Either<Failure, Success>?,
       showError: null == showError
           ? _value.showError
           : showError // ignore: cast_nullable_to_non_nullable
@@ -2186,6 +2193,7 @@ abstract class _$$_SearchStateCopyWith<$Res>
       bool hasLocationPermissions,
       bool isLoadingPosition,
       String token,
+      Either<Failure, Success>? searchFailureOrSuccess,
       bool showError,
       bool hasSearchError,
       bool isLoadingResults,
@@ -2215,6 +2223,7 @@ class __$$_SearchStateCopyWithImpl<$Res>
     Object? hasLocationPermissions = null,
     Object? isLoadingPosition = null,
     Object? token = null,
+    Object? searchFailureOrSuccess = freezed,
     Object? showError = null,
     Object? hasSearchError = null,
     Object? isLoadingResults = null,
@@ -2269,6 +2278,10 @@ class __$$_SearchStateCopyWithImpl<$Res>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
+      searchFailureOrSuccess: freezed == searchFailureOrSuccess
+          ? _value.searchFailureOrSuccess
+          : searchFailureOrSuccess // ignore: cast_nullable_to_non_nullable
+              as Either<Failure, Success>?,
       showError: null == showError
           ? _value.showError
           : showError // ignore: cast_nullable_to_non_nullable
@@ -2305,6 +2318,7 @@ class _$_SearchState implements _SearchState {
       this.hasLocationPermissions = false,
       this.isLoadingPosition = false,
       this.token = "",
+      this.searchFailureOrSuccess,
       this.showError = false,
       this.hasSearchError = false,
       this.isLoadingResults = false,
@@ -2351,6 +2365,8 @@ class _$_SearchState implements _SearchState {
   @override
   @JsonKey()
   final String token;
+  @override
+  final Either<Failure, Success>? searchFailureOrSuccess;
 // Fields to handle real search
   @override
   @JsonKey()
@@ -2367,7 +2383,7 @@ class _$_SearchState implements _SearchState {
 
   @override
   String toString() {
-    return 'SearchState(itemsToSearch: $itemsToSearch, pos: $pos, cat: $cat, dateTime: $dateTime, order: $order, results: $results, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, isLoadingPosition: $isLoadingPosition, token: $token, showError: $showError, hasSearchError: $hasSearchError, isLoadingResults: $isLoadingResults, pageState: $pageState)';
+    return 'SearchState(itemsToSearch: $itemsToSearch, pos: $pos, cat: $cat, dateTime: $dateTime, order: $order, results: $results, category: $category, address: $address, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, isLoadingPosition: $isLoadingPosition, token: $token, searchFailureOrSuccess: $searchFailureOrSuccess, showError: $showError, hasSearchError: $hasSearchError, isLoadingResults: $isLoadingResults, pageState: $pageState)';
   }
 
   @override
@@ -2393,6 +2409,8 @@ class _$_SearchState implements _SearchState {
             (identical(other.isLoadingPosition, isLoadingPosition) ||
                 other.isLoadingPosition == isLoadingPosition) &&
             (identical(other.token, token) || other.token == token) &&
+            (identical(other.searchFailureOrSuccess, searchFailureOrSuccess) ||
+                other.searchFailureOrSuccess == searchFailureOrSuccess) &&
             (identical(other.showError, showError) ||
                 other.showError == showError) &&
             (identical(other.hasSearchError, hasSearchError) ||
@@ -2418,6 +2436,7 @@ class _$_SearchState implements _SearchState {
       hasLocationPermissions,
       isLoadingPosition,
       token,
+      searchFailureOrSuccess,
       showError,
       hasSearchError,
       isLoadingResults,
@@ -2444,6 +2463,7 @@ abstract class _SearchState implements SearchState {
       final bool hasLocationPermissions,
       final bool isLoadingPosition,
       final String token,
+      final Either<Failure, Success>? searchFailureOrSuccess,
       final bool showError,
       final bool hasSearchError,
       final bool isLoadingResults,
@@ -2473,6 +2493,8 @@ abstract class _SearchState implements SearchState {
   bool get isLoadingPosition;
   @override
   String get token;
+  @override
+  Either<Failure, Success>? get searchFailureOrSuccess;
   @override // Fields to handle real search
   bool get showError;
   @override

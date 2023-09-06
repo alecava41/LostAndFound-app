@@ -5,8 +5,10 @@ import 'package:flutter_chat_types/flutter_chat_types.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/chat/presentation/bloc/inbox/inbox_bloc.dart';
 import 'package:lost_and_found/features/chat/presentation/pages/chat_page.dart';
+import 'package:lost_and_found/utils/screen_size.dart';
 
 import '../../../../core/presentation/widgets/error_page.dart';
+import '../../../../core/presentation/widgets/no_content_page.dart';
 import '../widgets/inbox/inbox_item.dart';
 
 class InboxScreen extends StatelessWidget {
@@ -35,6 +37,7 @@ class InboxScreen extends StatelessWidget {
               ? const Expanded(child: CustomCircularProgress(size: 100))
               : state.hasLoginOrLoadingError
                   ? ErrorPage(
+                      hasBottomBar: true,
                       onRetry: () => ctx.read<InboxBloc>().add(const InboxEvent.inboxContentCreated()),
                     )
                   : StreamBuilder<List<Room>>(
@@ -42,19 +45,22 @@ class InboxScreen extends StatelessWidget {
                       initialData: const [],
                       builder: (context, snapshot) {
                         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                          // TODO (@backToFrancesco) can we do something better?
-                          return const Padding(
-                            padding: EdgeInsets.fromLTRB(0, 60, 0, 0),
-                            child: Text("No chat yet", style: TextStyle(fontSize: 30)),
+                          return NoContentPage(
+                            hasBottomBar:
+                                ScreenSize.isBigSmartphoneDevice(context) || ScreenSize.isMediumSmartphoneDevice(context),
+                            image: "assets/images/no-chat.png",
+                            title: 'No active chat',
+                            subtitle: 'Chat with someone to see the chat list',
                           );
                         } else {
                           final activeRooms = snapshot.data!.filter((room) => room.metadata!["active"]! as bool).toList();
 
                           if (activeRooms.isEmpty) {
-                            // TODO (@backToFrancesco) can we do something better?
-                            return const Padding(
-                              padding: EdgeInsets.fromLTRB(0, 60, 0, 0),
-                              child: Text("No chat yet", style: TextStyle(fontSize: 30)),
+                            return const NoContentPage(
+                              hasBottomBar: true,
+                              image: "assets/images/no-chat.png",
+                              title: 'No active chat',
+                              subtitle: 'Chat with someone to see the chat list',
                             );
                           }
 

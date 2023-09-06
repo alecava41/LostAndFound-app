@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:badges/badges.dart' as badges;
 import 'package:lost_and_found/features/chat/presentation/pages/inbox_page.dart';
+import 'package:lost_and_found/features/item/presentation/bloc/search/search_bloc.dart';
 
 import '../../../../features/badges/presentation/bloc/badge_bloc.dart';
 import '../../../../features/chat/presentation/bloc/inbox/inbox_bloc.dart';
@@ -32,60 +33,60 @@ class HomeControllerScreen extends StatelessWidget {
 
     return BlocBuilder<BadgeBloc, BadgeState>(
       builder: (badgeCtx, badgeState) => BlocBuilder<HomeControllerBloc, HomeControllerState>(
-        builder: (ctx, state) {
-          return SafeArea(
-            child: AnnotatedRegion<SystemUiOverlayStyle>(
+        builder: (ctx, state) => BlocBuilder<SearchBloc, SearchState>(
+          builder: (searchCtx, searchState) {
+            return AnnotatedRegion<SystemUiOverlayStyle>(
               value: SystemUiOverlayStyle(
-                statusBarColor: state.tabIndex == 4 ? Colors.white : PersonalizedColor.backgroundColor,
-                statusBarBrightness: Brightness.light,
-                statusBarIconBrightness: Brightness.dark
+                  statusBarColor: state.tabIndex == 4 || (state.tabIndex == 1 && searchState.pageState == SearchPageState.resultPage) ? Colors.white : PersonalizedColor.backgroundColor,
+                  statusBarBrightness: Brightness.light,
+                  statusBarIconBrightness: Brightness.dark),
+              child: SafeArea(
+                child: Scaffold(
+                  backgroundColor: PersonalizedColor.backgroundColor,
+                  body: pages[state.tabIndex],
+                  bottomNavigationBar: BottomNavigationBar(
+                    currentIndex: state.tabIndex,
+                    onTap: (index) {
+                      if (!hasPageBeenInitialized[index]) {
+                        switch (index) {
+                          case 3:
+                            ctx.read<InboxBloc>().add(const InboxEvent.inboxContentCreated());
+                          case 4:
+                            ctx.read<UserBloc>().add(const UserEvent.contentCreated());
+                        }
 
-              ),
-              child: Scaffold(
-                backgroundColor: PersonalizedColor.backgroundColor,
-                body: pages[state.tabIndex],
-                bottomNavigationBar: BottomNavigationBar(
-                  currentIndex: state.tabIndex,
-                  onTap: (index) {
-                    if (!hasPageBeenInitialized[index]) {
-                      switch (index) {
-                        case 3:
-                          ctx.read<InboxBloc>().add(const InboxEvent.inboxContentCreated());
-                        case 4:
-                          ctx.read<UserBloc>().add(const UserEvent.contentCreated());
+                        hasPageBeenInitialized[index] = true;
                       }
 
-                      hasPageBeenInitialized[index] = true;
-                    }
-
-                    ctx.read<HomeControllerBloc>().add(HomeControllerEvent.tabChanged(index));
-                  },
-                  selectedItemColor: PersonalizedColor.mainColor,
-                  unselectedItemColor: Colors.grey,
-                  items: [
-                    BottomNavigationBarItem(
-                        icon: badges.Badge(
-                          position: badges.BadgePosition.topEnd(top: 0, end: -1),
-                          showBadge: badgeState.unreadReceivedClaims > 0 || badgeState.unreadNews > 0,
-                          child: const Icon(Icons.home),
-                        ),
-                        label: "Home"),
-                    const BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-                    const BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline_outlined), label: "Insert"),
-                    BottomNavigationBarItem(
-                        icon: badges.Badge(
-                          showBadge: badgeState.hasUnreadChats,
-                          position: badges.BadgePosition.topEnd(top: 0, end: -1),
-                          child: const Icon(Icons.mail),
-                        ),
-                        label: "Inbox"),
-                    const BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-                  ],
+                      ctx.read<HomeControllerBloc>().add(HomeControllerEvent.tabChanged(index));
+                    },
+                    selectedItemColor: PersonalizedColor.mainColor,
+                    unselectedItemColor: Colors.grey,
+                    items: [
+                      BottomNavigationBarItem(
+                          icon: badges.Badge(
+                            position: badges.BadgePosition.topEnd(top: 0, end: -1),
+                            showBadge: badgeState.unreadReceivedClaims > 0 || badgeState.unreadNews > 0,
+                            child: const Icon(Icons.home),
+                          ),
+                          label: "Home"),
+                      const BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+                      const BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline_outlined), label: "Insert"),
+                      BottomNavigationBarItem(
+                          icon: badges.Badge(
+                            showBadge: badgeState.hasUnreadChats,
+                            position: badges.BadgePosition.topEnd(top: 0, end: -1),
+                            child: const Icon(Icons.mail),
+                          ),
+                          label: "Inbox"),
+                      const BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

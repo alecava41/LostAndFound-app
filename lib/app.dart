@@ -35,21 +35,8 @@ class App extends StatefulWidget {
   // TODO (@alecava41) dark theme + switch
   // TODO (@alecava41) need to fix psw, must require 'strong' psw
   // TODO (@alecava41) (map) fix this on iOS (https://pub.dev/packages/map_launcher#for-ios-add-url-schemes-in-infoplist-file)
-
-  // TODO (@alecava41) add title/subtitle for no items results
-
-  /*
-    UNDRAW IMAGES
-      color = RGB (main color)
-
-      Messaging fun => NO CHAT
-      My notifications => NEWS
-      Approve => RECEIVED CLAIMS
-      Pending approval => YOUR CLAIMS
-      Web search => SEARCH NO RESULT
-   */
-
-  // TODO replace "no content" icons with images from undraw
+  // TODO (@alecava41) add few more pages on tutorial (to teach about "mark as solved", ...).
+  // TODO (@alecava41) add clickable text (on item page) "See Maps", which redirects to that position on GMaps
 }
 
 class _Application extends State<App> {
@@ -135,6 +122,7 @@ class _Application extends State<App> {
     super.initState();
     setupInteractedMessage();
   }
+
 
   @override
   Widget build(BuildContext context) {

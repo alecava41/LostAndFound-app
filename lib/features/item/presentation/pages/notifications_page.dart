@@ -14,24 +14,27 @@ class NotificationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: PersonalizedColor.backgroundColor,
-        appBar: AppBar(
-          systemOverlayStyle: const SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
-              statusBarBrightness: Brightness.light,
-              statusBarIconBrightness: Brightness.dark),
-          title: const Text(
-            "News",
-            style: TextStyle(color: Colors.black),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: PersonalizedColor.backgroundColor,
+          appBar: AppBar(
+            title: const Text(
+              "News",
+              style: TextStyle(color: Colors.black),
+            ),
+            backgroundColor: Colors.white,
+            iconTheme: const IconThemeData(color: Colors.black),
           ),
-          backgroundColor: Colors.white,
-          iconTheme: const IconThemeData(color: Colors.black),
-        ),
-        body: BlocProvider(
-          create: (_) => sl<NewsBloc>()..add(NewsEvent.newsCreated(newNewsId)),
-          child: NewsContent(newNewsId: newNewsId),
+          body: BlocProvider(
+            create: (_) => sl<NewsBloc>()..add(NewsEvent.newsCreated(newNewsId)),
+            child: NewsContent(newNewsId: newNewsId),
+          ),
         ),
       ),
     );

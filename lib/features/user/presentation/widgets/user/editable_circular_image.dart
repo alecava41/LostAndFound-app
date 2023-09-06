@@ -54,7 +54,7 @@ class EditableCircularImage extends StatelessWidget {
                   ),
                   errorWidget: (context, url, error) => CircleAvatar(
                     radius: radius,
-                    backgroundImage: Image.asset("assets/images/no-user.jpg").image,
+                    backgroundImage: noUserImage.image,
                   ),
                   imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                   imageBuilder: (ctx, imageProvider) => CircleAvatar(
@@ -64,7 +64,7 @@ class EditableCircularImage extends StatelessWidget {
                 )
               : CircleAvatar(
                   radius: radius,
-                  backgroundImage: Image.asset("assets/images/no-user.jpg").image,
+                  backgroundImage: noUserImage.image,
                 ),
           Positioned(
             bottom: 2.0,

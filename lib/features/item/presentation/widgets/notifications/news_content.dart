@@ -5,7 +5,6 @@ import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/core/presentation/widgets/no_content_page.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/notification/news_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/notifications/custom_notification.dart';
-import 'package:sizer/sizer.dart';
 
 class NewsContent extends StatelessWidget {
   final int? newNewsId;
@@ -30,10 +29,13 @@ class NewsContent extends StatelessWidget {
                     : state.news.isEmpty
                         ? SizedBox(
                             height: MediaQuery.of(context).size.height,
-                            child: SingleChildScrollView(
-                              physics: const AlwaysScrollableScrollPhysics(),
+                            child: const SingleChildScrollView(
+                              physics: AlwaysScrollableScrollPhysics(),
                               child: NoContentPage(
-                                onRetry: () {},
+                                image: 'assets/images/no-news.png',
+                                title: 'No news waiting for you',
+                                subtitle:
+                                    'News will be displayed as soon as someone inserts an item that may match one of yours',
                               ),
                             ),
                           )

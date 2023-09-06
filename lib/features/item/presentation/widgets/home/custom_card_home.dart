@@ -71,16 +71,10 @@ class CustomCardHome extends StatelessWidget {
                                   "Authorization": "Bearer $token",
                                 },
                                 placeholder: (context, _) => const CustomCircularProgress(size: 75.0),
-                                errorWidget: (context, url, error) => Image.asset(
-                                  "assets/images/no-item.png",
-                                  fit: BoxFit.cover,
-                                ),
+                                errorWidget: (context, url, error) => noItemImage,
                                 imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                               )
-                            : Image.asset(
-                                "assets/images/no-item.png",
-                                fit: BoxFit.cover,
-                              ),
+                            : noItemImage,
                       ),
                     ),
                   ),

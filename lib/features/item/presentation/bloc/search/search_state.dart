@@ -20,6 +20,7 @@ class SearchState with _$SearchState {
     @Default(false) bool hasLocationPermissions,
     @Default(false) bool isLoadingPosition,
     @Default("") String token,
+    Either<Failure, Success>? searchFailureOrSuccess,
 
     // Fields to handle real search
     @Default(false) bool showError,

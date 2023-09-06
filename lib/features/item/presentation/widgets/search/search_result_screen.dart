@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
+import 'package:lost_and_found/core/presentation/widgets/no_content_page.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/search/custom_card_search.dart';
 
 import '../../bloc/search/search_bloc.dart';
@@ -81,7 +82,10 @@ class SearchResultScreen extends StatelessWidget {
             height: 0,
           ),
           state.hasSearchError
-              ? ErrorPage(onRetry: () => ctx.read<SearchBloc>().add(const SearchEvent.searchSubmitted()))
+              ? ErrorPage(
+                  hasBottomBar: true,
+                  onRetry: () => ctx.read<SearchBloc>().add(const SearchEvent.searchSubmitted()),
+                )
               : (state.isLoadingResults
                   ? const CustomCircularProgress(size: 100)
                   : state.results.isNotEmpty
@@ -103,24 +107,11 @@ class SearchResultScreen extends StatelessWidget {
                                 .toList(),
                           ),
                         )
-                      : const Padding(
-                          padding: EdgeInsets.all(20),
-                          child: Column(
-                            children: [
-                              Icon(
-                                Icons.search_off_rounded,
-                                size: 80,
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "No matching items found with your parameters. Try with more general ones.",
-                                style: TextStyle(fontSize: 20),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
+                      : const NoContentPage(
+                          hasBottomBar: true,
+                          image: "assets/images/no-search-result.png",
+                          title: 'No matching items found with these parameters',
+                          subtitle: 'Try again with more general ones',
                         )),
         ],
       ),

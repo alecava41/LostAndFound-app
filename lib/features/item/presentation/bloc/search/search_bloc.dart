@@ -89,14 +89,15 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       final pos = state.pos.value.getOrElse(() => const LatLng(0, 0));
 
       final params = SearchItemsParams(
-          range: 400,
-          X: pos.longitude,
-          Y: pos.latitude,
-          type: itemsToSearch.first && itemsToSearch.second
-              ? SearchItemType.all
-              : (itemsToSearch.first ? SearchItemType.found : SearchItemType.lost),
-          category: state.cat.value.getOrElse(() => 0),
-          date: state.dateTime);
+        range: 400,
+        X: pos.longitude,
+        Y: pos.latitude,
+        type: itemsToSearch.first && itemsToSearch.second
+            ? SearchItemType.all
+            : (itemsToSearch.first ? SearchItemType.found : SearchItemType.lost),
+        category: state.cat.value.getOrElse(() => 0),
+        date: state.dateTime,
+      );
 
       final searchResponse = await _searchItemsUseCase(params);
       searchResponse.fold((failure) => searchFailureOrSuccess = Left(failure), (searchItems) {
@@ -113,15 +114,16 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
     emit(
       state.copyWith(
-        pageState: pageState,
-        results: items,
-        order: ResultOrder.dateDescending,
-        token: session != null ? session.token : "",
-        showError: true,
-        isLoadingResults: false,
-        hasSearchError: searchFailureOrSuccess?.isLeft() ?? false
-      ),
+          pageState: pageState,
+          results: items,
+          order: ResultOrder.dateDescending,
+          token: session != null ? session.token : "",
+          showError: true,
+          isLoadingResults: false,
+          searchFailureOrSuccess: searchFailureOrSuccess,
+          hasSearchError: searchFailureOrSuccess?.isLeft() ?? false),
     );
+    emit(state.copyWith(searchFailureOrSuccess: null));
   }
 
   void _onDateSelected(Emitter<SearchState> emit, DateTime date) {

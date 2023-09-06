@@ -7,15 +7,10 @@ class ImageDialogWidget extends StatelessWidget {
   final String imageUrl;
   final String token;
   final Widget child;
-  final String errorAsset;
+  final Image errorImage;
 
-  const ImageDialogWidget({
-    super.key,
-    required this.imageUrl,
-    required this.token,
-    required this.child,
-    required this.errorAsset
-  });
+  const ImageDialogWidget(
+      {super.key, required this.imageUrl, required this.token, required this.child, required this.errorImage});
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +28,8 @@ class ImageDialogWidget extends StatelessWidget {
                     httpHeaders: {
                       "Authorization": "Bearer $token",
                     },
-                    progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    const CustomCircularProgress(size: 100),
-                    errorWidget: (context, url, error) => Image.asset(errorAsset),
+                    progressIndicatorBuilder: (context, url, downloadProgress) => const CustomCircularProgress(size: 100),
+                    errorWidget: (context, url, error) => errorImage,
                     imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                   ),
                 ),

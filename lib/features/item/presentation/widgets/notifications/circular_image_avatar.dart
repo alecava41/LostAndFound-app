@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
+import 'package:lost_and_found/utils/constants.dart';
 
 class CircularImage extends StatelessWidget {
   final String token;
@@ -33,7 +34,7 @@ class CircularImage extends StatelessWidget {
         errorWidget: (context, url, error) {
           return CircleAvatar(
             radius: radius,
-            backgroundImage: Image.asset("assets/images/no-user.jpg").image,
+            backgroundImage: noUserImage.image,
           );
         },
         imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
@@ -45,7 +46,7 @@ class CircularImage extends StatelessWidget {
     } else {
       return CircleAvatar(
         radius: radius,
-        backgroundImage: Image.asset("assets/images/no-user.jpg").image,
+        backgroundImage: noUserImage.image,
       );
     }
   }

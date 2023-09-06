@@ -1,58 +1,70 @@
 import 'package:flutter/material.dart';
-import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
-import 'package:lost_and_found/utils/colors.dart';
+import 'package:sizer/sizer.dart';
+
+import '../../../utils/screen_size.dart';
+import 'large_green_button.dart';
 
 class ErrorPage extends StatelessWidget {
   final VoidCallback onRetry;
+  final bool hasBottomBar;
 
-  const ErrorPage({super.key, required this.onRetry});
+  const ErrorPage({super.key, required this.onRetry, this.hasBottomBar = false});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(25),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.sentiment_very_dissatisfied,
-                size: 80,
-                color: PersonalizedColor.mainColor,
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                "Oops, something went wrong!",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                "An error occurred while loading the data. Please try again later.",
+    return SizedBox(
+      height: ScreenSize.isBigSmartphoneDevice(context)
+          ? (75 - (hasBottomBar ? 10 : 0)).h
+          : ScreenSize.isMediumSmartphoneDevice(context)
+          ? (75 - (hasBottomBar ? 10 : 0)).h
+          : (70 - (hasBottomBar ? 5 : 0)).h,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image(
+              image: Image.asset("assets/images/error.png").image,
+              height: 30.h,
+              width: 70.w,
+            ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(10,0,10,0),
+              child: Text(
+                'An error occurred while loading the data.',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 16),
-              PersonalizedLargeGreenButton(
-                  onPressed: onRetry,
-                  text: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.refresh),
-                      SizedBox(
-                        width: 4,
-                      ),
-                      Text(
-                        "Retry",
-                        style: TextStyle(fontSize: 20),
-                      )
-                    ],
-                  ))
-            ],
-          ),
-        ));
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(15,0,15,0),
+              child: Text(
+                'Please try again later',
+                style: TextStyle(fontSize: 15, color: Colors.black54),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(height: 16),
+            PersonalizedLargeGreenButton(
+                onPressed: onRetry,
+                text: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.refresh),
+                    SizedBox(
+                      width: 4,
+                    ),
+                    Text(
+                      "Retry",
+                      style: TextStyle(fontSize: 20),
+                    )
+                  ],
+                ))
+          ],
+        ),
+      ),
+    );
   }
 }

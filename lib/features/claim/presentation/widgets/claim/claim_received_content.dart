@@ -5,6 +5,8 @@ import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc
 import 'package:lost_and_found/features/claim/presentation/widgets/claim/claimed_item_card.dart';
 import 'package:lost_and_found/features/claim/presentation/widgets/claim/info_claims_box.dart';
 
+import '../../../../../core/presentation/widgets/no_content_page.dart';
+
 class ClaimReceivedContent extends StatelessWidget {
   const ClaimReceivedContent({super.key});
 
@@ -26,24 +28,11 @@ class ClaimReceivedContent extends StatelessWidget {
                     height: MediaQuery.of(context).size.height,
                     child: const SingleChildScrollView(
                       physics: AlwaysScrollableScrollPhysics(),
-                      child: Center(
-                        child: Column(children: [
-                          SizedBox(
-                            height: 50,
-                          ),
-                          Icon(
-                            Icons.connect_without_contact,
-                            size: 80,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "No received claims yet",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ]),
+                      child: NoContentPage(
+                        image: 'assets/images/no-received-claims.png',
+                        title: 'No received claims to manage',
+                        subtitle:
+                        'Claims will be displayed as soon as someone claims one of your found items',
                       ),
                     ),
                   )
