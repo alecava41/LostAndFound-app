@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
+import 'package:lost_and_found/core/presentation/widgets/no_content_page.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/notification/news_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/notifications/custom_notification.dart';
+import 'package:sizer/sizer.dart';
 
 class NewsContent extends StatelessWidget {
   final int? newNewsId;
@@ -28,26 +30,10 @@ class NewsContent extends StatelessWidget {
                     : state.news.isEmpty
                         ? SizedBox(
                             height: MediaQuery.of(context).size.height,
-                            child: const SingleChildScrollView(
-                              physics: AlwaysScrollableScrollPhysics(),
-                              child: Center(
-                                child: Column(children: [
-                                  SizedBox(
-                                    height: 50,
-                                  ),
-                                  Icon(
-                                    Icons.notifications_none,
-                                    size: 80,
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "There aren't notifications waiting for you",
-                                    style: TextStyle(fontSize: 20),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ]),
+                            child: SingleChildScrollView(
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              child: NoContentPage(
+                                onRetry: () {},
                               ),
                             ),
                           )

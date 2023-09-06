@@ -22,6 +22,7 @@ CategoryDto _$CategoryDtoFromJson(Map<String, dynamic> json) {
 mixin _$CategoryDto {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
   int get icon => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +37,7 @@ abstract class $CategoryDtoCopyWith<$Res> {
           CategoryDto value, $Res Function(CategoryDto) then) =
       _$CategoryDtoCopyWithImpl<$Res, CategoryDto>;
   @useResult
-  $Res call({int id, String name, int icon});
+  $Res call({int id, String name, String description, int icon});
 }
 
 /// @nodoc
@@ -54,6 +55,7 @@ class _$CategoryDtoCopyWithImpl<$Res, $Val extends CategoryDto>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? description = null,
     Object? icon = null,
   }) {
     return _then(_value.copyWith(
@@ -64,6 +66,10 @@ class _$CategoryDtoCopyWithImpl<$Res, $Val extends CategoryDto>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String,
       icon: null == icon
           ? _value.icon
@@ -81,7 +87,7 @@ abstract class _$$$CategoryDtoCopyWith<$Res>
       __$$$CategoryDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, int icon});
+  $Res call({int id, String name, String description, int icon});
 }
 
 /// @nodoc
@@ -97,6 +103,7 @@ class __$$$CategoryDtoCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? description = null,
     Object? icon = null,
   }) {
     return _then(_$$CategoryDto(
@@ -107,6 +114,10 @@ class __$$$CategoryDtoCopyWithImpl<$Res>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String,
       icon: null == icon
           ? _value.icon
@@ -120,7 +131,10 @@ class __$$$CategoryDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$$CategoryDto implements $CategoryDto {
   const _$$CategoryDto(
-      {required this.id, required this.name, required this.icon});
+      {required this.id,
+      required this.name,
+      required this.description,
+      required this.icon});
 
   factory _$$CategoryDto.fromJson(Map<String, dynamic> json) =>
       _$$$CategoryDtoFromJson(json);
@@ -130,11 +144,13 @@ class _$$CategoryDto implements $CategoryDto {
   @override
   final String name;
   @override
+  final String description;
+  @override
   final int icon;
 
   @override
   String toString() {
-    return 'CategoryDto(id: $id, name: $name, icon: $icon)';
+    return 'CategoryDto(id: $id, name: $name, description: $description, icon: $icon)';
   }
 
   @override
@@ -144,12 +160,14 @@ class _$$CategoryDto implements $CategoryDto {
             other is _$$CategoryDto &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             (identical(other.icon, icon) || other.icon == icon));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, icon);
+  int get hashCode => Object.hash(runtimeType, id, name, description, icon);
 
   @JsonKey(ignore: true)
   @override
@@ -169,6 +187,7 @@ abstract class $CategoryDto implements CategoryDto {
   const factory $CategoryDto(
       {required final int id,
       required final String name,
+      required final String description,
       required final int icon}) = _$$CategoryDto;
 
   factory $CategoryDto.fromJson(Map<String, dynamic> json) =
@@ -178,6 +197,8 @@ abstract class $CategoryDto implements CategoryDto {
   int get id;
   @override
   String get name;
+  @override
+  String get description;
   @override
   int get icon;
   @override

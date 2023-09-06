@@ -31,15 +31,25 @@ class App extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _Application();
 
-  // TODO add more categories
+  // TODO (@alecava41) translation (app + notifications + server)
+  // TODO (@alecava41) dark theme + switch
+  // TODO (@alecava41) need to fix psw, must require 'strong' psw
+  // TODO (@alecava41) (map) fix this on iOS (https://pub.dev/packages/map_launcher#for-ios-add-url-schemes-in-infoplist-file)
 
-  // TODO translation (app + notifications)
+  // TODO (@alecava41) add title/subtitle for no items results
 
-  // TODO dark theme + switch
+  /*
+    UNDRAW IMAGES
+      color = RGB (main color)
 
-  // TODO (map) fix this on iOS (https://pub.dev/packages/map_launcher#for-ios-add-url-schemes-in-infoplist-file)
+      Messaging fun => NO CHAT
+      My notifications => NEWS
+      Approve => RECEIVED CLAIMS
+      Pending approval => YOUR CLAIMS
+      Web search => SEARCH NO RESULT
+   */
 
-  // TODO (@backToFrancesco) maybe dividers are too much thin? For instance, when there is an unread news (dark green) I cannot see the difference between the objects of the list
+  // TODO replace "no content" icons with images from undraw
 }
 
 class _Application extends State<App> {

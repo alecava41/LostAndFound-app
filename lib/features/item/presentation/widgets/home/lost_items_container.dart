@@ -43,33 +43,38 @@ class LostItemsContainer extends StatelessWidget {
                   ? Padding(
                       padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                       child: SizedBox(
-                          height: ScreenSize.isBigSmartphoneDevice(context)
-                              ? 230
-                              : ScreenSize.isMediumSmartphoneDevice(context)
-                                  ? 200
-                                  : 170,
-                          width: MediaQuery.of(context).size.width,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: state.lostItems
-                                .map(
-                                  (item) => CustomCardHome(
-                                    id: item.id,
-                                    text: item.title,
-                                    claims: item.claims,
-                                    token: state.token,
-                                    hasImage: item.hasImage,
-                                    approvedClaims: item.approvedClaims,
-                                  ),
-                                )
-                                .toList(),
-                          )),
+                        height: ScreenSize.isBigSmartphoneDevice(context)
+                            ? 230
+                            : ScreenSize.isMediumSmartphoneDevice(context)
+                                ? 200
+                                : 170,
+                        width: MediaQuery.of(context).size.width,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: state.lostItems
+                              .map(
+                                (item) => CustomCardHome(
+                                  id: item.id,
+                                  text: item.title,
+                                  claims: item.claims,
+                                  token: state.token,
+                                  hasImage: item.hasImage,
+                                  approvedClaims: item.approvedClaims,
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ),
                     )
-                  : const Padding(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  : Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                       child: NoItemMessage(
                         icon: Icons.sentiment_very_satisfied_rounded,
                         message: "You have no lost item!",
+                        buttonText: 'Insert a lost item',
+                        callback: () {
+                          // TODO (@alecava41) add logic
+                        },
                       )),
           SizedBox(
             height: 4.h,

@@ -32,7 +32,7 @@ extension ItemFromDto on ItemDto {
                   ? ClaimStatus.pending
                   : (userClaim!.status == ClaimStatus.rejected.name ? ClaimStatus.rejected : ClaimStatus.approved), answer: userClaim!.answer)
           : null,
-      category: Category(id: category.id, icon: category.icon, name: category.name),
+      category: Category(id: category.id, icon: category.icon, name: category.name, description: category.description),
       position: Position(X: position.X, Y: position.Y),
       hasImage: image,
     );

@@ -8,6 +8,7 @@ class CategoryDto with _$CategoryDto {
   const factory CategoryDto({
     required int id,
     required String name,
+    required String description,
     required int icon
   }) = $CategoryDto;
 

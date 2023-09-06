@@ -3,6 +3,6 @@ import 'package:lost_and_found/core/domain/entities/category.dart';
 
 extension CategoryFromDto on CategoryDto {
   Category toDomain() {
-    return Category(id: id, name: name, icon: icon);
+    return Category(id: id, name: name, icon: icon, description: description);
   }
 }

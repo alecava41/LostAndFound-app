@@ -65,10 +65,16 @@ class FoundItemsContainer extends StatelessWidget {
                                 child: Text("You have no found item inserted yet!", style: TextStyle(fontSize: 20))),
                       ),
                     )
-                  : const Padding(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 30),
-                      child:
-                          NoItemMessage(message: "No found items yet, keep searching!", icon: Icons.image_search_rounded),
+                  : Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
+                      child: NoItemMessage(
+                        message: "No found items yet, keep searching!",
+                        icon: Icons.image_search_rounded,
+                        buttonText: 'Insert a found item',
+                        callback: () {
+                          // TODO (@alecava41) add logic
+                        },
+                      ),
                     ),
         ],
       );

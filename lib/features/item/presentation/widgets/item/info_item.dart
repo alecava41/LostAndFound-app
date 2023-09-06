@@ -49,10 +49,33 @@ class InfoItem extends StatelessWidget {
             onTapField: () async {
               final availableMaps = await MapLauncher.installedMaps;
 
-              await availableMaps.first.showMarker(
-                coords: Coords(coordinates.X, coordinates.Y),
-                title: title,
-              );
+              if (availableMaps.isNotEmpty) {
+                await availableMaps.first.showMarker(
+                  coords: Coords(coordinates.X, coordinates.Y),
+                  title: title,
+                );
+              } else {
+                if (context.mounted) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('No Map App Found'),
+                        content: const Text(
+                            'Oops! It looks like there\'s no map app on your device to open this link. Please install a mapping app like Google Maps and try again.'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('Ok'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+              }
             },
           ),
           const SizedBox(height: 10),

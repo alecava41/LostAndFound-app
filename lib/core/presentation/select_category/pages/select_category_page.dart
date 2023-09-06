@@ -26,9 +26,7 @@ class CategorySelectionScreen extends StatelessWidget {
                   systemOverlayStyle: const SystemUiOverlayStyle(
                       statusBarColor: Colors.white,
                       statusBarBrightness: Brightness.light,
-                      statusBarIconBrightness: Brightness.dark
-
-                  ),
+                      statusBarIconBrightness: Brightness.dark),
                   title: const Text(
                     'Choose a category',
                     style: TextStyle(color: Colors.black),
@@ -54,6 +52,7 @@ class CategorySelectionScreen extends StatelessWidget {
                                   onTap: () {
                                     Navigator.pop(context, Pair<int, String>(cat.id, cat.name));
                                   },
+                                  description: cat.description,
                                 ))
                             .toList(),
                       ),

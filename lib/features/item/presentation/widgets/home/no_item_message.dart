@@ -1,39 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 
 import '../../../../../utils/colors.dart';
+import '../../../../../utils/screen_size.dart';
 
 class NoItemMessage extends StatelessWidget {
   final String message;
+  final String buttonText;
+  final VoidCallback callback;
   final IconData icon;
 
-  const NoItemMessage({super.key, required this.message, required this.icon});
+  const NoItemMessage(
+      {super.key, required this.message, required this.buttonText, required this.icon, required this.callback});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: ScreenSize.isBigSmartphoneDevice(context)
+          ? 230
+          : ScreenSize.isMediumSmartphoneDevice(context)
+              ? 200
+              : 170,
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Icon(
             icon,
-            size: 80,
+            size: ScreenSize.isBigSmartphoneDevice(context)
+                ? 80
+                : ScreenSize.isMediumSmartphoneDevice(context)
+                ? 70
+                : 50,
             color: PersonalizedColor.mainColor,
           ),
           Text(
             message,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 20,
+            style: TextStyle(
+              fontSize: ScreenSize.isBigSmartphoneDevice(context)
+                  ? 18
+                  : ScreenSize.isMediumSmartphoneDevice(context)
+                  ? 17
+                  : 16,
               color: PersonalizedColor.mainColor,
               fontWeight: FontWeight.bold,
             ),
           ),
+          PersonalizedLargeGreenButton(onPressed: callback, text: Text(buttonText, style: TextStyle(fontSize: ScreenSize.isBigSmartphoneDevice(context)
+              ? 20
+              : ScreenSize.isMediumSmartphoneDevice(context)
+              ? 18
+              : 16),))
         ],
       ),
     );

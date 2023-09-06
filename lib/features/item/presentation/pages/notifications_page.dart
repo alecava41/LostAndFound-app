@@ -23,7 +23,7 @@ class NotificationsScreen extends StatelessWidget {
               statusBarBrightness: Brightness.light,
               statusBarIconBrightness: Brightness.dark),
           title: const Text(
-            "Notifications",
+            "News",
             style: TextStyle(color: Colors.black),
           ),
           backgroundColor: Colors.white,
