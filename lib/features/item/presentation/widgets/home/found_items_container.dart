@@ -17,7 +17,7 @@ class FoundItemsContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
-            padding: EdgeInsets.fromLTRB(20, 0, 0, 10),
+            padding: EdgeInsets.fromLTRB(20, 0, 0, 5),
             child: Text(
               "Your found items",
               style: TextStyle(fontSize: 20),

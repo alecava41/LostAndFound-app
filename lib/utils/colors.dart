@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PersonalizedColor {
-  static const mainColor = Color.fromARGB(255, 28, 136, 111);
+  static const mainColor = Color.fromRGBO(28, 136, 111, 1);
   static const backgroundColor = Color.fromRGBO(240, 243, 248, 1);
   static MaterialColor primarySwatch = MaterialColor(mainColor.value, const {
     50: Color.fromRGBO(28, 136, 111, 0.1),

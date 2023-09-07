@@ -18,7 +18,7 @@ class LostItemsContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
-            padding: EdgeInsets.fromLTRB(20, 0, 0, 10),
+            padding: EdgeInsets.fromLTRB(20, 0, 0, 5),
             child: Text(
               "Your lost items",
               style: TextStyle(fontSize: 20),
@@ -77,7 +77,7 @@ class LostItemsContainer extends StatelessWidget {
                         },
                       )),
           SizedBox(
-            height: 4.h,
+            height: 1.5.h,
           )
         ],
       );
