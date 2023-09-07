@@ -160,22 +160,22 @@ class AnswerClaimScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const CustomExpansionTile(
-                                      title: Text(
-                                        "Claim decision",
-                                        style: TextStyle(fontSize: 30),
+                                   CustomExpansionTile(
+                                      title: const Text(
+                                        "You are deciding to accept or deny the claim.",
+                                        style: TextStyle(fontSize: 16),
                                       ),
                                       children: [
                                         Padding(
                                           padding: EdgeInsets.all(10.0),
                                           child: Text(
-                                            "Please review the answer received and make a decision to either accept or decline the claim for the item. If the provided answer is correct, you can proceed with returning the item to its rightful owner.",
+                                            isClaimAlreadyManaged? "On this page, you can find information about this claim you have recived." : "Please review the answer received and make a decision to either accept or decline the claim for the item. If you accept the claim, proceed with returning the item to its rightful owner.",
                                             style: TextStyle(
                                                 color: Colors.black54),
                                           ),
                                         ),
                                       ]),
-                                      // TODO: (@alecava) fix crash when open if already claimed
+                                      // TODO: (@alecava) fix crash when open if already claimed (maybe check also if a SizedBox is needed between the CustomExpansionTile and the content)
                                   Row(
                                     children: [
                                       const Icon(

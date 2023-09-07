@@ -115,21 +115,21 @@ class AnswerQuestionScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const CustomExpansionTile(
-                                  title: Text(
-                                    "Claim item",
-                                    style: TextStyle(fontSize: 30),
+                               CustomExpansionTile(
+                                  title: const Text(
+                                    "You are claiming the item.",
+                                    style: TextStyle(fontSize: 18),
                                   ),
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.all(10.0),
+                                      padding: const EdgeInsets.all(10.0),
                                       child: Text(
-                                        "To claim the item, please answer the following question correctly. If you can provide the correct answer, who found the item will proceed to give it back to you.",
-                                        style: TextStyle(color: Colors.black54),
+                                        isClaimAlreadyTaken? "On this page, you can find information about this claim you have made." : "To claim the item, please answer the following question correctly. If you can provide the correct answer, who found the item will proceed to give it back to you.",
+                                        style: const TextStyle(color: Colors.black54),
                                       ),
                                     ),
                                   ]),
-                              // TODO: (@alecava) fix crash when open if already claimed
+                              // TODO: (@alecava) fix crash when open if already claimed (maybe check also if a SizedBox is needed between the CustomExpansionTile and the content)
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(5, 0, 5, 10),
                                 child: Row(

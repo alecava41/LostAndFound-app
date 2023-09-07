@@ -87,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(8),
                       child: CustomExpansionTile(
                         title: const Text(
-                          "Do you have lost or found an item? What's now?",
+                          "Have you lost or found an item?\nWhat should you do now?",
                         ),
                         children: [
                           Container(
