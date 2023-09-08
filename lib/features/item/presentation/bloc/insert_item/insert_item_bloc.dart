@@ -47,9 +47,14 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
           positionSelected: (pos) => _onPositionSelected(emit, pos),
           categorySelected: (catId, category) => _onCategoryChanged(emit, catId, category),
           insertSubmitted: () => _onInsertSubmitted(emit),
+          contentCreated: (isNewItemLost) => _onContentCreated(emit, isNewItemLost),
         );
       },
     );
+  }
+
+  void _onContentCreated(Emitter<InsertItemState> emit, bool isNewItemLost) {
+    emit(state.copyWith(type: isNewItemLost ? ItemType.lost : ItemType.found));
   }
 
   void _onCategoryChanged(Emitter<InsertItemState> emit, int catId, String category) {

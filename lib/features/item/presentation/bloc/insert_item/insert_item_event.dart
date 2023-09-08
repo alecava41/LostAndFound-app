@@ -10,4 +10,5 @@ class InsertItemEvent with _$InsertItemEvent {
   const factory InsertItemEvent.imageSelected(String imagePath) = _ImageSelected;
   const factory InsertItemEvent.imageDeleted() = _ImageDeleted;
   const factory InsertItemEvent.insertSubmitted() = _InsertSubmitted;
+  const factory InsertItemEvent.contentCreated(bool isNewItemLost) = _ContentCreated;
 }

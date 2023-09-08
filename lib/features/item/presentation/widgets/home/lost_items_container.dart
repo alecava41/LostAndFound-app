@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
+import 'package:lost_and_found/features/item/presentation/pages/insert_item_page.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/home/custom_card_home.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/home/no_item_message.dart';
 import 'package:sizer/sizer.dart';
@@ -73,9 +74,10 @@ class LostItemsContainer extends StatelessWidget {
                         message: "You have no lost item!",
                         buttonText: 'Insert a lost item',
                         callback: () {
-                          // TODO (@alecava41) add logic
+                          Navigator.of(ctx).pushNamed("/insert", arguments: InsertItemScreenArguments(isNewItemLost: true));
                         },
-                      )),
+                      ),
+                    ),
           SizedBox(
             height: 1.5.h,
           )

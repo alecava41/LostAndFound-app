@@ -22,7 +22,15 @@ class RouteGenerator {
       case '/login':
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case '/insert':
-        return MaterialPageRoute(builder: (_) => InsertItemScreen());
+        return MaterialPageRoute(builder: (_) {
+          bool isNewItemLost = true;
+
+          if (settings.arguments != null) {
+            isNewItemLost = (settings.arguments as InsertItemScreenArguments).isNewItemLost;
+          }
+
+          return InsertItemScreen(isNewItemLost: isNewItemLost);
+        });
       case '/notifications':
         return MaterialPageRoute(
           builder: (_) {

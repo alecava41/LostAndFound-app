@@ -6,6 +6,7 @@ import 'package:lost_and_found/features/item/presentation/widgets/home/no_item_m
 
 import '../../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../../utils/screen_size.dart';
+import '../../pages/insert_item_page.dart';
 
 class FoundItemsContainer extends StatelessWidget {
   const FoundItemsContainer({super.key});
@@ -72,7 +73,8 @@ class FoundItemsContainer extends StatelessWidget {
                         icon: Icons.image_search_rounded,
                         buttonText: 'Insert a found item',
                         callback: () {
-                          // TODO (@alecava41) add logic
+                          Navigator.of(ctx)
+                              .pushNamed("/insert", arguments: InsertItemScreenArguments(isNewItemLost: false));
                         },
                       ),
                     ),

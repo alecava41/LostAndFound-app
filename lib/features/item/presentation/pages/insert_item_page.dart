@@ -22,9 +22,11 @@ import '../widgets/insert_item/radio_buttons_form.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class InsertItemScreen extends StatelessWidget {
+  final bool isNewItemLost;
+
   final ImagePicker picker = ImagePicker();
 
-  InsertItemScreen({super.key});
+  InsertItemScreen({super.key, this.isNewItemLost = true});
 
   // Upload image from camera or from gallery based on parameter
   Future<void> getImage(ImageSource media, Function(String? path) callback, context) async {
@@ -81,7 +83,7 @@ class InsertItemScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<InsertItemBloc>(
-      create: (_) => sl<InsertItemBloc>(),
+      create: (_) => sl<InsertItemBloc>()..add(InsertItemEvent.contentCreated(isNewItemLost)),
       child: BlocConsumer<InsertItemBloc, InsertItemState>(
         listener: (ctx, state) {
           final insertFailureOrSuccess = state.insertFailureOrSuccess;
@@ -272,8 +274,9 @@ class InsertItemScreen extends StatelessWidget {
                             height: 10,
                           ),
                           CategorySelectionForm(
-                            onTap: (value) =>
-                                ctx.read<InsertItemBloc>().add(InsertItemEvent.categorySelected(value.first, value.second)),
+                            onTap: (value) => ctx
+                                .read<InsertItemBloc>()
+                                .add(InsertItemEvent.categorySelected(value.first, value.second)),
                             category: state.category,
                             showError: state.showError,
                             errorText: state.cat.value.fold(
@@ -325,4 +328,10 @@ class InsertItemScreen extends StatelessWidget {
       },
     );
   }
+}
+
+class InsertItemScreenArguments {
+  final bool isNewItemLost;
+
+  InsertItemScreenArguments({required this.isNewItemLost});
 }
