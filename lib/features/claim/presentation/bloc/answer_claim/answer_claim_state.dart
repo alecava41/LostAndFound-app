@@ -9,7 +9,6 @@ class AnswerClaimState with _$AnswerClaimState {
     // UI params
     @Default("") String token,
     @Default(true) bool isLoading,
-    @Default(false) bool isInfoOpen,
     @Default(false) bool hasLoadingError,
     Either<Failure, Item>? claimFailureOrSuccess,
     Either<Failure, Room>? roomCreationFailureOrSuccess,

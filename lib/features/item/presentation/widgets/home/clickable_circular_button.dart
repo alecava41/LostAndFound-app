@@ -1,41 +1,51 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
 class ClickableCircularButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback? onPressed;
+  final String tooltipText;
 
-  const ClickableCircularButton({super.key, 
+  const ClickableCircularButton({
+    super.key,
+    required this.tooltipText,
     required this.icon,
     required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
-  return Container(
-    width: 60,
-    height: 60,
-    decoration: const BoxDecoration(
-      shape: BoxShape.circle,
-      color: Colors.white,
-    ),
-    child: Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onPressed,
-        borderRadius: BorderRadius.circular(30),
-        child: Center(
+    return Tooltip(
+      preferBelow: false,
+      showDuration: 1.seconds,
+      message: tooltipText,
+      triggerMode: TooltipTriggerMode.longPress,
+      child: Container(
+        width: 60,
+        height: 60,
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onPressed,
+            borderRadius: BorderRadius.circular(30),
             child: Center(
-              child: Icon(
-                icon,
-                size: 30,
-                color: PersonalizedColor.mainColor,
+              child: Center(
+                child: Icon(
+                  icon,
+                  size: 30,
+                  semanticLabel: tooltipText,
+                  color: PersonalizedColor.mainColor,
+                ),
+              ),
             ),
           ),
         ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 }

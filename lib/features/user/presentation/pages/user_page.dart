@@ -29,10 +29,8 @@ class UserScreen extends StatelessWidget {
                         backgroundColor: Colors.red,
                         content: Text(
                           failure.maybeWhen<String>(
-                              genericFailure: () =>
-                                  'Server error. Please try again later.',
-                              networkFailure: () =>
-                                  'No internet connection available. Check your internet connection.',
+                              genericFailure: () => 'Server error. Please try again later.',
+                              networkFailure: () => 'No internet connection available. Check your internet connection.',
                               orElse: () => "Unknown error"),
                         ),
                       ),
@@ -54,10 +52,8 @@ class UserScreen extends StatelessWidget {
                         backgroundColor: Colors.red,
                         content: Text(
                           failure.maybeWhen<String>(
-                              genericFailure: () =>
-                                  'Server error. Please try again later.',
-                              networkFailure: () =>
-                                  'No internet connection available. Check your internet connection.',
+                              genericFailure: () => 'Server error. Please try again later.',
+                              networkFailure: () => 'No internet connection available. Check your internet connection.',
                               orElse: () => "Unknown error"),
                         ),
                       ),
@@ -67,24 +63,12 @@ class UserScreen extends StatelessWidget {
                       Navigator.popUntil(context, (route) => route.isFirst),
                       Navigator.pushReplacementNamed(context, "/tutorial"),
 
-                      ctx
-                          .read<HomeBloc>()
-                          .add(const HomeEvent.restoreInitial()),
-                      ctx
-                          .read<SearchBloc>()
-                          .add(const SearchEvent.restoreInitial()),
-                      ctx
-                          .read<HomeControllerBloc>()
-                          .add(const HomeControllerEvent.restoreInitial()),
-                      ctx
-                          .read<BadgeBloc>()
-                          .add(const BadgeEvent.restoreInitial()),
-                      ctx
-                          .read<InboxBloc>()
-                          .add(const InboxEvent.restoreInitial()),
-                      ctx
-                          .read<UserBloc>()
-                          .add(const UserEvent.restoreInitial()),
+                      ctx.read<HomeBloc>().add(const HomeEvent.restoreInitial()),
+                      ctx.read<SearchBloc>().add(const SearchEvent.restoreInitial()),
+                      ctx.read<HomeControllerBloc>().add(const HomeControllerEvent.restoreInitial()),
+                      ctx.read<BadgeBloc>().add(const BadgeEvent.restoreInitial()),
+                      ctx.read<InboxBloc>().add(const InboxEvent.restoreInitial()),
+                      ctx.read<UserBloc>().add(const UserEvent.restoreInitial()),
 
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
@@ -96,9 +80,7 @@ class UserScreen extends StatelessWidget {
           }
         },
         builder: (ctx, state) => state.hasLoadingError
-            ? ErrorPage(
-                onRetry: () =>
-                    ctx.read<UserBloc>().add(const UserEvent.contentCreated()))
+            ? ErrorPage(onRetry: () => ctx.read<UserBloc>().add(const UserEvent.contentCreated()))
             : SingleChildScrollView(
                 child: Column(
                   children: [
@@ -124,16 +106,13 @@ class UserScreen extends StatelessWidget {
                                       children: [
                                         Flexible(
                                           child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               EditableCircularImage(
                                                 token: state.token,
                                                 userId: state.user!.id,
                                                 onImageChange: (String? path) =>
-                                                    ctx.read<UserBloc>().add(
-                                                        UserEvent.imageChanged(
-                                                            path)),
+                                                    ctx.read<UserBloc>().add(UserEvent.imageChanged(path)),
                                                 radius: 60,
                                                 hasImage: state.user!.hasImage,
                                               ),
@@ -142,17 +121,13 @@ class UserScreen extends StatelessWidget {
                                               ),
                                               Expanded(
                                                 child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Padding(
-                                                      padding: const EdgeInsets
-                                                              .fromLTRB(
-                                                          0, 10, 0, 0),
+                                                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                                                       child: Text(
                                                         state.user!.username,
-                                                        style: const TextStyle(
-                                                            fontSize: 25),
+                                                        style: const TextStyle(fontSize: 25),
                                                       ),
                                                     ),
                                                     const SizedBox(
@@ -170,12 +145,8 @@ class UserScreen extends StatelessWidget {
                                                               Text(
                                                                 //TODO (@alecava41): add logic to display user email
                                                                 "bacchin.francesco2000@gmail.coeeeeem",
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black54),
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
+                                                                style: TextStyle(color: Colors.black54),
+                                                                overflow: TextOverflow.ellipsis,
                                                               ),
                                                             ],
                                                           ),

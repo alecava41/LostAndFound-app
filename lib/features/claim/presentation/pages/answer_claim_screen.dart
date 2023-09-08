@@ -19,11 +19,7 @@ class AnswerClaimScreen extends StatelessWidget {
   final int claimId;
   final bool isClaimAlreadyManaged;
 
-  const AnswerClaimScreen(
-      {super.key,
-      required this.itemId,
-      required this.claimId,
-      required this.isClaimAlreadyManaged});
+  const AnswerClaimScreen({super.key, required this.itemId, required this.claimId, required this.isClaimAlreadyManaged});
 
   @override
   Widget build(BuildContext context) {
@@ -37,19 +33,16 @@ class AnswerClaimScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            title: const Text("Answer to claim",
-                style: TextStyle(color: Colors.black)),
+            title: const Text("Answer to claim", style: TextStyle(color: Colors.black)),
             backgroundColor: Colors.white,
             iconTheme: const IconThemeData(color: Colors.black),
           ),
           body: BlocProvider(
-            create: (_) => sl<AnswerClaimBloc>()
-              ..add(AnswerClaimEvent.contentCreated(itemId)),
+            create: (_) => sl<AnswerClaimBloc>()..add(AnswerClaimEvent.contentCreated(itemId)),
             child: BlocConsumer<AnswerClaimBloc, AnswerClaimState>(
               listener: (ctx, state) {
                 final claimFailureOrSuccess = state.claimFailureOrSuccess;
-                final roomCreationFailureOrSuccess =
-                    state.roomCreationFailureOrSuccess;
+                final roomCreationFailureOrSuccess = state.roomCreationFailureOrSuccess;
 
                 if (roomCreationFailureOrSuccess != null) {
                   roomCreationFailureOrSuccess.fold((failure) {
@@ -58,19 +51,16 @@ class AnswerClaimScreen extends StatelessWidget {
                         backgroundColor: Colors.red,
                         content: Text(
                           failure.maybeWhen<String>(
-                              genericFailure: () =>
-                                  'Server error. Please try again later.',
-                              networkFailure: () =>
-                                  'No internet connection available. Check your internet connection.',
+                              genericFailure: () => 'Server error. Please try again later.',
+                              networkFailure: () => 'No internet connection available. Check your internet connection.',
                               validationFailure: (reason) => reason!,
                               orElse: () => "Unknown error"),
                         ),
                       ),
                     );
                   }, (room) {
-                    Navigator.of(ctx).push(MaterialPageRoute(
-                        builder: (_) =>
-                            ChatScreen(roomId: room.id, itemId: itemId)));
+                    Navigator.of(ctx)
+                        .push(MaterialPageRoute(builder: (_) => ChatScreen(roomId: room.id, itemId: itemId)));
                   });
                 }
 
@@ -82,8 +72,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                 backgroundColor: Colors.red,
                                 content: Text(
                                   failure.maybeWhen<String>(
-                                      genericFailure: () =>
-                                          'Server error. Please try again later.',
+                                      genericFailure: () => 'Server error. Please try again later.',
                                       networkFailure: () =>
                                           'No internet connection available. Check your internet connection.',
                                       orElse: () => "Unknown error"),
@@ -109,9 +98,9 @@ class AnswerClaimScreen extends StatelessWidget {
                         isActive: !isClaimAlreadyManaged,
                         onPressed: () => isClaimAlreadyManaged
                             ? null
-                            : ctx.read<AnswerClaimBloc>().add(
-                                AnswerClaimEvent.claimDecisionTaken(
-                                    ClaimStatus.approved, claimId)),
+                            : ctx
+                                .read<AnswerClaimBloc>()
+                                .add(AnswerClaimEvent.claimDecisionTaken(ClaimStatus.approved, claimId)),
                         text: const Text(
                           "Accept",
                           style: TextStyle(fontSize: 20),
@@ -128,14 +117,13 @@ class AnswerClaimScreen extends StatelessWidget {
                             child: ElevatedButton(
                                 onPressed: () => isClaimAlreadyManaged
                                     ? null
-                                    : ctx.read<AnswerClaimBloc>().add(
-                                        AnswerClaimEvent.claimDecisionTaken(
-                                            ClaimStatus.rejected, claimId)),
+                                    : ctx
+                                        .read<AnswerClaimBloc>()
+                                        .add(AnswerClaimEvent.claimDecisionTaken(ClaimStatus.rejected, claimId)),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.red,
                                   shape: const StadiumBorder(),
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 16),
+                                  padding: const EdgeInsets.symmetric(vertical: 16),
                                 ),
                                 child: const Text(
                                   "Decline",
@@ -151,88 +139,35 @@ class AnswerClaimScreen extends StatelessWidget {
                     ? const CustomCircularProgress(size: 100)
                     : state.hasLoadingError
                         ? ErrorPage(
-                            onRetry: () => ctx
-                                .read<AnswerClaimBloc>()
-                                .add(AnswerClaimEvent.contentCreated(itemId)))
+                            onRetry: () => ctx.read<AnswerClaimBloc>().add(AnswerClaimEvent.contentCreated(itemId)))
                         : SingleChildScrollView(
                             child: Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                   CustomExpansionTile(
-                                      title: const Text(
-                                        "You are deciding to accept or deny the claim.",
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.all(10.0),
-                                          child: Text(
-                                            isClaimAlreadyManaged? "On this page, you can find information about this claim you have recived." : "Please review the answer received and make a decision to either accept or decline the claim for the item. If you accept the claim, proceed with returning the item to its rightful owner.",
-                                            style: TextStyle(
-                                                color: Colors.black54),
-                                          ),
-                                        ),
-                                      ]),
-                                      // TODO: (@alecava) fix crash when open if already claimed (maybe check also if a SizedBox is needed between the CustomExpansionTile and the content)
-                                  Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.connect_without_contact,
-                                        size: 25,
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      const Text(
-                                        "Claim decision",
-                                        style: TextStyle(fontSize: 30),
-                                      ),
-                                      const SizedBox(
-                                        width: 20,
-                                      ),
+                                  CustomExpansionTile(
+                                    title: Text(
                                       isClaimAlreadyManaged
-                                          ? Container()
-                                          : InkWell(
-                                              onTap: () => ctx
-                                                  .read<AnswerClaimBloc>()
-                                                  .add(const AnswerClaimEvent
-                                                      .infoTriggered()),
-                                              child: const Icon(
-                                                Icons.info,
-                                                size: 30,
-                                                color: Color.fromRGBO(
-                                                    144, 202, 249, 1),
-                                              ),
-                                            ),
+                                          ? "You have already managed this claim."
+                                          : "You are deciding whether to accept or deny this claim.",
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Text(
+                                          isClaimAlreadyManaged
+                                              ? "On this page, you can find the information about this received claim."
+                                              : "Please review the answer received and make a decision to either accept or decline this claim. If you accept this claim, all the other claims for this item will be automatically rejected and the item won't be visible anymore by others.",
+                                          style: const TextStyle(color: Colors.black54),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   const SizedBox(
                                     height: 15,
                                   ),
-                                  state.isInfoOpen
-                                      ? Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              0, 0, 0, 10),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  PersonalizedColor.infoColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            child: const Padding(
-                                              padding: EdgeInsets.all(10.0),
-                                              child: Text(
-                                                "Please review the answer received and make a decision to either accept or decline the claim for the item. If the provided answer is correct, you can proceed with returning the item to its rightful owner.",
-                                                style: TextStyle(
-                                                    color: Colors.black54),
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      : Container(),
                                   ClaimInfoField(
                                     title:
                                         "Item claimed by ${state.item!.claims!.firstWhere((element) => element.id == claimId).user.username}",
@@ -240,20 +175,14 @@ class AnswerClaimScreen extends StatelessWidget {
                                       token: state.token,
                                       item: state.item!,
                                       subject: state.item!.claims!
-                                          .firstWhere((element) =>
-                                              element.id == claimId)
+                                          .firstWhere((element) => element.id == claimId)
                                           .user
                                           .username,
-                                      claimIdx: state.item!.claims!.indexWhere(
-                                          (element) => element.id == claimId),
-                                      otherUserId: state.item!.claims!
-                                          .firstWhere((element) =>
-                                              element.id == claimId)
-                                          .user
-                                          .id,
+                                      claimIdx: state.item!.claims!.indexWhere((element) => element.id == claimId),
+                                      otherUserId:
+                                          state.item!.claims!.firstWhere((element) => element.id == claimId).user.id,
                                       otherUserUsername: state.item!.claims!
-                                          .firstWhere((element) =>
-                                              element.id == claimId)
+                                          .firstWhere((element) => element.id == claimId)
                                           .user
                                           .username,
                                       isQuestionScreen: false,
@@ -278,10 +207,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                     title:
                                         "Answer of ${state.item!.claims!.firstWhere((element) => element.id == claimId).user.username}",
                                     content: Text(
-                                      state.item!.claims!
-                                          .firstWhere((element) =>
-                                              element.id == claimId)
-                                          .answer,
+                                      state.item!.claims!.firstWhere((element) => element.id == claimId).answer,
                                       style: const TextStyle(fontSize: 16),
                                     ),
                                   ),
@@ -294,32 +220,20 @@ class AnswerClaimScreen extends StatelessWidget {
                                           content: Container(
                                             padding: const EdgeInsets.all(3),
                                             decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: state.item!.claims!
-                                                          .firstWhere((claim) =>
-                                                              claim.id ==
-                                                              claimId)
-                                                          .status ==
-                                                      ClaimStatus.approved
-                                                  ? PersonalizedColor
-                                                      .claimAcceptedStatusColor
-                                                  : (state.item!.claims!
-                                                              .firstWhere(
-                                                                  (claim) =>
-                                                                      claim
-                                                                          .id ==
-                                                                      claimId)
-                                                              .status ==
-                                                          ClaimStatus.rejected
-                                                      ? PersonalizedColor
-                                                          .claimDeniedStatusColor
-                                                      : PersonalizedColor
-                                                          .claimWaitingStatusColor),
+                                              borderRadius: BorderRadius.circular(10),
+                                              color:
+                                                  state.item!.claims!.firstWhere((claim) => claim.id == claimId).status ==
+                                                          ClaimStatus.approved
+                                                      ? PersonalizedColor.claimAcceptedStatusColor
+                                                      : (state.item!.claims!
+                                                                  .firstWhere((claim) => claim.id == claimId)
+                                                                  .status ==
+                                                              ClaimStatus.rejected
+                                                          ? PersonalizedColor.claimDeniedStatusColor
+                                                          : PersonalizedColor.claimWaitingStatusColor),
                                             ),
                                             child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Row(
                                                   children: [
@@ -328,28 +242,19 @@ class AnswerClaimScreen extends StatelessWidget {
                                                     ),
                                                     RichText(
                                                       maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
+                                                      overflow: TextOverflow.ellipsis,
                                                       text: TextSpan(
                                                         children: [
                                                           TextSpan(
-                                                            text: state
-                                                                .item!.claims!
-                                                                .firstWhere(
-                                                                    (claim) =>
-                                                                        claim
-                                                                            .id ==
-                                                                        claimId)
+                                                            text: state.item!.claims!
+                                                                .firstWhere((claim) => claim.id == claimId)
                                                                 .status
                                                                 .name
                                                                 .toUpperCase(),
                                                             style: const TextStyle(
                                                                 fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: Colors
-                                                                    .black),
+                                                                fontWeight: FontWeight.bold,
+                                                                color: Colors.black),
                                                           ),
                                                         ],
                                                       ),
@@ -371,38 +276,24 @@ class AnswerClaimScreen extends StatelessWidget {
                                                     ),
                                                     Expanded(
                                                       child: state.item!.claims!
-                                                                  .firstWhere((claim) =>
-                                                                      claim
-                                                                          .id ==
-                                                                      claimId)
+                                                                  .firstWhere((claim) => claim.id == claimId)
                                                                   .status ==
-                                                              ClaimStatus
-                                                                  .approved
+                                                              ClaimStatus.approved
                                                           ? Text(
                                                               "You have accepted this claim. Get in touch with ${state.item!.claims!.firstWhere((element) => element.id == claimId).user.username} through the chat to arrange the item's return.",
-                                                              style: const TextStyle(
-                                                                  color: Colors
-                                                                      .black54),
+                                                              style: const TextStyle(color: Colors.black54),
                                                             )
                                                           : state.item!.claims!
-                                                                      .firstWhere((claim) =>
-                                                                          claim
-                                                                              .id ==
-                                                                          claimId)
+                                                                      .firstWhere((claim) => claim.id == claimId)
                                                                       .status ==
-                                                                  ClaimStatus
-                                                                      .rejected
+                                                                  ClaimStatus.rejected
                                                               ? const Text(
                                                                   "You have rejected this claim.",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black54),
+                                                                  style: TextStyle(color: Colors.black54),
                                                                 )
                                                               : const Text(
                                                                   "Validate the claim.",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black54),
+                                                                  style: TextStyle(color: Colors.black54),
                                                                 ),
                                                     ),
                                                   ],

@@ -41,7 +41,6 @@ class AnswerClaimBloc extends Bloc<AnswerClaimEvent, AnswerClaimState> {
         await event.when<FutureOr<void>>(
             contentCreated: (itemId) => _onContentCreated(emit, itemId),
             claimDecisionTaken: (status, claimId) => _onClaimDecisionTaken(emit, status, claimId),
-            infoTriggered: () => _onInfoTriggered(emit),
             createChatRoom: (int id, String username) => _onChatRoomCreation(emit, id, username));
       },
     );
@@ -87,10 +86,6 @@ class AnswerClaimBloc extends Bloc<AnswerClaimEvent, AnswerClaimState> {
           item: item,
           token: session != null ? session.token : ""),
     );
-  }
-
-  void _onInfoTriggered(Emitter<AnswerClaimState> emit) {
-    emit(state.copyWith(isInfoOpen: !state.isInfoOpen));
   }
 
   Future<void> _onClaimDecisionTaken(Emitter<AnswerClaimState> emit, ClaimStatus status, int claimId) async {

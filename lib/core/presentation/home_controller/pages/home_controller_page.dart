@@ -37,7 +37,10 @@ class HomeControllerScreen extends StatelessWidget {
           builder: (searchCtx, searchState) {
             return AnnotatedRegion<SystemUiOverlayStyle>(
               value: SystemUiOverlayStyle(
-                  statusBarColor: state.tabIndex == 4 || (state.tabIndex == 1 && searchState.pageState == SearchPageState.resultPage) ? Colors.white : PersonalizedColor.backgroundColor,
+                  statusBarColor:
+                      state.tabIndex == 4 || (state.tabIndex == 1 && searchState.pageState == SearchPageState.resultPage)
+                          ? Colors.white
+                          : PersonalizedColor.backgroundColor,
                   statusBarBrightness: Brightness.light,
                   statusBarIconBrightness: Brightness.dark),
               child: SafeArea(
@@ -45,6 +48,9 @@ class HomeControllerScreen extends StatelessWidget {
                   backgroundColor: PersonalizedColor.backgroundColor,
                   body: pages[state.tabIndex],
                   bottomNavigationBar: BottomNavigationBar(
+                    showSelectedLabels: true,
+                    type: BottomNavigationBarType.fixed,
+                    showUnselectedLabels: true,
                     currentIndex: state.tabIndex,
                     onTap: (index) {
                       if (!hasPageBeenInitialized[index]) {

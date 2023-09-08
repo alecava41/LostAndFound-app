@@ -34,7 +34,9 @@ class App extends StatefulWidget {
   // TODO (@alecava41) translation (app + notifications + server)
   // TODO (@alecava41) dark theme + switch
   // TODO (@alecava41) (map) fix this on iOS (https://pub.dev/packages/map_launcher#for-ios-add-url-schemes-in-infoplist-file)
-  // TODO (@alecava41) add few more pages on tutorial (to teach about "mark as solved", ...).
+  // TODO (@alecava41) add few more pages on tutorial (to teach about "mark as solved", ...)
+  // TODO (@alecava41) add handling of insert_new_item from homepage (if click on new_lost, then insert_item_page should show radio_button on "found" + question)
+  // TODO (@alecava41) remove title + info_button on the 2 claim pages
 }
 
 class _Application extends State<App> {

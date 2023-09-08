@@ -42,7 +42,6 @@ class AnswerQuestionBloc extends Bloc<AnswerQuestionEvent, AnswerQuestionState> 
             contentCreated: (itemId) => _onContentCreated(emit, itemId),
             answerFieldChanged: (String answer) => _onAnswerFieldChanged(emit, answer),
             claimCreated: () => _onClaimSubmitted(emit),
-            infoTriggered: () => _onInfoTriggered(emit),
             createChatRoom: (int id, String username) => _onChatRoomCreation(emit, id, username));
       },
     );
@@ -90,10 +89,6 @@ class AnswerQuestionBloc extends Bloc<AnswerQuestionEvent, AnswerQuestionState> 
 
   void _onAnswerFieldChanged(Emitter<AnswerQuestionState> emit, String answer) {
     emit(state.copyWith(answer: AnswerField(answer)));
-  }
-
-  void _onInfoTriggered(Emitter<AnswerQuestionState> emit) {
-    emit(state.copyWith(isInfoOpen: !state.isInfoOpen));
   }
 
   Future<void> _onClaimSubmitted(Emitter<AnswerQuestionState> emit) async {

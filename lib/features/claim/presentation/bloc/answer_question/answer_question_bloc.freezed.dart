@@ -21,7 +21,6 @@ mixin _$AnswerQuestionEvent {
     required TResult Function(int itemId) contentCreated,
     required TResult Function(String answer) answerFieldChanged,
     required TResult Function() claimCreated,
-    required TResult Function() infoTriggered,
     required TResult Function(int id, String username) createChatRoom,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,7 +29,6 @@ mixin _$AnswerQuestionEvent {
     TResult? Function(int itemId)? contentCreated,
     TResult? Function(String answer)? answerFieldChanged,
     TResult? Function()? claimCreated,
-    TResult? Function()? infoTriggered,
     TResult? Function(int id, String username)? createChatRoom,
   }) =>
       throw _privateConstructorUsedError;
@@ -39,7 +37,6 @@ mixin _$AnswerQuestionEvent {
     TResult Function(int itemId)? contentCreated,
     TResult Function(String answer)? answerFieldChanged,
     TResult Function()? claimCreated,
-    TResult Function()? infoTriggered,
     TResult Function(int id, String username)? createChatRoom,
     required TResult orElse(),
   }) =>
@@ -49,7 +46,6 @@ mixin _$AnswerQuestionEvent {
     required TResult Function(_ContentCreated value) contentCreated,
     required TResult Function(_AnswerFieldChanged value) answerFieldChanged,
     required TResult Function(_ClaimCreated value) claimCreated,
-    required TResult Function(_InfoTriggered value) infoTriggered,
     required TResult Function(_CreateChatRoom value) createChatRoom,
   }) =>
       throw _privateConstructorUsedError;
@@ -58,7 +54,6 @@ mixin _$AnswerQuestionEvent {
     TResult? Function(_ContentCreated value)? contentCreated,
     TResult? Function(_AnswerFieldChanged value)? answerFieldChanged,
     TResult? Function(_ClaimCreated value)? claimCreated,
-    TResult? Function(_InfoTriggered value)? infoTriggered,
     TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) =>
       throw _privateConstructorUsedError;
@@ -67,7 +62,6 @@ mixin _$AnswerQuestionEvent {
     TResult Function(_ContentCreated value)? contentCreated,
     TResult Function(_AnswerFieldChanged value)? answerFieldChanged,
     TResult Function(_ClaimCreated value)? claimCreated,
-    TResult Function(_InfoTriggered value)? infoTriggered,
     TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
   }) =>
@@ -159,7 +153,6 @@ class _$_ContentCreated implements _ContentCreated {
     required TResult Function(int itemId) contentCreated,
     required TResult Function(String answer) answerFieldChanged,
     required TResult Function() claimCreated,
-    required TResult Function() infoTriggered,
     required TResult Function(int id, String username) createChatRoom,
   }) {
     return contentCreated(itemId);
@@ -171,7 +164,6 @@ class _$_ContentCreated implements _ContentCreated {
     TResult? Function(int itemId)? contentCreated,
     TResult? Function(String answer)? answerFieldChanged,
     TResult? Function()? claimCreated,
-    TResult? Function()? infoTriggered,
     TResult? Function(int id, String username)? createChatRoom,
   }) {
     return contentCreated?.call(itemId);
@@ -183,7 +175,6 @@ class _$_ContentCreated implements _ContentCreated {
     TResult Function(int itemId)? contentCreated,
     TResult Function(String answer)? answerFieldChanged,
     TResult Function()? claimCreated,
-    TResult Function()? infoTriggered,
     TResult Function(int id, String username)? createChatRoom,
     required TResult orElse(),
   }) {
@@ -199,7 +190,6 @@ class _$_ContentCreated implements _ContentCreated {
     required TResult Function(_ContentCreated value) contentCreated,
     required TResult Function(_AnswerFieldChanged value) answerFieldChanged,
     required TResult Function(_ClaimCreated value) claimCreated,
-    required TResult Function(_InfoTriggered value) infoTriggered,
     required TResult Function(_CreateChatRoom value) createChatRoom,
   }) {
     return contentCreated(this);
@@ -211,7 +201,6 @@ class _$_ContentCreated implements _ContentCreated {
     TResult? Function(_ContentCreated value)? contentCreated,
     TResult? Function(_AnswerFieldChanged value)? answerFieldChanged,
     TResult? Function(_ClaimCreated value)? claimCreated,
-    TResult? Function(_InfoTriggered value)? infoTriggered,
     TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) {
     return contentCreated?.call(this);
@@ -223,7 +212,6 @@ class _$_ContentCreated implements _ContentCreated {
     TResult Function(_ContentCreated value)? contentCreated,
     TResult Function(_AnswerFieldChanged value)? answerFieldChanged,
     TResult Function(_ClaimCreated value)? claimCreated,
-    TResult Function(_InfoTriggered value)? infoTriggered,
     TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
   }) {
@@ -311,7 +299,6 @@ class _$_AnswerFieldChanged implements _AnswerFieldChanged {
     required TResult Function(int itemId) contentCreated,
     required TResult Function(String answer) answerFieldChanged,
     required TResult Function() claimCreated,
-    required TResult Function() infoTriggered,
     required TResult Function(int id, String username) createChatRoom,
   }) {
     return answerFieldChanged(answer);
@@ -323,7 +310,6 @@ class _$_AnswerFieldChanged implements _AnswerFieldChanged {
     TResult? Function(int itemId)? contentCreated,
     TResult? Function(String answer)? answerFieldChanged,
     TResult? Function()? claimCreated,
-    TResult? Function()? infoTriggered,
     TResult? Function(int id, String username)? createChatRoom,
   }) {
     return answerFieldChanged?.call(answer);
@@ -335,7 +321,6 @@ class _$_AnswerFieldChanged implements _AnswerFieldChanged {
     TResult Function(int itemId)? contentCreated,
     TResult Function(String answer)? answerFieldChanged,
     TResult Function()? claimCreated,
-    TResult Function()? infoTriggered,
     TResult Function(int id, String username)? createChatRoom,
     required TResult orElse(),
   }) {
@@ -351,7 +336,6 @@ class _$_AnswerFieldChanged implements _AnswerFieldChanged {
     required TResult Function(_ContentCreated value) contentCreated,
     required TResult Function(_AnswerFieldChanged value) answerFieldChanged,
     required TResult Function(_ClaimCreated value) claimCreated,
-    required TResult Function(_InfoTriggered value) infoTriggered,
     required TResult Function(_CreateChatRoom value) createChatRoom,
   }) {
     return answerFieldChanged(this);
@@ -363,7 +347,6 @@ class _$_AnswerFieldChanged implements _AnswerFieldChanged {
     TResult? Function(_ContentCreated value)? contentCreated,
     TResult? Function(_AnswerFieldChanged value)? answerFieldChanged,
     TResult? Function(_ClaimCreated value)? claimCreated,
-    TResult? Function(_InfoTriggered value)? infoTriggered,
     TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) {
     return answerFieldChanged?.call(this);
@@ -375,7 +358,6 @@ class _$_AnswerFieldChanged implements _AnswerFieldChanged {
     TResult Function(_ContentCreated value)? contentCreated,
     TResult Function(_AnswerFieldChanged value)? answerFieldChanged,
     TResult Function(_ClaimCreated value)? claimCreated,
-    TResult Function(_InfoTriggered value)? infoTriggered,
     TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
   }) {
@@ -437,7 +419,6 @@ class _$_ClaimCreated implements _ClaimCreated {
     required TResult Function(int itemId) contentCreated,
     required TResult Function(String answer) answerFieldChanged,
     required TResult Function() claimCreated,
-    required TResult Function() infoTriggered,
     required TResult Function(int id, String username) createChatRoom,
   }) {
     return claimCreated();
@@ -449,7 +430,6 @@ class _$_ClaimCreated implements _ClaimCreated {
     TResult? Function(int itemId)? contentCreated,
     TResult? Function(String answer)? answerFieldChanged,
     TResult? Function()? claimCreated,
-    TResult? Function()? infoTriggered,
     TResult? Function(int id, String username)? createChatRoom,
   }) {
     return claimCreated?.call();
@@ -461,7 +441,6 @@ class _$_ClaimCreated implements _ClaimCreated {
     TResult Function(int itemId)? contentCreated,
     TResult Function(String answer)? answerFieldChanged,
     TResult Function()? claimCreated,
-    TResult Function()? infoTriggered,
     TResult Function(int id, String username)? createChatRoom,
     required TResult orElse(),
   }) {
@@ -477,7 +456,6 @@ class _$_ClaimCreated implements _ClaimCreated {
     required TResult Function(_ContentCreated value) contentCreated,
     required TResult Function(_AnswerFieldChanged value) answerFieldChanged,
     required TResult Function(_ClaimCreated value) claimCreated,
-    required TResult Function(_InfoTriggered value) infoTriggered,
     required TResult Function(_CreateChatRoom value) createChatRoom,
   }) {
     return claimCreated(this);
@@ -489,7 +467,6 @@ class _$_ClaimCreated implements _ClaimCreated {
     TResult? Function(_ContentCreated value)? contentCreated,
     TResult? Function(_AnswerFieldChanged value)? answerFieldChanged,
     TResult? Function(_ClaimCreated value)? claimCreated,
-    TResult? Function(_InfoTriggered value)? infoTriggered,
     TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) {
     return claimCreated?.call(this);
@@ -501,7 +478,6 @@ class _$_ClaimCreated implements _ClaimCreated {
     TResult Function(_ContentCreated value)? contentCreated,
     TResult Function(_AnswerFieldChanged value)? answerFieldChanged,
     TResult Function(_ClaimCreated value)? claimCreated,
-    TResult Function(_InfoTriggered value)? infoTriggered,
     TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
   }) {
@@ -514,126 +490,6 @@ class _$_ClaimCreated implements _ClaimCreated {
 
 abstract class _ClaimCreated implements AnswerQuestionEvent {
   const factory _ClaimCreated() = _$_ClaimCreated;
-}
-
-/// @nodoc
-abstract class _$$_InfoTriggeredCopyWith<$Res> {
-  factory _$$_InfoTriggeredCopyWith(
-          _$_InfoTriggered value, $Res Function(_$_InfoTriggered) then) =
-      __$$_InfoTriggeredCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_InfoTriggeredCopyWithImpl<$Res>
-    extends _$AnswerQuestionEventCopyWithImpl<$Res, _$_InfoTriggered>
-    implements _$$_InfoTriggeredCopyWith<$Res> {
-  __$$_InfoTriggeredCopyWithImpl(
-      _$_InfoTriggered _value, $Res Function(_$_InfoTriggered) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_InfoTriggered implements _InfoTriggered {
-  const _$_InfoTriggered();
-
-  @override
-  String toString() {
-    return 'AnswerQuestionEvent.infoTriggered()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_InfoTriggered);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int itemId) contentCreated,
-    required TResult Function(String answer) answerFieldChanged,
-    required TResult Function() claimCreated,
-    required TResult Function() infoTriggered,
-    required TResult Function(int id, String username) createChatRoom,
-  }) {
-    return infoTriggered();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int itemId)? contentCreated,
-    TResult? Function(String answer)? answerFieldChanged,
-    TResult? Function()? claimCreated,
-    TResult? Function()? infoTriggered,
-    TResult? Function(int id, String username)? createChatRoom,
-  }) {
-    return infoTriggered?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int itemId)? contentCreated,
-    TResult Function(String answer)? answerFieldChanged,
-    TResult Function()? claimCreated,
-    TResult Function()? infoTriggered,
-    TResult Function(int id, String username)? createChatRoom,
-    required TResult orElse(),
-  }) {
-    if (infoTriggered != null) {
-      return infoTriggered();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_ContentCreated value) contentCreated,
-    required TResult Function(_AnswerFieldChanged value) answerFieldChanged,
-    required TResult Function(_ClaimCreated value) claimCreated,
-    required TResult Function(_InfoTriggered value) infoTriggered,
-    required TResult Function(_CreateChatRoom value) createChatRoom,
-  }) {
-    return infoTriggered(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ContentCreated value)? contentCreated,
-    TResult? Function(_AnswerFieldChanged value)? answerFieldChanged,
-    TResult? Function(_ClaimCreated value)? claimCreated,
-    TResult? Function(_InfoTriggered value)? infoTriggered,
-    TResult? Function(_CreateChatRoom value)? createChatRoom,
-  }) {
-    return infoTriggered?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ContentCreated value)? contentCreated,
-    TResult Function(_AnswerFieldChanged value)? answerFieldChanged,
-    TResult Function(_ClaimCreated value)? claimCreated,
-    TResult Function(_InfoTriggered value)? infoTriggered,
-    TResult Function(_CreateChatRoom value)? createChatRoom,
-    required TResult orElse(),
-  }) {
-    if (infoTriggered != null) {
-      return infoTriggered(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _InfoTriggered implements AnswerQuestionEvent {
-  const factory _InfoTriggered() = _$_InfoTriggered;
 }
 
 /// @nodoc
@@ -712,7 +568,6 @@ class _$_CreateChatRoom implements _CreateChatRoom {
     required TResult Function(int itemId) contentCreated,
     required TResult Function(String answer) answerFieldChanged,
     required TResult Function() claimCreated,
-    required TResult Function() infoTriggered,
     required TResult Function(int id, String username) createChatRoom,
   }) {
     return createChatRoom(id, username);
@@ -724,7 +579,6 @@ class _$_CreateChatRoom implements _CreateChatRoom {
     TResult? Function(int itemId)? contentCreated,
     TResult? Function(String answer)? answerFieldChanged,
     TResult? Function()? claimCreated,
-    TResult? Function()? infoTriggered,
     TResult? Function(int id, String username)? createChatRoom,
   }) {
     return createChatRoom?.call(id, username);
@@ -736,7 +590,6 @@ class _$_CreateChatRoom implements _CreateChatRoom {
     TResult Function(int itemId)? contentCreated,
     TResult Function(String answer)? answerFieldChanged,
     TResult Function()? claimCreated,
-    TResult Function()? infoTriggered,
     TResult Function(int id, String username)? createChatRoom,
     required TResult orElse(),
   }) {
@@ -752,7 +605,6 @@ class _$_CreateChatRoom implements _CreateChatRoom {
     required TResult Function(_ContentCreated value) contentCreated,
     required TResult Function(_AnswerFieldChanged value) answerFieldChanged,
     required TResult Function(_ClaimCreated value) claimCreated,
-    required TResult Function(_InfoTriggered value) infoTriggered,
     required TResult Function(_CreateChatRoom value) createChatRoom,
   }) {
     return createChatRoom(this);
@@ -764,7 +616,6 @@ class _$_CreateChatRoom implements _CreateChatRoom {
     TResult? Function(_ContentCreated value)? contentCreated,
     TResult? Function(_AnswerFieldChanged value)? answerFieldChanged,
     TResult? Function(_ClaimCreated value)? claimCreated,
-    TResult? Function(_InfoTriggered value)? infoTriggered,
     TResult? Function(_CreateChatRoom value)? createChatRoom,
   }) {
     return createChatRoom?.call(this);
@@ -776,7 +627,6 @@ class _$_CreateChatRoom implements _CreateChatRoom {
     TResult Function(_ContentCreated value)? contentCreated,
     TResult Function(_AnswerFieldChanged value)? answerFieldChanged,
     TResult Function(_ClaimCreated value)? claimCreated,
-    TResult Function(_InfoTriggered value)? infoTriggered,
     TResult Function(_CreateChatRoom value)? createChatRoom,
     required TResult orElse(),
   }) {
@@ -807,7 +657,6 @@ mixin _$AnswerQuestionState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get hasLoadingError => throw _privateConstructorUsedError;
   bool get showErrorMessage => throw _privateConstructorUsedError;
-  bool get isInfoOpen => throw _privateConstructorUsedError;
   Either<Failure, Item>? get claimFailureOrSuccess =>
       throw _privateConstructorUsedError;
   Either<Failure, Room>? get roomCreationFailureOrSuccess =>
@@ -831,7 +680,6 @@ abstract class $AnswerQuestionStateCopyWith<$Res> {
       bool isLoading,
       bool hasLoadingError,
       bool showErrorMessage,
-      bool isInfoOpen,
       Either<Failure, Item>? claimFailureOrSuccess,
       Either<Failure, Room>? roomCreationFailureOrSuccess});
 }
@@ -855,7 +703,6 @@ class _$AnswerQuestionStateCopyWithImpl<$Res, $Val extends AnswerQuestionState>
     Object? isLoading = null,
     Object? hasLoadingError = null,
     Object? showErrorMessage = null,
-    Object? isInfoOpen = null,
     Object? claimFailureOrSuccess = freezed,
     Object? roomCreationFailureOrSuccess = freezed,
   }) {
@@ -884,10 +731,6 @@ class _$AnswerQuestionStateCopyWithImpl<$Res, $Val extends AnswerQuestionState>
           ? _value.showErrorMessage
           : showErrorMessage // ignore: cast_nullable_to_non_nullable
               as bool,
-      isInfoOpen: null == isInfoOpen
-          ? _value.isInfoOpen
-          : isInfoOpen // ignore: cast_nullable_to_non_nullable
-              as bool,
       claimFailureOrSuccess: freezed == claimFailureOrSuccess
           ? _value.claimFailureOrSuccess
           : claimFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -915,7 +758,6 @@ abstract class _$$_AnswerQuestionStateCopyWith<$Res>
       bool isLoading,
       bool hasLoadingError,
       bool showErrorMessage,
-      bool isInfoOpen,
       Either<Failure, Item>? claimFailureOrSuccess,
       Either<Failure, Room>? roomCreationFailureOrSuccess});
 }
@@ -937,7 +779,6 @@ class __$$_AnswerQuestionStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? hasLoadingError = null,
     Object? showErrorMessage = null,
-    Object? isInfoOpen = null,
     Object? claimFailureOrSuccess = freezed,
     Object? roomCreationFailureOrSuccess = freezed,
   }) {
@@ -966,10 +807,6 @@ class __$$_AnswerQuestionStateCopyWithImpl<$Res>
           ? _value.showErrorMessage
           : showErrorMessage // ignore: cast_nullable_to_non_nullable
               as bool,
-      isInfoOpen: null == isInfoOpen
-          ? _value.isInfoOpen
-          : isInfoOpen // ignore: cast_nullable_to_non_nullable
-              as bool,
       claimFailureOrSuccess: freezed == claimFailureOrSuccess
           ? _value.claimFailureOrSuccess
           : claimFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -992,7 +829,6 @@ class _$_AnswerQuestionState implements _AnswerQuestionState {
       this.isLoading = true,
       this.hasLoadingError = false,
       this.showErrorMessage = false,
-      this.isInfoOpen = false,
       this.claimFailureOrSuccess,
       this.roomCreationFailureOrSuccess});
 
@@ -1015,16 +851,13 @@ class _$_AnswerQuestionState implements _AnswerQuestionState {
   @JsonKey()
   final bool showErrorMessage;
   @override
-  @JsonKey()
-  final bool isInfoOpen;
-  @override
   final Either<Failure, Item>? claimFailureOrSuccess;
   @override
   final Either<Failure, Room>? roomCreationFailureOrSuccess;
 
   @override
   String toString() {
-    return 'AnswerQuestionState(answer: $answer, item: $item, token: $token, isLoading: $isLoading, hasLoadingError: $hasLoadingError, showErrorMessage: $showErrorMessage, isInfoOpen: $isInfoOpen, claimFailureOrSuccess: $claimFailureOrSuccess, roomCreationFailureOrSuccess: $roomCreationFailureOrSuccess)';
+    return 'AnswerQuestionState(answer: $answer, item: $item, token: $token, isLoading: $isLoading, hasLoadingError: $hasLoadingError, showErrorMessage: $showErrorMessage, claimFailureOrSuccess: $claimFailureOrSuccess, roomCreationFailureOrSuccess: $roomCreationFailureOrSuccess)';
   }
 
   @override
@@ -1041,8 +874,6 @@ class _$_AnswerQuestionState implements _AnswerQuestionState {
                 other.hasLoadingError == hasLoadingError) &&
             (identical(other.showErrorMessage, showErrorMessage) ||
                 other.showErrorMessage == showErrorMessage) &&
-            (identical(other.isInfoOpen, isInfoOpen) ||
-                other.isInfoOpen == isInfoOpen) &&
             (identical(other.claimFailureOrSuccess, claimFailureOrSuccess) ||
                 other.claimFailureOrSuccess == claimFailureOrSuccess) &&
             (identical(other.roomCreationFailureOrSuccess,
@@ -1060,7 +891,6 @@ class _$_AnswerQuestionState implements _AnswerQuestionState {
       isLoading,
       hasLoadingError,
       showErrorMessage,
-      isInfoOpen,
       claimFailureOrSuccess,
       roomCreationFailureOrSuccess);
 
@@ -1080,7 +910,6 @@ abstract class _AnswerQuestionState implements AnswerQuestionState {
           final bool isLoading,
           final bool hasLoadingError,
           final bool showErrorMessage,
-          final bool isInfoOpen,
           final Either<Failure, Item>? claimFailureOrSuccess,
           final Either<Failure, Room>? roomCreationFailureOrSuccess}) =
       _$_AnswerQuestionState;
@@ -1097,8 +926,6 @@ abstract class _AnswerQuestionState implements AnswerQuestionState {
   bool get hasLoadingError;
   @override
   bool get showErrorMessage;
-  @override
-  bool get isInfoOpen;
   @override
   Either<Failure, Item>? get claimFailureOrSuccess;
   @override

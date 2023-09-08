@@ -13,7 +13,6 @@ class AnswerQuestionState with _$AnswerQuestionState {
     @Default(true) bool isLoading,
     @Default(false) bool hasLoadingError,
     @Default(false) bool showErrorMessage,
-    @Default(false) bool isInfoOpen,
     Either<Failure, Item>? claimFailureOrSuccess,
     Either<Failure, Room>? roomCreationFailureOrSuccess,
   }) = _AnswerQuestionState;
