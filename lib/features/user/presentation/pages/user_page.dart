@@ -133,9 +133,9 @@ class UserScreen extends StatelessWidget {
                                                     const SizedBox(
                                                       height: 25,
                                                     ),
-                                                    const Row(
+                                                    Row(
                                                       children: [
-                                                        Icon(
+                                                        const Icon(
                                                           Icons.email,
                                                           color: Colors.black54,
                                                         ),
@@ -143,9 +143,8 @@ class UserScreen extends StatelessWidget {
                                                           child: Column(
                                                             children: [
                                                               Text(
-                                                                //TODO (@alecava41): add logic to display user email
-                                                                "bacchin.francesco2000@gmail.coeeeeem",
-                                                                style: TextStyle(color: Colors.black54),
+                                                                state.userEmail!,
+                                                                style: const TextStyle(color: Colors.black54),
                                                                 overflow: TextOverflow.ellipsis,
                                                               ),
                                                             ],

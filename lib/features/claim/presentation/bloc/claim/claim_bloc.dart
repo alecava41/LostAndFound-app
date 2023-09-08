@@ -38,7 +38,7 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
     on<ClaimEvent>(
       (event, emit) async {
         await event.when<FutureOr<void>>(
-          claimContentCreated: (tab, newClaimId) => _onClaimCreated(emit, tab, newClaimId),
+          claimContentCreated: (newClaimId) => _onClaimCreated(emit, newClaimId),
           receivedClaimsRefreshed: (item) => _onReceivedClaimRefreshed(emit, item),
           sentClaimsRefreshed: () => _onSentClaimRefreshed(emit),
           claimRead: (id) => _onClaimRead(emit, id),
@@ -57,7 +57,7 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
     });
   }
 
-  Future<void> _onClaimCreated(Emitter<ClaimState> emit, int? tab, int? newClaimId) async {
+  Future<void> _onClaimCreated(Emitter<ClaimState> emit, int? newClaimId) async {
     emit(state.copyWith(isLoadingReceived: true, isLoadingSent: true, hasLoadingError: false));
 
     final receivedClaimsResponse = await _getReceivedClaimsUseCase(NoParams());
@@ -74,11 +74,6 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
           isLoadingReceived: false,
           isLoadingSent: false),
     );
-
-    if (tab != null) {
-      emit(state.copyWith(needToSwitchTab: true));
-      emit(state.copyWith(needToSwitchTab: null));
-    }
 
     if (newClaimId != null) {
       await _onClaimRead(emit, newClaimId);

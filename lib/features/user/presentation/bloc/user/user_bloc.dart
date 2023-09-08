@@ -85,6 +85,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       isLoading: false,
       hasLoadingError: userResponse.isLeft(),
       user: user,
+      userEmail: session != null ? session.email : "",
       token: session != null ? session.token : "",
     ));
   }

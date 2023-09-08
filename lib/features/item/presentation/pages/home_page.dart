@@ -4,6 +4,7 @@ import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
+import 'package:lost_and_found/features/user/presentation/pages/tutorial_page.dart';
 import 'package:sizer/sizer.dart';
 
 import '../widgets/home/clickable_circular_button.dart';
@@ -111,12 +112,12 @@ class HomeScreen extends StatelessWidget {
                                     children: [
                                       PersonalizedLargeGreenButton(
                                           onPressed: () {
-                                            // TODO (@alecava41) navigate to lost tutorial page
+                                            Navigator.pushNamed(context, "/options/tutorial", arguments: const TutorialScreenArguments(tab: 0));
                                           },
                                           text: const Text("I lost an item", style: TextStyle(color: Colors.white))),
                                       PersonalizedLargeGreenButton(
                                           onPressed: () {
-                                            // TODO (@alecava41) navigate to found tutorial page
+                                            Navigator.pushNamed(context, "/options/tutorial", arguments: const TutorialScreenArguments(tab: 1));
                                           },
                                           text: const Text("I found an item", style: TextStyle(color: Colors.white))),
                                     ],

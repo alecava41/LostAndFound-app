@@ -60,7 +60,15 @@ class RouteGenerator {
       case '/options/changePassword':
         return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
       case '/options/tutorial':
-        return MaterialPageRoute(builder: (_) => const TutorialScreen());
+        return MaterialPageRoute(builder: (_) {
+          int? tab;
+
+          if (settings.arguments != null) {
+            tab = (settings.arguments as TutorialScreenArguments).tab;
+          }
+
+          return TutorialScreen(tab: tab);
+        });
       default:
         // If there is no such named route in the switch statement
         return _errorRoute();

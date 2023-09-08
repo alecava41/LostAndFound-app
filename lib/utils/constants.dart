@@ -20,6 +20,6 @@ enum NotificationType {
 // Global Navigator
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: "Main Navigator");
 
-// Image constants
+// Images
 final noUserImage = Image.asset("assets/images/no-user.jpg");
 final noItemImage = Image.asset("assets/images/no-item.png");

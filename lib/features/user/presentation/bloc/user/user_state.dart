@@ -5,6 +5,7 @@ class UserState with _$UserState {
   const factory UserState({
     // Domain fields
     required User? user,
+    required String? userEmail,
     required String? imagePath,
 
     // UI fields
@@ -17,6 +18,7 @@ class UserState with _$UserState {
 
   factory UserState.initial() => const UserState(
       user: null,
-    imagePath: null
+    imagePath: null,
+    userEmail: null,
   );
 }

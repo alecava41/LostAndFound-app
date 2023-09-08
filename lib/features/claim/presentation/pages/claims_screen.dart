@@ -28,6 +28,7 @@ class ClaimsScreen extends StatelessWidget {
         ),
         child: DefaultTabController(
           length: 2,
+          initialIndex: tab != null ? tab! : 0,
           child: SafeArea(
             child: Scaffold(
               backgroundColor: PersonalizedColor.backgroundColor,
@@ -86,23 +87,15 @@ class ClaimsScreen extends StatelessWidget {
                   },
                 ),
               ),
-              body: SafeArea(
-                child: BlocProvider(
-                  create: (_) => sl<ClaimBloc>()..add(ClaimEvent.claimContentCreated(tab, newClaimId)),
-                  child: BlocConsumer<ClaimBloc, ClaimState>(
-                    listener: (ctx, state) {
-                      if (state.needToSwitchTab != null && state.needToSwitchTab!) {
-                        DefaultTabController.of(ctx).animateTo(DefaultTabController.of(ctx).length - 1);
-                      }
-                    },
-                    builder: (ctx, state) => state.hasLoadingError
-                        ? ErrorPage(
-                            onRetry: () => ctx.read<ClaimBloc>().add(ClaimEvent.claimContentCreated(tab, newClaimId)))
-                        : TabBarView(
-                            controller: DefaultTabController.of(ctx),
-                            children: const [ClaimReceivedContent(), ClaimSentContent()],
-                          ),
-                  ),
+              body: BlocProvider(
+                create: (_) => sl<ClaimBloc>()..add(ClaimEvent.claimContentCreated(newClaimId)),
+                child: BlocBuilder<ClaimBloc, ClaimState>(
+                  builder: (ctx, state) => state.hasLoadingError
+                      ? ErrorPage(
+                          onRetry: () => ctx.read<ClaimBloc>().add(ClaimEvent.claimContentCreated(newClaimId)))
+                      : const TabBarView(
+                          children: [ClaimReceivedContent(), ClaimSentContent()],
+                        ),
                 ),
               ),
             ),

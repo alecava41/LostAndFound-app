@@ -574,6 +574,7 @@ abstract class _RestoreInitial implements UserEvent {
 mixin _$UserState {
 // Domain fields
   User? get user => throw _privateConstructorUsedError;
+  String? get userEmail => throw _privateConstructorUsedError;
   String? get imagePath => throw _privateConstructorUsedError; // UI fields
   dynamic get isLoading => throw _privateConstructorUsedError;
   String get token => throw _privateConstructorUsedError;
@@ -595,6 +596,7 @@ abstract class $UserStateCopyWith<$Res> {
   @useResult
   $Res call(
       {User? user,
+      String? userEmail,
       String? imagePath,
       dynamic isLoading,
       String token,
@@ -617,6 +619,7 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
   @override
   $Res call({
     Object? user = freezed,
+    Object? userEmail = freezed,
     Object? imagePath = freezed,
     Object? isLoading = freezed,
     Object? token = null,
@@ -629,6 +632,10 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      userEmail: freezed == userEmail
+          ? _value.userEmail
+          : userEmail // ignore: cast_nullable_to_non_nullable
+              as String?,
       imagePath: freezed == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -666,6 +673,7 @@ abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
   @useResult
   $Res call(
       {User? user,
+      String? userEmail,
       String? imagePath,
       dynamic isLoading,
       String token,
@@ -686,6 +694,7 @@ class __$$_UserStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = freezed,
+    Object? userEmail = freezed,
     Object? imagePath = freezed,
     Object? isLoading = freezed,
     Object? token = null,
@@ -698,6 +707,10 @@ class __$$_UserStateCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      userEmail: freezed == userEmail
+          ? _value.userEmail
+          : userEmail // ignore: cast_nullable_to_non_nullable
+              as String?,
       imagePath: freezed == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -728,6 +741,7 @@ class __$$_UserStateCopyWithImpl<$Res>
 class _$_UserState implements _UserState {
   const _$_UserState(
       {required this.user,
+      required this.userEmail,
       required this.imagePath,
       this.isLoading = false,
       this.token = "",
@@ -738,6 +752,8 @@ class _$_UserState implements _UserState {
 // Domain fields
   @override
   final User? user;
+  @override
+  final String? userEmail;
   @override
   final String? imagePath;
 // UI fields
@@ -757,7 +773,7 @@ class _$_UserState implements _UserState {
 
   @override
   String toString() {
-    return 'UserState(user: $user, imagePath: $imagePath, isLoading: $isLoading, token: $token, hasLoadingError: $hasLoadingError, logoutFailureOrSuccess: $logoutFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
+    return 'UserState(user: $user, userEmail: $userEmail, imagePath: $imagePath, isLoading: $isLoading, token: $token, hasLoadingError: $hasLoadingError, logoutFailureOrSuccess: $logoutFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
   }
 
   @override
@@ -766,6 +782,8 @@ class _$_UserState implements _UserState {
         (other.runtimeType == runtimeType &&
             other is _$_UserState &&
             (identical(other.user, user) || other.user == user) &&
+            (identical(other.userEmail, userEmail) ||
+                other.userEmail == userEmail) &&
             (identical(other.imagePath, imagePath) ||
                 other.imagePath == imagePath) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
@@ -784,6 +802,7 @@ class _$_UserState implements _UserState {
   int get hashCode => Object.hash(
       runtimeType,
       user,
+      userEmail,
       imagePath,
       const DeepCollectionEquality().hash(isLoading),
       token,
@@ -801,6 +820,7 @@ class _$_UserState implements _UserState {
 abstract class _UserState implements UserState {
   const factory _UserState(
           {required final User? user,
+          required final String? userEmail,
           required final String? imagePath,
           final dynamic isLoading,
           final String token,
@@ -811,6 +831,8 @@ abstract class _UserState implements UserState {
 
   @override // Domain fields
   User? get user;
+  @override
+  String? get userEmail;
   @override
   String? get imagePath;
   @override // UI fields

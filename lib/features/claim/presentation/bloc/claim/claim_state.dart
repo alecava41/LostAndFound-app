@@ -12,8 +12,6 @@ class ClaimState with _$ClaimState {
     @Default(false) bool isLoadingReceived,
     @Default(false) bool isLoadingSent,
     @Default(false) bool hasLoadingError,
-    @Default(null) bool? needToSwitchTab,
-
   }) = _ClaimState;
 
   factory ClaimState.initial() => const ClaimState(claimsReceived: [], claimsSent: []);
