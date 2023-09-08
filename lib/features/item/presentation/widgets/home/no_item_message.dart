@@ -35,8 +35,8 @@ class NoItemMessage extends StatelessWidget {
             size: ScreenSize.isBigSmartphoneDevice(context)
                 ? 80
                 : ScreenSize.isMediumSmartphoneDevice(context)
-                ? 70
-                : 50,
+                    ? 70
+                    : 50,
             color: PersonalizedColor.mainColor,
           ),
           Text(
@@ -46,17 +46,23 @@ class NoItemMessage extends StatelessWidget {
               fontSize: ScreenSize.isBigSmartphoneDevice(context)
                   ? 18
                   : ScreenSize.isMediumSmartphoneDevice(context)
-                  ? 17
-                  : 16,
+                      ? 17
+                      : 16,
               color: PersonalizedColor.mainColor,
               fontWeight: FontWeight.bold,
             ),
           ),
-          PersonalizedLargeGreenButton(onPressed: callback, text: Text(buttonText, style: TextStyle(fontSize: ScreenSize.isBigSmartphoneDevice(context)
-              ? 20
-              : ScreenSize.isMediumSmartphoneDevice(context)
-              ? 18
-              : 16),))
+          PersonalizedLargeGreenButton(
+              onPressed: callback,
+              text: Text(
+                buttonText,
+                style: TextStyle(
+                    fontSize: ScreenSize.isBigSmartphoneDevice(context)
+                        ? 20
+                        : ScreenSize.isMediumSmartphoneDevice(context)
+                            ? 18
+                            : 16),
+              ))
         ],
       ),
     );

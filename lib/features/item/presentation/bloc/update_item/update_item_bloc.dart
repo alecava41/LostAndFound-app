@@ -156,10 +156,11 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
 
       // Workaround to refresh image
       await CachedNetworkImage.evictFromCache("$baseUrl/api/users/${state.item!.id}/image");
-    } else {
-      updateFailureOrSuccess =
-          const Left(Failure.validationFailure("You need to fill all the fields with correct values."));
     }
+    // else {
+    //   updateFailureOrSuccess =
+    //       const Left(Failure.validationFailure("You need to fill all the fields with correct values."));
+    // }
 
     emit(state.copyWith(
         showError: true,

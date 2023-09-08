@@ -68,7 +68,7 @@ class InfoItem extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: const Text('Ok'),
+                            child: const Text('OK'),
                           ),
                         ],
                       );

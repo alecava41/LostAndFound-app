@@ -22,6 +22,6 @@ Either<Failure, String> _validateUserField(String input) {
   if (RegExp(emailRegex).hasMatch(input) || RegExp(usernameRegex).hasMatch(input)) {
     return Right(input);
   } else {
-    return const Left(Failure.validationFailure("Invalid username or email."));
+    return const Left(Failure.validationFailure());
   }
 }

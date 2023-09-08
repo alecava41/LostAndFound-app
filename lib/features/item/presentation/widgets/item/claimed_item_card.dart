@@ -99,7 +99,7 @@ class ClaimedItemCard extends StatelessWidget {
                               text: TextSpan(
                                 children: [
                                   const TextSpan(
-                                    text: "Claim status: ",
+                                    text: "Claim status ",
                                     style: TextStyle(fontSize: 13, color: Colors.black),
                                   ),
                                   TextSpan(

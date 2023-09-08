@@ -14,7 +14,7 @@ class SignInText extends StatelessWidget {
             Navigator.pushReplacementNamed(context, '/login');
           },
           child: const Text(
-            "Sign in",
+            "Sign In",
             style: TextStyle(
               decoration: TextDecoration.underline,
             ),

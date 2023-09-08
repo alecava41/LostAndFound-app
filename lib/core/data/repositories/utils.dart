@@ -21,7 +21,7 @@ Failure mapExceptionToFailure(Object e) {
     case PasswordMismatchException:
       return const Failure.passwordMismatchFailure();
     case ValidationException:
-      return const Failure.validationFailure(null);
+      return const Failure.validationFailure();
     default:
       // includes InternalServerException
       return const Failure.genericFailure();

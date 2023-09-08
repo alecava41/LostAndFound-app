@@ -20,7 +20,7 @@ class Failure with _$Failure {
   const factory Failure.passwordMismatchFailure() = _PasswordMismatchFailure;
 
   // represent an error during the validation of the fields of a request or before making the request
-  const factory Failure.validationFailure(String? reason) = _ValidationFailure;
+  const factory Failure.validationFailure() = _ValidationFailure;
 
   // represents a network error during a request
   const factory Failure.networkFailure() = _NetworkFailure;

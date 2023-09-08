@@ -63,7 +63,7 @@ dependencies:
   sqflite: ^2.2.8+4
   floor: ^1.4.2
   dartx: ^1.2.0
-  intl: ^0.18.0
+  intl: ^0.18.1
   http: ^1.1.0
   badges: ^3.1.1
   sizer: ^2.0.15
@@ -79,13 +79,13 @@ dependencies:
 
   map_launcher: ^2.5.0+1
 
-  flutter_svg: ^2.0.7
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1
-  
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -110,6 +110,7 @@ flutter_icons:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

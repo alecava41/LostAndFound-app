@@ -74,21 +74,17 @@ class _LostItemTutorialState extends State<LostItemTutorial> {
               carouselDetailedTutorialItem(
                   'assets/images/create-report.png',
                   'Report a Lost Item',
-                  'Input the item details such as title, position, category and create a new report.\n'
-                      'This would notify all the users that have reported a found item that could match the features of the one you have inserted.'),
+                  'Input the item details such as title, position, category and create a new report.\nThis would notify all the users that have reported a found item that could match the features of the one you have inserted.'),
               carouselDetailedTutorialItem(
                   'assets/images/create-claim.png',
                   'Create a Claim',
-                  'Browse found items of the other users or check if there are news for your lost item.\n'
-                      'Once you find an item that could match your lost one, create a claim by answering to the safe question.\n'
-                      'Wait for the other user to validate your claim.'),
+                  'Browse found items of the other users or check if there are news for your lost item.\nOnce you find an item that could match your lost one, create a claim by answering to the safe question.\nWait for the other user to validate your claim.'),
               carouselDetailedTutorialItem('assets/images/chat.png', 'Chat to Arrange Item Return',
                   'If your claim has been approved, then get in touch with the other user, through the chat, to arrange the item\'s return'),
               carouselDetailedTutorialItem(
                   'assets/images/solved.png',
                   'Mark Lost Item as Solved',
-                  'Everything went smooth, and the item came back to the legitimate owner!\n'
-                      'Mark your lost item as solved to remove it from the app.'),
+                  'Everything went smooth, and the item came back to the legitimate owner!\nMark your lost item as solved to remove it from the app.'),
             ],
           ),
         ),

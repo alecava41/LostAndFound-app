@@ -1,0 +1,326 @@
+{
+  "close": "Chiudi",
+  "cancel": "Cancella",
+  "yes": "Si",
+  "ok": "OK",
+  "singIn": "Registrati",
+  "signUp": "Effettua l\\'accesso",
+  "item": "{count, plural, =0{Oggetto} =other{Oggetti}}",
+  "@item": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "lostAndFound": "Lost&Found",
+  "found": "Trovato",
+  "lost": "Perso",
+  "retry": "Riprova",
+  "gallery": "Galleria",
+  "camera": "Fotocamera",
+  "date": "Data",
+  "password": "Password",
+  "confirmPassword": "Conferma Password",
+  "user": "Email o Username",
+  "email": "Indirizzo Email",
+  "username": "Username",
+  "send": "Invia",
+  "claim": "{count, plural, =0{Richiesta} =other{Richiesta}}",
+  "@claim": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "message": "{count, plural, =0{Messaggio} =other{Messaggi}}",
+  "@message": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "homeBottomBarTab": "Home",
+  "accept": "Accetta",
+  "decline": "Rifiuta",
+  "searchBottomBarTab": "Ricerca",
+  "insertBottomBarTab": "Inserisci",
+  "inboxBottomBarTab": "Posta",
+  "profileBottomBarTab": "Profilo",
+  "cameraPermissionDialogTitle": "Permesso Fotocamera Richiesto",
+  "cameraPermissionDialogContentPermanentlyDenied": "Il permesso per usare la fotocamera è richiesto per scattare la foto.\n\nPer favore abilita il permesso dalle impostazioni dell'app.",
+  "cameraPermissionDialogContentDenied": "Il permesso per usare la fotocamera è richiesto per scattare la foto.",
+  "categoryPageTitle": "Seleziona una categoria",
+  "categoryFormEntryTitle": "Categoria",
+  "positionPageTitle": "Seleziona posizione",
+  "positionUseCurrentLocation": "Usa la mia attuale posizione",
+  "positionUseSelected": "Seleziona questa posizione",
+  "locationPermissionDialogTitle": "Permesso Posizione Richiesto",
+  "locationPermissionDialogContentPermanentlyDenied": "Il permesso per usare la geolocalizzazione è richiesto per calcolare la tua posizione attuale.\\n\\nPer favore abilita il permesso dalle impostazioni dell'app.",
+  "locationPermissionDialogContentDenied": "Il permesso per usare la geolocalizzazione è richiesto per calcolare la tua posizione attuale.",
+  "noConnectionDialogTitle": "Connessione mancante",
+  "noConnectionDialogContent": "Per favore controllare la tua connessione internet",
+  "positionDialogTitle": "Geolocalizzazione Disabilitata",
+  "positionDialogContent": "Per favore abilita la geolocalizzazione",
+  "tutorialInitialPage1Title": "Inserisci un Oggetto Perso",
+  "tutorialInitialPage1Content": "Inserisci i dettagli dell'oggetto perso nell'app.",
+  "tutorialInitialPage2Title": "Inserisci un Oggetto Trovato",
+  "tutorialInitialPage2Content": "Notifica gli altri utenti inserendo un oggetto che hai trovato nell'app.",
+  "tutorialInitialPage3Title": "Concorda Restituzione Oggetto",
+  "tutorialInitialPage3Content": "Contatta la persona che ho trovato l'oggetto per concordare un incontro al fine di restituire lo stesso.",
+  "confirmExitDialogTitle": "Conferma Uscita",
+  "confirmExitDialogContent": "Uscendo da questa pagina perderai tutti i dati che hai inserito finora. Sei sicuro di voler uscire?",
+  "errorPageTitle": "Si è verificato un errore durante il caricamento",
+  "errorPageSubtitle": "Per favore riprova più tardi",
+  "mediaSelectionDialogContent": "Per favore selezione un'opzione",
+  "dateFormEntrySubtitle": "Data di caricamento",
+  "dateFormEntryValue": "Dopo {date}",
+  "@dateFormEntryValue": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMMMM"
+      }
+    }
+  },
+  "positionFormEntryTitle": "Posizione",
+  "positionFormEntrySubtitle": "Dove l'oggetto è stato perso o trovato",
+  "positionFormEntryNotSelected": "Posizione non ancora selezionata",
+  "signUpText": "Non hai un account?",
+  "signInText": "Hai già un account?",
+  "failureInvalidCredentials": "Credenziali non valide. Per favore prova di nuovo.",
+  "failureGeneric": "Errore server. Per favore riprovare più tardi.",
+  "failureNetwork": "Connessione internet non disponibile. Controlla la tua connessione e riprova.",
+  "failureUnknown": "Errore sconosciuto",
+  "failureInvalidPassword": "Password non valida.",
+  "failureInvalidUser": "Username o Email non valido.",
+  "failureConfirmPassword": "Il campo non ha lo stesso valore della password originale.",
+  "failureEmailDuplicate": "Email già in uso.",
+  "failureEmailInvalid": "Formato email non valido.",
+  "failureInvalidPasswordCreation": "La password deve contenere almeno 8 caratteri, con caratteri maiuscoli, minuscole e numerici.",
+  "successSignUp": "Registrazione avvenuta con successo",
+  "successAnswerClaim": "Richiesta gestita con successo",
+  "successAnswerQuestion": "Richiesta creata con successo",
+  "failureUsernameDuplicate": "Username già in uso.",
+  "failureInvalidUsername": "Username può contente fino a 30 caratteri alfanumerici.",
+  "noContentInboxTitle": "Non ci sono chat attive",
+  "noContentInboxSubtitle": "Chatta con qualcuno per vedere la lista delle conversazioni",
+  "answerClaimTitle": "Valida la richiesta",
+  "answerClaimTutorialClosedManaged": "Hai già validato questa richiesta.",
+  "answerClaimTutorialClosedUnmanaged": "Devi decidere se accettare o rifiutare questa richiesta.",
+  "answerClaimTutorialOpenManaged": "In questa pagina, puoi trovare le informazioni relative a questa richiesta.",
+  "answerClaimTutorialOpenUnmanaged": "Per favore valida questa richiesta decidendo se accettarla o rifiutarla. Se la accetti, tutte le altre richiesta per questo oggetto verranno automaticamente rifiutate e l'oggetto non sarà più visibile agli altri.",
+  "itemClaimedBy": "Oggetto richiesto da {username}",
+  "@itemClaimedBy": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "yourQuestion": "La tua domanda",
+  "answerOf": "Answer of {username}",
+  "@answerOf": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "claimStatus": "Stato richiesta",
+  "acceptedAnswerClaim": "Hai accetto questa richiesta. Contatta {username} per organizzare un incontro per la restituzione dell'oggetto.",
+  "@acceptedAnswerClaim": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "rejectedClaim": "Hai rifiutato questa richiesta.",
+  "validateClaim": "Valida la richiesta.",
+  "answerQuestionTitle": "Crea nuova richiesta",
+  "answerQuestionTutorialClosedManaged": "Hai già richiesto questo oggetto.",
+  "answerQuestionTutorialClosedUnmanaged": "Stai richiedendo questo oggetto.",
+  "answerQuestionTutorialOpenManaged": "In questa pagina, puoi trovare le informazioni sulla richiesta che hia creato.",
+  "answerQuestionTutorialOpenUnmanaged": "Per create la richiesta di restituzione dell'oggetto risponde alla sequente domanda correttamente. Se la risposta è corretta, l'utente che ha trovato l'oggetto la approverè e potrai riavere il tuo oggetto.",
+  "itemClaiming": "Oggetto che stai richiedendo",
+  "questionOf": "Domanda di{username}",
+  "@questionOf": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "yourAnswer": "La tua risposta",
+  "failureInvalidQuestion": "Una risposta è richiesta.",
+  "acceptedQuestionClaim": "La tua richiesta è stata accettata! Contatta {username} usando la chat per concordare la restituzione dell'oggetto.",
+  "@acceptedQuestionClaim": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "rejectedQuestionClaim": "Purtroppo la tua richiesta è stata rifiutata da {username}.",
+  "@rejectedQuestionClaim": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "waitQuestionClaim": "Attendi che {username} validi la tua richiesta.",
+  "@waitQuestionClaim": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "receivedClaims": "Richieste ricevute",
+  "yourClaims": "Richieste create",
+  "noContentClaimReceivedTitle": "Non hai richieste da validare",
+  "noContentClaimReceivedSubtitle": "Le richiesta verranno mostrate qui non appena un utente ne creerà una per un oggetto trovato che hai inserito",
+  "claimReceivedTutorial": "In questa sezione ci sono le richiesta fatte da altri utenti, per gli oggetti che hai trovato.",
+  "noContentClaimSentTitle": "Non ci sono richieste pendenti",
+  "noContentClaimSentSubtitle": "Le tue richieste verranno mostrate qui non appena ne creerai una",
+  "claimSentTutorial": "In questa sezione ci sono le richiesta che hai creato per oggetti trovati da altri.",
+  "claimedBy": "Richiesto da {username}",
+  "@claimedBy": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "claimStatusSpaced": "Stato richiesta ",
+  "seeDetails": "Vedi Dettagli",
+  "sendMessage": "Scrivi un Messaggio",
+  "filtersPageTitle": "Gestione Filtri",
+  "filters": "Filti",
+  "deleteAll": "ELIMINA TUTTO",
+  "failureInvalidType": "Seleziona almeno una delle due opzioni.",
+  "failureInvalidPosition": "Seleziona la posizione dell'oggetto.",
+  "failureInvalidCategory": "Seleziona la categoria.",
+  "search": "Cerca",
+  "home": "Home",
+  "tooltipNews": "news",
+  "tooltipClaims": "richieste",
+  "homeTutorialClosedTitle": "Hai trovato o perso un oggetto?\\nCosa puoi fare ora?",
+  "homeTutorialOpenLostItem": "Ho perso un oggetto",
+  "homeTutorialOpenFoundItem": "Ho trovato un oggetto",
+  "successInsertItem": "Oggetto correttamente creato",
+  "titleFieldTitle": "Titolo",
+  "titleFieldHint": "Nome riconoscibile per l'oggetto",
+  "failureInvalidTitle": "Il titolo deve contenere tra 1 e 50 caratteri.",
+  "itemType": "L'oggetto è stato",
+  "questionFieldTitle": "Domanda per verificare la proprietà",
+  "questionFieldHint": "Domanda chiara e preciso",
+  "failureInvalidQuestionField": "La domanda di sicurezza è richiesta.",
+  "create": "Crea",
+  "insertItemTitle": "Inserisci un Oggetto",
+  "successSolveItem": "Oggetto correttamente risolto",
+  "successDeleteItem": "Oggetto eliminato con successo",
+  "itemPageTitle": "Dettagli Oggetto",
+  "itemMenu1": "Marca come risolto",
+  "itemMenu2": "Modifica",
+  "itemMenu3": "Elimina",
+  "lostBy": "Perso da",
+  "foundBy": "Trovato by",
+  "claimsForItem": "Richieste per questo oggetto",
+  "noClaimsForItem": "Non ci sono ancora richieste.",
+  "claimItemButton": "Richiedi oggetto",
+  "newsPageTitle": "News",
+  "successItemUpdate": "Oggetto modificato correttamente",
+  "updateItemPageTitle": "Modifica Oggetto",
+  "update": "Modifica",
+  "openClaims": "{count, plural, =1{1 richiesta} =other{{count} richieste}}",
+  "@openClaims": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "resolved": "Risolto",
+  "yourFoundItems": "I tuoi oggetti trovati",
+  "yourLostItems": "I tuoi oggetti persi",
+  "noFoundItemContent": "Non ci sono ancora oggetti trovati, continua a cercare!",
+  "noFoundItemButton": "Inserisci un oggetto trovato",
+  "noLostItemContent": "Non hai oggetti persi!",
+  "noLostItemButton": "Inserisci un oggetto perso",
+  "uploadImageButton": "Carica una foto",
+  "foundNear": "Perso vicino",
+  "lostNear": "Trovato vicino",
+  "noMapAppTitle": "Nessuna App di navigazione installata",
+  "noMapAppContent": "Oops! Sembra che nel dispositivo non ci sia nessuna app per visualizzare questa posizione. Per favore installa un'app come Google Maps e riprova.",
+  "dateInsertion": "Date di inserimento",
+  "category": "Categoria",
+  "question": "Domanda per verificare la proprietà",
+  "openMap": "Apri mappa",
+  "hey": "Ehu, ",
+  "mightFound": "potrebe aver trovato",
+  "mightLost": "potrebbe essere il proprietario di",
+  "noContentNewsTitle": "Non ci sono news per te",
+  "noContentNewsSubtitle": "Le news verranno mostrate qui non appena qualcuno inserirà un oggetto che potrebbe corrispondere a uno dei tuoi",
+  "metersAway": "Distante {meters}m",
+  "@metersAway": {
+    "placeholders": {
+      "meters": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "noContentSearchResultTitle": "Nessun oggetto trovato per i parametri inseriti",
+  "noContentSearchResultSubtitle": "Prova di nuovo con parametri più generici",
+  "selectSortingDialogTitle": "Selezione un ordinamento.",
+  "successPasswordChange": "Password aggiornata con successo",
+  "changePasswordButton": "Cambia password",
+  "passwordCreate1": "Per creare una password sicura:",
+  "passwordCreate2": "Usa almeno 8 caratteri;",
+  "passwordCreate3": "Usa una combinazione di lettere maiuscole e minuscole e numeri.",
+  "passwordFormCurrentHint": "Password attuale",
+  "failureInvalidOldPasswordNotMatching": "La password non corrisponde alla tua attuale password.",
+  "failureInvalidOldPassword": "Password attuale richiesta.",
+  "newPasswordHint": "Nuova password",
+  "failureInvalidNewPassword": "Password deve contenere almeno 8 caratteri maiscuoli, minuscoli e numerici.",
+  "confirmNewPasswordField": "Conferma nuova password",
+  "invalidConfirmNewPassword": "Il campo non corrisponde al valore della nuova password.",
+  "tutorial": "Tutorial",
+  "lostItems": "Oggetti persi",
+  "foundItems": "Oggetti trovati",
+  "successUploadImage": "Immagine caricata con successo",
+  "successLogout": "Logout eseguito correttamente",
+  "profile": "Profilo",
+  "logout": "Logout",
+  "logoutDialogContent": "Sei sicuro di voler uscire?",
+  "logoutDialogNo": "No, rimani collecato",
+  "logoutDialogYes": "Si, esci",
+
+  // SONO ARRIVATO QUI!!
+  "tutorialFoundItemTitle1": "Inserisci un Oggetto Trovato",
+  "tutorialFoundItemContent1": "Input the item details such as title, position, category, safe question and create a new report.\\nThis would notify all the users that have reported a lost item that could match the features of the one you have inserted.",
+  "tutorialFoundItemTitle2": "Manage received Claims",
+  "tutorialFoundItemContent2": "Wait for users to open claims for your found item.\\nManage all of them, by taking care about approving the most correct one.\\nOnce you approve a claim for your found item, nobody will be able to see that item again and all the other claims will be automatically rejected.",
+  "tutorialFoundItemTitle3": "Chat to Arrange Item Return",
+  "tutorialFoundItemContent3": "Get in touch, through the chat, with the user who filled the claim you have approved, to arrange the item\\'s return",
+  "tutorialFoundItemTitle4": "Mark Found Item as Solved",
+  "tutorialFoundItemContent4": "Everything went smooth, and the item came back to the legitimate owner!\\nMark your found item as solved to remove it from the app.",
+
+  "tutorialLostItemTitle1": "Report a Lost Item",
+  "tutorialLostItemContent1": "Input the item details such as title, position, category and create a new report.\\nThis would notify all the users that have reported a found item that could match the features of the one you have inserted.",
+  "tutorialLostItemTitle2": "Create a Claim",
+  "tutorialLostItemContent2": "Browse found items of the other users or check if there are news for your lost item.\\nOnce you find an item that could match your lost one, create a claim by answering to the safe question.\\nWait for the other user to validate your claim.",
+  "tutorialLostItemTitle3": "Chat to Arrange Item Return",
+  "tutorialLostItemContent3": "If your claim has been approved, then get in touch with the other user, through the chat, to arrange the item\\'s return",
+  "tutorialLostItemTitle4": "Mark Lost Item as Solved",
+  "tutorialLostItemContent4": "Everything went smooth, and the item came back to the legitimate owner!\\nMark your lost item as solved to remove it from the app."
+}

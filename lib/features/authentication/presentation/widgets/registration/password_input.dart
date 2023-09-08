@@ -30,7 +30,7 @@ class PasswordInput extends StatelessWidget {
         autovalidateMode: state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
         validator: (_) => state.password.value.fold(
           (failure) => failure.maybeWhen<String?>(
-              validationFailure: (reason) => reason,
+              validationFailure: () => "Password must contain at least 8 characters, using uppercase, lowercase and numeric characters.",
               orElse: () => null),
           (_) => null,
         ),

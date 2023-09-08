@@ -13,234 +13,233 @@ class ChangePasswordScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => sl<ChangePasswordBloc>(),
       child: BlocConsumer<ChangePasswordBloc, ChangePasswordState>(
-          listener: (ctx, state) {
-            final changePswFailureOrSuccess = state.changePswFailureOrSuccess;
+        listener: (ctx, state) {
+          final changePswFailureOrSuccess = state.changePswFailureOrSuccess;
 
-            if (changePswFailureOrSuccess != null) {
-              changePswFailureOrSuccess.fold(
-                (failure) => failure.maybeWhen(
-                  validationFailure: (_) {},
-                  orElse: () => ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      backgroundColor: Colors.red,
-                      content: Text(
-                        failure.maybeWhen<String>(
-                            genericFailure: () => 'Server error. Please try again later.',
-                            networkFailure: () => 'No internet connection available. Check your internet connection.',
-                            orElse: () => "Unknown error"),
-                      ),
-                    ),
+          if (changePswFailureOrSuccess != null) {
+            changePswFailureOrSuccess.fold(
+              (failure) => ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Colors.red,
+                  content: Text(
+                    failure.maybeWhen<String>(
+                        genericFailure: () => 'Server error. Please try again later.',
+                        networkFailure: () => 'No internet connection available. Check your internet connection.',
+                        orElse: () => "Unknown error"),
                   ),
                 ),
-                (_) => {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      backgroundColor: Colors.green,
-                      content: Text("Password successfully updated"),
-                    ),
+              ),
+              (_) => {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    backgroundColor: Colors.green,
+                    content: Text("Password successfully updated"),
                   ),
-
-                  Navigator.pop(context)
-                },
-              );
-            }
-          },
-          builder: (ctx, state) => AnnotatedRegion(
-            value: const SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
-              statusBarBrightness: Brightness.light,
-              statusBarIconBrightness: Brightness.dark,
-            ),
-            child: GestureDetector(
-                  onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-                  child: Scaffold(
-                    appBar: AppBar(
-                      backgroundColor: Colors.white,
-                      title: const Text(
-                        "Change password",
-                        style: TextStyle(color: Colors.black),
+                ),
+                Navigator.pop(context)
+              },
+            );
+          }
+        },
+        builder: (ctx, state) => AnnotatedRegion(
+          value: const SystemUiOverlayStyle(
+            statusBarColor: Colors.white,
+            statusBarBrightness: Brightness.light,
+            statusBarIconBrightness: Brightness.dark,
+          ),
+          child: GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.white,
+                title: const Text(
+                  "Change password",
+                  style: TextStyle(color: Colors.black),
+                ),
+                iconTheme: const IconThemeData(color: Colors.black),
+              ),
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 20,
                       ),
-                      iconTheme: const IconThemeData(color: Colors.black),
-                    ),
-                    body: SafeArea(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.all(12.0),
-                                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                    child: Text(
-                                      "To create a secure password:",
-                                      style: TextStyle(fontSize: 22),
-                                    ),
-                                  ),
-                                  Padding(
-                                      padding: EdgeInsets.all(4.0),
-                                      child: Row(
-                                        children: [
-                                          Text("• ", style: TextStyle(fontSize: 30)),
-                                          Text(
-                                            "Use at least 8 characters;",
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                        ],
-                                      )),
-                                  Padding(
-                                      padding: EdgeInsets.all(4.0),
-                                      child: Row(
-                                        children: [
-                                          Text("• ", style: TextStyle(fontSize: 30)),
-                                          Expanded(
-                                            child: Text(
-                                              "Use a combination of uppercase letters, lowercase letters and numbers.",
-                                              style: TextStyle(fontSize: 16),
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                ]),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-                                child: TextFormField(
-                                  onChanged: (value) => ctx
-                                      .read<ChangePasswordBloc>()
-                                      .add(ChangePasswordEvent.oldPasswordFieldChanged(value)),
-                                  decoration: InputDecoration(
-                                    prefixIcon: const Icon(Icons.lock),
-                                    hintText: "Current password",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(18),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
-                                    filled: true,
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        state.obscureOldPassword ? Icons.visibility : Icons.visibility_off,
-                                      ),
-                                      onPressed: () => ctx
-                                          .read<ChangePasswordBloc>()
-                                          .add(const ChangePasswordEvent.obscureOldPasswordToggled()),
-                                    ),
-                                  ),
-                                  obscureText: state.obscureOldPassword,
-                                  validator: (_) => state.oldPassword.value.fold(
-                                      (failure) => failure.maybeWhen<String?>(
-                                          validationFailure: (reason) => reason, orElse: () => null),
-                                      (_) => null),
-                                  autovalidateMode:
-                                      state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
-                                ),
-                              ),
-                              const SizedBox(height: 12),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-                                child: TextFormField(
-                                  onChanged: (value) => ctx
-                                      .read<ChangePasswordBloc>()
-                                      .add(ChangePasswordEvent.newPasswordFieldChanged(value)),
-                                  decoration: InputDecoration(
-                                    errorMaxLines: 3,
-                                    prefixIcon: const Icon(Icons.lock),
-                                    hintText: "New password",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(18),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
-                                    filled: true,
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        state.obscureNewPassword ? Icons.visibility : Icons.visibility_off,
-                                      ),
-                                      onPressed: () => ctx
-                                          .read<ChangePasswordBloc>()
-                                          .add(const ChangePasswordEvent.obscureNewPasswordToggled()),
-                                    ),
-                                  ),
-                                  obscureText: state.obscureNewPassword,
-                                  validator: (_) => state.newPassword.value.fold(
-                                      (failure) => failure.maybeWhen<String?>(
-                                          validationFailure: (reason) => reason, orElse: () => null),
-                                      (_) => null),
-                                  autovalidateMode:
-                                      state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
-                                ),
-                              ),
-                              const SizedBox(height: 12),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-                                child: TextFormField(
-                                  textInputAction: TextInputAction.done,
-                                  onChanged: (value) => ctx
-                                      .read<ChangePasswordBloc>()
-                                      .add(ChangePasswordEvent.confirmPasswordFieldChanged(value)),
-                                  decoration: InputDecoration(
-                                    prefixIcon: const Icon(Icons.lock),
-                                    hintText: "Confirm new password",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(18),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
-                                    filled: true,
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        state.obscureConfirmPassword ? Icons.visibility : Icons.visibility_off,
-                                      ),
-                                      onPressed: () => ctx
-                                          .read<ChangePasswordBloc>()
-                                          .add(const ChangePasswordEvent.obscureConfirmPasswordToggled()),
-                                    ),
-                                  ),
-                                  obscureText: state.obscureConfirmPassword,
-                                  validator: (_) => state.confirmPassword.value.fold(
-                                      (failure) => failure.maybeWhen<String?>(
-                                          validationFailure: (reason) => reason, orElse: () => null),
-                                      (_) => null),
-                                  autovalidateMode:
-                                      state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              Row(
+                      const Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                            child: Text(
+                              "To create a secure password:",
+                              style: TextStyle(fontSize: 22),
+                            ),
+                          ),
+                          Padding(
+                              padding: EdgeInsets.all(4.0),
+                              child: Row(
                                 children: [
+                                  Text("• ", style: TextStyle(fontSize: 30)),
+                                  Text(
+                                    "Use at least 8 characters;",
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ],
+                              )),
+                          Padding(
+                              padding: EdgeInsets.all(4.0),
+                              child: Row(
+                                children: [
+                                  Text("• ", style: TextStyle(fontSize: 30)),
                                   Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: ElevatedButton(
-                                        onPressed: () => ctx
-                                            .read<ChangePasswordBloc>()
-                                            .add(const ChangePasswordEvent.changePasswordSubmitted()),
-                                        style: ElevatedButton.styleFrom(
-                                          shape: const StadiumBorder(),
-                                          padding: const EdgeInsets.symmetric(vertical: 16),
-                                        ),
-                                        child: const Text(
-                                          "Change password",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                      ),
+                                    child: Text(
+                                      "Use a combination of uppercase letters, lowercase letters and numbers.",
+                                      style: TextStyle(fontSize: 16),
                                     ),
                                   ),
                                 ],
+                              )),
+                        ]),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                        child: TextFormField(
+                          onChanged: (value) =>
+                              ctx.read<ChangePasswordBloc>().add(ChangePasswordEvent.oldPasswordFieldChanged(value)),
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.lock),
+                            hintText: "Current password",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(18),
+                              borderSide: BorderSide.none,
+                            ),
+                            fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+                            filled: true,
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                state.obscureOldPassword ? Icons.visibility : Icons.visibility_off,
                               ),
-                            ],
+                              onPressed: () => ctx
+                                  .read<ChangePasswordBloc>()
+                                  .add(const ChangePasswordEvent.obscureOldPasswordToggled()),
+                            ),
                           ),
-                        )),
+                          obscureText: state.obscureOldPassword,
+                          validator: (_) => state.oldPassword.value.fold(
+                              (failure) => failure.maybeWhen<String?>(
+                                  validationFailure: () => "Old password is required",
+                                  recordNotFoundFailure: () => "Old password doesn't correspond to actual password.",
+                                  orElse: () => null),
+                              (_) => null),
+                          autovalidateMode:
+                              state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                        child: TextFormField(
+                          onChanged: (value) =>
+                              ctx.read<ChangePasswordBloc>().add(ChangePasswordEvent.newPasswordFieldChanged(value)),
+                          decoration: InputDecoration(
+                            errorMaxLines: 3,
+                            prefixIcon: const Icon(Icons.lock),
+                            hintText: "New password",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(18),
+                              borderSide: BorderSide.none,
+                            ),
+                            fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+                            filled: true,
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                state.obscureNewPassword ? Icons.visibility : Icons.visibility_off,
+                              ),
+                              onPressed: () => ctx
+                                  .read<ChangePasswordBloc>()
+                                  .add(const ChangePasswordEvent.obscureNewPasswordToggled()),
+                            ),
+                          ),
+                          obscureText: state.obscureNewPassword,
+                          validator: (_) => state.newPassword.value.fold(
+                              (failure) => failure.maybeWhen<String?>(
+                                  validationFailure: () =>
+                                      "Password must contain at least 8 characters, using uppercase, lowercase and numeric characters.",
+                                  orElse: () => null),
+                              (_) => null),
+                          autovalidateMode:
+                              state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                        child: TextFormField(
+                          textInputAction: TextInputAction.done,
+                          onChanged: (value) =>
+                              ctx.read<ChangePasswordBloc>().add(ChangePasswordEvent.confirmPasswordFieldChanged(value)),
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.lock),
+                            hintText: "Confirm new password",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(18),
+                              borderSide: BorderSide.none,
+                            ),
+                            fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+                            filled: true,
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                state.obscureConfirmPassword ? Icons.visibility : Icons.visibility_off,
+                              ),
+                              onPressed: () => ctx
+                                  .read<ChangePasswordBloc>()
+                                  .add(const ChangePasswordEvent.obscureConfirmPasswordToggled()),
+                            ),
+                          ),
+                          obscureText: state.obscureConfirmPassword,
+                          validator: (_) => state.confirmPassword.value.fold(
+                              (failure) => failure.maybeWhen<String?>(
+                                  validationFailure: () => "Field doesn't match the new password.", orElse: () => null),
+                              (_) => null),
+                          autovalidateMode:
+                              state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: ElevatedButton(
+                                onPressed: () => ctx
+                                    .read<ChangePasswordBloc>()
+                                    .add(const ChangePasswordEvent.changePasswordSubmitted()),
+                                style: ElevatedButton.styleFrom(
+                                  shape: const StadiumBorder(),
+                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                ),
+                                child: const Text(
+                                  "Change password",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-          )),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

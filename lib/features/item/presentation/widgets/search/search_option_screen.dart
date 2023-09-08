@@ -58,7 +58,7 @@ class SearchOptionScreen extends StatelessWidget {
               onFoundCheckedChanged: (_) => ctx.read<SearchBloc>().add(const SearchEvent.foundCheckTriggered()),
               onLostCheckedChanged: (_) => ctx.read<SearchBloc>().add(const SearchEvent.lostCheckTriggered()),
               errorText: state.itemsToSearch.value.fold(
-                  (failure) => failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""), (_) => ""),
+                  (failure) => failure.maybeWhen(validationFailure: () => "Check at least one of the two options.", orElse: () => ""), (_) => ""),
             ),
             sizedBox,
             SelectPositionButton(
@@ -72,7 +72,7 @@ class SearchOptionScreen extends StatelessWidget {
               startingPosition: state.pos.value.getOrElse(() => defaultPosition),
               showError: state.showError,
               errorText: state.pos.value.fold(
-                  (failure) => failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""), (_) => ""),
+                  (failure) => failure.maybeWhen(validationFailure: () => "Select the position of the item.", orElse: () => ""), (_) => ""),
             ),
             sizedBox,
             CategorySelectionForm(
@@ -80,7 +80,7 @@ class SearchOptionScreen extends StatelessWidget {
               category: state.category,
               showError: state.showError,
               errorText: state.cat.value.fold(
-                  (failure) => failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""), (_) => ""),
+                  (failure) => failure.maybeWhen(validationFailure: () => "Select a category.", orElse: () => ""), (_) => ""),
             ),
             sizedBox,
             DateSelectionForm(
@@ -90,7 +90,7 @@ class SearchOptionScreen extends StatelessWidget {
             sizedBox,
             PersonalizedLargeGreenButton(
               onPressed: () => ctx.read<SearchBloc>().add(const SearchEvent.searchSubmitted()),
-              text: const Text("Show result", style: TextStyle(fontSize: 20, color: Colors.white)),
+              text: const Text("Search", style: TextStyle(fontSize: 20, color: Colors.white)),
             )
           ],
         ),

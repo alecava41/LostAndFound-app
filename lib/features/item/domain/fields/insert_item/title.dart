@@ -21,6 +21,6 @@ Either<Failure, String> _validateTitleField(String input) {
   if (RegExp(titleRegex).hasMatch(input)) {
     return Right(input);
   } else {
-    return const Left(Failure.validationFailure("Title must have between 1 and 50 characters."));
+    return const Left(Failure.validationFailure());
   }
 }

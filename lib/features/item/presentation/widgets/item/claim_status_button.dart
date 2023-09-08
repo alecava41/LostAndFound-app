@@ -8,14 +8,14 @@ class ClaimStatusButton extends StatelessWidget {
   final ClaimStatus status;
   final String owner;
   final int itemId;
-  final bool isCliccable;
+  final bool isClickable;
 
   const ClaimStatusButton({
     super.key,
     required this.status,
     required this.owner,
-    required this.itemId,  this.isCliccable = true,
-    
+    required this.itemId,
+    this.isClickable = true,
   });
 
   @override
@@ -29,17 +29,19 @@ class ClaimStatusButton extends StatelessWidget {
                 ? PersonalizedColor.claimWaitingStatusColor
                 : PersonalizedColor.claimDeniedStatusColor),
         child: InkWell(
-          onTap: isCliccable? () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (ctx) => AnswerQuestionScreen(
-                  itemId: itemId,
-                  isClaimAlreadyTaken: true,
-                ),
-              ),
-            );
-          } : null,
+          onTap: isClickable
+              ? () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (ctx) => AnswerQuestionScreen(
+                        itemId: itemId,
+                        isClaimAlreadyTaken: true,
+                      ),
+                    ),
+                  );
+                }
+              : null,
           splashColor: PersonalizedColor.splashGreyColor,
           child: Container(
             padding: const EdgeInsets.fromLTRB(12, 12, 4, 12),
@@ -63,7 +65,7 @@ class ClaimStatusButton extends StatelessWidget {
                             text: TextSpan(
                               children: [
                                 const TextSpan(
-                                  text: "Claim status: ",
+                                  text: "Claim status ",
                                   style: TextStyle(fontSize: 18, color: Colors.black),
                                 ),
                                 TextSpan(
@@ -109,10 +111,12 @@ class ClaimStatusButton extends StatelessWidget {
                     ],
                   ),
                 ),
-                isCliccable? const Icon(
-                  Icons.chevron_right,
-                  size: 50,
-                ) : Container()
+                isClickable
+                    ? const Icon(
+                        Icons.chevron_right,
+                        size: 50,
+                      )
+                    : Container()
               ],
             ),
           ),

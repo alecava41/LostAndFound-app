@@ -20,6 +20,6 @@ Either<Failure, String> _validateAnswerField(String input) {
   if (input.isNotEmpty) {
     return Right(input);
   } else {
-    return const Left(Failure.validationFailure("Answer is required."));
+    return const Left(Failure.validationFailure());
   }
 }

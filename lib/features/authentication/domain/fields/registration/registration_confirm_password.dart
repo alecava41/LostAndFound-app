@@ -20,6 +20,6 @@ Either<Failure, String> _validateConfirmPasswordField(String input, String sourc
   if (input == source || (input == "" && source == "")) {
     return Right(input);
   } else {
-    return const Left(Failure.validationFailure("Field doesn't match the original password."));
+    return const Left(Failure.validationFailure());
   }
 }

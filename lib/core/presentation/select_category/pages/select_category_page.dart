@@ -17,52 +17,53 @@ class CategorySelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<CategoryBloc>(
-        create: (_) => sl<CategoryBloc>()..add(const CategoryEvent.categoryCreated()),
-        child: BlocBuilder<CategoryBloc, CategoryState>(
-          builder: (ctx, state) {
-            return AnnotatedRegion(
-              value: const SystemUiOverlayStyle(
-                statusBarColor: Colors.white,
-                statusBarBrightness: Brightness.light,
-                statusBarIconBrightness: Brightness.dark,
-              ),
-              child: Scaffold(
-                  backgroundColor: PersonalizedColor.backgroundColor,
-                  appBar: AppBar(
-                    title: const Text(
-                      'Choose a category',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    backgroundColor: Colors.white,
-                    iconTheme: const IconThemeData(color: Colors.black),
+      create: (_) => sl<CategoryBloc>()..add(const CategoryEvent.categoryCreated()),
+      child: BlocBuilder<CategoryBloc, CategoryState>(
+        builder: (ctx, state) {
+          return AnnotatedRegion(
+            value: const SystemUiOverlayStyle(
+              statusBarColor: Colors.white,
+              statusBarBrightness: Brightness.light,
+              statusBarIconBrightness: Brightness.dark,
+            ),
+            child: Scaffold(
+                backgroundColor: PersonalizedColor.backgroundColor,
+                appBar: AppBar(
+                  title: const Text(
+                    'Choose a category',
+                    style: TextStyle(color: Colors.black),
                   ),
-                  body: () {
-                    if (state.isLoading) {
-                      return const Center(
-                        child: CircularProgressIndicator(value: null),
-                      );
-                    } else if (state.hasLoadingError) {
-                      return ErrorPage(onRetry: () => ctx.read<CategoryBloc>().add(const CategoryEvent.categoryCreated()));
-                    } else {
-                      return SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: (removeAllOption ? state.categories.drop(1) : state.categories)
-                              .map((cat) => CategoryItem(
-                                    categoryName: cat.name,
-                                    icon: IconData(cat.icon, fontFamily: 'MaterialIcons'),
-                                    onTap: () {
-                                      Navigator.pop(context, Pair<int, String>(cat.id, cat.name));
-                                    },
-                                    description: cat.description,
-                                  ))
-                              .toList(),
-                        ),
-                      );
-                    }
-                  }()),
-            );
-          },
-        ));
+                  backgroundColor: Colors.white,
+                  iconTheme: const IconThemeData(color: Colors.black),
+                ),
+                body: () {
+                  if (state.isLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(value: null),
+                    );
+                  } else if (state.hasLoadingError) {
+                    return ErrorPage(onRetry: () => ctx.read<CategoryBloc>().add(const CategoryEvent.categoryCreated()));
+                  } else {
+                    return SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: (removeAllOption ? state.categories.drop(1) : state.categories)
+                            .map((cat) => CategoryItem(
+                                  categoryName: cat.name,
+                                  icon: IconData(cat.icon, fontFamily: 'MaterialIcons'),
+                                  onTap: () {
+                                    Navigator.pop(context, Pair<int, String>(cat.id, cat.name));
+                                  },
+                                  description: cat.description,
+                                ))
+                            .toList(),
+                      ),
+                    );
+                  }
+                }()),
+          );
+        },
+      ),
+    );
   }
 }

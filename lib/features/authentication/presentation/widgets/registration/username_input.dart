@@ -19,7 +19,8 @@ class UsernameInput extends StatelessWidget {
         ),
         validator: (_) => state.username.value.fold(
             (failure) => failure.maybeWhen<String?>(
-                validationFailure: (reason) => reason,
+                validationFailure: () => "Username can contain up to 30 alphanumeric digits.",
+                duplicateRecordFailure: (_) => "Username already used.",
                 orElse: () => null),
             (_) => null),
         autovalidateMode: state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,

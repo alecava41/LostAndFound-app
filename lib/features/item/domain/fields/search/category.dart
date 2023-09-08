@@ -18,6 +18,6 @@ Either<Failure, int> _validateCategoryField(int id) {
   if (id > -1) {
     return Right(id);
   } else {
-    return const Left(Failure.validationFailure("Select a category."));
+    return const Left(Failure.validationFailure());
   }
 }

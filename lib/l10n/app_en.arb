@@ -1,0 +1,325 @@
+{
+  "close": "Close",
+  "cancel": "Cancel",
+  "yes": "Yes",
+  "ok": "OK",
+  "singIn": "Sign In",
+  "signUp": "Sign Up",
+  "item": "{count, plural, =0{Item} =other{Items}}",
+  "@item": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "lostAndFound": "Lost&Found",
+  "found": "Found",
+  "lost": "Lost",
+  "retry": "Retry",
+  "gallery": "Gallery",
+  "camera": "Camera",
+  "date": "Date",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "user": "Email or Username",
+  "email": "Email Address",
+  "username": "Username",
+  "send": "Send",
+  "claim": "{count, plural, =0{Claim} =other{Claims}}",
+  "@claim": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "message": "{count, plural, =0{Message} =other{Messages}}",
+  "@message": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "homeBottomBarTab": "Home",
+  "accept": "Accept",
+  "decline": "Decline",
+  "searchBottomBarTab": "Search",
+  "insertBottomBarTab": "Insert",
+  "inboxBottomBarTab": "Inbox",
+  "profileBottomBarTab": "Profile",
+  "cameraPermissionDialogTitle": "Camera Permission Required",
+  "cameraPermissionDialogContentPermanentlyDenied": "To take pictures you need to allow camera permissions.\n\nPlease go to the app settings and enable it.",
+  "cameraPermissionDialogContentDenied": "Camera permission is required to use your camera.",
+  "categoryPageTitle": "Choose a category",
+  "categoryFormEntryTitle": "Category",
+  "positionPageTitle": "Select position",
+  "positionUseCurrentLocation": "Use my current location",
+  "positionUseSelected": "Choose this position",
+  "locationPermissionDialogTitle": "Location Permission Required",
+  "locationPermissionDialogContentPermanentlyDenied": "Location permission is required to use your current location.\\n\\nPlease go to app settings and enable it.",
+  "locationPermissionDialogContentDenied": "Location permission is required to use your current location.",
+  "noConnectionDialogTitle": "No Connection",
+  "noConnectionDialogContent": "Please check your internet connectivity",
+  "positionDialogTitle": "Position Service Disabled",
+  "positionDialogContent": "Please enable your position service",
+  "tutorialInitialPage1Title": "Report a Lost Item",
+  "tutorialInitialPage1Content": "Input the item details in the app to report it as lost.",
+  "tutorialInitialPage2Title": "Report a Found Item",
+  "tutorialInitialPage2Content": "Notify others by reporting a found item through the app.",
+  "tutorialInitialPage3Title": "Arrange Item Return",
+  "tutorialInitialPage3Content": "Connect with the finder via messaging to arrange a safe meetup location for item return.",
+  "confirmExitDialogTitle": "Confirm Exit",
+  "confirmExitDialogContent": "By exiting this page you will lose your current progress. Are you sure you want to exit?",
+  "errorPageTitle": "An error occurred while loading the data.",
+  "errorPageSubtitle": "Please try again later",
+  "mediaSelectionDialogContent": "Please select a media option",
+  "dateFormEntrySubtitle": "Date of upload",
+  "dateFormEntryValue": "After {date}",
+  "@dateFormEntryValue": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMMMM"
+      }
+    }
+  },
+  "positionFormEntryTitle": "Position",
+  "positionFormEntrySubtitle": "Where the item has been found or lost",
+  "positionFormEntryNotSelected": "Position not chosen yet",
+  "signUpText": "Don't have an account?",
+  "signInText": "Already have an account?",
+  "failureInvalidCredentials": "Invalid credentials. Please try again.",
+  "failureGeneric": "Server error. Please try again later.",
+  "failureNetwork": "No internet connection available. Check your internet connection.",
+  "failureUnknown": "Unknown error",
+  "failureInvalidPassword": "Invalid password.",
+  "failureInvalidUser": "Invalid username or email.",
+  "failureConfirmPassword": "Field doesn't match the original password.",
+  "failureEmailDuplicate": "Email already used.",
+  "failureEmailInvalid": "Invalid email format.",
+  "failureInvalidPasswordCreation": "Password must contain at least 8 characters, using uppercase, lowercase and numeric characters.",
+  "successSignUp": "Successful sign up",
+  "successAnswerClaim": "Claim successfully managed",
+  "successAnswerQuestion": "Claim successfully created",
+  "failureUsernameDuplicate": "Username already used.",
+  "failureInvalidUsername": "Username can contain up to 30 alphanumeric digits.",
+  "noContentInboxTitle": "No active chats",
+  "noContentInboxSubtitle": "Chat with someone to see the chat list",
+  "answerClaimTitle": "Answer to claim",
+  "answerClaimTutorialClosedManaged": "You have already managed this claim.",
+  "answerClaimTutorialClosedUnmanaged": "You are deciding whether to accept or deny this claim.",
+  "answerClaimTutorialOpenManaged": "On this page, you can find the information about this received claim.",
+  "answerClaimTutorialOpenUnmanaged": "Please review the answer received and make a decision to either accept or decline this claim. If you accept this claim, all the other claims for this item will be automatically rejected and the item won't be visible anymore by others.",
+  "itemClaimedBy": "Item claimed by {username}",
+  "@itemClaimedBy": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "yourQuestion": "Your question",
+  "answerOf": "Answer of {username}",
+  "@answerOf": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "claimStatus": "Claim status",
+  "acceptedAnswerClaim": "You have accepted this claim. Get in touch with {username} through the chat to arrange the item's return.",
+  "@acceptedAnswerClaim": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "rejectedClaim": "You have rejected this claim.",
+  "validateClaim": "Validate the claim.",
+  "answerQuestionTitle": "Answer claim question",
+  "answerQuestionTutorialClosedManaged": "You have claimed this item.",
+  "answerQuestionTutorialClosedUnmanaged": "You are claiming this item.",
+  "answerQuestionTutorialOpenManaged": "On this page, you can find information about this claim you have made.",
+  "answerQuestionTutorialOpenUnmanaged": "To claim the item, please answer the following question correctly. If you can provide the correct answer, the user who found the item will approve your claim and then you can have your item back.",
+  "itemClaiming": "Item you are claiming",
+  "questionOf": "Question of {username}",
+  "@questionOf": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "yourAnswer": "Your answer",
+  "failureInvalidQuestion": "Answer is required.",
+  "acceptedQuestionClaim": "Your claim has been accepted! Get in touch with {username} through the chat to arrange the item's return.",
+  "@acceptedQuestionClaim": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "rejectedQuestionClaim": "Unfortunately, your claim has been rejected by {username}.",
+  "@rejectedQuestionClaim": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "waitQuestionClaim": "Wait for {username} to validate to your claim.",
+  "@waitQuestionClaim": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "receivedClaims": "Received claims",
+  "yourClaims": "Your claims",
+  "noContentClaimReceivedTitle": "No received claims to manage",
+  "noContentClaimReceivedSubtitle": "Claims will be displayed as soon as someone claims one of your found items",
+  "claimReceivedTutorial": "In this section there are the claims, made by other users, for the items you have found.",
+  "noContentClaimSentTitle": "No open claims",
+  "noContentClaimSentSubtitle": "Your claims will be displayed as soon as you claim a found item",
+  "claimSentTutorial": "In this section there are the claims you have made for items founded by other users.",
+  "claimedBy": "Claimed by {username}",
+  "@claimedBy": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "claimStatusSpaced": "Claim status ",
+  "seeDetails": "See Details",
+  "sendMessage": "Send a Message",
+  "filtersPageTitle": "Manage Filters",
+  "filters": "Filters",
+  "deleteAll": "DELETE ALL",
+  "failureInvalidType": "Check at least one of the two options.",
+  "failureInvalidPosition": "Select the position of the item.",
+  "failureInvalidCategory": "Select a category.",
+  "search": "Search",
+  "home": "Home",
+  "tooltipNews": "news",
+  "tooltipClaims": "claims",
+  "homeTutorialClosedTitle": "Have you lost or found an item?\\nWhat should you do now?",
+  "homeTutorialOpenLostItem": "I lost an Item",
+  "homeTutorialOpenFoundItem": "I found an Item",
+  "successInsertItem": "Item successfully created",
+  "titleFieldTitle": "Title",
+  "titleFieldHint": "Recognizable name for the item",
+  "failureInvalidTitle": "Title must have between 1 and 50 characters.",
+  "itemType": "The item has been",
+  "questionFieldTitle": "Question to verify the ownership",
+  "questionFieldHint": "Clear and precise question",
+  "failureInvalidQuestionField": "Safe question is required.",
+  "create": "Create",
+  "insertItemTitle": "Insert an Item",
+  "successSolveItem": "Item successfully solved",
+  "successDeleteItem": "Item successfully deleted",
+  "itemPageTitle": "Item Details",
+  "itemMenu1": "Mark as solved",
+  "itemMenu2": "Edit",
+  "itemMenu3": "Delete",
+  "lostBy": "Lost by",
+  "foundBy": "Found by",
+  "claimsForItem": "Claims for this item",
+  "noClaimsForItem": "No claims received yet.",
+  "claimItemButton": "Claim the item",
+  "newsPageTitle": "News",
+  "successItemUpdate": "Item successfully updated",
+  "updateItemPageTitle": "Edit Item",
+  "update": "Update",
+  "openClaims": "{count, plural, =1{1 claim} =other{{count} claims}}",
+  "@openClaims": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "resolved": "Resolved",
+  "yourFoundItems": "Your found items",
+  "yourLostItems": "Your lost items",
+  "noFoundItemContent": "No found items yet, keep searching!",
+  "noFoundItemButton": "Insert a found item",
+  "noLostItemContent": "You have no lost item!",
+  "noLostItemButton": "Insert a lost item",
+  "uploadImageButton": "Upload a photo",
+  "foundNear": "Found near",
+  "lostNear": "Lost near",
+  "noMapAppTitle": "No Map App Found",
+  "noMapAppContent": "Oops! It looks like there\\'s no map app on your device to open this link. Please install a mapping app like Google Maps and try again.",
+  "dateInsertion": "Date of insertion",
+  "category": "Category",
+  "question": "Question to verify the ownership",
+  "openMap": "Open map",
+  "hey": "Hey, ",
+  "mightFound": "might have found your",
+  "mightLost": "might be the owner of",
+  "noContentNewsTitle": "No news waiting for you",
+  "noContentNewsSubtitle": "News will be displayed as soon as someone inserts an item that may match one of yours",
+  "metersAway": "{meters}m away",
+  "@metersAway": {
+    "placeholders": {
+      "meters": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "noContentSearchResultTitle": "No matching items found with these parameters",
+  "noContentSearchResultSubtitle": "Try again with more general ones",
+  "selectSortingDialogTitle": "Select a sorting method.",
+  "successPasswordChange": "Password successfully updated",
+  "changePasswordButton": "Change password",
+  "passwordCreate1": "To create a secure password:",
+  "passwordCreate2": "Use at least 8 characters;",
+  "passwordCreate3": "Use a combination of uppercase letters, lowercase letters and numbers.",
+  "passwordFormCurrentHint": "Current password",
+  "failureInvalidOldPasswordNotMatching": "Old password doesn't correspond to actual password.",
+  "failureInvalidOldPassword": "Old password is required.",
+  "newPasswordHint": "New password",
+  "failureInvalidNewPassword": "Password must contain at least 8 characters, using uppercase, lowercase and numeric characters.",
+  "confirmNewPasswordField": "Confirm new password",
+  "invalidConfirmNewPassword": "Field doesn't match the new password.",
+  "tutorial": "Tutorial",
+  "lostItems": "Lost items",
+  "foundItems": "Found items",
+  "successUploadImage": "Image uploaded successfully",
+  "successLogout": "Successful logout",
+  "profile": "Profile",
+  "logout": "Logout",
+  "logoutDialogContent": "Are you sure you want to log out?",
+  "logoutDialogNo": "No, stay connected",
+  "logoutDialogYes": "Yes, log out",
+
+  "tutorialFoundItemTitle1": "Report a Found Item",
+  "tutorialFoundItemContent1": "Input the item details such as title, position, category, safe question and create a new report.\\nThis would notify all the users that have reported a lost item that could match the features of the one you have inserted.",
+  "tutorialFoundItemTitle2": "Manage received Claims",
+  "tutorialFoundItemContent2": "Wait for users to open claims for your found item.\\nManage all of them, by taking care about approving the most correct one.\\nOnce you approve a claim for your found item, nobody will be able to see that item again and all the other claims will be automatically rejected.",
+  "tutorialFoundItemTitle3": "Chat to Arrange Item Return",
+  "tutorialFoundItemContent3": "Get in touch, through the chat, with the user who filled the claim you have approved, to arrange the item\\'s return",
+  "tutorialFoundItemTitle4": "Mark Found Item as Solved",
+  "tutorialFoundItemContent4": "Everything went smooth, and the item came back to the legitimate owner!\\nMark your found item as solved to remove it from the app.",
+
+  "tutorialLostItemTitle1": "Report a Lost Item",
+  "tutorialLostItemContent1": "Input the item details such as title, position, category and create a new report.\\nThis would notify all the users that have reported a found item that could match the features of the one you have inserted.",
+  "tutorialLostItemTitle2": "Create a Claim",
+  "tutorialLostItemContent2": "Browse found items of the other users or check if there are news for your lost item.\\nOnce you find an item that could match your lost one, create a claim by answering to the safe question.\\nWait for the other user to validate your claim.",
+  "tutorialLostItemTitle3": "Chat to Arrange Item Return",
+  "tutorialLostItemContent3": "If your claim has been approved, then get in touch with the other user, through the chat, to arrange the item\\'s return",
+  "tutorialLostItemTitle4": "Mark Lost Item as Solved",
+  "tutorialLostItemContent4": "Everything went smooth, and the item came back to the legitimate owner!\\nMark your lost item as solved to remove it from the app."
+}

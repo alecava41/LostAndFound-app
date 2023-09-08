@@ -53,7 +53,6 @@ class AnswerClaimScreen extends StatelessWidget {
                           failure.maybeWhen<String>(
                               genericFailure: () => 'Server error. Please try again later.',
                               networkFailure: () => 'No internet connection available. Check your internet connection.',
-                              validationFailure: (reason) => reason!,
                               orElse: () => "Unknown error"),
                         ),
                       ),

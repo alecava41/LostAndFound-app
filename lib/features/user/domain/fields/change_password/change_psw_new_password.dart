@@ -20,6 +20,6 @@ Either<Failure, String> _validateNewPasswordField(String input) {
   if (RegExp(passwordRegex).hasMatch(input)) {
     return Right(input);
   } else {
-    return const Left(Failure.validationFailure("Password must contain at least 8 characters, using uppercase, lowercase and numeric characters."));
+    return const Left(Failure.validationFailure());
   }
 }

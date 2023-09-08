@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -31,9 +32,11 @@ class App extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _Application();
 
-  // TODO (@alecava41) translation (app + notifications + server)
-  // TODO (@alecava41) dark theme + switch
-  // TODO (@alecava41) (map) fix this on iOS (https://pub.dev/packages/map_launcher#for-ios-add-url-schemes-in-infoplist-file)
+// TODO (@alecava41) translation (notifications + server) + do stuff for iOS + missing translations from enums
+// TODO (@alecava41) should state somewhere to range of the search for the specified position
+// TODO (@alecava41) dark theme + switch
+// TODO (@alecava41) (map) fix this on iOS (https://pub.dev/packages/map_launcher#for-ios-add-url-schemes-in-infoplist-file)
+// TODO (@alecava41) remove third minion from home_tutorial image
 }
 
 class _Application extends State<App> {
@@ -120,7 +123,6 @@ class _Application extends State<App> {
     setupInteractedMessage();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -140,6 +142,8 @@ class _Application extends State<App> {
           }
 
           return MaterialApp(
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             locale: DevicePreview.locale(context),
             builder: DevicePreview.appBuilder,
             title: 'Lost and Found',

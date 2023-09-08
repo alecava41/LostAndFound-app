@@ -27,7 +27,7 @@ class ConfirmPasswordInput extends StatelessWidget {
         autovalidateMode: state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
         validator: (_) => state.confirmPassword.value.fold(
           (failure) => failure.maybeWhen<String?>(
-              validationFailure: (reason) => reason,
+              validationFailure: () => "Field doesn't match the original password.",
               orElse: () => null),
           (_) => null,
         ),

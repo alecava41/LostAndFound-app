@@ -18,7 +18,7 @@ class RegistrationUsernameField extends Equatable {
 
 Either<Failure, String> _validateUsernameField(String input, bool isDuplicate) {
   if (isDuplicate) {
-    return const Left(Failure.validationFailure("Username already used."));
+    return const Left(Failure.duplicateRecordFailure(""));
   }
 
   input = input.trim();
@@ -27,6 +27,6 @@ Either<Failure, String> _validateUsernameField(String input, bool isDuplicate) {
   if (RegExp(usernameRegex).hasMatch(input)) {
     return Right(input);
   } else {
-    return const Left(Failure.validationFailure("Username can contain up to 30 alphanumeric digits."));
+    return const Left(Failure.validationFailure());
   }
 }

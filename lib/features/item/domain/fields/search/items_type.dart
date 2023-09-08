@@ -20,6 +20,6 @@ Either<Failure, Pair<bool, bool>> _validateCheckboxesField(bool found, bool lost
   if (found || lost) {
     return Right(Pair(found, lost));
   } else {
-    return const Left(Failure.validationFailure("Check at least one of the two options."));
+    return const Left(Failure.validationFailure());
   }
 }

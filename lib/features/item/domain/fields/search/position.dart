@@ -19,6 +19,6 @@ Either<Failure, LatLng> _validatePositionField(LatLng pos) {
   if (pos != const LatLng(0, 0)) {
     return Right(pos);
   } else {
-    return const Left(Failure.validationFailure("Select the position of the item."));
+    return const Left(Failure.validationFailure());
   }
 }

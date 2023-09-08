@@ -43,28 +43,24 @@ class FoundItemsContainer extends StatelessWidget {
                   ? Padding(
                       padding: const EdgeInsets.fromLTRB(20, 0, 0, 25),
                       child: SizedBox(
-                        height: ScreenSize.isBigSmartphoneDevice(context)
-                            ? 240
-                            : ScreenSize.isMediumSmartphoneDevice(context)
-                                ? 210
-                                : 180,
-                        child: state.foundItems.isNotEmpty
-                            ? ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: state.foundItems
-                                    .map((item) => CustomCardHome(
-                                          id: item.id,
-                                          hasImage: item.hasImage,
-                                          text: item.title,
-                                          claims: item.claims,
-                                          token: state.token,
-                                          approvedClaims: item.approvedClaims,
-                                        ))
-                                    .toList(),
-                              )
-                            : const Center(
-                                child: Text("You have no found item inserted yet!", style: TextStyle(fontSize: 20))),
-                      ),
+                          height: ScreenSize.isBigSmartphoneDevice(context)
+                              ? 240
+                              : ScreenSize.isMediumSmartphoneDevice(context)
+                                  ? 210
+                                  : 180,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: state.foundItems
+                                .map((item) => CustomCardHome(
+                                      id: item.id,
+                                      hasImage: item.hasImage,
+                                      text: item.title,
+                                      claims: item.claims,
+                                      token: state.token,
+                                      approvedClaims: item.approvedClaims,
+                                    ))
+                                .toList(),
+                          )),
                     )
                   : Padding(
                       padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),

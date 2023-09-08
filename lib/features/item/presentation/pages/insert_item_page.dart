@@ -91,22 +91,17 @@ class InsertItemScreen extends StatelessWidget {
           if (insertFailureOrSuccess != null) {
             insertFailureOrSuccess.fold(
                 (failure) => {
-                      failure.maybeWhen(
-                          validationFailure: (_) {},
-                          orElse: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.red,
-                                content: Text(
-                                  failure.maybeWhen<String>(
-                                      genericFailure: () => 'Server error. Please try again later.',
-                                      networkFailure: () =>
-                                          'No internet connection available. Check your internet connection.',
-                                      orElse: () => "Unknown error"),
-                                ),
-                              ),
-                            );
-                          })
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text(
+                            failure.maybeWhen<String>(
+                                genericFailure: () => 'Server error. Please try again later.',
+                                networkFailure: () => 'No internet connection available. Check your internet connection.',
+                                orElse: () => "Unknown error"),
+                          ),
+                        ),
+                      )
                     },
                 (_) => {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -125,7 +120,8 @@ class InsertItemScreen extends StatelessWidget {
               maxLines: 1,
               showError: state.showError,
               errorText: state.title.value.fold(
-                  (failure) => failure.maybeWhen<String?>(validationFailure: (reason) => reason, orElse: () => null),
+                  (failure) => failure.maybeWhen<String?>(
+                      validationFailure: () => "Title must have between 1 and 50 characters.", orElse: () => null),
                   (r) => null),
               onTextChanged: (input) => ctx.read<InsertItemBloc>().add(InsertItemEvent.titleChanged(input)),
               isValid: state.title.value.isRight(),
@@ -146,7 +142,8 @@ class InsertItemScreen extends StatelessWidget {
               onTextChanged: (input) => ctx.read<InsertItemBloc>().add(InsertItemEvent.questionChanged(input)),
               showError: state.showError,
               errorText: state.question.value.fold(
-                  (failure) => failure.maybeWhen<String?>(validationFailure: (reason) => reason, orElse: () => null),
+                  (failure) => failure.maybeWhen<String?>(
+                      validationFailure: () => "Safe question is required.", orElse: () => null),
                   (r) => null),
             ),
           );
@@ -265,7 +262,8 @@ class InsertItemScreen extends StatelessWidget {
                             },
                             showError: state.showError,
                             errorText: state.pos.value.fold(
-                                (failure) => failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""),
+                                (failure) => failure.maybeWhen(
+                                    validationFailure: () => "Select the position of the item.", orElse: () => ""),
                                 (_) => ""),
                             startingPosition: state.pos.value.getOrElse(() => const LatLng(0, 0)),
                             isLoadingAddress: state.isLoadingPosition,
@@ -280,7 +278,7 @@ class InsertItemScreen extends StatelessWidget {
                             category: state.category,
                             showError: state.showError,
                             errorText: state.cat.value.fold(
-                                (failure) => failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""),
+                                (failure) => failure.maybeWhen(validationFailure: () => "Select a category.", orElse: () => ""),
                                 (_) => ""),
                             removeAllOption: true,
                           ),

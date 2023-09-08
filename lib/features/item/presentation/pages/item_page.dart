@@ -49,7 +49,6 @@ class ItemScreen extends StatelessWidget {
                     failure.maybeWhen<String>(
                         genericFailure: () => 'Server error. Please try again later.',
                         networkFailure: () => 'No internet connection available. Check your internet connection.',
-                        validationFailure: (reason) => reason!,
                         orElse: () => "Unknown error"),
                   ),
                 ),
@@ -68,7 +67,6 @@ class ItemScreen extends StatelessWidget {
                           failure.maybeWhen<String>(
                               genericFailure: () => 'Server error. Please try again later.',
                               networkFailure: () => 'No internet connection available. Check your internet connection.',
-                              validationFailure: (reason) => reason!,
                               orElse: () => "Unknown error"),
                         ),
                       ),
@@ -96,7 +94,6 @@ class ItemScreen extends StatelessWidget {
                             failure.maybeWhen<String>(
                                 genericFailure: () => 'Server error. Please try again later.',
                                 networkFailure: () => 'No internet connection available. Check your internet connection.',
-                                validationFailure: (reason) => reason!,
                                 orElse: () => "Unknown error"),
                             style: const TextStyle(fontSize: 20)),
                       ),
@@ -418,7 +415,7 @@ class ItemScreen extends StatelessWidget {
                       owner: owner.username,
                       status: claim.status,
                       itemId: itemId,
-                      isCliccable: false,
+                      isClickable: false,
                     ),
                   )
                 : Container(

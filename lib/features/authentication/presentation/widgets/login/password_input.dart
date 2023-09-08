@@ -28,7 +28,7 @@ class PasswordInput extends StatelessWidget {
         autovalidateMode: state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
         validator: (_) => state.password.value.fold(
           (failure) => failure.maybeWhen<String?>(
-              validationFailure: (reason) => reason,
+              validationFailure: () => "Invalid password.",
               orElse: () => null),
           (_) => null,
         ),

@@ -18,6 +18,6 @@ Either<Failure, String> _validatePassword(String input) {
   if (input.isNotEmpty) {
     return Right(input);
   } else {
-    return const Left(Failure.validationFailure("Invalid password."));
+    return const Left(Failure.validationFailure());
   }
 }

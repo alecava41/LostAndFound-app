@@ -17,12 +17,12 @@ class ChangePswOldPasswordField extends Equatable {
 
 Either<Failure, String> _validateOldPasswordField(String input, bool isNotActualPassword) {
   if (isNotActualPassword) {
-    return const Left(Failure.validationFailure("Old password doesn't correspond to actual password."));
+    return const Left(Failure.recordNotFoundFailure());
   }
 
   if (input.isNotEmpty) {
     return Right(input);
   } else {
-    return const Left(Failure.validationFailure("Old password is required"));
+    return const Left(Failure.validationFailure());
   }
 }

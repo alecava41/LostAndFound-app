@@ -100,7 +100,6 @@ class UpdateItemScreen extends StatelessWidget {
                             failure.maybeWhen<String>(
                                 genericFailure: () => 'Server error. Please try again later.',
                                 networkFailure: () => 'No internet connection available. Check your internet connection.',
-                                validationFailure: (reason) => reason!,
                                 orElse: () => "Unknown error"),
                           ),
                         ),
@@ -154,7 +153,7 @@ class UpdateItemScreen extends StatelessWidget {
                     ),
                     iconTheme: const IconThemeData(color: Colors.black),
                     title: const Text(
-                      "Modify item",
+                      "Edit Item",
                       style: TextStyle(color: Colors.black),
                     ),
                     backgroundColor: Colors.white,
@@ -204,7 +203,7 @@ class UpdateItemScreen extends StatelessWidget {
                                           showError: state.showError,
                                           errorText: state.title.value.fold(
                                               (failure) => failure.maybeWhen<String?>(
-                                                  validationFailure: (reason) => reason, orElse: () => null),
+                                                  validationFailure: () => "Title must have between 1 and 50 characters.", orElse: () => null),
                                               (r) => null),
                                           onTextChanged: (input) =>
                                               ctx.read<UpdateItemBloc>().add(UpdateItemEvent.titleChanged(input)),
@@ -230,7 +229,7 @@ class UpdateItemScreen extends StatelessWidget {
                                                 showError: state.showError,
                                                 errorText: state.question.value.fold(
                                                     (failure) => failure.maybeWhen<String?>(
-                                                        validationFailure: (reason) => reason, orElse: () => null),
+                                                        validationFailure: () => "Safe question is required.", orElse: () => null),
                                                     (r) => null),
                                               ),
                                             )
@@ -249,7 +248,7 @@ class UpdateItemScreen extends StatelessWidget {
                                   showError: state.showError,
                                   errorText: state.pos.value.fold(
                                       (failure) =>
-                                          failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""),
+                                          failure.maybeWhen(validationFailure: () => "Select the position of the item.", orElse: () => ""),
                                       (_) => ""),
                                   startingPosition: state.pos.value.getOrElse(() => defaultPosition),
                                   isLoadingAddress: state.isLoadingPosition,
@@ -273,7 +272,7 @@ class UpdateItemScreen extends StatelessWidget {
                                   showError: state.showError,
                                   errorText: state.cat.value.fold(
                                       (failure) =>
-                                          failure.maybeWhen(validationFailure: (reason) => reason!, orElse: () => ""),
+                                          failure.maybeWhen(validationFailure: () => "Select a category.", orElse: () => ""),
                                       (_) => ""),
                                   removeAllOption: true,
                                 ),

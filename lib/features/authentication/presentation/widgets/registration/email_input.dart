@@ -19,7 +19,9 @@ class EmailInput extends StatelessWidget {
         ),
         keyboardType: TextInputType.emailAddress,
         validator: (_) => state.email.value.fold(
-            (failure) => failure.maybeWhen<String?>(validationFailure: (reason) => reason, orElse: () => null),
+            (failure) => failure.maybeWhen<String?>(
+                duplicateRecordFailure: (_) => "Email already used.",
+                validationFailure: () => "Invalid email format.", orElse: () => null),
             (_) => null),
         autovalidateMode: state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
       );

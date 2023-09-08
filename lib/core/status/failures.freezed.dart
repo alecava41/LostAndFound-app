@@ -23,7 +23,7 @@ mixin _$Failure {
     required TResult Function() recordNotFoundFailure,
     required TResult Function(String failureField) duplicateRecordFailure,
     required TResult Function() passwordMismatchFailure,
-    required TResult Function(String? reason) validationFailure,
+    required TResult Function() validationFailure,
     required TResult Function() networkFailure,
     required TResult Function(GeolocationError reason) geolocationFailure,
   }) =>
@@ -35,7 +35,7 @@ mixin _$Failure {
     TResult? Function()? recordNotFoundFailure,
     TResult? Function(String failureField)? duplicateRecordFailure,
     TResult? Function()? passwordMismatchFailure,
-    TResult? Function(String? reason)? validationFailure,
+    TResult? Function()? validationFailure,
     TResult? Function()? networkFailure,
     TResult? Function(GeolocationError reason)? geolocationFailure,
   }) =>
@@ -47,7 +47,7 @@ mixin _$Failure {
     TResult Function()? recordNotFoundFailure,
     TResult Function(String failureField)? duplicateRecordFailure,
     TResult Function()? passwordMismatchFailure,
-    TResult Function(String? reason)? validationFailure,
+    TResult Function()? validationFailure,
     TResult Function()? networkFailure,
     TResult Function(GeolocationError reason)? geolocationFailure,
     required TResult orElse(),
@@ -155,7 +155,7 @@ class _$_GenericFailure implements _GenericFailure {
     required TResult Function() recordNotFoundFailure,
     required TResult Function(String failureField) duplicateRecordFailure,
     required TResult Function() passwordMismatchFailure,
-    required TResult Function(String? reason) validationFailure,
+    required TResult Function() validationFailure,
     required TResult Function() networkFailure,
     required TResult Function(GeolocationError reason) geolocationFailure,
   }) {
@@ -170,7 +170,7 @@ class _$_GenericFailure implements _GenericFailure {
     TResult? Function()? recordNotFoundFailure,
     TResult? Function(String failureField)? duplicateRecordFailure,
     TResult? Function()? passwordMismatchFailure,
-    TResult? Function(String? reason)? validationFailure,
+    TResult? Function()? validationFailure,
     TResult? Function()? networkFailure,
     TResult? Function(GeolocationError reason)? geolocationFailure,
   }) {
@@ -185,7 +185,7 @@ class _$_GenericFailure implements _GenericFailure {
     TResult Function()? recordNotFoundFailure,
     TResult Function(String failureField)? duplicateRecordFailure,
     TResult Function()? passwordMismatchFailure,
-    TResult Function(String? reason)? validationFailure,
+    TResult Function()? validationFailure,
     TResult Function()? networkFailure,
     TResult Function(GeolocationError reason)? geolocationFailure,
     required TResult orElse(),
@@ -296,7 +296,7 @@ class _$_RequestFailure implements _RequestFailure {
     required TResult Function() recordNotFoundFailure,
     required TResult Function(String failureField) duplicateRecordFailure,
     required TResult Function() passwordMismatchFailure,
-    required TResult Function(String? reason) validationFailure,
+    required TResult Function() validationFailure,
     required TResult Function() networkFailure,
     required TResult Function(GeolocationError reason) geolocationFailure,
   }) {
@@ -311,7 +311,7 @@ class _$_RequestFailure implements _RequestFailure {
     TResult? Function()? recordNotFoundFailure,
     TResult? Function(String failureField)? duplicateRecordFailure,
     TResult? Function()? passwordMismatchFailure,
-    TResult? Function(String? reason)? validationFailure,
+    TResult? Function()? validationFailure,
     TResult? Function()? networkFailure,
     TResult? Function(GeolocationError reason)? geolocationFailure,
   }) {
@@ -326,7 +326,7 @@ class _$_RequestFailure implements _RequestFailure {
     TResult Function()? recordNotFoundFailure,
     TResult Function(String failureField)? duplicateRecordFailure,
     TResult Function()? passwordMismatchFailure,
-    TResult Function(String? reason)? validationFailure,
+    TResult Function()? validationFailure,
     TResult Function()? networkFailure,
     TResult Function(GeolocationError reason)? geolocationFailure,
     required TResult orElse(),
@@ -437,7 +437,7 @@ class _$_RecordNotFoundFailure implements _RecordNotFoundFailure {
     required TResult Function() recordNotFoundFailure,
     required TResult Function(String failureField) duplicateRecordFailure,
     required TResult Function() passwordMismatchFailure,
-    required TResult Function(String? reason) validationFailure,
+    required TResult Function() validationFailure,
     required TResult Function() networkFailure,
     required TResult Function(GeolocationError reason) geolocationFailure,
   }) {
@@ -452,7 +452,7 @@ class _$_RecordNotFoundFailure implements _RecordNotFoundFailure {
     TResult? Function()? recordNotFoundFailure,
     TResult? Function(String failureField)? duplicateRecordFailure,
     TResult? Function()? passwordMismatchFailure,
-    TResult? Function(String? reason)? validationFailure,
+    TResult? Function()? validationFailure,
     TResult? Function()? networkFailure,
     TResult? Function(GeolocationError reason)? geolocationFailure,
   }) {
@@ -467,7 +467,7 @@ class _$_RecordNotFoundFailure implements _RecordNotFoundFailure {
     TResult Function()? recordNotFoundFailure,
     TResult Function(String failureField)? duplicateRecordFailure,
     TResult Function()? passwordMismatchFailure,
-    TResult Function(String? reason)? validationFailure,
+    TResult Function()? validationFailure,
     TResult Function()? networkFailure,
     TResult Function(GeolocationError reason)? geolocationFailure,
     required TResult orElse(),
@@ -606,7 +606,7 @@ class _$_DuplicateRecordFailure implements _DuplicateRecordFailure {
     required TResult Function() recordNotFoundFailure,
     required TResult Function(String failureField) duplicateRecordFailure,
     required TResult Function() passwordMismatchFailure,
-    required TResult Function(String? reason) validationFailure,
+    required TResult Function() validationFailure,
     required TResult Function() networkFailure,
     required TResult Function(GeolocationError reason) geolocationFailure,
   }) {
@@ -621,7 +621,7 @@ class _$_DuplicateRecordFailure implements _DuplicateRecordFailure {
     TResult? Function()? recordNotFoundFailure,
     TResult? Function(String failureField)? duplicateRecordFailure,
     TResult? Function()? passwordMismatchFailure,
-    TResult? Function(String? reason)? validationFailure,
+    TResult? Function()? validationFailure,
     TResult? Function()? networkFailure,
     TResult? Function(GeolocationError reason)? geolocationFailure,
   }) {
@@ -636,7 +636,7 @@ class _$_DuplicateRecordFailure implements _DuplicateRecordFailure {
     TResult Function()? recordNotFoundFailure,
     TResult Function(String failureField)? duplicateRecordFailure,
     TResult Function()? passwordMismatchFailure,
-    TResult Function(String? reason)? validationFailure,
+    TResult Function()? validationFailure,
     TResult Function()? networkFailure,
     TResult Function(GeolocationError reason)? geolocationFailure,
     required TResult orElse(),
@@ -754,7 +754,7 @@ class _$_PasswordMismatchFailure implements _PasswordMismatchFailure {
     required TResult Function() recordNotFoundFailure,
     required TResult Function(String failureField) duplicateRecordFailure,
     required TResult Function() passwordMismatchFailure,
-    required TResult Function(String? reason) validationFailure,
+    required TResult Function() validationFailure,
     required TResult Function() networkFailure,
     required TResult Function(GeolocationError reason) geolocationFailure,
   }) {
@@ -769,7 +769,7 @@ class _$_PasswordMismatchFailure implements _PasswordMismatchFailure {
     TResult? Function()? recordNotFoundFailure,
     TResult? Function(String failureField)? duplicateRecordFailure,
     TResult? Function()? passwordMismatchFailure,
-    TResult? Function(String? reason)? validationFailure,
+    TResult? Function()? validationFailure,
     TResult? Function()? networkFailure,
     TResult? Function(GeolocationError reason)? geolocationFailure,
   }) {
@@ -784,7 +784,7 @@ class _$_PasswordMismatchFailure implements _PasswordMismatchFailure {
     TResult Function()? recordNotFoundFailure,
     TResult Function(String failureField)? duplicateRecordFailure,
     TResult Function()? passwordMismatchFailure,
-    TResult Function(String? reason)? validationFailure,
+    TResult Function()? validationFailure,
     TResult Function()? networkFailure,
     TResult Function(GeolocationError reason)? geolocationFailure,
     required TResult orElse(),
@@ -857,8 +857,6 @@ abstract class _$$_ValidationFailureCopyWith<$Res> {
   factory _$$_ValidationFailureCopyWith(_$_ValidationFailure value,
           $Res Function(_$_ValidationFailure) then) =
       __$$_ValidationFailureCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String? reason});
 }
 
 /// @nodoc
@@ -868,51 +866,26 @@ class __$$_ValidationFailureCopyWithImpl<$Res>
   __$$_ValidationFailureCopyWithImpl(
       _$_ValidationFailure _value, $Res Function(_$_ValidationFailure) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? reason = freezed,
-  }) {
-    return _then(_$_ValidationFailure(
-      freezed == reason
-          ? _value.reason
-          : reason // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_ValidationFailure implements _ValidationFailure {
-  const _$_ValidationFailure(this.reason);
-
-  @override
-  final String? reason;
+  const _$_ValidationFailure();
 
   @override
   String toString() {
-    return 'Failure.validationFailure(reason: $reason)';
+    return 'Failure.validationFailure()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ValidationFailure &&
-            (identical(other.reason, reason) || other.reason == reason));
+        (other.runtimeType == runtimeType && other is _$_ValidationFailure);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, reason);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ValidationFailureCopyWith<_$_ValidationFailure> get copyWith =>
-      __$$_ValidationFailureCopyWithImpl<_$_ValidationFailure>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
@@ -922,11 +895,11 @@ class _$_ValidationFailure implements _ValidationFailure {
     required TResult Function() recordNotFoundFailure,
     required TResult Function(String failureField) duplicateRecordFailure,
     required TResult Function() passwordMismatchFailure,
-    required TResult Function(String? reason) validationFailure,
+    required TResult Function() validationFailure,
     required TResult Function() networkFailure,
     required TResult Function(GeolocationError reason) geolocationFailure,
   }) {
-    return validationFailure(reason);
+    return validationFailure();
   }
 
   @override
@@ -937,11 +910,11 @@ class _$_ValidationFailure implements _ValidationFailure {
     TResult? Function()? recordNotFoundFailure,
     TResult? Function(String failureField)? duplicateRecordFailure,
     TResult? Function()? passwordMismatchFailure,
-    TResult? Function(String? reason)? validationFailure,
+    TResult? Function()? validationFailure,
     TResult? Function()? networkFailure,
     TResult? Function(GeolocationError reason)? geolocationFailure,
   }) {
-    return validationFailure?.call(reason);
+    return validationFailure?.call();
   }
 
   @override
@@ -952,13 +925,13 @@ class _$_ValidationFailure implements _ValidationFailure {
     TResult Function()? recordNotFoundFailure,
     TResult Function(String failureField)? duplicateRecordFailure,
     TResult Function()? passwordMismatchFailure,
-    TResult Function(String? reason)? validationFailure,
+    TResult Function()? validationFailure,
     TResult Function()? networkFailure,
     TResult Function(GeolocationError reason)? geolocationFailure,
     required TResult orElse(),
   }) {
     if (validationFailure != null) {
-      return validationFailure(reason);
+      return validationFailure();
     }
     return orElse();
   }
@@ -1017,12 +990,7 @@ class _$_ValidationFailure implements _ValidationFailure {
 }
 
 abstract class _ValidationFailure implements Failure {
-  const factory _ValidationFailure(final String? reason) = _$_ValidationFailure;
-
-  String? get reason;
-  @JsonKey(ignore: true)
-  _$$_ValidationFailureCopyWith<_$_ValidationFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _ValidationFailure() = _$_ValidationFailure;
 }
 
 /// @nodoc
@@ -1068,7 +1036,7 @@ class _$_NetworkFailure implements _NetworkFailure {
     required TResult Function() recordNotFoundFailure,
     required TResult Function(String failureField) duplicateRecordFailure,
     required TResult Function() passwordMismatchFailure,
-    required TResult Function(String? reason) validationFailure,
+    required TResult Function() validationFailure,
     required TResult Function() networkFailure,
     required TResult Function(GeolocationError reason) geolocationFailure,
   }) {
@@ -1083,7 +1051,7 @@ class _$_NetworkFailure implements _NetworkFailure {
     TResult? Function()? recordNotFoundFailure,
     TResult? Function(String failureField)? duplicateRecordFailure,
     TResult? Function()? passwordMismatchFailure,
-    TResult? Function(String? reason)? validationFailure,
+    TResult? Function()? validationFailure,
     TResult? Function()? networkFailure,
     TResult? Function(GeolocationError reason)? geolocationFailure,
   }) {
@@ -1098,7 +1066,7 @@ class _$_NetworkFailure implements _NetworkFailure {
     TResult Function()? recordNotFoundFailure,
     TResult Function(String failureField)? duplicateRecordFailure,
     TResult Function()? passwordMismatchFailure,
-    TResult Function(String? reason)? validationFailure,
+    TResult Function()? validationFailure,
     TResult Function()? networkFailure,
     TResult Function(GeolocationError reason)? geolocationFailure,
     required TResult orElse(),
@@ -1236,7 +1204,7 @@ class _$_GeolocationFailure implements _GeolocationFailure {
     required TResult Function() recordNotFoundFailure,
     required TResult Function(String failureField) duplicateRecordFailure,
     required TResult Function() passwordMismatchFailure,
-    required TResult Function(String? reason) validationFailure,
+    required TResult Function() validationFailure,
     required TResult Function() networkFailure,
     required TResult Function(GeolocationError reason) geolocationFailure,
   }) {
@@ -1251,7 +1219,7 @@ class _$_GeolocationFailure implements _GeolocationFailure {
     TResult? Function()? recordNotFoundFailure,
     TResult? Function(String failureField)? duplicateRecordFailure,
     TResult? Function()? passwordMismatchFailure,
-    TResult? Function(String? reason)? validationFailure,
+    TResult? Function()? validationFailure,
     TResult? Function()? networkFailure,
     TResult? Function(GeolocationError reason)? geolocationFailure,
   }) {
@@ -1266,7 +1234,7 @@ class _$_GeolocationFailure implements _GeolocationFailure {
     TResult Function()? recordNotFoundFailure,
     TResult Function(String failureField)? duplicateRecordFailure,
     TResult Function()? passwordMismatchFailure,
-    TResult Function(String? reason)? validationFailure,
+    TResult Function()? validationFailure,
     TResult Function()? networkFailure,
     TResult Function(GeolocationError reason)? geolocationFailure,
     required TResult orElse(),
