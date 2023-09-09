@@ -17,7 +17,7 @@ class QuestionField extends Equatable {
 Either<Failure, String> _validateQuestionField(String input) {
   input = input.trim();
 
-  if (input.isNotEmpty) {
+  if (input.isNotEmpty && input.split(" ").length >= 3) {
     return Right(input);
   } else {
     return const Left(Failure.validationFailure());

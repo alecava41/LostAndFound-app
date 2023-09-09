@@ -18,7 +18,7 @@ Either<Failure, String> _validateTitleField(String input) {
   const titleRegex = r"""^[\x20-\x7D ]{1,50}$""";
   input = input.trim();
 
-  if (RegExp(titleRegex).hasMatch(input)) {
+  if (RegExp(titleRegex).hasMatch(input) && input.split(" ").length >= 3) {
     return Right(input);
   } else {
     return const Left(Failure.validationFailure());
