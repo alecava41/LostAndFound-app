@@ -86,7 +86,7 @@ class SearchResultScreen extends StatelessWidget {
           state.hasSearchError
               ? ErrorPage(
                   hasBottomBar: true,
-                  onRetry: () => ctx.read<SearchBloc>().add(const SearchEvent.searchSubmitted()),
+                  onRetry: () => ctx.read<SearchBloc>().add(const SearchEvent.searchSubmitted(false)),
                 )
               : (state.isLoadingResults
                   ? const CustomCircularProgress(size: 100)

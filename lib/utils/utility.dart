@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/status/failures.dart';
 
@@ -37,8 +36,8 @@ showBasicSuccessSnackbar(BuildContext context, String text) {
   );
 }
 
-LatLng getCenterPositionBasedOnLocale() {
-  switch (Intl.getCurrentLocale()) {
+LatLng getCenterPositionBasedOnLocale(String languageCode) {
+  switch (languageCode) {
     case "en":
       return const LatLng(51.5072, 0.1276);
     case "it":

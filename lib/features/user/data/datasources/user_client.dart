@@ -5,6 +5,7 @@ import 'package:lost_and_found/features/user/domain/usecases/update_password_use
 import 'package:retrofit/http.dart';
 
 import '../../../../utils/constants.dart';
+import '../../domain/usecases/update_locale_usecase.dart';
 import '../models/get_user/user_dto.dart';
 
 part 'user_client.g.dart';
@@ -24,4 +25,7 @@ abstract class UserClient {
 
   @PATCH('/users/password')
   Future<void> updatePassword(@Body() UpdatePasswordParams params);
+
+  @PATCH('/users/locale')
+  Future<void> updateLocale(@Body() UpdateLocaleParams params);
 }

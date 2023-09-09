@@ -1,13 +1,14 @@
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/select_category/bloc/category_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../injection_container.dart';
+import '../../../domain/entities/category.dart';
 import '../widgets/category_item.dart';
 
 class CategorySelectionScreen extends StatelessWidget {
@@ -48,7 +49,21 @@ class CategorySelectionScreen extends StatelessWidget {
                     return SingleChildScrollView(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: (removeAllOption ? state.categories.drop(1) : state.categories)
+                        children: (removeAllOption
+                                ? state.categories
+                                : () {
+                                    List<Category> modifiableList = [];
+                                    modifiableList = state.categories.toList();
+                                    modifiableList.insert(
+                                      0,
+                                      Category(
+                                          id: 0,
+                                          name: AppLocalizations.of(context)!.categoryAllTitle,
+                                          icon: 0xe1f7,
+                                          description: AppLocalizations.of(context)!.categoryAllDescription),
+                                    );
+                                    return modifiableList;
+                                  }())
                             .map((cat) => CategoryItem(
                                   categoryName: cat.name,
                                   icon: IconData(cat.icon, fontFamily: 'MaterialIcons'),

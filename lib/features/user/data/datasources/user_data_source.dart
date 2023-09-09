@@ -1,5 +1,6 @@
 import 'package:lost_and_found/core/domain/usecases/usecase.dart';
 import 'package:lost_and_found/features/user/data/datasources/user_client.dart';
+import 'package:lost_and_found/features/user/domain/usecases/update_locale_usecase.dart';
 import 'package:lost_and_found/features/user/domain/usecases/update_password_usecase.dart';
 import 'package:lost_and_found/features/user/domain/usecases/upload_user_image_usecase.dart';
 
@@ -10,6 +11,7 @@ abstract class UserDataSource {
   Future<UserDto> getUserInfo(NoParams params, int userId);
   Future<void> uploadUserImage(UploadUserImageParams params);
   Future<void> updatePassword(UpdatePasswordParams params);
+  Future<void> updateLocale(UpdateLocaleParams params);
 }
 
 class UserDataSourceImpl implements UserDataSource {
@@ -30,6 +32,11 @@ class UserDataSourceImpl implements UserDataSource {
   @override
   Future<void> updatePassword(UpdatePasswordParams params) {
     return _client.updatePassword(params).catchError(handleError<void>);
+  }
+
+  @override
+  Future<void> updateLocale(UpdateLocaleParams params) {
+    return _client.updateLocale(params).catchError(handleError<void>);
   }
 
 }

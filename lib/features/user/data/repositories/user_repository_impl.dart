@@ -8,6 +8,7 @@ import 'package:lost_and_found/core/status/success.dart';
 import 'package:lost_and_found/features/user/data/adapters/user_from_dto.dart';
 
 import 'package:lost_and_found/features/user/domain/entities/user.dart';
+import 'package:lost_and_found/features/user/domain/usecases/update_locale_usecase.dart';
 import 'package:lost_and_found/features/user/domain/usecases/update_password_usecase.dart';
 import 'package:lost_and_found/features/user/domain/usecases/upload_user_image_usecase.dart';
 
@@ -68,6 +69,20 @@ class UserRepositoryImpl implements UserRepository {
     try {
       if (await _networkInfo.isConnected) {
         await _dataSource.updatePassword(params);
+        return const Right(Success.genericSuccess());
+      } else {
+        return const Left(Failure.networkFailure());
+      }
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> updateLocale(UpdateLocaleParams params) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        await _dataSource.updateLocale(params);
         return const Right(Success.genericSuccess());
       } else {
         return const Left(Failure.networkFailure());

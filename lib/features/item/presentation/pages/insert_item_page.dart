@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:lost_and_found/core/presentation/app_global/bloc/app_global_bloc.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/insert_item/insert_item_bloc.dart';
@@ -84,212 +85,214 @@ class InsertItemScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<InsertItemBloc>(
-      create: (_) => sl<InsertItemBloc>()..add(InsertItemEvent.contentCreated(isNewItemLost)),
-      child: BlocConsumer<InsertItemBloc, InsertItemState>(
-        listener: (ctx, state) {
-          final insertFailureOrSuccess = state.insertFailureOrSuccess;
+    return BlocBuilder<AppGlobalBloc, AppGlobalState>(
+      builder: (appGlobalCtx, appGlobalState) => BlocProvider<InsertItemBloc>(
+        create: (_) => sl<InsertItemBloc>()..add(InsertItemEvent.contentCreated(isNewItemLost)),
+        child: BlocConsumer<InsertItemBloc, InsertItemState>(
+          listener: (ctx, state) {
+            final insertFailureOrSuccess = state.insertFailureOrSuccess;
 
-          if (insertFailureOrSuccess != null) {
-            insertFailureOrSuccess.fold(
-                (failure) => showBasicErrorSnackbar(context, failure),
-                (_) => {
-                      showBasicSuccessSnackbar(context, AppLocalizations.of(context)!.successInsertItem),
-                      ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.type)),
-                      ctx.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0)),
-                      Navigator.pop(ctx)
-                    });
-          }
-        },
-        builder: (ctx, state) {
-          var titleField = CustomFieldContainer(
-            title: AppLocalizations.of(context)!.titleFieldTitle,
-            content: PersonalizedFormWithTextInsertion(
-              maxLines: 1,
-              showError: state.showError,
-              errorText: state.title.value.fold(
-                  (failure) => failure.maybeWhen<String?>(
-                      validationFailure: () => AppLocalizations.of(context)!.failureInvalidTitle, orElse: () => null),
-                  (r) => null),
-              onTextChanged: (input) => ctx.read<InsertItemBloc>().add(InsertItemEvent.titleChanged(input)),
-              isValid: state.title.value.isRight(),
-              hintText: AppLocalizations.of(context)!.titleFieldHint,
-            ),
-          );
-          var checkboxField = CustomFieldContainer(
-            title: AppLocalizations.of(context)!.itemType,
-            content: PersonalizedRadioButtonsForm(
-                selectedValue: state.type,
-                onChanged: (type) => ctx.read<InsertItemBloc>().add(InsertItemEvent.typeChanged(type))),
-          );
-          var questionField = CustomFieldContainer(
-            title: AppLocalizations.of(context)!.questionFieldTitle,
-            content: PersonalizedFormWithTextInsertion(
-              hintText: AppLocalizations.of(context)!.questionFieldHint,
-              isValid: state.question.value.isRight(),
-              onTextChanged: (input) => ctx.read<InsertItemBloc>().add(InsertItemEvent.questionChanged(input)),
-              showError: state.showError,
-              errorText: state.question.value.fold(
-                  (failure) => failure.maybeWhen<String?>(
-                      validationFailure: () => AppLocalizations.of(context)!.failureInvalidQuestionField,
-                      orElse: () => null),
-                  (r) => null),
-            ),
-          );
-          var createButton = Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ElevatedButton(
-                      onPressed: () => ctx.read<InsertItemBloc>().add(const InsertItemEvent.insertSubmitted()),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: PersonalizedColor.mainColor,
-                        shape: const StadiumBorder(),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+            if (insertFailureOrSuccess != null) {
+              insertFailureOrSuccess.fold(
+                  (failure) => showBasicErrorSnackbar(context, failure),
+                  (_) => {
+                        showBasicSuccessSnackbar(context, AppLocalizations.of(context)!.successInsertItem),
+                        ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.type)),
+                        ctx.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0)),
+                        Navigator.pop(ctx)
+                      });
+            }
+          },
+          builder: (ctx, state) {
+            var titleField = CustomFieldContainer(
+              title: AppLocalizations.of(context)!.titleFieldTitle,
+              content: PersonalizedFormWithTextInsertion(
+                maxLines: 1,
+                showError: state.showError,
+                errorText: state.title.value.fold(
+                    (failure) => failure.maybeWhen<String?>(
+                        validationFailure: () => AppLocalizations.of(context)!.failureInvalidTitle, orElse: () => null),
+                    (r) => null),
+                onTextChanged: (input) => ctx.read<InsertItemBloc>().add(InsertItemEvent.titleChanged(input)),
+                isValid: state.title.value.isRight(),
+                hintText: AppLocalizations.of(context)!.titleFieldHint,
+              ),
+            );
+            var checkboxField = CustomFieldContainer(
+              title: AppLocalizations.of(context)!.itemType,
+              content: PersonalizedRadioButtonsForm(
+                  selectedValue: state.type,
+                  onChanged: (type) => ctx.read<InsertItemBloc>().add(InsertItemEvent.typeChanged(type))),
+            );
+            var questionField = CustomFieldContainer(
+              title: AppLocalizations.of(context)!.questionFieldTitle,
+              content: PersonalizedFormWithTextInsertion(
+                hintText: AppLocalizations.of(context)!.questionFieldHint,
+                isValid: state.question.value.isRight(),
+                onTextChanged: (input) => ctx.read<InsertItemBloc>().add(InsertItemEvent.questionChanged(input)),
+                showError: state.showError,
+                errorText: state.question.value.fold(
+                    (failure) => failure.maybeWhen<String?>(
+                        validationFailure: () => AppLocalizations.of(context)!.failureInvalidQuestionField,
+                        orElse: () => null),
+                    (r) => null),
+              ),
+            );
+            var createButton = Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ElevatedButton(
+                        onPressed: () => ctx.read<InsertItemBloc>().add(const InsertItemEvent.insertSubmitted()),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: PersonalizedColor.mainColor,
+                          shape: const StadiumBorder(),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                        ),
+                        child: Text(
+                          AppLocalizations.of(context)!.create,
+                          style: const TextStyle(fontSize: 20, color: Colors.white),
+                        )),
+                  ),
+                )
+              ],
+            );
+            return AnnotatedRegion(
+              value: const SystemUiOverlayStyle(
+                statusBarColor: Colors.white,
+                statusBarBrightness: Brightness.light,
+                statusBarIconBrightness: Brightness.dark,
+              ),
+              child: WillPopScope(
+                onWillPop: () async {
+                  if (!state.isInitial()) {
+                    showDialogExit(context);
+                    return false;
+                  } else {
+                    context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
+                    Navigator.pop(ctx);
+                    return true;
+                  }
+                },
+                child: GestureDetector(
+                  onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                  child: SafeArea(
+                    child: Scaffold(
+                      backgroundColor: PersonalizedColor.backgroundColor,
+                      appBar: AppBar(
+                        leading: IconButton(
+                          icon: const Icon(Icons.arrow_back),
+                          onPressed: () {
+                            if (!state.isInitial()) {
+                              showDialogExit(context);
+                            } else {
+                              context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
+                              Navigator.pop(ctx);
+                            }
+                          },
+                        ),
+                        iconTheme: const IconThemeData(color: Colors.black),
+                        title: Text(
+                          AppLocalizations.of(context)!.insertItemTitle,
+                          style: const TextStyle(color: Colors.black),
+                        ),
+                        backgroundColor: Colors.white,
                       ),
-                      child: Text(
-                        AppLocalizations.of(context)!.create,
-                        style: const TextStyle(fontSize: 20, color: Colors.white),
-                      )),
-                ),
-              )
-            ],
-          );
-          return AnnotatedRegion(
-            value: const SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
-              statusBarBrightness: Brightness.light,
-              statusBarIconBrightness: Brightness.dark,
-            ),
-            child: WillPopScope(
-              onWillPop: () async {
-                if (!state.isInitial()) {
-                  showDialogExit(context);
-                  return false;
-                } else {
-                  context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
-                  Navigator.pop(ctx);
-                  return true;
-                }
-              },
-              child: GestureDetector(
-                onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-                child: SafeArea(
-                  child: Scaffold(
-                    backgroundColor: PersonalizedColor.backgroundColor,
-                    appBar: AppBar(
-                      leading: IconButton(
-                        icon: const Icon(Icons.arrow_back),
-                        onPressed: () {
-                          if (!state.isInitial()) {
-                            showDialogExit(context);
-                          } else {
-                            context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
-                            Navigator.pop(ctx);
-                          }
-                        },
-                      ),
-                      iconTheme: const IconThemeData(color: Colors.black),
-                      title: Text(
-                        AppLocalizations.of(context)!.insertItemTitle,
-                        style: const TextStyle(color: Colors.black),
-                      ),
-                      backgroundColor: Colors.white,
-                    ),
-                    body: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          UploadImageForm(
-                            onSelectUploadMethod: () => chooseMediaDialog(ctx),
-                            onDeletePhoto: () => ctx.read<InsertItemBloc>().add(const InsertItemEvent.imageDeleted()),
-                            imagePath: state.imagePath,
-                          ),
-                          customDivider(),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          customDivider(),
-                          Container(
-                            color: Colors.white,
-                            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                checkboxField,
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                titleField,
-                                state.type == ItemType.found
-                                    ? const SizedBox(
-                                        height: 15,
-                                      )
-                                    : Container(),
-                                state.type == ItemType.found ? questionField : Container(),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                              ],
+                      body: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            UploadImageForm(
+                              onSelectUploadMethod: () => chooseMediaDialog(ctx),
+                              onDeletePhoto: () => ctx.read<InsertItemBloc>().add(const InsertItemEvent.imageDeleted()),
+                              imagePath: state.imagePath,
                             ),
-                          ),
-                          customDivider(),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          SelectPositionButton(
-                            address: state.address,
-                            onPositionSelected: (LatLng? pos) {
-                              if (pos != null) {
-                                ctx
-                                    .read<InsertItemBloc>()
-                                    .add(InsertItemEvent.positionSelected(LatLng(pos.latitude, pos.longitude)));
-                              }
-                            },
-                            showError: state.showError,
-                            errorText: state.pos.value.fold(
-                                (failure) => failure.maybeWhen(
-                                    validationFailure: () => AppLocalizations.of(context)!.failureInvalidPosition,
-                                    orElse: () => ""),
-                                (_) => ""),
-                            startingPosition: state.pos.value.getOrElse(() => const LatLng(0, 0)),
-                            isLoadingAddress: state.isLoadingPosition,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          CategorySelectionForm(
-                            onTap: (value) => ctx
-                                .read<InsertItemBloc>()
-                                .add(InsertItemEvent.categorySelected(value.first, value.second)),
-                            category: state.category,
-                            showError: state.showError,
-                            errorText: state.cat.value.fold(
-                                (failure) => failure.maybeWhen(
-                                    validationFailure: () => AppLocalizations.of(context)!.failureInvalidCategory,
-                                    orElse: () => ""),
-                                (_) => ""),
-                            removeAllOption: true,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          createButton,
-                          const SizedBox(
-                            height: 50,
-                          ),
-                        ],
+                            customDivider(),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            customDivider(),
+                            Container(
+                              color: Colors.white,
+                              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  checkboxField,
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  titleField,
+                                  state.type == ItemType.found
+                                      ? const SizedBox(
+                                          height: 15,
+                                        )
+                                      : Container(),
+                                  state.type == ItemType.found ? questionField : Container(),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            customDivider(),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            SelectPositionButton(
+                              address: state.address,
+                              onPositionSelected: (LatLng? pos) {
+                                if (pos != null) {
+                                  ctx
+                                      .read<InsertItemBloc>()
+                                      .add(InsertItemEvent.positionSelected(LatLng(pos.latitude, pos.longitude)));
+                                }
+                              },
+                              showError: state.showError,
+                              errorText: state.pos.value.fold(
+                                  (failure) => failure.maybeWhen(
+                                      validationFailure: () => AppLocalizations.of(context)!.failureInvalidPosition,
+                                      orElse: () => ""),
+                                  (_) => ""),
+                              startingPosition: state.pos.value.getOrElse(() => appGlobalState.defaultPosition),
+                              isLoadingAddress: state.isLoadingPosition,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            CategorySelectionForm(
+                              onTap: (value) => ctx
+                                  .read<InsertItemBloc>()
+                                  .add(InsertItemEvent.categorySelected(value.first, value.second)),
+                              category: state.category,
+                              showError: state.showError,
+                              errorText: state.cat.value.fold(
+                                  (failure) => failure.maybeWhen(
+                                      validationFailure: () => AppLocalizations.of(context)!.failureInvalidCategory,
+                                      orElse: () => ""),
+                                  (_) => ""),
+                              removeAllOption: true,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            createButton,
+                            const SizedBox(
+                              height: 50,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

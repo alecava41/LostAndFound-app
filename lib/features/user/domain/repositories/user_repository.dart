@@ -5,10 +5,12 @@ import '../../../../core/status/failures.dart';
 
 import '../../../../core/status/success.dart';
 import '../entities/user.dart';
+import '../usecases/update_locale_usecase.dart';
 import '../usecases/update_password_usecase.dart';
 
 abstract class UserRepository {
   Future<Either<Failure, User>> getUserInfo(NoParams params);
   Future<Either<Failure, Success>> uploadUserImage(UploadUserImageParams params);
   Future<Either<Failure, Success>> updatePassword(UpdatePasswordParams params);
+  Future<Either<Failure, Success>> updateLocale(UpdateLocaleParams params);
 }

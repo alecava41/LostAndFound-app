@@ -115,10 +115,6 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
             (failure) => imageFailureOrSuccess = Left(failure), (success) => imageFailureOrSuccess = Right(success));
       }
     }
-    // else {
-    //   createFailureOrSuccess =
-    //       const Left(Failure.validationFailure("You need to fill all the fields with correct values."));
-    // }
 
     emit(state.copyWith(
         showError: true,

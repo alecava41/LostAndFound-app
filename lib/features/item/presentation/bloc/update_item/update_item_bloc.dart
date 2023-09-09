@@ -93,7 +93,7 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
         title: title,
         cat: CategoryField(item != null ? item!.category.id : -1),
         category: item != null ? item!.category.name : "",
-        pos: PositionField(item != null ? LatLng(item!.position.X, item!.position.Y) : defaultPosition),
+        pos: PositionField(item != null ? LatLng(item!.position.X, item!.position.Y) : const LatLng(0, 0)),
         address: item != null ? item!.address : "",
       ),
     );
@@ -127,7 +127,7 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
     if ((isItemLostValid || isItemFoundValid) && isCategoryValid && isPositionValid) {
       emit(state.copyWith(isLoading: true, updateFailureOrSuccess: null));
 
-      final pos = state.pos.value.getOrElse(() => defaultPosition);
+      final pos = state.pos.value.getOrElse(() => const LatLng(0, 0));
 
       final params = UpdateItemParams(
           category: state.cat.value.getOrElse(() => 0),
@@ -157,10 +157,6 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
       // Workaround to refresh image
       await CachedNetworkImage.evictFromCache("$baseUrl/api/users/${state.item!.id}/image");
     }
-    // else {
-    //   updateFailureOrSuccess =
-    //       const Left(Failure.validationFailure("You need to fill all the fields with correct values."));
-    // }
 
     emit(state.copyWith(
         showError: true,

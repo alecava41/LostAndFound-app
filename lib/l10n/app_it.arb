@@ -257,8 +257,8 @@
   "noLostItemContent": "Non hai oggetti persi!",
   "noLostItemButton": "Inserisci un oggetto perso",
   "uploadImageButton": "Carica una foto",
-  "foundNear": "Perso vicino",
-  "lostNear": "Trovato vicino",
+  "foundNear": "Trovato vicino",
+  "lostNear": "Perso vicino",
   "noMapAppTitle": "Nessuna App di navigazione installata",
   "noMapAppContent": "Oops! Sembra che nel dispositivo non ci sia nessuna app per visualizzare questa posizione. Per favore installa un'app come Google Maps e riprova.",
   "dateInsertion": "Date di inserimento",
@@ -283,7 +283,7 @@
   "noContentSearchResultSubtitle": "Prova di nuovo con parametri più generici",
   "selectSortingDialogTitle": "Selezione un ordinamento.",
   "successPasswordChange": "Password aggiornata con successo",
-  "changePasswordButton": "Cambia password",
+  "changePasswordButton": "Cambia Password",
   "passwordCreate1": "Per creare una password sicura:",
   "passwordCreate2": "Usa almeno 8 caratteri;",
   "passwordCreate3": "Usa una combinazione di lettere maiuscole e minuscole e numeri.",
@@ -331,7 +331,9 @@
   "orderNewestOldest": "Più nuovo a più vecchio",
   "orderFarthestNearest": "Più lontano a più vicino",
   "orderNearestFarthest": "Più vicino a più lontano",
-  "changeLanguage": "Cambia lingua",
+  "changeLanguage": "Cambia Lingua",
   "selectLanguageDialogTitle": "Seleziona Lingua",
-  "selectDate": "Seleziona Data"
+  "selectDate": "Seleziona Data",
+  "categoryAllTitle": "Tutte",
+  "categoryAllDescription": "Tutte le posibili categorie"
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:lost_and_found/core/presentation/app_global/bloc/app_global_bloc.dart';
 import 'package:lost_and_found/core/presentation/select_position/pages/select_position_page.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
-import 'package:lost_and_found/utils/constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../utils/colors.dart';
@@ -27,100 +28,107 @@ class SelectPositionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Divider(
-          height: 0,
-        ),
-        Ink(
-          color: Colors.white,
-          child: InkWell(
-            onTap: () async {
-              FocusManager.instance.primaryFocus?.unfocus();
-              final selectedPos = await Navigator.push<LatLng>(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SelectPositionScreen(
-                          startingPosition: startingPosition,
-                        )),
-              );
+    return BlocBuilder<AppGlobalBloc, AppGlobalState>(
+      builder: (appGlobalCtx, appGlobalState) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Divider(
+            height: 0,
+          ),
+          Ink(
+            color: Colors.white,
+            child: InkWell(
+              onTap: () async {
+                FocusManager.instance.primaryFocus?.unfocus();
+                final selectedPos = await Navigator.push<LatLng>(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SelectPositionScreen(
+                            startingPosition: startingPosition,
+                          )),
+                );
 
-              onPositionSelected(selectedPos);
-            },
-            child: SizedBox(
-              height: showError && errorText != "" ? 155 : 131,
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            AppLocalizations.of(context)!.positionFormEntryTitle,
-                            style: const TextStyle(fontSize: 22),
-                          ),
-                          Text(AppLocalizations.of(context)!.positionFormEntrySubtitle, style: const TextStyle(color: Colors.black54),),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.location_on,
-                                color: address == "" ? Colors.black : PersonalizedColor.mainColor,
-                                size: 30,
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    isLoadingAddress
-                                        ? const CustomCircularProgress(size: 15)
-                                        : Text(
-                                            address == "" ? AppLocalizations.of(context)!.positionFormEntryNotSelected : address,
-                                            maxLines: 2,
-                                            style: TextStyle(
-                                              overflow: TextOverflow.ellipsis,
-                                              color: address == "" ? Colors.black : PersonalizedColor.mainColor,
-                                            ),
-                                          ),
-                                  ],
+                onPositionSelected(selectedPos);
+              },
+              child: SizedBox(
+                height: showError && errorText != "" ? 155 : 131,
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context)!.positionFormEntryTitle,
+                              style: const TextStyle(fontSize: 22),
+                            ),
+                            Text(
+                              AppLocalizations.of(context)!.positionFormEntrySubtitle,
+                              style: const TextStyle(color: Colors.black54),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.location_on,
+                                  color: address == "" ? Colors.black : PersonalizedColor.mainColor,
+                                  size: 30,
                                 ),
-                              ),
-                            ],
-                          ),
-                          showError && (startingPosition == defaultPosition || startingPosition == const LatLng(0, 0))
-                              ? const SizedBox(height: 10)
-                              : Container(),
-                          showError && (startingPosition == defaultPosition || startingPosition == const LatLng(0, 0))
-                              ? Text(
-                                  errorText,
-                                  style: TextStyle(color: Colors.redAccent.shade700, fontSize: 12),
-                                )
-                              : Container(),
-                        ],
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      isLoadingAddress
+                                          ? const CustomCircularProgress(size: 15)
+                                          : Text(
+                                              address == ""
+                                                  ? AppLocalizations.of(context)!.positionFormEntryNotSelected
+                                                  : address,
+                                              maxLines: 2,
+                                              style: TextStyle(
+                                                overflow: TextOverflow.ellipsis,
+                                                color: address == "" ? Colors.black : PersonalizedColor.mainColor,
+                                              ),
+                                            ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            showError && (startingPosition == appGlobalState.defaultPosition || startingPosition == const LatLng(0, 0))
+                                ? const SizedBox(height: 10)
+                                : Container(),
+                            showError && (startingPosition == appGlobalState.defaultPosition || startingPosition == const LatLng(0, 0))
+                                ? Text(
+                                    errorText,
+                                    style: TextStyle(color: Colors.redAccent.shade700, fontSize: 12),
+                                  )
+                                : Container(),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const Icon(
-                    Icons.chevron_right,
-                    size: 50,
-                  ),
-                ],
+                    const Icon(
+                      Icons.chevron_right,
+                      size: 50,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        const Divider(
-          height: 0,
-        ),
-      ],
+          const Divider(
+            height: 0,
+          ),
+        ],
+      ),
     );
   }
 }

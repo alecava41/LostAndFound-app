@@ -21,7 +21,20 @@ class UserScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppGlobalBloc, AppGlobalState>(
+    return BlocConsumer<AppGlobalBloc, AppGlobalState>(
+      listener: (appGlobalCtx, appGlobalState) {
+        final localeUpdateFailureOrSuccess = appGlobalState.response;
+
+        if (localeUpdateFailureOrSuccess != null) {
+          localeUpdateFailureOrSuccess.fold(
+            (_) => null,
+            (r) => {
+              appGlobalCtx.read<HomeBloc>()..add(const HomeEvent.homeRefreshed()),
+              appGlobalCtx.read<SearchBloc>()..add(const SearchEvent.searchSubmitted(true))
+            },
+          );
+        }
+      },
       builder: (appGlobalCtx, appGlobalState) => BlocConsumer<UserBloc, UserState>(
         listener: (ctx, state) {
           final imageFailureOrSuccess = state.imageUploadFailureOrSuccess;

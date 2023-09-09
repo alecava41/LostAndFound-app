@@ -46,7 +46,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           positionSelected: (LatLng pos) => _onPositionSelected(emit, pos),
           categorySelected: (id, category) => _onCategorySelected(emit, id, category),
           dateSelected: (date) => _onDateSelected(emit, date),
-          searchSubmitted: () => _onSearchSubmit(emit),
+          searchSubmitted: (refreshResult) => _onSearchSubmit(emit, refreshResult),
           showFilters: () => _onShowFilters(emit),
           sortParameterChanged: (order) => _onChangeSortingParameter(emit, order),
           searchPageChanged: (page) => _onSearchPageChanged(emit, page),
@@ -68,7 +68,13 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     );
   }
 
-  Future<void> _onSearchSubmit(Emitter<SearchState> emit) async {
+  Future<void> _onSearchSubmit(Emitter<SearchState> emit, bool refreshResult) async {
+    // refreshResult needed to refresh results in case of language change
+
+    if(refreshResult && state.pageState != SearchPageState.resultPage) {
+      return;
+    }
+
     emit(
       state.copyWith(
         isLoadingResults: true,

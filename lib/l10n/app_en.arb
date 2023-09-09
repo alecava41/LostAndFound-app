@@ -333,7 +333,9 @@
   "orderNewestOldest": "Newest to Oldest",
   "orderFarthestNearest": "Farthest to Nearest",
   "orderNearestFarthest": "Nearest to Farthest",
-  "changeLanguage": "Change language",
+  "changeLanguage": "Change Language",
   "selectLanguageDialogTitle": "Select Language",
-  "selectDate": "Select Date"
+  "selectDate": "Select Date",
+  "categoryAllTitle": "All",
+  "categoryAllDescription": "All possible categories"
 }

@@ -24,7 +24,7 @@ mixin _$SearchEvent {
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
-    required TResult Function() searchSubmitted,
+    required TResult Function(bool refreshResult) searchSubmitted,
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
@@ -39,7 +39,7 @@ mixin _$SearchEvent {
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
-    TResult? Function()? searchSubmitted,
+    TResult? Function(bool refreshResult)? searchSubmitted,
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
@@ -54,7 +54,7 @@ mixin _$SearchEvent {
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
-    TResult Function()? searchSubmitted,
+    TResult Function(bool refreshResult)? searchSubmitted,
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
@@ -172,7 +172,7 @@ class _$_ResetFilters implements _ResetFilters {
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
-    required TResult Function() searchSubmitted,
+    required TResult Function(bool refreshResult) searchSubmitted,
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
@@ -190,7 +190,7 @@ class _$_ResetFilters implements _ResetFilters {
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
-    TResult? Function()? searchSubmitted,
+    TResult? Function(bool refreshResult)? searchSubmitted,
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
@@ -208,7 +208,7 @@ class _$_ResetFilters implements _ResetFilters {
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
-    TResult Function()? searchSubmitted,
+    TResult Function(bool refreshResult)? searchSubmitted,
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
@@ -328,7 +328,7 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
-    required TResult Function() searchSubmitted,
+    required TResult Function(bool refreshResult) searchSubmitted,
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
@@ -346,7 +346,7 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
-    TResult? Function()? searchSubmitted,
+    TResult? Function(bool refreshResult)? searchSubmitted,
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
@@ -364,7 +364,7 @@ class _$_FoundCheckTriggered implements _FoundCheckTriggered {
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
-    TResult Function()? searchSubmitted,
+    TResult Function(bool refreshResult)? searchSubmitted,
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
@@ -484,7 +484,7 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
-    required TResult Function() searchSubmitted,
+    required TResult Function(bool refreshResult) searchSubmitted,
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
@@ -502,7 +502,7 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
-    TResult? Function()? searchSubmitted,
+    TResult? Function(bool refreshResult)? searchSubmitted,
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
@@ -520,7 +520,7 @@ class _$_LostCheckTriggered implements _LostCheckTriggered {
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
-    TResult Function()? searchSubmitted,
+    TResult Function(bool refreshResult)? searchSubmitted,
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
@@ -666,7 +666,7 @@ class _$_PositionSelected implements _PositionSelected {
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
-    required TResult Function() searchSubmitted,
+    required TResult Function(bool refreshResult) searchSubmitted,
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
@@ -684,7 +684,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
-    TResult? Function()? searchSubmitted,
+    TResult? Function(bool refreshResult)? searchSubmitted,
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
@@ -702,7 +702,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
-    TResult Function()? searchSubmitted,
+    TResult Function(bool refreshResult)? searchSubmitted,
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
@@ -862,7 +862,7 @@ class _$_CategorySelected implements _CategorySelected {
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
-    required TResult Function() searchSubmitted,
+    required TResult Function(bool refreshResult) searchSubmitted,
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
@@ -880,7 +880,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
-    TResult? Function()? searchSubmitted,
+    TResult? Function(bool refreshResult)? searchSubmitted,
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
@@ -898,7 +898,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
-    TResult Function()? searchSubmitted,
+    TResult Function(bool refreshResult)? searchSubmitted,
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
@@ -1051,7 +1051,7 @@ class _$_DateSelected implements _DateSelected {
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
-    required TResult Function() searchSubmitted,
+    required TResult Function(bool refreshResult) searchSubmitted,
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
@@ -1069,7 +1069,7 @@ class _$_DateSelected implements _DateSelected {
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
-    TResult? Function()? searchSubmitted,
+    TResult? Function(bool refreshResult)? searchSubmitted,
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
@@ -1087,7 +1087,7 @@ class _$_DateSelected implements _DateSelected {
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
-    TResult Function()? searchSubmitted,
+    TResult Function(bool refreshResult)? searchSubmitted,
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
@@ -1173,6 +1173,8 @@ abstract class _$$_SearchSubmittedCopyWith<$Res> {
   factory _$$_SearchSubmittedCopyWith(
           _$_SearchSubmitted value, $Res Function(_$_SearchSubmitted) then) =
       __$$_SearchSubmittedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool refreshResult});
 }
 
 /// @nodoc
@@ -1182,26 +1184,51 @@ class __$$_SearchSubmittedCopyWithImpl<$Res>
   __$$_SearchSubmittedCopyWithImpl(
       _$_SearchSubmitted _value, $Res Function(_$_SearchSubmitted) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? refreshResult = null,
+  }) {
+    return _then(_$_SearchSubmitted(
+      null == refreshResult
+          ? _value.refreshResult
+          : refreshResult // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_SearchSubmitted implements _SearchSubmitted {
-  const _$_SearchSubmitted();
+  const _$_SearchSubmitted(this.refreshResult);
+
+  @override
+  final bool refreshResult;
 
   @override
   String toString() {
-    return 'SearchEvent.searchSubmitted()';
+    return 'SearchEvent.searchSubmitted(refreshResult: $refreshResult)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_SearchSubmitted);
+        (other.runtimeType == runtimeType &&
+            other is _$_SearchSubmitted &&
+            (identical(other.refreshResult, refreshResult) ||
+                other.refreshResult == refreshResult));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, refreshResult);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SearchSubmittedCopyWith<_$_SearchSubmitted> get copyWith =>
+      __$$_SearchSubmittedCopyWithImpl<_$_SearchSubmitted>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1212,13 +1239,13 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
-    required TResult Function() searchSubmitted,
+    required TResult Function(bool refreshResult) searchSubmitted,
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
     required TResult Function() restoreInitial,
   }) {
-    return searchSubmitted();
+    return searchSubmitted(refreshResult);
   }
 
   @override
@@ -1230,13 +1257,13 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
-    TResult? Function()? searchSubmitted,
+    TResult? Function(bool refreshResult)? searchSubmitted,
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
     TResult? Function()? restoreInitial,
   }) {
-    return searchSubmitted?.call();
+    return searchSubmitted?.call(refreshResult);
   }
 
   @override
@@ -1248,7 +1275,7 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
-    TResult Function()? searchSubmitted,
+    TResult Function(bool refreshResult)? searchSubmitted,
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
@@ -1256,7 +1283,7 @@ class _$_SearchSubmitted implements _SearchSubmitted {
     required TResult orElse(),
   }) {
     if (searchSubmitted != null) {
-      return searchSubmitted();
+      return searchSubmitted(refreshResult);
     }
     return orElse();
   }
@@ -1321,7 +1348,12 @@ class _$_SearchSubmitted implements _SearchSubmitted {
 }
 
 abstract class _SearchSubmitted implements SearchEvent {
-  const factory _SearchSubmitted() = _$_SearchSubmitted;
+  const factory _SearchSubmitted(final bool refreshResult) = _$_SearchSubmitted;
+
+  bool get refreshResult;
+  @JsonKey(ignore: true)
+  _$$_SearchSubmittedCopyWith<_$_SearchSubmitted> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1368,7 +1400,7 @@ class _$_ShowFilters implements _ShowFilters {
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
-    required TResult Function() searchSubmitted,
+    required TResult Function(bool refreshResult) searchSubmitted,
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
@@ -1386,7 +1418,7 @@ class _$_ShowFilters implements _ShowFilters {
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
-    TResult? Function()? searchSubmitted,
+    TResult? Function(bool refreshResult)? searchSubmitted,
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
@@ -1404,7 +1436,7 @@ class _$_ShowFilters implements _ShowFilters {
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
-    TResult Function()? searchSubmitted,
+    TResult Function(bool refreshResult)? searchSubmitted,
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
@@ -1551,7 +1583,7 @@ class _$_SearchPageChanged implements _SearchPageChanged {
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
-    required TResult Function() searchSubmitted,
+    required TResult Function(bool refreshResult) searchSubmitted,
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
@@ -1569,7 +1601,7 @@ class _$_SearchPageChanged implements _SearchPageChanged {
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
-    TResult? Function()? searchSubmitted,
+    TResult? Function(bool refreshResult)? searchSubmitted,
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
@@ -1587,7 +1619,7 @@ class _$_SearchPageChanged implements _SearchPageChanged {
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
-    TResult Function()? searchSubmitted,
+    TResult Function(bool refreshResult)? searchSubmitted,
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
@@ -1740,7 +1772,7 @@ class _$_SortParameterChanged implements _SortParameterChanged {
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
-    required TResult Function() searchSubmitted,
+    required TResult Function(bool refreshResult) searchSubmitted,
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
@@ -1758,7 +1790,7 @@ class _$_SortParameterChanged implements _SortParameterChanged {
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
-    TResult? Function()? searchSubmitted,
+    TResult? Function(bool refreshResult)? searchSubmitted,
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
@@ -1776,7 +1808,7 @@ class _$_SortParameterChanged implements _SortParameterChanged {
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
-    TResult Function()? searchSubmitted,
+    TResult Function(bool refreshResult)? searchSubmitted,
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,
@@ -1902,7 +1934,7 @@ class _$_RestoreInitial implements _RestoreInitial {
     required TResult Function(LatLng pos) positionSelected,
     required TResult Function(int id, String category) categorySelected,
     required TResult Function(DateTime date) dateSelected,
-    required TResult Function() searchSubmitted,
+    required TResult Function(bool refreshResult) searchSubmitted,
     required TResult Function() showFilters,
     required TResult Function(SearchPageState page) searchPageChanged,
     required TResult Function(ResultOrder order) sortParameterChanged,
@@ -1920,7 +1952,7 @@ class _$_RestoreInitial implements _RestoreInitial {
     TResult? Function(LatLng pos)? positionSelected,
     TResult? Function(int id, String category)? categorySelected,
     TResult? Function(DateTime date)? dateSelected,
-    TResult? Function()? searchSubmitted,
+    TResult? Function(bool refreshResult)? searchSubmitted,
     TResult? Function()? showFilters,
     TResult? Function(SearchPageState page)? searchPageChanged,
     TResult? Function(ResultOrder order)? sortParameterChanged,
@@ -1938,7 +1970,7 @@ class _$_RestoreInitial implements _RestoreInitial {
     TResult Function(LatLng pos)? positionSelected,
     TResult Function(int id, String category)? categorySelected,
     TResult Function(DateTime date)? dateSelected,
-    TResult Function()? searchSubmitted,
+    TResult Function(bool refreshResult)? searchSubmitted,
     TResult Function()? showFilters,
     TResult Function(SearchPageState page)? searchPageChanged,
     TResult Function(ResultOrder order)? sortParameterChanged,

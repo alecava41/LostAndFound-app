@@ -75,6 +75,7 @@ import 'package:lost_and_found/features/user/data/datasources/user_client.dart';
 import 'package:lost_and_found/features/user/data/datasources/user_data_source.dart';
 import 'package:lost_and_found/features/user/domain/repositories/user_repository.dart';
 import 'package:lost_and_found/features/user/domain/usecases/get_user_info_usecase.dart';
+import 'package:lost_and_found/features/user/domain/usecases/update_locale_usecase.dart';
 import 'package:lost_and_found/features/user/domain/usecases/update_password_usecase.dart';
 import 'package:lost_and_found/features/user/domain/usecases/upload_user_image_usecase.dart';
 import 'package:lost_and_found/features/user/presentation/bloc/change_password/change_password_bloc.dart';
@@ -194,6 +195,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => LogoutUseCase(sl()));
   sl.registerLazySingleton(() => UploadUserImageUseCase(sl()));
   sl.registerLazySingleton(() => UpdatePasswordUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateLocaleUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(storage: sl(), networkInfo: sl(), dataSource: sl()));
@@ -297,5 +299,5 @@ Future<void> init() async {
   sl.registerFactory(() => HomeControllerBloc());
   sl.registerFactory(() => SelectPositionBloc(networkInfo: sl()));
   sl.registerFactory(() => CategoryBloc(getCategoriesUseCase: sl()));
-  sl.registerFactory(() => AppGlobalBloc(storage: sl()));
+  sl.registerFactory(() => AppGlobalBloc(storage: sl(), updateLocaleUseCase: sl()));
 }

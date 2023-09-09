@@ -312,6 +312,8 @@ abstract class _LocaleChanged implements AppGlobalEvent {
 /// @nodoc
 mixin _$AppGlobalState {
   Locale get locale => throw _privateConstructorUsedError;
+  LatLng get defaultPosition => throw _privateConstructorUsedError;
+  Either<Failure, Success>? get response => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppGlobalStateCopyWith<AppGlobalState> get copyWith =>
@@ -324,7 +326,10 @@ abstract class $AppGlobalStateCopyWith<$Res> {
           AppGlobalState value, $Res Function(AppGlobalState) then) =
       _$AppGlobalStateCopyWithImpl<$Res, AppGlobalState>;
   @useResult
-  $Res call({Locale locale});
+  $Res call(
+      {Locale locale,
+      LatLng defaultPosition,
+      Either<Failure, Success>? response});
 }
 
 /// @nodoc
@@ -341,12 +346,22 @@ class _$AppGlobalStateCopyWithImpl<$Res, $Val extends AppGlobalState>
   @override
   $Res call({
     Object? locale = null,
+    Object? defaultPosition = null,
+    Object? response = freezed,
   }) {
     return _then(_value.copyWith(
       locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
               as Locale,
+      defaultPosition: null == defaultPosition
+          ? _value.defaultPosition
+          : defaultPosition // ignore: cast_nullable_to_non_nullable
+              as LatLng,
+      response: freezed == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as Either<Failure, Success>?,
     ) as $Val);
   }
 }
@@ -359,7 +374,10 @@ abstract class _$$_AppGlobalStateCopyWith<$Res>
       __$$_AppGlobalStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Locale locale});
+  $Res call(
+      {Locale locale,
+      LatLng defaultPosition,
+      Either<Failure, Success>? response});
 }
 
 /// @nodoc
@@ -374,12 +392,22 @@ class __$$_AppGlobalStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? locale = null,
+    Object? defaultPosition = null,
+    Object? response = freezed,
   }) {
     return _then(_$_AppGlobalState(
       locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
               as Locale,
+      defaultPosition: null == defaultPosition
+          ? _value.defaultPosition
+          : defaultPosition // ignore: cast_nullable_to_non_nullable
+              as LatLng,
+      response: freezed == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as Either<Failure, Success>?,
     ));
   }
 }
@@ -387,14 +415,19 @@ class __$$_AppGlobalStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AppGlobalState implements _AppGlobalState {
-  const _$_AppGlobalState({required this.locale});
+  const _$_AppGlobalState(
+      {required this.locale, required this.defaultPosition, this.response});
 
   @override
   final Locale locale;
+  @override
+  final LatLng defaultPosition;
+  @override
+  final Either<Failure, Success>? response;
 
   @override
   String toString() {
-    return 'AppGlobalState(locale: $locale)';
+    return 'AppGlobalState(locale: $locale, defaultPosition: $defaultPosition, response: $response)';
   }
 
   @override
@@ -402,11 +435,16 @@ class _$_AppGlobalState implements _AppGlobalState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AppGlobalState &&
-            (identical(other.locale, locale) || other.locale == locale));
+            (identical(other.locale, locale) || other.locale == locale) &&
+            (identical(other.defaultPosition, defaultPosition) ||
+                other.defaultPosition == defaultPosition) &&
+            (identical(other.response, response) ||
+                other.response == response));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, locale);
+  int get hashCode =>
+      Object.hash(runtimeType, locale, defaultPosition, response);
 
   @JsonKey(ignore: true)
   @override
@@ -416,11 +454,17 @@ class _$_AppGlobalState implements _AppGlobalState {
 }
 
 abstract class _AppGlobalState implements AppGlobalState {
-  const factory _AppGlobalState({required final Locale locale}) =
-      _$_AppGlobalState;
+  const factory _AppGlobalState(
+      {required final Locale locale,
+      required final LatLng defaultPosition,
+      final Either<Failure, Success>? response}) = _$_AppGlobalState;
 
   @override
   Locale get locale;
+  @override
+  LatLng get defaultPosition;
+  @override
+  Either<Failure, Success>? get response;
   @override
   @JsonKey(ignore: true)
   _$$_AppGlobalStateCopyWith<_$_AppGlobalState> get copyWith =>

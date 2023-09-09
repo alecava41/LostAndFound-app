@@ -29,11 +29,12 @@ class HttpInterceptor extends Interceptor {
     if (await _storage.containsKey(key: TOKEN)) {
       final token = await _storage.read(key: TOKEN);
       final expire = await _storage.read(key: EXPIRE);
+      final language = await _storage.read(key: LOCALE);
       final expireDate = DateTime.fromMillisecondsSinceEpoch(int.parse(expire!) * 1000, isUtc: true);
       final now = DateTime.now().toUtc();
 
       if (now.isBefore(expireDate)) {
-        options.headers.addAll({'Authorization': 'Bearer $token'});
+        options.headers.addAll({'Authorization': 'Bearer $token', 'Accept-Language': language ?? "en"});
       } else {
         final user = await _storage.read(key: USER);
         final psw = await _storage.read(key: PASSWORD);
