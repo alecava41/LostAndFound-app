@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:latlong2/latlong.dart';
-
+import 'package:lost_and_found/utils/utility.dart';
 
 // flutter pub run build_runner watch --delete-conflicting-outputs
 // Base URL of back-end server
 const String baseUrl = "http://16.16.64.106:5000";
 
-// Default Position - Center of the current locale (Italy)
-const defaultPosition = LatLng(43.102107520506756, 12.349117446797067);
+// Default Position - Center of the current locale
+// TODO not working
+final defaultPosition = getCenterPositionBasedOnLocale();
 
 // Types of Push Notifications
 enum NotificationType {

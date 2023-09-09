@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/features/chat/presentation/pages/chat_page.dart';
@@ -11,6 +12,7 @@ import 'package:lost_and_found/features/item/presentation/pages/update_item_page
 import 'package:lost_and_found/features/item/presentation/widgets/insert_item/custom_field_container.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/item/claimed_item_card.dart';
 import 'package:lost_and_found/utils/constants.dart';
+import 'package:lost_and_found/utils/utility.dart';
 
 import '../../../../core/domain/entities/claim_status.dart';
 import '../../../../core/presentation/home_controller/bloc/home_controller_bloc.dart';
@@ -41,42 +43,14 @@ class ItemScreen extends StatelessWidget {
           final roomCreationFailureOrSuccess = state.roomCreationFailureOrSuccess;
 
           if (roomCreationFailureOrSuccess != null) {
-            roomCreationFailureOrSuccess.fold((failure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: Colors.red,
-                  content: Text(
-                    failure.maybeWhen<String>(
-                        genericFailure: () => 'Server error. Please try again later.',
-                        networkFailure: () => 'No internet connection available. Check your internet connection.',
-                        orElse: () => "Unknown error"),
-                  ),
-                ),
-              );
-            }, (room) {
+            roomCreationFailureOrSuccess.fold((failure) => showBasicErrorSnackbar(context, failure), (room) {
               Navigator.of(ctx).push(MaterialPageRoute(builder: (_) => ChatScreen(roomId: room.id, itemId: itemId)));
             });
           }
 
           if (solveFailureOrSuccess != null) {
-            solveFailureOrSuccess.fold(
-                (failure) => ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor: Colors.red,
-                        content: Text(
-                          failure.maybeWhen<String>(
-                              genericFailure: () => 'Server error. Please try again later.',
-                              networkFailure: () => 'No internet connection available. Check your internet connection.',
-                              orElse: () => "Unknown error"),
-                        ),
-                      ),
-                    ), (_) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  backgroundColor: Colors.green,
-                  content: Text("Item successfully solved"),
-                ),
-              );
+            solveFailureOrSuccess.fold((failure) => showBasicErrorSnackbar(context, failure), (_) {
+              showBasicSuccessSnackbar(context, AppLocalizations.of(context)!.successSolveItem);
 
               // Navigate back to HP + update HP
               ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.item!.type));
@@ -86,24 +60,8 @@ class ItemScreen extends StatelessWidget {
           }
 
           if (deleteFailureOrSuccess != null) {
-            deleteFailureOrSuccess.fold(
-                (failure) => ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor: Colors.red,
-                        content: Text(
-                            failure.maybeWhen<String>(
-                                genericFailure: () => 'Server error. Please try again later.',
-                                networkFailure: () => 'No internet connection available. Check your internet connection.',
-                                orElse: () => "Unknown error"),
-                            style: const TextStyle(fontSize: 20)),
-                      ),
-                    ), (_) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  backgroundColor: Colors.green,
-                  content: Text("Item successfully deleted"),
-                ),
-              );
+            deleteFailureOrSuccess.fold((failure) => showBasicErrorSnackbar(context, failure), (_) {
+              showBasicSuccessSnackbar(context, AppLocalizations.of(context)!.successDeleteItem);
 
               // Navigate back to HP + update HP
               ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.item!.type));
@@ -126,7 +84,7 @@ class ItemScreen extends StatelessWidget {
               child: Scaffold(
                 backgroundColor: Colors.white,
                 appBar: AppBar(
-                  title: const Text("Item details", style: TextStyle(color: Colors.black)),
+                  title: Text(AppLocalizations.of(context)!.itemPageTitle, style: const TextStyle(color: Colors.black)),
                   backgroundColor: Colors.white,
                   iconTheme: const IconThemeData(color: Colors.black),
                   actions: state.isLoading || state.hasLoadingError ? null : _showOwnerMenu(ctx, isCurrentUserOwner!),
@@ -190,19 +148,19 @@ class ItemScreen extends StatelessWidget {
         PopupMenuButton<String>(
           iconSize: 30,
           itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-            const PopupMenuItem<String>(
+            PopupMenuItem<String>(
               value: 'opt1',
-              child: Text('Mark as solved'),
+              child: Text(AppLocalizations.of(context)!.itemMenu1),
             ),
-            const PopupMenuItem<String>(
+            PopupMenuItem<String>(
               value: 'opt2',
-              child: Text('Modify'),
+              child: Text(AppLocalizations.of(context)!.itemMenu2),
             ),
-            const PopupMenuItem<String>(
+            PopupMenuItem<String>(
               value: 'opt3',
               child: Text(
-                'Delete',
-                style: TextStyle(color: Colors.red),
+                AppLocalizations.of(context)!.itemMenu3,
+                style: const TextStyle(color: Colors.red),
               ),
             ),
           ],
@@ -242,7 +200,7 @@ class ItemScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: CustomFieldContainer(
-                title: "Lost by",
+                title: AppLocalizations.of(context)!.lostBy,
                 content: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -305,9 +263,9 @@ class ItemScreen extends StatelessWidget {
                                     owner.username,
                                   ));
                             },
-                            child: const Text(
-                              'Send a message',
-                              style: TextStyle(fontSize: 14, color: PersonalizedColor.mainColor),
+                            child: Text(
+                              AppLocalizations.of(context)!.sendMessage,
+                              style: const TextStyle(fontSize: 14, color: PersonalizedColor.mainColor),
                             ),
                           ),
                         ],
@@ -334,16 +292,16 @@ class ItemScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomFieldContainer(
-              title: "Claims for this item",
+              title: AppLocalizations.of(context)!.claimsForItem,
               content: claims.isEmpty
-                  ? const Center(
+                  ? Center(
                       child: Column(
                       children: [
                         Text(
-                          "No claims received yet.",
-                          style: TextStyle(fontSize: 18),
+                          AppLocalizations.of(context)!.noClaimsForItem,
+                          style: const TextStyle(fontSize: 18),
                         ),
-                        Icon(
+                        const Icon(
                           Icons.connect_without_contact,
                           size: 50,
                         )
@@ -445,17 +403,17 @@ class ItemScreen extends StatelessWidget {
                                 context.read<ItemBloc>().add(ItemEvent.claimUpdated(updatedItem));
                               }
                             },
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.connect_without_contact,
                                   size: 18.5,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 3,
                                 ),
-                                Text('Claim the item', style: TextStyle(fontSize: 20)),
+                                Text(AppLocalizations.of(context)!.claimItemButton, style: const TextStyle(fontSize: 20)),
                               ],
                             ),
                           ),
@@ -468,7 +426,7 @@ class ItemScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: CustomFieldContainer(
-                  title: "Found by",
+                  title: AppLocalizations.of(context)!.foundBy,
                   content: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -519,9 +477,9 @@ class ItemScreen extends StatelessWidget {
                                     owner.username,
                                   ));
                             },
-                            child: const Text(
-                              'Send a message',
-                              style: TextStyle(fontSize: 14, color: PersonalizedColor.mainColor),
+                            child: Text(
+                              AppLocalizations.of(context)!.sendMessage,
+                              style: const TextStyle(fontSize: 14, color: PersonalizedColor.mainColor),
                             ),
                           ),
                         ],

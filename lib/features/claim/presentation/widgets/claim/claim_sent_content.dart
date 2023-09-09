@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/widgets/claim/claimed_status_card.dart';
 import 'package:lost_and_found/features/claim/presentation/widgets/claim/info_claims_box.dart';
@@ -24,20 +25,19 @@ class ClaimSentContent extends StatelessWidget {
             : state.claimsSent.isEmpty
                 ? SizedBox(
                     height: MediaQuery.of(context).size.height,
-                    child: const SingleChildScrollView(
-                      physics: AlwaysScrollableScrollPhysics(),
+                    child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
                       child: NoContentPage(
                         image: 'assets/images/no-created-claims.png',
-                        title: 'No open claims',
-                        subtitle:
-                        'Your claims will be displayed as soon as you claim a found item',
+                        title: AppLocalizations.of(context)!.noContentClaimSentTitle,
+                        subtitle: AppLocalizations.of(context)!.noContentClaimSentSubtitle,
                       ),
                     ),
                   )
                 : Column(
-                  children: [
-                    Expanded(
-                      child: ListView.builder(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
                           itemCount: state.claimsSent.length,
                           itemBuilder: (context, index) {
                             final claim = state.claimsSent[index];
@@ -50,10 +50,10 @@ class ClaimSentContent extends StatelessWidget {
                             );
                           },
                         ),
-                    ),
-                      const InfoClaimsBox(text: "In this section there are the claims you have made for items founded by other users.")
-                  ],
-                ),
+                      ),
+                      InfoClaimsBox(text: AppLocalizations.of(context)!.claimSentTutorial)
+                    ],
+                  ),
       ),
     );
   }

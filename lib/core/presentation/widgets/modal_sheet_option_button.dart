@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../../../utils/colors.dart';
 
-class OrderOptionButton extends StatelessWidget {
+class ModalSheetOptionButton extends StatelessWidget {
   final String text;
   final bool isSelected;
   final VoidCallback onClick;
 
-  const OrderOptionButton({
+  const ModalSheetOptionButton({
     super.key,
     required this.text,
     required this.isSelected,
@@ -36,13 +36,4 @@ class OrderOptionButton extends StatelessWidget {
       ),
     );
   }
-}
-
-enum OrdinationType {
-  alphabeticalAZ,
-  alphabeticalZA,
-  dateAscending,
-  dateDescending,
-  distanceAscending,
-  distanceDescending
 }

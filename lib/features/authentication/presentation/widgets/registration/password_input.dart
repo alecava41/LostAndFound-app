@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/authentication/presentation/bloc/registration/registration_bloc.dart';
 
 class PasswordInput extends StatelessWidget {
@@ -14,7 +15,7 @@ class PasswordInput extends StatelessWidget {
         },
         decoration: InputDecoration(
           errorMaxLines: 3,
-          hintText: "Password",
+          hintText: AppLocalizations.of(context)!.password,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
             borderSide: BorderSide.none,
@@ -30,7 +31,7 @@ class PasswordInput extends StatelessWidget {
         autovalidateMode: state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
         validator: (_) => state.password.value.fold(
           (failure) => failure.maybeWhen<String?>(
-              validationFailure: () => "Password must contain at least 8 characters, using uppercase, lowercase and numeric characters.",
+              validationFailure: () => AppLocalizations.of(context)!.failureInvalidPassword,
               orElse: () => null),
           (_) => null,
         ),

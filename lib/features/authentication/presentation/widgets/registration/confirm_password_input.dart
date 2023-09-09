@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/authentication/presentation/bloc/registration/registration_bloc.dart';
 
 class ConfirmPasswordInput extends StatelessWidget {
@@ -11,7 +12,7 @@ class ConfirmPasswordInput extends StatelessWidget {
       return TextFormField(
         onChanged: (value) => context.read<RegistrationBloc>().add(RegistrationEvent.confirmPasswordFieldChanged(value)),
         decoration: InputDecoration(
-          hintText: "Confirm Password",
+          hintText: AppLocalizations.of(context)!.confirmPassword,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
             borderSide: BorderSide.none,
@@ -27,7 +28,7 @@ class ConfirmPasswordInput extends StatelessWidget {
         autovalidateMode: state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
         validator: (_) => state.confirmPassword.value.fold(
           (failure) => failure.maybeWhen<String?>(
-              validationFailure: () => "Field doesn't match the original password.",
+              validationFailure: () => AppLocalizations.of(context)!.failureConfirmPassword,
               orElse: () => null),
           (_) => null,
         ),

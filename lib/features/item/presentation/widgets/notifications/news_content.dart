@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/core/presentation/widgets/no_content_page.dart';
@@ -29,13 +30,12 @@ class NewsContent extends StatelessWidget {
                     : state.news.isEmpty
                         ? SizedBox(
                             height: MediaQuery.of(context).size.height,
-                            child: const SingleChildScrollView(
-                              physics: AlwaysScrollableScrollPhysics(),
+                            child: SingleChildScrollView(
+                              physics: const AlwaysScrollableScrollPhysics(),
                               child: NoContentPage(
                                 image: 'assets/images/no-news.png',
-                                title: 'No news waiting for you',
-                                subtitle:
-                                    'News will be displayed as soon as someone inserts an item that may match one of yours',
+                                title: AppLocalizations.of(context)!.noContentNewsTitle,
+                                subtitle: AppLocalizations.of(context)!.noContentNewsSubtitle,
                               ),
                             ),
                           )

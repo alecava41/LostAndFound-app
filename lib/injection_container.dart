@@ -84,6 +84,7 @@ import 'core/data/datasources/database/database.dart';
 import 'core/data/datasources/http_interceptor.dart';
 import 'core/data/secure_storage/secure_storage.dart';
 import 'core/domain/repositories/category_repository.dart';
+import 'core/presentation/app_global/bloc/app_global_bloc.dart';
 import 'core/presentation/select_position/bloc/select_position_bloc.dart';
 import 'features/badges/data/repositories/badge_repository_impl.dart';
 import 'features/chat/domain/usecases/get_user_rooms_usecase.dart';
@@ -296,4 +297,5 @@ Future<void> init() async {
   sl.registerFactory(() => HomeControllerBloc());
   sl.registerFactory(() => SelectPositionBloc(networkInfo: sl()));
   sl.registerFactory(() => CategoryBloc(getCategoriesUseCase: sl()));
+  sl.registerFactory(() => AppGlobalBloc(storage: sl()));
 }

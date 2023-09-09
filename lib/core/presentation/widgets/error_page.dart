@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../utils/screen_size.dart';
 import 'large_green_button.dart';
@@ -16,8 +17,8 @@ class ErrorPage extends StatelessWidget {
       height: ScreenSize.isBigSmartphoneDevice(context)
           ? (75 - (hasBottomBar ? 10 : 0)).h
           : ScreenSize.isMediumSmartphoneDevice(context)
-          ? (75 - (hasBottomBar ? 10 : 0)).h
-          : (70 - (hasBottomBar ? 5 : 0)).h,
+              ? (75 - (hasBottomBar ? 10 : 0)).h
+              : (70 - (hasBottomBar ? 5 : 0)).h,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -27,38 +28,38 @@ class ErrorPage extends StatelessWidget {
               height: 30.h,
               width: 70.w,
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(10,0,10,0),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: Text(
-                'An error occurred while loading the data.',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                AppLocalizations.of(context)!.errorPageTitle,
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
             ),
             const SizedBox(
               height: 10,
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(15,0,15,0),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
               child: Text(
-                'Please try again later',
-                style: TextStyle(fontSize: 15, color: Colors.black54),
+                AppLocalizations.of(context)!.errorPageSubtitle,
+                style: const TextStyle(fontSize: 15, color: Colors.black54),
                 textAlign: TextAlign.center,
               ),
             ),
             const SizedBox(height: 16),
             PersonalizedLargeGreenButton(
                 onPressed: onRetry,
-                text: const Row(
+                text: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.refresh),
-                    SizedBox(
+                    const Icon(Icons.refresh),
+                    const SizedBox(
                       width: 4,
                     ),
                     Text(
-                      "Retry",
-                      style: TextStyle(fontSize: 20),
+                      AppLocalizations.of(context)!.retry,
+                      style: const TextStyle(fontSize: 20),
                     )
                   ],
                 ))

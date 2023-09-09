@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../utils/colors.dart';
 
@@ -63,7 +64,7 @@ class InfoItemField extends StatelessWidget {
                           ? <TextSpan>[
                               const TextSpan(text: " (", style: TextStyle(fontSize: 16, color: Colors.black)),
                               TextSpan(
-                                text: "Open map",
+                                text: AppLocalizations.of(context)!.openMap,
                                 recognizer: TapGestureRecognizer()..onTap = onTapField,
                                 style: TextStyle(
                                   fontSize: 16,

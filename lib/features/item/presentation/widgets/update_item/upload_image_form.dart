@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../../utils/colors.dart';
@@ -72,9 +73,9 @@ class UploadImageForm extends StatelessWidget {
                                     ),
                                     elevation: 0,
                                   ),
-                                  child: const Text(
-                                    "Upload a photo",
-                                    style: TextStyle(
+                                  child: Text(
+                                    AppLocalizations.of(context)!.uploadImageButton,
+                                    style: const TextStyle(
                                       fontSize: 20,
                                       color: PersonalizedColor.mainColor,
                                     ),

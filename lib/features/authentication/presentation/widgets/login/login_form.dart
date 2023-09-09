@@ -7,6 +7,7 @@ import 'package:lost_and_found/features/authentication/presentation/widgets/logi
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/features/user/presentation/bloc/user/user_bloc.dart';
+import 'package:lost_and_found/utils/utility.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../core/presentation/home_controller/bloc/home_controller_bloc.dart';
@@ -28,21 +29,7 @@ class LoginForm extends StatelessWidget {
 
               if (authFailureOrSuccess != null) {
                 authFailureOrSuccess.fold(
-                    (failure) => {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              backgroundColor: Colors.red,
-                              content: Text(
-                                failure.maybeWhen<String>(
-                                    passwordMismatchFailure: () => 'Invalid credentials. Please try again.',
-                                    genericFailure: () => 'Server error. Please try again later.',
-                                    networkFailure: () =>
-                                        'No internet connection available. Check your internet connection.',
-                                    orElse: () => "Unknown error"),
-                              ),
-                            ),
-                          )
-                        },
+                    (failure) => showBasicErrorSnackbar(context, failure),
                     (_) => {
                           Navigator.popUntil(context, (route) => route.isFirst),
                           Navigator.of(context).pushReplacementNamed('/'),

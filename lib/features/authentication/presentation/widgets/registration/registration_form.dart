@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/authentication/presentation/bloc/registration/registration_bloc.dart';
 import 'package:lost_and_found/features/authentication/presentation/widgets/registration/password_input.dart';
 import 'package:lost_and_found/features/authentication/presentation/widgets/registration/confirm_password_input.dart';
@@ -7,6 +8,7 @@ import 'package:lost_and_found/features/authentication/presentation/widgets/regi
 import 'package:lost_and_found/features/authentication/presentation/widgets/registration/registration_button.dart';
 import 'package:lost_and_found/features/authentication/presentation/widgets/registration/sign_in_text.dart';
 import 'package:lost_and_found/features/authentication/presentation/widgets/registration/username_input.dart';
+import 'package:lost_and_found/utils/utility.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../core/presentation/widgets/title_logo.dart';
@@ -27,27 +29,9 @@ class RegistrationForm extends StatelessWidget {
 
               if (regFailureOrSuccess != null) {
                 regFailureOrSuccess.fold(
-                    (failure) => failure.maybeWhen(
-                        genericFailure: () => ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                backgroundColor: Colors.red,
-                                content: Text('Server error. Please try again later.'),
-                              ),
-                            ),
-                        networkFailure: () => ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                backgroundColor: Colors.red,
-                                content: Text('No internet connection available. Check your internet connection.'),
-                              ),
-                            ),
-                        orElse: () {}),
+                    (failure) => showBasicErrorSnackbar(context, failure),
                     (_) => {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              backgroundColor: Colors.green,
-                              content: Text('Successful sign up'),
-                            ),
-                          ),
+                          showBasicSuccessSnackbar(context, AppLocalizations.of(context)!.successSignUp),
                           Navigator.pushReplacementNamed(ctx, '/login')
                         });
               }
@@ -60,7 +44,7 @@ class RegistrationForm extends StatelessWidget {
                 SizedBox(
                   height: 3.5.h,
                 ),
-                titleLogoHorizontal(),
+                titleLogoHorizontal(context),
                 SizedBox(height: 6.w),
                 const UsernameInput(),
                 const SizedBox(height: 12),

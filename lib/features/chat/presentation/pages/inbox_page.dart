@@ -1,6 +1,7 @@
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/chat/presentation/bloc/inbox/inbox_bloc.dart';
@@ -22,11 +23,11 @@ class InboxScreen extends StatelessWidget {
           SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 90,
-            child: const Padding(
-              padding: EdgeInsets.fromLTRB(15, 25, 0, 10),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(15, 25, 0, 10),
               child: Text(
-                "Messages",
-                style: TextStyle(fontSize: 30),
+                AppLocalizations.of(context)!.message(2),
+                style: const TextStyle(fontSize: 30),
               ),
             ),
           ),
@@ -49,18 +50,18 @@ class InboxScreen extends StatelessWidget {
                             hasBottomBar:
                                 ScreenSize.isBigSmartphoneDevice(context) || ScreenSize.isMediumSmartphoneDevice(context),
                             image: "assets/images/no-chat.png",
-                            title: 'No active chat',
-                            subtitle: 'Chat with someone to see the chat list',
+                            title: AppLocalizations.of(context)!.noContentInboxTitle,
+                            subtitle: AppLocalizations.of(context)!.noContentInboxSubtitle,
                           );
                         } else {
                           final activeRooms = snapshot.data!.filter((room) => room.metadata!["active"]! as bool).toList();
 
                           if (activeRooms.isEmpty) {
-                            return const NoContentPage(
+                            return NoContentPage(
                               hasBottomBar: true,
                               image: "assets/images/no-chat.png",
-                              title: 'No active chat',
-                              subtitle: 'Chat with someone to see the chat list',
+                              title: AppLocalizations.of(context)!.noContentInboxTitle,
+                              subtitle: AppLocalizations.of(context)!.noContentInboxSubtitle,
                             );
                           }
 
@@ -108,7 +109,7 @@ class InboxScreen extends StatelessWidget {
                           );
                         }
                       },
-                    )
+                    ),
         ],
       ),
     );

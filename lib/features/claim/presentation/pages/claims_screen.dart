@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc.dart';
@@ -33,9 +34,9 @@ class ClaimsScreen extends StatelessWidget {
             child: Scaffold(
               backgroundColor: PersonalizedColor.backgroundColor,
               appBar: AppBar(
-                title: const Text(
-                  "Claims",
-                  style: TextStyle(color: Colors.black),
+                title: Text(
+                  AppLocalizations.of(context)!.claim(2),
+                  style: const TextStyle(color: Colors.black),
                 ),
                 backgroundColor: Colors.white,
                 iconTheme: const IconThemeData(color: Colors.black),
@@ -55,9 +56,9 @@ class ClaimsScreen extends StatelessWidget {
                           const SizedBox(
                             width: 4,
                           ),
-                          const Text(
-                            "Received claims",
-                            style: TextStyle(color: Colors.black),
+                          Text(
+                            AppLocalizations.of(context)!.receivedClaims,
+                            style: const TextStyle(color: Colors.black),
                           ),
                         ],
                       ),
@@ -72,9 +73,9 @@ class ClaimsScreen extends StatelessWidget {
                           const SizedBox(
                             width: 4,
                           ),
-                          const Text(
-                            "Your claims",
-                            style: TextStyle(color: Colors.black),
+                          Text(
+                            AppLocalizations.of(context)!.yourClaims,
+                            style: const TextStyle(color: Colors.black),
                           ),
                         ],
                       ),
@@ -91,8 +92,7 @@ class ClaimsScreen extends StatelessWidget {
                 create: (_) => sl<ClaimBloc>()..add(ClaimEvent.claimContentCreated(newClaimId)),
                 child: BlocBuilder<ClaimBloc, ClaimState>(
                   builder: (ctx, state) => state.hasLoadingError
-                      ? ErrorPage(
-                          onRetry: () => ctx.read<ClaimBloc>().add(ClaimEvent.claimContentCreated(newClaimId)))
+                      ? ErrorPage(onRetry: () => ctx.read<ClaimBloc>().add(ClaimEvent.claimContentCreated(newClaimId)))
                       : const TabBarView(
                           children: [ClaimReceivedContent(), ClaimSentContent()],
                         ),

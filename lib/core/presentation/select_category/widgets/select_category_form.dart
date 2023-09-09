@@ -1,6 +1,7 @@
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/core/presentation/select_category/pages/select_category_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../utils/colors.dart';
 
@@ -54,12 +55,12 @@ class CategorySelectionForm extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Category",
-                                style: TextStyle(fontSize: 22),
+                                AppLocalizations.of(context)!.categoryFormEntryTitle,
+                                style: const TextStyle(fontSize: 22),
                               ),
                             ],
                           ),

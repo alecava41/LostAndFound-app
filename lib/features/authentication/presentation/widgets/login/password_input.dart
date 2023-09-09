@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../bloc/login/login_bloc.dart';
 
@@ -12,7 +13,7 @@ class PasswordInput extends StatelessWidget {
       return TextFormField(
         onChanged: (value) => context.read<LoginBloc>().add(LoginEvent.passwordFieldChanged(value)),
         decoration: InputDecoration(
-          hintText: "Password",
+          hintText: AppLocalizations.of(context)!.passwordFormCurrentHint,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
             borderSide: BorderSide.none,
@@ -28,7 +29,7 @@ class PasswordInput extends StatelessWidget {
         autovalidateMode: state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
         validator: (_) => state.password.value.fold(
           (failure) => failure.maybeWhen<String?>(
-              validationFailure: () => "Invalid password.",
+              validationFailure: () => AppLocalizations.of(context)!.failureInvalidPassword,
               orElse: () => null),
           (_) => null,
         ),

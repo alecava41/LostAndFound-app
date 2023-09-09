@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/user/presentation/widgets/tutorial/lost_item_tutorial.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
@@ -25,24 +26,24 @@ class TutorialScreen extends StatelessWidget {
           child: Scaffold(
             backgroundColor: PersonalizedColor.backgroundColor,
             appBar: AppBar(
-              title: const Text(
-                "Tutorial",
-                style: TextStyle(color: Colors.black),
+              title: Text(
+                AppLocalizations.of(context)!.tutorial,
+                style: const TextStyle(color: Colors.black),
               ),
               backgroundColor: Colors.white,
               iconTheme: const IconThemeData(color: Colors.black),
-              bottom: const TabBar(
+              bottom: TabBar(
                 tabs: [
                   Tab(
                     child: Text(
-                      "Lost items",
-                      style: TextStyle(color: Colors.black),
+                      AppLocalizations.of(context)!.lostItems,
+                      style: const TextStyle(color: Colors.black),
                     ),
                   ),
                   Tab(
                     child: Text(
-                      "Found items",
-                      style: TextStyle(color: Colors.black),
+                      AppLocalizations.of(context)!.foundItems,
+                      style: const TextStyle(color: Colors.black),
                     ),
                   ),
                 ],

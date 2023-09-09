@@ -3,6 +3,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/presentation/select_position/pages/select_position_page.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/utils/constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../utils/colors.dart';
 
@@ -21,7 +22,7 @@ class SelectPositionButton extends StatelessWidget {
     required this.address,
     required this.onPositionSelected,
     required this.isLoadingAddress,
-    this.startingPosition = defaultPosition,
+    required this.startingPosition,
   }) : super(key: key);
 
   @override
@@ -60,11 +61,11 @@ class SelectPositionButton extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            "Position",
-                            style: TextStyle(fontSize: 22),
+                          Text(
+                            AppLocalizations.of(context)!.positionFormEntryTitle,
+                            style: const TextStyle(fontSize: 22),
                           ),
-                          const Text("Where the item has been found or lost", style: TextStyle(color: Colors.black54),),
+                          Text(AppLocalizations.of(context)!.positionFormEntrySubtitle, style: const TextStyle(color: Colors.black54),),
                           const SizedBox(
                             height: 20,
                           ),
@@ -82,7 +83,7 @@ class SelectPositionButton extends StatelessWidget {
                                     isLoadingAddress
                                         ? const CustomCircularProgress(size: 15)
                                         : Text(
-                                            address == "" ? "Position not chosen yet" : address,
+                                            address == "" ? AppLocalizations.of(context)!.positionFormEntryNotSelected : address,
                                             maxLines: 2,
                                             style: TextStyle(
                                               overflow: TextOverflow.ellipsis,

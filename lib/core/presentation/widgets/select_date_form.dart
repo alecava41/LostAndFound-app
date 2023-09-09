@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_holo_date_picker/date_picker.dart';
 import 'package:flutter_holo_date_picker/i18n/date_picker_i18n.dart';
 import 'package:intl/intl.dart';
@@ -34,22 +35,25 @@ class DateSelectionForm extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Column(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Date",
-                          style: TextStyle(fontSize: 22),
+                          AppLocalizations.of(context)!.date,
+                          style: const TextStyle(fontSize: 22),
                         ),
-                        Text("Date of upload", style: TextStyle(color: Colors.black54),),
+                        Text(
+                          AppLocalizations.of(context)!.dateFormEntrySubtitle,
+                          style: const TextStyle(color: Colors.black54),
+                        ),
                       ],
                     ),
                     Row(
                       children: [
                         if (date != null)
                           Text(
-                            "After ${DateFormat.yMMMM().format(date!)}",
+                            AppLocalizations.of(context)!.dateFormEntryValue(DateFormat.yMMMM().format(date!)),
                             style: const TextStyle(
                               fontSize: 15,
                               color: PersonalizedColor.mainColor,
@@ -77,11 +81,12 @@ class DateSelectionForm extends StatelessWidget {
   void onButtonTap(context) async {
     var pickedDate = await DatePicker.showSimpleDatePicker(
       context,
+      titleText: AppLocalizations.of(context)!.selectDate,
       initialDate: date ?? DateTime.now(),
       firstDate: DateTime(1984),
       lastDate: DateTime.now(),
       dateFormat: "MMMM-yyyy",
-      locale: DateTimePickerLocale.en_us,
+      locale: AppLocalizations.of(context)!.localeName == "it" ? DateTimePickerLocale.it : DateTimePickerLocale.en_us,
       looping: false,
       reverse: true,
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../utils/colors.dart';
 
@@ -34,11 +35,11 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.fromLTRB(15, 8, 0, 0),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 8, 0, 0),
                 child: Text(
-                  'Items',
-                  style: TextStyle(fontSize: 22),
+                  AppLocalizations.of(context)!.item(2),
+                  style: const TextStyle(fontSize: 22),
                 ),
               ),
               Row(
@@ -51,9 +52,9 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
                         onChanged: onFoundCheckedChanged,
                         isError: showError && !foundChecked && !lostChecked,
                       ),
-                      const Text(
-                        'Found',
-                        style: TextStyle(fontSize: 18),
+                      Text(
+                        AppLocalizations.of(context)!.found,
+                        style: const TextStyle(fontSize: 18),
                       ),
                     ],
                   ),
@@ -66,7 +67,7 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
                         onChanged: onLostCheckedChanged,
                         isError: showError && !lostChecked && !foundChecked,
                       ),
-                      const Text('Lost', style: TextStyle(fontSize: 18)),
+                      Text(AppLocalizations.of(context)!.lost, style: const TextStyle(fontSize: 18)),
                     ],
                   ),
                 ],

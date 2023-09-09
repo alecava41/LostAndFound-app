@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/insert_item/insert_item_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/insert_item/custom_field_container.dart';
+import 'package:lost_and_found/utils/utility.dart';
 
 import '../../../../core/presentation/dialogs/camera_permission.dart';
 import '../../../../core/presentation/home_controller/bloc/home_controller_bloc.dart';
@@ -90,23 +92,9 @@ class InsertItemScreen extends StatelessWidget {
 
           if (insertFailureOrSuccess != null) {
             insertFailureOrSuccess.fold(
-                (failure) => {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          backgroundColor: Colors.red,
-                          content: Text(
-                            failure.maybeWhen<String>(
-                                genericFailure: () => 'Server error. Please try again later.',
-                                networkFailure: () => 'No internet connection available. Check your internet connection.',
-                                orElse: () => "Unknown error"),
-                          ),
-                        ),
-                      )
-                    },
+                (failure) => showBasicErrorSnackbar(context, failure),
                 (_) => {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(backgroundColor: Colors.green, content: Text("Item successfully created")),
-                      ),
+                      showBasicSuccessSnackbar(context, AppLocalizations.of(context)!.successInsertItem),
                       ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.type)),
                       ctx.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0)),
                       Navigator.pop(ctx)
@@ -115,35 +103,36 @@ class InsertItemScreen extends StatelessWidget {
         },
         builder: (ctx, state) {
           var titleField = CustomFieldContainer(
-            title: "Title",
+            title: AppLocalizations.of(context)!.titleFieldTitle,
             content: PersonalizedFormWithTextInsertion(
               maxLines: 1,
               showError: state.showError,
               errorText: state.title.value.fold(
                   (failure) => failure.maybeWhen<String?>(
-                      validationFailure: () => "Title must have between 1 and 50 characters.", orElse: () => null),
+                      validationFailure: () => AppLocalizations.of(context)!.failureInvalidTitle, orElse: () => null),
                   (r) => null),
               onTextChanged: (input) => ctx.read<InsertItemBloc>().add(InsertItemEvent.titleChanged(input)),
               isValid: state.title.value.isRight(),
-              hintText: "Recognizable name for the item",
+              hintText: AppLocalizations.of(context)!.titleFieldHint,
             ),
           );
           var checkboxField = CustomFieldContainer(
-            title: "The item has been",
+            title: AppLocalizations.of(context)!.itemType,
             content: PersonalizedRadioButtonsForm(
                 selectedValue: state.type,
                 onChanged: (type) => ctx.read<InsertItemBloc>().add(InsertItemEvent.typeChanged(type))),
           );
           var questionField = CustomFieldContainer(
-            title: "Question to verify the ownership",
+            title: AppLocalizations.of(context)!.questionFieldTitle,
             content: PersonalizedFormWithTextInsertion(
-              hintText: "Clear and precise question",
+              hintText: AppLocalizations.of(context)!.questionFieldHint,
               isValid: state.question.value.isRight(),
               onTextChanged: (input) => ctx.read<InsertItemBloc>().add(InsertItemEvent.questionChanged(input)),
               showError: state.showError,
               errorText: state.question.value.fold(
                   (failure) => failure.maybeWhen<String?>(
-                      validationFailure: () => "Safe question is required.", orElse: () => null),
+                      validationFailure: () => AppLocalizations.of(context)!.failureInvalidQuestionField,
+                      orElse: () => null),
                   (r) => null),
             ),
           );
@@ -160,9 +149,9 @@ class InsertItemScreen extends StatelessWidget {
                         shape: const StadiumBorder(),
                         padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
-                      child: const Text(
-                        "Create",
-                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      child: Text(
+                        AppLocalizations.of(context)!.create,
+                        style: const TextStyle(fontSize: 20, color: Colors.white),
                       )),
                 ),
               )
@@ -203,9 +192,9 @@ class InsertItemScreen extends StatelessWidget {
                         },
                       ),
                       iconTheme: const IconThemeData(color: Colors.black),
-                      title: const Text(
-                        "Insert an item",
-                        style: TextStyle(color: Colors.black),
+                      title: Text(
+                        AppLocalizations.of(context)!.insertItemTitle,
+                        style: const TextStyle(color: Colors.black),
                       ),
                       backgroundColor: Colors.white,
                     ),
@@ -263,7 +252,8 @@ class InsertItemScreen extends StatelessWidget {
                             showError: state.showError,
                             errorText: state.pos.value.fold(
                                 (failure) => failure.maybeWhen(
-                                    validationFailure: () => "Select the position of the item.", orElse: () => ""),
+                                    validationFailure: () => AppLocalizations.of(context)!.failureInvalidPosition,
+                                    orElse: () => ""),
                                 (_) => ""),
                             startingPosition: state.pos.value.getOrElse(() => const LatLng(0, 0)),
                             isLoadingAddress: state.isLoadingPosition,
@@ -278,7 +268,9 @@ class InsertItemScreen extends StatelessWidget {
                             category: state.category,
                             showError: state.showError,
                             errorText: state.cat.value.fold(
-                                (failure) => failure.maybeWhen(validationFailure: () => "Select a category.", orElse: () => ""),
+                                (failure) => failure.maybeWhen(
+                                    validationFailure: () => AppLocalizations.of(context)!.failureInvalidCategory,
+                                    orElse: () => ""),
                                 (_) => ""),
                             removeAllOption: true,
                           ),

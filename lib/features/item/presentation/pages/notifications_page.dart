@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/notification/news_bloc.dart';
 import 'package:lost_and_found/utils/colors.dart';
 
@@ -24,9 +25,9 @@ class NotificationsScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: PersonalizedColor.backgroundColor,
           appBar: AppBar(
-            title: const Text(
-              "News",
-              style: TextStyle(color: Colors.black),
+            title: Text(
+              AppLocalizations.of(context)!.newsPageTitle,
+              style: const TextStyle(color: Colors.black),
             ),
             backgroundColor: Colors.white,
             iconTheme: const IconThemeData(color: Colors.black),

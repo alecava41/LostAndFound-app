@@ -13,7 +13,7 @@ class SelectPositionState with _$SelectPositionState {
     Either<Failure, Success>? positionFailureOrSuccess
   }) = _SelectPositionState;
 
-  factory SelectPositionState.initial() => const SelectPositionState(
+  factory SelectPositionState.initial() => SelectPositionState(
     userCurrentPos: defaultPosition
   );
 }

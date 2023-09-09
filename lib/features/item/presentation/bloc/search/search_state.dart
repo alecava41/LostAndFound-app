@@ -29,14 +29,13 @@ class SearchState with _$SearchState {
     @Default(SearchPageState.filterPage) SearchPageState pageState,
   }) = _SearchState;
 
-  factory SearchState.initial() =>
-      SearchState(
-          itemsToSearch: ItemsTypeField(false, false),
-          pos: PositionField(const LatLng(0, 0)),
-          cat: CategoryField(-1),
-          results: [],
-          dateTime: null,
-          order: ResultOrder.dateDescending,
+  factory SearchState.initial() => SearchState(
+        itemsToSearch: ItemsTypeField(false, false),
+        pos: PositionField(const LatLng(0, 0)),
+        cat: CategoryField(-1),
+        results: [],
+        dateTime: null,
+        order: ResultOrder.dateDescending,
       );
 }
 
@@ -52,20 +51,20 @@ enum ResultOrder {
 }
 
 extension LabelName on ResultOrder {
-  String get name {
+  String getTranslatedName(BuildContext context) {
     switch (this) {
       case ResultOrder.alphabeticAscending:
-        return 'A to Z';
+        return AppLocalizations.of(context)!.orderAZ;
       case ResultOrder.alphabeticDescending:
-        return 'Z to A';
+        return AppLocalizations.of(context)!.orderZA;
       case ResultOrder.dateAscending:
-        return 'Oldest to Newest';
+        return AppLocalizations.of(context)!.orderOldestNewest;
       case ResultOrder.dateDescending:
-        return 'Newest to Oldest';
+        return AppLocalizations.of(context)!.orderNewestOldest;
       case ResultOrder.distanceAscending:
-        return 'Farthest to Nearest';
+        return AppLocalizations.of(context)!.orderFarthestNearest;
       case ResultOrder.distanceDescending:
-        return 'Nearest to Farthest';
+        return AppLocalizations.of(context)!.orderNearestFarthest;
     }
   }
 }

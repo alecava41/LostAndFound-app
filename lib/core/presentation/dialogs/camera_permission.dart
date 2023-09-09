@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void showCameraPermissionPermanentlyDeniedDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: const Text('Camera Permission Required'),
-        content: const Text(
-          'To take pictures you need to allow camera permissions.\n\n'
-              'Please go to the app settings and enable it.',
+        title: Text(AppLocalizations.of(context)!.cameraPermissionDialogTitle),
+        content: Text(AppLocalizations.of(context)!.cameraPermissionDialogContentPermanentlyDenied,
         ),
         actions: <Widget>[
           TextButton(
-            child: const Text('Close'),
+            child: Text(AppLocalizations.of(context)!.close),
             onPressed: () {
               // Close the dialog
               Navigator.of(context).pop();
@@ -29,14 +28,14 @@ void showCameraPermissionDeniedDialog(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: const Text('Camera Permission Required'),
-        content: const Text('Camera permission is required to use your camera.'),
+        title: Text(AppLocalizations.of(context)!.cameraPermissionDialogTitle),
+        content: Text(AppLocalizations.of(context)!.cameraPermissionDialogContentDenied),
         actions: <Widget>[
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const Text('Close'),
+            child: Text(AppLocalizations.of(context)!.close),
           ),
         ],
       );

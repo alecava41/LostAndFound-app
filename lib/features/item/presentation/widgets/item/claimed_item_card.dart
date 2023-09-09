@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
@@ -78,7 +79,7 @@ class ClaimedItemCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            "Claimed by $username",
+                            AppLocalizations.of(context)!.claimedBy(username),
                             style: const TextStyle(fontSize: 13),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -98,12 +99,12 @@ class ClaimedItemCard extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               text: TextSpan(
                                 children: [
-                                  const TextSpan(
-                                    text: "Claim status ",
-                                    style: TextStyle(fontSize: 13, color: Colors.black),
+                                  TextSpan(
+                                    text: AppLocalizations.of(context)!.claimStatusSpaced,
+                                    style: const TextStyle(fontSize: 13, color: Colors.black),
                                   ),
                                   TextSpan(
-                                    text: status.name.toUpperCase(),
+                                    text: status.getTranslatedName(context).toUpperCase(),
                                     style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
                                   ),
                                 ],

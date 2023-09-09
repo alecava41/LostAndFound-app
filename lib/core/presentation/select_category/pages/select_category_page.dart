@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/select_category/bloc/category_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/utils/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../injection_container.dart';
 import '../widgets/category_item.dart';
@@ -29,9 +30,9 @@ class CategorySelectionScreen extends StatelessWidget {
             child: Scaffold(
                 backgroundColor: PersonalizedColor.backgroundColor,
                 appBar: AppBar(
-                  title: const Text(
-                    'Choose a category',
-                    style: TextStyle(color: Colors.black),
+                  title: Text(
+                    AppLocalizations.of(context)!.categoryPageTitle,
+                    style: const TextStyle(color: Colors.black),
                   ),
                   backgroundColor: Colors.white,
                   iconTheme: const IconThemeData(color: Colors.black),

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../utils/colors.dart';
 
@@ -43,9 +44,9 @@ class UploadImageForm extends StatelessWidget {
                                 ),
                                 elevation: 0,
                               ),
-                              child: const Text(
-                                "Upload a photo",
-                                style: TextStyle(
+                              child: Text(
+                                AppLocalizations.of(context)!.uploadImageButton,
+                                style: const TextStyle(
                                   fontSize: 20,
                                   color: PersonalizedColor.mainColor,
                                 ),

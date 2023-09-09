@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/carousel_item.dart';
 import '../widgets/large_white_button.dart';
@@ -34,7 +35,7 @@ class _InfoScreenState extends State<InfoScreen> {
               SizedBox(
                 height: 2.5.h,
               ),
-              titleLogoHorizontal(),
+              titleLogoHorizontal(context),
               _carouselSlider(),
               SizedBox(
                 height: 3.h,
@@ -84,12 +85,12 @@ class _InfoScreenState extends State<InfoScreen> {
               });
             },
             children: <Widget>[
-              carouselItem('assets/images/input_item.png', 'Report a Lost Item',
-                  'Input the item details in the app to report it as lost.'),
-              carouselItem('assets/images/report_item.png', 'Report a Found Item',
-                  'Notify others by reporting a found item through the app.'),
-              carouselItem('assets/images/return_item.png', 'Arrange Item Return',
-                  'Connect with the finder via messaging to arrange\na safe meetup location for item return.'),
+              carouselItem('assets/images/input_item.png', AppLocalizations.of(context)!.tutorialInitialPage1Title,
+                  AppLocalizations.of(context)!.tutorialInitialPage1Content),
+              carouselItem('assets/images/report_item.png', AppLocalizations.of(context)!.tutorialInitialPage2Title,
+                  AppLocalizations.of(context)!.tutorialInitialPage2Content),
+              carouselItem('assets/images/return_item.png', AppLocalizations.of(context)!.tutorialInitialPage3Title,
+                  AppLocalizations.of(context)!.tutorialInitialPage3Content),
             ],
           ),
         ),
@@ -108,9 +109,8 @@ class _InfoScreenState extends State<InfoScreen> {
           '/login',
         );
       },
-      text: const Text(
-        "Sign In",
-        style: TextStyle(fontSize: 20, color: PersonalizedColor.mainColor),
+      text: Text(AppLocalizations.of(context)!.singIn,
+        style: const TextStyle(fontSize: 20, color: PersonalizedColor.mainColor),
       ),
     );
   }
@@ -122,9 +122,9 @@ class _InfoScreenState extends State<InfoScreen> {
           '/register',
         );
       },
-      text: const Text(
-        "Sign Up",
-        style: TextStyle(fontSize: 20, color: Colors.white),
+      text: Text(
+        AppLocalizations.of(context)!.signUp,
+        style: const TextStyle(fontSize: 20, color: Colors.white),
       ),
     );
   }

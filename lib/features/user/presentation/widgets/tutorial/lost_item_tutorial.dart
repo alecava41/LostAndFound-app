@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/user/presentation/widgets/tutorial/carousel_detailed_tutorial.dart';
 import 'package:sizer/sizer.dart';
 
@@ -73,18 +74,18 @@ class _LostItemTutorialState extends State<LostItemTutorial> {
             children: <Widget>[
               carouselDetailedTutorialItem(
                   'assets/images/create-report.png',
-                  'Report a Lost Item',
-                  'Input the item details such as title, position, category and create a new report.\nThis would notify all the users that have reported a found item that could match the features of the one you have inserted.'),
+                  AppLocalizations.of(context)!.tutorialLostItemTitle1,
+                  AppLocalizations.of(context)!.tutorialLostItemContent1),
               carouselDetailedTutorialItem(
                   'assets/images/create-claim.png',
-                  'Create a Claim',
-                  'Browse found items of the other users or check if there are news for your lost item.\nOnce you find an item that could match your lost one, create a claim by answering to the safe question.\nWait for the other user to validate your claim.'),
-              carouselDetailedTutorialItem('assets/images/chat.png', 'Chat to Arrange Item Return',
-                  'If your claim has been approved, then get in touch with the other user, through the chat, to arrange the item\'s return'),
+                  AppLocalizations.of(context)!.tutorialLostItemTitle2,
+                  AppLocalizations.of(context)!.tutorialLostItemContent2),
+              carouselDetailedTutorialItem('assets/images/chat.png', AppLocalizations.of(context)!.tutorialLostItemTitle3,
+                  AppLocalizations.of(context)!.tutorialLostItemContent3),
               carouselDetailedTutorialItem(
                   'assets/images/solved.png',
-                  'Mark Lost Item as Solved',
-                  'Everything went smooth, and the item came back to the legitimate owner!\nMark your lost item as solved to remove it from the app.'),
+                  AppLocalizations.of(context)!.tutorialLostItemTitle4,
+                  AppLocalizations.of(context)!.tutorialLostItemContent4),
             ],
           ),
         ),

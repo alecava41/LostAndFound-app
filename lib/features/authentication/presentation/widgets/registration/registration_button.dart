@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/authentication/presentation/bloc/registration/registration_bloc.dart';
 
 import '../../../../../core/presentation/widgets/custom_circular_progress.dart';
@@ -39,9 +40,9 @@ class RegistrationButton extends StatelessWidget {
                 size: 25,
                 color: Colors.white,
               )
-            : const Text(
-                "Sign Up",
-                style: TextStyle(fontSize: 20),
+            : Text(
+                AppLocalizations.of(context)!.signUp,
+                style: const TextStyle(fontSize: 20),
               ),
       );
     });

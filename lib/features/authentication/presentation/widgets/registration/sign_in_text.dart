@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInText extends StatelessWidget {
   const SignInText({super.key});
@@ -8,14 +9,14 @@ class SignInText extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text("Already have an account?"),
+        Text(AppLocalizations.of(context)!.signInText),
         TextButton(
           onPressed: () {
             Navigator.pushReplacementNamed(context, '/login');
           },
-          child: const Text(
-            "Sign In",
-            style: TextStyle(
+          child: Text(
+            AppLocalizations.of(context)!.singIn,
+            style: const TextStyle(
               decoration: TextDecoration.underline,
             ),
           ),

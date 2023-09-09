@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../utils/colors.dart';
 
@@ -15,22 +16,21 @@ class ConfirmExitDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Confirm Exit'),
-      content: const Text(
-        'By exiting this page you will lose your current progress. Are you sure you want to exit?'),
+      title: Text(AppLocalizations.of(context)!.confirmExitDialogTitle),
+      content: Text(AppLocalizations.of(context)!.confirmExitDialogContent),
       actions: [
         TextButton(
           onPressed: onCancel,
-          child: const Text(
-            'Cancel',
-            style: TextStyle(color: PersonalizedColor.mainColor),
+          child: Text(
+            AppLocalizations.of(context)!.cancel,
+            style: const TextStyle(color: PersonalizedColor.mainColor),
           ),
         ),
         TextButton(
           onPressed: onConfirm,
-          child: const Text(
-            'Yes',
-            style: TextStyle(color: PersonalizedColor.mainColor),
+          child: Text(
+            AppLocalizations.of(context)!.yes,
+            style: const TextStyle(color: PersonalizedColor.mainColor),
           ),
         ),
       ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/domain/entities/claim_status.dart';
 import '../../../../../utils/colors.dart';
@@ -64,12 +65,12 @@ class ClaimStatusButton extends StatelessWidget {
                           RichText(
                             text: TextSpan(
                               children: [
-                                const TextSpan(
-                                  text: "Claim status ",
-                                  style: TextStyle(fontSize: 18, color: Colors.black),
+                                TextSpan(
+                                  text: AppLocalizations.of(context)!.claimStatusSpaced,
+                                  style: const TextStyle(fontSize: 18, color: Colors.black),
                                 ),
                                 TextSpan(
-                                  text: status.name.toUpperCase(),
+                                  text: status.getTranslatedName(context),
                                   style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
                                 ),
                               ],
@@ -93,16 +94,16 @@ class ClaimStatusButton extends StatelessWidget {
                           Expanded(
                             child: status == ClaimStatus.approved
                                 ? Text(
-                                    "Your claim has been accepted! Get in touch with $owner through the chat to arrange the item's return.",
+                                    AppLocalizations.of(context)!.acceptedQuestionClaim(owner),
                                     style: const TextStyle(color: Colors.black54),
                                   )
                                 : status == ClaimStatus.rejected
                                     ? Text(
-                                        "Unfortunately, your claim has been rejected by $owner.",
+                                        AppLocalizations.of(context)!.rejectedQuestionClaim(owner),
                                         style: const TextStyle(color: Colors.black54),
                                       )
                                     : Text(
-                                        "Wait for $owner to validate to your claim.",
+                                        AppLocalizations.of(context)!.waitQuestionClaim(owner),
                                         style: const TextStyle(color: Colors.black54),
                                       ),
                           ),

@@ -1,11 +1,12 @@
 {
+  "appName": "Lost and Found",
   "close": "Chiudi",
   "cancel": "Cancella",
   "yes": "Si",
   "ok": "OK",
   "singIn": "Registrati",
   "signUp": "Effettua l\\'accesso",
-  "item": "{count, plural, =0{Oggetto} =other{Oggetti}}",
+  "item": "{count, plural, =0{Oggetto} other{Oggetti}}",
   "@item": {
     "placeholders": {
       "count": {
@@ -22,12 +23,12 @@
   "camera": "Fotocamera",
   "date": "Data",
   "password": "Password",
-  "confirmPassword": "Conferma Password",
+  "confirmPassword": "Conferma password",
   "user": "Email o Username",
   "email": "Indirizzo Email",
   "username": "Username",
   "send": "Invia",
-  "claim": "{count, plural, =0{Richiesta} =other{Richiesta}}",
+  "claim": "{count, plural, =0{Richiesta} other{Richiesta}}",
   "@claim": {
     "placeholders": {
       "count": {
@@ -36,7 +37,7 @@
       }
     }
   },
-  "message": "{count, plural, =0{Messaggio} =other{Messaggi}}",
+  "message": "{count, plural, =0{Messaggio} other{Messaggi}}",
   "@message": {
     "placeholders": {
       "count": {
@@ -61,7 +62,7 @@
   "positionUseCurrentLocation": "Usa la mia attuale posizione",
   "positionUseSelected": "Seleziona questa posizione",
   "locationPermissionDialogTitle": "Permesso Posizione Richiesto",
-  "locationPermissionDialogContentPermanentlyDenied": "Il permesso per usare la geolocalizzazione è richiesto per calcolare la tua posizione attuale.\\n\\nPer favore abilita il permesso dalle impostazioni dell'app.",
+  "locationPermissionDialogContentPermanentlyDenied": "Il permesso per usare la geolocalizzazione è richiesto per calcolare la tua posizione attuale.\n\nPer favore abilita il permesso dalle impostazioni dell'app.",
   "locationPermissionDialogContentDenied": "Il permesso per usare la geolocalizzazione è richiesto per calcolare la tua posizione attuale.",
   "noConnectionDialogTitle": "Connessione mancante",
   "noConnectionDialogContent": "Per favore controllare la tua connessione internet",
@@ -77,14 +78,13 @@
   "confirmExitDialogContent": "Uscendo da questa pagina perderai tutti i dati che hai inserito finora. Sei sicuro di voler uscire?",
   "errorPageTitle": "Si è verificato un errore durante il caricamento",
   "errorPageSubtitle": "Per favore riprova più tardi",
-  "mediaSelectionDialogContent": "Per favore selezione un'opzione",
+  "mediaSelectionDialogTitle": "Per favore selezione un'opzione",
   "dateFormEntrySubtitle": "Data di caricamento",
   "dateFormEntryValue": "Dopo {date}",
   "@dateFormEntryValue": {
     "placeholders": {
       "date": {
-        "type": "DateTime",
-        "format": "yMMMM"
+        "type": "String"
       }
     }
   },
@@ -124,7 +124,7 @@
     }
   },
   "yourQuestion": "La tua domanda",
-  "answerOf": "Answer of {username}",
+  "answerOf": "Risposta di {username}",
   "@answerOf": {
     "placeholders": {
       "username": {
@@ -149,7 +149,7 @@
   "answerQuestionTutorialOpenManaged": "In questa pagina, puoi trovare le informazioni sulla richiesta che hia creato.",
   "answerQuestionTutorialOpenUnmanaged": "Per create la richiesta di restituzione dell'oggetto risponde alla sequente domanda correttamente. Se la risposta è corretta, l'utente che ha trovato l'oggetto la approverè e potrai riavere il tuo oggetto.",
   "itemClaiming": "Oggetto che stai richiedendo",
-  "questionOf": "Domanda di{username}",
+  "questionOf": "Domanda di {username}",
   "@questionOf": {
     "placeholders": {
       "username": {
@@ -201,9 +201,9 @@
   },
   "claimStatusSpaced": "Stato richiesta ",
   "seeDetails": "Vedi Dettagli",
-  "sendMessage": "Scrivi un Messaggio",
+  "sendMessage": "Scrivi Messaggio",
   "filtersPageTitle": "Gestione Filtri",
-  "filters": "Filti",
+  "filters": "Filtri",
   "deleteAll": "ELIMINA TUTTO",
   "failureInvalidType": "Seleziona almeno una delle due opzioni.",
   "failureInvalidPosition": "Seleziona la posizione dell'oggetto.",
@@ -212,9 +212,9 @@
   "home": "Home",
   "tooltipNews": "news",
   "tooltipClaims": "richieste",
-  "homeTutorialClosedTitle": "Hai trovato o perso un oggetto?\\nCosa puoi fare ora?",
-  "homeTutorialOpenLostItem": "Ho perso un oggetto",
-  "homeTutorialOpenFoundItem": "Ho trovato un oggetto",
+  "homeTutorialClosedTitle": "Hai trovato o perso un oggetto?\nCosa puoi fare ora?",
+  "homeTutorialOpenLostItem": "Oggetto perso",
+  "homeTutorialOpenFoundItem": "Oggetto trovato",
   "successInsertItem": "Oggetto correttamente creato",
   "titleFieldTitle": "Titolo",
   "titleFieldHint": "Nome riconoscibile per l'oggetto",
@@ -240,7 +240,7 @@
   "successItemUpdate": "Oggetto modificato correttamente",
   "updateItemPageTitle": "Modifica Oggetto",
   "update": "Modifica",
-  "openClaims": "{count, plural, =1{1 richiesta} =other{{count} richieste}}",
+  "openClaims": "{count, plural, =1{1 richiesta} other{{count} richieste}}",
   "@openClaims": {
     "placeholders": {
       "count": {
@@ -304,23 +304,34 @@
   "logoutDialogContent": "Sei sicuro di voler uscire?",
   "logoutDialogNo": "No, rimani collecato",
   "logoutDialogYes": "Si, esci",
-
-  // SONO ARRIVATO QUI!!
   "tutorialFoundItemTitle1": "Inserisci un Oggetto Trovato",
-  "tutorialFoundItemContent1": "Input the item details such as title, position, category, safe question and create a new report.\\nThis would notify all the users that have reported a lost item that could match the features of the one you have inserted.",
-  "tutorialFoundItemTitle2": "Manage received Claims",
-  "tutorialFoundItemContent2": "Wait for users to open claims for your found item.\\nManage all of them, by taking care about approving the most correct one.\\nOnce you approve a claim for your found item, nobody will be able to see that item again and all the other claims will be automatically rejected.",
-  "tutorialFoundItemTitle3": "Chat to Arrange Item Return",
-  "tutorialFoundItemContent3": "Get in touch, through the chat, with the user who filled the claim you have approved, to arrange the item\\'s return",
-  "tutorialFoundItemTitle4": "Mark Found Item as Solved",
-  "tutorialFoundItemContent4": "Everything went smooth, and the item came back to the legitimate owner!\\nMark your found item as solved to remove it from the app.",
-
-  "tutorialLostItemTitle1": "Report a Lost Item",
-  "tutorialLostItemContent1": "Input the item details such as title, position, category and create a new report.\\nThis would notify all the users that have reported a found item that could match the features of the one you have inserted.",
-  "tutorialLostItemTitle2": "Create a Claim",
-  "tutorialLostItemContent2": "Browse found items of the other users or check if there are news for your lost item.\\nOnce you find an item that could match your lost one, create a claim by answering to the safe question.\\nWait for the other user to validate your claim.",
-  "tutorialLostItemTitle3": "Chat to Arrange Item Return",
-  "tutorialLostItemContent3": "If your claim has been approved, then get in touch with the other user, through the chat, to arrange the item\\'s return",
-  "tutorialLostItemTitle4": "Mark Lost Item as Solved",
-  "tutorialLostItemContent4": "Everything went smooth, and the item came back to the legitimate owner!\\nMark your lost item as solved to remove it from the app."
+  "tutorialFoundItemContent1": "Inserisci i dettagli dell'oggetto trovato come titolo, posizione, categoria, domanda di sicurezza e inserisci l'oggetto.\nQuesto notificherà tutti gli utenti che hanno inserito un oggetto perso che potrebbe corrispondere a quello che hai appena inserito.",
+  "tutorialFoundItemTitle2": "Gestisci le Richieste ricevute",
+  "tutorialFoundItemContent2": "Attendi che gli utenti aprano una richiesta per avere il tuo oggetto trovato.\nValidale tutte, cercando di accettare quella che sembra più attendibile.\nQuando ne approverai una, nessuno potrà più vedere l'oggetto tramite l'app e tutte le altre richieste per quell'oggetto saranno automaticamente rifiutate.",
+  "tutorialFoundItemTitle3": "Chatta per Organizzare la Restituzione dell'Oggetto",
+  "tutorialFoundItemContent3": "Contatta, attraverso la chat, l'utente che ha mandato la richiesta da te approvata, in modo da poter organizzare un incontro per la restituzione dell'item.",
+  "tutorialFoundItemTitle4": "Marca il tuo Oggetto Trovato come Risolto",
+  "tutorialFoundItemContent4": "Tutto è andato bene e l'oggetto è ritornato al legittimo proprietario!\nMarca l'oggetto trovato come risolto per rimuoverlo dall'app.",
+  "tutorialLostItemTitle1": "Inserisci un Oggetto Perso",
+  "tutorialLostItemContent1": "Inserisci i dettagli dell'oggetto perso come titolo, posizione, categoria e inseriscilo.\nQuesto notificherà tutti gli utenti che hanno inserito un oggetto trovato che potrebbe corrispondere a quello che hai appena inserito.",
+  "tutorialLostItemTitle2": "Crea una Richiesta",
+  "tutorialLostItemContent2": "Cerca oggetti trovati di altri utenti o controlla le news per il tuo oggetto trovato.\nQuando trovi un ogggetto che potrebbe corrispondere a quello che hai perso, crea una richiesta rispondendo alla domanda di sicurezza.\nAttenti la validazione della richiesta da parte dell'altro utente.",
+  "tutorialLostItemTitle3": "Chatta per Organizzare la Restituzione dell'Oggetto",
+  "tutorialLostItemContent3": "Se la tua richiesta è stata approvata, contatta, attraverso la chat, l'utente che l'ha accetta, in modo da organizzare un incontro per la restituzione del tuo oggetto.",
+  "tutorialLostItemTitle4": "Marca il tuo Oggetto Perso come Risolto",
+  "tutorialLostItemContent4": "Tutto è andato bene e l'oggetto è ritornato al legittimo proprietario!\nMarca l'oggetto perso come risolto per rimuoverlo dall'app.",
+  "claimStatusPending": "in attesa",
+  "claimStatusApproved": "accettata",
+  "claimStatusRejected": "rifiutata",
+  "itemTypeLost": "perso",
+  "itemTypeFound": "trovato",
+  "orderAZ": "A a Z",
+  "orderZA": "Z a A",
+  "orderOldestNewest": "Più vecchio a più nuovo",
+  "orderNewestOldest": "Più nuovo a più vecchio",
+  "orderFarthestNearest": "Più lontano a più vicino",
+  "orderNearestFarthest": "Più vicino a più lontano",
+  "changeLanguage": "Cambia lingua",
+  "selectLanguageDialogTitle": "Seleziona Lingua",
+  "selectDate": "Seleziona Data"
 }

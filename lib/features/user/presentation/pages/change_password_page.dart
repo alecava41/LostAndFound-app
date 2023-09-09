@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/user/presentation/bloc/change_password/change_password_bloc.dart';
+import 'package:lost_and_found/utils/utility.dart';
 
 import '../../../../injection_container.dart';
 
@@ -18,24 +20,9 @@ class ChangePasswordScreen extends StatelessWidget {
 
           if (changePswFailureOrSuccess != null) {
             changePswFailureOrSuccess.fold(
-              (failure) => ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: Colors.red,
-                  content: Text(
-                    failure.maybeWhen<String>(
-                        genericFailure: () => 'Server error. Please try again later.',
-                        networkFailure: () => 'No internet connection available. Check your internet connection.',
-                        orElse: () => "Unknown error"),
-                  ),
-                ),
-              ),
+              (failure) => showBasicErrorSnackbar(context, failure),
               (_) => {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    backgroundColor: Colors.green,
-                    content: Text("Password successfully updated"),
-                  ),
-                ),
+                showBasicSuccessSnackbar(context, AppLocalizations.of(context)!.successPasswordChange),
                 Navigator.pop(context)
               },
             );
@@ -52,9 +39,9 @@ class ChangePasswordScreen extends StatelessWidget {
             child: Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.white,
-                title: const Text(
-                  "Change password",
-                  style: TextStyle(color: Colors.black),
+                title: Text(
+                  AppLocalizations.of(context)!.changePasswordButton,
+                  style: const TextStyle(color: Colors.black),
                 ),
                 iconTheme: const IconThemeData(color: Colors.black),
               ),
@@ -66,36 +53,36 @@ class ChangePasswordScreen extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Padding(
-                        padding: EdgeInsets.all(12.0),
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
                         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                           Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                             child: Text(
-                              "To create a secure password:",
-                              style: TextStyle(fontSize: 22),
+                              AppLocalizations.of(context)!.passwordCreate1,
+                              style: const TextStyle(fontSize: 22),
                             ),
                           ),
                           Padding(
-                              padding: EdgeInsets.all(4.0),
+                              padding: const EdgeInsets.all(4.0),
                               child: Row(
                                 children: [
-                                  Text("• ", style: TextStyle(fontSize: 30)),
+                                  const Text("• ", style: TextStyle(fontSize: 30)),
                                   Text(
-                                    "Use at least 8 characters;",
-                                    style: TextStyle(fontSize: 16),
+                                    AppLocalizations.of(context)!.passwordCreate2,
+                                    style: const TextStyle(fontSize: 16),
                                   ),
                                 ],
                               )),
                           Padding(
-                              padding: EdgeInsets.all(4.0),
+                              padding: const EdgeInsets.all(4.0),
                               child: Row(
                                 children: [
-                                  Text("• ", style: TextStyle(fontSize: 30)),
+                                  const Text("• ", style: TextStyle(fontSize: 30)),
                                   Expanded(
                                     child: Text(
-                                      "Use a combination of uppercase letters, lowercase letters and numbers.",
-                                      style: TextStyle(fontSize: 16),
+                                      AppLocalizations.of(context)!.passwordCreate3,
+                                      style: const TextStyle(fontSize: 16),
                                     ),
                                   ),
                                 ],
@@ -112,7 +99,7 @@ class ChangePasswordScreen extends StatelessWidget {
                               ctx.read<ChangePasswordBloc>().add(ChangePasswordEvent.oldPasswordFieldChanged(value)),
                           decoration: InputDecoration(
                             prefixIcon: const Icon(Icons.lock),
-                            hintText: "Current password",
+                            hintText: AppLocalizations.of(context)!.passwordFormCurrentHint,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(18),
                               borderSide: BorderSide.none,
@@ -131,8 +118,9 @@ class ChangePasswordScreen extends StatelessWidget {
                           obscureText: state.obscureOldPassword,
                           validator: (_) => state.oldPassword.value.fold(
                               (failure) => failure.maybeWhen<String?>(
-                                  validationFailure: () => "Old password is required",
-                                  recordNotFoundFailure: () => "Old password doesn't correspond to actual password.",
+                                  validationFailure: () => AppLocalizations.of(context)!.failureInvalidOldPassword,
+                                  recordNotFoundFailure: () =>
+                                      AppLocalizations.of(context)!.failureInvalidOldPasswordNotMatching,
                                   orElse: () => null),
                               (_) => null),
                           autovalidateMode:
@@ -148,7 +136,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           decoration: InputDecoration(
                             errorMaxLines: 3,
                             prefixIcon: const Icon(Icons.lock),
-                            hintText: "New password",
+                            hintText: AppLocalizations.of(context)!.newPasswordHint,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(18),
                               borderSide: BorderSide.none,
@@ -167,8 +155,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           obscureText: state.obscureNewPassword,
                           validator: (_) => state.newPassword.value.fold(
                               (failure) => failure.maybeWhen<String?>(
-                                  validationFailure: () =>
-                                      "Password must contain at least 8 characters, using uppercase, lowercase and numeric characters.",
+                                  validationFailure: () => AppLocalizations.of(context)!.failureInvalidNewPassword,
                                   orElse: () => null),
                               (_) => null),
                           autovalidateMode:
@@ -184,7 +171,7 @@ class ChangePasswordScreen extends StatelessWidget {
                               ctx.read<ChangePasswordBloc>().add(ChangePasswordEvent.confirmPasswordFieldChanged(value)),
                           decoration: InputDecoration(
                             prefixIcon: const Icon(Icons.lock),
-                            hintText: "Confirm new password",
+                            hintText: AppLocalizations.of(context)!.confirmPassword,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(18),
                               borderSide: BorderSide.none,
@@ -203,7 +190,8 @@ class ChangePasswordScreen extends StatelessWidget {
                           obscureText: state.obscureConfirmPassword,
                           validator: (_) => state.confirmPassword.value.fold(
                               (failure) => failure.maybeWhen<String?>(
-                                  validationFailure: () => "Field doesn't match the new password.", orElse: () => null),
+                                  validationFailure: () => AppLocalizations.of(context)!.failureConfirmPassword,
+                                  orElse: () => null),
                               (_) => null),
                           autovalidateMode:
                               state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
@@ -223,9 +211,9 @@ class ChangePasswordScreen extends StatelessWidget {
                                   shape: const StadiumBorder(),
                                   padding: const EdgeInsets.symmetric(vertical: 16),
                                 ),
-                                child: const Text(
-                                  "Change password",
-                                  style: TextStyle(fontSize: 20),
+                                child: Text(
+                                  AppLocalizations.of(context)!.changePasswordButton,
+                                  style: const TextStyle(fontSize: 20),
                                 ),
                               ),
                             ),

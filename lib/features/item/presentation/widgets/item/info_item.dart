@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/item/info_item_field.dart';
@@ -44,7 +45,8 @@ class InfoItem extends StatelessWidget {
           const SizedBox(height: 10),
           InfoItemField(
             icon: Icons.location_on,
-            title: type == ItemType.found ? "Found near" : "Lost near",
+            title:
+                type == ItemType.found ? AppLocalizations.of(context)!.foundNear : AppLocalizations.of(context)!.lostNear,
             content: position,
             onTapField: () async {
               final availableMaps = await MapLauncher.installedMaps;
@@ -60,15 +62,14 @@ class InfoItem extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text('No Map App Found'),
-                        content: const Text(
-                            'Oops! It looks like there\'s no map app on your device to open this link. Please install a mapping app like Google Maps and try again.'),
+                        title: Text(AppLocalizations.of(context)!.noMapAppTitle),
+                        content: Text(AppLocalizations.of(context)!.noMapAppContent),
                         actions: <Widget>[
                           TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: const Text('OK'),
+                            child: Text(AppLocalizations.of(context)!.ok),
                           ),
                         ],
                       );
@@ -80,13 +81,15 @@ class InfoItem extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           InfoItemField(
-              icon: Icons.calendar_month, title: "Date of insertion", content: DateFormat("dd/MM/yyyy").format(date)),
+              icon: Icons.calendar_month,
+              title: AppLocalizations.of(context)!.dateInsertion,
+              content: DateFormat("dd/MM/yyyy").format(date)),
           const SizedBox(height: 10),
-          InfoItemField(icon: Icons.category, title: "Category", content: category),
+          InfoItemField(icon: Icons.category, title: AppLocalizations.of(context)!.category, content: category),
           question != null && type == ItemType.found ? const SizedBox(height: 10) : Container(),
           question != null && type == ItemType.found
               ? InfoItemField(
-                  icon: Icons.connect_without_contact, title: "Question to verify the ownership", content: question!)
+                  icon: Icons.connect_without_contact, title: AppLocalizations.of(context)!.question, content: question!)
               : Container(),
         ],
       ),

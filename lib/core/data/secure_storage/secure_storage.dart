@@ -15,6 +15,8 @@ const String EXPIRE = "expire";
 const String EMAIL = "email";
 const String USERNAME = "username";
 
+const String LOCALE = "locale";
+
 abstract class SecureStorage {
   Future<bool> hasValidSession();
 
@@ -35,6 +37,9 @@ abstract class SecureStorage {
   Future<void> saveCredentialsForChatLogin(String email, String username);
 
   Future<Pair<String, String>> getCredentialsForChatLogin();
+
+  Future<String?> getLastSetLocale();
+  Future<void> setLocale(String locale);
 }
 
 class SecureStorageImpl extends SecureStorage {
@@ -124,5 +129,15 @@ class SecureStorageImpl extends SecureStorage {
   @override
   Future<Pair<String, String>> getCredentialsForChatLogin() async {
     return Pair((await _storage.read(key: EMAIL))!, (await _storage.read(key: USERNAME))!);
+  }
+
+  @override
+  Future<String?> getLastSetLocale() async {
+    return await _storage.read(key: LOCALE);
+  }
+
+  @override
+  Future<void> setLocale(String locale) async {
+    await _storage.write(key: LOCALE, value: locale);
   }
 }

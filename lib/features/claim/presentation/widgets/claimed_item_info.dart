@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
@@ -90,7 +91,7 @@ class ClaimedItemInfo extends StatelessWidget {
                       PersonalizedLargeGreenButton(
                         onPressed: () =>
                             Navigator.of(context).push(MaterialPageRoute(builder: (_) => ItemScreen(itemId: item.id))),
-                        text: const Text("See details"),
+                        text: Text(AppLocalizations.of(context)!.seeDetails),
                       ),
                     ],
                   ),
@@ -151,14 +152,14 @@ class ClaimedItemInfo extends StatelessWidget {
                       ));
                 } else {
                   context.read<AnswerClaimBloc>().add(AnswerClaimEvent.createChatRoom(
-                    otherUserId,
-                    otherUserUsername,
-                  ));
+                        otherUserId,
+                        otherUserUsername,
+                      ));
                 }
               },
-              child: const Text(
-                'Send a message',
-                style: TextStyle(fontSize: 14, color: PersonalizedColor.mainColor),
+              child: Text(
+                AppLocalizations.of(context)!.sendMessage,
+                style: const TextStyle(fontSize: 14, color: PersonalizedColor.mainColor),
               ),
             ),
           ],

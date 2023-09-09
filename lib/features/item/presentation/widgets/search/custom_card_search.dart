@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/utils/constants.dart';
@@ -82,7 +83,7 @@ class CustomCardSearch extends StatelessWidget {
                         style: const TextStyle(fontSize: 14, color: Colors.black54),
                       ),
                       Text(
-                        "${distance.toInt()}m away",
+                        AppLocalizations.of(context)!.metersAway(distance.toInt()),
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(fontSize: 14, color: Colors.black54),
                       )

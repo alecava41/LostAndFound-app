@@ -6,6 +6,7 @@ import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/presentation/select_position/bloc/select_position_bloc.dart';
 import 'package:lost_and_found/utils/constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../injection_container.dart';
 
@@ -69,9 +70,9 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
               child: Scaffold(
                   appBar: AppBar(
                     iconTheme: const IconThemeData(color: Colors.black),
-                    title: const Text(
-                      "Select position",
-                      style: TextStyle(
+                    title: Text(
+                      AppLocalizations.of(context)!.positionPageTitle,
+                      style: const TextStyle(
                         color: Colors.black,
                       ),
                     ),
@@ -160,17 +161,17 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                             .read<SelectPositionBloc>()
                                             .add(const SelectPositionEvent.selectCurrentPosition());
                                       },
-                                      child: const Row(
+                                      child: Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.navigation,
                                             size: 30,
                                           ),
-                                          SizedBox(width: 8.0),
+                                          const SizedBox(width: 8.0),
                                           Text(
-                                            'Use my current location',
-                                            style: TextStyle(
+                                            AppLocalizations.of(context)!.positionUseCurrentLocation,
+                                            style: const TextStyle(
                                               decoration: TextDecoration.underline,
                                               fontSize: 18,
                                             ),
@@ -191,9 +192,9 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                                   shape: const StadiumBorder(),
                                                   padding: const EdgeInsets.symmetric(vertical: 18),
                                                 ),
-                                                child: const Text(
-                                                  'Choose this position',
-                                                  style: TextStyle(fontSize: 20),
+                                                child: Text(
+                                                  AppLocalizations.of(context)!.positionUseSelected,
+                                                  style: const TextStyle(fontSize: 20),
                                                 )),
                                           ),
                                         ],
@@ -218,14 +219,14 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Location Permission Required'),
-          content: const Text('Location permission is required to use your current location.'),
+          title: Text(AppLocalizations.of(context)!.locationPermissionDialogTitle),
+          content: Text(AppLocalizations.of(context)!.locationPermissionDialogContentDenied),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Close'),
+              child: Text(AppLocalizations.of(context)!.close),
             ),
           ],
         );
@@ -238,15 +239,14 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Location Permission Required'),
-          content: const Text(
-              'Location permission is required to use your current location.\n\nPlease go to app settings and enable it.'),
+          title: Text(AppLocalizations.of(context)!.locationPermissionDialogTitle),
+          content: Text(AppLocalizations.of(context)!.locationPermissionDialogContentPermanentlyDenied),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Close'),
+              child: Text(AppLocalizations.of(context)!.close),
             ),
           ],
         );
@@ -259,8 +259,8 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('No Connection'),
-          content: const Text('Please check your internet connectivity'),
+          title: Text(AppLocalizations.of(context)!.noConnectionDialogTitle),
+          content: Text(AppLocalizations.of(context)!.noConnectionDialogContent),
           actions: <Widget>[
             TextButton(
               onPressed: () async {
@@ -271,7 +271,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                   setState(() => isAlertSet = true);
                 }
               },
-              child: const Text('Ok'),
+              child: Text(AppLocalizations.of(context)!.ok),
             ),
           ],
         );
@@ -284,8 +284,8 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Position Service Disabled'),
-          content: const Text('Please enable your position service'),
+          title: Text(AppLocalizations.of(context)!.positionDialogTitle),
+          content: Text(AppLocalizations.of(context)!.positionDialogContent),
           actions: <Widget>[
             TextButton(
               onPressed: () async {
@@ -296,7 +296,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                   setState(() => isAlertSet = true);
                 }
               },
-              child: const Text('Ok'),
+              child: Text(AppLocalizations.of(context)!.ok),
             ),
           ],
         );

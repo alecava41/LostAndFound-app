@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/authentication/presentation/bloc/login/login_bloc.dart';
 
@@ -22,10 +23,10 @@ class LoginButton extends StatelessWidget {
                 size: 25,
                 color: Colors.white,
               )
-            : const Text(
-          "Sign In",
-          style: TextStyle(fontSize: 20),
-        ),
+            : Text(
+                AppLocalizations.of(context)!.singIn,
+                style: const TextStyle(fontSize: 20),
+              ),
       );
     });
   }

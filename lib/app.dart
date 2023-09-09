@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lost_and_found/config/route_generator.dart';
+import 'package:lost_and_found/core/presentation/app_global/bloc/app_global_bloc.dart';
 import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import 'package:lost_and_found/features/chat/presentation/pages/chat_page.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
@@ -32,10 +33,13 @@ class App extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _Application();
 
-// TODO (@alecava41) translation (notifications + server) + do stuff for iOS + missing translations from enums
-// TODO (@alecava41) should state somewhere to range of the search for the specified position
+// TODO (@alecava41) translation (notifications + server) + do stuff for iOS
 // TODO (@alecava41) dark theme + switch
 // TODO (@alecava41) (map) fix this on iOS (https://pub.dev/packages/map_launcher#for-ios-add-url-schemes-in-infoplist-file)
+
+// TODO (@alecava41) should state somewhere to range of the search for the specified position
+
+// TODO (@alecava41) modify tutorial in options to avoid "double" horizontal scroll
 // TODO (@alecava41) remove third minion from home_tutorial image
 }
 
@@ -127,6 +131,7 @@ class _Application extends State<App> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<AppGlobalBloc>(create: (_) => sl<AppGlobalBloc>()..add(const AppGlobalEvent.appCreated())),
         BlocProvider<HomeBloc>(create: (_) => sl<HomeBloc>()),
         BlocProvider<SearchBloc>(create: (_) => sl<SearchBloc>()),
         BlocProvider<UserBloc>(create: (_) => sl<UserBloc>()),
@@ -141,19 +146,21 @@ class _Application extends State<App> {
             context.read<BadgeBloc>().add(const BadgeEvent.badgeCreated());
           }
 
-          return MaterialApp(
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
-            locale: DevicePreview.locale(context),
-            builder: DevicePreview.appBuilder,
-            title: 'Lost and Found',
-            navigatorKey: navigatorKey,
-            theme: ThemeData(
-              fontFamily: GoogleFonts.roboto().fontFamily,
-              primarySwatch: PersonalizedColor.primarySwatch,
+          return BlocBuilder<AppGlobalBloc, AppGlobalState>(
+            builder: (ctx, state) => MaterialApp(
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: state.locale,
+              builder: DevicePreview.appBuilder,
+              title: 'Lost and Found',
+              navigatorKey: navigatorKey,
+              theme: ThemeData(
+                fontFamily: GoogleFonts.roboto().fontFamily,
+                primarySwatch: PersonalizedColor.primarySwatch,
+              ),
+              initialRoute: initialRoute,
+              onGenerateRoute: RouteGenerator.generateRoute,
             ),
-            initialRoute: initialRoute,
-            onGenerateRoute: RouteGenerator.generateRoute,
           );
         },
       ),

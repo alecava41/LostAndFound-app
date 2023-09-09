@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
@@ -43,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text("Home", style: TextStyle(fontSize: 30)),
+                          Text(AppLocalizations.of(context)!.home, style: const TextStyle(fontSize: 30)),
                           Row(
                             children: [
                               badges.Badge(
@@ -53,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                                 child: ClickableCircularButton(
                                   icon: Icons.notifications,
                                   onPressed: () => Navigator.of(context).pushNamed('/notifications'),
-                                  tooltipText: 'news',
+                                  tooltipText: AppLocalizations.of(context)!.tooltipNews,
                                 ),
                               ),
                               const SizedBox(
@@ -67,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                                 child: ClickableCircularButton(
                                   icon: Icons.connect_without_contact,
                                   onPressed: () => Navigator.of(context).pushNamed('/claims'),
-                                  tooltipText: 'claims',
+                                  tooltipText: AppLocalizations.of(context)!.tooltipClaims,
                                 ),
                               ),
                             ],
@@ -78,9 +79,9 @@ class HomeScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8),
                       child: CustomExpansionTile(
-                        title: const Text(
-                          "Have you lost or found an item?\nWhat should you do now?",
-                          style: TextStyle(fontSize: 16),
+                        title: Text(
+                          AppLocalizations.of(context)!.homeTutorialClosedTitle,
+                          style: const TextStyle(fontSize: 16),
                         ),
                         children: [
                           Container(
@@ -112,14 +113,18 @@ class HomeScreen extends StatelessWidget {
                                     children: [
                                       PersonalizedLargeGreenButton(
                                           onPressed: () {
-                                            Navigator.pushNamed(context, "/options/tutorial", arguments: const TutorialScreenArguments(tab: 0));
+                                            Navigator.pushNamed(context, "/options/tutorial",
+                                                arguments: const TutorialScreenArguments(tab: 0));
                                           },
-                                          text: const Text("I lost an item", style: TextStyle(color: Colors.white))),
+                                          text: Text(AppLocalizations.of(context)!.homeTutorialOpenLostItem,
+                                              style: const TextStyle(color: Colors.white))),
                                       PersonalizedLargeGreenButton(
                                           onPressed: () {
-                                            Navigator.pushNamed(context, "/options/tutorial", arguments: const TutorialScreenArguments(tab: 1));
+                                            Navigator.pushNamed(context, "/options/tutorial",
+                                                arguments: const TutorialScreenArguments(tab: 1));
                                           },
-                                          text: const Text("I found an item", style: TextStyle(color: Colors.white))),
+                                          text: Text(AppLocalizations.of(context)!.homeTutorialOpenFoundItem,
+                                              style: const TextStyle(color: Colors.white))),
                                     ],
                                   ),
                                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/notification/news_bloc.dart';
@@ -38,7 +39,7 @@ class CustomNotification extends StatelessWidget {
       return Column(
         children: [
           Material(
-            color: opened ? PersonalizedColor.openedColor :  PersonalizedColor.notOpenedColor,
+            color: opened ? PersonalizedColor.openedColor : PersonalizedColor.notOpenedColor,
             child: InkWell(
               onTap: () => {
                 ctx.read<NewsBloc>().add(NewsEvent.newsRead(id)),
@@ -62,19 +63,21 @@ class CustomNotification extends StatelessWidget {
                       Expanded(
                         child: Builder(
                           builder: (BuildContext context) {
-                            final sentence =
-                                (subjectItemType == ItemType.lost) ? "might have found your" : "might be the owner of";
+                            final sentence = (subjectItemType == ItemType.lost)
+                                ? AppLocalizations.of(context)!.mightFound
+                                : AppLocalizations.of(context)!.mightLost;
 
-                            return RichText(text:
-                              TextSpan(
+                            return RichText(
+                              text: TextSpan(
                                 children: [
-                                  const TextSpan(
-                                    text: "Hey, ",
-                                    style: TextStyle(fontSize: 15, color: Colors.black),
+                                  TextSpan(
+                                    text: AppLocalizations.of(context)!.hey,
+                                    style: const TextStyle(fontSize: 15, color: Colors.black),
                                   ),
                                   TextSpan(
                                     text: targetUsername,
-                                    style: const TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
+                                    style:
+                                        const TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
                                   ),
                                   TextSpan(
                                     text: " $sentence ",
@@ -82,14 +85,15 @@ class CustomNotification extends StatelessWidget {
                                   ),
                                   TextSpan(
                                     text: subjectItemTitle,
-                                    style: const TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
+                                    style:
+                                        const TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
                                   ),
                                   const TextSpan(
                                     text: "!",
                                     style: TextStyle(fontSize: 15, color: Colors.black),
                                   ),
-                                ]
-                              )
+                                ],
+                              ),
                             );
                           },
                         ),

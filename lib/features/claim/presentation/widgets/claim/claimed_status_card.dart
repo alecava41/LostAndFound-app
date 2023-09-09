@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_question_screen.dart';
@@ -103,12 +104,12 @@ class ClaimedStatusCard extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               text: TextSpan(
                                 children: [
-                                  const TextSpan(
-                                    text: "Claim status ",
-                                    style: TextStyle(fontSize: 13, color: Colors.black),
+                                  TextSpan(
+                                    text: AppLocalizations.of(context)!.claimStatusSpaced,
+                                    style: const TextStyle(fontSize: 13, color: Colors.black),
                                   ),
                                   TextSpan(
-                                    text: claim.status.name.toUpperCase(),
+                                    text: claim.status.getTranslatedName(context).toUpperCase(),
                                     style:
                                         const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
                                   ),

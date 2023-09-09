@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/authentication/presentation/bloc/registration/registration_bloc.dart';
 
 class EmailInput extends StatelessWidget {
@@ -11,7 +12,7 @@ class EmailInput extends StatelessWidget {
       return TextFormField(
         onChanged: (value) => context.read<RegistrationBloc>().add(RegistrationEvent.emailFieldChanged(value)),
         decoration: InputDecoration(
-          hintText: "Email Address",
+          hintText: AppLocalizations.of(context)!.email,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: BorderSide.none),
           fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
           filled: true,
@@ -20,8 +21,9 @@ class EmailInput extends StatelessWidget {
         keyboardType: TextInputType.emailAddress,
         validator: (_) => state.email.value.fold(
             (failure) => failure.maybeWhen<String?>(
-                duplicateRecordFailure: (_) => "Email already used.",
-                validationFailure: () => "Invalid email format.", orElse: () => null),
+                duplicateRecordFailure: (_) => AppLocalizations.of(context)!.failureEmailDuplicate,
+                validationFailure: () => AppLocalizations.of(context)!.failureEmailInvalid,
+                orElse: () => null),
             (_) => null),
         autovalidateMode: state.showErrorMessage == true ? AutovalidateMode.always : AutovalidateMode.disabled,
       );

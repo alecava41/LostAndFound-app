@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/home/custom_card_home.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/home/no_item_message.dart';
@@ -17,11 +18,11 @@ class FoundItemsContainer extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.fromLTRB(20, 0, 0, 5),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 0, 5),
             child: Text(
-              "Your found items",
-              style: TextStyle(fontSize: 20),
+              AppLocalizations.of(context)!.yourFoundItems,
+              style: const TextStyle(fontSize: 20),
             ),
           ),
           state.isLoading
@@ -65,9 +66,9 @@ class FoundItemsContainer extends StatelessWidget {
                   : Padding(
                       padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
                       child: NoItemMessage(
-                        message: "No found items yet, keep searching!",
+                        message: AppLocalizations.of(context)!.noFoundItemContent,
                         icon: Icons.image_search_rounded,
-                        buttonText: 'Insert a found item',
+                        buttonText: AppLocalizations.of(context)!.noFoundItemButton,
                         callback: () {
                           Navigator.of(ctx)
                               .pushNamed("/insert", arguments: InsertItemScreenArguments(isNewItemLost: false));

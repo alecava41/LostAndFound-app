@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:lost_and_found/features/chat/presentation/pages/inbox_page.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/search/search_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../features/badges/presentation/bloc/badge_bloc.dart';
 import '../../../../features/chat/presentation/bloc/inbox/inbox_bloc.dart';
@@ -75,17 +76,17 @@ class HomeControllerScreen extends StatelessWidget {
                             showBadge: badgeState.unreadReceivedClaims > 0 || badgeState.unreadNews > 0,
                             child: const Icon(Icons.home),
                           ),
-                          label: "Home"),
-                      const BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-                      const BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline_outlined), label: "Insert"),
+                          label: AppLocalizations.of(context)!.homeBottomBarTab),
+                      BottomNavigationBarItem(icon: const Icon(Icons.search), label: AppLocalizations.of(context)!.searchBottomBarTab),
+                      BottomNavigationBarItem(icon: const Icon(Icons.add_circle_outline_outlined), label: AppLocalizations.of(context)!.insertBottomBarTab),
                       BottomNavigationBarItem(
                           icon: badges.Badge(
                             showBadge: badgeState.hasUnreadChats,
                             position: badges.BadgePosition.topEnd(top: 0, end: -1),
                             child: const Icon(Icons.mail),
                           ),
-                          label: "Inbox"),
-                      const BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+                          label: AppLocalizations.of(context)!.inboxBottomBarTab),
+                       BottomNavigationBarItem(icon: const Icon(Icons.person), label: AppLocalizations.of(context)!.profileBottomBarTab),
                     ],
                   ),
                 ),

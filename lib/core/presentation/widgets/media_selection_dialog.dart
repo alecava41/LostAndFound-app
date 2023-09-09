@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../utils/colors.dart';
 
@@ -16,7 +17,7 @@ class MediaSelectionDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      title: const Text('Please select a media option'),
+      title: Text(AppLocalizations.of(context)!.mediaSelectionDialogTitle),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -25,13 +26,13 @@ class MediaSelectionDialog extends StatelessWidget {
               backgroundColor: PersonalizedColor.mainColor,
             ),
             onPressed: onTapGallery,
-            child: const Row(
+            child: Row(
               children: [
-                Icon(Icons.image),
-                SizedBox(
+                const Icon(Icons.image),
+                const SizedBox(
                   width: 5,
                 ),
-                Text('Gallery'),
+                Text(AppLocalizations.of(context)!.gallery),
               ],
             ),
           ),
@@ -43,15 +44,13 @@ class MediaSelectionDialog extends StatelessWidget {
               backgroundColor: PersonalizedColor.mainColor,
             ),
             onPressed: onTapCamera,
-            child: const Row(
+            child: Row(
               children: [
-                Icon(Icons.camera),
-                SizedBox(
+                const Icon(Icons.camera),
+                const SizedBox(
                   width: 5,
                 ),
-                Text(
-                  'Camera',
-                ),
+                Text(AppLocalizations.of(context)!.camera),
               ],
             ),
           ),

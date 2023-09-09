@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Widget titleLogoVertical() {
   return Column(
@@ -18,7 +19,7 @@ Widget titleLogoVertical() {
   );
 }
 
-Widget titleLogoHorizontal() {
+Widget titleLogoHorizontal(BuildContext context) {
   return SizedBox(
     width: 400,
     child: Row(
@@ -29,9 +30,9 @@ Widget titleLogoHorizontal() {
           width: 90,
           height: 90,
         ),
-        const Text(
-          "Lost&Found",
-          style: TextStyle(fontSize: 40),
+        Text(
+          AppLocalizations.of(context)!.lostAndFound,
+          style: const TextStyle(fontSize: 40),
         ),
       ],
     ),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/domain/entities/claim_status.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/features/claim/presentation/bloc/answer_claim/answer_claim_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/widgets/claim_info_field.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/home/custom_expansion_tile.dart';
+import 'package:lost_and_found/utils/utility.dart';
 
 import '../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../core/presentation/widgets/large_green_button.dart';
@@ -33,7 +35,7 @@ class AnswerClaimScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            title: const Text("Answer to claim", style: TextStyle(color: Colors.black)),
+            title: Text(AppLocalizations.of(context)!.answerClaimTitle, style: const TextStyle(color: Colors.black)),
             backgroundColor: Colors.white,
             iconTheme: const IconThemeData(color: Colors.black),
           ),
@@ -46,17 +48,7 @@ class AnswerClaimScreen extends StatelessWidget {
 
                 if (roomCreationFailureOrSuccess != null) {
                   roomCreationFailureOrSuccess.fold((failure) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor: Colors.red,
-                        content: Text(
-                          failure.maybeWhen<String>(
-                              genericFailure: () => 'Server error. Please try again later.',
-                              networkFailure: () => 'No internet connection available. Check your internet connection.',
-                              orElse: () => "Unknown error"),
-                        ),
-                      ),
-                    );
+                    showBasicErrorSnackbar(context, failure);
                   }, (room) {
                     Navigator.of(ctx)
                         .push(MaterialPageRoute(builder: (_) => ChatScreen(roomId: room.id, itemId: itemId)));
@@ -65,27 +57,9 @@ class AnswerClaimScreen extends StatelessWidget {
 
                 if (claimFailureOrSuccess != null) {
                   claimFailureOrSuccess.fold(
-                      (failure) => {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.red,
-                                content: Text(
-                                  failure.maybeWhen<String>(
-                                      genericFailure: () => 'Server error. Please try again later.',
-                                      networkFailure: () =>
-                                          'No internet connection available. Check your internet connection.',
-                                      orElse: () => "Unknown error"),
-                                ),
-                              ),
-                            )
-                          },
+                      (failure) => showBasicErrorSnackbar(context, failure),
                       (updatedItem) => {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                backgroundColor: Colors.green,
-                                content: Text("Claim successfully managed"),
-                              ),
-                            ),
+                            showBasicSuccessSnackbar(context, AppLocalizations.of(context)!.successAnswerClaim),
                             Navigator.pop(context, updatedItem)
                           });
                 }
@@ -100,9 +74,9 @@ class AnswerClaimScreen extends StatelessWidget {
                             : ctx
                                 .read<AnswerClaimBloc>()
                                 .add(AnswerClaimEvent.claimDecisionTaken(ClaimStatus.approved, claimId)),
-                        text: const Text(
-                          "Accept",
-                          style: TextStyle(fontSize: 20),
+                        text: Text(
+                          AppLocalizations.of(context)!.accept,
+                          style: const TextStyle(fontSize: 20),
                         )),
                     const SizedBox(
                       height: 5,
@@ -124,9 +98,9 @@ class AnswerClaimScreen extends StatelessWidget {
                                   shape: const StadiumBorder(),
                                   padding: const EdgeInsets.symmetric(vertical: 16),
                                 ),
-                                child: const Text(
-                                  "Decline",
-                                  style: TextStyle(fontSize: 20),
+                                child: Text(
+                                  AppLocalizations.of(context)!.decline,
+                                  style: const TextStyle(fontSize: 20),
                                 )),
                           ),
                         )
@@ -148,8 +122,8 @@ class AnswerClaimScreen extends StatelessWidget {
                                   CustomExpansionTile(
                                     title: Text(
                                       isClaimAlreadyManaged
-                                          ? "You have already managed this claim."
-                                          : "You are deciding whether to accept or deny this claim.",
+                                          ? AppLocalizations.of(context)!.answerClaimTutorialClosedManaged
+                                          : AppLocalizations.of(context)!.answerClaimTutorialClosedUnmanaged,
                                       style: const TextStyle(fontSize: 16),
                                     ),
                                     children: [
@@ -157,8 +131,8 @@ class AnswerClaimScreen extends StatelessWidget {
                                         padding: const EdgeInsets.all(10.0),
                                         child: Text(
                                           isClaimAlreadyManaged
-                                              ? "On this page, you can find the information about this received claim."
-                                              : "Please review the answer received and make a decision to either accept or decline this claim. If you accept this claim, all the other claims for this item will be automatically rejected and the item won't be visible anymore by others.",
+                                              ? AppLocalizations.of(context)!.answerClaimTutorialOpenManaged
+                                              : AppLocalizations.of(context)!.answerClaimTutorialOpenUnmanaged,
                                           style: const TextStyle(color: Colors.black54),
                                         ),
                                       ),
@@ -168,8 +142,8 @@ class AnswerClaimScreen extends StatelessWidget {
                                     height: 15,
                                   ),
                                   ClaimInfoField(
-                                    title:
-                                        "Item claimed by ${state.item!.claims!.firstWhere((element) => element.id == claimId).user.username}",
+                                    title: AppLocalizations.of(context)!.itemClaimedBy(
+                                        state.item!.claims!.firstWhere((element) => element.id == claimId).user.username),
                                     content: ClaimedItemInfo(
                                       token: state.token,
                                       item: state.item!,
@@ -191,7 +165,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                     height: 10,
                                   ),
                                   ClaimInfoField(
-                                    title: "Your question",
+                                    title: AppLocalizations.of(context)!.yourQuestion,
                                     content: Text(
                                       state.item!.question!,
                                       style: const TextStyle(
@@ -203,8 +177,8 @@ class AnswerClaimScreen extends StatelessWidget {
                                     height: 10,
                                   ),
                                   ClaimInfoField(
-                                    title:
-                                        "Answer of ${state.item!.claims!.firstWhere((element) => element.id == claimId).user.username}",
+                                    title: AppLocalizations.of(context)!.answerOf(
+                                        state.item!.claims!.firstWhere((element) => element.id == claimId).user.username),
                                     content: Text(
                                       state.item!.claims!.firstWhere((element) => element.id == claimId).answer,
                                       style: const TextStyle(fontSize: 16),
@@ -215,7 +189,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                   ),
                                   isClaimAlreadyManaged
                                       ? ClaimInfoField(
-                                          title: "Claim status",
+                                          title: AppLocalizations.of(context)!.claimStatus,
                                           content: Container(
                                             padding: const EdgeInsets.all(3),
                                             decoration: BoxDecoration(
@@ -248,7 +222,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                                             text: state.item!.claims!
                                                                 .firstWhere((claim) => claim.id == claimId)
                                                                 .status
-                                                                .name
+                                                                .getTranslatedName(context)
                                                                 .toUpperCase(),
                                                             style: const TextStyle(
                                                                 fontSize: 16,
@@ -279,20 +253,24 @@ class AnswerClaimScreen extends StatelessWidget {
                                                                   .status ==
                                                               ClaimStatus.approved
                                                           ? Text(
-                                                              "You have accepted this claim. Get in touch with ${state.item!.claims!.firstWhere((element) => element.id == claimId).user.username} through the chat to arrange the item's return.",
+                                                              AppLocalizations.of(context)!.acceptedAnswerClaim(state
+                                                                  .item!.claims!
+                                                                  .firstWhere((element) => element.id == claimId)
+                                                                  .user
+                                                                  .username),
                                                               style: const TextStyle(color: Colors.black54),
                                                             )
                                                           : state.item!.claims!
                                                                       .firstWhere((claim) => claim.id == claimId)
                                                                       .status ==
                                                                   ClaimStatus.rejected
-                                                              ? const Text(
-                                                                  "You have rejected this claim.",
-                                                                  style: TextStyle(color: Colors.black54),
+                                                              ? Text(
+                                                                  AppLocalizations.of(context)!.rejectedClaim,
+                                                                  style: const TextStyle(color: Colors.black54),
                                                                 )
-                                                              : const Text(
-                                                                  "Validate the claim.",
-                                                                  style: TextStyle(color: Colors.black54),
+                                                              : Text(
+                                                                  AppLocalizations.of(context)!.validateClaim,
+                                                                  style: const TextStyle(color: Colors.black54),
                                                                 ),
                                                     ),
                                                   ],

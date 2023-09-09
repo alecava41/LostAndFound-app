@@ -2,6 +2,7 @@ import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/search/search_bloc.dart';
 import 'package:lost_and_found/utils/constants.dart';
@@ -48,9 +49,9 @@ class FiltersScreen extends StatelessWidget {
                   onPressed: () => Navigator.pop(ctx),
                 ),
                 iconTheme: const IconThemeData(color: Colors.black),
-                title: const Text(
-                  "Manage Filters",
-                  style: TextStyle(color: Colors.black),
+                title: Text(
+                  AppLocalizations.of(context)!.filtersPageTitle,
+                  style: const TextStyle(color: Colors.black),
                 ),
                 backgroundColor: Colors.white,
               ),
@@ -63,11 +64,11 @@ class FiltersScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Row(
+                          Row(
                             children: [
                               Text(
-                                "Filters",
-                                style: TextStyle(fontSize: 30),
+                                AppLocalizations.of(context)!.filters,
+                                style: const TextStyle(fontSize: 30),
                               ),
                             ],
                           ),
@@ -78,9 +79,7 @@ class FiltersScreen extends StatelessWidget {
                               shape: const StadiumBorder(),
                               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                             ),
-                            child: const Text(
-                              "DELETE ALL",
-                            ),
+                            child: Text(AppLocalizations.of(context)!.deleteAll),
                           ),
                         ],
                       ),
@@ -93,7 +92,8 @@ class FiltersScreen extends StatelessWidget {
                       onLostCheckedChanged: (_) => ctx.read<SearchBloc>().add(const SearchEvent.lostCheckTriggered()),
                       errorText: state.itemsToSearch.value.fold(
                           (failure) => failure.maybeWhen(
-                              validationFailure: () => "Check at least one of the two options.", orElse: () => ""),
+                              validationFailure: () => AppLocalizations.of(context)!.failureInvalidType,
+                              orElse: () => ""),
                           (_) => ""),
                     ),
                     sizedBox,
@@ -108,7 +108,9 @@ class FiltersScreen extends StatelessWidget {
                       startingPosition: state.pos.value.getOrElse(() => defaultPosition),
                       showError: state.showError,
                       errorText: state.pos.value.fold(
-                          (failure) => failure.maybeWhen(validationFailure: () => "Select the position of the item.", orElse: () => ""),
+                          (failure) => failure.maybeWhen(
+                              validationFailure: () => AppLocalizations.of(context)!.failureInvalidPosition,
+                              orElse: () => ""),
                           (_) => ""),
                     ),
                     sizedBox,
@@ -118,7 +120,9 @@ class FiltersScreen extends StatelessWidget {
                       category: state.category,
                       showError: state.showError,
                       errorText: state.cat.value.fold(
-                          (failure) => failure.maybeWhen(validationFailure: () => "Select a category.", orElse: () => ""),
+                          (failure) => failure.maybeWhen(
+                              validationFailure: () => AppLocalizations.of(context)!.failureInvalidCategory,
+                              orElse: () => ""),
                           (_) => ""),
                     ),
                     sizedBox,
@@ -129,7 +133,8 @@ class FiltersScreen extends StatelessWidget {
                     sizedBox,
                     PersonalizedLargeGreenButton(
                       onPressed: () => {ctx.read<SearchBloc>().add(const SearchEvent.searchSubmitted())},
-                      text: const Text("Search", style: TextStyle(fontSize: 20, color: Colors.white)),
+                      text: Text(AppLocalizations.of(context)!.search,
+                          style: const TextStyle(fontSize: 20, color: Colors.white)),
                     )
                   ],
                 ),

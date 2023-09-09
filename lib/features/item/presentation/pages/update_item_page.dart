@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
@@ -10,6 +11,7 @@ import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.da
 import 'package:lost_and_found/features/item/presentation/bloc/update_item/update_item_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/insert_item/radio_buttons_form.dart';
 import 'package:lost_and_found/utils/constants.dart';
+import 'package:lost_and_found/utils/utility.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../core/presentation/dialogs/camera_permission.dart';
@@ -92,26 +94,9 @@ class UpdateItemScreen extends StatelessWidget {
 
           if (updateFailureOrSuccess != null) {
             updateFailureOrSuccess.fold(
-                (failure) => {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          backgroundColor: Colors.red,
-                          content: Text(
-                            failure.maybeWhen<String>(
-                                genericFailure: () => 'Server error. Please try again later.',
-                                networkFailure: () => 'No internet connection available. Check your internet connection.',
-                                orElse: () => "Unknown error"),
-                          ),
-                        ),
-                      )
-                    },
+                (failure) => showBasicErrorSnackbar(context, failure),
                 (_) => {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          backgroundColor: Colors.green,
-                          content: Text("Item successfully updated"),
-                        ),
-                      ),
+                      showBasicSuccessSnackbar(context, AppLocalizations.of(context)!.successItemUpdate),
 
                       // Update lost/found item on HP
                       ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.item!.type)),
@@ -152,9 +137,9 @@ class UpdateItemScreen extends StatelessWidget {
                       },
                     ),
                     iconTheme: const IconThemeData(color: Colors.black),
-                    title: const Text(
-                      "Edit Item",
-                      style: TextStyle(color: Colors.black),
+                    title: Text(
+                      AppLocalizations.of(context)!.updateItemPageTitle,
+                      style: const TextStyle(color: Colors.black),
                     ),
                     backgroundColor: Colors.white,
                   ),
@@ -188,7 +173,7 @@ class UpdateItemScreen extends StatelessWidget {
                                         height: 10,
                                       ),
                                       CustomFieldContainer(
-                                        title: "The item has been",
+                                        title: AppLocalizations.of(context)!.itemType,
                                         content: PersonalizedRadioButtonsForm(
                                             selectedValue: state.item!.type, onChanged: null),
                                       ),
@@ -196,19 +181,21 @@ class UpdateItemScreen extends StatelessWidget {
                                         height: 15,
                                       ),
                                       CustomFieldContainer(
-                                        title: "Title",
+                                        title: AppLocalizations.of(context)!.titleFieldTitle,
                                         content: PersonalizedFormWithTextInsertion(
                                           maxLines: 1,
                                           text: state.title.value.getOrElse(() => ""),
                                           showError: state.showError,
                                           errorText: state.title.value.fold(
                                               (failure) => failure.maybeWhen<String?>(
-                                                  validationFailure: () => "Title must have between 1 and 50 characters.", orElse: () => null),
+                                                  validationFailure: () =>
+                                                      AppLocalizations.of(context)!.failureInvalidTitle,
+                                                  orElse: () => null),
                                               (r) => null),
                                           onTextChanged: (input) =>
                                               ctx.read<UpdateItemBloc>().add(UpdateItemEvent.titleChanged(input)),
                                           isValid: state.title.value.isRight(),
-                                          hintText: "Recognizable name for the item",
+                                          hintText: AppLocalizations.of(context)!.titleFieldHint,
                                         ),
                                       ),
                                       state.item!.type == ItemType.found
@@ -218,10 +205,10 @@ class UpdateItemScreen extends StatelessWidget {
                                           : Container(),
                                       state.item!.type == ItemType.found
                                           ? CustomFieldContainer(
-                                              title: "Question to verify the ownership",
+                                              title: AppLocalizations.of(context)!.questionFieldTitle,
                                               content: PersonalizedFormWithTextInsertion(
                                                 text: state.question.value.getOrElse(() => ""),
-                                                hintText: "Clear and precise question",
+                                                hintText: AppLocalizations.of(context)!.questionFieldHint,
                                                 isValid: state.question.value.isRight(),
                                                 onTextChanged: (input) => ctx
                                                     .read<UpdateItemBloc>()
@@ -229,7 +216,9 @@ class UpdateItemScreen extends StatelessWidget {
                                                 showError: state.showError,
                                                 errorText: state.question.value.fold(
                                                     (failure) => failure.maybeWhen<String?>(
-                                                        validationFailure: () => "Safe question is required.", orElse: () => null),
+                                                        validationFailure: () =>
+                                                            AppLocalizations.of(context)!.failureInvalidQuestionField,
+                                                        orElse: () => null),
                                                     (r) => null),
                                               ),
                                             )
@@ -247,8 +236,9 @@ class UpdateItemScreen extends StatelessWidget {
                                 SelectPositionButton(
                                   showError: state.showError,
                                   errorText: state.pos.value.fold(
-                                      (failure) =>
-                                          failure.maybeWhen(validationFailure: () => "Select the position of the item.", orElse: () => ""),
+                                      (failure) => failure.maybeWhen(
+                                          validationFailure: () => AppLocalizations.of(context)!.failureInvalidPosition,
+                                          orElse: () => ""),
                                       (_) => ""),
                                   startingPosition: state.pos.value.getOrElse(() => defaultPosition),
                                   isLoadingAddress: state.isLoadingPosition,
@@ -271,8 +261,9 @@ class UpdateItemScreen extends StatelessWidget {
                                   category: state.category,
                                   showError: state.showError,
                                   errorText: state.cat.value.fold(
-                                      (failure) =>
-                                          failure.maybeWhen(validationFailure: () => "Select a category.", orElse: () => ""),
+                                      (failure) => failure.maybeWhen(
+                                          validationFailure: () => AppLocalizations.of(context)!.failureInvalidCategory,
+                                          orElse: () => ""),
                                       (_) => ""),
                                   removeAllOption: true,
                                 ),
@@ -293,9 +284,9 @@ class UpdateItemScreen extends StatelessWidget {
                                               shape: const StadiumBorder(),
                                               padding: const EdgeInsets.symmetric(vertical: 16),
                                             ),
-                                            child: const Text(
-                                              "Update",
-                                              style: TextStyle(fontSize: 20, color: Colors.white),
+                                            child: Text(
+                                              AppLocalizations.of(context)!.update,
+                                              style: const TextStyle(fontSize: 20, color: Colors.white),
                                             )),
                                       ),
                                     )
