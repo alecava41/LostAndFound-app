@@ -52,10 +52,12 @@ class UploadImageForm extends StatelessWidget {
                             httpHeaders: {
                               "Authorization": "Bearer $token",
                             },
-                            progressIndicatorBuilder: (context, url, downloadProgress) =>
-                                const CustomCircularProgress(size: 150),
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    const CustomCircularProgress(size: 150),
                             errorWidget: (context, url, error) => noItemImage,
-                            imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+                            imageRenderMethodForWeb:
+                                ImageRenderMethodForWeb.HttpGet,
                           )
                         : () {
                             if (imagePath == null) {
@@ -63,18 +65,32 @@ class UploadImageForm extends StatelessWidget {
                                 child: ElevatedButton(
                                   onPressed: onSelectUploadMethod,
                                   style: ElevatedButton.styleFrom(
-                                    surfaceTintColor: PersonalizedColor.mainColor,
+                                    surfaceTintColor:
+                                        PersonalizedColor.mainColor,
                                     backgroundColor: Colors.white,
                                     shape: const StadiumBorder(),
                                     padding: const EdgeInsets.all(20),
                                     side: const BorderSide(
                                       color: PersonalizedColor.mainColor,
-                                      width: 0.5,
+                                      width: 0.4,
                                     ),
                                     elevation: 0,
+                                  ).copyWith(
+                                    overlayColor: MaterialStateProperty
+                                        .resolveWith<Color>(
+                                      (Set<MaterialState> states) {
+                                        if (states
+                                            .contains(MaterialState.pressed)) {
+                                          return PersonalizedColor
+                                              .primarySwatch.shade50;
+                                        }
+                                        return Colors.transparent;
+                                      },
+                                    ),
                                   ),
                                   child: Text(
-                                    AppLocalizations.of(context)!.uploadImageButton,
+                                    AppLocalizations.of(context)!
+                                        .uploadImageButton,
                                     style: const TextStyle(
                                       fontSize: 20,
                                       color: PersonalizedColor.mainColor,
@@ -87,7 +103,8 @@ class UploadImageForm extends StatelessWidget {
                             }
                           }(),
                   ),
-                  if (imagePath != null || (hasImage && !hasDeletedOriginalImage))
+                  if (imagePath != null ||
+                      (hasImage && !hasDeletedOriginalImage))
                     Positioned(
                       right: 16,
                       bottom: 10,

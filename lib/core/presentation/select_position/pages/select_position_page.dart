@@ -9,6 +9,7 @@ import 'package:lost_and_found/core/presentation/select_position/bloc/select_pos
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../injection_container.dart';
+import '../../widgets/large_green_button.dart';
 
 class SelectPositionScreen extends StatefulWidget {
   final LatLng startingPosition;
@@ -224,12 +225,11 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
           title: Text(AppLocalizations.of(context)!.locationPermissionDialogTitle),
           content: Text(AppLocalizations.of(context)!.locationPermissionDialogContentDenied),
           actions: <Widget>[
-            TextButton(
+            PersonalizedLargeGreenButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text(AppLocalizations.of(context)!.close),
-            ),
+              text: Text(AppLocalizations.of(context)!.close)),
           ],
         );
       },
@@ -244,12 +244,11 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
           title: Text(AppLocalizations.of(context)!.locationPermissionDialogTitle),
           content: Text(AppLocalizations.of(context)!.locationPermissionDialogContentPermanentlyDenied),
           actions: <Widget>[
-            TextButton(
+            PersonalizedLargeGreenButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text(AppLocalizations.of(context)!.close),
-            ),
+              text: Text(AppLocalizations.of(context)!.close)),
           ],
         );
       },
@@ -264,17 +263,14 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
           title: Text(AppLocalizations.of(context)!.noConnectionDialogTitle),
           content: Text(AppLocalizations.of(context)!.noConnectionDialogContent),
           actions: <Widget>[
-            TextButton(
-              onPressed: () async {
+            PersonalizedLargeGreenButton(onPressed: () async {
                 Navigator.pop(context, 'Cancel');
                 setState(() => isAlertSet = false);
                 if (!isDeviceConnected && !isAlertSet) {
                   showConnectionLostAlert(isDeviceConnected);
                   setState(() => isAlertSet = true);
                 }
-              },
-              child: Text(AppLocalizations.of(context)!.ok),
-            ),
+              }, text: Text(AppLocalizations.of(context)!.ok))
           ],
         );
       },
@@ -289,17 +285,14 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
           title: Text(AppLocalizations.of(context)!.positionDialogTitle),
           content: Text(AppLocalizations.of(context)!.positionDialogContent),
           actions: <Widget>[
-            TextButton(
-              onPressed: () async {
+            PersonalizedLargeGreenButton(onPressed: () async {
                 Navigator.pop(context, 'Cancel');
                 setState(() => isAlertSet = false);
                 if (!isServiceEnabled && !isAlertSet) {
                   showPositionServiceNotAvailableAlert(isServiceEnabled);
                   setState(() => isAlertSet = true);
                 }
-              },
-              child: Text(AppLocalizations.of(context)!.ok),
-            ),
+              }, text: Text(AppLocalizations.of(context)!.ok))
           ],
         );
       },

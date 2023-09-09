@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 
 void showCameraPermissionPermanentlyDeniedDialog(BuildContext context) {
   showDialog(
@@ -7,16 +8,16 @@ void showCameraPermissionPermanentlyDeniedDialog(BuildContext context) {
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text(AppLocalizations.of(context)!.cameraPermissionDialogTitle),
-        content: Text(AppLocalizations.of(context)!.cameraPermissionDialogContentPermanentlyDenied,
+        content: Text(
+          AppLocalizations.of(context)!
+              .cameraPermissionDialogContentPermanentlyDenied,
         ),
         actions: <Widget>[
-          TextButton(
-            child: Text(AppLocalizations.of(context)!.close),
-            onPressed: () {
-              // Close the dialog
-              Navigator.of(context).pop();
-            },
-          ),
+          PersonalizedLargeGreenButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              text: Text(AppLocalizations.of(context)!.close))
         ],
       );
     },
@@ -29,14 +30,14 @@ void showCameraPermissionDeniedDialog(BuildContext context) {
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text(AppLocalizations.of(context)!.cameraPermissionDialogTitle),
-        content: Text(AppLocalizations.of(context)!.cameraPermissionDialogContentDenied),
+        content: Text(
+            AppLocalizations.of(context)!.cameraPermissionDialogContentDenied),
         actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(AppLocalizations.of(context)!.close),
-          ),
+          PersonalizedLargeGreenButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              text: Text(AppLocalizations.of(context)!.close)),
         ],
       );
     },

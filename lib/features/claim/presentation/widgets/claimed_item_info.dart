@@ -137,13 +137,23 @@ class ClaimedItemInfo extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
+            
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
-                side: const BorderSide(color: PersonalizedColor.mainColor, width: 1.5),
+                side: const BorderSide(color: PersonalizedColor.mainColor, width: 0.4),
                 shape: const StadiumBorder(),
                 padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
-              ),
+              ).copyWith(
+                    overlayColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed)) {
+                          return PersonalizedColor.primarySwatch.shade50;
+                        }
+                        return Colors.transparent;
+                      },
+                    ),
+                  ),
               onPressed: () {
                 if (isQuestionScreen) {
                   context.read<AnswerQuestionBloc>().add(AnswerQuestionEvent.createChatRoom(

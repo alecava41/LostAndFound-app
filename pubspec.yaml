@@ -63,7 +63,7 @@ dependencies:
   sqflite: ^2.2.8+4
   floor: ^1.4.2
   dartx: ^1.2.0
-  intl: ^0.18.1
+  intl: ^0.18.0
   http: ^1.1.0
   badges: ^3.1.1
   sizer: ^2.0.15

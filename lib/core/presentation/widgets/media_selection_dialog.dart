@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../utils/colors.dart';
+import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 
 class MediaSelectionDialog extends StatelessWidget {
   final VoidCallback onTapGallery;
@@ -21,39 +20,30 @@ class MediaSelectionDialog extends StatelessWidget {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: PersonalizedColor.mainColor,
-            ),
-            onPressed: onTapGallery,
-            child: Row(
+          PersonalizedLargeGreenButton(onPressed: onTapGallery, text: Row(
               children: [
+                const SizedBox(
+                  width: 20,
+                ),
                 const Icon(Icons.image),
                 const SizedBox(
                   width: 5,
                 ),
                 Text(AppLocalizations.of(context)!.gallery),
               ],
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: PersonalizedColor.mainColor,
-            ),
-            onPressed: onTapCamera,
-            child: Row(
+            ),),
+          PersonalizedLargeGreenButton(onPressed: onTapCamera, text:Row(
               children: [
+                const SizedBox(
+                  width: 20,
+                ),
                 const Icon(Icons.camera),
                 const SizedBox(
                   width: 5,
                 ),
                 Text(AppLocalizations.of(context)!.camera),
               ],
-            ),
-          ),
+            ),),
         ],
       ),
     );

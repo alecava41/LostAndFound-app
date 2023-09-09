@@ -12,7 +12,10 @@ class UploadImageForm extends StatelessWidget {
   final String? imagePath;
 
   const UploadImageForm(
-      {super.key, required this.onSelectUploadMethod, required this.onDeletePhoto, required this.imagePath});
+      {super.key,
+      required this.onSelectUploadMethod,
+      required this.onDeletePhoto,
+      required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +43,21 @@ class UploadImageForm extends StatelessWidget {
                                 padding: const EdgeInsets.all(20),
                                 side: const BorderSide(
                                   color: PersonalizedColor.mainColor,
-                                  width: 0.5,
+                                  width: 0.4,
                                 ),
                                 elevation: 0,
+                              ).copyWith(
+                                overlayColor:
+                                    MaterialStateProperty.resolveWith<Color>(
+                                  (Set<MaterialState> states) {
+                                    if (states
+                                        .contains(MaterialState.pressed)) {
+                                      return PersonalizedColor
+                                          .primarySwatch.shade50;
+                                    }
+                                    return Colors.transparent;
+                                  },
+                                ),
                               ),
                               child: Text(
                                 AppLocalizations.of(context)!.uploadImageButton,
@@ -53,7 +68,10 @@ class UploadImageForm extends StatelessWidget {
                               ),
                             ),
                           )
-                        : Image.file(File(imagePath!), fit: BoxFit.cover,),
+                        : Image.file(
+                            File(imagePath!),
+                            fit: BoxFit.cover,
+                          ),
                   ),
                   if (imagePath != null)
                     Positioned(
