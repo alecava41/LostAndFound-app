@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 
 import '../../../utils/colors.dart';
+import '../tutorial/widgets/large_white_button.dart';
 
 class ConfirmExitDialog extends StatelessWidget {
   final VoidCallback onCancel;
@@ -19,16 +21,15 @@ class ConfirmExitDialog extends StatelessWidget {
       title: Text(AppLocalizations.of(context)!.confirmExitDialogTitle),
       content: Text(AppLocalizations.of(context)!.confirmExitDialogContent),
       actions: [
-        TextButton(
+        PersonalizedLargeGreenButton(
           onPressed: onCancel,
-          child: Text(
+          text: Text(
             AppLocalizations.of(context)!.cancel,
-            style: const TextStyle(color: PersonalizedColor.mainColor),
           ),
         ),
-        TextButton(
+        PersonalizedLargeWhiteButton(
           onPressed: onConfirm,
-          child: Text(
+          text: Text(
             AppLocalizations.of(context)!.yes,
             style: const TextStyle(color: PersonalizedColor.mainColor),
           ),
