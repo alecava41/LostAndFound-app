@@ -4,8 +4,8 @@
   "cancel": "Cancella",
   "yes": "Si",
   "ok": "OK",
-  "singIn": "Registrati",
-  "signUp": "Effettua l\\'accesso",
+  "singIn": "Effettua l'accesso",
+  "signUp": "Registrati",
   "item": "{count, plural, =0{Oggetto} other{Oggetti}}",
   "@item": {
     "placeholders": {

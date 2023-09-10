@@ -9,7 +9,7 @@ class SignUpText extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(AppLocalizations.of(context)!.signUp),
+        Text(AppLocalizations.of(context)!.signUpText),
         TextButton(
           onPressed: () {
             Navigator.pushReplacementNamed(context, '/register');
