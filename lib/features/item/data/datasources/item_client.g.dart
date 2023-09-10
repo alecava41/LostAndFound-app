@@ -13,7 +13,7 @@ class _ItemClient implements ItemClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://16.16.64.106:5000/api';
+    baseUrl ??= 'http://13.53.163.189:5000/api';
   }
 
   final Dio _dio;
