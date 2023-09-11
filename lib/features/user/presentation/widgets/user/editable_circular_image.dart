@@ -79,12 +79,12 @@ class EditableCircularImage extends StatelessWidget {
                     });
               },
               child: const CircleAvatar(
-                radius: 20,
+                radius: 16,
                 backgroundColor: PersonalizedColor.mainColor,
                 child: Icon(
                   Icons.camera_alt,
                   color: Colors.white,
-                  size: 25.0,
+                  size: 20.0,
                 ),
               ),
             ),

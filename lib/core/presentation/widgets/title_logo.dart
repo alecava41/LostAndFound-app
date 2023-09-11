@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sizer/sizer.dart';
 
 Widget titleLogoVertical() {
   return Column(
@@ -9,12 +10,12 @@ Widget titleLogoVertical() {
         width: 200,
         height: 200,
       ),
-      const SizedBox(height: 20),
+      SizedBox(height: 1.h),
       const Text(
         "Lost&Found",
         style: TextStyle(fontSize: 40),
       ),
-      const SizedBox(height: 40),
+      SizedBox(height: 2.h),
     ],
   );
 }

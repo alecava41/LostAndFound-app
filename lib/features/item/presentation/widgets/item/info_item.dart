@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:lost_and_found/core/presentation/tutorial/widgets/large_white_button.dart';
 import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/item/info_item_field.dart';
+import 'package:lost_and_found/utils/colors.dart';
 import 'package:map_launcher/map_launcher.dart';
 
 import '../../../domain/entities/item.dart';
@@ -54,9 +56,42 @@ class InfoItem extends StatelessWidget {
               final availableMaps = await MapLauncher.installedMaps;
 
               if (availableMaps.isNotEmpty) {
-                await availableMaps.first.showMarker(
-                  coords: Coords(coordinates.X, coordinates.Y),
-                  title: title,
+                // TODO (@backToFrancesco): add traslation
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('See in Maps'),
+                      content: const SingleChildScrollView(
+                        child: ListBody(
+                          children: <Widget>[
+                            Text(
+                                'You are about to be redirected to your maps app to view this location.\n\nAre you sure you want to exit the app?'),
+                          ],
+                        ),
+                      ),
+                      actions: <Widget>[
+                        PersonalizedLargeGreenButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          text: Text('Cancel'),
+                        ),
+                        PersonalizedLargeWhiteButton(
+                            onPressed: () async {
+                              await availableMaps.first.showMarker(
+                                coords: Coords(coordinates.X, coordinates.Y),
+                                title: title,
+                              );
+                            },
+                            text: Text(
+                              'Confirm',
+                              style:
+                                  TextStyle(color: PersonalizedColor.mainColor),
+                            ))
+                      ],
+                    );
+                  },
                 );
               } else {
                 if (context.mounted) {
