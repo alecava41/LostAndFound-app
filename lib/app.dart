@@ -44,6 +44,9 @@ class App extends StatefulWidget {
 // TODO (@alecava41) modify tutorial in options to avoid "double" horizontal scroll
 // TODO (@alecava41) remove third minion from home_tutorial image
 // TODO (@alecava41) initial tutorial has different background with respect to status_bar
+
+// TODO (@alecava41) find country for starting position on map
+// TODO (@alecava41) replace costang image widget with string
 }
 
 class _Application extends State<App> {
