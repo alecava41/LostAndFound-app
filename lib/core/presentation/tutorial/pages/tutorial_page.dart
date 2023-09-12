@@ -25,9 +25,10 @@ class _InfoScreenState extends State<InfoScreen> {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
-          statusBarColor: Colors.white,
-          statusBarBrightness: Brightness.light,
-          statusBarIconBrightness: Brightness.dark),
+        statusBarColor: Colors.white,
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
+      ),
       child: SafeArea(
         child: Scaffold(
           body: SingleChildScrollView(
@@ -109,7 +110,8 @@ class _InfoScreenState extends State<InfoScreen> {
           '/login',
         );
       },
-      text: Text(AppLocalizations.of(context)!.singIn,
+      text: Text(
+        AppLocalizations.of(context)!.singIn,
         style: const TextStyle(fontSize: 20, color: PersonalizedColor.mainColor),
       ),
     );

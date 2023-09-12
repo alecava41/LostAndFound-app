@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // flutter pub run build_runner watch --delete-conflicting-outputs
 // Base URL of back-end server
-const String baseUrl = "http://13.53.163.189:5000";
+const String baseUrl = "http://13.53.123.54:5000";
 
 // Types of Push Notifications
 enum NotificationType {

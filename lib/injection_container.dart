@@ -1,16 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:lost_and_found/core/data/datasources/app_global/app_global_data_source.dart';
+import 'package:lost_and_found/core/data/datasources/app_global/clients/app_global_client.dart';
 import 'package:lost_and_found/core/data/datasources/category/category_data_source.dart';
-import 'package:lost_and_found/core/data/datasources/category/client/category_client.dart';
+import 'package:lost_and_found/core/data/datasources/category/clients/category_client.dart';
 import 'package:lost_and_found/core/data/datasources/claim/read_claim_datasource.dart';
 import 'package:lost_and_found/core/data/datasources/position/client/position_client.dart';
 import 'package:lost_and_found/core/data/datasources/position/position_data_source.dart';
+import 'package:lost_and_found/core/data/repositories/app_global_repository_impl.dart';
 import 'package:lost_and_found/core/data/repositories/category_repository_impl.dart';
 import 'package:lost_and_found/core/data/repositories/position_repository_impl.dart';
+import 'package:lost_and_found/core/domain/repositories/app_global_repository.dart';
 import 'package:lost_and_found/core/domain/repositories/position_repository.dart';
 import 'package:lost_and_found/core/domain/usecases/get_address_from_position_usecase.dart';
 import 'package:lost_and_found/core/domain/usecases/get_categories_usecase.dart';
+import 'package:lost_and_found/core/domain/usecases/get_current_country_usecase.dart';
 import 'package:lost_and_found/core/network/network_info.dart';
 import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import 'package:lost_and_found/core/presentation/select_category/bloc/category_bloc.dart';
@@ -255,17 +260,20 @@ Future<void> init() async {
   // Use cases
   sl.registerLazySingleton(() => GetAddressFromPositionUseCase(sl()));
   sl.registerLazySingleton(() => GetCategoriesUseCase(sl()));
+  sl.registerLazySingleton(() => GetCurrentCountryUseCase(sl()));
 
   // Repositories
   sl.registerLazySingleton<PositionRepository>(() => PositionRepositoryImpl(dataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<CategoryRepository>(() => CategoryRepositoryImpl(dataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<AuthenticationRepository>(
       () => AuthenticationRepositoryImpl(networkInfo: sl(), dataSource: sl(), storage: sl()));
+  sl.registerLazySingleton<AppGlobalRepository>(() => AppGlobalRepositoryImpl(networkInfo: sl(), appGlobalDataSource: sl()));
 
   // Data sources
   sl.registerLazySingleton<PositionDataSource>(() => PositionDataSourceImpl(sl()));
   sl.registerLazySingleton<CategoryDataSource>(() => CategoryDataSourceImpl(sl()));
   sl.registerLazySingleton<ReadClaimDataSource>(() => ReadClaimDataSourceImpl(database: sl()));
+  sl.registerLazySingleton<AppGlobalDataSource>(() => AppGlobalDataSourceImpl(sl()));
 
   // Storage
   sl.registerLazySingleton<SecureStorage>(() => SecureStorageImpl(sl()));
@@ -294,10 +302,11 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UserClient(sl()));
   sl.registerLazySingleton(() => BadgeClient(sl()));
   sl.registerLazySingleton(() => ChatClient(sl()));
+  sl.registerLazySingleton(() => AppGlobalClient(sl()));
 
   // Global BLoCs
   sl.registerFactory(() => HomeControllerBloc());
   sl.registerFactory(() => SelectPositionBloc(networkInfo: sl()));
   sl.registerFactory(() => CategoryBloc(getCategoriesUseCase: sl()));
-  sl.registerFactory(() => AppGlobalBloc(storage: sl(), updateLocaleUseCase: sl()));
+  sl.registerFactory(() => AppGlobalBloc(storage: sl(), updateLocaleUseCase: sl(), getCurrentCountryUseCase: sl()));
 }

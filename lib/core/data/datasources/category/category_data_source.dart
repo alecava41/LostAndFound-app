@@ -1,7 +1,7 @@
 import 'package:lost_and_found/core/domain/usecases/usecase.dart';
 
 import '../../../../core/data/datasources/utils.dart';
-import 'client/category_client.dart';
+import 'clients/category_client.dart';
 import 'models/category_dto.dart';
 
 abstract class CategoryDataSource {
