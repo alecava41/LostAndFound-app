@@ -12,6 +12,7 @@ class ConfirmPasswordInput extends StatelessWidget {
       return TextFormField(
         onChanged: (value) => context.read<RegistrationBloc>().add(RegistrationEvent.confirmPasswordFieldChanged(value)),
         decoration: InputDecoration(
+          errorMaxLines: 3,
           hintText: AppLocalizations.of(context)!.confirmPassword,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),

@@ -32,6 +32,7 @@ class PersonalizedTextField extends StatelessWidget {
       autovalidateMode: showError == true ? AutovalidateMode.always : AutovalidateMode.disabled,
       validator: (_) => errorText,
       decoration: InputDecoration(
+          errorMaxLines: 3,
           hintText: hintText,
           focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: PersonalizedColor.mainColor))),
     );

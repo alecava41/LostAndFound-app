@@ -13,6 +13,7 @@ class UsernameInput extends StatelessWidget {
         return TextFormField(
           onChanged: (value) => context.read<RegistrationBloc>().add(RegistrationEvent.usernameFieldChanged(value)),
           decoration: InputDecoration(
+            errorMaxLines: 3,
             hintText: AppLocalizations.of(context)!.username,
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: BorderSide.none),
             fillColor: Theme.of(context).primaryColor.withOpacity(0.1),

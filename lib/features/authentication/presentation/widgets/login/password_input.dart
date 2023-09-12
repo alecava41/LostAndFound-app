@@ -13,6 +13,7 @@ class PasswordInput extends StatelessWidget {
       return TextFormField(
         onChanged: (value) => context.read<LoginBloc>().add(LoginEvent.passwordFieldChanged(value)),
         decoration: InputDecoration(
+          errorMaxLines: 3,
           hintText: AppLocalizations.of(context)!.passwordFormCurrentHint,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),

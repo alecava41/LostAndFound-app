@@ -35,14 +35,12 @@ class App extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _Application();
 
-// TODO (@alecava41) dark theme + switch
+// TODO (@alecava41) dark theme + switch (need to provide the option to let user pick system theme)
 
-// TODO (@alecava41) add supported languages in iOS
+// TODO (@alecava41) add supported languages in iOS (https://docs.flutter.dev/ui/accessibility-and-localization/internationalization#localizing-for-ios-updating-the-ios-app-bundle)
 // TODO (@alecava41) add iOS permission
 
-// TODO (@alecava41) should state somewhere the range of the search from the specified position (maybe inside position screen?)
-// TODO (@alecava41) modify tutorial in options to avoid "double" horizontal scroll (I would leave it like this)
-// TODO (@alecava41) initial tutorial has different background with respect to status_bar (which color is it??)
+// TODO (@alecava41) modify tutorial in options to avoid "double" horizontal scroll (pointers on the left side + button to go next)
 }
 
 class _Application extends State<App> {

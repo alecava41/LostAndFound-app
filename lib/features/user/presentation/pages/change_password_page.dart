@@ -98,6 +98,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           onChanged: (value) =>
                               ctx.read<ChangePasswordBloc>().add(ChangePasswordEvent.oldPasswordFieldChanged(value)),
                           decoration: InputDecoration(
+                            errorMaxLines: 3,
                             prefixIcon: const Icon(Icons.lock),
                             hintText: AppLocalizations.of(context)!.passwordFormCurrentHint,
                             border: OutlineInputBorder(
@@ -170,6 +171,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           onChanged: (value) =>
                               ctx.read<ChangePasswordBloc>().add(ChangePasswordEvent.confirmPasswordFieldChanged(value)),
                           decoration: InputDecoration(
+                            errorMaxLines: 3,
                             prefixIcon: const Icon(Icons.lock),
                             hintText: AppLocalizations.of(context)!.confirmPassword,
                             border: OutlineInputBorder(

@@ -13,6 +13,7 @@ class UserInput extends StatelessWidget {
       return TextFormField(
         onChanged: (value) => context.read<LoginBloc>().add(LoginEvent.userFieldChanged(value)),
         decoration: InputDecoration(
+          errorMaxLines: 3,
           hintText: AppLocalizations.of(context)!.user,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: BorderSide.none),
           fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
