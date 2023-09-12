@@ -39,8 +39,6 @@ class App extends StatefulWidget {
 // TODO (@alecava41) add supported languages in iOS (https://docs.flutter.dev/ui/accessibility-and-localization/internationalization#localizing-for-ios-updating-the-ios-app-bundle)
 // TODO (@alecava41) add iOS permission
 
-// TODO unknown error instead of correct error on wrong password login
-
 // TODO need to delete rooms when deleting an item
 // TODO update room's item title when updating an item
 }

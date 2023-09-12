@@ -11,10 +11,12 @@ showBasicErrorSnackbar(BuildContext context, Failure failure) {
               backgroundColor: Colors.red,
               content: Text(
                 failure.maybeWhen<String>(
-                    passwordMismatchFailure: () => AppLocalizations.of(context)!.failureInvalidCredentials,
-                    genericFailure: () => AppLocalizations.of(context)!.failureGeneric,
-                    networkFailure: () => AppLocalizations.of(context)!.failureNetwork,
-                    orElse: () => AppLocalizations.of(context)!.failureUnknown),
+                  passwordMismatchFailure: () => AppLocalizations.of(context)!.failureInvalidCredentials,
+                  requestFailure: () => AppLocalizations.of(context)!.failureInvalidCredentials,
+                  genericFailure: () => AppLocalizations.of(context)!.failureGeneric,
+                  networkFailure: () => AppLocalizations.of(context)!.failureNetwork,
+                  orElse: () => AppLocalizations.of(context)!.failureUnknown,
+                ),
               ),
             ),
           ));
