@@ -159,7 +159,7 @@
     }
   },
   "yourAnswer": "La tua risposta",
-  "failureInvalidQuestion": "Una risposta è richiesta con almeno 3 parole.",
+  "failureInvalidQuestion": "Una risposta è richiesta.",
   "acceptedQuestionClaim": "La tua richiesta è stata accettata! Contatta {username} usando la chat per concordare la restituzione dell'oggetto.",
   "@acceptedQuestionClaim": {
     "placeholders": {
@@ -219,11 +219,11 @@
   "successInsertItem": "Oggetto correttamente creato",
   "titleFieldTitle": "Titolo",
   "titleFieldHint": "Nome riconoscibile per l'oggetto",
-  "failureInvalidTitle": "Il titolo deve contenere tra 1 e 50 caratteri, con almeno 3 parole.",
+  "failureInvalidTitle": "Il titolo deve contenere tra 1 e 50 caratteri.",
   "itemType": "L'oggetto è stato",
   "questionFieldTitle": "Domanda per verificare la proprietà",
   "questionFieldHint": "Domanda chiara e preciso",
-  "failureInvalidQuestionField": "La domanda di sicurezza è richiesta con almeno 3 parole.",
+  "failureInvalidQuestionField": "La domanda di sicurezza è richiesta.",
   "create": "Crea",
   "insertItemTitle": "Inserisci un Oggetto",
   "successSolveItem": "Oggetto correttamente risolto",

@@ -159,7 +159,7 @@
     }
   },
   "yourAnswer": "Your answer",
-  "failureInvalidQuestion": "Answer is required with at least 3 words.",
+  "failureInvalidQuestion": "Answer is required.",
   "acceptedQuestionClaim": "Your claim has been accepted! Get in touch with {username} through the chat to arrange the item's return.",
   "@acceptedQuestionClaim": {
     "placeholders": {
@@ -219,11 +219,11 @@
   "successInsertItem": "Item successfully created",
   "titleFieldTitle": "Title",
   "titleFieldHint": "Recognizable name for the item",
-  "failureInvalidTitle": "Title must have between 1 and 50 characters, with at least 3 words.",
+  "failureInvalidTitle": "Title must have between 1 and 50 characters.",
   "itemType": "The item has been",
   "questionFieldTitle": "Question to verify the ownership",
   "questionFieldHint": "Clear and precise question",
-  "failureInvalidQuestionField": "Safe question is required with at least 3 words.",
+  "failureInvalidQuestionField": "Safe question is required.",
   "create": "Create",
   "insertItemTitle": "Insert an Item",
   "successSolveItem": "Item successfully solved",

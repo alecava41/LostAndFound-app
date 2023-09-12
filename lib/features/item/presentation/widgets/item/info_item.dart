@@ -48,15 +48,13 @@ class InfoItem extends StatelessWidget {
           const SizedBox(height: 10),
           InfoItemField(
             icon: Icons.location_on,
-            title: type == ItemType.found
-                ? AppLocalizations.of(context)!.foundNear
-                : AppLocalizations.of(context)!.lostNear,
+            title:
+                type == ItemType.found ? AppLocalizations.of(context)!.foundNear : AppLocalizations.of(context)!.lostNear,
             content: position,
             onTapField: () async {
               final availableMaps = await MapLauncher.installedMaps;
 
-              if (availableMaps.isNotEmpty) {
-                // TODO (@alecava): do you know what the hint means?
+              if (availableMaps.isNotEmpty && context.mounted) {
                 showDialog(
                   context: context,
                   builder: (context) {
@@ -65,8 +63,7 @@ class InfoItem extends StatelessWidget {
                       content: SingleChildScrollView(
                         child: ListBody(
                           children: <Widget>[
-                            Text(
-                                AppLocalizations.of(context)!.goToMapsDialogDescription),
+                            Text(AppLocalizations.of(context)!.goToMapsDialogDescription),
                           ],
                         ),
                       ),
@@ -83,12 +80,14 @@ class InfoItem extends StatelessWidget {
                                 coords: Coords(coordinates.X, coordinates.Y),
                                 title: title,
                               );
-                              Navigator.of(context).pop();
+
+                              if (context.mounted) {
+                                Navigator.of(context).pop();
+                              }
                             },
                             text: Text(
                               AppLocalizations.of(context)!.yesSeeMaps,
-                              style:
-                                  TextStyle(color: PersonalizedColor.mainColor),
+                              style: const TextStyle(color: PersonalizedColor.mainColor),
                             ))
                       ],
                     );
@@ -100,10 +99,8 @@ class InfoItem extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title:
-                            Text(AppLocalizations.of(context)!.noMapAppTitle),
-                        content:
-                            Text(AppLocalizations.of(context)!.noMapAppContent),
+                        title: Text(AppLocalizations.of(context)!.noMapAppTitle),
+                        content: Text(AppLocalizations.of(context)!.noMapAppContent),
                         actions: <Widget>[
                           PersonalizedLargeGreenButton(
                               onPressed: () {
@@ -124,18 +121,11 @@ class InfoItem extends StatelessWidget {
               title: AppLocalizations.of(context)!.dateInsertion,
               content: DateFormat("dd/MM/yyyy").format(date)),
           const SizedBox(height: 10),
-          InfoItemField(
-              icon: Icons.category,
-              title: AppLocalizations.of(context)!.category,
-              content: category),
-          question != null && type == ItemType.found
-              ? const SizedBox(height: 10)
-              : Container(),
+          InfoItemField(icon: Icons.category, title: AppLocalizations.of(context)!.category, content: category),
+          question != null && type == ItemType.found ? const SizedBox(height: 10) : Container(),
           question != null && type == ItemType.found
               ? InfoItemField(
-                  icon: Icons.connect_without_contact,
-                  title: AppLocalizations.of(context)!.question,
-                  content: question!)
+                  icon: Icons.connect_without_contact, title: AppLocalizations.of(context)!.question, content: question!)
               : Container(),
         ],
       ),
