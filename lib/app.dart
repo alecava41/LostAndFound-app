@@ -40,8 +40,10 @@ class App extends StatefulWidget {
 // TODO (@alecava41) add supported languages in iOS (https://docs.flutter.dev/ui/accessibility-and-localization/internationalization#localizing-for-ios-updating-the-ios-app-bundle)
 // TODO (@alecava41) add iOS permission
 
-// TODO remove three words for valid input
 // TODO update all claims when a claim is accepted in answer_question
+
+// TODO when deleting an object, it should return on home_page + delete chat!
+// TODO check the same as below for "mark as solved"
 
 // TODO cannot see image in chat (even if the image is there)
 
