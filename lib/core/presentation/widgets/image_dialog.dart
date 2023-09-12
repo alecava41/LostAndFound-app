@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 
@@ -22,15 +20,15 @@ class ImageDialogWidget extends StatelessWidget {
               return Dialog(
                 child: GestureDetector(
                   onTap: () => Navigator.pop(context),
-                  child: CachedNetworkImage(
-                    imageUrl: imageUrl,
+                  child: Image.network(
+                    imageUrl,
                     fit: BoxFit.cover,
-                    httpHeaders: {
-                      "Authorization": "Bearer $token",
+                    headers: {"Authorization": "Bearer $token"},
+                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return const CustomCircularProgress(size: 100);
                     },
-                    progressIndicatorBuilder: (context, url, downloadProgress) => const CustomCircularProgress(size: 100),
-                    errorWidget: (context, url, error) => errorImage,
-                    imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+                    errorBuilder: (context, error, stackTrace) => errorImage,
                   ),
                 ),
               );

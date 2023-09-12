@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 
@@ -56,19 +54,24 @@ class NotClaimedItemCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     child: () {
                       try {
-                        return CachedNetworkImage(
-                          imageUrl: "$baseUrl/api/items/$itemId/image",
+                        return Image.network(
+                          "$baseUrl/api/items/$itemId/image",
                           fit: BoxFit.cover,
-                          httpHeaders: {
-                            "Authorization": "Bearer $token",
+                          headers: {"Authorization": "Bearer $token"},
+                          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return const CustomCircularProgress(size: 35);
                           },
-                          progressIndicatorBuilder: (context, url, downloadProgress) =>
-                          const CustomCircularProgress(size: 35),
-                          errorWidget: (context, url, error) => Image.asset(noItemImagePath, fit: BoxFit.cover,),
-                          imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+                          errorBuilder: (context, error, stackTrace) => Image.asset(
+                            noItemImagePath,
+                            fit: BoxFit.cover,
+                          ),
                         );
                       } catch (_) {
-                        return Image.asset(noItemImagePath, fit: BoxFit.cover,);
+                        return Image.asset(
+                          noItemImagePath,
+                          fit: BoxFit.cover,
+                        );
                       }
                     }(),
                   ),

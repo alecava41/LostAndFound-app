@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 
@@ -23,23 +21,22 @@ class CircularImage extends StatelessWidget {
   Widget build(BuildContext context) {
     try {
       if (hasImage) {
-        return CachedNetworkImage(
-          imageUrl: imageUrl,
-          httpHeaders: {
-            "Authorization": "Bearer $token",
-          },
-          progressIndicatorBuilder: (context, url, downloadProgress) =>
-              SizedBox(height: radius * 2, width: radius * 2, child: CustomCircularProgress(size: radius)),
-          errorWidget: (context, url, error) => CircleAvatar(
+        return
+          CircleAvatar(
             radius: radius,
-            backgroundImage: errorImage.image,
-          ),
-          imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-          imageBuilder: (ctx, imageProvider) => CircleAvatar(
-            radius: radius,
-            backgroundImage: imageProvider,
-          ),
-        );
+            backgroundImage: Image.network(
+              imageUrl,
+              fit: BoxFit.cover,
+              headers: {"Authorization": "Bearer $token"},
+              errorBuilder: (ctx, error, trace) => CircleAvatar(
+                radius: radius,
+                backgroundImage: errorImage.image,
+              ),
+              loadingBuilder: (ctx, error, trace) =>
+                  SizedBox(height: radius * 2, width: radius * 2, child: CustomCircularProgress(size: radius)),
+            ).image,
+          )
+        ;
       } else {
         return CircleAvatar(
           radius: radius,

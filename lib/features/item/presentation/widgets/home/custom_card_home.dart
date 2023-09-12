@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
@@ -65,17 +63,23 @@ class CustomCardHome extends StatelessWidget {
                                 ? 130
                                 : 100,
                         child: hasImage
-                            ? CachedNetworkImage(
-                                imageUrl: "$baseUrl/api/items/$id/image",
+                            ? Image.network(
+                                "$baseUrl/api/items/$id/image",
                                 fit: BoxFit.cover,
-                                httpHeaders: {
-                                  "Authorization": "Bearer $token",
+                                headers: {"Authorization": "Bearer $token"},
+                                loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return const CustomCircularProgress(size: 75);
                                 },
-                                placeholder: (context, _) => const CustomCircularProgress(size: 75.0),
-                                errorWidget: (context, url, error) => Image.asset(noItemImagePath, fit: BoxFit.cover,),
-                                imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+                                errorBuilder: (context, error, stackTrace) => Image.asset(
+                                  noItemImagePath,
+                                  fit: BoxFit.cover,
+                                ),
                               )
-                            : Image.asset(noItemImagePath, fit: BoxFit.cover,),
+                            : Image.asset(
+                                noItemImagePath,
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     ),
                   ),

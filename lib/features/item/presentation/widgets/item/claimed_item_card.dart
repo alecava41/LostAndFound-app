@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
@@ -55,18 +53,23 @@ class ClaimedItemCard extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: hasImage
-                        ? CachedNetworkImage(
-                            imageUrl: "$baseUrl/api/users/$userId/image",
+                        ? Image.network(
+                            "$baseUrl/api/users/$userId/image",
                             fit: BoxFit.cover,
-                            httpHeaders: {
-                              "Authorization": "Bearer $token",
+                            headers: {"Authorization": "Bearer $token"},
+                            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return const CustomCircularProgress(size: 35);
                             },
-                            progressIndicatorBuilder: (context, url, downloadProgress) =>
-                                const CustomCircularProgress(size: 35),
-                            errorWidget: (context, url, error) => Image.asset(noUserImagePath, fit: BoxFit.cover,),
-                            imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+                            errorBuilder: (context, error, stackTrace) => Image.asset(
+                              noUserImagePath,
+                              fit: BoxFit.cover,
+                            ),
                           )
-                        : Image.asset(noUserImagePath, fit: BoxFit.cover,),
+                        : Image.asset(
+                            noUserImagePath,
+                            fit: BoxFit.cover,
+                          ),
                   ),
                 ),
                 Expanded(
@@ -105,7 +108,8 @@ class ClaimedItemCard extends StatelessWidget {
                                   ),
                                   TextSpan(
                                     text: status.getTranslatedName(context).toUpperCase(),
-                                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
+                                    style:
+                                        const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
                                   ),
                                 ],
                               ),

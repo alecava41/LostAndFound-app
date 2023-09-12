@@ -58,8 +58,6 @@ dependencies:
   dio_http_formatter: ^3.1.0
   info_popup: ^3.0.4
   flutter_chat_ui: ^1.6.9
-  cached_network_image: ^3.2.3
-  cached_network_image_platform_interface: any
   sqflite: ^2.2.8+4
   floor: ^1.4.2
   dartx: ^1.2.0

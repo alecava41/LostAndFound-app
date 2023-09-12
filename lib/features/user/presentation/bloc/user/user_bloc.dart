@@ -2,13 +2,11 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lost_and_found/core/data/secure_storage/secure_storage.dart';
 import 'package:lost_and_found/core/domain/usecases/usecase.dart';
 import 'package:lost_and_found/features/user/domain/usecases/logout_usecase.dart';
-import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../../core/status/failures.dart';
 import '../../../../../core/status/success.dart';
@@ -100,9 +98,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         path = null;
         return Right(success);
       });
-
-      // Workaround to refresh image
-      await CachedNetworkImage.evictFromCache("$baseUrl/api/users/${state.user!.id}/image");
     }
 
     emit(state.copyWith(

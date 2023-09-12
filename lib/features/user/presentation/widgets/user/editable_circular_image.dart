@@ -1,11 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/utils/constants.dart';
-import 'package:lost_and_found/utils/utility.dart';
 
 import '../../../../../core/presentation/widgets/media_selection_dialog.dart';
 
@@ -41,30 +38,31 @@ class EditableCircularImage extends StatelessWidget {
       child: Center(
         child: Stack(children: <Widget>[
           hasImage
-              ? CachedNetworkImage(
-                  key: Key(randomString()),
-                  imageUrl: "$baseUrl/api/users/$userId/image",
-                  httpHeaders: {
-                    "Authorization": "Bearer $token",
-                  },
-                  progressIndicatorBuilder: (context, url, downloadProgress) => SizedBox(
-                    height: radius * 2,
-                    width: radius * 2,
-                    child: CustomCircularProgress(size: radius),
-                  ),
-                  errorWidget: (context, url, error) => CircleAvatar(
-                    radius: radius,
-                    backgroundImage: Image.asset(noUserImagePath, fit: BoxFit.cover,).image,
-                  ),
-                  imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-                  imageBuilder: (ctx, imageProvider) => CircleAvatar(
-                    radius: radius,
-                    backgroundImage: imageProvider,
-                  ),
+              ? CircleAvatar(
+                  radius: radius,
+                  backgroundImage: Image.network(
+                    "$baseUrl/api/users/$userId/image",
+                    headers: {"Authorization": "Bearer $token"},
+                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return SizedBox(
+                        height: radius * 2,
+                        width: radius * 2,
+                        child: CustomCircularProgress(size: radius),
+                      );
+                    },
+                    errorBuilder: (context, error, stackTrace) => Image.asset(
+                      noUserImagePath,
+                      fit: BoxFit.cover,
+                    ),
+                  ).image,
                 )
               : CircleAvatar(
                   radius: radius,
-                  backgroundImage: Image.asset(noUserImagePath, fit: BoxFit.cover,).image,
+                  backgroundImage: Image.asset(
+                    noUserImagePath,
+                    fit: BoxFit.cover,
+                  ).image,
                 ),
           Positioned(
             bottom: 2.0,

@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/utils/constants.dart';
@@ -21,32 +19,31 @@ class CircularImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (hasImage) {
-      return CachedNetworkImage(
-        imageUrl: imageUrl,
-        httpHeaders: {
-          "Authorization": "Bearer $token",
-        },
-        progressIndicatorBuilder: (context, url, downloadProgress) => SizedBox(
-          height: radius * 2,
-          width: radius * 2,
-          child: CustomCircularProgress(size: radius),
-        ),
-        errorWidget: (context, url, error) {
-          return CircleAvatar(
+      return CircleAvatar(
+        radius: radius,
+        backgroundImage: Image.network(
+          imageUrl,
+          headers: {"Authorization": "Bearer $token"},
+          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+            if (loadingProgress == null) return child;
+            return SizedBox(height: radius * 2, width: radius * 2, child: CustomCircularProgress(size: radius));
+          },
+          errorBuilder: (context, error, stackTrace) => CircleAvatar(
             radius: radius,
-            backgroundImage: Image.asset(noUserImagePath, fit: BoxFit.cover,).image,
-          );
-        },
-        imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-        imageBuilder: (ctx, imageProvider) => CircleAvatar(
-          radius: radius,
-          backgroundImage: imageProvider,
-        ),
+            backgroundImage: Image.asset(
+              noUserImagePath,
+              fit: BoxFit.cover,
+            ).image,
+          ),
+        ).image,
       );
     } else {
       return CircleAvatar(
         radius: radius,
-        backgroundImage: Image.asset(noUserImagePath, fit: BoxFit.cover,).image,
+        backgroundImage: Image.asset(
+          noUserImagePath,
+          fit: BoxFit.cover,
+        ).image,
       );
     }
   }

@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -58,18 +56,23 @@ class ClaimedStatusCard extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: claim.item.hasImage
-                        ? CachedNetworkImage(
-                            imageUrl: "$baseUrl/api/items/${claim.item.id}/image",
+                        ? Image.network(
+                            "$baseUrl/api/items/${claim.item.id}/image",
                             fit: BoxFit.cover,
-                            httpHeaders: {
-                              "Authorization": "Bearer $token",
-                            },
-                            progressIndicatorBuilder: (context, url, downloadProgress) =>
-                                const CustomCircularProgress(size: 35),
-                            errorWidget: (context, url, error) => Image.asset(noItemImagePath, fit: BoxFit.cover,),
-                            imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+                            headers: {"Authorization": "Bearer $token"},
+                      loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return const CustomCircularProgress(size: 35);
+                      },
+                            errorBuilder: (context, error, stackTrace) => Image.asset(
+                              noItemImagePath,
+                              fit: BoxFit.cover,
+                            ),
                           )
-                        : Image.asset(noItemImagePath, fit: BoxFit.cover,),
+                        : Image.asset(
+                            noItemImagePath,
+                            fit: BoxFit.cover,
+                          ),
                   ),
                 ),
                 Expanded(

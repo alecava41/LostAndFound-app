@@ -42,10 +42,10 @@ class App extends StatefulWidget {
 
 // TODO update all claims when a claim is accepted in answer_question
 
-// TODO when deleting an object, it should return on home_page + delete chat!
+// TODO when deleting an object, it should return on home_page (+ delete chat!)
 // TODO check the same as below for "mark as solved"
 
-// TODO cannot see image in chat (even if the image is there)
+// TODO check insert_item/update_item back button
 
 // TODO refresh device token everytime a new login is performed
 

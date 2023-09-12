@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -46,18 +44,18 @@ class UploadImageForm extends StatelessWidget {
                     height: 300,
                     width: MediaQuery.of(context).size.width,
                     child: hasImage && !hasDeletedOriginalImage
-                        ? CachedNetworkImage(
-                            imageUrl: "$baseUrl/api/items/$itemId/image",
+                        ? Image.network(
+                            "$baseUrl/api/items/$itemId/image",
                             fit: BoxFit.cover,
-                            httpHeaders: {
-                              "Authorization": "Bearer $token",
+                            headers: {"Authorization": "Bearer $token"},
+                            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return const CustomCircularProgress(size: 150);
                             },
-                            progressIndicatorBuilder:
-                                (context, url, downloadProgress) =>
-                                    const CustomCircularProgress(size: 150),
-                            errorWidget: (context, url, error) => Image.asset(noItemImagePath, fit: BoxFit.cover,),
-                            imageRenderMethodForWeb:
-                                ImageRenderMethodForWeb.HttpGet,
+                            errorBuilder: (context, error, stackTrace) => Image.asset(
+                              noItemImagePath,
+                              fit: BoxFit.cover,
+                            ),
                           )
                         : () {
                             if (imagePath == null) {
@@ -65,8 +63,7 @@ class UploadImageForm extends StatelessWidget {
                                 child: ElevatedButton(
                                   onPressed: onSelectUploadMethod,
                                   style: ElevatedButton.styleFrom(
-                                    surfaceTintColor:
-                                        PersonalizedColor.mainColor,
+                                    surfaceTintColor: PersonalizedColor.mainColor,
                                     backgroundColor: Colors.white,
                                     shape: const StadiumBorder(),
                                     padding: const EdgeInsets.all(20),
@@ -76,21 +73,17 @@ class UploadImageForm extends StatelessWidget {
                                     ),
                                     elevation: 0,
                                   ).copyWith(
-                                    overlayColor: MaterialStateProperty
-                                        .resolveWith<Color>(
+                                    overlayColor: MaterialStateProperty.resolveWith<Color>(
                                       (Set<MaterialState> states) {
-                                        if (states
-                                            .contains(MaterialState.pressed)) {
-                                          return PersonalizedColor
-                                              .primarySwatch.shade50;
+                                        if (states.contains(MaterialState.pressed)) {
+                                          return PersonalizedColor.primarySwatch.shade50;
                                         }
                                         return Colors.transparent;
                                       },
                                     ),
                                   ),
                                   child: Text(
-                                    AppLocalizations.of(context)!
-                                        .uploadImageButton,
+                                    AppLocalizations.of(context)!.uploadImageButton,
                                     style: const TextStyle(
                                       fontSize: 20,
                                       color: PersonalizedColor.mainColor,
@@ -103,8 +96,7 @@ class UploadImageForm extends StatelessWidget {
                             }
                           }(),
                   ),
-                  if (imagePath != null ||
-                      (hasImage && !hasDeletedOriginalImage))
+                  if (imagePath != null || (hasImage && !hasDeletedOriginalImage))
                     Positioned(
                       right: 16,
                       bottom: 10,

@@ -1,11 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../../core/presentation/widgets/image_dialog.dart';
-import '../../../../../utils/utility.dart';
 
 class ImageItem extends StatelessWidget {
   final int itemId;
@@ -20,23 +17,28 @@ class ImageItem extends StatelessWidget {
       final String imageUrl = "$baseUrl/api/items/$itemId/image";
 
       return ImageDialogWidget(
-        key: Key(randomString()),
         imageUrl: imageUrl,
         token: token,
-        errorImage: Image.asset(noItemImagePath, fit: BoxFit.cover,),
+        errorImage: Image.asset(
+          noItemImagePath,
+          fit: BoxFit.cover,
+        ),
         child: Container(
           color: Colors.white,
           width: MediaQuery.of(context).size.width,
           height: 300,
-          child: CachedNetworkImage(
-            imageUrl: imageUrl,
+          child: Image.network(
+            imageUrl,
             fit: BoxFit.cover,
-            httpHeaders: {
-              "Authorization": "Bearer $token",
+            headers: {"Authorization": "Bearer $token"},
+            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) return child;
+              return const CustomCircularProgress(size: 150);
             },
-            progressIndicatorBuilder: (context, url, downloadProgress) => const CustomCircularProgress(size: 150),
-            errorWidget: (context, url, error) => Image.asset(noItemImagePath, fit: BoxFit.cover,),
-            imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+            errorBuilder: (context, error, stackTrace) => Image.asset(
+              noItemImagePath,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       );
@@ -44,7 +46,10 @@ class ImageItem extends StatelessWidget {
       return SizedBox(
         width: MediaQuery.of(context).size.width,
         height: 300,
-        child: Image.asset(noItemImagePath, fit: BoxFit.cover,),
+        child: Image.asset(
+          noItemImagePath,
+          fit: BoxFit.cover,
+        ),
       );
     }
   }

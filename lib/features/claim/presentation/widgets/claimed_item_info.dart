@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -53,24 +51,33 @@ class ClaimedItemInfo extends StatelessWidget {
                   ? ImageDialogWidget(
                       imageUrl: itemUrl,
                       token: token,
-                      errorImage: Image.asset(noItemImagePath, fit: BoxFit.cover,),
+                      errorImage: Image.asset(
+                        noItemImagePath,
+                        fit: BoxFit.cover,
+                      ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: CachedNetworkImage(
-                          imageUrl: itemUrl,
+                        child: Image.network(
+                          itemUrl,
                           fit: BoxFit.cover,
-                          httpHeaders: {
-                            "Authorization": "Bearer $token",
+                          headers: {"Authorization": "Bearer $token"},
+                          errorBuilder: (ctx, error, trace) => Image.asset(
+                            noItemImagePath,
+                            fit: BoxFit.cover,
+                          ),
+                          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return const CustomCircularProgress(size: 75);
                           },
-                          placeholder: (context, _) => const CustomCircularProgress(size: 75),
-                          errorWidget: (context, url, error) => Image.asset(noItemImagePath, fit: BoxFit.cover,),
-                          imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                         ),
                       ),
                     )
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(noItemImagePath, fit: BoxFit.cover,),
+                      child: Image.asset(
+                        noItemImagePath,
+                        fit: BoxFit.cover,
+                      ),
                     ),
             ),
             Expanded(
@@ -139,7 +146,6 @@ class ClaimedItemInfo extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
-            
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
@@ -147,15 +153,15 @@ class ClaimedItemInfo extends StatelessWidget {
                 shape: const StadiumBorder(),
                 padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
               ).copyWith(
-                    overlayColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.pressed)) {
-                          return PersonalizedColor.primarySwatch.shade50;
-                        }
-                        return Colors.transparent;
-                      },
-                    ),
-                  ),
+                overlayColor: MaterialStateProperty.resolveWith<Color>(
+                  (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.pressed)) {
+                      return PersonalizedColor.primarySwatch.shade50;
+                    }
+                    return Colors.transparent;
+                  },
+                ),
+              ),
               onPressed: () {
                 if (isQuestionScreen) {
                   context.read<AnswerQuestionBloc>().add(AnswerQuestionEvent.createChatRoom(

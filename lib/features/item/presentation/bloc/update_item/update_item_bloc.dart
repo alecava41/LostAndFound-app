@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:latlong2/latlong.dart';
@@ -14,7 +13,6 @@ import 'package:lost_and_found/features/item/domain/fields/update_item/position.
 import '../../../../../core/data/secure_storage/secure_storage.dart';
 import '../../../../../core/status/failures.dart';
 import '../../../../../core/status/success.dart';
-import '../../../../../utils/constants.dart';
 import '../../../domain/entities/item.dart' as item_entity;
 import '../../../domain/fields/insert_item/question.dart';
 import '../../../domain/fields/insert_item/title.dart';
@@ -153,9 +151,6 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
         imgFailureOrSuccess.fold(
             (failure) => imageFailureOrSuccess = Left(failure), (success) => imageFailureOrSuccess = Right(success));
       }
-
-      // Workaround to refresh image
-      await CachedNetworkImage.evictFromCache("$baseUrl/api/users/${state.item!.id}/image");
     }
 
     emit(state.copyWith(

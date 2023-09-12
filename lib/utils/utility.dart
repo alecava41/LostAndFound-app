@@ -1,16 +1,7 @@
-import 'dart:convert';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/status/failures.dart';
-
-String randomString() {
-  final random = Random.secure();
-  final values = List<int>.generate(16, (i) => random.nextInt(255));
-  return base64UrlEncode(values);
-}
 
 showBasicErrorSnackbar(BuildContext context, Failure failure) {
   failure.maybeWhen(
