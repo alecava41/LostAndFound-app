@@ -110,7 +110,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                                     claimIdx: null,
                                     otherUserId: state.item!.user.id,
                                     otherUserUsername: state.item!.user.username,
-                                    isQuestionScreen: true,
+                                    isQuestionScreen: true, hasOtherUserImage: state.item!.user.hasImage,
                                   ),
                                 ),
                                 const SizedBox(

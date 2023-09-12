@@ -40,6 +40,9 @@ class App extends StatefulWidget {
 // TODO (@alecava41) add supported languages in iOS (https://docs.flutter.dev/ui/accessibility-and-localization/internationalization#localizing-for-ios-updating-the-ios-app-bundle)
 // TODO (@alecava41) add iOS permission
 
+// TODO remove three words for valid input
+
+// TODO (@alecava41) add spinner in personalizedlargegreenbutton in insert_item and update_item, answer_question_claim
 // TODO (@alecava41) modify tutorial in options to avoid "double" horizontal scroll (pointers on the left side + button to go next)
 }
 

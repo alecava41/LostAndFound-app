@@ -20,6 +20,7 @@ class ClaimedItemInfo extends StatelessWidget {
   final String token;
   final String subject; // either the owner of the object or the user that claimed it
   final int otherUserId;
+  final bool hasOtherUserImage;
   final String otherUserUsername;
   final bool isQuestionScreen;
   final int? claimIdx;
@@ -33,6 +34,7 @@ class ClaimedItemInfo extends StatelessWidget {
     required this.otherUserUsername,
     required this.isQuestionScreen,
     required this.claimIdx,
+    required this.hasOtherUserImage,
   });
 
   @override
@@ -114,7 +116,7 @@ class ClaimedItemInfo extends StatelessWidget {
               child: Row(
                 children: [
                   CircularImage(
-                    hasImage: true,
+                    hasImage: hasOtherUserImage,
                     imageUrl: "$baseUrl/api/users/$otherUserId/image",
                     radius: 25,
                     token: token,
