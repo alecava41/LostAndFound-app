@@ -345,5 +345,6 @@
   "goToMapTitle":"Visualizza in Mappe",
   "noStayInApp": "No, rimani nell’app",
   "yesSeeMaps":"Sì, visualizza in mappe",
-  "next": "Avanti"
+  "next": "Avanti",
+  "itemAlreadySolvedToast": "Impossibile mostrare i dettagli dell'oggetto, esso non è più visibile."
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_question_screen.dart';
@@ -44,7 +45,12 @@ class ClaimedStatusCard extends StatelessWidget {
                 ),
               );
             } else {
-              // TODO notify user that item is not visible because it has been already solved
+              Fluttertoast.showToast(
+                msg: AppLocalizations.of(context)!.itemAlreadySolvedToast,
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 5,
+              );
             }
           },
           child: Container(

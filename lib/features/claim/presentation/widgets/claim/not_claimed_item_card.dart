@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 
 import '../../../../../core/presentation/widgets/custom_circular_progress.dart';
@@ -38,7 +40,12 @@ class NotClaimedItemCard extends StatelessWidget {
                 ),
               );
             } else {
-              // TODO notify user that item is not visible because it has been already solved
+              Fluttertoast.showToast(
+                msg: AppLocalizations.of(context)!.itemAlreadySolvedToast,
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 5,
+              );
             }
           },
           child: Container(

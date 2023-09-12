@@ -347,5 +347,6 @@
   "goToMapsDialogDescription":"You are about to be redirected to your maps app to view this location.\n\nAre you sure you want to exit the app?",
   "noStayInApp": "No, stay in the app",
   "yesSeeMaps":"Yes, see in Maps",
-  "next": "Next"
+  "next": "Next",
+  "itemAlreadySolvedToast": "Cannot access item's details, the item is not visible anymore."
 }
