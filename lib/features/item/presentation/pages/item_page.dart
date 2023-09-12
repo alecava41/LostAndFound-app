@@ -67,6 +67,7 @@ class ItemScreen extends StatelessWidget {
                   .read<HomeControllerBloc>()
                   .add(const HomeControllerEvent.tabChanged(0));
               Navigator.pop(context);
+              Navigator.pop(context);
             });
           }
 
@@ -83,6 +84,7 @@ class ItemScreen extends StatelessWidget {
               context
                   .read<HomeControllerBloc>()
                   .add(const HomeControllerEvent.tabChanged(0));
+              Navigator.pop(context);
               Navigator.pop(context);
             });
           }

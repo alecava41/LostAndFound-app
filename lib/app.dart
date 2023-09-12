@@ -45,8 +45,6 @@ class App extends StatefulWidget {
 // TODO when deleting an object, it should return on home_page (+ delete chat!)
 // TODO check the same as below for "mark as solved"
 
-// TODO check insert_item/update_item back button
-
 // TODO refresh device token everytime a new login is performed
 
 // TODO (@alecava41) add spinner in personalizedlargegreenbutton in insert_item and update_item, answer_question_claim
