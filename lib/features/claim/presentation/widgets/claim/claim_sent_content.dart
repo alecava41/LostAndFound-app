@@ -45,7 +45,7 @@ class ClaimSentContent extends StatelessWidget {
                               padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
                               child: ClaimedStatusCard(
                                 token: state.token,
-                                claim: claim,
+                                claim: claim, isItemSolved: false,
                               ),
                             );
                           },

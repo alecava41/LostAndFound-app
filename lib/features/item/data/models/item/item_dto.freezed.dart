@@ -21,6 +21,7 @@ ItemDto _$ItemDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ItemDto {
   int get id => throw _privateConstructorUsedError;
+  bool get resolved => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $ItemDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
+      bool resolved,
       String title,
       String type,
       String address,
@@ -77,6 +79,7 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
   @override
   $Res call({
     Object? id = null,
+    Object? resolved = null,
     Object? title = null,
     Object? type = null,
     Object? address = null,
@@ -94,6 +97,10 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      resolved: null == resolved
+          ? _value.resolved
+          : resolved // ignore: cast_nullable_to_non_nullable
+              as bool,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -187,6 +194,7 @@ abstract class _$$$ItemDtoCopyWith<$Res> implements $ItemDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
+      bool resolved,
       String title,
       String type,
       String address,
@@ -220,6 +228,7 @@ class __$$$ItemDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? resolved = null,
     Object? title = null,
     Object? type = null,
     Object? address = null,
@@ -237,6 +246,10 @@ class __$$$ItemDtoCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      resolved: null == resolved
+          ? _value.resolved
+          : resolved // ignore: cast_nullable_to_non_nullable
+              as bool,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -290,6 +303,7 @@ class __$$$ItemDtoCopyWithImpl<$Res>
 class _$$ItemDto implements $ItemDto {
   const _$$ItemDto(
       {required this.id,
+      required this.resolved,
       required this.title,
       required this.type,
       required this.address,
@@ -308,6 +322,8 @@ class _$$ItemDto implements $ItemDto {
 
   @override
   final int id;
+  @override
+  final bool resolved;
   @override
   final String title;
   @override
@@ -341,7 +357,7 @@ class _$$ItemDto implements $ItemDto {
 
   @override
   String toString() {
-    return 'ItemDto(id: $id, title: $title, type: $type, address: $address, image: $image, date: $date, user: $user, category: $category, question: $question, position: $position, claims: $claims, userClaim: $userClaim)';
+    return 'ItemDto(id: $id, resolved: $resolved, title: $title, type: $type, address: $address, image: $image, date: $date, user: $user, category: $category, question: $question, position: $position, claims: $claims, userClaim: $userClaim)';
   }
 
   @override
@@ -350,6 +366,8 @@ class _$$ItemDto implements $ItemDto {
         (other.runtimeType == runtimeType &&
             other is _$$ItemDto &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.resolved, resolved) ||
+                other.resolved == resolved) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.address, address) || other.address == address) &&
@@ -372,6 +390,7 @@ class _$$ItemDto implements $ItemDto {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      resolved,
       title,
       type,
       address,
@@ -401,6 +420,7 @@ class _$$ItemDto implements $ItemDto {
 abstract class $ItemDto implements ItemDto {
   const factory $ItemDto(
       {required final int id,
+      required final bool resolved,
       required final String title,
       required final String type,
       required final String address,
@@ -417,6 +437,8 @@ abstract class $ItemDto implements ItemDto {
 
   @override
   int get id;
+  @override
+  bool get resolved;
   @override
   String get title;
   @override

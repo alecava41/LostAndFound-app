@@ -11,12 +11,14 @@ import '../../../../../utils/constants.dart';
 import '../../../domain/entities/claim_sent.dart';
 
 class ClaimedStatusCard extends StatelessWidget {
+  final bool isItemSolved;
   final ClaimSent claim;
   final String token;
 
   const ClaimedStatusCard({
     required this.claim,
     required this.token,
+    required this.isItemSolved,
     super.key,
   });
 
@@ -28,15 +30,22 @@ class ClaimedStatusCard extends StatelessWidget {
         color: PersonalizedColor.openedColor,
         child: InkWell(
           splashColor: PersonalizedColor.splashGreyColor,
-          onTap: () => {
-            context.read<BadgeBloc>().add(const BadgeEvent.sentClaimRead()),
-            Navigator.push(
+          onTap: () {
+            if (!isItemSolved) {
+              context.read<BadgeBloc>().add(const BadgeEvent.sentClaimRead());
+
+              Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (_) => AnswerQuestionScreen(
-                          itemId: claim.item.id,
-                          isClaimAlreadyTaken: true,
-                        )))
+                  builder: (_) => AnswerQuestionScreen(
+                    itemId: claim.item.id,
+                    isClaimAlreadyTaken: true,
+                  ),
+                ),
+              );
+            } else {
+              // TODO notify user that item is not visible because it has been already solved
+            }
           },
           child: Container(
             decoration: BoxDecoration(
@@ -60,10 +69,10 @@ class ClaimedStatusCard extends StatelessWidget {
                             "$baseUrl/api/items/${claim.item.id}/image",
                             fit: BoxFit.cover,
                             headers: {"Authorization": "Bearer $token"},
-                      loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return const CustomCircularProgress(size: 35);
-                      },
+                            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return const CustomCircularProgress(size: 35);
+                            },
                             errorBuilder: (context, error, stackTrace) => Image.asset(
                               noItemImagePath,
                               fit: BoxFit.cover,

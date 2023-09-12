@@ -17,9 +17,7 @@ class ClaimReceivedContent extends StatelessWidget {
       builder: (ctx, state) => RefreshIndicator(
         onRefresh: () async {
           Future block = ctx.read<ClaimBloc>().stream.first;
-          ctx
-              .read<ClaimBloc>()
-              .add(const ClaimEvent.receivedClaimsRefreshed(null));
+          ctx.read<ClaimBloc>().add(const ClaimEvent.receivedClaimsRefreshed(null));
           await block;
         },
         child: state.isLoadingReceived
@@ -38,7 +36,6 @@ class ClaimReceivedContent extends StatelessWidget {
                   )
                 : Column(
                     children: [
-                      
                       Expanded(
                         child: ListView.builder(
                           itemCount: state.claimsReceived.length,
@@ -49,13 +46,13 @@ class ClaimReceivedContent extends StatelessWidget {
                               child: ClaimedItemCard(
                                 claim: claim,
                                 token: state.token,
+                                isItemResolved: false,
                               ),
                             );
                           },
                         ),
                       ),
-                      InfoClaimsBox(
-                          text: AppLocalizations.of(context)!.claimReceivedTutorial),
+                      InfoClaimsBox(text: AppLocalizations.of(context)!.claimReceivedTutorial),
                     ],
                   ),
       ),

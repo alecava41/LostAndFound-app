@@ -9,6 +9,7 @@ extension ItemFromDto on ItemDto {
   Item toDomain() {
     return Item(
       id: id,
+      resolved: resolved,
       title: title,
       insertion: date,
       user: User(id: user.id, username: user.username, hasImage: user.image),

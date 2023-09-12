@@ -13,10 +13,11 @@ import '../../../../../utils/colors.dart';
 import '../../../../../utils/constants.dart';
 
 class ClaimedItemCard extends StatelessWidget {
+  final bool isItemResolved;
   final String token;
   final ClaimReceived claim;
 
-  const ClaimedItemCard({super.key, required this.token, required this.claim});
+  const ClaimedItemCard({super.key, required this.isItemResolved, required this.token, required this.claim});
 
   @override
   Widget build(BuildContext context) {
@@ -28,22 +29,26 @@ class ClaimedItemCard extends StatelessWidget {
           child: InkWell(
             splashColor: !claim.opened ? PersonalizedColor.splashGreenColor : PersonalizedColor.splashGreyColor,
             onTap: () async {
-              ctx.read<ClaimBloc>().add(ClaimEvent.claimRead(claim.id));
-              ctx.read<BadgeBloc>().add(const BadgeEvent.receivedClaimRead());
+              if (!isItemResolved) {
+                ctx.read<ClaimBloc>().add(ClaimEvent.claimRead(claim.id));
+                ctx.read<BadgeBloc>().add(const BadgeEvent.receivedClaimRead());
 
-              final updatedItem = await Navigator.push<item.Item?>(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => AnswerClaimScreen(
-                    itemId: claim.item.id,
-                    claimId: claim.id,
-                    isClaimAlreadyManaged: claim.status != ClaimStatus.pending,
+                final updatedItem = await Navigator.push<item.Item?>(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => AnswerClaimScreen(
+                      itemId: claim.item.id,
+                      claimId: claim.id,
+                      isClaimAlreadyManaged: claim.status != ClaimStatus.pending,
+                    ),
                   ),
-                ),
-              );
+                );
 
-              if (updatedItem != null && context.mounted) {
-                context.read<ClaimBloc>().add(ClaimEvent.receivedClaimsRefreshed(updatedItem));
+                if (updatedItem != null && context.mounted) {
+                  context.read<ClaimBloc>().add(ClaimEvent.receivedClaimsRefreshed(updatedItem));
+                }
+              } else {
+                // TODO notify user that item is not visible because it has been already solved
               }
             },
             child: Container(
@@ -72,10 +77,10 @@ class ClaimedItemCard extends StatelessWidget {
                                 noUserImagePath,
                                 fit: BoxFit.cover,
                               ),
-                        loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                          if (loadingProgress == null) return child;
-                          return const CustomCircularProgress(size: 35);
-                        },
+                              loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return const CustomCircularProgress(size: 35);
+                              },
                             )
                           : Image.asset(
                               noUserImagePath,

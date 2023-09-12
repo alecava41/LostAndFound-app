@@ -6,11 +6,13 @@ import '../../../../../utils/colors.dart';
 import '../../../../../utils/constants.dart';
 
 class NotClaimedItemCard extends StatelessWidget {
+  final bool isItemSolved;
   final int itemId;
   final String itemName;
   final String token;
 
   const NotClaimedItemCard({
+    required this.isItemSolved,
     required this.itemId,
     required this.itemName,
     required this.token,
@@ -25,15 +27,19 @@ class NotClaimedItemCard extends StatelessWidget {
         color: PersonalizedColor.openedColor,
         child: InkWell(
           splashColor: PersonalizedColor.splashGreyColor,
-          onTap: () => {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => ItemScreen(
-                  itemId: itemId,
+          onTap: () {
+            if (!isItemSolved) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ItemScreen(
+                    itemId: itemId,
+                  ),
                 ),
-              ),
-            )
+              );
+            } else {
+              // TODO notify user that item is not visible because it has been already solved
+            }
           },
           child: Container(
             decoration: BoxDecoration(

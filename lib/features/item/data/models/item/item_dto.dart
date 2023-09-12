@@ -13,6 +13,7 @@ part 'item_dto.g.dart';
 class ItemDto with _$ItemDto {
   const factory ItemDto({
     required int id,
+    required bool resolved,
     required String title,
     required String type,
     required String address,

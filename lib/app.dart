@@ -36,15 +36,13 @@ class App extends StatefulWidget {
   State<StatefulWidget> createState() => _Application();
 
 // TODO (@alecava41) dark theme + switch (need to provide the option to let user pick system theme)
-
 // TODO (@alecava41) add supported languages in iOS (https://docs.flutter.dev/ui/accessibility-and-localization/internationalization#localizing-for-ios-updating-the-ios-app-bundle)
 // TODO (@alecava41) add iOS permission
 
 // TODO update all claims when a claim is accepted in answer_question
 
 // TODO need to delete rooms when deleting an item
-
-// TODO if an item is resolved, chat will still be there. Therefore item details can still be accessed from there...
+// TODO update room's item title when updating an item
 }
 
 class _Application extends State<App> {

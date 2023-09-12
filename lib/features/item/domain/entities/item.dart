@@ -5,6 +5,7 @@ import '../../../../core/domain/entities/claim_status.dart';
 
 class Item {
   final int id;
+  final bool resolved;
   final String title;
   final ItemType type;
   final String address;
@@ -19,6 +20,7 @@ class Item {
 
   const Item(
       {required this.id,
+      required this.resolved,
       required this.title,
       required this.type,
       required this.address,

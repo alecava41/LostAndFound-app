@@ -8,6 +8,7 @@ part of 'item_dto.dart';
 
 _$$ItemDto _$$$ItemDtoFromJson(Map<String, dynamic> json) => _$$ItemDto(
       id: json['id'] as int,
+      resolved: json['resolved'] as bool,
       title: json['title'] as String,
       type: json['type'] as String,
       address: json['address'] as String,
@@ -28,6 +29,7 @@ _$$ItemDto _$$$ItemDtoFromJson(Map<String, dynamic> json) => _$$ItemDto(
 Map<String, dynamic> _$$$ItemDtoToJson(_$$ItemDto instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'resolved': instance.resolved,
       'title': instance.title,
       'type': instance.type,
       'address': instance.address,

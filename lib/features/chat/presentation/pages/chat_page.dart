@@ -102,6 +102,7 @@ class ChatScreen extends StatelessWidget {
                               color: PersonalizedColor.backgroundColor,
                               padding: const EdgeInsets.fromLTRB(8, 8, 8, 2),
                               child: ClaimedItemCard(
+                                isItemResolved: state.item!.resolved,
                                 token: state.token,
                                 claim: ClaimReceived(
                                   id: receivedClaim.id,
@@ -128,8 +129,10 @@ class ChatScreen extends StatelessWidget {
                                               title: state.item!.title,
                                               hasImage: state.item!.hasImage)),
                                       token: state.token,
+                                      isItemSolved: state.item!.resolved,
                                     )
                                   : NotClaimedItemCard(
+                                      isItemSolved: state.item!.resolved,
                                       itemId: state.item!.id,
                                       itemName: state.item!.title,
                                       token: state.token,
