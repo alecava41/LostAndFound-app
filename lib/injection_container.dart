@@ -39,6 +39,7 @@ import 'package:lost_and_found/features/chat/data/datasources/chat_data_source.d
 import 'package:lost_and_found/features/chat/data/repositories/chat_repository_impl.dart';
 import 'package:lost_and_found/features/chat/domain/repositories/chat_repository.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/create_room_usecase.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/delete_rooms_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/get_room_messages_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/login_chat_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/logout_chat_usecase.dart';
@@ -129,7 +130,7 @@ Future<void> init() async {
         solveItemUseCase: sl(),
         deleteItemUseCase: sl(),
         insertReadClaimUseCase: sl(),
-        createRoomUseCase: sl(),
+        createRoomUseCase: sl(), deleteRoomsUseCase: sl(),
       ));
   sl.registerFactory(
       () => InsertItemBloc(createItemUseCase: sl(), getAddressFromPositionUseCase: sl(), uploadItemImageUseCase: sl()));
@@ -249,6 +250,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetRoomMessagesUseCase(sl()));
   sl.registerLazySingleton(() => SendMessageUseCase(sl()));
   sl.registerLazySingleton(() => ReadChatUseCase(sl()));
+  sl.registerLazySingleton(() => DeleteRoomsUseCase(sl()));
 
   // Repositories
   sl.registerLazySingleton<ChatRepository>(() => ChatRepositoryImpl(sl(), sl(), sl()));

@@ -6,6 +6,7 @@ import 'package:flutter_chat_types/flutter_chat_types.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lost_and_found/core/data/secure_storage/secure_storage.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/create_room_usecase.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/delete_rooms_usecase.dart';
 import 'package:lost_and_found/features/claim/domain/usecases/insert_read_claim_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/delete_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/get_item_usecase.dart';
@@ -24,7 +25,10 @@ part 'item_state.dart';
 class ItemBloc extends Bloc<ItemEvent, ItemState> {
   final GetItemUseCase _getItemUseCase;
   final SolveItemUseCase _solveItemUseCase;
+
   final DeleteItemUseCase _deleteItemUseCase;
+  final DeleteRoomsUseCase _deleteRoomsUseCase;
+
   final InsertReadClaimUseCase _insertReadClaimUseCase;
 
   final CreateRoomUseCase _createRoomUseCase;
@@ -37,6 +41,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     required DeleteItemUseCase deleteItemUseCase,
     required InsertReadClaimUseCase insertReadClaimUseCase,
     required SecureStorage secureStorage,
+    required DeleteRoomsUseCase deleteRoomsUseCase,
     required CreateRoomUseCase createRoomUseCase,
   })  : _getItemUseCase = getItemUseCase,
         _solveItemUseCase = solveItemUseCase,
@@ -44,6 +49,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
         _insertReadClaimUseCase = insertReadClaimUseCase,
         _secureStorage = secureStorage,
         _createRoomUseCase = createRoomUseCase,
+        _deleteRoomsUseCase = deleteRoomsUseCase,
         super(ItemState.initial()) {
     on<ItemEvent>(
       (event, emit) async {
@@ -132,6 +138,10 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
 
     final itemResponse = await _deleteItemUseCase(DeleteItemParams(itemId: state.item!.id));
     itemResponse.fold((failure) => request = Left(failure), (it) => request = const Right(Success.genericSuccess()));
+
+    if(itemResponse.isRight()) {
+      await _deleteRoomsUseCase(DeleteRoomsParams(itemId: state.item!.id));
+    }
 
     emit(state.copyWith(isLoading: false, deleteFailureOrSuccess: request));
     emit(state.copyWith(deleteFailureOrSuccess: null));

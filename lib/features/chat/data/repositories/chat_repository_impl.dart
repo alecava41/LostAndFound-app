@@ -8,6 +8,7 @@ import 'package:lost_and_found/core/status/failures.dart';
 import 'package:lost_and_found/core/status/success.dart';
 import 'package:lost_and_found/features/chat/data/datasources/chat_data_source.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/create_room_usecase.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/delete_rooms_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/get_room_messages_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/read_chat_usecase.dart';
 
@@ -130,7 +131,21 @@ class ChatRepositoryImpl implements ChatRepository {
   Future<Either<Failure, Success>> logout(NoParams params) async {
     try {
       if (await _networkInfo.isConnected) {
-        await _dataSource.logout(NoParams());
+        await _dataSource.logout(params);
+        return const Right(Success.genericSuccess());
+      } else {
+        return const Left(Failure.networkFailure());
+      }
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> deleteRooms(DeleteRoomsParams params) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        await _dataSource.deleteRooms(params);
         return const Right(Success.genericSuccess());
       } else {
         return const Left(Failure.networkFailure());

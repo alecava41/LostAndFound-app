@@ -5,6 +5,7 @@ import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:lost_and_found/core/domain/usecases/usecase.dart';
 import 'package:lost_and_found/features/chat/data/models/send_notification_body.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/create_room_usecase.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/delete_rooms_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/get_room_messages_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/read_chat_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/registration_chat_usecase.dart';
@@ -27,6 +28,8 @@ abstract class ChatDataSource {
   Future<void> sendMessage(SendMessageParams params);
 
   Future<void> readChat(ReadChatParams params);
+
+  Future<void> deleteRooms(DeleteRoomsParams params);
 
   Future<void> logout(NoParams params);
 }
@@ -172,6 +175,20 @@ class ChatDataSourceImpl implements ChatDataSource {
       await FirebaseChatCore.instance.getFirebaseFirestore().collection("rooms").doc(params.roomId).update(
         {"metadata.last-${params.currentId}": messageId},
       );
+    }
+  }
+
+  @override
+  Future<void> deleteRooms(DeleteRoomsParams params) async {
+    final roomsToDelete = (await FirebaseChatCore.instance
+            .getFirebaseFirestore()
+            .collection("rooms")
+            .where("metadata.item", isEqualTo: params.itemId)
+            .get())
+        .docs;
+
+    for (var element in roomsToDelete) {
+      await element.reference.delete();
     }
   }
 }
