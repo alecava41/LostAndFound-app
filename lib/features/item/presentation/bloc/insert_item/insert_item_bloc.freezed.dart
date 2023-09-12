@@ -1660,6 +1660,7 @@ mixin _$InsertItemState {
   bool get hasLocationPermissions => throw _privateConstructorUsedError;
   dynamic get showError => throw _privateConstructorUsedError;
   dynamic get isLoading => throw _privateConstructorUsedError;
+  dynamic get isSubmitting => throw _privateConstructorUsedError;
   Either<Failure, Success>? get insertFailureOrSuccess =>
       throw _privateConstructorUsedError;
   Either<Failure, Success>? get imageUploadFailureOrSuccess =>
@@ -1690,6 +1691,7 @@ abstract class $InsertItemStateCopyWith<$Res> {
       bool hasLocationPermissions,
       dynamic showError,
       dynamic isLoading,
+      dynamic isSubmitting,
       Either<Failure, Success>? insertFailureOrSuccess,
       Either<Failure, Success>? imageUploadFailureOrSuccess});
 }
@@ -1720,6 +1722,7 @@ class _$InsertItemStateCopyWithImpl<$Res, $Val extends InsertItemState>
     Object? hasLocationPermissions = null,
     Object? showError = freezed,
     Object? isLoading = freezed,
+    Object? isSubmitting = freezed,
     Object? insertFailureOrSuccess = freezed,
     Object? imageUploadFailureOrSuccess = freezed,
   }) {
@@ -1776,6 +1779,10 @@ class _$InsertItemStateCopyWithImpl<$Res, $Val extends InsertItemState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      isSubmitting: freezed == isSubmitting
+          ? _value.isSubmitting
+          : isSubmitting // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       insertFailureOrSuccess: freezed == insertFailureOrSuccess
           ? _value.insertFailureOrSuccess
           : insertFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -1810,6 +1817,7 @@ abstract class _$$_InsertItemStateCopyWith<$Res>
       bool hasLocationPermissions,
       dynamic showError,
       dynamic isLoading,
+      dynamic isSubmitting,
       Either<Failure, Success>? insertFailureOrSuccess,
       Either<Failure, Success>? imageUploadFailureOrSuccess});
 }
@@ -1838,6 +1846,7 @@ class __$$_InsertItemStateCopyWithImpl<$Res>
     Object? hasLocationPermissions = null,
     Object? showError = freezed,
     Object? isLoading = freezed,
+    Object? isSubmitting = freezed,
     Object? insertFailureOrSuccess = freezed,
     Object? imageUploadFailureOrSuccess = freezed,
   }) {
@@ -1887,6 +1896,8 @@ class __$$_InsertItemStateCopyWithImpl<$Res>
               as bool,
       showError: freezed == showError ? _value.showError! : showError,
       isLoading: freezed == isLoading ? _value.isLoading! : isLoading,
+      isSubmitting:
+          freezed == isSubmitting ? _value.isSubmitting! : isSubmitting,
       insertFailureOrSuccess: freezed == insertFailureOrSuccess
           ? _value.insertFailureOrSuccess
           : insertFailureOrSuccess // ignore: cast_nullable_to_non_nullable
@@ -1916,6 +1927,7 @@ class _$_InsertItemState extends _InsertItemState {
       this.hasLocationPermissions = false,
       this.showError = false,
       this.isLoading = false,
+      this.isSubmitting = false,
       this.insertFailureOrSuccess,
       this.imageUploadFailureOrSuccess})
       : super._();
@@ -1957,13 +1969,16 @@ class _$_InsertItemState extends _InsertItemState {
   @JsonKey()
   final dynamic isLoading;
   @override
+  @JsonKey()
+  final dynamic isSubmitting;
+  @override
   final Either<Failure, Success>? insertFailureOrSuccess;
   @override
   final Either<Failure, Success>? imageUploadFailureOrSuccess;
 
   @override
   String toString() {
-    return 'InsertItemState(type: $type, imagePath: $imagePath, pos: $pos, cat: $cat, title: $title, question: $question, category: $category, address: $address, isLoadingPosition: $isLoadingPosition, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, showError: $showError, isLoading: $isLoading, insertFailureOrSuccess: $insertFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
+    return 'InsertItemState(type: $type, imagePath: $imagePath, pos: $pos, cat: $cat, title: $title, question: $question, category: $category, address: $address, isLoadingPosition: $isLoadingPosition, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, showError: $showError, isLoading: $isLoading, isSubmitting: $isSubmitting, insertFailureOrSuccess: $insertFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
   }
 
   @override
@@ -1990,6 +2005,8 @@ class _$_InsertItemState extends _InsertItemState {
                 other.hasLocationPermissions == hasLocationPermissions) &&
             const DeepCollectionEquality().equals(other.showError, showError) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other.isSubmitting, isSubmitting) &&
             (identical(other.insertFailureOrSuccess, insertFailureOrSuccess) ||
                 other.insertFailureOrSuccess == insertFailureOrSuccess) &&
             (identical(other.imageUploadFailureOrSuccess,
@@ -2014,6 +2031,7 @@ class _$_InsertItemState extends _InsertItemState {
       hasLocationPermissions,
       const DeepCollectionEquality().hash(showError),
       const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(isSubmitting),
       insertFailureOrSuccess,
       imageUploadFailureOrSuccess);
 
@@ -2039,6 +2057,7 @@ abstract class _InsertItemState extends InsertItemState {
           final bool hasLocationPermissions,
           final dynamic showError,
           final dynamic isLoading,
+          final dynamic isSubmitting,
           final Either<Failure, Success>? insertFailureOrSuccess,
           final Either<Failure, Success>? imageUploadFailureOrSuccess}) =
       _$_InsertItemState;
@@ -2070,6 +2089,8 @@ abstract class _InsertItemState extends InsertItemState {
   dynamic get showError;
   @override
   dynamic get isLoading;
+  @override
+  dynamic get isSubmitting;
   @override
   Either<Failure, Success>? get insertFailureOrSuccess;
   @override

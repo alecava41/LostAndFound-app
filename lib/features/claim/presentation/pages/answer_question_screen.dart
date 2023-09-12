@@ -110,7 +110,8 @@ class AnswerQuestionScreen extends StatelessWidget {
                                     claimIdx: null,
                                     otherUserId: state.item!.user.id,
                                     otherUserUsername: state.item!.user.username,
-                                    isQuestionScreen: true, hasOtherUserImage: state.item!.user.hasImage,
+                                    isQuestionScreen: true,
+                                    hasOtherUserImage: state.item!.user.hasImage,
                                   ),
                                 ),
                                 const SizedBox(
@@ -181,7 +182,9 @@ class AnswerQuestionScreen extends StatelessWidget {
                                                   text: TextSpan(
                                                     children: [
                                                       TextSpan(
-                                                        text: state.item!.userClaim!.status.getTranslatedName(context).toUpperCase(),
+                                                        text: state.item!.userClaim!.status
+                                                            .getTranslatedName(context)
+                                                            .toUpperCase(),
                                                         style: const TextStyle(
                                                             fontSize: 16,
                                                             fontWeight: FontWeight.bold,
@@ -236,10 +239,15 @@ class AnswerQuestionScreen extends StatelessWidget {
                                             : ctx
                                                 .read<AnswerQuestionBloc>()
                                                 .add(const AnswerQuestionEvent.claimCreated()),
-                                        text: Text(
-                                          AppLocalizations.of(context)!.send,
-                                          style: const TextStyle(fontSize: 20),
-                                        ))
+                                        text: state.isSubmitting
+                                            ? const CustomCircularProgress(
+                                                size: 25,
+                                                color: Colors.white,
+                                              )
+                                            : Text(
+                                                AppLocalizations.of(context)!.send,
+                                                style: const TextStyle(fontSize: 20),
+                                              ))
                               ],
                             ),
                           ),

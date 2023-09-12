@@ -12,6 +12,7 @@ class AnswerQuestionState with _$AnswerQuestionState {
     @Default("") String token,
     @Default(true) bool isLoading,
     @Default(false) bool hasLoadingError,
+    @Default(false) bool isSubmitting,
     @Default(false) bool showErrorMessage,
     Either<Failure, Item>? claimFailureOrSuccess,
     Either<Failure, Room>? roomCreationFailureOrSuccess,

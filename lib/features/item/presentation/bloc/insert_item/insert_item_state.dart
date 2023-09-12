@@ -23,6 +23,7 @@ class InsertItemState with _$InsertItemState {
     @Default(false) bool hasLocationPermissions,
     @Default(false) showError,
     @Default(false) isLoading,
+    @Default(false) isSubmitting,
     Either<Failure, Success>? insertFailureOrSuccess,
     Either<Failure, Success>? imageUploadFailureOrSuccess,
   }) = _InsertItemState;

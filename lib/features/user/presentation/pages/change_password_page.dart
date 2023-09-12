@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/user/presentation/bloc/change_password/change_password_bloc.dart';
 import 'package:lost_and_found/utils/utility.dart';
 
+import '../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../injection_container.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
@@ -213,7 +214,11 @@ class ChangePasswordScreen extends StatelessWidget {
                                   shape: const StadiumBorder(),
                                   padding: const EdgeInsets.symmetric(vertical: 16),
                                 ),
-                                child: Text(
+                                child: state.isSubmitting
+                                    ? const CustomCircularProgress(
+                                  size: 25,
+                                  color: Colors.white,
+                                ) : Text(
                                   AppLocalizations.of(context)!.changePasswordButton,
                                   style: const TextStyle(fontSize: 20),
                                 ),

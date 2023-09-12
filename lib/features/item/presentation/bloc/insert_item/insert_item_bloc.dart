@@ -80,6 +80,8 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
   }
 
   Future<void> _onInsertSubmitted(Emitter<InsertItemState> emit) async {
+    emit(state.copyWith(isSubmitting: true));
+
     final isItemLostValid = state.title.value.isRight();
     final isItemFoundValid = state.title.value.isRight() && state.question.value.isRight();
     final isCategoryValid = state.cat.value.isRight();
@@ -116,10 +118,15 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
       }
     }
 
-    emit(state.copyWith(
+    emit(
+      state.copyWith(
         showError: true,
         insertFailureOrSuccess: createFailureOrSuccess,
-        imageUploadFailureOrSuccess: imageFailureOrSuccess));
+        imageUploadFailureOrSuccess: imageFailureOrSuccess,
+        isSubmitting: false,
+      ),
+    );
+
     emit(state.copyWith(insertFailureOrSuccess: null, imageUploadFailureOrSuccess: null));
   }
 

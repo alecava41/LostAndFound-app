@@ -1428,6 +1428,7 @@ mixin _$UpdateItemState {
   String get address => throw _privateConstructorUsedError;
   dynamic get showError => throw _privateConstructorUsedError;
   dynamic get isLoading => throw _privateConstructorUsedError;
+  dynamic get isSubmitting => throw _privateConstructorUsedError;
   dynamic get isLoadingPosition => throw _privateConstructorUsedError;
   dynamic get hasDeletedOriginalImage => throw _privateConstructorUsedError;
   dynamic get hasChangedSomething =>
@@ -1464,6 +1465,7 @@ abstract class $UpdateItemStateCopyWith<$Res> {
       String address,
       dynamic showError,
       dynamic isLoading,
+      dynamic isSubmitting,
       dynamic isLoadingPosition,
       dynamic hasDeletedOriginalImage,
       dynamic hasChangedSomething,
@@ -1498,6 +1500,7 @@ class _$UpdateItemStateCopyWithImpl<$Res, $Val extends UpdateItemState>
     Object? address = null,
     Object? showError = freezed,
     Object? isLoading = freezed,
+    Object? isSubmitting = freezed,
     Object? isLoadingPosition = freezed,
     Object? hasDeletedOriginalImage = freezed,
     Object? hasChangedSomething = freezed,
@@ -1551,6 +1554,10 @@ class _$UpdateItemStateCopyWithImpl<$Res, $Val extends UpdateItemState>
       isLoading: freezed == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      isSubmitting: freezed == isSubmitting
+          ? _value.isSubmitting
+          : isSubmitting // ignore: cast_nullable_to_non_nullable
               as dynamic,
       isLoadingPosition: freezed == isLoadingPosition
           ? _value.isLoadingPosition
@@ -1608,6 +1615,7 @@ abstract class _$$_UpdateItemStateCopyWith<$Res>
       String address,
       dynamic showError,
       dynamic isLoading,
+      dynamic isSubmitting,
       dynamic isLoadingPosition,
       dynamic hasDeletedOriginalImage,
       dynamic hasChangedSomething,
@@ -1640,6 +1648,7 @@ class __$$_UpdateItemStateCopyWithImpl<$Res>
     Object? address = null,
     Object? showError = freezed,
     Object? isLoading = freezed,
+    Object? isSubmitting = freezed,
     Object? isLoadingPosition = freezed,
     Object? hasDeletedOriginalImage = freezed,
     Object? hasChangedSomething = freezed,
@@ -1688,6 +1697,8 @@ class __$$_UpdateItemStateCopyWithImpl<$Res>
               as String,
       showError: freezed == showError ? _value.showError! : showError,
       isLoading: freezed == isLoading ? _value.isLoading! : isLoading,
+      isSubmitting:
+          freezed == isSubmitting ? _value.isSubmitting! : isSubmitting,
       isLoadingPosition: freezed == isLoadingPosition
           ? _value.isLoadingPosition!
           : isLoadingPosition,
@@ -1736,6 +1747,7 @@ class _$_UpdateItemState implements _UpdateItemState {
       this.address = "",
       this.showError = false,
       this.isLoading = true,
+      this.isSubmitting = false,
       this.isLoadingPosition = false,
       this.hasDeletedOriginalImage = false,
       this.hasChangedSomething = false,
@@ -1777,6 +1789,9 @@ class _$_UpdateItemState implements _UpdateItemState {
   final dynamic isLoading;
   @override
   @JsonKey()
+  final dynamic isSubmitting;
+  @override
+  @JsonKey()
   final dynamic isLoadingPosition;
   @override
   @JsonKey()
@@ -1802,7 +1817,7 @@ class _$_UpdateItemState implements _UpdateItemState {
 
   @override
   String toString() {
-    return 'UpdateItemState(item: $item, imagePath: $imagePath, pos: $pos, cat: $cat, title: $title, question: $question, token: $token, category: $category, address: $address, showError: $showError, isLoading: $isLoading, isLoadingPosition: $isLoadingPosition, hasDeletedOriginalImage: $hasDeletedOriginalImage, hasChangedSomething: $hasChangedSomething, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, hasLoadingError: $hasLoadingError, updateFailureOrSuccess: $updateFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
+    return 'UpdateItemState(item: $item, imagePath: $imagePath, pos: $pos, cat: $cat, title: $title, question: $question, token: $token, category: $category, address: $address, showError: $showError, isLoading: $isLoading, isSubmitting: $isSubmitting, isLoadingPosition: $isLoadingPosition, hasDeletedOriginalImage: $hasDeletedOriginalImage, hasChangedSomething: $hasChangedSomething, isConnected: $isConnected, hasLocationPermissions: $hasLocationPermissions, hasLoadingError: $hasLoadingError, updateFailureOrSuccess: $updateFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
   }
 
   @override
@@ -1824,6 +1839,8 @@ class _$_UpdateItemState implements _UpdateItemState {
             (identical(other.address, address) || other.address == address) &&
             const DeepCollectionEquality().equals(other.showError, showError) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other.isSubmitting, isSubmitting) &&
             const DeepCollectionEquality()
                 .equals(other.isLoadingPosition, isLoadingPosition) &&
             const DeepCollectionEquality().equals(
@@ -1858,6 +1875,7 @@ class _$_UpdateItemState implements _UpdateItemState {
         address,
         const DeepCollectionEquality().hash(showError),
         const DeepCollectionEquality().hash(isLoading),
+        const DeepCollectionEquality().hash(isSubmitting),
         const DeepCollectionEquality().hash(isLoadingPosition),
         const DeepCollectionEquality().hash(hasDeletedOriginalImage),
         const DeepCollectionEquality().hash(hasChangedSomething),
@@ -1888,6 +1906,7 @@ abstract class _UpdateItemState implements UpdateItemState {
           final String address,
           final dynamic showError,
           final dynamic isLoading,
+          final dynamic isSubmitting,
           final dynamic isLoadingPosition,
           final dynamic hasDeletedOriginalImage,
           final dynamic hasChangedSomething,
@@ -1920,6 +1939,8 @@ abstract class _UpdateItemState implements UpdateItemState {
   dynamic get showError;
   @override
   dynamic get isLoading;
+  @override
+  dynamic get isSubmitting;
   @override
   dynamic get isLoadingPosition;
   @override

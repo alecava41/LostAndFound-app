@@ -285,10 +285,15 @@ class UpdateItemScreen extends StatelessWidget {
                                                 shape: const StadiumBorder(),
                                                 padding: const EdgeInsets.symmetric(vertical: 16),
                                               ),
-                                              child: Text(
-                                                AppLocalizations.of(context)!.update,
-                                                style: const TextStyle(fontSize: 20, color: Colors.white),
-                                              )),
+                                              child: state.isSubmitting
+                                                  ? const CustomCircularProgress(
+                                                      size: 25,
+                                                      color: Colors.white,
+                                                    )
+                                                  : Text(
+                                                      AppLocalizations.of(context)!.update,
+                                                      style: const TextStyle(fontSize: 20, color: Colors.white),
+                                                    )),
                                         ),
                                       )
                                     ],

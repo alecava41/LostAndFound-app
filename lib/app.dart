@@ -42,12 +42,12 @@ class App extends StatefulWidget {
 
 // TODO update all claims when a claim is accepted in answer_question
 
-// TODO when deleting an object, it should return on home_page (+ delete chat!)
-// TODO check the same as below for "mark as solved"
+// TODO need to delete rooms when deleting an item
+
+// TODO if an item is resolve, chat will still be there. Therefore item details can still be accessed from there...
 
 // TODO refresh device token everytime a new login is performed
 
-// TODO (@alecava41) add spinner in personalizedlargegreenbutton in insert_item and update_item, answer_question_claim
 // TODO (@alecava41) modify tutorial in options to avoid "double" horizontal scroll (pointers on the left side + button to go next)
 }
 

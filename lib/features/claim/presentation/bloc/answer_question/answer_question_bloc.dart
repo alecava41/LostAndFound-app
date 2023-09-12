@@ -92,6 +92,8 @@ class AnswerQuestionBloc extends Bloc<AnswerQuestionEvent, AnswerQuestionState> 
   }
 
   Future<void> _onClaimSubmitted(Emitter<AnswerQuestionState> emit) async {
+    emit(state.copyWith(isSubmitting: true));
+
     final isAnswerValid = state.answer.value.isRight();
 
     Either<Failure, Item>? claimFailureOrSuccess;
@@ -111,7 +113,7 @@ class AnswerQuestionBloc extends Bloc<AnswerQuestionEvent, AnswerQuestionState> 
     }
 
     emit(
-      state.copyWith(isLoading: false, showErrorMessage: true, claimFailureOrSuccess: claimFailureOrSuccess),
+      state.copyWith(isLoading: false, showErrorMessage: true, isSubmitting: false, claimFailureOrSuccess: claimFailureOrSuccess),
     );
     emit(state.copyWith(claimFailureOrSuccess: null));
   }

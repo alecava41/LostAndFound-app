@@ -114,6 +114,8 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
   }
 
   Future<void> _onUpdateSubmitted(Emitter<UpdateItemState> emit) async {
+    emit(state.copyWith(isSubmitting: true));
+
     final isItemLostValid = state.title.value.isRight();
     final isItemFoundValid = state.title.value.isRight() && state.question.value.isRight();
     final isPositionValid = state.pos.value.isRight();
@@ -155,6 +157,7 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
 
     emit(state.copyWith(
         showError: true,
+        isSubmitting: false,
         updateFailureOrSuccess: updateFailureOrSuccess,
         imageUploadFailureOrSuccess: imageFailureOrSuccess));
 

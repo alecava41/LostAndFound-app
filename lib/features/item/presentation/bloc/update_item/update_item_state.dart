@@ -19,6 +19,7 @@ class UpdateItemState with _$UpdateItemState {
     @Default("") String address,
     @Default(false) showError,
     @Default(true) isLoading,
+    @Default(false) isSubmitting,
     @Default(false) isLoadingPosition,
     @Default(false) hasDeletedOriginalImage,
     @Default(false) hasChangedSomething,

@@ -656,6 +656,7 @@ mixin _$AnswerQuestionState {
   String get token => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get hasLoadingError => throw _privateConstructorUsedError;
+  bool get isSubmitting => throw _privateConstructorUsedError;
   bool get showErrorMessage => throw _privateConstructorUsedError;
   Either<Failure, Item>? get claimFailureOrSuccess =>
       throw _privateConstructorUsedError;
@@ -679,6 +680,7 @@ abstract class $AnswerQuestionStateCopyWith<$Res> {
       String token,
       bool isLoading,
       bool hasLoadingError,
+      bool isSubmitting,
       bool showErrorMessage,
       Either<Failure, Item>? claimFailureOrSuccess,
       Either<Failure, Room>? roomCreationFailureOrSuccess});
@@ -702,6 +704,7 @@ class _$AnswerQuestionStateCopyWithImpl<$Res, $Val extends AnswerQuestionState>
     Object? token = null,
     Object? isLoading = null,
     Object? hasLoadingError = null,
+    Object? isSubmitting = null,
     Object? showErrorMessage = null,
     Object? claimFailureOrSuccess = freezed,
     Object? roomCreationFailureOrSuccess = freezed,
@@ -726,6 +729,10 @@ class _$AnswerQuestionStateCopyWithImpl<$Res, $Val extends AnswerQuestionState>
       hasLoadingError: null == hasLoadingError
           ? _value.hasLoadingError
           : hasLoadingError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSubmitting: null == isSubmitting
+          ? _value.isSubmitting
+          : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
       showErrorMessage: null == showErrorMessage
           ? _value.showErrorMessage
@@ -757,6 +764,7 @@ abstract class _$$_AnswerQuestionStateCopyWith<$Res>
       String token,
       bool isLoading,
       bool hasLoadingError,
+      bool isSubmitting,
       bool showErrorMessage,
       Either<Failure, Item>? claimFailureOrSuccess,
       Either<Failure, Room>? roomCreationFailureOrSuccess});
@@ -778,6 +786,7 @@ class __$$_AnswerQuestionStateCopyWithImpl<$Res>
     Object? token = null,
     Object? isLoading = null,
     Object? hasLoadingError = null,
+    Object? isSubmitting = null,
     Object? showErrorMessage = null,
     Object? claimFailureOrSuccess = freezed,
     Object? roomCreationFailureOrSuccess = freezed,
@@ -802,6 +811,10 @@ class __$$_AnswerQuestionStateCopyWithImpl<$Res>
       hasLoadingError: null == hasLoadingError
           ? _value.hasLoadingError
           : hasLoadingError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSubmitting: null == isSubmitting
+          ? _value.isSubmitting
+          : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
       showErrorMessage: null == showErrorMessage
           ? _value.showErrorMessage
@@ -828,6 +841,7 @@ class _$_AnswerQuestionState implements _AnswerQuestionState {
       this.token = "",
       this.isLoading = true,
       this.hasLoadingError = false,
+      this.isSubmitting = false,
       this.showErrorMessage = false,
       this.claimFailureOrSuccess,
       this.roomCreationFailureOrSuccess});
@@ -849,6 +863,9 @@ class _$_AnswerQuestionState implements _AnswerQuestionState {
   final bool hasLoadingError;
   @override
   @JsonKey()
+  final bool isSubmitting;
+  @override
+  @JsonKey()
   final bool showErrorMessage;
   @override
   final Either<Failure, Item>? claimFailureOrSuccess;
@@ -857,7 +874,7 @@ class _$_AnswerQuestionState implements _AnswerQuestionState {
 
   @override
   String toString() {
-    return 'AnswerQuestionState(answer: $answer, item: $item, token: $token, isLoading: $isLoading, hasLoadingError: $hasLoadingError, showErrorMessage: $showErrorMessage, claimFailureOrSuccess: $claimFailureOrSuccess, roomCreationFailureOrSuccess: $roomCreationFailureOrSuccess)';
+    return 'AnswerQuestionState(answer: $answer, item: $item, token: $token, isLoading: $isLoading, hasLoadingError: $hasLoadingError, isSubmitting: $isSubmitting, showErrorMessage: $showErrorMessage, claimFailureOrSuccess: $claimFailureOrSuccess, roomCreationFailureOrSuccess: $roomCreationFailureOrSuccess)';
   }
 
   @override
@@ -872,6 +889,8 @@ class _$_AnswerQuestionState implements _AnswerQuestionState {
                 other.isLoading == isLoading) &&
             (identical(other.hasLoadingError, hasLoadingError) ||
                 other.hasLoadingError == hasLoadingError) &&
+            (identical(other.isSubmitting, isSubmitting) ||
+                other.isSubmitting == isSubmitting) &&
             (identical(other.showErrorMessage, showErrorMessage) ||
                 other.showErrorMessage == showErrorMessage) &&
             (identical(other.claimFailureOrSuccess, claimFailureOrSuccess) ||
@@ -890,6 +909,7 @@ class _$_AnswerQuestionState implements _AnswerQuestionState {
       token,
       isLoading,
       hasLoadingError,
+      isSubmitting,
       showErrorMessage,
       claimFailureOrSuccess,
       roomCreationFailureOrSuccess);
@@ -909,6 +929,7 @@ abstract class _AnswerQuestionState implements AnswerQuestionState {
           final String token,
           final bool isLoading,
           final bool hasLoadingError,
+          final bool isSubmitting,
           final bool showErrorMessage,
           final Either<Failure, Item>? claimFailureOrSuccess,
           final Either<Failure, Room>? roomCreationFailureOrSuccess}) =
@@ -924,6 +945,8 @@ abstract class _AnswerQuestionState implements AnswerQuestionState {
   bool get isLoading;
   @override
   bool get hasLoadingError;
+  @override
+  bool get isSubmitting;
   @override
   bool get showErrorMessage;
   @override

@@ -74,10 +74,15 @@ class AnswerClaimScreen extends StatelessWidget {
                             : ctx
                                 .read<AnswerClaimBloc>()
                                 .add(AnswerClaimEvent.claimDecisionTaken(ClaimStatus.approved, claimId)),
-                        text: Text(
-                          AppLocalizations.of(context)!.accept,
-                          style: const TextStyle(fontSize: 20),
-                        )),
+                        text: state.isSubmittingAccept
+                            ? const CustomCircularProgress(
+                                size: 25,
+                                color: Colors.white,
+                              )
+                            : Text(
+                                AppLocalizations.of(context)!.accept,
+                                style: const TextStyle(fontSize: 20),
+                              )),
                     const SizedBox(
                       height: 5,
                     ),
@@ -98,10 +103,15 @@ class AnswerClaimScreen extends StatelessWidget {
                                   shape: const StadiumBorder(),
                                   padding: const EdgeInsets.symmetric(vertical: 16),
                                 ),
-                                child: Text(
-                                  AppLocalizations.of(context)!.decline,
-                                  style: const TextStyle(fontSize: 20),
-                                )),
+                                child: state.isSubmittingReject
+                                    ? const CustomCircularProgress(
+                                        size: 25,
+                                        color: Colors.white,
+                                      )
+                                    : Text(
+                                        AppLocalizations.of(context)!.decline,
+                                        style: const TextStyle(fontSize: 20),
+                                      )),
                           ),
                         )
                       ],
@@ -161,7 +171,8 @@ class AnswerClaimScreen extends StatelessWidget {
                                       isQuestionScreen: false,
                                       hasOtherUserImage: state.item!.claims!
                                           .firstWhere((element) => element.id == claimId)
-                                          .user.hasImage,
+                                          .user
+                                          .hasImage,
                                     ),
                                   ),
                                   const SizedBox(

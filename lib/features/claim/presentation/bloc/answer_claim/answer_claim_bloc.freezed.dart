@@ -527,6 +527,8 @@ mixin _$AnswerClaimState {
   Item? get item => throw _privateConstructorUsedError; // UI params
   String get token => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isSubmittingAccept => throw _privateConstructorUsedError;
+  bool get isSubmittingReject => throw _privateConstructorUsedError;
   bool get hasLoadingError => throw _privateConstructorUsedError;
   Either<Failure, Item>? get claimFailureOrSuccess =>
       throw _privateConstructorUsedError;
@@ -548,6 +550,8 @@ abstract class $AnswerClaimStateCopyWith<$Res> {
       {Item? item,
       String token,
       bool isLoading,
+      bool isSubmittingAccept,
+      bool isSubmittingReject,
       bool hasLoadingError,
       Either<Failure, Item>? claimFailureOrSuccess,
       Either<Failure, Room>? roomCreationFailureOrSuccess});
@@ -569,6 +573,8 @@ class _$AnswerClaimStateCopyWithImpl<$Res, $Val extends AnswerClaimState>
     Object? item = freezed,
     Object? token = null,
     Object? isLoading = null,
+    Object? isSubmittingAccept = null,
+    Object? isSubmittingReject = null,
     Object? hasLoadingError = null,
     Object? claimFailureOrSuccess = freezed,
     Object? roomCreationFailureOrSuccess = freezed,
@@ -585,6 +591,14 @@ class _$AnswerClaimStateCopyWithImpl<$Res, $Val extends AnswerClaimState>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSubmittingAccept: null == isSubmittingAccept
+          ? _value.isSubmittingAccept
+          : isSubmittingAccept // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSubmittingReject: null == isSubmittingReject
+          ? _value.isSubmittingReject
+          : isSubmittingReject // ignore: cast_nullable_to_non_nullable
               as bool,
       hasLoadingError: null == hasLoadingError
           ? _value.hasLoadingError
@@ -614,6 +628,8 @@ abstract class _$$_AnswerClaimStateCopyWith<$Res>
       {Item? item,
       String token,
       bool isLoading,
+      bool isSubmittingAccept,
+      bool isSubmittingReject,
       bool hasLoadingError,
       Either<Failure, Item>? claimFailureOrSuccess,
       Either<Failure, Room>? roomCreationFailureOrSuccess});
@@ -633,6 +649,8 @@ class __$$_AnswerClaimStateCopyWithImpl<$Res>
     Object? item = freezed,
     Object? token = null,
     Object? isLoading = null,
+    Object? isSubmittingAccept = null,
+    Object? isSubmittingReject = null,
     Object? hasLoadingError = null,
     Object? claimFailureOrSuccess = freezed,
     Object? roomCreationFailureOrSuccess = freezed,
@@ -649,6 +667,14 @@ class __$$_AnswerClaimStateCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSubmittingAccept: null == isSubmittingAccept
+          ? _value.isSubmittingAccept
+          : isSubmittingAccept // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSubmittingReject: null == isSubmittingReject
+          ? _value.isSubmittingReject
+          : isSubmittingReject // ignore: cast_nullable_to_non_nullable
               as bool,
       hasLoadingError: null == hasLoadingError
           ? _value.hasLoadingError
@@ -673,6 +699,8 @@ class _$_AnswerClaimState implements _AnswerClaimState {
       {required this.item,
       this.token = "",
       this.isLoading = true,
+      this.isSubmittingAccept = false,
+      this.isSubmittingReject = false,
       this.hasLoadingError = false,
       this.claimFailureOrSuccess,
       this.roomCreationFailureOrSuccess});
@@ -688,6 +716,12 @@ class _$_AnswerClaimState implements _AnswerClaimState {
   final bool isLoading;
   @override
   @JsonKey()
+  final bool isSubmittingAccept;
+  @override
+  @JsonKey()
+  final bool isSubmittingReject;
+  @override
+  @JsonKey()
   final bool hasLoadingError;
   @override
   final Either<Failure, Item>? claimFailureOrSuccess;
@@ -696,7 +730,7 @@ class _$_AnswerClaimState implements _AnswerClaimState {
 
   @override
   String toString() {
-    return 'AnswerClaimState(item: $item, token: $token, isLoading: $isLoading, hasLoadingError: $hasLoadingError, claimFailureOrSuccess: $claimFailureOrSuccess, roomCreationFailureOrSuccess: $roomCreationFailureOrSuccess)';
+    return 'AnswerClaimState(item: $item, token: $token, isLoading: $isLoading, isSubmittingAccept: $isSubmittingAccept, isSubmittingReject: $isSubmittingReject, hasLoadingError: $hasLoadingError, claimFailureOrSuccess: $claimFailureOrSuccess, roomCreationFailureOrSuccess: $roomCreationFailureOrSuccess)';
   }
 
   @override
@@ -708,6 +742,10 @@ class _$_AnswerClaimState implements _AnswerClaimState {
             (identical(other.token, token) || other.token == token) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isSubmittingAccept, isSubmittingAccept) ||
+                other.isSubmittingAccept == isSubmittingAccept) &&
+            (identical(other.isSubmittingReject, isSubmittingReject) ||
+                other.isSubmittingReject == isSubmittingReject) &&
             (identical(other.hasLoadingError, hasLoadingError) ||
                 other.hasLoadingError == hasLoadingError) &&
             (identical(other.claimFailureOrSuccess, claimFailureOrSuccess) ||
@@ -719,8 +757,16 @@ class _$_AnswerClaimState implements _AnswerClaimState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, item, token, isLoading,
-      hasLoadingError, claimFailureOrSuccess, roomCreationFailureOrSuccess);
+  int get hashCode => Object.hash(
+      runtimeType,
+      item,
+      token,
+      isLoading,
+      isSubmittingAccept,
+      isSubmittingReject,
+      hasLoadingError,
+      claimFailureOrSuccess,
+      roomCreationFailureOrSuccess);
 
   @JsonKey(ignore: true)
   @override
@@ -734,6 +780,8 @@ abstract class _AnswerClaimState implements AnswerClaimState {
           {required final Item? item,
           final String token,
           final bool isLoading,
+          final bool isSubmittingAccept,
+          final bool isSubmittingReject,
           final bool hasLoadingError,
           final Either<Failure, Item>? claimFailureOrSuccess,
           final Either<Failure, Room>? roomCreationFailureOrSuccess}) =
@@ -745,6 +793,10 @@ abstract class _AnswerClaimState implements AnswerClaimState {
   String get token;
   @override
   bool get isLoading;
+  @override
+  bool get isSubmittingAccept;
+  @override
+  bool get isSubmittingReject;
   @override
   bool get hasLoadingError;
   @override

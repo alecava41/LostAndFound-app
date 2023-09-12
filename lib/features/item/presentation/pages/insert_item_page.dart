@@ -15,6 +15,7 @@ import '../../../../core/presentation/dialogs/camera_permission.dart';
 import '../../../../core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import '../../../../core/presentation/select_category/widgets/select_category_form.dart';
 import '../../../../core/presentation/widgets/confirm_exit_dialog.dart';
+import '../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../core/presentation/widgets/insert_string_form.dart';
 import '../../../../core/presentation/widgets/media_selection_dialog.dart';
 import '../../../../core/presentation/widgets/select_position_button.dart';
@@ -151,10 +152,15 @@ class InsertItemScreen extends StatelessWidget {
                           shape: const StadiumBorder(),
                           padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
-                        child: Text(
-                          AppLocalizations.of(context)!.create,
-                          style: const TextStyle(fontSize: 20, color: Colors.white),
-                        )),
+                        child: state.isSubmitting
+                            ? const CustomCircularProgress(
+                                size: 25,
+                                color: Colors.white,
+                              )
+                            : Text(
+                                AppLocalizations.of(context)!.create,
+                                style: const TextStyle(fontSize: 20, color: Colors.white),
+                              )),
                   ),
                 )
               ],
