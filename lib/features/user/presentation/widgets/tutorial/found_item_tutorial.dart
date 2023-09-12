@@ -20,16 +20,14 @@ class _FoundItemTutorialState extends State<FoundItemTutorial> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _carouselSlider(),
-          const SizedBox(
-            height: 25,
-          ),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _carouselSlider(),
+        const SizedBox(
+          height: 25,
+        ),
+      ],
     );
   }
 
@@ -58,11 +56,7 @@ class _FoundItemTutorialState extends State<FoundItemTutorial> {
     return Column(
       children: [
         SizedBox(
-          height: ScreenSize.isBigSmartphoneDevice(context)
-              ? 80.h
-              : ScreenSize.isMediumSmartphoneDevice(context)
-                  ? 75.h
-                  : 70.h,
+          height: !ScreenSize.isSmallSmartphoneDevice(context) ? 70.h : 65.h,
           child: PageView(
             physics: const ClampingScrollPhysics(),
             controller: _pageController,

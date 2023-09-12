@@ -9,6 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lost_and_found/config/route_generator.dart';
 import 'package:lost_and_found/core/presentation/app_global/bloc/app_global_bloc.dart';
 import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
+import 'package:lost_and_found/core/presentation/home_controller/pages/home_controller_page.dart';
+import 'package:lost_and_found/core/presentation/tutorial/pages/tutorial_page.dart';
 import 'package:lost_and_found/features/chat/presentation/pages/chat_page.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_screen.dart';
 import 'package:lost_and_found/features/claim/presentation/pages/claims_screen.dart';
@@ -37,17 +39,13 @@ class App extends StatefulWidget {
 // TODO (@alecava41) dark theme + switch
 // TODO (@alecava41) (map) fix this on iOS (https://pub.dev/packages/map_launcher#for-ios-add-url-schemes-in-infoplist-file)
 
-// TODO (@alecava41) check bug when opening app and login not automatic (there are pages behind)
-
-// TODO (@alecava41) should state somewhere the range of the search from the specified position (?)
-
-// TODO (@alecava41) modify tutorial in options to avoid "double" horizontal scroll
-
+// TODO (@alecava41) should state somewhere the range of the search from the specified position (maybe inside position screen?)
+// TODO (@alecava41) modify tutorial in options to avoid "double" horizontal scroll (I would leave it like this)
 // TODO (@alecava41) initial tutorial has different background with respect to status_bar (which color is it??)
 }
 
 class _Application extends State<App> {
-  late String initialRoute = widget.initialRoute;
+  late String initialRoute;
   RemoteMessage? remoteMessage;
 
   Future<void> setupInteractedMessage() async {
@@ -127,6 +125,7 @@ class _Application extends State<App> {
   @override
   void initState() {
     super.initState();
+    initialRoute = widget.initialRoute;
     setupInteractedMessage();
   }
 
@@ -162,6 +161,13 @@ class _Application extends State<App> {
                 primarySwatch: PersonalizedColor.primarySwatch,
               ),
               initialRoute: initialRoute,
+              onGenerateInitialRoutes: (route) {
+                if (route != '/') {
+                  return [MaterialPageRoute(builder: (_) => const InfoScreen())];
+                } else {
+                  return [MaterialPageRoute(builder: (_) => HomeControllerScreen())];
+                }
+              },
               onGenerateRoute: RouteGenerator.generateRoute,
             ),
           );

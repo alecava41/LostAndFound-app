@@ -27,12 +27,9 @@ void main() async {
   final response = await sl<LoginUseCase>()(null);
 
   if (response.isRight()) {
+    initialRoute = "/";
     await sl<LoginChatUseCase>()(NoParams());
   }
-
-  response.fold((_) => null, (success) {
-    initialRoute = "/";
-  });
 
   runApp(
     DevicePreview(
