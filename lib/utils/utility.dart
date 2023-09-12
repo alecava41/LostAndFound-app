@@ -13,18 +13,20 @@ String randomString() {
 }
 
 showBasicErrorSnackbar(BuildContext context, Failure failure) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      backgroundColor: Colors.red,
-      content: Text(
-        failure.maybeWhen<String>(
-            passwordMismatchFailure: () => AppLocalizations.of(context)!.failureInvalidCredentials,
-            genericFailure: () => AppLocalizations.of(context)!.failureGeneric,
-            networkFailure: () => AppLocalizations.of(context)!.failureNetwork,
-            orElse: () => AppLocalizations.of(context)!.failureUnknown),
-      ),
-    ),
-  );
+  failure.maybeWhen(
+      validationFailure: () => null,
+      orElse: () => ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(
+                failure.maybeWhen<String>(
+                    passwordMismatchFailure: () => AppLocalizations.of(context)!.failureInvalidCredentials,
+                    genericFailure: () => AppLocalizations.of(context)!.failureGeneric,
+                    networkFailure: () => AppLocalizations.of(context)!.failureNetwork,
+                    orElse: () => AppLocalizations.of(context)!.failureUnknown),
+              ),
+            ),
+          ));
 }
 
 showBasicSuccessSnackbar(BuildContext context, String text) {

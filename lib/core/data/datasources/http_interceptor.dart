@@ -23,6 +23,8 @@ class HttpInterceptor extends Interceptor {
     ];
 
     if (noTokenURLs.contains(options.path)) {
+      final language = await _storage.read(key: LOCALE);
+      options.headers.addAll({'Accept-Language': language ?? "en"});
       return handler.next(options);
     }
 

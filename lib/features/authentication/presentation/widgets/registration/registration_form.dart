@@ -33,7 +33,8 @@ class RegistrationForm extends StatelessWidget {
                     (_) => {
                           showBasicSuccessSnackbar(context, AppLocalizations.of(context)!.successSignUp),
                           Navigator.pushReplacementNamed(ctx, '/login')
-                        });
+                        }
+                        );
               }
             },
             child: Column(

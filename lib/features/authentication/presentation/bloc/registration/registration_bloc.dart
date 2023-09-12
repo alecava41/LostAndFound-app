@@ -115,11 +115,12 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
             orElse: () {});
 
         registrationFailureOrSuccess = Left(failure);
-      }, (success) async {
-        await _registrationChatUseCase(
-            RegistrationChatParams(email: params.email, password: params.password, username: params.username));
+      }, (success) {
         registrationFailureOrSuccess = Right(success);
       });
+
+      await _registrationChatUseCase(
+          RegistrationChatParams(email: params.email, password: params.password, username: params.username));
     }
 
     emit(

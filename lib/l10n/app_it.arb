@@ -97,7 +97,7 @@
   "failureGeneric": "Errore server. Per favore riprovare più tardi.",
   "failureNetwork": "Connessione internet non disponibile. Controlla la tua connessione e riprova.",
   "failureUnknown": "Errore sconosciuto",
-  "failureInvalidPassword": "Password non valida.",
+  "failureInvalidPassword": "Password non valida. La password deve contenere almeno 8 caratteri, con caratteri maiuscoli, minuscole e numerici.",
   "failureInvalidUser": "Username o Email non valido.",
   "failureConfirmPassword": "Il campo non ha lo stesso valore della password originale.",
   "failureEmailDuplicate": "Email già in uso.",

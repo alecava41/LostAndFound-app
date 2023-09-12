@@ -97,7 +97,7 @@
   "failureGeneric": "Server error. Please try again later.",
   "failureNetwork": "No internet connection available. Check your internet connection.",
   "failureUnknown": "Unknown error",
-  "failureInvalidPassword": "Invalid password.",
+  "failureInvalidPassword": "Invalid password. Password must contain at least 8 characters, using uppercase, lowercase and numeric characters.",
   "failureInvalidUser": "Invalid username or email.",
   "failureConfirmPassword": "Field doesn't match the original password.",
   "failureEmailDuplicate": "Email already used.",
