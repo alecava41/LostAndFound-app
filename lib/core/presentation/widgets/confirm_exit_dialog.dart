@@ -24,7 +24,7 @@ class ConfirmExitDialog extends StatelessWidget {
         PersonalizedLargeGreenButton(
           onPressed: onCancel,
           text: Text(
-            AppLocalizations.of(context)!.cancel,
+            AppLocalizations.of(context)!.stayInPage,
           ),
         ),
         PersonalizedLargeWhiteButton(

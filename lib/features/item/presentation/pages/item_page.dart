@@ -206,12 +206,10 @@ class ItemScreen extends StatelessWidget {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: Text(AppLocalizations.of(context)!.itemMenu1),
-                      content: const SingleChildScrollView(
+                      content: SingleChildScrollView(
                         child: ListBody(
                           children: <Widget>[
-                            // TODO @(backToFrancesco): add translation
-                            Text(
-                                'Are you sure you want to mark this report as solved? \n\nIf you mark it as solved, the report will no longer be visible.'),
+                            Text(AppLocalizations.of(context)!.markAsSolvedDialogDescription),
                           ],
                         ),
                       ),
@@ -220,7 +218,7 @@ class ItemScreen extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            text: const Text("Cancel")),
+                            text: Text(AppLocalizations.of(context)!.notMarkAsSolved)),
                         PersonalizedLargeWhiteButton(
                             onPressed: () {
                               ctx
@@ -240,12 +238,13 @@ class ItemScreen extends StatelessWidget {
                     return AlertDialog(
                       title: Text(
                 AppLocalizations.of(context)!.itemMenu3,
+                style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
               ),
-                      content: const SingleChildScrollView(
+                      content: SingleChildScrollView(
                         child: ListBody(
                           children: <Widget>[
                             Text(
-                                'Are you sure you want to delete this report? \n\nIf you delete it, the report will no longer be visible.'),
+                                AppLocalizations.of(context)!.deleteReportDialogDescription),
                           ],
                         ),
                       ),
@@ -254,7 +253,7 @@ class ItemScreen extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            text: const Text("Cancel")),
+                            text: Text(AppLocalizations.of(context)!.noDeleteReport)),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [

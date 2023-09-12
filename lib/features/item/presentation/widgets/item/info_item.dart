@@ -61,12 +61,12 @@ class InfoItem extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: const Text('See in Maps'),
-                      content: const SingleChildScrollView(
+                      title: Text(AppLocalizations.of(context)!.goToMapTitle),
+                      content: SingleChildScrollView(
                         child: ListBody(
                           children: <Widget>[
                             Text(
-                                'You are about to be redirected to your maps app to view this location.\n\nAre you sure you want to exit the app?'),
+                                AppLocalizations.of(context)!.goToMapsDialogDescription),
                           ],
                         ),
                       ),
@@ -75,7 +75,7 @@ class InfoItem extends StatelessWidget {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          text: Text('Cancel'),
+                          text: Text(AppLocalizations.of(context)!.noStayInApp),
                         ),
                         PersonalizedLargeWhiteButton(
                             onPressed: () async {
@@ -83,9 +83,10 @@ class InfoItem extends StatelessWidget {
                                 coords: Coords(coordinates.X, coordinates.Y),
                                 title: title,
                               );
+                              Navigator.of(context).pop();
                             },
                             text: Text(
-                              'Confirm',
+                              AppLocalizations.of(context)!.yesSeeMaps,
                               style:
                                   TextStyle(color: PersonalizedColor.mainColor),
                             ))
