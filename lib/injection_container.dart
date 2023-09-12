@@ -46,6 +46,7 @@ import 'package:lost_and_found/features/chat/domain/usecases/logout_chat_usecase
 import 'package:lost_and_found/features/chat/domain/usecases/read_chat_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/registration_chat_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/send_message_usecase.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/update_item_title_room_usecase.dart';
 import 'package:lost_and_found/features/chat/presentation/bloc/chat/chat_bloc.dart';
 import 'package:lost_and_found/features/chat/presentation/bloc/inbox/inbox_bloc.dart';
 import 'package:lost_and_found/features/claim/data/datasources/claim_client.dart';
@@ -130,7 +131,8 @@ Future<void> init() async {
         solveItemUseCase: sl(),
         deleteItemUseCase: sl(),
         insertReadClaimUseCase: sl(),
-        createRoomUseCase: sl(), deleteRoomsUseCase: sl(),
+        createRoomUseCase: sl(),
+        deleteRoomsUseCase: sl(),
       ));
   sl.registerFactory(
       () => InsertItemBloc(createItemUseCase: sl(), getAddressFromPositionUseCase: sl(), uploadItemImageUseCase: sl()));
@@ -140,7 +142,8 @@ Future<void> init() async {
       deleteItemImageUseCase: sl(),
       updateItemUseCase: sl(),
       getAddressFromPositionUseCase: sl(),
-      secureStorage: sl()));
+      secureStorage: sl(),
+      updateItemTitleRoomUseCase: sl()));
 
   // Use Cases
   sl.registerLazySingleton(() => GetUserItemsUseCase(sl()));
@@ -251,6 +254,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SendMessageUseCase(sl()));
   sl.registerLazySingleton(() => ReadChatUseCase(sl()));
   sl.registerLazySingleton(() => DeleteRoomsUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateItemTitleRoomUseCase(sl()));
 
   // Repositories
   sl.registerLazySingleton<ChatRepository>(() => ChatRepositoryImpl(sl(), sl(), sl()));
@@ -269,7 +273,8 @@ Future<void> init() async {
   sl.registerLazySingleton<CategoryRepository>(() => CategoryRepositoryImpl(dataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<AuthenticationRepository>(
       () => AuthenticationRepositoryImpl(networkInfo: sl(), dataSource: sl(), storage: sl()));
-  sl.registerLazySingleton<AppGlobalRepository>(() => AppGlobalRepositoryImpl(networkInfo: sl(), appGlobalDataSource: sl()));
+  sl.registerLazySingleton<AppGlobalRepository>(
+      () => AppGlobalRepositoryImpl(networkInfo: sl(), appGlobalDataSource: sl()));
 
   // Data sources
   sl.registerLazySingleton<PositionDataSource>(() => PositionDataSourceImpl(sl()));

@@ -11,6 +11,7 @@ import 'package:lost_and_found/features/chat/domain/usecases/read_chat_usecase.d
 import 'package:lost_and_found/features/chat/domain/usecases/registration_chat_usecase.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:lost_and_found/features/chat/domain/usecases/send_message_usecase.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/update_item_title_room_usecase.dart';
 
 import 'chat_client.dart';
 
@@ -30,6 +31,8 @@ abstract class ChatDataSource {
   Future<void> readChat(ReadChatParams params);
 
   Future<void> deleteRooms(DeleteRoomsParams params);
+
+  Future<void> updateItemTitleRoom(UpdateItemTitleRoomParams params);
 
   Future<void> logout(NoParams params);
 }
@@ -189,6 +192,20 @@ class ChatDataSourceImpl implements ChatDataSource {
 
     for (var element in roomsToDelete) {
       await element.reference.delete();
+    }
+  }
+
+  @override
+  Future<void> updateItemTitleRoom(UpdateItemTitleRoomParams params) async {
+    final roomsToUpdate = (await FirebaseChatCore.instance
+            .getFirebaseFirestore()
+            .collection("rooms")
+            .where("metadata.item", isEqualTo: params.itemId)
+            .get())
+        .docs;
+
+    for (var element in roomsToUpdate) {
+      await element.reference.update({"metadata.title": params.newItemName});
     }
   }
 }

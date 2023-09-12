@@ -14,6 +14,7 @@ import 'package:lost_and_found/features/chat/domain/usecases/read_chat_usecase.d
 
 import 'package:lost_and_found/features/chat/domain/usecases/registration_chat_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/send_message_usecase.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/update_item_title_room_usecase.dart';
 
 import '../../../../core/data/repositories/utils.dart';
 import '../../../../core/data/secure_storage/secure_storage.dart';
@@ -146,6 +147,20 @@ class ChatRepositoryImpl implements ChatRepository {
     try {
       if (await _networkInfo.isConnected) {
         await _dataSource.deleteRooms(params);
+        return const Right(Success.genericSuccess());
+      } else {
+        return const Left(Failure.networkFailure());
+      }
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> updateItemTitleRoom(UpdateItemTitleRoomParams params) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        await _dataSource.updateItemTitleRoom(params);
         return const Right(Success.genericSuccess());
       } else {
         return const Left(Failure.networkFailure());

@@ -6,6 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/domain/usecases/get_address_from_position_usecase.dart';
+import 'package:lost_and_found/features/chat/domain/usecases/update_item_title_room_usecase.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/domain/fields/update_item/category.dart';
 import 'package:lost_and_found/features/item/domain/fields/update_item/position.dart';
@@ -30,6 +31,7 @@ part 'update_item_state.dart';
 class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
   final GetItemUseCase _getItemUseCase;
   final UpdateItemUseCase _updateItemUseCase;
+  final UpdateItemTitleRoomUseCase _updateItemTitleRoomUseCase;
   final UploadItemImageUseCase _uploadItemImageUseCase;
   final DeleteItemImageUseCase _deleteItemImageUseCase;
   final GetAddressFromPositionUseCase _getAddressFromPositionUseCase;
@@ -41,6 +43,7 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
       required UploadItemImageUseCase uploadItemImageUseCase,
       required UpdateItemUseCase updateItemUseCase,
       required GetAddressFromPositionUseCase getAddressFromPositionUseCase,
+      required UpdateItemTitleRoomUseCase updateItemTitleRoomUseCase,
       required DeleteItemImageUseCase deleteItemImageUseCase,
       required SecureStorage secureStorage})
       : _getItemUseCase = getItemUseCase,
@@ -48,6 +51,7 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
         _getAddressFromPositionUseCase = getAddressFromPositionUseCase,
         _updateItemUseCase = updateItemUseCase,
         _deleteItemImageUseCase = deleteItemImageUseCase,
+        _updateItemTitleRoomUseCase = updateItemTitleRoomUseCase,
         _secureStorage = secureStorage,
         super(UpdateItemState.initial()) {
     on<UpdateItemEvent>(
@@ -139,6 +143,9 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
       final updateResponse = await _updateItemUseCase(params);
       updateResponse.fold(
           (failure) => updateFailureOrSuccess = Left(failure), (success) => updateFailureOrSuccess = Right(success));
+
+      await _updateItemTitleRoomUseCase(
+          UpdateItemTitleRoomParams(itemId: state.item!.id, newItemName: state.title.value.getOrElse(() => "")));
 
       if (state.imagePath != null) {
         final params = UploadItemImageParams(itemId: state.item!.id, image: File(state.imagePath!));

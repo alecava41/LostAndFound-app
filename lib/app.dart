@@ -38,8 +38,6 @@ class App extends StatefulWidget {
 // TODO (@alecava41) dark theme + switch (need to provide the option to let user pick system theme)
 // TODO (@alecava41) add supported languages in iOS (https://docs.flutter.dev/ui/accessibility-and-localization/internationalization#localizing-for-ios-updating-the-ios-app-bundle)
 // TODO (@alecava41) add iOS permission
-
-// TODO update room's item title when updating an item
 }
 
 class _Application extends State<App> {
