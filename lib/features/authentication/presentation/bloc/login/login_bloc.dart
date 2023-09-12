@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lost_and_found/core/domain/usecases/usecase.dart';
 import 'package:lost_and_found/core/status/success.dart';
@@ -63,8 +64,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         ),
       );
 
-      final params =
-          LoginParams(password: state.password.value.getOrElse(() => ""), user: state.user.value.getOrElse(() => ""));
+      final params = LoginParams(
+          password: state.password.value.getOrElse(() => ""), user: state.user.value.getOrElse(() => ""),
+          token: await FirebaseMessaging.instance.getToken());
 
       final loginResponse = await _loginUseCase(params);
       loginResponse.fold(

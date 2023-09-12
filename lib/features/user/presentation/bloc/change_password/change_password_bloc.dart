@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:bloc/bloc.dart';
 import 'package:lost_and_found/features/user/domain/usecases/update_password_usecase.dart';
@@ -102,21 +103,22 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
 
       final changePasswordResponse = await _updatePasswordUseCase(params);
 
-      await changePasswordResponse.fold((failure) {
+      changePasswordResponse.fold((failure) {
         failure.maybeWhen(
             passwordMismatchFailure: () => emit(state.copyWith(
                 oldPassword: ChangePswOldPasswordField(state.oldPassword.value.getOrElse(() => ""), true))),
             orElse: () {});
 
         pswChangeFailureOrSuccess = Left(failure);
-      }, (success) async {
-        final credentials = await _storage.getCredentials();
-        await _storage.removeCredentials();
-        await _storage.destroySession();
-
-        await _loginUseCase(LoginParams(user: credentials.user, password: params.newPassword));
+      }, (success) {
         pswChangeFailureOrSuccess = Right(success);
       });
+
+      final credentials = await _storage.getCredentials();
+      await _storage.removeCredentials();
+      await _storage.destroySession();
+
+      await _loginUseCase(LoginParams(user: credentials.user, password: params.newPassword, token: await FirebaseMessaging.instance.getToken()));
     }
 
     emit(state.copyWith(

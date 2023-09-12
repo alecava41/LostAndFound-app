@@ -46,8 +46,6 @@ class App extends StatefulWidget {
 
 // TODO if an item is resolve, chat will still be there. Therefore item details can still be accessed from there...
 
-// TODO refresh device token everytime a new login is performed
-
 // TODO (@alecava41) modify tutorial in options to avoid "double" horizontal scroll (pointers on the left side + button to go next)
 }
 

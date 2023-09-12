@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:dartx/dartx.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:lost_and_found/features/authentication/data/models/session_model.dart';
 
@@ -89,7 +90,7 @@ class SecureStorageImpl extends SecureStorage {
     final user = await _storage.read(key: USER);
     final password = await _storage.read(key: PASSWORD);
 
-    return LoginParams(password: password!, user: user!);
+    return LoginParams(password: password!, user: user!, token: await FirebaseMessaging.instance.getToken());
   }
 
   @override

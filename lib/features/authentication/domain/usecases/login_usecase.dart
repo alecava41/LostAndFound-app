@@ -23,11 +23,13 @@ class LoginUseCase implements UseCase<Success, LoginParams> {
 class LoginParams {
   final String user;
   final String password;
+  final String? token;
 
   LoginParams({
     required this.user,
-    required this.password
+    required this.password,
+    required this.token,
   });
 
-  Map<String,dynamic> toJson() => _$LoginParamsToJson(this);
+  Map<String, dynamic> toJson() => _$LoginParamsToJson(this);
 }
