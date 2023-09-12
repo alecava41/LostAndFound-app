@@ -56,10 +56,10 @@ class InfoItem extends StatelessWidget {
               final availableMaps = await MapLauncher.installedMaps;
 
               if (availableMaps.isNotEmpty) {
-                // TODO (@backToFrancesco): add traslation
+                // TODO (@alecava): do you know what the hint means?
                 showDialog(
                   context: context,
-                  builder: (BuildContext context) {
+                  builder: (context) {
                     return AlertDialog(
                       title: Text(AppLocalizations.of(context)!.goToMapTitle),
                       content: SingleChildScrollView(
