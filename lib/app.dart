@@ -42,7 +42,6 @@ class App extends StatefulWidget {
 // TODO (@alecava41) should state somewhere the range of the search from the specified position (?)
 
 // TODO (@alecava41) modify tutorial in options to avoid "double" horizontal scroll
-// TODO (@alecava41) remove third minion from home_tutorial image
 // TODO (@alecava41) initial tutorial has different background with respect to status_bar
 
 // TODO (@alecava41) find country for starting position on map
