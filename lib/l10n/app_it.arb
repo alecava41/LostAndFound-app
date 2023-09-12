@@ -306,9 +306,9 @@
   "logoutDialogNo": "No, rimani collecato",
   "logoutDialogYes": "Si, esci",
   "tutorialFoundItemTitle1": "Inserisci un Oggetto Trovato",
-  "tutorialFoundItemContent1": "Inserisci i dettagli dell'oggetto trovato come titolo, posizione, categoria, domanda di sicurezza e inserisci l'oggetto.\nQuesto notificherà tutti gli utenti che hanno inserito un oggetto perso che potrebbe corrispondere a quello che hai appena inserito.",
+  "tutorialFoundItemContent1": "Inserisci i dettagli dell'oggetto trovato come titolo, posizione, categoria, domanda di verifica e crea il report. Questo avviserà tutti gli utenti che hanno inserito un oggetto perso simile a quello che hai appena inserito.",
   "tutorialFoundItemTitle2": "Gestisci le Richieste ricevute",
-  "tutorialFoundItemContent2": "Attendi che gli utenti aprano una richiesta per avere il tuo oggetto trovato.\nValidale tutte, cercando di accettare quella che sembra più attendibile.\nQuando ne approverai una, nessuno potrà più vedere l'oggetto tramite l'app e tutte le altre richieste per quell'oggetto saranno automaticamente rifiutate.",
+  "tutorialFoundItemContent2": "Attendi che gli utenti aprano una richiesta per avere il tuo oggetto trovato. Approva quella che sembra più attendibile. Quando ne approverai una, l'oggetto non sarà più visibile e tutte le altre richieste per saranno automaticamente rifiutate.",
   "tutorialFoundItemTitle3": "Chatta per Organizzare la Restituzione dell'Oggetto",
   "tutorialFoundItemContent3": "Contatta, attraverso la chat, l'utente che ha mandato la richiesta da te approvata, in modo da poter organizzare un incontro per la restituzione dell'item.",
   "tutorialFoundItemTitle4": "Marca il tuo Oggetto Trovato come Risolto",
@@ -316,7 +316,7 @@
   "tutorialLostItemTitle1": "Inserisci un Oggetto Perso",
   "tutorialLostItemContent1": "Inserisci i dettagli dell'oggetto perso come titolo, posizione, categoria e inseriscilo.\nQuesto notificherà tutti gli utenti che hanno inserito un oggetto trovato che potrebbe corrispondere a quello che hai appena inserito.",
   "tutorialLostItemTitle2": "Crea una Richiesta",
-  "tutorialLostItemContent2": "Cerca oggetti trovati di altri utenti o controlla le news per il tuo oggetto trovato.\nQuando trovi un ogggetto che potrebbe corrispondere a quello che hai perso, crea una richiesta rispondendo alla domanda di sicurezza.\nAttenti la validazione della richiesta da parte dell'altro utente.",
+  "tutorialLostItemContent2": "Cerca oggetti trovati di altri utenti e controlla le news. Quando troverai un oggetto che potrebbe corrispondere a quello che hai perso, crea una richiesta.\nAttendi la validazione della richiesta da parte dell'altro utente.",
   "tutorialLostItemTitle3": "Chatta per Organizzare la Restituzione dell'Oggetto",
   "tutorialLostItemContent3": "Se la tua richiesta è stata approvata, contatta, attraverso la chat, l'utente che l'ha accetta, in modo da organizzare un incontro per la restituzione del tuo oggetto.",
   "tutorialLostItemTitle4": "Marca il tuo Oggetto Perso come Risolto",
@@ -344,5 +344,6 @@
   "goToMapsDialogDescription":"Stai per essere reindirizzato alla tua app delle mappe per visualizzare questa posizione.\n\nSei sicuro di voler uscire dall'app?",
   "goToMapTitle":"Visualizza in Mappe",
   "noStayInApp": "No, rimani nell’app",
-  "yesSeeMaps":"Sì, visualizza in mappe"
+  "yesSeeMaps":"Sì, visualizza in mappe",
+  "next": "Avanti"
 }

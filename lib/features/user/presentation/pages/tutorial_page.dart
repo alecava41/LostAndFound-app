@@ -49,7 +49,7 @@ class TutorialScreen extends StatelessWidget {
                 ],
               ),
             ),
-            body: const TabBarView(
+            body: TabBarView(
               children: [LostItemTutorial(), FoundItemTutorial()],
             ),
           ),

@@ -44,9 +44,7 @@ class App extends StatefulWidget {
 
 // TODO need to delete rooms when deleting an item
 
-// TODO if an item is resolve, chat will still be there. Therefore item details can still be accessed from there...
-
-// TODO (@alecava41) modify tutorial in options to avoid "double" horizontal scroll (pointers on the left side + button to go next)
+// TODO if an item is resolved, chat will still be there. Therefore item details can still be accessed from there...
 }
 
 class _Application extends State<App> {

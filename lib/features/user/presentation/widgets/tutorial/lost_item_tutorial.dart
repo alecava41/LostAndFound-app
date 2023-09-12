@@ -24,9 +24,6 @@ class _LostItemTutorialState extends State<LostItemTutorial> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _carouselSlider(),
-        const SizedBox(
-          height: 25,
-        ),
       ],
     );
   }
@@ -34,9 +31,9 @@ class _LostItemTutorialState extends State<LostItemTutorial> {
   Widget _indicator(bool isActive) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 150),
-      margin: const EdgeInsets.symmetric(horizontal: 8.0),
-      height: 8.0,
-      width: isActive ? 24.0 : 16.0,
+      margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+      height: isActive ? 48 : 32,
+      width: isActive ? 12 : 8.0,
       decoration: BoxDecoration(
         color: isActive ? PersonalizedColor.mainColor : Colors.black,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -55,40 +52,75 @@ class _LostItemTutorialState extends State<LostItemTutorial> {
   _carouselSlider() {
     return Column(
       children: [
-        SizedBox(
-          height: !ScreenSize.isSmallSmartphoneDevice(context) ? 70.h : 65.h,
-          child: PageView(
-            physics: const ClampingScrollPhysics(),
-            controller: _pageController,
-            onPageChanged: (int page) {
-              setState(() {
-                _currentPage = page;
-              });
-            },
-            children: <Widget>[
-              carouselDetailedTutorialItem(
-                  'assets/images/create-report.png',
-                  AppLocalizations.of(context)!.tutorialLostItemTitle1,
-                  AppLocalizations.of(context)!.tutorialLostItemContent1),
-              carouselDetailedTutorialItem(
-                  'assets/images/create-claim.png',
-                  AppLocalizations.of(context)!.tutorialLostItemTitle2,
-                  AppLocalizations.of(context)!.tutorialLostItemContent2),
-              carouselDetailedTutorialItem('assets/images/chat.png', AppLocalizations.of(context)!.tutorialLostItemTitle3,
-                  AppLocalizations.of(context)!.tutorialLostItemContent3),
-              carouselDetailedTutorialItem(
-                  'assets/images/solved.png',
-                  AppLocalizations.of(context)!.tutorialLostItemTitle4,
-                  AppLocalizations.of(context)!.tutorialLostItemContent4),
-            ],
-          ),
+        Row(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: _buildPageIndicator(),
+            ),
+            SizedBox(
+              height: !ScreenSize.isSmallSmartphoneDevice(context) ? 70.h : 65.h,
+              width: 90.w,
+              child: PageView(
+                scrollDirection: Axis.vertical,
+                physics: const ClampingScrollPhysics(),
+                controller: _pageController,
+                onPageChanged: (int page) {
+                  setState(() {
+                    _currentPage = page;
+                  });
+                },
+                children: <Widget>[
+                  carouselDetailedTutorialItem(
+                      'assets/images/create-report.png',
+                      AppLocalizations.of(context)!.tutorialLostItemTitle1,
+                      AppLocalizations.of(context)!.tutorialLostItemContent1),
+                  carouselDetailedTutorialItem(
+                      'assets/images/create-claim.png',
+                      AppLocalizations.of(context)!.tutorialLostItemTitle2,
+                      AppLocalizations.of(context)!.tutorialLostItemContent2),
+                  carouselDetailedTutorialItem(
+                      'assets/images/chat.png',
+                      AppLocalizations.of(context)!.tutorialLostItemTitle3,
+                      AppLocalizations.of(context)!.tutorialLostItemContent3),
+                  carouselDetailedTutorialItem(
+                      'assets/images/solved.png',
+                      AppLocalizations.of(context)!.tutorialLostItemTitle4,
+                      AppLocalizations.of(context)!.tutorialLostItemContent4),
+                ],
+              ),
+            ),
+          ],
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: _buildPageIndicator(),
-        ),
-        const SizedBox(
-          height: 20,
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      if (_currentPage == _numPages - 1) {
+                        _currentPage = 0;
+                      } else {
+                        _currentPage++;
+                      }
+                    });
+
+                    _pageController.jumpToPage(_currentPage);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: const StadiumBorder(),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  child: Text(
+                    AppLocalizations.of(context)!.next,
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                ),
+              ),
+            ),
+          ],
         )
       ],
     );

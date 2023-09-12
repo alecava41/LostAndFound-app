@@ -309,7 +309,7 @@
   "tutorialFoundItemTitle1": "Report a Found Item",
   "tutorialFoundItemContent1": "Input the item details such as title, position, category, safe question and create a new report.\nThis would notify all the users that have reported a lost item that could match the features of the one you have inserted.",
   "tutorialFoundItemTitle2": "Manage received Claims",
-  "tutorialFoundItemContent2": "Wait for users to open claims for your found item.\nManage all of them, by taking care about approving the most correct one.\nOnce you approve a claim for your found item, nobody will be able to see that item again and all the other claims will be automatically rejected.",
+  "tutorialFoundItemContent2": "Wait for users to open claims for your found item. Manage all of them, approve the most correct one. If you approve a claim for your found item, nobody will be able to see that item again and all the other claims will be automatically rejected.",
   "tutorialFoundItemTitle3": "Chat to Arrange Item Return",
   "tutorialFoundItemContent3": "Get in touch, through the chat, with the user who filled the claim you have approved, to arrange the item's return.",
   "tutorialFoundItemTitle4": "Mark Found Item as Solved",
@@ -346,5 +346,6 @@
   "goToMapTitle":"See in Maps",
   "goToMapsDialogDescription":"You are about to be redirected to your maps app to view this location.\n\nAre you sure you want to exit the app?",
   "noStayInApp": "No, stay in the app",
-  "yesSeeMaps":"Yes, see in Maps"
+  "yesSeeMaps":"Yes, see in Maps",
+  "next": "Next"
 }
