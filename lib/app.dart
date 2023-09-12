@@ -35,9 +35,10 @@ class App extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _Application();
 
-// TODO (@alecava41) translation (do stuff for iOS, see flutter internationalization)
 // TODO (@alecava41) dark theme + switch
-// TODO (@alecava41) (map) fix this on iOS (https://pub.dev/packages/map_launcher#for-ios-add-url-schemes-in-infoplist-file)
+
+// TODO (@alecava41) add supported languages in iOS
+// TODO (@alecava41) add iOS permission
 
 // TODO (@alecava41) should state somewhere the range of the search from the specified position (maybe inside position screen?)
 // TODO (@alecava41) modify tutorial in options to avoid "double" horizontal scroll (I would leave it like this)
