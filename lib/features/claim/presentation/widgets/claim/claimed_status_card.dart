@@ -66,10 +66,10 @@ class ClaimedStatusCard extends StatelessWidget {
                             },
                             progressIndicatorBuilder: (context, url, downloadProgress) =>
                                 const CustomCircularProgress(size: 35),
-                            errorWidget: (context, url, error) => noItemImage,
+                            errorWidget: (context, url, error) => Image.asset(noItemImagePath, fit: BoxFit.cover,),
                             imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                           )
-                        : noItemImage,
+                        : Image.asset(noItemImagePath, fit: BoxFit.cover,),
                   ),
                 ),
                 Expanded(

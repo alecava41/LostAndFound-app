@@ -23,7 +23,7 @@ class ImageItem extends StatelessWidget {
         key: Key(randomString()),
         imageUrl: imageUrl,
         token: token,
-        errorImage: noItemImage,
+        errorImage: Image.asset(noItemImagePath, fit: BoxFit.cover,),
         child: Container(
           color: Colors.white,
           width: MediaQuery.of(context).size.width,
@@ -35,7 +35,7 @@ class ImageItem extends StatelessWidget {
               "Authorization": "Bearer $token",
             },
             progressIndicatorBuilder: (context, url, downloadProgress) => const CustomCircularProgress(size: 150),
-            errorWidget: (context, url, error) => noItemImage,
+            errorWidget: (context, url, error) => Image.asset(noItemImagePath, fit: BoxFit.cover,),
             imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
           ),
         ),
@@ -44,7 +44,7 @@ class ImageItem extends StatelessWidget {
       return SizedBox(
         width: MediaQuery.of(context).size.width,
         height: 300,
-        child: noItemImage,
+        child: Image.asset(noItemImagePath, fit: BoxFit.cover,),
       );
     }
   }

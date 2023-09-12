@@ -55,7 +55,7 @@ class InboxItem extends StatelessWidget {
                               imageUrl: "$baseUrl/api/users/$otherUserId/image",
                               hasImage: true,
                               radius: 25,
-                              errorImage: noUserImage,
+                              errorImage: Image.asset(noUserImagePath, fit: BoxFit.cover,),
                             ),
                             Expanded(
                               child: Padding(
@@ -105,7 +105,7 @@ class InboxItem extends StatelessWidget {
                               },
                               progressIndicatorBuilder: (context, url, downloadProgress) =>
                                   const CustomCircularProgress(size: 25),
-                              errorWidget: (context, url, error) => noItemImage,
+                              errorWidget: (context, url, error) => Image.asset(noItemImagePath, fit: BoxFit.cover,),
                               imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                             ),
                           ),

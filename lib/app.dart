@@ -37,16 +37,15 @@ class App extends StatefulWidget {
 // TODO (@alecava41) dark theme + switch
 // TODO (@alecava41) (map) fix this on iOS (https://pub.dev/packages/map_launcher#for-ios-add-url-schemes-in-infoplist-file)
 
-// TODO (@alecava41) check bug when opening app and login not automatic
+// TODO (@alecava41) check bug when opening app and login not automatic (there are pages behind)
 
-// TODO (@alecava41) should state somewhere the range of the search from the specified position?
+// TODO (@alecava41) should state somewhere the range of the search from the specified position (?)
 
 // TODO (@alecava41) modify tutorial in options to avoid "double" horizontal scroll
 // TODO (@alecava41) remove third minion from home_tutorial image
 // TODO (@alecava41) initial tutorial has different background with respect to status_bar
 
 // TODO (@alecava41) find country for starting position on map
-// TODO (@alecava41) replace costang image widget with string
 }
 
 class _Application extends State<App> {

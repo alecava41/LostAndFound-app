@@ -51,7 +51,7 @@ class ClaimedItemInfo extends StatelessWidget {
                   ? ImageDialogWidget(
                       imageUrl: itemUrl,
                       token: token,
-                      errorImage: noItemImage,
+                      errorImage: Image.asset(noItemImagePath, fit: BoxFit.cover,),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: CachedNetworkImage(
@@ -61,14 +61,14 @@ class ClaimedItemInfo extends StatelessWidget {
                             "Authorization": "Bearer $token",
                           },
                           placeholder: (context, _) => const CustomCircularProgress(size: 75),
-                          errorWidget: (context, url, error) => noItemImage,
+                          errorWidget: (context, url, error) => Image.asset(noItemImagePath, fit: BoxFit.cover,),
                           imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
                         ),
                       ),
                     )
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: noItemImage,
+                      child: Image.asset(noItemImagePath, fit: BoxFit.cover,),
                     ),
             ),
             Expanded(

@@ -16,5 +16,5 @@ enum NotificationType {
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: "Main Navigator");
 
 // Images
-final noUserImage = Image.asset("assets/images/no-user.jpg", fit: BoxFit.cover,);
-final noItemImage = Image.asset("assets/images/no-item.png", fit: BoxFit.cover,);
+const noUserImagePath = "assets/images/no-user.jpg";
+const noItemImagePath = "assets/images/no-item.png";

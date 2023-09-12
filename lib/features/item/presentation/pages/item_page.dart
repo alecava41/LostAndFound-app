@@ -355,7 +355,7 @@ class ItemScreen extends StatelessWidget {
                                     ? ImageDialogWidget(
                                         token: token,
                                         imageUrl: userUrl,
-                                        errorImage: noUserImage,
+                                        errorImage: Image.asset(noUserImagePath, fit: BoxFit.cover,),
                                         child: CircularImage(
                                           hasImage: owner.hasImage,
                                           imageUrl: userUrl,

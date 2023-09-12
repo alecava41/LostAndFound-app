@@ -34,7 +34,7 @@ class CircularImage extends StatelessWidget {
         errorWidget: (context, url, error) {
           return CircleAvatar(
             radius: radius,
-            backgroundImage: noUserImage.image,
+            backgroundImage: Image.asset(noUserImagePath, fit: BoxFit.cover,).image,
           );
         },
         imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
@@ -46,7 +46,7 @@ class CircularImage extends StatelessWidget {
     } else {
       return CircleAvatar(
         radius: radius,
-        backgroundImage: noUserImage.image,
+        backgroundImage: Image.asset(noUserImagePath, fit: BoxFit.cover,).image,
       );
     }
   }
