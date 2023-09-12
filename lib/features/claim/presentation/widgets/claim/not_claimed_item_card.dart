@@ -54,17 +54,23 @@ class NotClaimedItemCard extends StatelessWidget {
                   height: 70,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: CachedNetworkImage(
-                      imageUrl: "$baseUrl/api/items/$itemId/image",
-                      fit: BoxFit.cover,
-                      httpHeaders: {
-                        "Authorization": "Bearer $token",
-                      },
-                      progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    child: () {
+                      try {
+                        return CachedNetworkImage(
+                          imageUrl: "$baseUrl/api/items/$itemId/image",
+                          fit: BoxFit.cover,
+                          httpHeaders: {
+                            "Authorization": "Bearer $token",
+                          },
+                          progressIndicatorBuilder: (context, url, downloadProgress) =>
                           const CustomCircularProgress(size: 35),
-                      errorWidget: (context, url, error) => Image.asset(noItemImagePath, fit: BoxFit.cover,),
-                      imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-                    ),
+                          errorWidget: (context, url, error) => Image.asset(noItemImagePath, fit: BoxFit.cover,),
+                          imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+                        );
+                      } catch (_) {
+                        return Image.asset(noItemImagePath, fit: BoxFit.cover,);
+                      }
+                    }(),
                   ),
                 ),
                 Expanded(

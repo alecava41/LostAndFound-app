@@ -21,25 +21,32 @@ class CircularImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (hasImage) {
-      return CachedNetworkImage(
-        imageUrl: imageUrl,
-        httpHeaders: {
-          "Authorization": "Bearer $token",
-        },
-        progressIndicatorBuilder: (context, url, downloadProgress) =>
-            SizedBox(height: radius * 2, width: radius * 2, child: CustomCircularProgress(size: radius)),
-        errorWidget: (context, url, error) => CircleAvatar(
+    try {
+      if (hasImage) {
+        return CachedNetworkImage(
+          imageUrl: imageUrl,
+          httpHeaders: {
+            "Authorization": "Bearer $token",
+          },
+          progressIndicatorBuilder: (context, url, downloadProgress) =>
+              SizedBox(height: radius * 2, width: radius * 2, child: CustomCircularProgress(size: radius)),
+          errorWidget: (context, url, error) => CircleAvatar(
+            radius: radius,
+            backgroundImage: errorImage.image,
+          ),
+          imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+          imageBuilder: (ctx, imageProvider) => CircleAvatar(
+            radius: radius,
+            backgroundImage: imageProvider,
+          ),
+        );
+      } else {
+        return CircleAvatar(
           radius: radius,
           backgroundImage: errorImage.image,
-        ),
-        imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-        imageBuilder: (ctx, imageProvider) => CircleAvatar(
-          radius: radius,
-          backgroundImage: imageProvider,
-        ),
-      );
-    } else {
+        );
+      }
+    } on Exception catch (_) {
       return CircleAvatar(
         radius: radius,
         backgroundImage: errorImage.image,
