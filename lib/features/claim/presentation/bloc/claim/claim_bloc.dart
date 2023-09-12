@@ -86,22 +86,20 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
     if (newItem != null) {
       final newClaims = newItem.claims!;
 
-      for (var claim in newClaims) {
-        final claimIdx = state.claimsReceived.indexWhere((element) => element.id == claim.id);
-        claim.opened = state.claimsReceived[claimIdx].opened;
-      }
+      final updateClaims = state.claimsReceived.map((claim) {
+        final claimIdx = newClaims.indexWhere((element) => element.id == claim.id);
+
+        if (claimIdx >= 0) {
+          return ClaimReceived(id: claim.id, item: claim.item, user: claim.user, opened: claim.opened, status: newClaims[claimIdx].status);
+        } else {
+          return claim;
+        }
+      }).toList();
 
       emit(
         state.copyWith(
           isLoadingReceived: false,
-          claimsReceived: newClaims
-              .map((e) => ClaimReceived(
-                  id: e.id,
-                  item: ReceivedItem(id: newItem.id, title: newItem.title),
-                  user: ReceivedUser(id: e.user.id, username: e.user.username, hasImage: e.user.hasImage),
-                  opened: e.opened,
-                  status: e.status))
-              .toList(),
+          claimsReceived: updateClaims,
         ),
       );
     } else {
