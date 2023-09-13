@@ -126,7 +126,6 @@ class ItemScreen extends StatelessWidget {
                                   ImageItem(
                                     token: state.token,
                                     itemId: state.item!.id,
-                                    hasImage: state.item!.hasImage,
                                   ),
                                   const Divider(
                                     height: 0,
@@ -352,23 +351,15 @@ class ItemScreen extends StatelessWidget {
                           Flexible(
                             child: Row(
                               children: [
-                                owner.hasImage
-                                    ? ImageDialogWidget(
+                                ImageDialogWidget(
                                         token: token,
                                         imageUrl: userUrl,
                                         errorImage: Image.asset(noUserImagePath, fit: BoxFit.cover,),
                                         child: CircularImage(
-                                          hasImage: owner.hasImage,
                                           imageUrl: userUrl,
                                           radius: 25,
                                           token: token,
                                         ),
-                                      )
-                                    : CircularImage(
-                                        hasImage: owner.hasImage,
-                                        imageUrl: userUrl,
-                                        radius: 25,
-                                        token: token,
                                       ),
                                 const SizedBox(
                                   width: 5,
@@ -467,7 +458,6 @@ class ItemScreen extends StatelessWidget {
                             token: token,
                             opened: claim.opened,
                             userId: claim.user.id,
-                            hasImage: claim.user.hasImage,
                             username: claim.user.username,
                             onTap: () async {
                               context
@@ -600,7 +590,6 @@ class ItemScreen extends StatelessWidget {
                             child: Row(
                               children: [
                                 CircularImage(
-                                  hasImage: owner.hasImage,
                                   imageUrl: userUrl,
                                   radius: 25,
                                   token: token,

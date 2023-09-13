@@ -74,8 +74,7 @@ class ClaimedItemCard extends StatelessWidget {
                     height: 70,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: claim.user.hasImage
-                          ? Image.network(
+                      child: Image.network(
                               "$baseUrl/api/users/${claim.user.id}/image",
                               fit: BoxFit.cover,
                               headers: {"Authorization": "Bearer $token"},
@@ -87,10 +86,6 @@ class ClaimedItemCard extends StatelessWidget {
                                 if (loadingProgress == null) return child;
                                 return const CustomCircularProgress(size: 35);
                               },
-                            )
-                          : Image.asset(
-                              noUserImagePath,
-                              fit: BoxFit.cover,
                             ),
                     ),
                   ),

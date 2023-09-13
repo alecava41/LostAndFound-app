@@ -6,19 +6,16 @@ class CircularImage extends StatelessWidget {
   final String token;
   final String imageUrl;
   final double radius;
-  final bool hasImage;
 
   const CircularImage({
     super.key,
     required this.token,
-    required this.hasImage,
     required this.imageUrl,
     this.radius = 50,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (hasImage) {
       return CircleAvatar(
         radius: radius,
         backgroundImage: Image.network(
@@ -37,14 +34,5 @@ class CircularImage extends StatelessWidget {
           ),
         ).image,
       );
-    } else {
-      return CircleAvatar(
-        radius: radius,
-        backgroundImage: Image.asset(
-          noUserImagePath,
-          fit: BoxFit.cover,
-        ).image,
-      );
-    }
   }
 }

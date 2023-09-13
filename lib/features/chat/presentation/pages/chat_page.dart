@@ -107,10 +107,7 @@ class ChatScreen extends StatelessWidget {
                                 claim: ClaimReceived(
                                   id: receivedClaim.id,
                                   item: ReceivedItem(id: state.item!.id, title: state.item!.title),
-                                  user: ReceivedUser(
-                                      id: receivedClaim.user.id,
-                                      hasImage: receivedClaim.user.hasImage,
-                                      username: receivedClaim.user.username),
+                                  user: ReceivedUser(id: receivedClaim.user.id, username: receivedClaim.user.username),
                                   status: receivedClaim.status,
                                   opened: receivedClaim.opened,
                                 ),
@@ -124,10 +121,7 @@ class ChatScreen extends StatelessWidget {
                                       claim: sent.ClaimSent(
                                           status: sentClaim.status,
                                           id: sentClaim.id,
-                                          item: sent.SentItem(
-                                              id: state.item!.id,
-                                              title: state.item!.title,
-                                              hasImage: state.item!.hasImage)),
+                                          item: sent.SentItem(id: state.item!.id, title: state.item!.title)),
                                       token: state.token,
                                       isItemSolved: state.item!.resolved,
                                     )
@@ -150,7 +144,6 @@ class ChatScreen extends StatelessWidget {
                                 padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                                 child: CircularImage(
                                   token: state.token,
-                                  hasImage: true,
                                   imageUrl: "$baseUrl/api/users/$id/image",
                                   radius: 20,
                                 ),

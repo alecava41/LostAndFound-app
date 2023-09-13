@@ -51,7 +51,6 @@ class InboxItem extends StatelessWidget {
                             CircularImage(
                               token: token,
                               imageUrl: "$baseUrl/api/users/$otherUserId/image",
-                              hasImage: true,
                               radius: 25,
                               errorImage: Image.asset(
                                 noUserImagePath,
@@ -75,6 +74,7 @@ class InboxItem extends StatelessWidget {
                                     Text(
                                       lastMessage,
                                       overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(color: Colors.black54),
                                     )
                                   ],
                                 ),

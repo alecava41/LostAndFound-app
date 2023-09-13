@@ -9,7 +9,6 @@ import '../../../../../core/presentation/widgets/media_selection_dialog.dart';
 class EditableCircularImage extends StatelessWidget {
   final ImagePicker picker = ImagePicker();
 
-  final bool hasImage;
   final String token;
   final int userId;
 
@@ -18,7 +17,6 @@ class EditableCircularImage extends StatelessWidget {
 
   EditableCircularImage(
       {super.key,
-      required this.hasImage,
       required this.token,
       required this.userId,
       required this.onImageChange,
@@ -37,8 +35,7 @@ class EditableCircularImage extends StatelessWidget {
       },
       child: Center(
         child: Stack(children: <Widget>[
-          hasImage
-              ? CircleAvatar(
+          CircleAvatar(
                   radius: radius,
                   backgroundImage: Image.network(
                     "$baseUrl/api/users/$userId/image",
@@ -55,13 +52,6 @@ class EditableCircularImage extends StatelessWidget {
                       noUserImagePath,
                       fit: BoxFit.cover,
                     ),
-                  ).image,
-                )
-              : CircleAvatar(
-                  radius: radius,
-                  backgroundImage: Image.asset(
-                    noUserImagePath,
-                    fit: BoxFit.cover,
                   ).image,
                 ),
           Positioned(

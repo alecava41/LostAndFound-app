@@ -47,7 +47,6 @@ class NewsContent extends StatelessWidget {
                                 id: news.id,
                                 subjectItemTitle: news.subject.title,
                                 subjectItemType: news.subject.type,
-                                hasUserImage: news.targetUser.hasImage,
                                 targetItemId: news.targetId,
                                 targetUserId: news.targetUser.id,
                                 targetUsername: news.targetUser.username,

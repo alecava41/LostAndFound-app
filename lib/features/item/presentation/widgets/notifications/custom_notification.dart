@@ -14,7 +14,6 @@ class CustomNotification extends StatelessWidget {
   final int targetUserId;
   final String targetUsername;
   final int targetItemId;
-  final bool hasUserImage;
   final String subjectItemTitle;
   final ItemType subjectItemType;
   final String token;
@@ -24,7 +23,6 @@ class CustomNotification extends StatelessWidget {
     required this.id,
     required this.targetUserId,
     required this.targetUsername,
-    required this.hasUserImage,
     required this.targetItemId,
     required this.subjectItemTitle,
     required this.subjectItemType,
@@ -54,7 +52,6 @@ class CustomNotification extends StatelessWidget {
                   child: Row(
                     children: [
                       CircularImage(
-                        hasImage: hasUserImage,
                         imageUrl: "$baseUrl/api/users/$targetUserId/image",
                         token: token,
                         radius: 35,

@@ -10,7 +10,7 @@ class SearchItemDto with _$SearchItemDto {
     required int id,
     required String title,
     required String type,
-    required bool image,
+    bool? image,
     required UserDto user,
     required DateTime date,
     required double distance

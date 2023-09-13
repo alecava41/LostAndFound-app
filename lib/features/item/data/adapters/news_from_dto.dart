@@ -9,7 +9,7 @@ extension NewsFromDto on NewsDto {
         dateTime: DateTime.parse(datetime),
         subject: Subject(id: subject.id, title: subject.title, type: subject.type == "lost" ? ItemType.lost : ItemType.found),
         targetId: target.id,
-        targetUser: User(id: target.user.id, username: target.user.username, hasImage: target.user.image),
+        targetUser: User(id: target.user.id, username: target.user.username),
         opened: false
     );
   }

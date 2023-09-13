@@ -70,8 +70,7 @@ class ClaimedStatusCard extends StatelessWidget {
                   height: 70,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: claim.item.hasImage
-                        ? Image.network(
+                    child: Image.network(
                             "$baseUrl/api/items/${claim.item.id}/image",
                             fit: BoxFit.cover,
                             headers: {"Authorization": "Bearer $token"},
@@ -83,10 +82,6 @@ class ClaimedStatusCard extends StatelessWidget {
                               noItemImagePath,
                               fit: BoxFit.cover,
                             ),
-                          )
-                        : Image.asset(
-                            noItemImagePath,
-                            fit: BoxFit.cover,
                           ),
                   ),
                 ),

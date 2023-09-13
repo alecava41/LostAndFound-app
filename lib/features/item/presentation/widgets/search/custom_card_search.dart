@@ -15,11 +15,9 @@ class CustomCardSearch extends StatelessWidget {
   final String token;
   final DateTime date;
   final double distance;
-  final bool hasImage;
 
   const CustomCardSearch({
     super.key,
-    required this.hasImage,
     required this.id,
     required this.text,
     required this.type,
@@ -50,8 +48,7 @@ class CustomCardSearch extends StatelessWidget {
                     child: SizedBox(
                       height: 150.0,
                       width: 150.0,
-                      child: hasImage
-                          ? Image.network(
+                      child: Image.network(
                               "$baseUrl/api/items/$id/image",
                               fit: BoxFit.cover,
                               headers: {"Authorization": "Bearer $token"},
@@ -63,10 +60,6 @@ class CustomCardSearch extends StatelessWidget {
                                 noItemImagePath,
                                 fit: BoxFit.cover,
                               ),
-                            )
-                          : Image.asset(
-                              noItemImagePath,
-                              fit: BoxFit.cover,
                             ),
                     ),
                   ),

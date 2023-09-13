@@ -8,7 +8,6 @@ import 'package:lost_and_found/utils/screen_size.dart';
 
 class CustomCardHome extends StatelessWidget {
   final int id;
-  final bool hasImage;
   final String text;
   final int claims;
   final int approvedClaims;
@@ -16,7 +15,6 @@ class CustomCardHome extends StatelessWidget {
 
   const CustomCardHome({
     super.key,
-    required this.hasImage,
     required this.id,
     required this.text,
     required this.claims,
@@ -62,8 +60,7 @@ class CustomCardHome extends StatelessWidget {
                             : ScreenSize.isMediumSmartphoneDevice(context)
                                 ? 130
                                 : 100,
-                        child: hasImage
-                            ? Image.network(
+                        child: Image.network(
                                 "$baseUrl/api/items/$id/image",
                                 fit: BoxFit.cover,
                                 headers: {"Authorization": "Bearer $token"},
@@ -75,10 +72,6 @@ class CustomCardHome extends StatelessWidget {
                                   noItemImagePath,
                                   fit: BoxFit.cover,
                                 ),
-                              )
-                            : Image.asset(
-                                noItemImagePath,
-                                fit: BoxFit.cover,
                               ),
                       ),
                     ),

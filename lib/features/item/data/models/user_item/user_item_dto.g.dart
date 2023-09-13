@@ -12,7 +12,7 @@ _$$UserItemDto _$$$UserItemDtoFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       claims: json['claims'] as int,
       approvedClaims: json['approvedClaims'] as int,
-      image: json['image'] as bool,
+      image: json['image'] as bool?,
     );
 
 Map<String, dynamic> _$$$UserItemDtoToJson(_$$UserItemDto instance) =>

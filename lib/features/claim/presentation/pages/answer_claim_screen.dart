@@ -169,7 +169,6 @@ class AnswerClaimScreen extends StatelessWidget {
                                           .user
                                           .username,
                                       isQuestionScreen: false,
-                                      hasOtherUserImage: true,
                                     ),
                                   ),
                                   const SizedBox(

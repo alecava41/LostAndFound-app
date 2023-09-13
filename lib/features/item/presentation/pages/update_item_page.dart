@@ -158,7 +158,6 @@ class UpdateItemScreen extends StatelessWidget {
                                       imagePath: state.imagePath,
                                       itemId: itemId,
                                       token: state.token,
-                                      hasImage: state.item!.hasImage,
                                       hasDeletedOriginalImage: state.hasDeletedOriginalImage),
                                   customDivider(),
                                   const SizedBox(

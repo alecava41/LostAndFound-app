@@ -55,9 +55,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           token: session != null ? session.token : ""),
     );
 
-    emit(state.copyWith(token: ""));
-    emit(state.copyWith(token: state.token));
-
     if (creation) {
       emit(state.copyWith(isLoading: false));
     }
@@ -75,9 +72,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       } else {
         emit(state.copyWith(lostItems: itemsResponse.getOrElse(() => state.lostItems)));
       }
-
-      emit(state.copyWith(token: ""));
-      emit(state.copyWith(token: state.token));
     }
   }
 }

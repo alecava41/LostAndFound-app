@@ -125,7 +125,6 @@ class UserScreen extends StatelessWidget {
                                                         UserEvent.imageChanged(
                                                             path)),
                                                 radius: 50,
-                                                hasImage: state.user!.hasImage,
                                               ),
                                               const SizedBox(
                                                 width: 10,

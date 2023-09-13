@@ -26,7 +26,6 @@ class ReceivedItem {
 class ReceivedUser {
   final int id;
   final String username;
-  final bool hasImage;
 
-  ReceivedUser({required this.id, required this.username, required this.hasImage});
+  ReceivedUser({required this.id, required this.username});
 }

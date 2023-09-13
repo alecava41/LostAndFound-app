@@ -9,7 +9,7 @@ part of 'item_dto.dart';
 _$$ItemDto _$$$ItemDtoFromJson(Map<String, dynamic> json) => _$$ItemDto(
       id: json['id'] as int,
       title: json['title'] as String,
-      image: json['image'] as bool,
+      image: json['image'] as bool?,
     );
 
 Map<String, dynamic> _$$$ItemDtoToJson(_$$ItemDto instance) =>

@@ -10,7 +10,6 @@ class ClaimedItemCard extends StatelessWidget {
   final int userId;
   final String username;
   final bool opened;
-  final bool hasImage;
   final String token;
   final ClaimStatus status;
   final VoidCallback onTap;
@@ -19,7 +18,6 @@ class ClaimedItemCard extends StatelessWidget {
     super.key,
     required this.userId,
     required this.username,
-    required this.hasImage,
     required this.opened,
     required this.token,
     required this.onTap,
@@ -52,8 +50,7 @@ class ClaimedItemCard extends StatelessWidget {
                   height: 70,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: hasImage
-                        ? Image.network(
+                    child: Image.network(
                             "$baseUrl/api/users/$userId/image",
                             fit: BoxFit.cover,
                             headers: {"Authorization": "Bearer $token"},
@@ -65,10 +62,6 @@ class ClaimedItemCard extends StatelessWidget {
                               noUserImagePath,
                               fit: BoxFit.cover,
                             ),
-                          )
-                        : Image.asset(
-                            noUserImagePath,
-                            fit: BoxFit.cover,
                           ),
                   ),
                 ),

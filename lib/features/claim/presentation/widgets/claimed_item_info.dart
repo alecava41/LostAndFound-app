@@ -18,7 +18,6 @@ class ClaimedItemInfo extends StatelessWidget {
   final String token;
   final String subject; // either the owner of the object or the user that claimed it
   final int otherUserId;
-  final bool hasOtherUserImage;
   final String otherUserUsername;
   final bool isQuestionScreen;
   final int? claimIdx;
@@ -32,7 +31,6 @@ class ClaimedItemInfo extends StatelessWidget {
     required this.otherUserUsername,
     required this.isQuestionScreen,
     required this.claimIdx,
-    required this.hasOtherUserImage,
   });
 
   @override
@@ -47,38 +45,30 @@ class ClaimedItemInfo extends StatelessWidget {
             SizedBox(
               width: 150,
               height: 150,
-              child: item.hasImage
-                  ? ImageDialogWidget(
-                      imageUrl: itemUrl,
-                      token: token,
-                      errorImage: Image.asset(
-                        noItemImagePath,
-                        fit: BoxFit.cover,
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          itemUrl,
-                          fit: BoxFit.cover,
-                          headers: {"Authorization": "Bearer $token"},
-                          errorBuilder: (ctx, error, trace) => Image.asset(
-                            noItemImagePath,
-                            fit: BoxFit.cover,
-                          ),
-                          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return const CustomCircularProgress(size: 75);
-                          },
-                        ),
-                      ),
-                    )
-                  : ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        noItemImagePath,
-                        fit: BoxFit.cover,
-                      ),
+              child: ImageDialogWidget(
+                imageUrl: itemUrl,
+                token: token,
+                errorImage: Image.asset(
+                  noItemImagePath,
+                  fit: BoxFit.cover,
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    itemUrl,
+                    fit: BoxFit.cover,
+                    headers: {"Authorization": "Bearer $token"},
+                    errorBuilder: (ctx, error, trace) => Image.asset(
+                      noItemImagePath,
+                      fit: BoxFit.cover,
                     ),
+                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return const CustomCircularProgress(size: 75);
+                    },
+                  ),
+                ),
+              ),
             ),
             Expanded(
               child: SizedBox(
@@ -123,7 +113,6 @@ class ClaimedItemInfo extends StatelessWidget {
               child: Row(
                 children: [
                   CircularImage(
-                    hasImage: hasOtherUserImage,
                     imageUrl: "$baseUrl/api/users/$otherUserId/image",
                     radius: 25,
                     token: token,

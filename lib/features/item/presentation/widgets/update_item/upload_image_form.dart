@@ -13,7 +13,6 @@ class UploadImageForm extends StatelessWidget {
   final VoidCallback onSelectUploadMethod;
   final VoidCallback onDeletePhoto;
   final String? imagePath;
-  final bool hasImage;
   final bool hasDeletedOriginalImage;
 
   const UploadImageForm({
@@ -24,7 +23,6 @@ class UploadImageForm extends StatelessWidget {
     required this.onDeletePhoto,
     required this.imagePath,
     required this.hasDeletedOriginalImage,
-    required this.hasImage,
   });
 
   @override
@@ -43,7 +41,7 @@ class UploadImageForm extends StatelessWidget {
                     color: Colors.white,
                     height: 300,
                     width: MediaQuery.of(context).size.width,
-                    child: hasImage && !hasDeletedOriginalImage
+                    child: !hasDeletedOriginalImage
                         ? Image.network(
                             "$baseUrl/api/items/$itemId/image",
                             fit: BoxFit.cover,
@@ -96,7 +94,7 @@ class UploadImageForm extends StatelessWidget {
                             }
                           }(),
                   ),
-                  if (imagePath != null || (hasImage && !hasDeletedOriginalImage))
+                  if (imagePath != null || !hasDeletedOriginalImage)
                     Positioned(
                       right: 16,
                       bottom: 10,

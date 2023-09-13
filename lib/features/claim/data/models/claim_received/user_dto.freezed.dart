@@ -22,7 +22,7 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
 mixin _$UserDto {
   int get id => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
-  bool get image => throw _privateConstructorUsedError;
+  bool? get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $UserDtoCopyWith<$Res> {
   factory $UserDtoCopyWith(UserDto value, $Res Function(UserDto) then) =
       _$UserDtoCopyWithImpl<$Res, UserDto>;
   @useResult
-  $Res call({int id, String username, bool image});
+  $Res call({int id, String username, bool? image});
 }
 
 /// @nodoc
@@ -52,7 +52,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
   $Res call({
     Object? id = null,
     Object? username = null,
-    Object? image = null,
+    Object? image = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -63,10 +63,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ) as $Val);
   }
 }
@@ -78,7 +78,7 @@ abstract class _$$$UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       __$$$UserDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String username, bool image});
+  $Res call({int id, String username, bool? image});
 }
 
 /// @nodoc
@@ -93,7 +93,7 @@ class __$$$UserDtoCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? username = null,
-    Object? image = null,
+    Object? image = freezed,
   }) {
     return _then(_$$UserDto(
       id: null == id
@@ -104,10 +104,10 @@ class __$$$UserDtoCopyWithImpl<$Res>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ));
   }
 }
@@ -115,8 +115,7 @@ class __$$$UserDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$$UserDto implements $UserDto {
-  const _$$UserDto(
-      {required this.id, required this.username, required this.image});
+  const _$$UserDto({required this.id, required this.username, this.image});
 
   factory _$$UserDto.fromJson(Map<String, dynamic> json) =>
       _$$$UserDtoFromJson(json);
@@ -126,7 +125,7 @@ class _$$UserDto implements $UserDto {
   @override
   final String username;
   @override
-  final bool image;
+  final bool? image;
 
   @override
   String toString() {
@@ -166,7 +165,7 @@ abstract class $UserDto implements UserDto {
   const factory $UserDto(
       {required final int id,
       required final String username,
-      required final bool image}) = _$$UserDto;
+      final bool? image}) = _$$UserDto;
 
   factory $UserDto.fromJson(Map<String, dynamic> json) = _$$UserDto.fromJson;
 
@@ -175,7 +174,7 @@ abstract class $UserDto implements UserDto {
   @override
   String get username;
   @override
-  bool get image;
+  bool? get image;
   @override
   @JsonKey(ignore: true)
   _$$$UserDtoCopyWith<_$$UserDto> get copyWith =>
