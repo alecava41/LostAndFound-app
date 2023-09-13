@@ -4,7 +4,6 @@ import 'package:lost_and_found/features/user/presentation/widgets/tutorial/carou
 import 'package:sizer/sizer.dart';
 
 import '../../../../../utils/colors.dart';
-import '../../../../../utils/screen_size.dart';
 
 class FoundItemTutorial extends StatefulWidget {
   const FoundItemTutorial({super.key});
@@ -59,7 +58,7 @@ class _FoundItemTutorialState extends State<FoundItemTutorial> {
               children: _buildPageIndicator(),
             ),
             SizedBox(
-              height: !ScreenSize.isSmallSmartphoneDevice(context) ? 70.h : 65.h,
+              height: 65.h,
               width: 90.w,
               child: PageView(
                 scrollDirection: Axis.vertical,
