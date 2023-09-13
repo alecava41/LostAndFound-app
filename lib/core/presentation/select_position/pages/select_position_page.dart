@@ -47,9 +47,9 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
             if (positionFailureOrSuccess != null) {
               positionFailureOrSuccess.fold((failure) {
                 if (!state.hasPermissions) {
-                  if (!state.isPermissionPermanentlyNegated) {
+                  if (state.isPermissionNegated) {
                     showLocationPermissionDeniedDialog(context);
-                  } else {
+                  } else if (state.isPermissionPermanentlyNegated) {
                     showLocationPermissionPermanentlyDeniedDialog(context);
                   }
                 } else if (!state.isDeviceConnected) {
@@ -138,75 +138,79 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                           ],
                         ),
                         Positioned(
-                            bottom: 0.0,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 200.0,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20.0),
-                                      topRight: Radius.circular(20.0),
-                                    ),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      TextButton(
-                                        onPressed: () async {
-                                          mapController.animatedZoomOut();
-                                          ctx
-                                              .read<SelectPositionBloc>()
-                                              .add(const SelectPositionEvent.selectCurrentPosition());
-                                        },
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            const Icon(
-                                              Icons.navigation,
-                                              size: 30,
-                                            ),
-                                            const SizedBox(width: 8.0),
-                                            Text(
-                                              AppLocalizations.of(context)!.positionUseCurrentLocation,
-                                              style: const TextStyle(
-                                                decoration: TextDecoration.underline,
-                                                fontSize: 18,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(18),
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: ElevatedButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context, markerPos);
-                                                  },
-                                                  style: ElevatedButton.styleFrom(
-                                                    shape: const StadiumBorder(),
-                                                    padding: const EdgeInsets.symmetric(vertical: 18),
-                                                  ),
-                                                  child: Text(
-                                                    AppLocalizations.of(context)!.positionUseSelected,
-                                                    style: const TextStyle(fontSize: 20),
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                          bottom: 0.0,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 200.0,
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20.0),
+                                    topRight: Radius.circular(20.0),
                                   ),
                                 ),
-                              ],
-                            ))
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    TextButton(
+                                      onPressed: () async {
+                                        if (state.hasPermissions) {
+                                          mapController.animatedZoomOut();
+                                        }
+
+                                        ctx
+                                            .read<SelectPositionBloc>()
+                                            .add(const SelectPositionEvent.selectCurrentPosition());
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            Icons.navigation,
+                                            size: 30,
+                                          ),
+                                          const SizedBox(width: 8.0),
+                                          Text(
+                                            AppLocalizations.of(context)!.positionUseCurrentLocation,
+                                            style: const TextStyle(
+                                              decoration: TextDecoration.underline,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(18),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: ElevatedButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context, markerPos);
+                                                },
+                                                style: ElevatedButton.styleFrom(
+                                                  shape: const StadiumBorder(),
+                                                  padding: const EdgeInsets.symmetric(vertical: 18),
+                                                ),
+                                                child: Text(
+                                                  AppLocalizations.of(context)!.positionUseSelected,
+                                                  style: const TextStyle(fontSize: 20),
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     )),
               ),
@@ -226,10 +230,10 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
           content: Text(AppLocalizations.of(context)!.locationPermissionDialogContentDenied),
           actions: <Widget>[
             PersonalizedLargeGreenButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              text: Text(AppLocalizations.of(context)!.close)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                text: Text(AppLocalizations.of(context)!.close)),
           ],
         );
       },
@@ -245,10 +249,10 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
           content: Text(AppLocalizations.of(context)!.locationPermissionDialogContentPermanentlyDenied),
           actions: <Widget>[
             PersonalizedLargeGreenButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              text: Text(AppLocalizations.of(context)!.close)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                text: Text(AppLocalizations.of(context)!.close)),
           ],
         );
       },
@@ -263,14 +267,16 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
           title: Text(AppLocalizations.of(context)!.noConnectionDialogTitle),
           content: Text(AppLocalizations.of(context)!.noConnectionDialogContent),
           actions: <Widget>[
-            PersonalizedLargeGreenButton(onPressed: () async {
-                Navigator.pop(context, 'Cancel');
-                setState(() => isAlertSet = false);
-                if (!isDeviceConnected && !isAlertSet) {
-                  showConnectionLostAlert(isDeviceConnected);
-                  setState(() => isAlertSet = true);
-                }
-              }, text: Text(AppLocalizations.of(context)!.ok))
+            PersonalizedLargeGreenButton(
+                onPressed: () async {
+                  Navigator.pop(context, 'Cancel');
+                  setState(() => isAlertSet = false);
+                  if (!isDeviceConnected && !isAlertSet) {
+                    showConnectionLostAlert(isDeviceConnected);
+                    setState(() => isAlertSet = true);
+                  }
+                },
+                text: Text(AppLocalizations.of(context)!.ok))
           ],
         );
       },
@@ -285,14 +291,16 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
           title: Text(AppLocalizations.of(context)!.positionDialogTitle),
           content: Text(AppLocalizations.of(context)!.positionDialogContent),
           actions: <Widget>[
-            PersonalizedLargeGreenButton(onPressed: () async {
-                Navigator.pop(context, 'Cancel');
-                setState(() => isAlertSet = false);
-                if (!isServiceEnabled && !isAlertSet) {
-                  showPositionServiceNotAvailableAlert(isServiceEnabled);
-                  setState(() => isAlertSet = true);
-                }
-              }, text: Text(AppLocalizations.of(context)!.ok))
+            PersonalizedLargeGreenButton(
+                onPressed: () async {
+                  Navigator.pop(context, 'Cancel');
+                  setState(() => isAlertSet = false);
+                  if (!isServiceEnabled && !isAlertSet) {
+                    showPositionServiceNotAvailableAlert(isServiceEnabled);
+                    setState(() => isAlertSet = true);
+                  }
+                },
+                text: Text(AppLocalizations.of(context)!.ok))
           ],
         );
       },

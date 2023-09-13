@@ -17,6 +17,8 @@ class GeoLocationService {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         return const Left(Failure.geolocationFailure(GeolocationError.permissionDenied));
+      } else if (permission == LocationPermission.deniedForever) {
+        return const Left(Failure.geolocationFailure(GeolocationError.permissionPermanentlyDenied));
       }
     }
 
