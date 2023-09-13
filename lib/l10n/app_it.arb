@@ -339,7 +339,7 @@
   "categoryAllDescription": "Tutte le posibili categorie",
   "markAsSolvedDialogDescription": "Sei sicuro di voler contrassegnare questo report come risolto?\n\nSe lo contrassegni come risolto, il report non sarà più visibile.",
   "notMarkAsSolved":"No, non marcare come risolto",
-  "deleteReportDialogDescription":"Sei sicuro di voler eliminare questo report?\n\nSe lo elimini, il report non sarà più visibile.",
+  "deleteReportDialogDescription":"Sei sicuro di voler eliminare questo report?\n\nSe lo elimini, il report non sarà più visibile e le chat associate ad esso saranno cancellate.",
   "noDeleteReport":"No, non eliminare report",
   "goToMapsDialogDescription":"Stai per essere reindirizzato alla tua app delle mappe per visualizzare questa posizione.\n\nSei sicuro di voler uscire dall'app?",
   "goToMapTitle":"Visualizza in Mappe",
