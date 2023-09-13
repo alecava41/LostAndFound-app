@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../../core/network/network_info.dart';
 import '../../../../../core/status/failures.dart';
@@ -38,6 +37,7 @@ class SelectPositionBloc extends Bloc<SelectPositionEvent, SelectPositionState> 
     final isDeviceConnected = await _networkInfo.isConnected;
     bool isServiceFailure = false;
     bool isPermissionPermanentlyDeniedFailure = false;
+    bool isPermissionNegated = false;
     LatLng pos = state.userCurrentPos;
 
     Either<Failure, Success>? positionFailureOrSuccess;
@@ -45,7 +45,7 @@ class SelectPositionBloc extends Bloc<SelectPositionEvent, SelectPositionState> 
     final serviceOrFailure = await _geolocationService.getGeoPosition(true);
     serviceOrFailure.fold(
         (failure) => {
-              (isServiceFailure, isPermissionPermanentlyDeniedFailure) = _mapFailureToState(failure),
+              (isServiceFailure, isPermissionPermanentlyDeniedFailure, isPermissionNegated) = _mapFailureToState(failure),
               positionFailureOrSuccess = const Left(Failure.genericFailure())
             },
         (position) => {
@@ -55,7 +55,8 @@ class SelectPositionBloc extends Bloc<SelectPositionEvent, SelectPositionState> 
             });
 
     emit(state.copyWith(
-      hasPermissions: isPermissionPermanentlyDeniedFailure == false,
+      hasPermissions: isPermissionPermanentlyDeniedFailure == false && isPermissionNegated == false,
+      isPermissionNegated: isPermissionNegated,
       isDeviceConnected: isDeviceConnected,
       isServiceAvailable: isServiceFailure == false,
       userCurrentPos: pos,
@@ -69,9 +70,10 @@ class SelectPositionBloc extends Bloc<SelectPositionEvent, SelectPositionState> 
     emit(state.copyWith(userCurrentPos: pos));
   }
 
-  (bool, bool) _mapFailureToState(Failure failure) {
+  (bool, bool, bool) _mapFailureToState(Failure failure) {
     var isServiceFailure = false;
     var isPermissionPermanentlyDenied = false;
+    var isPermissionNegated = false;
 
     failure.maybeWhen<void>(
         geolocationFailure: (reason) {
@@ -81,11 +83,11 @@ class SelectPositionBloc extends Bloc<SelectPositionEvent, SelectPositionState> 
             case GeolocationError.permissionPermanentlyDenied:
               isPermissionPermanentlyDenied = true;
             case GeolocationError.permissionDenied:
-              {}
+              isPermissionNegated = true;
           }
         },
         orElse: () {});
 
-    return (isServiceFailure, isPermissionPermanentlyDenied);
+    return (isServiceFailure, isPermissionPermanentlyDenied, isPermissionNegated);
   }
 }

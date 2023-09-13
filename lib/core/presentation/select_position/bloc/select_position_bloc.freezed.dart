@@ -324,6 +324,7 @@ mixin _$SelectPositionState {
   bool get isServiceAvailable => throw _privateConstructorUsedError;
   bool get hasPermissions => throw _privateConstructorUsedError;
   bool get isPermissionPermanentlyNegated => throw _privateConstructorUsedError;
+  bool get isPermissionNegated => throw _privateConstructorUsedError;
   DateTime? get lastPositionUpdate => throw _privateConstructorUsedError;
   Either<Failure, Success>? get positionFailureOrSuccess =>
       throw _privateConstructorUsedError;
@@ -345,6 +346,7 @@ abstract class $SelectPositionStateCopyWith<$Res> {
       bool isServiceAvailable,
       bool hasPermissions,
       bool isPermissionPermanentlyNegated,
+      bool isPermissionNegated,
       DateTime? lastPositionUpdate,
       Either<Failure, Success>? positionFailureOrSuccess});
 }
@@ -367,6 +369,7 @@ class _$SelectPositionStateCopyWithImpl<$Res, $Val extends SelectPositionState>
     Object? isServiceAvailable = null,
     Object? hasPermissions = null,
     Object? isPermissionPermanentlyNegated = null,
+    Object? isPermissionNegated = null,
     Object? lastPositionUpdate = freezed,
     Object? positionFailureOrSuccess = freezed,
   }) {
@@ -390,6 +393,10 @@ class _$SelectPositionStateCopyWithImpl<$Res, $Val extends SelectPositionState>
       isPermissionPermanentlyNegated: null == isPermissionPermanentlyNegated
           ? _value.isPermissionPermanentlyNegated
           : isPermissionPermanentlyNegated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPermissionNegated: null == isPermissionNegated
+          ? _value.isPermissionNegated
+          : isPermissionNegated // ignore: cast_nullable_to_non_nullable
               as bool,
       lastPositionUpdate: freezed == lastPositionUpdate
           ? _value.lastPositionUpdate
@@ -417,6 +424,7 @@ abstract class _$$_SelectPositionStateCopyWith<$Res>
       bool isServiceAvailable,
       bool hasPermissions,
       bool isPermissionPermanentlyNegated,
+      bool isPermissionNegated,
       DateTime? lastPositionUpdate,
       Either<Failure, Success>? positionFailureOrSuccess});
 }
@@ -437,6 +445,7 @@ class __$$_SelectPositionStateCopyWithImpl<$Res>
     Object? isServiceAvailable = null,
     Object? hasPermissions = null,
     Object? isPermissionPermanentlyNegated = null,
+    Object? isPermissionNegated = null,
     Object? lastPositionUpdate = freezed,
     Object? positionFailureOrSuccess = freezed,
   }) {
@@ -461,6 +470,10 @@ class __$$_SelectPositionStateCopyWithImpl<$Res>
           ? _value.isPermissionPermanentlyNegated
           : isPermissionPermanentlyNegated // ignore: cast_nullable_to_non_nullable
               as bool,
+      isPermissionNegated: null == isPermissionNegated
+          ? _value.isPermissionNegated
+          : isPermissionNegated // ignore: cast_nullable_to_non_nullable
+              as bool,
       lastPositionUpdate: freezed == lastPositionUpdate
           ? _value.lastPositionUpdate
           : lastPositionUpdate // ignore: cast_nullable_to_non_nullable
@@ -482,6 +495,7 @@ class _$_SelectPositionState implements _SelectPositionState {
       this.isServiceAvailable = false,
       this.hasPermissions = false,
       this.isPermissionPermanentlyNegated = false,
+      this.isPermissionNegated = false,
       this.lastPositionUpdate = null,
       this.positionFailureOrSuccess});
 
@@ -501,13 +515,16 @@ class _$_SelectPositionState implements _SelectPositionState {
   final bool isPermissionPermanentlyNegated;
   @override
   @JsonKey()
+  final bool isPermissionNegated;
+  @override
+  @JsonKey()
   final DateTime? lastPositionUpdate;
   @override
   final Either<Failure, Success>? positionFailureOrSuccess;
 
   @override
   String toString() {
-    return 'SelectPositionState(userCurrentPos: $userCurrentPos, isDeviceConnected: $isDeviceConnected, isServiceAvailable: $isServiceAvailable, hasPermissions: $hasPermissions, isPermissionPermanentlyNegated: $isPermissionPermanentlyNegated, lastPositionUpdate: $lastPositionUpdate, positionFailureOrSuccess: $positionFailureOrSuccess)';
+    return 'SelectPositionState(userCurrentPos: $userCurrentPos, isDeviceConnected: $isDeviceConnected, isServiceAvailable: $isServiceAvailable, hasPermissions: $hasPermissions, isPermissionPermanentlyNegated: $isPermissionPermanentlyNegated, isPermissionNegated: $isPermissionNegated, lastPositionUpdate: $lastPositionUpdate, positionFailureOrSuccess: $positionFailureOrSuccess)';
   }
 
   @override
@@ -527,6 +544,8 @@ class _$_SelectPositionState implements _SelectPositionState {
                     isPermissionPermanentlyNegated) ||
                 other.isPermissionPermanentlyNegated ==
                     isPermissionPermanentlyNegated) &&
+            (identical(other.isPermissionNegated, isPermissionNegated) ||
+                other.isPermissionNegated == isPermissionNegated) &&
             (identical(other.lastPositionUpdate, lastPositionUpdate) ||
                 other.lastPositionUpdate == lastPositionUpdate) &&
             (identical(
@@ -542,6 +561,7 @@ class _$_SelectPositionState implements _SelectPositionState {
       isServiceAvailable,
       hasPermissions,
       isPermissionPermanentlyNegated,
+      isPermissionNegated,
       lastPositionUpdate,
       positionFailureOrSuccess);
 
@@ -560,6 +580,7 @@ abstract class _SelectPositionState implements SelectPositionState {
           final bool isServiceAvailable,
           final bool hasPermissions,
           final bool isPermissionPermanentlyNegated,
+          final bool isPermissionNegated,
           final DateTime? lastPositionUpdate,
           final Either<Failure, Success>? positionFailureOrSuccess}) =
       _$_SelectPositionState;
@@ -574,6 +595,8 @@ abstract class _SelectPositionState implements SelectPositionState {
   bool get hasPermissions;
   @override
   bool get isPermissionPermanentlyNegated;
+  @override
+  bool get isPermissionNegated;
   @override
   DateTime? get lastPositionUpdate;
   @override
