@@ -169,10 +169,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                           .user
                                           .username,
                                       isQuestionScreen: false,
-                                      hasOtherUserImage: state.item!.claims!
-                                          .firstWhere((element) => element.id == claimId)
-                                          .user
-                                          .hasImage,
+                                      hasOtherUserImage: true,
                                     ),
                                   ),
                                   const SizedBox(

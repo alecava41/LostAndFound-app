@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
@@ -66,7 +67,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
       final params = LoginParams(
           password: state.password.value.getOrElse(() => ""), user: state.user.value.getOrElse(() => ""),
-          token: await FirebaseMessaging.instance.getToken());
+          token: Platform.isAndroid ? await FirebaseMessaging.instance.getToken(): null);
 
       final loginResponse = await _loginUseCase(params);
       loginResponse.fold(

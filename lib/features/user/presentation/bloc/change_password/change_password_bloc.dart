@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -118,7 +119,7 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
       await _storage.removeCredentials();
       await _storage.destroySession();
 
-      await _loginUseCase(LoginParams(user: credentials.user, password: params.newPassword, token: await FirebaseMessaging.instance.getToken()));
+      await _loginUseCase(LoginParams(user: credentials.user, password: params.newPassword, token: Platform.isAndroid ? await FirebaseMessaging.instance.getToken() : null));
     }
 
     emit(state.copyWith(
