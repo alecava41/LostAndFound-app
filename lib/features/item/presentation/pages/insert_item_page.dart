@@ -38,7 +38,7 @@ class InsertItemScreen extends StatelessWidget {
 
     if (media == ImageSource.camera) {
       Permission permission = Permission.camera;
-      PermissionStatus permissionStatus = await permission.status;
+      PermissionStatus permissionStatus = await permission.request();
 
       if (permissionStatus.isPermanentlyDenied) {
         showCameraPermissionPermanentlyDeniedDialog(context);
