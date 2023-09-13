@@ -25,8 +25,8 @@ class _InfoScreenState extends State<InfoScreen> {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
-        statusBarColor: Colors.white30,
-        statusBarBrightness: Brightness.light,
+        statusBarColor: Colors.white,
+        statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark,
       ),
       child: SafeArea(

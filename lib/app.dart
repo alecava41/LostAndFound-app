@@ -36,7 +36,6 @@ class App extends StatefulWidget {
   State<StatefulWidget> createState() => _Application();
 
 // TODO (@alecava41) dark theme + switch (whatsapp-like) (need to provide the option to let user pick system theme)
-// TODO (@alecava41) status bar iOS + android (initial page)
 }
 
 class _Application extends State<App> {

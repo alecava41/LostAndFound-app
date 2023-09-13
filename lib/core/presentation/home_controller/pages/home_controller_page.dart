@@ -42,7 +42,7 @@ class HomeControllerScreen extends StatelessWidget {
                       state.tabIndex == 4 || (state.tabIndex == 1 && searchState.pageState == SearchPageState.resultPage)
                           ? Colors.white
                           : PersonalizedColor.backgroundColor,
-                  statusBarBrightness: Brightness.light,
+                  statusBarBrightness: Brightness.dark,
                   statusBarIconBrightness: Brightness.dark),
               child: SafeArea(
                 child: Scaffold(

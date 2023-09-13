@@ -32,7 +32,7 @@ class ChangePasswordScreen extends StatelessWidget {
         builder: (ctx, state) => AnnotatedRegion(
           value: const SystemUiOverlayStyle(
             statusBarColor: Colors.white,
-            statusBarBrightness: Brightness.light,
+            statusBarBrightness: Brightness.dark,
             statusBarIconBrightness: Brightness.dark,
           ),
           child: GestureDetector(

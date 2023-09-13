@@ -24,7 +24,7 @@ class ClaimsScreen extends StatelessWidget {
       builder: (ctx, state) => AnnotatedRegion<SystemUiOverlayStyle>(
         value: const SystemUiOverlayStyle(
           statusBarColor: Colors.white,
-          statusBarBrightness: Brightness.light,
+          statusBarBrightness: Brightness.dark,
           statusBarIconBrightness: Brightness.dark,
         ),
         child: DefaultTabController(
