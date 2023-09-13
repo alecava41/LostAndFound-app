@@ -98,7 +98,7 @@ class _FoundItemTutorialState extends State<FoundItemTutorial> {
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: _currentPage == _numPages - 1 ? null : () {
                     setState(() {
                       if (_currentPage == _numPages - 1) {
                         _currentPage = 0;
@@ -107,14 +107,22 @@ class _FoundItemTutorialState extends State<FoundItemTutorial> {
                       }
                     });
 
-                    _pageController.jumpToPage(_currentPage);
+                    var animationOffSet = 70.h;
+                    _pageController.animateTo(
+                      animationOffSet*_currentPage,
+                      duration: const Duration(
+                          milliseconds:
+                              500),
+                      curve: Curves
+                          .easeInOut,
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     shape: const StadiumBorder(),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
                   child: Text(
-                    AppLocalizations.of(context)!.next,
+                    _currentPage == _numPages - 1? AppLocalizations.of(context)!.tutorialCompleted : AppLocalizations.of(context)!.next,
                     style: const TextStyle(fontSize: 20),
                   ),
                 ),

@@ -348,5 +348,6 @@
   "noStayInApp": "No, stay in the app",
   "yesSeeMaps":"Yes, see in Maps",
   "next": "Next",
-  "itemAlreadySolvedToast": "Cannot access item's details, the item is not visible anymore."
+  "itemAlreadySolvedToast": "Cannot access item's details, the item is not visible anymore.",
+  "tutorialCompleted" : "Tutorial completed!"
 }
