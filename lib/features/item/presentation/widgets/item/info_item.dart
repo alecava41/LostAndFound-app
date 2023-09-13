@@ -76,14 +76,12 @@ class InfoItem extends StatelessWidget {
                         ),
                         PersonalizedLargeWhiteButton(
                             onPressed: () async {
+                              Navigator.of(context).pop();
+
                               await availableMaps.first.showMarker(
                                 coords: Coords(coordinates.X, coordinates.Y),
                                 title: title,
                               );
-
-                              if (context.mounted) {
-                                Navigator.of(context).pop();
-                              }
                             },
                             text: Text(
                               AppLocalizations.of(context)!.yesSeeMaps,
