@@ -67,7 +67,8 @@ class HomeControllerScreen extends StatelessWidget {
 
                       ctx.read<HomeControllerBloc>().add(HomeControllerEvent.tabChanged(index));
                     },
-                    selectedItemColor: Theme.of(context).primaryColor,
+                    backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
+                    selectedItemColor: Theme.of(context).colorScheme.primary,
                     unselectedItemColor: Theme.of(context).colorScheme.outline,
                     items: [
                       BottomNavigationBarItem(

@@ -63,10 +63,10 @@ class EditableCircularImage extends StatelessWidget {
               },
               child: CircleAvatar(
                 radius: 16,
-                backgroundColor: Theme.of(context).primaryColor,
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 child: Icon(
                   Icons.camera_alt,
-                  color: Theme.of(context).colorScheme.background,
+                  color: Theme.of(context).colorScheme.onPrimary,
                   size: 20.0,
                 ),
               ),

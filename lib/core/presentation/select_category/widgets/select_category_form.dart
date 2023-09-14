@@ -2,6 +2,7 @@ import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/core/presentation/select_category/pages/select_category_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lost_and_found/utils/colors/custom_color.dart';
 
 
 class CategorySelectionForm extends StatelessWidget {
@@ -38,7 +39,7 @@ class CategorySelectionForm extends StatelessWidget {
           height: 0,
         ),
         Material(
-          color: Theme.of(context).colorScheme.surface,
+          color: Theme.of(context).extension<CustomColors>()!.background2,
           child: InkWell(
             onTap: () async =>
                 {FocusManager.instance.primaryFocus?.unfocus(), await navigateToCategorySelection(context)},
@@ -85,7 +86,7 @@ class CategorySelectionForm extends StatelessWidget {
                             category,
                             style: TextStyle(
                               fontSize: 15,
-                              color: Theme.of(context).primaryColor,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
                         const Icon(

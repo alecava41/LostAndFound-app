@@ -48,11 +48,11 @@ class SearchOptionScreen extends StatelessWidget {
                       ElevatedButton(
                         onPressed: () => ctx.read<SearchBloc>().add(const SearchEvent.resetFilters()),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(context).primaryColor,
+                          backgroundColor: Theme.of(context).colorScheme.primary,
                           shape: const StadiumBorder(),
                           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                         ),
-                        child: Text(AppLocalizations.of(context)!.deleteAll),
+                        child: Text(AppLocalizations.of(context)!.deleteAll, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),),
                       ),
                     ],
                   ),
@@ -106,7 +106,7 @@ class SearchOptionScreen extends StatelessWidget {
                   onPressed: () => ctx.read<SearchBloc>().add(const SearchEvent.searchSubmitted(false)),
                   text: Text(
                     AppLocalizations.of(context)!.search,
-                    style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.background),
+                    style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onPrimary),
                   ),
                 )
               ],

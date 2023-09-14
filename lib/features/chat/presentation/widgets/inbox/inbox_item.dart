@@ -30,7 +30,7 @@ class InboxItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: !opened ? Theme.of(context).colorScheme.secondary : Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
+      color: !opened ? Theme.of(context).colorScheme.secondary : Theme.of(context).extension<CustomColors>()!.background2,
       child: InkWell(
         onTap: onTap,
         splashColor: !opened ? Theme.of(context).colorScheme.tertiary : Theme.of(context).extension<CustomColors>()!.splashGreyColor!.withOpacity(0.4),
@@ -74,7 +74,7 @@ class InboxItem extends StatelessWidget {
                                     Text(
                                       lastMessage,
                                       overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.usernameColor),
+                                      style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
                                     )
                                   ],
                                 ),
@@ -90,7 +90,6 @@ class InboxItem extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(8, 4, 12, 4),
                   child: SizedBox(
                     width: 80,
-                    //color: Colors.amber,
                     child: Column(
                       children: [
                         SizedBox(
@@ -124,7 +123,7 @@ class InboxItem extends StatelessWidget {
                         ),
                         Text(
                           itemTitle,
-                          style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.usernameColor, overflow: TextOverflow.ellipsis, fontSize: 12),
+                          style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor, overflow: TextOverflow.ellipsis, fontSize: 12),
                         ),
                       ],
                     ),

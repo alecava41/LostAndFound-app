@@ -29,6 +29,15 @@ class PersonalizedLargeGreenButton extends StatelessWidget {
                   backgroundColor: isActive ? Theme.of(context).colorScheme.primary : Theme.of(context).extension<CustomColors>()!.splashGreyColor,
                   shape: const StadiumBorder(),
                   padding: const EdgeInsets.symmetric(vertical: 16),
+                ).copyWith(
+                  overlayColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.pressed)) {
+                        return Theme.of(context).colorScheme.onPrimary.withOpacity(0.1);
+                      }
+                      return Colors.transparent;
+                    },
+                  ),
                 ),
                 child: text),
           ),

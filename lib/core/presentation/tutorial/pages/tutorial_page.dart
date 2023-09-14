@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../utils/colors/custom_color.dart';
 import '../../widgets/title_logo.dart';
 import '../widgets/carousel_item.dart';
 import '../widgets/large_white_button.dart';
@@ -25,13 +24,13 @@ class _InfoScreenState extends State<InfoScreen> {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
-        statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
+        statusBarColor: Theme.of(context).colorScheme.background,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark,
       ),
-      child: SafeArea(
-        child: Scaffold(
-          body: SingleChildScrollView(
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
             child: Column(mainAxisAlignment: MainAxisAlignment.center, mainAxisSize: MainAxisSize.max, children: [
               SizedBox(
                 height: 2.5.h,
@@ -112,7 +111,7 @@ class _InfoScreenState extends State<InfoScreen> {
       },
       text: Text(
         AppLocalizations.of(context)!.singIn,
-        style: TextStyle(fontSize: 20, color: Theme.of(context).primaryColor),
+        style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary),
       ),
     );
   }
@@ -126,7 +125,7 @@ class _InfoScreenState extends State<InfoScreen> {
       },
       text: Text(
         AppLocalizations.of(context)!.signUp,
-        style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.surface),
+        style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onPrimary),
       ),
     );
   }

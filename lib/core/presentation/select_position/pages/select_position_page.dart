@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/presentation/app_global/bloc/app_global_bloc.dart';
 import 'package:lost_and_found/core/presentation/select_position/bloc/select_position_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../injection_container.dart';
 import '../../../../utils/colors/custom_color.dart';
@@ -62,159 +61,157 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
             }
           },
           builder: (ctx, state) {
-            return AnnotatedRegion(
-              value: SystemUiOverlayStyle(
-                statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
-                statusBarBrightness: Brightness.dark,
-                statusBarIconBrightness: Brightness.dark,
+            return Scaffold(
+              backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
+              appBar: AppBar(
+                backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
+                elevation: 0,
+                surfaceTintColor: Theme.of(context).colorScheme.outline,
+                shadowColor: Theme.of(context).colorScheme.outline,
+                iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
+                title: Text(
+                  AppLocalizations.of(context)!.positionPageTitle,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                ),
               ),
-              child: SafeArea(
-                minimum: EdgeInsets.zero,
-                child: Scaffold(
-                    appBar: AppBar(
-                      iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
-                      title: Text(
-                        AppLocalizations.of(context)!.positionPageTitle,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onBackground,
-                        ),
+              body: SafeArea(
+                  minimum: EdgeInsets.zero,
+                  child: Stack(
+                    children: [
+                      Stack(
+                        children: [
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 150),
+                              child: FlutterMap(
+                                mapController: mapController.mapController,
+                                options: MapOptions(
+                                    maxZoom: 18,
+                                    onMapReady: () {
+                                      if (markerPos != appGlobalState.defaultPosition) {
+                                        mapController.animatedZoomOut();
+                                        mapController.centerOnPoint(LatLng(markerPos.latitude, markerPos.longitude),
+                                            zoom: 17);
+                                      }
+                                    },
+                                    interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
+                                    center: center,
+                                    zoom: 5.5,
+                                    onPositionChanged: (MapPosition position, bool gesture) {
+                                      // Update marker position based on the map center
+                                      setState(() {
+                                        markerPos = LatLng(position.center!.latitude, position.center!.longitude);
+                                      });
+                                    }),
+                                children: [
+                                  TileLayer(
+                                    urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                    userAgentPackageName: 'it.fabc.lostandfound',
+                                  ),
+                                  MarkerLayer(
+                                    markers: [
+                                      Marker(
+                                        width: 200.0,
+                                        height: 200.0,
+                                        point: markerPos,
+                                        builder: (ctx) => const Padding(
+                                          padding: EdgeInsets.fromLTRB(0, 0, 0, 65),
+                                          child: Icon(
+                                            Icons.location_on,
+                                            color: Color.fromRGBO(47, 122, 106, 1),
+                                            weight: 10,
+                                            size: 80,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      backgroundColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
-                    ),
-                    body: Stack(
-                      children: [
-                        Stack(
+                      Positioned(
+                        bottom: 0.0,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
                           children: [
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height,
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 150),
-                                child: FlutterMap(
-                                  mapController: mapController.mapController,
-                                  options: MapOptions(
-                                      maxZoom: 18,
-                                      onMapReady: () {
-                                        if (markerPos != appGlobalState.defaultPosition) {
-                                          mapController.animatedZoomOut();
-                                          mapController.centerOnPoint(LatLng(markerPos.latitude, markerPos.longitude),
-                                              zoom: 17);
-                                        }
-                                      },
-                                      interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
-                                      center: center,
-                                      zoom: 5.5,
-                                      onPositionChanged: (MapPosition position, bool gesture) {
-                                        // Update marker position based on the map center
-                                        setState(() {
-                                          markerPos = LatLng(position.center!.latitude, position.center!.longitude);
-                                        });
-                                      }),
-                                  children: [
-                                    TileLayer(
-                                      urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                                      userAgentPackageName: 'it.fabc.lostandfound',
-                                    ),
-                                    MarkerLayer(
-                                      markers: [
-                                        Marker(
-                                          width: 200.0,
-                                          height: 200.0,
-                                          point: markerPos,
-                                          builder: (ctx) => const Padding(
-                                            padding: EdgeInsets.fromLTRB(0, 0, 0, 65),
-                                            child: Icon(
-                                              Icons.location_on,
-                                              color: Color.fromRGBO(47, 122, 106, 1),
-                                              weight: 10,
-                                              size: 80,
-                                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 200.0,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).extension<CustomColors>()!.background2,
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(20.0),
+                                  topRight: Radius.circular(20.0),
+                                ),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  TextButton(
+                                    onPressed: () async {
+                                      if (state.hasPermissions) {
+                                        mapController.animatedZoomOut();
+                                      }
+
+                                      ctx
+                                          .read<SelectPositionBloc>()
+                                          .add(const SelectPositionEvent.selectCurrentPosition());
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        const Icon(
+                                          Icons.navigation,
+                                          size: 30,
+                                        ),
+                                        const SizedBox(width: 8.0),
+                                        Text(
+                                          AppLocalizations.of(context)!.positionUseCurrentLocation,
+                                          style: const TextStyle(
+                                            decoration: TextDecoration.underline,
+                                            fontSize: 18,
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(18),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.pop(context, markerPos);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Theme.of(context).colorScheme.primary,
+                                                shape: const StadiumBorder(),
+                                                padding: const EdgeInsets.symmetric(vertical: 18),
+                                              ),
+                                              child: Text(
+                                                AppLocalizations.of(context)!.positionUseSelected,
+                                                style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onPrimary),
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
-                        Positioned(
-                          bottom: 0.0,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 200.0,
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(20.0),
-                                    topRight: Radius.circular(20.0),
-                                  ),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    TextButton(
-                                      onPressed: () async {
-                                        if (state.hasPermissions) {
-                                          mapController.animatedZoomOut();
-                                        }
-
-                                        ctx
-                                            .read<SelectPositionBloc>()
-                                            .add(const SelectPositionEvent.selectCurrentPosition());
-                                      },
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          const Icon(
-                                            Icons.navigation,
-                                            size: 30,
-                                          ),
-                                          const SizedBox(width: 8.0),
-                                          Text(
-                                            AppLocalizations.of(context)!.positionUseCurrentLocation,
-                                            style: const TextStyle(
-                                              decoration: TextDecoration.underline,
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(18),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: ElevatedButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context, markerPos);
-                                                },
-                                                style: ElevatedButton.styleFrom(
-                                                  shape: const StadiumBorder(),
-                                                  padding: const EdgeInsets.symmetric(vertical: 18),
-                                                ),
-                                                child: Text(
-                                                  AppLocalizations.of(context)!.positionUseSelected,
-                                                  style: const TextStyle(fontSize: 20),
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    )),
-              ),
+                      )
+                    ],
+                  )),
             );
           },
         ),
@@ -227,6 +224,8 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          surfaceTintColor: Theme.of(context).extension<CustomColors>()!.background2,
+          backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
           title: Text(AppLocalizations.of(context)!.locationPermissionDialogTitle),
           content: Text(AppLocalizations.of(context)!.locationPermissionDialogContentDenied),
           actions: <Widget>[
@@ -234,7 +233,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                text: Text(AppLocalizations.of(context)!.close)),
+                text: Text(AppLocalizations.of(context)!.close, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary))),
           ],
         );
       },
@@ -246,6 +245,8 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          surfaceTintColor: Theme.of(context).extension<CustomColors>()!.background2,
+          backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
           title: Text(AppLocalizations.of(context)!.locationPermissionDialogTitle),
           content: Text(AppLocalizations.of(context)!.locationPermissionDialogContentPermanentlyDenied),
           actions: <Widget>[
@@ -253,7 +254,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                text: Text(AppLocalizations.of(context)!.close)),
+                text: Text(AppLocalizations.of(context)!.close, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary))),
           ],
         );
       },
@@ -265,6 +266,8 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          surfaceTintColor: Theme.of(context).extension<CustomColors>()!.background2,
+          backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
           title: Text(AppLocalizations.of(context)!.noConnectionDialogTitle),
           content: Text(AppLocalizations.of(context)!.noConnectionDialogContent),
           actions: <Widget>[
@@ -277,7 +280,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                     setState(() => isAlertSet = true);
                   }
                 },
-                text: Text(AppLocalizations.of(context)!.ok))
+                text: Text(AppLocalizations.of(context)!.ok, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary) ))
           ],
         );
       },
@@ -289,6 +292,8 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          surfaceTintColor: Theme.of(context).extension<CustomColors>()!.background2,
+          backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
           title: Text(AppLocalizations.of(context)!.positionDialogTitle),
           content: Text(AppLocalizations.of(context)!.positionDialogContent),
           actions: <Widget>[
@@ -301,7 +306,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                     setState(() => isAlertSet = true);
                   }
                 },
-                text: Text(AppLocalizations.of(context)!.ok))
+                text: Text(AppLocalizations.of(context)!.ok, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),))
           ],
         );
       },

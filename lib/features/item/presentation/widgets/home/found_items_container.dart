@@ -57,7 +57,7 @@ class FoundItemsContainer extends StatelessWidget {
                                       text: item.title,
                                       claims: item.claims,
                                       token: state.token,
-                                      approvedClaims: item.approvedClaims,
+                                      approvedClaims: item.approvedClaims, hasAdditionalInfo: true,
                                     ))
                                 .toList(),
                           )),

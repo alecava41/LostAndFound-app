@@ -36,8 +36,6 @@ class App extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _Application();
-
-// TODO (@alecava41) fix color of light anf dark theme
 }
 
 class _Application extends State<App> {
@@ -146,21 +144,8 @@ class _Application extends State<App> {
 
           return BlocBuilder<AppGlobalBloc, AppGlobalState>(
             builder: (ctx, state) => DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-              ColorScheme lightScheme;
-              ColorScheme darkScheme;
-
-              if (lightDynamic != null && darkDynamic != null) {
-                lightScheme = lightDynamic.harmonized();
-                lightCustomColors = lightCustomColors.harmonized(lightScheme);
-
-                // Repeat for the dark color scheme.
-                darkScheme = darkDynamic.harmonized();
-                darkCustomColors = darkCustomColors.harmonized(darkScheme);
-              } else {
-                // Otherwise, use fallback schemes.
-                lightScheme = lightColorScheme;
-                darkScheme = darkColorScheme;
-              }
+              ColorScheme lightScheme = lightColorScheme;
+              ColorScheme darkScheme = darkColorScheme;
 
               return MaterialApp(
                 localizationsDelegates: AppLocalizations.localizationsDelegates,

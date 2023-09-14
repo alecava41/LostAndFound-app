@@ -58,7 +58,7 @@ class CategoryItem extends StatelessWidget {
                               ),
                               Text(
                                 description,
-                                style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.usernameColor),
+                                style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ],

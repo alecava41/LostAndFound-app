@@ -353,5 +353,8 @@
   "changeTheme": "Change Theme",
   "themeSystem": "System default",
   "themeDark": "Dark",
-  "themeLight": "Light"
+  "themeLight": "Light",
+  "selectThemeDialogTitle": "Select Theme",
+  "login": "Login",
+  "registration": "Registration"
 }

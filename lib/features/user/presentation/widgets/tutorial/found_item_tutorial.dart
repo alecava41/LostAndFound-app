@@ -33,7 +33,7 @@ class _FoundItemTutorialState extends State<FoundItemTutorial> {
       height: isActive ? 48 : 32,
       width: isActive ? 12 : 8.0,
       decoration: BoxDecoration(
-        color: isActive ? Theme.of(context).primaryColor : Theme.of(context).colorScheme.onBackground,
+        color: isActive ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onBackground,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );

@@ -73,7 +73,7 @@ class UserScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Container(
-                      color: Theme.of(context).colorScheme.background,
+                      color: Theme.of(context).extension<CustomColors>()!.background2,
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(15, 25, 0, 0),
                         child: Column(
@@ -129,7 +129,7 @@ class UserScreen extends StatelessWidget {
                                                             Icons.email_outlined,
                                                             color: Theme.of(context)
                                                                 .extension<CustomColors>()!
-                                                                .usernameColor,
+                                                                .secondaryTextColor,
                                                           ),
                                                           const SizedBox(
                                                             width: 2,
@@ -138,7 +138,10 @@ class UserScreen extends StatelessWidget {
                                                             child: Text(
                                                               state.userEmail!,
                                                               textAlign: TextAlign.left,
-                                                              style: const TextStyle(color: Colors.black54),
+                                                              style: TextStyle(
+                                                                  color: Theme.of(context)
+                                                                      .extension<CustomColors>()!
+                                                                      .secondaryTextColor),
                                                               overflow: TextOverflow.ellipsis,
                                                             ),
                                                           ),
@@ -171,13 +174,15 @@ class UserScreen extends StatelessWidget {
                       optionName: AppLocalizations.of(context)!.changePasswordButton,
                       onTap: () => Navigator.of(ctx).pushNamed(
                         '/options/changePassword',
-                      ), icon: Icons.lock,
+                      ),
+                      icon: Icons.lock,
                     ),
                     OptionItem(
                       optionName: AppLocalizations.of(context)!.tutorial,
                       onTap: () => Navigator.of(ctx).pushNamed(
                         '/options/tutorial',
-                      ), icon: Icons.question_mark,
+                      ),
+                      icon: Icons.question_mark,
                     ),
                     OptionItem(
                       optionName: AppLocalizations.of(context)!.changeLanguage,
@@ -196,7 +201,8 @@ class UserScreen extends StatelessWidget {
                       showArrow: false,
                       onTap: () {
                         showLogoutDialog(ctx);
-                      }, icon: Icons.logout,
+                      },
+                      icon: Icons.logout,
                     )
                   ],
                 ),
@@ -207,6 +213,7 @@ class UserScreen extends StatelessWidget {
 
   void onChangeLanguageButtonClick(BuildContext ctx, Locale currentLocale) {
     showModalBottomSheet<void>(
+      backgroundColor: Theme.of(ctx).extension<CustomColors>()!.background2,
       context: ctx,
       builder: (BuildContext context) {
         return Column(
@@ -246,6 +253,7 @@ class UserScreen extends StatelessWidget {
 
   void onChangeThemeButtonClick(BuildContext ctx, ThemeMode currentTheme) {
     showModalBottomSheet<void>(
+      backgroundColor: Theme.of(ctx).extension<CustomColors>()!.background2,
       context: ctx,
       builder: (BuildContext context) {
         return Column(
@@ -254,7 +262,7 @@ class UserScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                AppLocalizations.of(context)!.selectLanguageDialogTitle,
+                AppLocalizations.of(context)!.selectThemeDialogTitle,
                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
@@ -293,6 +301,8 @@ class UserScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          surfaceTintColor: Theme.of(context).extension<CustomColors>()!.background2,
+          backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
           title: Text(AppLocalizations.of(context)!.logout),
           content: Text(AppLocalizations.of(context)!.logoutDialogContent),
           actions: <Widget>[
@@ -300,7 +310,10 @@ class UserScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              text: Text(AppLocalizations.of(context)!.logoutDialogNo),
+              text: Text(
+                AppLocalizations.of(context)!.logoutDialogNo,
+                style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+              ),
             ),
             PersonalizedLargeWhiteButton(
                 onPressed: () {
@@ -309,7 +322,7 @@ class UserScreen extends StatelessWidget {
                 },
                 text: Text(
                   AppLocalizations.of(context)!.logoutDialogYes,
-                  style: TextStyle(color: Theme.of(context).primaryColor),
+                  style: TextStyle(color: Theme.of(context).colorScheme.primary),
                 ))
           ],
         );

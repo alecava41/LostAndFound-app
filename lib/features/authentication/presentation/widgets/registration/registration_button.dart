@@ -5,7 +5,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/authentication/presentation/bloc/registration/registration_bloc.dart';
 
 import '../../../../../core/presentation/widgets/custom_circular_progress.dart';
-import '../../../../../utils/colors/custom_color.dart';
 
 class RegistrationButton extends StatelessWidget {
   const RegistrationButton({super.key});
@@ -35,15 +34,16 @@ class RegistrationButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
           padding: const EdgeInsets.symmetric(vertical: 16),
+          backgroundColor: Theme.of(context).colorScheme.primary
         ),
         child: state.isSubmitting
             ? CustomCircularProgress(
                 size: 25,
-                color: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
+                color: Theme.of(context).colorScheme.onPrimary,
               )
             : Text(
                 AppLocalizations.of(context)!.signUp,
-                style: const TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onPrimary),
               ),
       );
     });

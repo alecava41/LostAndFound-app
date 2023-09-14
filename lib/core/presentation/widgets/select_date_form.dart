@@ -24,7 +24,7 @@ class DateSelectionForm extends StatelessWidget {
           height: 0,
         ),
         Ink(
-          color: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
+          color: Theme.of(context).extension<CustomColors>()!.background2,
           child: InkWell(
             onTap: () => onButtonTap(context),
             borderRadius: BorderRadius.circular(0),
@@ -45,7 +45,7 @@ class DateSelectionForm extends StatelessWidget {
                         ),
                         Text(
                           AppLocalizations.of(context)!.dateFormEntrySubtitle,
-                          style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.usernameColor),
+                          style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
                         ),
                       ],
                     ),
@@ -56,7 +56,7 @@ class DateSelectionForm extends StatelessWidget {
                             AppLocalizations.of(context)!.dateFormEntryValue(DateFormat.yMMMM().format(date!)),
                             style: TextStyle(
                               fontSize: 15,
-                              color: Theme.of(context).primaryColor,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
                         const Icon(

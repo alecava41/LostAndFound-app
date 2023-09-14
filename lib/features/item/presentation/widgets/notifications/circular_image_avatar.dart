@@ -23,7 +23,7 @@ class CircularImage extends StatelessWidget {
           headers: {"Authorization": "Bearer $token"},
           loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
             if (loadingProgress == null) return child;
-            return SizedBox(height: radius * 2, width: radius * 2, child: CustomCircularProgress(size: radius));
+            return CustomCircularProgress(size: radius);
           },
           errorBuilder: (context, error, stackTrace) => CircleAvatar(
             radius: radius,

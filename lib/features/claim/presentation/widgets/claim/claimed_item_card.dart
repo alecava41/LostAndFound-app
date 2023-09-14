@@ -108,7 +108,7 @@ class ClaimedItemCard extends StatelessWidget {
                             ),
                             Text(
                               AppLocalizations.of(context)!.claimedBy(claim.user.username),
-                              style: TextStyle(fontSize: 13, color: Theme.of(context).extension<CustomColors>()!.usernameColor),
+                              style: TextStyle(fontSize: 13, color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),

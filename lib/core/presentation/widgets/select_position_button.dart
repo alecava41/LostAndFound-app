@@ -36,7 +36,7 @@ class SelectPositionButton extends StatelessWidget {
             height: 0,
           ),
           Ink(
-            color: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
+            color: Theme.of(context).extension<CustomColors>()!.background2,
             child: InkWell(
               onTap: () async {
                 FocusManager.instance.primaryFocus?.unfocus();
@@ -51,7 +51,7 @@ class SelectPositionButton extends StatelessWidget {
                 onPositionSelected(selectedPos);
               },
               child: SizedBox(
-                height: showError && errorText != "" ? 155 : 131,
+                height: showError && errorText != "" ? 170 : 151,
                 width: MediaQuery.of(context).size.width,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -69,7 +69,7 @@ class SelectPositionButton extends StatelessWidget {
                             ),
                             Text(
                               AppLocalizations.of(context)!.positionFormEntrySubtitle,
-                              style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.usernameColor),
+                              style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
                             ),
                             const SizedBox(
                               height: 20,
@@ -78,7 +78,7 @@ class SelectPositionButton extends StatelessWidget {
                               children: [
                                 Icon(
                                   Icons.location_on,
-                                  color: address.isEmpty ? Colors.transparent : Theme.of(context).primaryColor,
+                                  color: address.isEmpty ? Theme.of(context).extension<CustomColors>()!.secondaryTextColor : Theme.of(context).colorScheme.primary,
                                   size: 30,
                                 ),
                                 Expanded(
@@ -94,7 +94,7 @@ class SelectPositionButton extends StatelessWidget {
                                               maxLines: 2,
                                               style: TextStyle(
                                                 overflow: TextOverflow.ellipsis,
-                                                color: address.isEmpty ? Colors.transparent : Theme.of(context).primaryColor,
+                                                color: address.isEmpty ? Theme.of(context).extension<CustomColors>()!.secondaryTextColor : Theme.of(context).colorScheme.primary,
                                               ),
                                             ),
                                     ],

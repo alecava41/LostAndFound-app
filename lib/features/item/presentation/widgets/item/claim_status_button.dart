@@ -67,11 +67,11 @@ class ClaimStatusButton extends StatelessWidget {
                               children: [
                                 TextSpan(
                                   text: AppLocalizations.of(context)!.claimStatusSpaced,
-                                  style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.onBackground),
+                                  style: TextStyle(fontSize: 18, color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
                                 ),
                                 TextSpan(
-                                  text: status.getTranslatedName(context),
-                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onBackground),
+                                  text: status.getTranslatedName(context).toUpperCase(),
+                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
                                 ),
                               ],
                             ),
@@ -86,7 +86,7 @@ class ClaimStatusButton extends StatelessWidget {
                           Icon(
                             Icons.info,
                             size: 20,
-                            color: Theme.of(context).extension<CustomColors>()!.usernameColor,
+                            color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor,
                           ),
                           const SizedBox(
                             width: 5,
@@ -95,16 +95,16 @@ class ClaimStatusButton extends StatelessWidget {
                             child: status == ClaimStatus.approved
                                 ? Text(
                                     AppLocalizations.of(context)!.acceptedQuestionClaim(owner),
-                                    style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.usernameColor),
+                                    style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
                                   )
                                 : status == ClaimStatus.rejected
                                     ? Text(
                                         AppLocalizations.of(context)!.rejectedQuestionClaim(owner),
-                                        style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.usernameColor),
+                                        style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
                                       )
                                     : Text(
                                         AppLocalizations.of(context)!.waitQuestionClaim(owner),
-                                        style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.usernameColor),
+                                        style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
                                       ),
                           ),
                         ],

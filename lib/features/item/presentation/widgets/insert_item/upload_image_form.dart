@@ -29,7 +29,7 @@ class UploadImageForm extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 children: [
                   Container(
-                    color: Theme.of(context).colorScheme.background,
+                    color: Theme.of(context).extension<CustomColors>()!.background2,
                     height: 300,
                     width: MediaQuery.of(context).size.width,
                     child: imagePath == null
@@ -37,12 +37,12 @@ class UploadImageForm extends StatelessWidget {
                             child: ElevatedButton(
                               onPressed: onSelectUploadMethod,
                               style: ElevatedButton.styleFrom(
-                                surfaceTintColor: Theme.of(context).primaryColor,
-                                backgroundColor: Theme.of(context).colorScheme.background,
+                                surfaceTintColor: Theme.of(context).colorScheme.primary,
+                                backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
                                 shape: const StadiumBorder(),
                                 padding: const EdgeInsets.all(20),
                                 side: BorderSide(
-                                  color: Theme.of(context).primaryColor,
+                                  color: Theme.of(context).colorScheme.primary,
                                   width: 0.4,
                                 ),
                                 elevation: 0,
@@ -62,7 +62,7 @@ class UploadImageForm extends StatelessWidget {
                                 AppLocalizations.of(context)!.uploadImageButton,
                                 style: TextStyle(
                                   fontSize: 20,
-                                  color: Theme.of(context).primaryColor,
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                               ),
                             ),
@@ -82,9 +82,10 @@ class UploadImageForm extends StatelessWidget {
                         child: FloatingActionButton(
                           onPressed: onDeletePhoto,
                           backgroundColor: Theme.of(context).colorScheme.error,
-                          child: const Icon(
+                          child: Icon(
                             Icons.delete,
                             size: 30,
+                            color: Theme.of(context).colorScheme.onError,
                           ),
                         ),
                       ),

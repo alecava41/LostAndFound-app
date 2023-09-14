@@ -1,5 +1,6 @@
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
+import 'package:lost_and_found/utils/colors/custom_color.dart';
 
 
 class ClickableCircularButton extends StatelessWidget {
@@ -26,7 +27,7 @@ class ClickableCircularButton extends StatelessWidget {
         height: 60,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Theme.of(context).colorScheme.background,
+          color: Theme.of(context).extension<CustomColors>()!.background2,
         ),
         child: Material(
           color: Colors.transparent,
@@ -39,7 +40,7 @@ class ClickableCircularButton extends StatelessWidget {
                   icon,
                   size: 30,
                   semanticLabel: tooltipText,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),

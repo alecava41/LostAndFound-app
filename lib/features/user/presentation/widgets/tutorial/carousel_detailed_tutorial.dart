@@ -26,7 +26,7 @@ Widget carouselDetailedTutorialItem(BuildContext context, String imagePath, Stri
         padding: const EdgeInsets.fromLTRB(15,0,15,0),
         child: Text(
           description,
-          style: TextStyle(fontSize: 15, color: Theme.of(context).extension<CustomColors>()!.usernameColor),
+          style: TextStyle(fontSize: 15, color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
           textAlign: TextAlign.center,
         ),
       ),

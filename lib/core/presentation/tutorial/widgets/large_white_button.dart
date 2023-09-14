@@ -23,14 +23,14 @@ class PersonalizedLargeWhiteButton extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 border: Border.all(
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.primary,
                   width: 0.5,
                 ),
               ),
               child: ElevatedButton(
                   onPressed: onPressed,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
+                    backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
                     shape: const StadiumBorder(),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ).copyWith(

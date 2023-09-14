@@ -5,6 +5,7 @@ import 'package:lost_and_found/core/presentation/tutorial/widgets/large_white_bu
 import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/item/info_item_field.dart';
+import 'package:lost_and_found/utils/colors/custom_color.dart';
 
 import 'package:map_launcher/map_launcher.dart';
 
@@ -59,6 +60,8 @@ class InfoItem extends StatelessWidget {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
+                      surfaceTintColor: Theme.of(context).extension<CustomColors>()!.background2,
+                      backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
                       title: Text(AppLocalizations.of(context)!.goToMapTitle),
                       content: SingleChildScrollView(
                         child: ListBody(
@@ -72,7 +75,7 @@ class InfoItem extends StatelessWidget {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          text: Text(AppLocalizations.of(context)!.noStayInApp),
+                          text: Text(AppLocalizations.of(context)!.noStayInApp, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),),
                         ),
                         PersonalizedLargeWhiteButton(
                             onPressed: () async {
@@ -85,7 +88,7 @@ class InfoItem extends StatelessWidget {
                             },
                             text: Text(
                               AppLocalizations.of(context)!.yesSeeMaps,
-                              style: TextStyle(color: Theme.of(context).primaryColor),
+                              style: TextStyle(color: Theme.of(context).colorScheme.primary),
                             ))
                       ],
                     );

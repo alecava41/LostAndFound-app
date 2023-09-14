@@ -13,11 +13,11 @@ class CustomExpansionTile extends StatelessWidget {
       data: ExpansionTileThemeData(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         collapsedIconColor: Theme.of(context).colorScheme.background,
-        iconColor: Theme.of(context).primaryColor,
-        collapsedBackgroundColor: Theme.of(context).primaryColor,
+        iconColor: Theme.of(context).colorScheme.primary,
+        collapsedBackgroundColor: Theme.of(context).colorScheme.primary,
         backgroundColor: Theme.of(context).colorScheme.onTertiary,
-        textColor: Theme.of(context).primaryColor,
-        collapsedTextColor: Theme.of(context).colorScheme.background.withOpacity(0.5),
+        textColor: Theme.of(context).colorScheme.primary,
+        collapsedTextColor: Theme.of(context).colorScheme.onPrimary,
       ),
       child: Card(
         elevation: 10,

@@ -351,5 +351,8 @@
   "changeTheme": "Cambia Tema",
   "themeSystem": "Default di sistema",
   "themeDark": "Scuro",
-  "themeLight": "Chiaro"
+  "themeLight": "Chiaro",
+  "selectThemeDialogTitle": "Seleziona Tema",
+  "login": "Login",
+  "registration": "Registrazione"
 }

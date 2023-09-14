@@ -7,7 +7,6 @@ import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../core/presentation/widgets/image_dialog.dart';
-import '../../../../utils/colors/custom_color.dart';
 import '../../../item/domain/entities/item.dart';
 import '../../../item/presentation/widgets/notifications/circular_image_avatar.dart';
 import '../bloc/answer_claim/answer_claim_bloc.dart';
@@ -90,7 +89,7 @@ class ClaimedItemInfo extends StatelessWidget {
                       PersonalizedLargeGreenButton(
                         onPressed: () =>
                             Navigator.of(context).push(MaterialPageRoute(builder: (_) => ItemScreen(itemId: item.id))),
-                        text: Text(AppLocalizations.of(context)!.seeDetails),
+                        text: Text(AppLocalizations.of(context)!.seeDetails, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),),
                       ),
                     ],
                   ),
@@ -101,7 +100,7 @@ class ClaimedItemInfo extends StatelessWidget {
         ),
         Divider(
           thickness: 1,
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).colorScheme.primary,
         ),
         const SizedBox(
           height: 10,
@@ -137,15 +136,15 @@ class ClaimedItemInfo extends StatelessWidget {
             const SizedBox(width: 10),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.background,
-                side: BorderSide(color: Theme.of(context).primaryColor, width: 0.4),
+                backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                side: BorderSide(color: Theme.of(context).colorScheme.primary, width: 0.4),
                 shape: const StadiumBorder(),
                 padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
               ).copyWith(
                 overlayColor: MaterialStateProperty.resolveWith<Color>(
                   (Set<MaterialState> states) {
                     if (states.contains(MaterialState.pressed)) {
-                      return Theme.of(context).extension<CustomColors>()!.buttonPressed!;
+                      return Theme.of(context).colorScheme.onTertiaryContainer.withOpacity(0.2);
                     }
                     return Colors.transparent;
                   },
@@ -166,7 +165,7 @@ class ClaimedItemInfo extends StatelessWidget {
               },
               child: Text(
                 AppLocalizations.of(context)!.sendMessage,
-                style: TextStyle(fontSize: 14, color: Theme.of(context).primaryColor),
+                style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onTertiaryContainer),
               ),
             ),
           ],

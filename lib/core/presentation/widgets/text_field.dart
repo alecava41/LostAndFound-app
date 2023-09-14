@@ -24,7 +24,7 @@ class PersonalizedTextField extends StatelessWidget {
     return TextFormField(
       initialValue: text,
       textCapitalization: TextCapitalization.sentences,
-      cursorColor: Theme.of(context).primaryColor,
+      cursorColor: Theme.of(context).colorScheme.primary,
       onChanged: onTextChanged,
       minLines: 1,
       maxLines: maxLines,
@@ -33,7 +33,7 @@ class PersonalizedTextField extends StatelessWidget {
       decoration: InputDecoration(
           errorMaxLines: 3,
           hintText: hintText,
-          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor))),
+          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.of(context).colorScheme.primary))),
     );
   }
 }

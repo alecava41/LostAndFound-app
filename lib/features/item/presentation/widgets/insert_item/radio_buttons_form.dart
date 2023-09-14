@@ -1,7 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
-
 
 class PersonalizedRadioButtonsForm extends StatelessWidget {
   final ItemType? selectedValue;
@@ -10,7 +10,7 @@ class PersonalizedRadioButtonsForm extends StatelessWidget {
   const PersonalizedRadioButtonsForm({
     super.key,
     required this.selectedValue,
-    this.onChanged,
+    required this.onChanged,
   });
 
   @override
@@ -25,17 +25,29 @@ class PersonalizedRadioButtonsForm extends StatelessWidget {
               value: ItemType.lost,
               groupValue: selectedValue,
               onChanged: onChanged,
-              activeColor: Theme.of(context).primaryColor,
+              activeColor: onChanged != null ? Theme.of(context).colorScheme.primary : Colors.grey,
             ),
-            Text(AppLocalizations.of(context)!.lost, style: const TextStyle(fontSize: 18)),
+            RichText(
+              text: TextSpan(
+                text: AppLocalizations.of(context)!.lost,
+                recognizer: TapGestureRecognizer()..onTap = () => onChanged!(ItemType.lost),
+                style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.onBackground),
+              ),
+            ),
             const SizedBox(width: 60),
             Radio<ItemType>(
               value: ItemType.found,
               groupValue: selectedValue,
               onChanged: onChanged,
-              activeColor: Theme.of(context).primaryColor,
+              activeColor: onChanged != null ? Theme.of(context).colorScheme.primary : Colors.grey,
             ),
-            Text(AppLocalizations.of(context)!.found, style: const TextStyle(fontSize: 18)),
+            RichText(
+              text: TextSpan(
+                text: AppLocalizations.of(context)!.found,
+                recognizer: TapGestureRecognizer()..onTap = () => onChanged!(ItemType.found),
+                style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.onBackground),
+              ),
+            )
           ],
         ),
       ],

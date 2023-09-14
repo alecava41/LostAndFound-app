@@ -30,11 +30,12 @@ class CustomCardSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 253,
+      height: 270,
       width: 165,
       child: Stack(
         children: [
           Card(
+            surfaceTintColor: Theme.of(context).extension<CustomColors>()!.background2,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(24.0),
             ),
@@ -76,12 +77,12 @@ class CustomCardSearch extends StatelessWidget {
                       Text(
                         DateFormat("dd/MM/yyyy").format(date),
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 14, color: Theme.of(context).extension<CustomColors>()!.usernameColor),
+                        style: TextStyle(fontSize: 14, color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
                       ),
                       Text(
                         AppLocalizations.of(context)!.metersAway(distance.toInt()),
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 14, color: Theme.of(context).extension<CustomColors>()!.usernameColor),
+                        style: TextStyle(fontSize: 14, color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
                       )
                     ],
                   ),
@@ -97,7 +98,7 @@ class CustomCardSearch extends StatelessWidget {
                 width: 65,
                 height: 30,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.primary,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),
                     bottomLeft: Radius.circular(10),
@@ -114,7 +115,7 @@ class CustomCardSearch extends StatelessWidget {
                 child: Center(
                   child: Text(
                     "${type[0].toUpperCase()}${type.substring(1)}",
-                    style: TextStyle(color: Theme.of(context).colorScheme.background, fontSize: 16),
+                    style: TextStyle(color: Theme.of(context).colorScheme.onPrimary, fontSize: 16),
                   ),
                 ),
               )),

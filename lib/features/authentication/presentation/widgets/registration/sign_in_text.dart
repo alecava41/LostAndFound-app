@@ -14,6 +14,9 @@ class SignInText extends StatelessWidget {
           onPressed: () {
             Navigator.pushReplacementNamed(context, '/login');
           },
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.zero
+          ),
           child: Text(
             AppLocalizations.of(context)!.singIn,
             style: const TextStyle(

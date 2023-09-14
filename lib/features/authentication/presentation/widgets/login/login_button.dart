@@ -4,8 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/authentication/presentation/bloc/login/login_bloc.dart';
 
-import '../../../../../utils/colors/custom_color.dart';
-
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});
 
@@ -17,17 +15,18 @@ class LoginButton extends StatelessWidget {
           context.read<LoginBloc>().add(const LoginEvent.loginSubmitted());
         },
         style: ElevatedButton.styleFrom(
+          backgroundColor: Theme.of(context).colorScheme.primary,
           shape: const StadiumBorder(),
           padding: const EdgeInsets.symmetric(vertical: 16),
         ),
         child: state.isSubmitting
             ? CustomCircularProgress(
                 size: 25,
-                color: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
+                color: Theme.of(context).colorScheme.onPrimary,
               )
             : Text(
                 AppLocalizations.of(context)!.singIn,
-                style: const TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onPrimary),
               ),
       );
     });

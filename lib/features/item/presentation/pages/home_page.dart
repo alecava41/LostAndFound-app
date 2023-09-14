@@ -6,6 +6,7 @@ import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart
 import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/features/user/presentation/pages/tutorial_page.dart';
+import 'package:lost_and_found/utils/colors/custom_color.dart';
 import 'package:sizer/sizer.dart';
 
 import '../widgets/home/clickable_circular_button.dart';
@@ -117,14 +118,14 @@ class HomeScreen extends StatelessWidget {
                                                 arguments: const TutorialScreenArguments(tab: 0));
                                           },
                                           text: Text(AppLocalizations.of(context)!.homeTutorialOpenLostItem,
-                                              style: TextStyle(color: Theme.of(context).colorScheme.background))),
+                                              style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.background2),),),
                                       PersonalizedLargeGreenButton(
                                           onPressed: () {
                                             Navigator.pushNamed(context, "/options/tutorial",
                                                 arguments: const TutorialScreenArguments(tab: 1));
                                           },
                                           text: Text(AppLocalizations.of(context)!.homeTutorialOpenFoundItem,
-                                              style: TextStyle(color: Theme.of(context).colorScheme.background))),
+                                              style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.background2),),),
                                     ],
                                   ),
                                 ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
@@ -105,205 +104,201 @@ class UpdateItemScreen extends StatelessWidget {
                       });
             }
           },
-          builder: (ctx, state) => AnnotatedRegion(
-            value: SystemUiOverlayStyle(
-              statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
-              statusBarBrightness: Brightness.dark,
-              statusBarIconBrightness: Brightness.dark,
-            ),
-            child: WillPopScope(
-              onWillPop: () async {
-                if (state.hasChangedSomething) {
-                  showDialogExit(context);
-                  return false;
-                } else {
-                  Navigator.pop(ctx);
-                  return true;
-                }
-              },
-              child: GestureDetector(
-                onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-                child: SafeArea(
-                  child: Scaffold(
-                    backgroundColor: Theme.of(context).colorScheme.background,
-                    appBar: AppBar(
-                      leading: IconButton(
-                        icon: const Icon(Icons.arrow_back),
-                        onPressed: () {
-                          if (state.hasChangedSomething) {
-                            showDialogExit(context);
-                          } else {
-                            Navigator.pop(ctx);
-                          }
-                        },
-                      ),
-                      iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
-                      title: Text(
-                        AppLocalizations.of(context)!.updateItemPageTitle,
-                        style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
-                      ),
-                      backgroundColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
-                    ),
-                    body: state.isLoading
-                        ? const CustomCircularProgress(size: 100)
-                        : state.hasLoadingError
-                            ? ErrorPage(
-                                onRetry: () => ctx.read<UpdateItemBloc>().add(UpdateItemEvent.contentCreated(itemId)))
-                            : SingleChildScrollView(
-                                child: Column(children: [
-                                  UploadImageForm(
-                                      onSelectUploadMethod: () => chooseMediaDialog(ctx),
-                                      onDeletePhoto: () =>
-                                          ctx.read<UpdateItemBloc>().add(const UpdateItemEvent.imageDeleted()),
-                                      imagePath: state.imagePath,
-                                      itemId: itemId,
-                                      token: state.token,
-                                      hasDeletedOriginalImage: state.hasDeletedOriginalImage),
-                                  customDivider(),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  customDivider(),
-                                  Container(
-                                    color: Theme.of(context).colorScheme.background,
-                                    padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                    child: Column(
-                                      children: [
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        CustomFieldContainer(
-                                          title: AppLocalizations.of(context)!.itemType,
-                                          content: PersonalizedRadioButtonsForm(
-                                              selectedValue: state.item!.type, onChanged: null),
-                                        ),
-                                        const SizedBox(
-                                          height: 15,
-                                        ),
-                                        CustomFieldContainer(
-                                          title: AppLocalizations.of(context)!.titleFieldTitle,
-                                          content: PersonalizedFormWithTextInsertion(
-                                            maxLines: 1,
-                                            text: state.title.value.getOrElse(() => ""),
-                                            showError: state.showError,
-                                            errorText: state.title.value.fold(
-                                                (failure) => failure.maybeWhen<String?>(
-                                                    validationFailure: () =>
-                                                        AppLocalizations.of(context)!.failureInvalidTitle,
-                                                    orElse: () => null),
-                                                (r) => null),
-                                            onTextChanged: (input) =>
-                                                ctx.read<UpdateItemBloc>().add(UpdateItemEvent.titleChanged(input)),
-                                            isValid: state.title.value.isRight(),
-                                            hintText: AppLocalizations.of(context)!.titleFieldHint,
-                                          ),
-                                        ),
-                                        state.item!.type == ItemType.found
-                                            ? const SizedBox(
-                                                height: 15,
-                                              )
-                                            : Container(),
-                                        state.item!.type == ItemType.found
-                                            ? CustomFieldContainer(
-                                                title: AppLocalizations.of(context)!.questionFieldTitle,
-                                                content: PersonalizedFormWithTextInsertion(
-                                                  text: state.question.value.getOrElse(() => ""),
-                                                  hintText: AppLocalizations.of(context)!.questionFieldHint,
-                                                  isValid: state.question.value.isRight(),
-                                                  onTextChanged: (input) => ctx
-                                                      .read<UpdateItemBloc>()
-                                                      .add(UpdateItemEvent.questionChanged(input)),
-                                                  showError: state.showError,
-                                                  errorText: state.question.value.fold(
-                                                      (failure) => failure.maybeWhen<String?>(
-                                                          validationFailure: () =>
-                                                              AppLocalizations.of(context)!.failureInvalidQuestionField,
-                                                          orElse: () => null),
-                                                      (r) => null),
-                                                ),
-                                              )
-                                            : Container(),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  customDivider(),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  SelectPositionButton(
-                                    showError: state.showError,
-                                    errorText: state.pos.value.fold(
-                                        (failure) => failure.maybeWhen(
-                                            validationFailure: () => AppLocalizations.of(context)!.failureInvalidPosition,
-                                            orElse: () => ""),
-                                        (_) => ""),
-                                    startingPosition: state.pos.value.getOrElse(() => appGlobalState.defaultPosition),
-                                    isLoadingAddress: state.isLoadingPosition,
-                                    address: state.address,
-                                    onPositionSelected: (LatLng? pos) {
-                                      if (pos != null) {
-                                        ctx
-                                            .read<UpdateItemBloc>()
-                                            .add(UpdateItemEvent.positionSelected(LatLng(pos.latitude, pos.longitude)));
-                                      }
-                                    },
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  CategorySelectionForm(
-                                    onTap: (value) => ctx
-                                        .read<UpdateItemBloc>()
-                                        .add(UpdateItemEvent.categorySelected(value.first, value.second)),
-                                    category: state.category,
-                                    showError: state.showError,
-                                    errorText: state.cat.value.fold(
-                                        (failure) => failure.maybeWhen(
-                                            validationFailure: () => AppLocalizations.of(context)!.failureInvalidCategory,
-                                            orElse: () => ""),
-                                        (_) => ""),
-                                    removeAllOption: true,
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
+          builder: (ctx, state) => WillPopScope(
+            onWillPop: () async {
+              if (state.hasChangedSomething) {
+                showDialogExit(context);
+                return false;
+              } else {
+                Navigator.pop(ctx);
+                return true;
+              }
+            },
+            child: GestureDetector(
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+              child: Scaffold(
+                backgroundColor: Theme.of(context).colorScheme.background,
+                appBar: AppBar(
+                  backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
+                  elevation: 0,
+                  surfaceTintColor: Theme.of(context).colorScheme.outline,
+                  shadowColor: Theme.of(context).colorScheme.outline,
+                  leading: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      if (state.hasChangedSomething) {
+                        showDialogExit(context);
+                      } else {
+                        Navigator.pop(ctx);
+                      }
+                    },
+                  ),
+                  iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
+                  title: Text(
+                    AppLocalizations.of(context)!.updateItemPageTitle,
+                    style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                  ),
+                ),
+                body: SafeArea(
+                  child: state.isLoading
+                      ? const CustomCircularProgress(size: 100)
+                      : state.hasLoadingError
+                          ? ErrorPage(
+                              onRetry: () => ctx.read<UpdateItemBloc>().add(UpdateItemEvent.contentCreated(itemId)))
+                          : SingleChildScrollView(
+                              child: Column(children: [
+                                UploadImageForm(
+                                    onSelectUploadMethod: () => chooseMediaDialog(ctx),
+                                    onDeletePhoto: () =>
+                                        ctx.read<UpdateItemBloc>().add(const UpdateItemEvent.imageDeleted()),
+                                    imagePath: state.imagePath,
+                                    itemId: itemId,
+                                    token: state.token,
+                                    hasDeletedOriginalImage: state.hasDeletedOriginalImage),
+                                customDivider(),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                customDivider(),
+                                Container(
+                                  color: Theme.of(context).colorScheme.background,
+                                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                  child: Column(
                                     children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: ElevatedButton(
-                                              onPressed: () =>
-                                                  ctx.read<UpdateItemBloc>().add(const UpdateItemEvent.updateSubmitted()),
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Theme.of(context).primaryColor,
-                                                shape: const StadiumBorder(),
-                                                padding: const EdgeInsets.symmetric(vertical: 16),
-                                              ),
-                                              child: state.isSubmitting
-                                                  ? CustomCircularProgress(
-                                                      size: 25,
-                                                      color: Theme.of(context).colorScheme.background,
-                                                    )
-                                                  : Text(
-                                                      AppLocalizations.of(context)!.update,
-                                                      style: TextStyle(
-                                                          fontSize: 20, color: Theme.of(context).colorScheme.background),
-                                                    )),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      CustomFieldContainer(
+                                        title: AppLocalizations.of(context)!.itemType,
+                                        content: PersonalizedRadioButtonsForm(
+                                            selectedValue: state.item!.type, onChanged: null),
+                                      ),
+                                      const SizedBox(
+                                        height: 15,
+                                      ),
+                                      CustomFieldContainer(
+                                        title: AppLocalizations.of(context)!.titleFieldTitle,
+                                        content: PersonalizedFormWithTextInsertion(
+                                          maxLines: 1,
+                                          text: state.title.value.getOrElse(() => ""),
+                                          showError: state.showError,
+                                          errorText: state.title.value.fold(
+                                              (failure) => failure.maybeWhen<String?>(
+                                                  validationFailure: () =>
+                                                      AppLocalizations.of(context)!.failureInvalidTitle,
+                                                  orElse: () => null),
+                                              (r) => null),
+                                          onTextChanged: (input) =>
+                                              ctx.read<UpdateItemBloc>().add(UpdateItemEvent.titleChanged(input)),
+                                          isValid: state.title.value.isRight(),
+                                          hintText: AppLocalizations.of(context)!.titleFieldHint,
                                         ),
-                                      )
+                                      ),
+                                      state.item!.type == ItemType.found
+                                          ? const SizedBox(
+                                              height: 15,
+                                            )
+                                          : Container(),
+                                      state.item!.type == ItemType.found
+                                          ? CustomFieldContainer(
+                                              title: AppLocalizations.of(context)!.questionFieldTitle,
+                                              content: PersonalizedFormWithTextInsertion(
+                                                text: state.question.value.getOrElse(() => ""),
+                                                hintText: AppLocalizations.of(context)!.questionFieldHint,
+                                                isValid: state.question.value.isRight(),
+                                                onTextChanged: (input) => ctx
+                                                    .read<UpdateItemBloc>()
+                                                    .add(UpdateItemEvent.questionChanged(input)),
+                                                showError: state.showError,
+                                                errorText: state.question.value.fold(
+                                                    (failure) => failure.maybeWhen<String?>(
+                                                        validationFailure: () =>
+                                                            AppLocalizations.of(context)!.failureInvalidQuestionField,
+                                                        orElse: () => null),
+                                                    (r) => null),
+                                              ),
+                                            )
+                                          : Container(),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
                                     ],
                                   ),
-                                  const SizedBox(
-                                    height: 50,
-                                  ),
-                                ]),
-                              ),
-                  ),
+                                ),
+                                customDivider(),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SelectPositionButton(
+                                  showError: state.showError,
+                                  errorText: state.pos.value.fold(
+                                      (failure) => failure.maybeWhen(
+                                          validationFailure: () => AppLocalizations.of(context)!.failureInvalidPosition,
+                                          orElse: () => ""),
+                                      (_) => ""),
+                                  startingPosition: state.pos.value.getOrElse(() => appGlobalState.defaultPosition),
+                                  isLoadingAddress: state.isLoadingPosition,
+                                  address: state.address,
+                                  onPositionSelected: (LatLng? pos) {
+                                    if (pos != null) {
+                                      ctx
+                                          .read<UpdateItemBloc>()
+                                          .add(UpdateItemEvent.positionSelected(LatLng(pos.latitude, pos.longitude)));
+                                    }
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                CategorySelectionForm(
+                                  onTap: (value) => ctx
+                                      .read<UpdateItemBloc>()
+                                      .add(UpdateItemEvent.categorySelected(value.first, value.second)),
+                                  category: state.category,
+                                  showError: state.showError,
+                                  errorText: state.cat.value.fold(
+                                      (failure) => failure.maybeWhen(
+                                          validationFailure: () => AppLocalizations.of(context)!.failureInvalidCategory,
+                                          orElse: () => ""),
+                                      (_) => ""),
+                                  removeAllOption: true,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: ElevatedButton(
+                                            onPressed: () =>
+                                                ctx.read<UpdateItemBloc>().add(const UpdateItemEvent.updateSubmitted()),
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: Theme.of(context).colorScheme.primary,
+                                              shape: const StadiumBorder(),
+                                              padding: const EdgeInsets.symmetric(vertical: 16),
+                                            ),
+                                            child: state.isSubmitting
+                                                ? CustomCircularProgress(
+                                                    size: 25,
+                                                    color: Theme.of(context).colorScheme.onPrimary,
+                                                  )
+                                                : Text(
+                                                    AppLocalizations.of(context)!.update,
+                                                    style: TextStyle(
+                                                        fontSize: 20, color: Theme.of(context).colorScheme.onPrimary),
+                                                  )),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 50,
+                                ),
+                              ]),
+                            ),
                 ),
               ),
             ),

@@ -35,6 +35,7 @@ class ClaimedItemCard extends StatelessWidget {
           onTap: () => onTap(),
           child: Container(
             decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surfaceVariant,
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
                 width: 0.3,
@@ -97,12 +98,12 @@ class ClaimedItemCard extends StatelessWidget {
                                 children: [
                                   TextSpan(
                                     text: AppLocalizations.of(context)!.claimStatusSpaced,
-                                    style: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.onBackground),
+                                    style: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.onSurface),
                                   ),
                                   TextSpan(
                                     text: status.getTranslatedName(context).toUpperCase(),
                                     style:
-                                        TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onBackground),
+                                        TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface),
                                   ),
                                 ],
                               ),

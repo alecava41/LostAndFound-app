@@ -153,7 +153,7 @@ class ChatScreen extends StatelessWidget {
                             theme: DefaultChatTheme(
                               inputBorderRadius: const BorderRadius.all(Radius.circular(60)),
                               inputContainerDecoration: BoxDecoration(
-                                  border: Border.all(width: 0.1, color: Theme.of(context).extension<CustomColors>()!.usernameColor!),
+                                  border: Border.all(width: 0.1, color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor!),
                                   borderRadius: const BorderRadius.all(Radius.circular(60))),
                               primaryColor: Theme.of(context).colorScheme.primary,
                               secondaryColor: Theme.of(context).colorScheme.secondary,

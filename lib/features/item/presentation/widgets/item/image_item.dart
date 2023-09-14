@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
+import 'package:lost_and_found/utils/colors/custom_color.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../../core/presentation/widgets/image_dialog.dart';
@@ -22,7 +23,7 @@ class ImageItem extends StatelessWidget {
         fit: BoxFit.cover,
       ),
       child: Container(
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).extension<CustomColors>()!.background2,
         width: MediaQuery.of(context).size.width,
         height: 300,
         child: Image.network(

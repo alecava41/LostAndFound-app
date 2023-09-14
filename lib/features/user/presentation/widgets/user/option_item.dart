@@ -20,7 +20,7 @@ class OptionItem extends StatelessWidget {
     return Column(
       children: [
         Material(
-          color: Theme.of(context).colorScheme.background,
+          color: Theme.of(context).extension<CustomColors>()!.background2,
           child: InkWell(
             onTap: onTap,
             splashColor: Theme.of(context).extension<CustomColors>()!.splashGreyColor,
