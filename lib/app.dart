@@ -4,6 +4,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -125,6 +126,11 @@ class _Application extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return MultiBlocProvider(
       providers: [
         BlocProvider<AppGlobalBloc>(create: (_) => sl<AppGlobalBloc>()..add(const AppGlobalEvent.appCreated())),
