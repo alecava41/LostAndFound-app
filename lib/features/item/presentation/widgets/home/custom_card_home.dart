@@ -43,6 +43,7 @@ class CustomCardHome extends StatelessWidget {
           children: [
             Card(
               surfaceTintColor: Theme.of(context).extension<CustomColors>()!.background2,
+              color: Theme.of(context).extension<CustomColors>()!.background2,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(24.0),
               ),
@@ -106,7 +107,7 @@ class CustomCardHome extends StatelessWidget {
                                 child: Container(
                                   padding: const EdgeInsets.all(1),
                                   decoration: BoxDecoration(
-                                    color: Theme.of(context).extension<CustomColors>()!.claimWaitingStatusColor,
+                                    color: Theme.of(context).extension<CustomColors>()!.nClaimsColor,
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: Row(

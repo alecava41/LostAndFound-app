@@ -1,11 +1,10 @@
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:badges/badges.dart' as badges;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/chat/presentation/pages/inbox_page.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/search/search_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/utils/colors/custom_color.dart';
 
 import '../../../../features/badges/presentation/bloc/badge_bloc.dart';
@@ -38,12 +37,13 @@ class HomeControllerScreen extends StatelessWidget {
           builder: (searchCtx, searchState) {
             return AnnotatedRegion<SystemUiOverlayStyle>(
               value: SystemUiOverlayStyle(
-                  statusBarColor:
-                      state.tabIndex == 4 || (state.tabIndex == 1 && searchState.pageState == SearchPageState.resultPage)
-                          ? Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor
-                          : Theme.of(context).colorScheme.background,
-                  statusBarBrightness: Brightness.dark,
-                  statusBarIconBrightness: Brightness.dark),
+                statusBarColor:
+                    state.tabIndex == 4 || (state.tabIndex == 1 && searchState.pageState == SearchPageState.resultPage)
+                        ? Theme.of(context).extension<CustomColors>()!.background2
+                        : Theme.of(context).colorScheme.background,
+                statusBarBrightness: WidgetsBinding.instance.platformDispatcher.platformBrightness,
+                statusBarIconBrightness: WidgetsBinding.instance.platformDispatcher.platformBrightness,
+              ),
               child: SafeArea(
                 child: Scaffold(
                   backgroundColor: Theme.of(context).colorScheme.background,
@@ -78,8 +78,11 @@ class HomeControllerScreen extends StatelessWidget {
                             child: const Icon(Icons.home),
                           ),
                           label: AppLocalizations.of(context)!.homeBottomBarTab),
-                      BottomNavigationBarItem(icon: const Icon(Icons.search), label: AppLocalizations.of(context)!.searchBottomBarTab),
-                      BottomNavigationBarItem(icon: const Icon(Icons.add_circle_outline_outlined), label: AppLocalizations.of(context)!.insertBottomBarTab),
+                      BottomNavigationBarItem(
+                          icon: const Icon(Icons.search), label: AppLocalizations.of(context)!.searchBottomBarTab),
+                      BottomNavigationBarItem(
+                          icon: const Icon(Icons.add_circle_outline_outlined),
+                          label: AppLocalizations.of(context)!.insertBottomBarTab),
                       BottomNavigationBarItem(
                           icon: badges.Badge(
                             showBadge: badgeState.hasUnreadChats,
@@ -87,7 +90,8 @@ class HomeControllerScreen extends StatelessWidget {
                             child: const Icon(Icons.mail),
                           ),
                           label: AppLocalizations.of(context)!.inboxBottomBarTab),
-                       BottomNavigationBarItem(icon: const Icon(Icons.person), label: AppLocalizations.of(context)!.profileBottomBarTab),
+                      BottomNavigationBarItem(
+                          icon: const Icon(Icons.person), label: AppLocalizations.of(context)!.profileBottomBarTab),
                     ],
                   ),
                 ),

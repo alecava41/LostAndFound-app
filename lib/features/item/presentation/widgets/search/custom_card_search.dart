@@ -36,6 +36,7 @@ class CustomCardSearch extends StatelessWidget {
         children: [
           Card(
             surfaceTintColor: Theme.of(context).extension<CustomColors>()!.background2,
+            color: Theme.of(context).extension<CustomColors>()!.background2,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(24.0),
             ),
