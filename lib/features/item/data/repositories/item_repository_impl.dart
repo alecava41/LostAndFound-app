@@ -11,7 +11,7 @@ import 'package:lost_and_found/core/data/datasources/news/read_news_datasource.d
 import 'package:lost_and_found/features/item/domain/entities/item.dart';
 import 'package:lost_and_found/features/item/domain/entities/search_item.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
-import 'package:lost_and_found/features/item/domain/entities/news.dart';
+import 'package:lost_and_found/features/item/domain/entities/news.dart' as notification;
 import 'package:lost_and_found/features/item/domain/repositories/item_repository.dart';
 import 'package:lost_and_found/features/item/domain/usecases/create_item_usecase.dart';
 import 'package:lost_and_found/features/item/domain/usecases/delete_item_usecase.dart';
@@ -62,7 +62,7 @@ class ItemRepositoryImpl implements ItemRepository {
   }
 
   @override
-  Future<Either<Failure, List<News>>> getUserNotifications(NoParams params) async {
+  Future<Either<Failure, List<notification.News>>> getUserNotifications(NoParams params) async {
     try {
       if (await _networkInfo.isConnected) {
         final news = await _dataSource.getUserNotifications(params);

@@ -12,6 +12,8 @@ import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/pages/update_item_page.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/insert_item/custom_field_container.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/item/claimed_item_card.dart';
+import 'package:lost_and_found/features/item/presentation/widgets/item/custom_card_news.dart';
+import 'package:lost_and_found/features/item/presentation/widgets/item/custom_news_list_view.dart';
 import 'package:lost_and_found/utils/constants.dart';
 import 'package:lost_and_found/utils/utility.dart';
 
@@ -118,7 +120,13 @@ class ItemScreen extends StatelessWidget {
                               if (isCurrentUserOwner!) {
                                 if (state.item!.type == ItemType.found) {
                                   widgetList += _showOwnerFoundItemWidgets(
-                                      ctx, state.item!.claims != null ? state.item!.claims! : [], state.token, itemId);
+                                      ctx,
+                                      state.item!.claims != null ? state.item!.claims! : [],
+                                      state.token,
+                                      itemId,
+                                      state.item!.news);
+                                } else {
+                                  widgetList += _showOwnerLostItemWidgets(ctx, state.item!.news, state.token);
                                 }
                               } else {
                                 if (state.item!.type == ItemType.lost) {
@@ -389,7 +397,54 @@ class ItemScreen extends StatelessWidget {
     ];
   }
 
-  List<Widget> _showOwnerFoundItemWidgets(BuildContext context, List<ClaimReceived> claims, String token, int itemId) {
+  List<Widget> _showOwnerLostItemWidgets(BuildContext context, List<News>? news, String token) {
+    return [
+      Container(
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomFieldContainer(
+              title: AppLocalizations.of(context)!.newsForLostItem,
+              content: news == null || news.isEmpty
+                  ? Center(
+                      child: Column(
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!.noNewsForItem,
+                            style: const TextStyle(fontSize: 18),
+                          ),
+                          const Icon(
+                            Icons.notifications,
+                            size: 50,
+                          )
+                        ],
+                      ),
+                    )
+                  : CustomScrollableNewsListView(
+                      newsList: news
+                          .map(
+                            (news) => CustomCardNews(
+                              token: token,
+                              title: news.title,
+                              id: news.itemId,
+                            ),
+                          )
+                          .toList(),
+                    ),
+            ),
+          ],
+        ),
+      ),
+      const Divider(
+        height: 0,
+      ),
+    ];
+  }
+
+  List<Widget> _showOwnerFoundItemWidgets(
+      BuildContext context, List<ClaimReceived> claims, String token, int itemId, List<News>? news) {
     return [
       Container(
         width: MediaQuery.of(context).size.width,
@@ -402,17 +457,18 @@ class ItemScreen extends StatelessWidget {
               content: claims.isEmpty
                   ? Center(
                       child: Column(
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)!.noClaimsForItem,
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                        const Icon(
-                          Icons.connect_without_contact,
-                          size: 50,
-                        )
-                      ],
-                    ))
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!.noClaimsForItem,
+                            style: const TextStyle(fontSize: 18),
+                          ),
+                          const Icon(
+                            Icons.connect_without_contact,
+                            size: 50,
+                          )
+                        ],
+                      ),
+                    )
                   : ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -450,6 +506,36 @@ class ItemScreen extends StatelessWidget {
                           ),
                         );
                       },
+                    ),
+            ),
+            const SizedBox(height: 20),
+            CustomFieldContainer(
+              title: AppLocalizations.of(context)!.newsForFoundItem,
+              content: news == null || news.isEmpty
+                  ? Center(
+                      child: Column(
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!.noNewsForItem,
+                            style: const TextStyle(fontSize: 18),
+                          ),
+                          const Icon(
+                            Icons.notifications,
+                            size: 50,
+                          )
+                        ],
+                      ),
+                    )
+                  : CustomScrollableNewsListView(
+                      newsList: news
+                          .map(
+                            (news) => CustomCardNews(
+                              token: token,
+                              title: news.title,
+                              id: news.itemId,
+                            ),
+                          )
+                          .toList(),
                     ),
             ),
           ],

@@ -356,5 +356,8 @@
   "themeLight": "Light",
   "selectThemeDialogTitle": "Select Theme",
   "login": "Login",
-  "registration": "Registration"
+  "registration": "Registration",
+  "newsForFoundItem": "Matching lost items",
+  "newsForLostItem": "Matching found items",
+  "noNewsForItem": "No news received yet"
 }

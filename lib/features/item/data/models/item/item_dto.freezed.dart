@@ -33,6 +33,7 @@ mixin _$ItemDto {
   PositionDto get position => throw _privateConstructorUsedError;
   List<ClaimReceivedDto>? get claims => throw _privateConstructorUsedError;
   ClaimSentDto? get userClaim => throw _privateConstructorUsedError;
+  List<NewsDto>? get news => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -57,7 +58,8 @@ abstract class $ItemDtoCopyWith<$Res> {
       String? question,
       PositionDto position,
       List<ClaimReceivedDto>? claims,
-      ClaimSentDto? userClaim});
+      ClaimSentDto? userClaim,
+      List<NewsDto>? news});
 
   $UserDtoCopyWith<$Res> get user;
   $CategoryDtoCopyWith<$Res> get category;
@@ -91,6 +93,7 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
     Object? position = null,
     Object? claims = freezed,
     Object? userClaim = freezed,
+    Object? news = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -145,6 +148,10 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
           ? _value.userClaim
           : userClaim // ignore: cast_nullable_to_non_nullable
               as ClaimSentDto?,
+      news: freezed == news
+          ? _value.news
+          : news // ignore: cast_nullable_to_non_nullable
+              as List<NewsDto>?,
     ) as $Val);
   }
 
@@ -205,7 +212,8 @@ abstract class _$$$ItemDtoCopyWith<$Res> implements $ItemDtoCopyWith<$Res> {
       String? question,
       PositionDto position,
       List<ClaimReceivedDto>? claims,
-      ClaimSentDto? userClaim});
+      ClaimSentDto? userClaim,
+      List<NewsDto>? news});
 
   @override
   $UserDtoCopyWith<$Res> get user;
@@ -240,6 +248,7 @@ class __$$$ItemDtoCopyWithImpl<$Res>
     Object? position = null,
     Object? claims = freezed,
     Object? userClaim = freezed,
+    Object? news = freezed,
   }) {
     return _then(_$$ItemDto(
       id: null == id
@@ -294,6 +303,10 @@ class __$$$ItemDtoCopyWithImpl<$Res>
           ? _value.userClaim
           : userClaim // ignore: cast_nullable_to_non_nullable
               as ClaimSentDto?,
+      news: freezed == news
+          ? _value._news
+          : news // ignore: cast_nullable_to_non_nullable
+              as List<NewsDto>?,
     ));
   }
 }
@@ -314,8 +327,10 @@ class _$$ItemDto implements $ItemDto {
       required this.question,
       required this.position,
       final List<ClaimReceivedDto>? claims,
-      this.userClaim})
-      : _claims = claims;
+      this.userClaim,
+      final List<NewsDto>? news})
+      : _claims = claims,
+        _news = news;
 
   factory _$$ItemDto.fromJson(Map<String, dynamic> json) =>
       _$$$ItemDtoFromJson(json);
@@ -354,10 +369,19 @@ class _$$ItemDto implements $ItemDto {
 
   @override
   final ClaimSentDto? userClaim;
+  final List<NewsDto>? _news;
+  @override
+  List<NewsDto>? get news {
+    final value = _news;
+    if (value == null) return null;
+    if (_news is EqualUnmodifiableListView) return _news;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'ItemDto(id: $id, resolved: $resolved, title: $title, type: $type, address: $address, image: $image, date: $date, user: $user, category: $category, question: $question, position: $position, claims: $claims, userClaim: $userClaim)';
+    return 'ItemDto(id: $id, resolved: $resolved, title: $title, type: $type, address: $address, image: $image, date: $date, user: $user, category: $category, question: $question, position: $position, claims: $claims, userClaim: $userClaim, news: $news)';
   }
 
   @override
@@ -382,7 +406,8 @@ class _$$ItemDto implements $ItemDto {
                 other.position == position) &&
             const DeepCollectionEquality().equals(other._claims, _claims) &&
             (identical(other.userClaim, userClaim) ||
-                other.userClaim == userClaim));
+                other.userClaim == userClaim) &&
+            const DeepCollectionEquality().equals(other._news, _news));
   }
 
   @JsonKey(ignore: true)
@@ -401,7 +426,8 @@ class _$$ItemDto implements $ItemDto {
       question,
       position,
       const DeepCollectionEquality().hash(_claims),
-      userClaim);
+      userClaim,
+      const DeepCollectionEquality().hash(_news));
 
   @JsonKey(ignore: true)
   @override
@@ -431,7 +457,8 @@ abstract class $ItemDto implements ItemDto {
       required final String? question,
       required final PositionDto position,
       final List<ClaimReceivedDto>? claims,
-      final ClaimSentDto? userClaim}) = _$$ItemDto;
+      final ClaimSentDto? userClaim,
+      final List<NewsDto>? news}) = _$$ItemDto;
 
   factory $ItemDto.fromJson(Map<String, dynamic> json) = _$$ItemDto.fromJson;
 
@@ -461,6 +488,8 @@ abstract class $ItemDto implements ItemDto {
   List<ClaimReceivedDto>? get claims;
   @override
   ClaimSentDto? get userClaim;
+  @override
+  List<NewsDto>? get news;
   @override
   @JsonKey(ignore: true)
   _$$$ItemDtoCopyWith<_$$ItemDto> get copyWith =>

@@ -36,7 +36,7 @@ class OptionItem extends StatelessWidget {
                       ),
                       Icon(
                         icon,
-                        size: 40,
+                        size: 25,
                       ),
                       const SizedBox(
                         width: 15,

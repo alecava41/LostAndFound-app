@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/user/presentation/widgets/tutorial/carousel_detailed_tutorial.dart';
 import 'package:sizer/sizer.dart';
 
-
 class FoundItemTutorial extends StatefulWidget {
   const FoundItemTutorial({super.key});
 
@@ -69,19 +68,23 @@ class _FoundItemTutorialState extends State<FoundItemTutorial> {
                   });
                 },
                 children: <Widget>[
-                  carouselDetailedTutorialItem(context,
+                  carouselDetailedTutorialItem(
+                      context,
                       'assets/images/create-report.png',
                       AppLocalizations.of(context)!.tutorialFoundItemTitle1,
                       AppLocalizations.of(context)!.tutorialFoundItemContent1),
-                  carouselDetailedTutorialItem(context,
+                  carouselDetailedTutorialItem(
+                      context,
                       'assets/images/manage-claim.png',
                       AppLocalizations.of(context)!.tutorialFoundItemTitle2,
                       AppLocalizations.of(context)!.tutorialFoundItemContent2),
-                  carouselDetailedTutorialItem(context,
+                  carouselDetailedTutorialItem(
+                      context,
                       'assets/images/chat.png',
                       AppLocalizations.of(context)!.tutorialFoundItemTitle3,
                       AppLocalizations.of(context)!.tutorialFoundItemContent3),
-                  carouselDetailedTutorialItem(context,
+                  carouselDetailedTutorialItem(
+                      context,
                       'assets/images/solved.png',
                       AppLocalizations.of(context)!.tutorialFoundItemTitle4,
                       AppLocalizations.of(context)!.tutorialFoundItemContent4),
@@ -96,32 +99,42 @@ class _FoundItemTutorialState extends State<FoundItemTutorial> {
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: ElevatedButton(
-                  onPressed: _currentPage == _numPages - 1 ? null : () {
-                    setState(() {
-                      if (_currentPage == _numPages - 1) {
-                        _currentPage = 0;
-                      } else {
-                        _currentPage++;
-                      }
-                    });
+                  onPressed: _currentPage == _numPages - 1
+                      ? null
+                      : () {
+                          setState(() {
+                            _currentPage++;
+                          });
 
-                    var animationOffSet = 70.h;
-                    _pageController.animateTo(
-                      animationOffSet*_currentPage,
-                      duration: const Duration(
-                          milliseconds:
-                              500),
-                      curve: Curves
-                          .easeInOut,
-                    );
-                  },
+                          var animationOffSet = 70.h;
+                          _pageController.animateTo(
+                            animationOffSet * _currentPage,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeInOut,
+                          );
+                        },
                   style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                     shape: const StadiumBorder(),
                     padding: const EdgeInsets.symmetric(vertical: 16),
+                  ).copyWith(
+                    overlayColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed)) {
+                          return Theme.of(context).colorScheme.onPrimary.withOpacity(0.3);
+                        }
+                        return Colors.transparent;
+                      },
+                    ),
                   ),
                   child: Text(
-                    _currentPage == _numPages - 1? AppLocalizations.of(context)!.tutorialCompleted : AppLocalizations.of(context)!.next,
-                    style: const TextStyle(fontSize: 20),
+                    _currentPage == _numPages - 1
+                        ? AppLocalizations.of(context)!.tutorialCompleted
+                        : AppLocalizations.of(context)!.next,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
                   ),
                 ),
               ),

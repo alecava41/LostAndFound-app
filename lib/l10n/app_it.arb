@@ -354,5 +354,8 @@
   "themeLight": "Chiaro",
   "selectThemeDialogTitle": "Seleziona Tema",
   "login": "Login",
-  "registration": "Registrazione"
+  "registration": "Registrazione",
+  "newsForFoundItem": "Oggetti persi simili",
+  "newsForLostItem": "Oggetti trovati simili",
+  "noNewsForItem": "Non ci sono ancora novità"
 }

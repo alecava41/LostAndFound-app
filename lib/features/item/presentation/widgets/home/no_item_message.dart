@@ -30,7 +30,6 @@ class NoItemMessage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          // TODO replace with image!
           Icon(
             icon,
             size: ScreenSize.isBigSmartphoneDevice(context)
