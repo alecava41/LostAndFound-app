@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../utils/colors.dart';
 
 class CustomExpansionTile extends StatelessWidget {
   final Widget title;
@@ -13,12 +12,12 @@ class CustomExpansionTile extends StatelessWidget {
     return ExpansionTileTheme(
       data: ExpansionTileThemeData(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        collapsedIconColor: Colors.white,
-        iconColor: PersonalizedColor.mainColor,
-        collapsedBackgroundColor: PersonalizedColor.mainColor,
-        backgroundColor: Colors.white54,
-        textColor: PersonalizedColor.mainColor,
-        collapsedTextColor: Colors.white,
+        collapsedIconColor: Theme.of(context).colorScheme.background,
+        iconColor: Theme.of(context).primaryColor,
+        collapsedBackgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).colorScheme.onTertiary,
+        textColor: Theme.of(context).primaryColor,
+        collapsedTextColor: Theme.of(context).colorScheme.background.withOpacity(0.5),
       ),
       child: Card(
         elevation: 10,

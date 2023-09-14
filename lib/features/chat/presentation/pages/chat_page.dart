@@ -11,10 +11,11 @@ import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/widgets/claim/not_claimed_item_card.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/notifications/circular_image_avatar.dart';
-import 'package:lost_and_found/utils/colors.dart';
+
 import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../injection_container.dart';
+import '../../../../utils/colors/custom_color.dart';
 import '../../../claim/presentation/widgets/claim/claimed_item_card.dart';
 import '../../../claim/presentation/widgets/claim/claimed_status_card.dart';
 
@@ -40,16 +41,16 @@ class ChatScreen extends StatelessWidget {
         builder: (ctx, state) {
           if (state.hasLoadingError) {
             return AnnotatedRegion(
-              value: const SystemUiOverlayStyle(
-                statusBarColor: Colors.white,
+              value: SystemUiOverlayStyle(
+                statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
                 statusBarBrightness: Brightness.dark,
                 statusBarIconBrightness: Brightness.dark,
               ),
               child: SafeArea(
                 child: Scaffold(
                   appBar: AppBar(
-                    backgroundColor: Colors.white,
-                    iconTheme: const IconThemeData(color: Colors.black),
+                    backgroundColor: Colors.transparent,
+                    iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
                   ),
                   body: ErrorPage(
                       onRetry: () => ctx.read<chat.ChatBloc>().add(chat.ChatEvent.chatContentCreated(roomId, itemId))),
@@ -78,8 +79,8 @@ class ChatScreen extends StatelessWidget {
           final sentClaim = state.item!.userClaim;
 
           return AnnotatedRegion(
-            value: const SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
+            value: SystemUiOverlayStyle(
+              statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
               statusBarBrightness: Brightness.dark,
               statusBarIconBrightness: Brightness.dark,
             ),
@@ -91,15 +92,15 @@ class ChatScreen extends StatelessWidget {
               child: SafeArea(
                 child: Scaffold(
                   appBar: AppBar(
-                    title: Text(otherUser.firstName!, style: const TextStyle(color: Colors.black, fontSize: 18)),
-                    backgroundColor: Colors.white,
-                    iconTheme: const IconThemeData(color: Colors.black),
+                    title: Text(otherUser.firstName!, style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 18)),
+                    backgroundColor: Colors.transparent,
+                    iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
                   ),
                   body: Column(
                     children: [
                       receivedClaim != null
                           ? Container(
-                              color: PersonalizedColor.backgroundColor,
+                              color: Theme.of(context).colorScheme.background,
                               padding: const EdgeInsets.fromLTRB(8, 8, 8, 2),
                               child: ClaimedItemCard(
                                 isItemResolved: state.item!.resolved,
@@ -114,7 +115,7 @@ class ChatScreen extends StatelessWidget {
                               ),
                             )
                           : Container(
-                              color: PersonalizedColor.backgroundColor,
+                              color: Theme.of(context).colorScheme.background,
                               padding: const EdgeInsets.fromLTRB(8, 8, 8, 2),
                               child: sentClaim != null
                                   ? ClaimedStatusCard(
@@ -152,13 +153,13 @@ class ChatScreen extends StatelessWidget {
                             theme: DefaultChatTheme(
                               inputBorderRadius: const BorderRadius.all(Radius.circular(60)),
                               inputContainerDecoration: BoxDecoration(
-                                  border: Border.all(width: 0.1, color: Colors.black54),
+                                  border: Border.all(width: 0.1, color: Theme.of(context).extension<CustomColors>()!.usernameColor!),
                                   borderRadius: const BorderRadius.all(Radius.circular(60))),
-                              primaryColor: PersonalizedColor.mainColor,
-                              secondaryColor: Colors.white,
-                              inputBackgroundColor: Colors.white,
-                              inputTextColor: Colors.black,
-                              backgroundColor: PersonalizedColor.backgroundColor,
+                              primaryColor: Theme.of(context).colorScheme.primary,
+                              secondaryColor: Theme.of(context).colorScheme.secondary,
+                              inputBackgroundColor: Theme.of(context).colorScheme.background,
+                              inputTextColor: Theme.of(context).colorScheme.onBackground,
+                              backgroundColor: Theme.of(context).colorScheme.background,
                               inputMargin: const EdgeInsets.fromLTRB(5, 5, 5, 10),
                             ),
                             messages: snapshot.data ?? [],

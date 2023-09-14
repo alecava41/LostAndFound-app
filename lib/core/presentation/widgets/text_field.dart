@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lost_and_found/utils/colors.dart';
 
 class PersonalizedTextField extends StatelessWidget {
   final void Function(String) onTextChanged;
@@ -25,7 +24,7 @@ class PersonalizedTextField extends StatelessWidget {
     return TextFormField(
       initialValue: text,
       textCapitalization: TextCapitalization.sentences,
-      cursorColor: PersonalizedColor.mainColor,
+      cursorColor: Theme.of(context).primaryColor,
       onChanged: onTextChanged,
       minLines: 1,
       maxLines: maxLines,
@@ -34,7 +33,7 @@ class PersonalizedTextField extends StatelessWidget {
       decoration: InputDecoration(
           errorMaxLines: 3,
           hintText: hintText,
-          focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: PersonalizedColor.mainColor))),
+          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor))),
     );
   }
 }

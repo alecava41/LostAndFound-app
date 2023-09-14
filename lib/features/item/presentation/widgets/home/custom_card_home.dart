@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
-import 'package:lost_and_found/utils/colors.dart';
+
 import 'package:lost_and_found/utils/constants.dart';
 import 'package:lost_and_found/utils/screen_size.dart';
+
+import '../../../../../utils/colors/custom_color.dart';
 
 class CustomCardHome extends StatelessWidget {
   final int id;
@@ -101,7 +103,7 @@ class CustomCardHome extends StatelessWidget {
                               child: Container(
                                 padding: const EdgeInsets.all(3),
                                 decoration: BoxDecoration(
-                                  color: PersonalizedColor.claimWaitingStatusColor,
+                                  color: Theme.of(context).extension<CustomColors>()!.claimWaitingStatusColor,
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Row(
@@ -134,7 +136,7 @@ class CustomCardHome extends StatelessWidget {
                               child: Container(
                                 padding: const EdgeInsets.all(3),
                                 decoration: BoxDecoration(
-                                  color: PersonalizedColor.claimAcceptedStatusColor,
+                                  color: Theme.of(context).extension<CustomColors>()!.claimAcceptedStatusColor,
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Row(
@@ -167,7 +169,7 @@ class CustomCardHome extends StatelessWidget {
           Material(
             color: Colors.transparent,
             child: InkWell(
-              splashColor: PersonalizedColor.splashGreyColor,
+              splashColor: Theme.of(context).extension<CustomColors>()!.splashGreyColor,
               onTap: () {
                 Navigator.push(
                     context,

@@ -6,8 +6,10 @@ import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/notification/news_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/notifications/circular_image_avatar.dart';
-import 'package:lost_and_found/utils/colors.dart';
+
 import 'package:lost_and_found/utils/constants.dart';
+
+import '../../../../../utils/colors/custom_color.dart';
 
 class CustomNotification extends StatelessWidget {
   final int id;
@@ -37,14 +39,14 @@ class CustomNotification extends StatelessWidget {
       return Column(
         children: [
           Material(
-            color: opened ? PersonalizedColor.openedColor : PersonalizedColor.notOpenedColor,
+            color: opened ? Theme.of(context).extension<CustomColors>()!.openedColor : Theme.of(context).extension<CustomColors>()!.notOpenedColor,
             child: InkWell(
               onTap: () => {
                 ctx.read<NewsBloc>().add(NewsEvent.newsRead(id)),
                 ctx.read<BadgeBloc>().add(const BadgeEvent.newsRead()),
                 Navigator.push(context, MaterialPageRoute(builder: (_) => ItemScreen(itemId: targetItemId)))
               },
-              splashColor: opened ? PersonalizedColor.splashGreyColor : PersonalizedColor.splashGreenColor,
+              splashColor: opened ? Theme.of(context).extension<CustomColors>()!.splashGreyColor : Theme.of(context).extension<CustomColors>()!.splashGreenColor,
               child: SizedBox(
                 height: 100,
                 child: Padding(
@@ -69,25 +71,25 @@ class CustomNotification extends StatelessWidget {
                                 children: [
                                   TextSpan(
                                     text: AppLocalizations.of(context)!.hey,
-                                    style: const TextStyle(fontSize: 15, color: Colors.black),
+                                    style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.onBackground),
                                   ),
                                   TextSpan(
                                     text: targetUsername,
                                     style:
-                                        const TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
+                                        TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold),
                                   ),
                                   TextSpan(
                                     text: " $sentence ",
-                                    style: const TextStyle(fontSize: 15, color: Colors.black),
+                                    style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.onBackground),
                                   ),
                                   TextSpan(
                                     text: subjectItemTitle,
                                     style:
-                                        const TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
+                                        TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold),
                                   ),
-                                  const TextSpan(
+                                  TextSpan(
                                     text: "!",
-                                    style: TextStyle(fontSize: 15, color: Colors.black),
+                                    style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.onBackground),
                                   ),
                                 ],
                               ),

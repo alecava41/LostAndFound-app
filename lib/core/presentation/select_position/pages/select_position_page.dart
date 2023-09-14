@@ -9,6 +9,7 @@ import 'package:lost_and_found/core/presentation/select_position/bloc/select_pos
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../injection_container.dart';
+import '../../../../utils/colors/custom_color.dart';
 import '../../widgets/large_green_button.dart';
 
 class SelectPositionScreen extends StatefulWidget {
@@ -62,8 +63,8 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
           },
           builder: (ctx, state) {
             return AnnotatedRegion(
-              value: const SystemUiOverlayStyle(
-                statusBarColor: Colors.white,
+              value: SystemUiOverlayStyle(
+                statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
                 statusBarBrightness: Brightness.dark,
                 statusBarIconBrightness: Brightness.dark,
               ),
@@ -71,14 +72,14 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                 minimum: EdgeInsets.zero,
                 child: Scaffold(
                     appBar: AppBar(
-                      iconTheme: const IconThemeData(color: Colors.black),
+                      iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
                       title: Text(
                         AppLocalizations.of(context)!.positionPageTitle,
-                        style: const TextStyle(
-                          color: Colors.black,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onBackground,
                         ),
                       ),
-                      backgroundColor: Colors.white,
+                      backgroundColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
                     ),
                     body: Stack(
                       children: [
@@ -145,9 +146,9 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                               Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: 200.0,
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
+                                  borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(20.0),
                                     topRight: Radius.circular(20.0),
                                   ),

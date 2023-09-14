@@ -12,7 +12,7 @@ import 'package:lost_and_found/utils/utility.dart';
 import '../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../core/presentation/widgets/large_green_button.dart';
 import '../../../../injection_container.dart';
-import '../../../../utils/colors.dart';
+import '../../../../utils/colors/custom_color.dart';
 import '../../../chat/presentation/pages/chat_page.dart';
 import '../widgets/claimed_item_info.dart';
 
@@ -26,18 +26,18 @@ class AnswerClaimScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
-      value: const SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
+      value: SystemUiOverlayStyle(
+        statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark,
       ),
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.white,
           appBar: AppBar(
-            title: Text(AppLocalizations.of(context)!.answerClaimTitle, style: const TextStyle(color: Colors.black)),
-            backgroundColor: Colors.white,
-            iconTheme: const IconThemeData(color: Colors.black),
+            title: Text(AppLocalizations.of(context)!.answerClaimTitle,
+                style: TextStyle(color: Theme.of(context).colorScheme.onBackground)),
+            backgroundColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
+            iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
           ),
           body: BlocProvider(
             create: (_) => sl<AnswerClaimBloc>()..add(AnswerClaimEvent.contentCreated(itemId)),
@@ -75,9 +75,9 @@ class AnswerClaimScreen extends StatelessWidget {
                                 .read<AnswerClaimBloc>()
                                 .add(AnswerClaimEvent.claimDecisionTaken(ClaimStatus.approved, claimId)),
                         text: state.isSubmittingAccept
-                            ? const CustomCircularProgress(
+                            ? CustomCircularProgress(
                                 size: 25,
-                                color: Colors.white,
+                                color: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
                               )
                             : Text(
                                 AppLocalizations.of(context)!.accept,
@@ -99,14 +99,14 @@ class AnswerClaimScreen extends StatelessWidget {
                                         .read<AnswerClaimBloc>()
                                         .add(AnswerClaimEvent.claimDecisionTaken(ClaimStatus.rejected, claimId)),
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.red,
+                                  backgroundColor: Theme.of(context).colorScheme.error,
                                   shape: const StadiumBorder(),
                                   padding: const EdgeInsets.symmetric(vertical: 16),
                                 ),
                                 child: state.isSubmittingReject
-                                    ? const CustomCircularProgress(
+                                    ? CustomCircularProgress(
                                         size: 25,
-                                        color: Colors.white,
+                                        color: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
                                       )
                                     : Text(
                                         AppLocalizations.of(context)!.decline,
@@ -143,7 +143,8 @@ class AnswerClaimScreen extends StatelessWidget {
                                           isClaimAlreadyManaged
                                               ? AppLocalizations.of(context)!.answerClaimTutorialOpenManaged
                                               : AppLocalizations.of(context)!.answerClaimTutorialOpenUnmanaged,
-                                          style: const TextStyle(color: Colors.black54),
+                                          style: TextStyle(
+                                              color: Theme.of(context).extension<CustomColors>()!.usernameColor),
                                         ),
                                       ),
                                     ],
@@ -204,16 +205,21 @@ class AnswerClaimScreen extends StatelessWidget {
                                             padding: const EdgeInsets.all(3),
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(10),
-                                              color:
-                                                  state.item!.claims!.firstWhere((claim) => claim.id == claimId).status ==
-                                                          ClaimStatus.approved
-                                                      ? PersonalizedColor.claimAcceptedStatusColor
-                                                      : (state.item!.claims!
-                                                                  .firstWhere((claim) => claim.id == claimId)
-                                                                  .status ==
-                                                              ClaimStatus.rejected
-                                                          ? PersonalizedColor.claimDeniedStatusColor
-                                                          : PersonalizedColor.claimWaitingStatusColor),
+                                              color: state.item!.claims!
+                                                          .firstWhere((claim) => claim.id == claimId)
+                                                          .status ==
+                                                      ClaimStatus.approved
+                                                  ? Theme.of(context).extension<CustomColors>()!.claimAcceptedStatusColor
+                                                  : (state.item!.claims!
+                                                              .firstWhere((claim) => claim.id == claimId)
+                                                              .status ==
+                                                          ClaimStatus.rejected
+                                                      ? Theme.of(context)
+                                                          .extension<CustomColors>()!
+                                                          .claimDeniedStatusColor
+                                                      : Theme.of(context)
+                                                          .extension<CustomColors>()!
+                                                          .claimWaitingStatusColor),
                                             ),
                                             child: Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,10 +240,11 @@ class AnswerClaimScreen extends StatelessWidget {
                                                                 .status
                                                                 .getTranslatedName(context)
                                                                 .toUpperCase(),
-                                                            style: const TextStyle(
-                                                                fontSize: 16,
-                                                                fontWeight: FontWeight.bold,
-                                                                color: Colors.black),
+                                                            style: TextStyle(
+                                                              fontSize: 16,
+                                                              fontWeight: FontWeight.bold,
+                                                              color: Theme.of(context).colorScheme.onBackground,
+                                                            ),
                                                           ),
                                                         ],
                                                       ),

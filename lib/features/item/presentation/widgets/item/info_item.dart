@@ -5,7 +5,7 @@ import 'package:lost_and_found/core/presentation/tutorial/widgets/large_white_bu
 import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/item/info_item_field.dart';
-import 'package:lost_and_found/utils/colors.dart';
+
 import 'package:map_launcher/map_launcher.dart';
 
 import '../../../domain/entities/item.dart';
@@ -33,7 +33,7 @@ class InfoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.background,
       width: double.infinity,
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -85,7 +85,7 @@ class InfoItem extends StatelessWidget {
                             },
                             text: Text(
                               AppLocalizations.of(context)!.yesSeeMaps,
-                              style: const TextStyle(color: PersonalizedColor.mainColor),
+                              style: TextStyle(color: Theme.of(context).primaryColor),
                             ))
                       ],
                     );

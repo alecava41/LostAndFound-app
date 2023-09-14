@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lost_and_found/utils/colors.dart';
 
 class CustomCircularProgress extends StatelessWidget {
   final double size;
-  final Color color;
+  final Color? color;
 
-  const CustomCircularProgress({super.key, required this.size, this.color = PersonalizedColor.mainColor});
+  const CustomCircularProgress({super.key, required this.size, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class CustomCircularProgress extends StatelessWidget {
       width: size,
       child: CircularProgressIndicator(
         value: null,
-        color: color,
+        color: color ?? Theme.of(context).primaryColor,
       ),
     ));
   }

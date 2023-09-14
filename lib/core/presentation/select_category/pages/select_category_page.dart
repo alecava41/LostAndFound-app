@@ -5,9 +5,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/select_category/bloc/category_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
-import 'package:lost_and_found/utils/colors.dart';
+
 
 import '../../../../injection_container.dart';
+import '../../../../utils/colors/custom_color.dart';
 import '../../../domain/entities/category.dart';
 import '../widgets/category_item.dart';
 
@@ -23,20 +24,20 @@ class CategorySelectionScreen extends StatelessWidget {
       child: BlocBuilder<CategoryBloc, CategoryState>(
         builder: (ctx, state) {
           return AnnotatedRegion(
-            value: const SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
+            value: SystemUiOverlayStyle(
+              statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
               statusBarBrightness: Brightness.dark,
               statusBarIconBrightness: Brightness.dark,
             ),
             child: Scaffold(
-                backgroundColor: PersonalizedColor.backgroundColor,
+                backgroundColor: Theme.of(context).colorScheme.background,
                 appBar: AppBar(
                   title: Text(
                     AppLocalizations.of(context)!.categoryPageTitle,
-                    style: const TextStyle(color: Colors.black),
+                    style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
                   ),
-                  backgroundColor: Colors.white,
-                  iconTheme: const IconThemeData(color: Colors.black),
+                  backgroundColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
+                  iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
                 ),
                 body: () {
                   if (state.isLoading) {

@@ -21,7 +21,7 @@ class SearchResultScreen extends StatelessWidget {
       builder: (ctx, state) => Column(
         children: [
           Container(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.background,
             height: 70,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

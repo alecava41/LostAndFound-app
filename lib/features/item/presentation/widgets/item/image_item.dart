@@ -22,7 +22,7 @@ class ImageItem extends StatelessWidget {
         fit: BoxFit.cover,
       ),
       child: Container(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.background,
         width: MediaQuery.of(context).size.width,
         height: 300,
         child: Image.network(

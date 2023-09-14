@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
-import 'package:lost_and_found/utils/colors.dart';
-import 'package:sizer/sizer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
+import 'package:sizer/sizer.dart';
 
+import '../../../../utils/colors/custom_color.dart';
+import '../../widgets/title_logo.dart';
 import '../widgets/carousel_item.dart';
 import '../widgets/large_white_button.dart';
-import '../../widgets/title_logo.dart';
 
 class InfoScreen extends StatefulWidget {
   const InfoScreen({super.key});
@@ -24,8 +24,8 @@ class _InfoScreenState extends State<InfoScreen> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: const SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
+      value: SystemUiOverlayStyle(
+        statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark,
       ),
@@ -58,7 +58,7 @@ class _InfoScreenState extends State<InfoScreen> {
       height: 8.0,
       width: isActive ? 24.0 : 16.0,
       decoration: BoxDecoration(
-        color: isActive ? PersonalizedColor.mainColor : Colors.black,
+        color: isActive ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onBackground,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
@@ -112,7 +112,7 @@ class _InfoScreenState extends State<InfoScreen> {
       },
       text: Text(
         AppLocalizations.of(context)!.singIn,
-        style: const TextStyle(fontSize: 20, color: PersonalizedColor.mainColor),
+        style: TextStyle(fontSize: 20, color: Theme.of(context).primaryColor),
       ),
     );
   }
@@ -126,7 +126,7 @@ class _InfoScreenState extends State<InfoScreen> {
       },
       text: Text(
         AppLocalizations.of(context)!.signUp,
-        style: const TextStyle(fontSize: 20, color: Colors.white),
+        style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.surface),
       ),
     );
   }

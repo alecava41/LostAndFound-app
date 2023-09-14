@@ -20,6 +20,8 @@ const String USERNAME = "username";
 
 const String LOCALE = "locale";
 
+const String THEME = "theme";
+
 abstract class SecureStorage {
   Future<bool> hasValidSession();
 
@@ -43,6 +45,9 @@ abstract class SecureStorage {
 
   Future<String?> getLastSetLocale();
   Future<void> setLocale(String locale);
+
+  Future<void> setTheme(String theme);
+  Future<String?> getSavedTheme();
 }
 
 class SecureStorageImpl extends SecureStorage {
@@ -142,5 +147,15 @@ class SecureStorageImpl extends SecureStorage {
   @override
   Future<void> setLocale(String locale) async {
     await _storage.write(key: LOCALE, value: locale);
+  }
+
+  @override
+  Future<String?> getSavedTheme() async {
+    return await _storage.read(key: THEME);
+  }
+
+  @override
+  Future<void> setTheme(String theme) async {
+    await _storage.write(key: THEME, value: theme);
   }
 }

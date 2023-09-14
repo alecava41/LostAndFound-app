@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-Widget carouselDetailedTutorialItem(String imagePath, String title, String description) {
+import '../../../../../utils/colors/custom_color.dart';
+
+Widget carouselDetailedTutorialItem(BuildContext context, String imagePath, String title, String description) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: <Widget>[
@@ -24,7 +26,7 @@ Widget carouselDetailedTutorialItem(String imagePath, String title, String descr
         padding: const EdgeInsets.fromLTRB(15,0,15,0),
         child: Text(
           description,
-          style: const TextStyle(fontSize: 15, color: Colors.black54),
+          style: TextStyle(fontSize: 15, color: Theme.of(context).extension<CustomColors>()!.usernameColor),
           textAlign: TextAlign.center,
         ),
       ),

@@ -12,7 +12,7 @@ import '../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../core/presentation/widgets/insert_string_form.dart';
 import '../../../../core/presentation/widgets/large_green_button.dart';
 import '../../../../injection_container.dart';
-import '../../../../utils/colors.dart';
+import '../../../../utils/colors/custom_color.dart';
 import '../../../chat/presentation/pages/chat_page.dart';
 import '../bloc/answer_question/answer_question_bloc.dart';
 import '../widgets/claim_info_field.dart';
@@ -27,21 +27,20 @@ class AnswerQuestionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
-      value: const SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
+      value: SystemUiOverlayStyle(
+        statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark,
       ),
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.white,
           appBar: AppBar(
             title: Text(
               AppLocalizations.of(context)!.answerQuestionTitle,
-              style: const TextStyle(color: Colors.black),
+              style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
             ),
-            backgroundColor: Colors.white,
-            iconTheme: const IconThemeData(color: Colors.black),
+            backgroundColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
+            iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
           ),
           body: BlocProvider(
             create: (_) => sl<AnswerQuestionBloc>()..add(AnswerQuestionEvent.contentCreated(itemId)),
@@ -93,7 +92,7 @@ class AnswerQuestionScreen extends StatelessWidget {
                                         isClaimAlreadyTaken
                                             ? AppLocalizations.of(context)!.answerQuestionTutorialOpenManaged
                                             : AppLocalizations.of(context)!.answerQuestionTutorialOpenUnmanaged,
-                                        style: const TextStyle(color: Colors.black54),
+                                        style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.usernameColor),
                                       ),
                                     ),
                                   ],
@@ -164,10 +163,10 @@ class AnswerQuestionScreen extends StatelessWidget {
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(10),
                                             color: state.item!.userClaim!.status == ClaimStatus.approved
-                                                ? PersonalizedColor.claimAcceptedStatusColor
+                                                ? Theme.of(context).extension<CustomColors>()!.claimAcceptedStatusColor
                                                 : (state.item!.userClaim!.status == ClaimStatus.rejected
-                                                    ? PersonalizedColor.claimDeniedStatusColor
-                                                    : PersonalizedColor.claimWaitingStatusColor),
+                                                    ? Theme.of(context).extension<CustomColors>()!.claimDeniedStatusColor
+                                                    : Theme.of(context).extension<CustomColors>()!.claimWaitingStatusColor),
                                           ),
                                           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                                             Row(
@@ -184,10 +183,11 @@ class AnswerQuestionScreen extends StatelessWidget {
                                                         text: state.item!.userClaim!.status
                                                             .getTranslatedName(context)
                                                             .toUpperCase(),
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             fontSize: 16,
                                                             fontWeight: FontWeight.bold,
-                                                            color: Colors.black),
+                                                            color: Theme.of(context).colorScheme.onBackground,
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
@@ -199,10 +199,10 @@ class AnswerQuestionScreen extends StatelessWidget {
                                             ),
                                             Row(
                                               children: [
-                                                const Icon(
+                                                Icon(
                                                   Icons.info,
                                                   size: 20,
-                                                  color: Colors.black54,
+                                                  color: Theme.of(context).extension<CustomColors>()!.usernameColor,
                                                 ),
                                                 const SizedBox(
                                                   width: 5,
@@ -212,18 +212,18 @@ class AnswerQuestionScreen extends StatelessWidget {
                                                       ? Text(
                                                           AppLocalizations.of(context)!
                                                               .acceptedQuestionClaim(state.item!.user.username),
-                                                          style: const TextStyle(color: Colors.black54),
+                                                          style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.usernameColor),
                                                         )
                                                       : state.item!.userClaim!.status == ClaimStatus.rejected
                                                           ? Text(
                                                               AppLocalizations.of(context)!
                                                                   .rejectedQuestionClaim(state.item!.user.username),
-                                                              style: const TextStyle(color: Colors.black54),
+                                                              style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.usernameColor),
                                                             )
                                                           : Text(
                                                               AppLocalizations.of(context)!
                                                                   .waitQuestionClaim(state.item!.user.username),
-                                                              style: const TextStyle(color: Colors.black54),
+                                                              style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.usernameColor),
                                                             ),
                                                 ),
                                               ],
@@ -239,9 +239,9 @@ class AnswerQuestionScreen extends StatelessWidget {
                                                 .read<AnswerQuestionBloc>()
                                                 .add(const AnswerQuestionEvent.claimCreated()),
                                         text: state.isSubmitting
-                                            ? const CustomCircularProgress(
+                                            ? CustomCircularProgress(
                                                 size: 25,
-                                                color: Colors.white,
+                                                color: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
                                               )
                                             : Text(
                                                 AppLocalizations.of(context)!.send,

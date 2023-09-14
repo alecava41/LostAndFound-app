@@ -6,10 +6,11 @@ import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/widgets/claim/claim_received_content.dart';
-import 'package:lost_and_found/utils/colors.dart';
+
 import 'package:badges/badges.dart' as badges;
 
 import '../../../../injection_container.dart';
+import '../../../../utils/colors/custom_color.dart';
 import '../widgets/claim/claim_sent_content.dart';
 
 class ClaimsScreen extends StatelessWidget {
@@ -22,8 +23,8 @@ class ClaimsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<BadgeBloc, BadgeState>(
       builder: (ctx, state) => AnnotatedRegion<SystemUiOverlayStyle>(
-        value: const SystemUiOverlayStyle(
-          statusBarColor: Colors.white,
+        value: SystemUiOverlayStyle(
+          statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
           statusBarBrightness: Brightness.dark,
           statusBarIconBrightness: Brightness.dark,
         ),
@@ -32,14 +33,14 @@ class ClaimsScreen extends StatelessWidget {
           initialIndex: tab != null ? tab! : 0,
           child: SafeArea(
             child: Scaffold(
-              backgroundColor: PersonalizedColor.backgroundColor,
+              backgroundColor: Theme.of(context).colorScheme.background,
               appBar: AppBar(
                 title: Text(
                   AppLocalizations.of(context)!.claim(2),
-                  style: const TextStyle(color: Colors.black),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
                 ),
-                backgroundColor: Colors.white,
-                iconTheme: const IconThemeData(color: Colors.black),
+                backgroundColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
+                iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
                 bottom: TabBar(
                   tabs: [
                     Tab(
@@ -58,7 +59,7 @@ class ClaimsScreen extends StatelessWidget {
                           ),
                           Text(
                             AppLocalizations.of(context)!.receivedClaims,
-                            style: const TextStyle(color: Colors.black),
+                            style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
                           ),
                         ],
                       ),
@@ -75,7 +76,7 @@ class ClaimsScreen extends StatelessWidget {
                           ),
                           Text(
                             AppLocalizations.of(context)!.yourClaims,
-                            style: const TextStyle(color: Colors.black),
+                            style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
                           ),
                         ],
                       ),

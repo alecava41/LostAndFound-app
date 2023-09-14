@@ -4,4 +4,5 @@ part of 'app_global_bloc.dart';
 class AppGlobalEvent with _$AppGlobalEvent {
   const factory AppGlobalEvent.appCreated() = _AppCreated;
   const factory AppGlobalEvent.localeChanged(Locale locale) = _LocaleChanged;
+  const factory AppGlobalEvent.themeChanged(ThemeMode theme) = _ThemeChanged;
 }

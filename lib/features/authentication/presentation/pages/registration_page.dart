@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../utils/colors/custom_color.dart';
 import '../bloc/registration/registration_bloc.dart';
 import '../../../../injection_container.dart';
 import '../widgets/registration/registration_form.dart';
@@ -12,8 +13,8 @@ class RegistrationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
-      value: const SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
+      value: SystemUiOverlayStyle(
+        statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark,
       ),
@@ -24,7 +25,7 @@ class RegistrationScreen extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
-              iconTheme: const IconThemeData(color: Colors.black),
+              iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () {

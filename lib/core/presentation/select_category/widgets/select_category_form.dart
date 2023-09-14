@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:lost_and_found/core/presentation/select_category/pages/select_category_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../utils/colors.dart';
 
 class CategorySelectionForm extends StatelessWidget {
   final ValueChanged<Pair<int, String>> onTap;
@@ -39,7 +38,7 @@ class CategorySelectionForm extends StatelessWidget {
           height: 0,
         ),
         Material(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           child: InkWell(
             onTap: () async =>
                 {FocusManager.instance.primaryFocus?.unfocus(), await navigateToCategorySelection(context)},
@@ -73,7 +72,7 @@ class CategorySelectionForm extends StatelessWidget {
                               ? Text(
                                   errorText,
                                   textAlign: TextAlign.start,
-                                  style: TextStyle(color: Colors.redAccent.shade700, fontSize: 12),
+                                  style: TextStyle(color: Theme.of(context).colorScheme.error, fontSize: 12),
                                 )
                               : Container()
                         ],
@@ -84,9 +83,9 @@ class CategorySelectionForm extends StatelessWidget {
                         if (category.isNotEmpty)
                           Text(
                             category,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 15,
-                              color: PersonalizedColor.mainColor,
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                         const Icon(

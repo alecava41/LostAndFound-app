@@ -6,6 +6,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:lost_and_found/features/chat/presentation/pages/inbox_page.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/search/search_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lost_and_found/utils/colors/custom_color.dart';
 
 import '../../../../features/badges/presentation/bloc/badge_bloc.dart';
 import '../../../../features/chat/presentation/bloc/inbox/inbox_bloc.dart';
@@ -14,7 +15,6 @@ import '../../../../features/item/presentation/pages/home_page.dart';
 import '../../../../features/item/presentation/pages/search_page.dart';
 import '../../../../features/user/presentation/bloc/user/user_bloc.dart';
 import '../../../../features/user/presentation/pages/user_page.dart';
-import '../../../../utils/colors.dart';
 import '../bloc/home_controller_bloc.dart';
 
 class HomeControllerScreen extends StatelessWidget {
@@ -40,13 +40,13 @@ class HomeControllerScreen extends StatelessWidget {
               value: SystemUiOverlayStyle(
                   statusBarColor:
                       state.tabIndex == 4 || (state.tabIndex == 1 && searchState.pageState == SearchPageState.resultPage)
-                          ? Colors.white
-                          : PersonalizedColor.backgroundColor,
+                          ? Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor
+                          : Theme.of(context).colorScheme.background,
                   statusBarBrightness: Brightness.dark,
                   statusBarIconBrightness: Brightness.dark),
               child: SafeArea(
                 child: Scaffold(
-                  backgroundColor: PersonalizedColor.backgroundColor,
+                  backgroundColor: Theme.of(context).colorScheme.background,
                   body: pages[state.tabIndex],
                   bottomNavigationBar: BottomNavigationBar(
                     showSelectedLabels: true,
@@ -67,8 +67,8 @@ class HomeControllerScreen extends StatelessWidget {
 
                       ctx.read<HomeControllerBloc>().add(HomeControllerEvent.tabChanged(index));
                     },
-                    selectedItemColor: PersonalizedColor.mainColor,
-                    unselectedItemColor: Colors.grey,
+                    selectedItemColor: Theme.of(context).primaryColor,
+                    unselectedItemColor: Theme.of(context).colorScheme.outline,
                     items: [
                       BottomNavigationBarItem(
                           icon: badges.Badge(

@@ -7,7 +7,7 @@ import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../core/presentation/widgets/image_dialog.dart';
-import '../../../../utils/colors.dart';
+import '../../../../utils/colors/custom_color.dart';
 import '../../../item/domain/entities/item.dart';
 import '../../../item/presentation/widgets/notifications/circular_image_avatar.dart';
 import '../bloc/answer_claim/answer_claim_bloc.dart';
@@ -99,9 +99,9 @@ class ClaimedItemInfo extends StatelessWidget {
             ),
           ],
         ),
-        const Divider(
+        Divider(
           thickness: 1,
-          color: PersonalizedColor.mainColor,
+          color: Theme.of(context).primaryColor,
         ),
         const SizedBox(
           height: 10,
@@ -137,15 +137,15 @@ class ClaimedItemInfo extends StatelessWidget {
             const SizedBox(width: 10),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                side: const BorderSide(color: PersonalizedColor.mainColor, width: 0.4),
+                backgroundColor: Theme.of(context).colorScheme.background,
+                side: BorderSide(color: Theme.of(context).primaryColor, width: 0.4),
                 shape: const StadiumBorder(),
                 padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
               ).copyWith(
                 overlayColor: MaterialStateProperty.resolveWith<Color>(
                   (Set<MaterialState> states) {
                     if (states.contains(MaterialState.pressed)) {
-                      return PersonalizedColor.primarySwatch.shade50;
+                      return Theme.of(context).extension<CustomColors>()!.buttonPressed!;
                     }
                     return Colors.transparent;
                   },
@@ -166,7 +166,7 @@ class ClaimedItemInfo extends StatelessWidget {
               },
               child: Text(
                 AppLocalizations.of(context)!.sendMessage,
-                style: const TextStyle(fontSize: 14, color: PersonalizedColor.mainColor),
+                style: TextStyle(fontSize: 14, color: Theme.of(context).primaryColor),
               ),
             ),
           ],

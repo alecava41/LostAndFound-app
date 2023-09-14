@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../utils/colors.dart';
-
 class ClaimInfoField extends StatelessWidget {
   final String title;
   final Widget content;
@@ -12,7 +10,7 @@ class ClaimInfoField extends StatelessWidget {
     return Container(
             decoration: BoxDecoration(
               border: Border.all(
-                color: PersonalizedColor.mainColor,
+                color: Theme.of(context).primaryColor,
                 width: 1,
               ),
               borderRadius: BorderRadius.circular(10.0),
@@ -21,9 +19,9 @@ class ClaimInfoField extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.all(4),
-                  decoration: const BoxDecoration(
-                    color: PersonalizedColor.mainColor,
-                    borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(8.0),
                       topRight: Radius.circular(8.0),
                     ),
@@ -37,7 +35,7 @@ class ClaimInfoField extends StatelessWidget {
                       ),
                       Text(
                         title,
-                        style: const TextStyle(fontSize: 16, color: Colors.white),
+                        style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.background),
                       ),
                     ],
                   ),

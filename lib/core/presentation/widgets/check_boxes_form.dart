@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../utils/colors.dart';
+import '../../../utils/colors/custom_color.dart';
 
 class PersonalizedCheckBoxesForm extends StatelessWidget {
   final bool foundChecked;
@@ -30,7 +30,7 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
         ),
         Container(
           height: showError && errorText != "" ? 115 : 90,
-          color: Colors.white,
+          color: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +47,7 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
                   Row(
                     children: [
                       Checkbox(
-                        activeColor: PersonalizedColor.mainColor,
+                        activeColor: Theme.of(context).primaryColor,
                         value: foundChecked,
                         onChanged: onFoundCheckedChanged,
                         isError: showError && !foundChecked && !lostChecked,
@@ -62,7 +62,7 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
                   Row(
                     children: [
                       Checkbox(
-                        activeColor: PersonalizedColor.mainColor,
+                        activeColor: Theme.of(context).primaryColor,
                         value: lostChecked,
                         onChanged: onLostCheckedChanged,
                         isError: showError && !lostChecked && !foundChecked,
@@ -77,7 +77,7 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
                 child: showError && !foundChecked && !lostChecked
                     ? Text(
                         errorText,
-                        style: TextStyle(color: Colors.redAccent.shade700, fontSize: 12),
+                        style: TextStyle(color: Theme.of(context).colorScheme.error, fontSize: 12),
                       )
                     : Container(),
               ),

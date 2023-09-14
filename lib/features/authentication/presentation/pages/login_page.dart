@@ -5,6 +5,7 @@ import 'package:lost_and_found/features/authentication/presentation/bloc/login/l
 import 'package:lost_and_found/features/authentication/presentation/widgets/login/login_form.dart';
 
 import '../../../../injection_container.dart';
+import '../../../../utils/colors/custom_color.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -12,8 +13,8 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
-      value: const SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
+      value: SystemUiOverlayStyle(
+        statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark,
       ),
@@ -24,7 +25,7 @@ class LoginScreen extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
-              iconTheme: const IconThemeData(color: Colors.black),
+              iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () {

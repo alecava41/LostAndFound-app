@@ -11,7 +11,6 @@ import '../../../../../core/presentation/widgets/check_boxes_form.dart';
 import '../../../../../core/presentation/widgets/large_green_button.dart';
 import '../../../../../core/presentation/widgets/select_date_form.dart';
 import '../../../../../core/presentation/widgets/select_position_button.dart';
-import '../../../../../utils/colors.dart';
 import '../../../../../utils/screen_size.dart';
 
 class SearchOptionScreen extends StatelessWidget {
@@ -49,7 +48,7 @@ class SearchOptionScreen extends StatelessWidget {
                       ElevatedButton(
                         onPressed: () => ctx.read<SearchBloc>().add(const SearchEvent.resetFilters()),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: PersonalizedColor.mainColor,
+                          backgroundColor: Theme.of(context).primaryColor,
                           shape: const StadiumBorder(),
                           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                         ),
@@ -105,8 +104,10 @@ class SearchOptionScreen extends StatelessWidget {
                 sizedBox,
                 PersonalizedLargeGreenButton(
                   onPressed: () => ctx.read<SearchBloc>().add(const SearchEvent.searchSubmitted(false)),
-                  text: Text(AppLocalizations.of(context)!.search,
-                      style: const TextStyle(fontSize: 20, color: Colors.white)),
+                  text: Text(
+                    AppLocalizations.of(context)!.search,
+                    style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.background),
+                  ),
                 )
               ],
             ),

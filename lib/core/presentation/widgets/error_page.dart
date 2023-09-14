@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../utils/colors/custom_color.dart';
 import '../../../utils/screen_size.dart';
 import 'large_green_button.dart';
 
@@ -43,7 +44,7 @@ class ErrorPage extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
               child: Text(
                 AppLocalizations.of(context)!.errorPageSubtitle,
-                style: const TextStyle(fontSize: 15, color: Colors.black54),
+                style: TextStyle(fontSize: 15, color: Theme.of(context).extension<CustomColors>()!.usernameColor),
                 textAlign: TextAlign.center,
               ),
             ),

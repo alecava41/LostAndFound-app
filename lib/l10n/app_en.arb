@@ -349,5 +349,9 @@
   "yesSeeMaps":"Yes, see in Maps",
   "next": "Next",
   "itemAlreadySolvedToast": "Cannot access item's details, the item is not visible anymore.",
-  "tutorialCompleted" : "Tutorial completed!"
+  "tutorialCompleted" : "Tutorial completed!",
+  "changeTheme": "Change Theme",
+  "themeSystem": "System default",
+  "themeDark": "Dark",
+  "themeLight": "Light"
 }

@@ -10,6 +10,7 @@ import 'package:lost_and_found/features/item/presentation/bloc/home/home_bloc.da
 import 'package:lost_and_found/features/item/presentation/bloc/insert_item/insert_item_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/insert_item/custom_field_container.dart';
 import 'package:lost_and_found/utils/utility.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../core/presentation/dialogs/camera_permission.dart';
 import '../../../../core/presentation/home_controller/bloc/home_controller_bloc.dart';
@@ -19,11 +20,10 @@ import '../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../core/presentation/widgets/insert_string_form.dart';
 import '../../../../core/presentation/widgets/media_selection_dialog.dart';
 import '../../../../core/presentation/widgets/select_position_button.dart';
-import '../widgets/insert_item/upload_image_form.dart';
 import '../../../../injection_container.dart';
-import '../../../../utils/colors.dart';
+import '../../../../utils/colors/custom_color.dart';
 import '../widgets/insert_item/radio_buttons_form.dart';
-import 'package:permission_handler/permission_handler.dart';
+import '../widgets/insert_item/upload_image_form.dart';
 
 class InsertItemScreen extends StatelessWidget {
   final bool isNewItemLost;
@@ -148,26 +148,26 @@ class InsertItemScreen extends StatelessWidget {
                     child: ElevatedButton(
                         onPressed: () => ctx.read<InsertItemBloc>().add(const InsertItemEvent.insertSubmitted()),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: PersonalizedColor.mainColor,
+                          backgroundColor: Theme.of(context).primaryColor,
                           shape: const StadiumBorder(),
                           padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
                         child: state.isSubmitting
-                            ? const CustomCircularProgress(
+                            ? CustomCircularProgress(
                                 size: 25,
-                                color: Colors.white,
+                                color: Theme.of(context).colorScheme.background,
                               )
                             : Text(
                                 AppLocalizations.of(context)!.create,
-                                style: const TextStyle(fontSize: 20, color: Colors.white),
+                                style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onBackground),
                               )),
                   ),
                 )
               ],
             );
             return AnnotatedRegion(
-              value: const SystemUiOverlayStyle(
-                statusBarColor: Colors.white,
+              value: SystemUiOverlayStyle(
+                statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
                 statusBarBrightness: Brightness.dark,
                 statusBarIconBrightness: Brightness.dark,
               ),
@@ -186,7 +186,7 @@ class InsertItemScreen extends StatelessWidget {
                   onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
                   child: SafeArea(
                     child: Scaffold(
-                      backgroundColor: PersonalizedColor.backgroundColor,
+                      backgroundColor: Theme.of(context).colorScheme.background,
                       appBar: AppBar(
                         leading: IconButton(
                           icon: const Icon(Icons.arrow_back),

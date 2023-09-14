@@ -8,7 +8,7 @@ showBasicErrorSnackbar(BuildContext context, Failure failure) {
       validationFailure: () => null,
       orElse: () => ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor: Colors.red,
+              backgroundColor: Theme.of(context).colorScheme.errorContainer,
               content: Text(
                 failure.maybeWhen<String>(
                   passwordMismatchFailure: () => AppLocalizations.of(context)!.failureInvalidCredentials,
@@ -17,6 +17,7 @@ showBasicErrorSnackbar(BuildContext context, Failure failure) {
                   networkFailure: () => AppLocalizations.of(context)!.failureNetwork,
                   orElse: () => AppLocalizations.of(context)!.failureUnknown,
                 ),
+                style: TextStyle(color: Theme.of(context).colorScheme.onErrorContainer),
               ),
             ),
           ));

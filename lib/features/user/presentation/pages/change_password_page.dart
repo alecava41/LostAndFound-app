@@ -7,6 +7,7 @@ import 'package:lost_and_found/utils/utility.dart';
 
 import '../../../../core/presentation/widgets/custom_circular_progress.dart';
 import '../../../../injection_container.dart';
+import '../../../../utils/colors/custom_color.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({super.key});
@@ -30,8 +31,8 @@ class ChangePasswordScreen extends StatelessWidget {
           }
         },
         builder: (ctx, state) => AnnotatedRegion(
-          value: const SystemUiOverlayStyle(
-            statusBarColor: Colors.white,
+          value: SystemUiOverlayStyle(
+            statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
             statusBarBrightness: Brightness.dark,
             statusBarIconBrightness: Brightness.dark,
           ),
@@ -39,12 +40,12 @@ class ChangePasswordScreen extends StatelessWidget {
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
             child: Scaffold(
               appBar: AppBar(
-                backgroundColor: Colors.white,
+                backgroundColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
                 title: Text(
                   AppLocalizations.of(context)!.changePasswordButton,
-                  style: const TextStyle(color: Colors.black),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
                 ),
-                iconTheme: const IconThemeData(color: Colors.black),
+                iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
               ),
               body: SafeArea(
                 child: SingleChildScrollView(
@@ -215,9 +216,9 @@ class ChangePasswordScreen extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(vertical: 16),
                                 ),
                                 child: state.isSubmitting
-                                    ? const CustomCircularProgress(
+                                    ? CustomCircularProgress(
                                   size: 25,
-                                  color: Colors.white,
+                                  color: Theme.of(context).colorScheme.background,
                                 ) : Text(
                                   AppLocalizations.of(context)!.changePasswordButton,
                                   style: const TextStyle(fontSize: 20),

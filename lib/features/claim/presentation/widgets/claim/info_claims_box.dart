@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../utils/colors.dart';
-
 class InfoClaimsBox extends StatelessWidget {
   final String text;
   const InfoClaimsBox({
@@ -14,12 +12,12 @@ class InfoClaimsBox extends StatelessWidget {
     return Container(
       height: 65,
       width: MediaQuery.of(context).size.width,
-      color: PersonalizedColor.mainColor,
+      color: Theme.of(context).primaryColor,
       padding: const EdgeInsets.all(8),
       child: Row(children: [
-        const Icon(
+        Icon(
           Icons.info,
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.background,
         ),
         const SizedBox(
           width: 5,
@@ -30,7 +28,7 @@ class InfoClaimsBox extends StatelessWidget {
             children: [
               Text(
                 text,
-                style: const TextStyle(color: Colors.white),
+                style: TextStyle(color: Theme.of(context).colorScheme.background),
               ),
             ],
           ),

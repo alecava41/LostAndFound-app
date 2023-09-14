@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/user/presentation/widgets/tutorial/lost_item_tutorial.dart';
-import 'package:lost_and_found/utils/colors.dart';
 
+
+import '../../../../utils/colors/custom_color.dart';
 import '../widgets/tutorial/found_item_tutorial.dart';
 
 class TutorialScreen extends StatelessWidget {
@@ -14,8 +15,8 @@ class TutorialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: const SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
+      value: SystemUiOverlayStyle(
+        statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark,
       ),
@@ -24,26 +25,26 @@ class TutorialScreen extends StatelessWidget {
         length: 2,
         child: SafeArea(
           child: Scaffold(
-            backgroundColor: PersonalizedColor.backgroundColor,
+            backgroundColor: Theme.of(context).colorScheme.background,
             appBar: AppBar(
               title: Text(
                 AppLocalizations.of(context)!.tutorial,
-                style: const TextStyle(color: Colors.black),
+                style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
               ),
-              backgroundColor: Colors.white,
-              iconTheme: const IconThemeData(color: Colors.black),
+              backgroundColor: Theme.of(context).colorScheme.background,
+              iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
               bottom: TabBar(
                 tabs: [
                   Tab(
                     child: Text(
                       AppLocalizations.of(context)!.lostItems,
-                      style: const TextStyle(color: Colors.black),
+                      style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
                     ),
                   ),
                   Tab(
                     child: Text(
                       AppLocalizations.of(context)!.foundItems,
-                      style: const TextStyle(color: Colors.black),
+                      style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
                     ),
                   ),
                 ],

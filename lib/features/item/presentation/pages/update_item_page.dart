@@ -21,10 +21,10 @@ import '../../../../core/presentation/widgets/confirm_exit_dialog.dart';
 import '../../../../core/presentation/widgets/insert_string_form.dart';
 import '../../../../core/presentation/widgets/media_selection_dialog.dart';
 import '../../../../core/presentation/widgets/select_position_button.dart';
+import '../../../../injection_container.dart';
+import '../../../../utils/colors/custom_color.dart';
 import '../widgets/insert_item/custom_field_container.dart';
 import '../widgets/update_item/upload_image_form.dart';
-import '../../../../injection_container.dart';
-import '../../../../utils/colors.dart';
 
 class UpdateItemScreen extends StatelessWidget {
   final int itemId;
@@ -106,8 +106,8 @@ class UpdateItemScreen extends StatelessWidget {
             }
           },
           builder: (ctx, state) => AnnotatedRegion(
-            value: const SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
+            value: SystemUiOverlayStyle(
+              statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
               statusBarBrightness: Brightness.dark,
               statusBarIconBrightness: Brightness.dark,
             ),
@@ -125,7 +125,7 @@ class UpdateItemScreen extends StatelessWidget {
                 onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
                 child: SafeArea(
                   child: Scaffold(
-                    backgroundColor: PersonalizedColor.backgroundColor,
+                    backgroundColor: Theme.of(context).colorScheme.background,
                     appBar: AppBar(
                       leading: IconButton(
                         icon: const Icon(Icons.arrow_back),
@@ -137,12 +137,12 @@ class UpdateItemScreen extends StatelessWidget {
                           }
                         },
                       ),
-                      iconTheme: const IconThemeData(color: Colors.black),
+                      iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
                       title: Text(
                         AppLocalizations.of(context)!.updateItemPageTitle,
-                        style: const TextStyle(color: Colors.black),
+                        style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
                       ),
-                      backgroundColor: Colors.white,
+                      backgroundColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
                     ),
                     body: state.isLoading
                         ? const CustomCircularProgress(size: 100)
@@ -165,7 +165,7 @@ class UpdateItemScreen extends StatelessWidget {
                                   ),
                                   customDivider(),
                                   Container(
-                                    color: Colors.white,
+                                    color: Theme.of(context).colorScheme.background,
                                     padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                                     child: Column(
                                       children: [
@@ -280,18 +280,19 @@ class UpdateItemScreen extends StatelessWidget {
                                               onPressed: () =>
                                                   ctx.read<UpdateItemBloc>().add(const UpdateItemEvent.updateSubmitted()),
                                               style: ElevatedButton.styleFrom(
-                                                backgroundColor: PersonalizedColor.mainColor,
+                                                backgroundColor: Theme.of(context).primaryColor,
                                                 shape: const StadiumBorder(),
                                                 padding: const EdgeInsets.symmetric(vertical: 16),
                                               ),
                                               child: state.isSubmitting
-                                                  ? const CustomCircularProgress(
+                                                  ? CustomCircularProgress(
                                                       size: 25,
-                                                      color: Colors.white,
+                                                      color: Theme.of(context).colorScheme.background,
                                                     )
                                                   : Text(
                                                       AppLocalizations.of(context)!.update,
-                                                      style: const TextStyle(fontSize: 20, color: Colors.white),
+                                                      style: TextStyle(
+                                                          fontSize: 20, color: Theme.of(context).colorScheme.background),
                                                     )),
                                         ),
                                       )

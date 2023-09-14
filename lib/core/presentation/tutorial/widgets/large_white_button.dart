@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lost_and_found/utils/colors.dart';
+import 'package:lost_and_found/utils/colors/custom_color.dart';
 
 class PersonalizedLargeWhiteButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -23,21 +23,21 @@ class PersonalizedLargeWhiteButton extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 border: Border.all(
-                  color: PersonalizedColor.mainColor,
+                  color: Theme.of(context).primaryColor,
                   width: 0.5,
                 ),
               ),
               child: ElevatedButton(
                   onPressed: onPressed,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
+                    backgroundColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
                     shape: const StadiumBorder(),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ).copyWith(
                     overlayColor: MaterialStateProperty.resolveWith<Color>(
                       (Set<MaterialState> states) {
                         if (states.contains(MaterialState.pressed)) {
-                          return PersonalizedColor.primarySwatch.shade50;
+                          return Theme.of(context).extension<CustomColors>()!.buttonPressed!;
                         }
                         return Colors.transparent;
                       },

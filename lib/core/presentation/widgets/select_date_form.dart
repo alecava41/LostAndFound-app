@@ -4,7 +4,7 @@ import 'package:flutter_holo_date_picker/date_picker.dart';
 import 'package:flutter_holo_date_picker/i18n/date_picker_i18n.dart';
 import 'package:intl/intl.dart';
 
-import '../../../utils/colors.dart';
+import '../../../utils/colors/custom_color.dart';
 
 class DateSelectionForm extends StatelessWidget {
   final DateTime? date;
@@ -24,7 +24,7 @@ class DateSelectionForm extends StatelessWidget {
           height: 0,
         ),
         Ink(
-          color: Colors.white,
+          color: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
           child: InkWell(
             onTap: () => onButtonTap(context),
             borderRadius: BorderRadius.circular(0),
@@ -45,7 +45,7 @@ class DateSelectionForm extends StatelessWidget {
                         ),
                         Text(
                           AppLocalizations.of(context)!.dateFormEntrySubtitle,
-                          style: const TextStyle(color: Colors.black54),
+                          style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.usernameColor),
                         ),
                       ],
                     ),
@@ -54,9 +54,9 @@ class DateSelectionForm extends StatelessWidget {
                         if (date != null)
                           Text(
                             AppLocalizations.of(context)!.dateFormEntryValue(DateFormat.yMMMM().format(date!)),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 15,
-                              color: PersonalizedColor.mainColor,
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                         const Icon(

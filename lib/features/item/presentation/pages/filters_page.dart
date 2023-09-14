@@ -6,13 +6,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/presentation/app_global/bloc/app_global_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/search/search_bloc.dart';
+import 'package:lost_and_found/utils/colors/custom_color.dart';
 
 import '../../../../core/presentation/select_category/widgets/select_category_form.dart';
 import '../../../../core/presentation/widgets/check_boxes_form.dart';
 import '../../../../core/presentation/widgets/large_green_button.dart';
 import '../../../../core/presentation/widgets/select_date_form.dart';
 import '../../../../core/presentation/widgets/select_position_button.dart';
-import '../../../../utils/colors.dart';
 import '../../../../utils/screen_size.dart';
 
 class FiltersScreen extends StatelessWidget {
@@ -36,25 +36,25 @@ class FiltersScreen extends StatelessWidget {
         },
         builder: (ctx, state) {
           return AnnotatedRegion(
-            value: const SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
+            value: SystemUiOverlayStyle(
+              statusBarColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
               statusBarBrightness: Brightness.dark,
               statusBarIconBrightness: Brightness.dark,
             ),
             child: SafeArea(
               child: Scaffold(
-                backgroundColor: PersonalizedColor.backgroundColor,
+                backgroundColor: Theme.of(context).colorScheme.background,
                 appBar: AppBar(
                   leading: IconButton(
                     icon: const Icon(Icons.arrow_back),
                     onPressed: () => Navigator.pop(ctx),
                   ),
-                  iconTheme: const IconThemeData(color: Colors.black),
+                  iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
                   title: Text(
                     AppLocalizations.of(context)!.filtersPageTitle,
-                    style: const TextStyle(color: Colors.black),
+                    style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
                   ),
-                  backgroundColor: Colors.white,
+                  backgroundColor: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
                 ),
                 body: SingleChildScrollView(
                   child: Column(
@@ -76,7 +76,7 @@ class FiltersScreen extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () => ctx.read<SearchBloc>().add(const SearchEvent.resetFilters()),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: PersonalizedColor.mainColor,
+                                backgroundColor: Theme.of(context).primaryColor,
                                 shape: const StadiumBorder(),
                                 padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                               ),
@@ -135,7 +135,8 @@ class FiltersScreen extends StatelessWidget {
                       PersonalizedLargeGreenButton(
                         onPressed: () => {ctx.read<SearchBloc>().add(const SearchEvent.searchSubmitted(false))},
                         text: Text(AppLocalizations.of(context)!.search,
-                            style: const TextStyle(fontSize: 20, color: Colors.white)),
+                            style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.background),
+                        ),
                       )
                     ],
                   ),

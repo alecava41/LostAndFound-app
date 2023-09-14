@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 
 import '../../../../../core/presentation/widgets/custom_circular_progress.dart';
-import '../../../../../utils/colors.dart';
+import '../../../../../utils/colors/custom_color.dart';
 import '../../../../../utils/constants.dart';
 
 class NotClaimedItemCard extends StatelessWidget {
@@ -26,9 +26,9 @@ class NotClaimedItemCard extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Material(
-        color: PersonalizedColor.openedColor,
+        color: Theme.of(context).extension<CustomColors>()!.openedColor,
         child: InkWell(
-          splashColor: PersonalizedColor.splashGreyColor,
+          splashColor: Theme.of(context).extension<CustomColors>()!.splashGreyColor,
           onTap: () {
             if (!isItemSolved) {
               Navigator.push(
@@ -52,7 +52,7 @@ class NotClaimedItemCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: PersonalizedColor.borderColorOpened,
+                color: Theme.of(context).extension<CustomColors>()!.borderColorOpened!,
                 width: 0.3,
               ),
             ),

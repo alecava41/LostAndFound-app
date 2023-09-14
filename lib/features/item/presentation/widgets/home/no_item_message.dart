@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 
-import '../../../../../utils/colors.dart';
 import '../../../../../utils/screen_size.dart';
 
 class NoItemMessage extends StatelessWidget {
@@ -25,7 +24,7 @@ class NoItemMessage extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.background,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -37,7 +36,7 @@ class NoItemMessage extends StatelessWidget {
                 : ScreenSize.isMediumSmartphoneDevice(context)
                     ? 70
                     : 50,
-            color: PersonalizedColor.mainColor,
+            color: Theme.of(context).primaryColor,
           ),
           Text(
             message,
@@ -48,7 +47,7 @@ class NoItemMessage extends StatelessWidget {
                   : ScreenSize.isMediumSmartphoneDevice(context)
                       ? 17
                       : 16,
-              color: PersonalizedColor.mainColor,
+              color: Theme.of(context).primaryColor,
               fontWeight: FontWeight.bold,
             ),
           ),

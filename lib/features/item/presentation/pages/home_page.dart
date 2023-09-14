@@ -117,14 +117,14 @@ class HomeScreen extends StatelessWidget {
                                                 arguments: const TutorialScreenArguments(tab: 0));
                                           },
                                           text: Text(AppLocalizations.of(context)!.homeTutorialOpenLostItem,
-                                              style: const TextStyle(color: Colors.white))),
+                                              style: TextStyle(color: Theme.of(context).colorScheme.background))),
                                       PersonalizedLargeGreenButton(
                                           onPressed: () {
                                             Navigator.pushNamed(context, "/options/tutorial",
                                                 arguments: const TutorialScreenArguments(tab: 1));
                                           },
                                           text: Text(AppLocalizations.of(context)!.homeTutorialOpenFoundItem,
-                                              style: const TextStyle(color: Colors.white))),
+                                              style: TextStyle(color: Theme.of(context).colorScheme.background))),
                                     ],
                                   ),
                                 ),

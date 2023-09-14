@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
+import 'package:lost_and_found/utils/colors/custom_color.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
-import '../../../../../utils/colors.dart';
 import '../../pages/item_page.dart';
 
 class CustomCardSearch extends StatelessWidget {
@@ -76,12 +76,12 @@ class CustomCardSearch extends StatelessWidget {
                       Text(
                         DateFormat("dd/MM/yyyy").format(date),
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontSize: 14, color: Colors.black54),
+                        style: TextStyle(fontSize: 14, color: Theme.of(context).extension<CustomColors>()!.usernameColor),
                       ),
                       Text(
                         AppLocalizations.of(context)!.metersAway(distance.toInt()),
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontSize: 14, color: Colors.black54),
+                        style: TextStyle(fontSize: 14, color: Theme.of(context).extension<CustomColors>()!.usernameColor),
                       )
                     ],
                   ),
@@ -97,14 +97,14 @@ class CustomCardSearch extends StatelessWidget {
                 width: 65,
                 height: 30,
                 decoration: BoxDecoration(
-                  color: PersonalizedColor.mainColor,
+                  color: Theme.of(context).primaryColor,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),
                     bottomLeft: Radius.circular(10),
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Theme.of(context).colorScheme.onBackground.withOpacity(0.3),
                       spreadRadius: 2,
                       blurRadius: 4,
                       offset: const Offset(0, 2),
@@ -114,7 +114,7 @@ class CustomCardSearch extends StatelessWidget {
                 child: Center(
                   child: Text(
                     "${type[0].toUpperCase()}${type.substring(1)}",
-                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                    style: TextStyle(color: Theme.of(context).colorScheme.background, fontSize: 16),
                   ),
                 ),
               )),
