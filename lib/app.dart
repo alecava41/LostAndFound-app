@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lost_and_found/config/route_generator.dart';
 import 'package:lost_and_found/core/presentation/app_global/bloc/app_global_bloc.dart';
@@ -16,8 +17,9 @@ import 'package:lost_and_found/features/claim/presentation/pages/answer_claim_sc
 import 'package:lost_and_found/features/claim/presentation/pages/claims_screen.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 import 'package:lost_and_found/features/item/presentation/pages/notifications_page.dart';
-import 'package:lost_and_found/utils/colors.dart';
+import 'package:lost_and_found/utils/colors/color_schemes.dart';
 import 'package:lost_and_found/utils/constants.dart';
+import 'package:lost_and_found/utils/colors/custom_color.dart';
 import 'package:sizer/sizer.dart';
 
 import 'features/badges/presentation/bloc/badge_bloc.dart';
@@ -34,10 +36,6 @@ class App extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _Application();
-
-// TODO (@alecava41) dark theme + switch (need to provide the option to let user pick system theme)
-// TODO (@alecava41) add supported languages in iOS (https://docs.flutter.dev/ui/accessibility-and-localization/internationalization#localizing-for-ios-updating-the-ios-app-bundle)
-// TODO (@alecava41) add iOS permission
 }
 
 class _Application extends State<App> {
@@ -145,27 +143,41 @@ class _Application extends State<App> {
           }
 
           return BlocBuilder<AppGlobalBloc, AppGlobalState>(
-            builder: (ctx, state) => MaterialApp(
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              supportedLocales: AppLocalizations.supportedLocales,
-              locale: state.locale,
-              builder: DevicePreview.appBuilder,
-              title: 'Lost and Found',
-              navigatorKey: navigatorKey,
-              theme: ThemeData(
-                fontFamily: GoogleFonts.roboto().fontFamily,
-                primarySwatch: PersonalizedColor.primarySwatch,
-              ),
-              initialRoute: initialRoute,
-              onGenerateInitialRoutes: (route) {
-                if (route != '/') {
-                  return [MaterialPageRoute(builder: (_) => const InfoScreen())];
-                } else {
-                  return [MaterialPageRoute(builder: (_) => HomeControllerScreen())];
-                }
-              },
-              onGenerateRoute: RouteGenerator.generateRoute,
-            ),
+            builder: (ctx, state) => DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+              ColorScheme lightScheme = lightColorScheme;
+              ColorScheme darkScheme = darkColorScheme;
+
+              return MaterialApp(
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+                locale: state.locale,
+                builder: DevicePreview.appBuilder,
+                title: 'Lost and Found',
+                navigatorKey: navigatorKey,
+                themeMode: state.theme,
+                theme: ThemeData(
+                  fontFamily: GoogleFonts.roboto().fontFamily,
+                  useMaterial3: true,
+                  colorScheme: lightScheme,
+                  extensions: [lightCustomColors],
+                ),
+                darkTheme: ThemeData(
+                  fontFamily: GoogleFonts.roboto().fontFamily,
+                  useMaterial3: true,
+                  colorScheme: darkScheme,
+                  extensions: [darkCustomColors],
+                ),
+                initialRoute: initialRoute,
+                onGenerateInitialRoutes: (route) {
+                  if (route != '/') {
+                    return [MaterialPageRoute(builder: (_) => const InfoScreen())];
+                  } else {
+                    return [MaterialPageRoute(builder: (_) => HomeControllerScreen())];
+                  }
+                },
+                onGenerateRoute: RouteGenerator.generateRoute,
+              );
+            }),
           );
         },
       ),

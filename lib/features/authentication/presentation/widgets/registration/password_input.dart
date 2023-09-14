@@ -20,9 +20,10 @@ class PasswordInput extends StatelessWidget {
             borderRadius: BorderRadius.circular(18),
             borderSide: BorderSide.none,
           ),
-          fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+          fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
           filled: true,
           prefixIcon: const Icon(Icons.lock),
+          suffixIconColor: Theme.of(context).colorScheme.onBackground.withOpacity(0.8),
           suffixIcon: IconButton(
             onPressed: () => context.read<RegistrationBloc>().add(const RegistrationEvent.obscurePasswordToggled()),
             icon: state.obscurePassword ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off),

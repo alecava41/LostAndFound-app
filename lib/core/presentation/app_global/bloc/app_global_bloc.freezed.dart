@@ -20,18 +20,21 @@ mixin _$AppGlobalEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() appCreated,
     required TResult Function(Locale locale) localeChanged,
+    required TResult Function(ThemeMode theme) themeChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appCreated,
     TResult? Function(Locale locale)? localeChanged,
+    TResult? Function(ThemeMode theme)? themeChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appCreated,
     TResult Function(Locale locale)? localeChanged,
+    TResult Function(ThemeMode theme)? themeChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$AppGlobalEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_AppCreated value) appCreated,
     required TResult Function(_LocaleChanged value) localeChanged,
+    required TResult Function(_ThemeChanged value) themeChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AppCreated value)? appCreated,
     TResult? Function(_LocaleChanged value)? localeChanged,
+    TResult? Function(_ThemeChanged value)? themeChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AppCreated value)? appCreated,
     TResult Function(_LocaleChanged value)? localeChanged,
+    TResult Function(_ThemeChanged value)? themeChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,6 +120,7 @@ class _$_AppCreated implements _AppCreated {
   TResult when<TResult extends Object?>({
     required TResult Function() appCreated,
     required TResult Function(Locale locale) localeChanged,
+    required TResult Function(ThemeMode theme) themeChanged,
   }) {
     return appCreated();
   }
@@ -123,6 +130,7 @@ class _$_AppCreated implements _AppCreated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appCreated,
     TResult? Function(Locale locale)? localeChanged,
+    TResult? Function(ThemeMode theme)? themeChanged,
   }) {
     return appCreated?.call();
   }
@@ -132,6 +140,7 @@ class _$_AppCreated implements _AppCreated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appCreated,
     TResult Function(Locale locale)? localeChanged,
+    TResult Function(ThemeMode theme)? themeChanged,
     required TResult orElse(),
   }) {
     if (appCreated != null) {
@@ -145,6 +154,7 @@ class _$_AppCreated implements _AppCreated {
   TResult map<TResult extends Object?>({
     required TResult Function(_AppCreated value) appCreated,
     required TResult Function(_LocaleChanged value) localeChanged,
+    required TResult Function(_ThemeChanged value) themeChanged,
   }) {
     return appCreated(this);
   }
@@ -154,6 +164,7 @@ class _$_AppCreated implements _AppCreated {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AppCreated value)? appCreated,
     TResult? Function(_LocaleChanged value)? localeChanged,
+    TResult? Function(_ThemeChanged value)? themeChanged,
   }) {
     return appCreated?.call(this);
   }
@@ -163,6 +174,7 @@ class _$_AppCreated implements _AppCreated {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AppCreated value)? appCreated,
     TResult Function(_LocaleChanged value)? localeChanged,
+    TResult Function(_ThemeChanged value)? themeChanged,
     required TResult orElse(),
   }) {
     if (appCreated != null) {
@@ -242,6 +254,7 @@ class _$_LocaleChanged implements _LocaleChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() appCreated,
     required TResult Function(Locale locale) localeChanged,
+    required TResult Function(ThemeMode theme) themeChanged,
   }) {
     return localeChanged(locale);
   }
@@ -251,6 +264,7 @@ class _$_LocaleChanged implements _LocaleChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? appCreated,
     TResult? Function(Locale locale)? localeChanged,
+    TResult? Function(ThemeMode theme)? themeChanged,
   }) {
     return localeChanged?.call(locale);
   }
@@ -260,6 +274,7 @@ class _$_LocaleChanged implements _LocaleChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? appCreated,
     TResult Function(Locale locale)? localeChanged,
+    TResult Function(ThemeMode theme)? themeChanged,
     required TResult orElse(),
   }) {
     if (localeChanged != null) {
@@ -273,6 +288,7 @@ class _$_LocaleChanged implements _LocaleChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(_AppCreated value) appCreated,
     required TResult Function(_LocaleChanged value) localeChanged,
+    required TResult Function(_ThemeChanged value) themeChanged,
   }) {
     return localeChanged(this);
   }
@@ -282,6 +298,7 @@ class _$_LocaleChanged implements _LocaleChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AppCreated value)? appCreated,
     TResult? Function(_LocaleChanged value)? localeChanged,
+    TResult? Function(_ThemeChanged value)? themeChanged,
   }) {
     return localeChanged?.call(this);
   }
@@ -291,6 +308,7 @@ class _$_LocaleChanged implements _LocaleChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AppCreated value)? appCreated,
     TResult Function(_LocaleChanged value)? localeChanged,
+    TResult Function(_ThemeChanged value)? themeChanged,
     required TResult orElse(),
   }) {
     if (localeChanged != null) {
@@ -310,9 +328,149 @@ abstract class _LocaleChanged implements AppGlobalEvent {
 }
 
 /// @nodoc
+abstract class _$$_ThemeChangedCopyWith<$Res> {
+  factory _$$_ThemeChangedCopyWith(
+          _$_ThemeChanged value, $Res Function(_$_ThemeChanged) then) =
+      __$$_ThemeChangedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ThemeMode theme});
+}
+
+/// @nodoc
+class __$$_ThemeChangedCopyWithImpl<$Res>
+    extends _$AppGlobalEventCopyWithImpl<$Res, _$_ThemeChanged>
+    implements _$$_ThemeChangedCopyWith<$Res> {
+  __$$_ThemeChangedCopyWithImpl(
+      _$_ThemeChanged _value, $Res Function(_$_ThemeChanged) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? theme = null,
+  }) {
+    return _then(_$_ThemeChanged(
+      null == theme
+          ? _value.theme
+          : theme // ignore: cast_nullable_to_non_nullable
+              as ThemeMode,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ThemeChanged implements _ThemeChanged {
+  const _$_ThemeChanged(this.theme);
+
+  @override
+  final ThemeMode theme;
+
+  @override
+  String toString() {
+    return 'AppGlobalEvent.themeChanged(theme: $theme)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ThemeChanged &&
+            (identical(other.theme, theme) || other.theme == theme));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, theme);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ThemeChangedCopyWith<_$_ThemeChanged> get copyWith =>
+      __$$_ThemeChangedCopyWithImpl<_$_ThemeChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() appCreated,
+    required TResult Function(Locale locale) localeChanged,
+    required TResult Function(ThemeMode theme) themeChanged,
+  }) {
+    return themeChanged(theme);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? appCreated,
+    TResult? Function(Locale locale)? localeChanged,
+    TResult? Function(ThemeMode theme)? themeChanged,
+  }) {
+    return themeChanged?.call(theme);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? appCreated,
+    TResult Function(Locale locale)? localeChanged,
+    TResult Function(ThemeMode theme)? themeChanged,
+    required TResult orElse(),
+  }) {
+    if (themeChanged != null) {
+      return themeChanged(theme);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AppCreated value) appCreated,
+    required TResult Function(_LocaleChanged value) localeChanged,
+    required TResult Function(_ThemeChanged value) themeChanged,
+  }) {
+    return themeChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AppCreated value)? appCreated,
+    TResult? Function(_LocaleChanged value)? localeChanged,
+    TResult? Function(_ThemeChanged value)? themeChanged,
+  }) {
+    return themeChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AppCreated value)? appCreated,
+    TResult Function(_LocaleChanged value)? localeChanged,
+    TResult Function(_ThemeChanged value)? themeChanged,
+    required TResult orElse(),
+  }) {
+    if (themeChanged != null) {
+      return themeChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ThemeChanged implements AppGlobalEvent {
+  const factory _ThemeChanged(final ThemeMode theme) = _$_ThemeChanged;
+
+  ThemeMode get theme;
+  @JsonKey(ignore: true)
+  _$$_ThemeChangedCopyWith<_$_ThemeChanged> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$AppGlobalState {
   Locale get locale => throw _privateConstructorUsedError;
   LatLng get defaultPosition => throw _privateConstructorUsedError;
+  ThemeMode get theme => throw _privateConstructorUsedError;
   Either<Failure, Success>? get response => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -329,6 +487,7 @@ abstract class $AppGlobalStateCopyWith<$Res> {
   $Res call(
       {Locale locale,
       LatLng defaultPosition,
+      ThemeMode theme,
       Either<Failure, Success>? response});
 }
 
@@ -347,6 +506,7 @@ class _$AppGlobalStateCopyWithImpl<$Res, $Val extends AppGlobalState>
   $Res call({
     Object? locale = null,
     Object? defaultPosition = null,
+    Object? theme = null,
     Object? response = freezed,
   }) {
     return _then(_value.copyWith(
@@ -358,6 +518,10 @@ class _$AppGlobalStateCopyWithImpl<$Res, $Val extends AppGlobalState>
           ? _value.defaultPosition
           : defaultPosition // ignore: cast_nullable_to_non_nullable
               as LatLng,
+      theme: null == theme
+          ? _value.theme
+          : theme // ignore: cast_nullable_to_non_nullable
+              as ThemeMode,
       response: freezed == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
@@ -377,6 +541,7 @@ abstract class _$$_AppGlobalStateCopyWith<$Res>
   $Res call(
       {Locale locale,
       LatLng defaultPosition,
+      ThemeMode theme,
       Either<Failure, Success>? response});
 }
 
@@ -393,6 +558,7 @@ class __$$_AppGlobalStateCopyWithImpl<$Res>
   $Res call({
     Object? locale = null,
     Object? defaultPosition = null,
+    Object? theme = null,
     Object? response = freezed,
   }) {
     return _then(_$_AppGlobalState(
@@ -404,6 +570,10 @@ class __$$_AppGlobalStateCopyWithImpl<$Res>
           ? _value.defaultPosition
           : defaultPosition // ignore: cast_nullable_to_non_nullable
               as LatLng,
+      theme: null == theme
+          ? _value.theme
+          : theme // ignore: cast_nullable_to_non_nullable
+              as ThemeMode,
       response: freezed == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
@@ -416,18 +586,23 @@ class __$$_AppGlobalStateCopyWithImpl<$Res>
 
 class _$_AppGlobalState implements _AppGlobalState {
   const _$_AppGlobalState(
-      {required this.locale, required this.defaultPosition, this.response});
+      {required this.locale,
+      required this.defaultPosition,
+      required this.theme,
+      this.response});
 
   @override
   final Locale locale;
   @override
   final LatLng defaultPosition;
   @override
+  final ThemeMode theme;
+  @override
   final Either<Failure, Success>? response;
 
   @override
   String toString() {
-    return 'AppGlobalState(locale: $locale, defaultPosition: $defaultPosition, response: $response)';
+    return 'AppGlobalState(locale: $locale, defaultPosition: $defaultPosition, theme: $theme, response: $response)';
   }
 
   @override
@@ -438,13 +613,14 @@ class _$_AppGlobalState implements _AppGlobalState {
             (identical(other.locale, locale) || other.locale == locale) &&
             (identical(other.defaultPosition, defaultPosition) ||
                 other.defaultPosition == defaultPosition) &&
+            (identical(other.theme, theme) || other.theme == theme) &&
             (identical(other.response, response) ||
                 other.response == response));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, locale, defaultPosition, response);
+      Object.hash(runtimeType, locale, defaultPosition, theme, response);
 
   @JsonKey(ignore: true)
   @override
@@ -457,12 +633,15 @@ abstract class _AppGlobalState implements AppGlobalState {
   const factory _AppGlobalState(
       {required final Locale locale,
       required final LatLng defaultPosition,
+      required final ThemeMode theme,
       final Either<Failure, Success>? response}) = _$_AppGlobalState;
 
   @override
   Locale get locale;
   @override
   LatLng get defaultPosition;
+  @override
+  ThemeMode get theme;
   @override
   Either<Failure, Success>? get response;
   @override

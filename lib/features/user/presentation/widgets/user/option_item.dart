@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:lost_and_found/utils/colors.dart';
+
+import '../../../../../utils/colors/custom_color.dart';
 
 class OptionItem extends StatelessWidget {
+  final IconData icon;
   final String optionName;
   final VoidCallback onTap;
   final bool showArrow;
 
-  const OptionItem({Key? key, required this.optionName, required this.onTap, this.showArrow = true}) : super(key: key);
+  const OptionItem({Key? key, required this.icon, required this.optionName, required this.onTap, this.showArrow = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    const divider =  Divider(
-            height: 0,
-          );
+    const divider = Divider(
+      height: 0,
+    );
 
     return Column(
       children: [
         Material(
-          color: Colors.white,
+          color: Theme.of(context).extension<CustomColors>()!.background2,
           child: InkWell(
             onTap: onTap,
-            splashColor: PersonalizedColor.splashGreyColor,
+            splashColor: Theme.of(context).extension<CustomColors>()!.splashGreyColor,
             child: SizedBox(
               height: 80,
               child: Row(
@@ -28,6 +31,13 @@ class OptionItem extends StatelessWidget {
                 children: [
                   Row(
                     children: [
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Icon(
+                        icon,
+                        size: 40,
+                      ),
                       const SizedBox(
                         width: 15,
                       ),

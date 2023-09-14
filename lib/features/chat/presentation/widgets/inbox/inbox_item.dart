@@ -3,7 +3,7 @@ import 'package:lost_and_found/core/presentation/widgets/circular_image_avatar.d
 import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../../core/presentation/widgets/custom_circular_progress.dart';
-import '../../../../../utils/colors.dart';
+import '../../../../../utils/colors/custom_color.dart';
 
 class InboxItem extends StatelessWidget {
   final int otherUserId;
@@ -30,10 +30,10 @@ class InboxItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: !opened ? PersonalizedColor.primarySwatch.shade200 : Colors.white,
+      color: !opened ? Theme.of(context).colorScheme.secondary : Theme.of(context).extension<CustomColors>()!.background2,
       child: InkWell(
         onTap: onTap,
-        splashColor: !opened ? PersonalizedColor.primarySwatch.shade500 : Colors.grey.withOpacity(0.4),
+        splashColor: !opened ? Theme.of(context).colorScheme.tertiary : Theme.of(context).extension<CustomColors>()!.splashGreyColor!.withOpacity(0.4),
         child: Column(
           children: [
             Row(
@@ -51,7 +51,6 @@ class InboxItem extends StatelessWidget {
                             CircularImage(
                               token: token,
                               imageUrl: "$baseUrl/api/users/$otherUserId/image",
-                              hasImage: true,
                               radius: 25,
                               errorImage: Image.asset(
                                 noUserImagePath,
@@ -75,6 +74,7 @@ class InboxItem extends StatelessWidget {
                                     Text(
                                       lastMessage,
                                       overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
                                     )
                                   ],
                                 ),
@@ -90,7 +90,6 @@ class InboxItem extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(8, 4, 12, 4),
                   child: SizedBox(
                     width: 80,
-                    //color: Colors.amber,
                     child: Column(
                       children: [
                         SizedBox(
@@ -124,7 +123,7 @@ class InboxItem extends StatelessWidget {
                         ),
                         Text(
                           itemTitle,
-                          style: const TextStyle(color: Colors.black45, overflow: TextOverflow.ellipsis, fontSize: 12),
+                          style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor, overflow: TextOverflow.ellipsis, fontSize: 12),
                         ),
                       ],
                     ),

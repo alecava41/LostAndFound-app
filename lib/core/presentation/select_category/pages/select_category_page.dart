@@ -1,13 +1,13 @@
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lost_and_found/core/presentation/select_category/bloc/category_bloc.dart';
 import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
-import 'package:lost_and_found/utils/colors.dart';
+
 
 import '../../../../injection_container.dart';
+import '../../../../utils/colors/custom_color.dart';
 import '../../../domain/entities/category.dart';
 import '../widgets/category_item.dart';
 
@@ -22,62 +22,57 @@ class CategorySelectionScreen extends StatelessWidget {
       create: (_) => sl<CategoryBloc>()..add(const CategoryEvent.categoryCreated()),
       child: BlocBuilder<CategoryBloc, CategoryState>(
         builder: (ctx, state) {
-          return AnnotatedRegion(
-            value: const SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
-              statusBarBrightness: Brightness.light,
-              statusBarIconBrightness: Brightness.dark,
-            ),
-            child: Scaffold(
-                backgroundColor: PersonalizedColor.backgroundColor,
-                appBar: AppBar(
-                  title: Text(
-                    AppLocalizations.of(context)!.categoryPageTitle,
-                    style: const TextStyle(color: Colors.black),
-                  ),
-                  backgroundColor: Colors.white,
-                  iconTheme: const IconThemeData(color: Colors.black),
+          return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
+                elevation: 0,
+                surfaceTintColor: Theme.of(context).colorScheme.outline,
+                shadowColor: Theme.of(context).colorScheme.outline,
+                title: Text(
+                  AppLocalizations.of(context)!.categoryPageTitle,
+                  style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
                 ),
-                body: () {
-                  if (state.isLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(value: null),
-                    );
-                  } else if (state.hasLoadingError) {
-                    return ErrorPage(onRetry: () => ctx.read<CategoryBloc>().add(const CategoryEvent.categoryCreated()));
-                  } else {
-                    return SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: (removeAllOption
-                                ? state.categories
-                                : () {
-                                    List<Category> modifiableList = [];
-                                    modifiableList = state.categories.toList();
-                                    modifiableList.insert(
-                                      0,
-                                      Category(
-                                          id: 0,
-                                          name: AppLocalizations.of(context)!.categoryAllTitle,
-                                          icon: 0xe1f7,
-                                          description: AppLocalizations.of(context)!.categoryAllDescription),
-                                    );
-                                    return modifiableList;
-                                  }())
-                            .map((cat) => CategoryItem(
-                                  categoryName: cat.name,
-                                  icon: IconData(cat.icon, fontFamily: 'MaterialIcons'),
-                                  onTap: () {
-                                    Navigator.pop(context, Pair<int, String>(cat.id, cat.name));
-                                  },
-                                  description: cat.description,
-                                ))
-                            .toList(),
-                      ),
-                    );
-                  }
-                }()),
-          );
+                iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
+              ),
+              body: () {
+                if (state.isLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(value: null),
+                  );
+                } else if (state.hasLoadingError) {
+                  return ErrorPage(onRetry: () => ctx.read<CategoryBloc>().add(const CategoryEvent.categoryCreated()));
+                } else {
+                  return SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: (removeAllOption
+                              ? state.categories
+                              : () {
+                                  List<Category> modifiableList = [];
+                                  modifiableList = state.categories.toList();
+                                  modifiableList.insert(
+                                    0,
+                                    Category(
+                                        id: 0,
+                                        name: AppLocalizations.of(context)!.categoryAllTitle,
+                                        icon: 0xe1f7,
+                                        description: AppLocalizations.of(context)!.categoryAllDescription),
+                                  );
+                                  return modifiableList;
+                                }())
+                          .map((cat) => CategoryItem(
+                                categoryName: cat.name,
+                                icon: IconData(cat.icon, fontFamily: 'MaterialIcons'),
+                                onTap: () {
+                                  Navigator.pop(context, Pair<int, String>(cat.id, cat.name));
+                                },
+                                description: cat.description,
+                              ))
+                          .toList(),
+                    ),
+                  );
+                }
+              }());
         },
       ),
     );

@@ -3,8 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/features/user/presentation/widgets/tutorial/carousel_detailed_tutorial.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../../utils/colors.dart';
-import '../../../../../utils/screen_size.dart';
 
 class FoundItemTutorial extends StatefulWidget {
   const FoundItemTutorial({super.key});
@@ -35,7 +33,7 @@ class _FoundItemTutorialState extends State<FoundItemTutorial> {
       height: isActive ? 48 : 32,
       width: isActive ? 12 : 8.0,
       decoration: BoxDecoration(
-        color: isActive ? PersonalizedColor.mainColor : Colors.black,
+        color: isActive ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onBackground,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
@@ -59,7 +57,7 @@ class _FoundItemTutorialState extends State<FoundItemTutorial> {
               children: _buildPageIndicator(),
             ),
             SizedBox(
-              height: !ScreenSize.isSmallSmartphoneDevice(context) ? 70.h : 65.h,
+              height: 65.h,
               width: 90.w,
               child: PageView(
                 scrollDirection: Axis.vertical,
@@ -71,19 +69,19 @@ class _FoundItemTutorialState extends State<FoundItemTutorial> {
                   });
                 },
                 children: <Widget>[
-                  carouselDetailedTutorialItem(
+                  carouselDetailedTutorialItem(context,
                       'assets/images/create-report.png',
                       AppLocalizations.of(context)!.tutorialFoundItemTitle1,
                       AppLocalizations.of(context)!.tutorialFoundItemContent1),
-                  carouselDetailedTutorialItem(
+                  carouselDetailedTutorialItem(context,
                       'assets/images/manage-claim.png',
                       AppLocalizations.of(context)!.tutorialFoundItemTitle2,
                       AppLocalizations.of(context)!.tutorialFoundItemContent2),
-                  carouselDetailedTutorialItem(
+                  carouselDetailedTutorialItem(context,
                       'assets/images/chat.png',
                       AppLocalizations.of(context)!.tutorialFoundItemTitle3,
                       AppLocalizations.of(context)!.tutorialFoundItemContent3),
-                  carouselDetailedTutorialItem(
+                  carouselDetailedTutorialItem(context,
                       'assets/images/solved.png',
                       AppLocalizations.of(context)!.tutorialFoundItemTitle4,
                       AppLocalizations.of(context)!.tutorialFoundItemContent4),

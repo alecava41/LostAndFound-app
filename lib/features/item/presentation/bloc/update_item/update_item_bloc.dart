@@ -153,7 +153,7 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
         final imgFailureOrSuccess = await _uploadItemImageUseCase(params);
         imgFailureOrSuccess.fold(
             (failure) => imageFailureOrSuccess = Left(failure), (success) => imageFailureOrSuccess = Right(success));
-      } else if (state.item!.hasImage && state.hasDeletedOriginalImage) {
+      } else if (state.hasDeletedOriginalImage) {
         final params = DeleteItemImageParams(itemId: state.item!.id);
 
         final imgFailureOrSuccess = await _deleteItemImageUseCase(params);

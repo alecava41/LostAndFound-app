@@ -4,13 +4,12 @@ import 'package:lost_and_found/core/presentation/widgets/custom_circular_progres
 import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../../core/domain/entities/claim_status.dart';
-import '../../../../../utils/colors.dart';
+import '../../../../../utils/colors/custom_color.dart';
 
 class ClaimedItemCard extends StatelessWidget {
   final int userId;
   final String username;
   final bool opened;
-  final bool hasImage;
   final String token;
   final ClaimStatus status;
   final VoidCallback onTap;
@@ -19,7 +18,6 @@ class ClaimedItemCard extends StatelessWidget {
     super.key,
     required this.userId,
     required this.username,
-    required this.hasImage,
     required this.opened,
     required this.token,
     required this.onTap,
@@ -31,16 +29,17 @@ class ClaimedItemCard extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Material(
-        color: opened ? PersonalizedColor.openedColor : PersonalizedColor.notOpenedColor,
+        color: opened ? Theme.of(context).extension<CustomColors>()!.openedColor : Theme.of(context).extension<CustomColors>()!.notOpenedColor,
         child: InkWell(
-          splashColor: opened ? PersonalizedColor.splashGreyColor : PersonalizedColor.splashGreenColor,
+          splashColor: opened ? Theme.of(context).extension<CustomColors>()!.splashGreyColor : Theme.of(context).extension<CustomColors>()!.splashGreenColor,
           onTap: () => onTap(),
           child: Container(
             decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surfaceVariant,
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
                 width: 0.3,
-                color: opened ? PersonalizedColor.borderColorOpened : PersonalizedColor.borderColorNotOpened,
+                color: opened ? Theme.of(context).extension<CustomColors>()!.borderColorOpened! : Theme.of(context).extension<CustomColors>()!.borderColorNotOpened!,
               ),
             ),
             padding: const EdgeInsets.all(5),
@@ -52,8 +51,7 @@ class ClaimedItemCard extends StatelessWidget {
                   height: 70,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: hasImage
-                        ? Image.network(
+                    child: Image.network(
                             "$baseUrl/api/users/$userId/image",
                             fit: BoxFit.cover,
                             headers: {"Authorization": "Bearer $token"},
@@ -65,10 +63,6 @@ class ClaimedItemCard extends StatelessWidget {
                               noUserImagePath,
                               fit: BoxFit.cover,
                             ),
-                          )
-                        : Image.asset(
-                            noUserImagePath,
-                            fit: BoxFit.cover,
                           ),
                   ),
                 ),
@@ -92,10 +86,10 @@ class ClaimedItemCard extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: status == ClaimStatus.approved
-                                  ? PersonalizedColor.claimAcceptedStatusColor
+                                  ? Theme.of(context).extension<CustomColors>()!.claimAcceptedStatusColor
                                   : (status == ClaimStatus.rejected
-                                      ? PersonalizedColor.claimDeniedStatusColor
-                                      : PersonalizedColor.claimWaitingStatusColor),
+                                      ? Theme.of(context).extension<CustomColors>()!.claimDeniedStatusColor
+                                      : Theme.of(context).extension<CustomColors>()!.claimWaitingStatusColor),
                             ),
                             child: RichText(
                               maxLines: 1,
@@ -104,12 +98,12 @@ class ClaimedItemCard extends StatelessWidget {
                                 children: [
                                   TextSpan(
                                     text: AppLocalizations.of(context)!.claimStatusSpaced,
-                                    style: const TextStyle(fontSize: 13, color: Colors.black),
+                                    style: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.onSurface),
                                   ),
                                   TextSpan(
                                     text: status.getTranslatedName(context).toUpperCase(),
                                     style:
-                                        const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
+                                        TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface),
                                   ),
                                 ],
                               ),

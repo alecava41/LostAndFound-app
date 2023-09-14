@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../utils/colors.dart';
-
 class InfoClaimsBox extends StatelessWidget {
   final String text;
+
   const InfoClaimsBox({
     super.key,
     required this.text,
@@ -14,28 +13,30 @@ class InfoClaimsBox extends StatelessWidget {
     return Container(
       height: 65,
       width: MediaQuery.of(context).size.width,
-      color: PersonalizedColor.mainColor,
+      color: Theme.of(context).colorScheme.tertiaryContainer,
       padding: const EdgeInsets.all(8),
-      child: Row(children: [
-        const Icon(
-          Icons.info,
-          color: Colors.white,
-        ),
-        const SizedBox(
-          width: 5,
-        ),
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                text,
-                style: const TextStyle(color: Colors.white),
-              ),
-            ],
+      child: Row(
+        children: [
+          Icon(
+            Icons.info,
+            color: Theme.of(context).colorScheme.onTertiaryContainer,
           ),
-        ),
-      ]),
+          const SizedBox(
+            width: 5,
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  text,
+                  style: TextStyle(color: Theme.of(context).colorScheme.onTertiaryContainer),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

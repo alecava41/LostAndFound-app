@@ -6,7 +6,7 @@ import 'package:lost_and_found/core/presentation/select_position/pages/select_po
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../utils/colors.dart';
+import '../../../utils/colors/custom_color.dart';
 
 class SelectPositionButton extends StatelessWidget {
   final String address;
@@ -36,7 +36,7 @@ class SelectPositionButton extends StatelessWidget {
             height: 0,
           ),
           Ink(
-            color: Colors.white,
+            color: Theme.of(context).extension<CustomColors>()!.background2,
             child: InkWell(
               onTap: () async {
                 FocusManager.instance.primaryFocus?.unfocus();
@@ -51,7 +51,7 @@ class SelectPositionButton extends StatelessWidget {
                 onPositionSelected(selectedPos);
               },
               child: SizedBox(
-                height: showError && errorText != "" ? 155 : 131,
+                height: showError && errorText != "" ? 170 : 151,
                 width: MediaQuery.of(context).size.width,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -69,7 +69,7 @@ class SelectPositionButton extends StatelessWidget {
                             ),
                             Text(
                               AppLocalizations.of(context)!.positionFormEntrySubtitle,
-                              style: const TextStyle(color: Colors.black54),
+                              style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
                             ),
                             const SizedBox(
                               height: 20,
@@ -78,7 +78,7 @@ class SelectPositionButton extends StatelessWidget {
                               children: [
                                 Icon(
                                   Icons.location_on,
-                                  color: address == "" ? Colors.black : PersonalizedColor.mainColor,
+                                  color: address.isEmpty ? Theme.of(context).extension<CustomColors>()!.secondaryTextColor : Theme.of(context).colorScheme.primary,
                                   size: 30,
                                 ),
                                 Expanded(
@@ -94,7 +94,7 @@ class SelectPositionButton extends StatelessWidget {
                                               maxLines: 2,
                                               style: TextStyle(
                                                 overflow: TextOverflow.ellipsis,
-                                                color: address == "" ? Colors.black : PersonalizedColor.mainColor,
+                                                color: address.isEmpty ? Theme.of(context).extension<CustomColors>()!.secondaryTextColor : Theme.of(context).colorScheme.primary,
                                               ),
                                             ),
                                     ],
@@ -108,7 +108,7 @@ class SelectPositionButton extends StatelessWidget {
                             showError && (startingPosition == appGlobalState.defaultPosition || startingPosition == const LatLng(0, 0))
                                 ? Text(
                                     errorText,
-                                    style: TextStyle(color: Colors.redAccent.shade700, fontSize: 12),
+                                    style: TextStyle(color: Theme.of(context).colorScheme.error, fontSize: 12),
                                   )
                                 : Container(),
                           ],

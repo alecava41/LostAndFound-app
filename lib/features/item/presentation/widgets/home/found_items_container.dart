@@ -54,11 +54,10 @@ class FoundItemsContainer extends StatelessWidget {
                             children: state.foundItems
                                 .map((item) => CustomCardHome(
                                       id: item.id,
-                                      hasImage: item.hasImage,
                                       text: item.title,
                                       claims: item.claims,
                                       token: state.token,
-                                      approvedClaims: item.approvedClaims,
+                                      approvedClaims: item.approvedClaims, hasAdditionalInfo: true,
                                     ))
                                 .toList(),
                           )),

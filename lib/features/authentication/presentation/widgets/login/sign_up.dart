@@ -11,6 +11,9 @@ class SignUpText extends StatelessWidget {
       children: [
         Text(AppLocalizations.of(context)!.signUpText),
         TextButton(
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.zero
+          ),
           onPressed: () {
             Navigator.pushReplacementNamed(context, '/register');
           },

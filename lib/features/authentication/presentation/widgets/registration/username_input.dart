@@ -16,7 +16,7 @@ class UsernameInput extends StatelessWidget {
             errorMaxLines: 3,
             hintText: AppLocalizations.of(context)!.username,
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: BorderSide.none),
-            fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+            fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
             filled: true,
             prefixIcon: const Icon(Icons.person),
           ),

@@ -1,7 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../utils/colors.dart';
+import '../../../utils/colors/custom_color.dart';
 
 class PersonalizedCheckBoxesForm extends StatelessWidget {
   final bool foundChecked;
@@ -29,8 +30,8 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
           height: 0,
         ),
         Container(
-          height: showError && errorText != "" ? 115 : 90,
-          color: Colors.white,
+          height: showError && errorText != "" ? 123 : 92,
+          color: Theme.of(context).extension<CustomColors>()!.background2,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,14 +48,17 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
                   Row(
                     children: [
                       Checkbox(
-                        activeColor: PersonalizedColor.mainColor,
+                        activeColor: Theme.of(context).colorScheme.primary,
                         value: foundChecked,
                         onChanged: onFoundCheckedChanged,
                         isError: showError && !foundChecked && !lostChecked,
                       ),
-                      Text(
-                        AppLocalizations.of(context)!.found,
-                        style: const TextStyle(fontSize: 18),
+                      RichText(
+                        text: TextSpan(
+                          text: AppLocalizations.of(context)!.found,
+                          recognizer: TapGestureRecognizer()..onTap = () => onFoundCheckedChanged(!foundChecked),
+                          style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.onBackground),
+                        ),
                       ),
                     ],
                   ),
@@ -62,12 +66,18 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
                   Row(
                     children: [
                       Checkbox(
-                        activeColor: PersonalizedColor.mainColor,
+                        activeColor: Theme.of(context).colorScheme.primary,
                         value: lostChecked,
                         onChanged: onLostCheckedChanged,
                         isError: showError && !lostChecked && !foundChecked,
                       ),
-                      Text(AppLocalizations.of(context)!.lost, style: const TextStyle(fontSize: 18)),
+                      RichText(
+                        text: TextSpan(
+                          text: AppLocalizations.of(context)!.lost,
+                          recognizer: TapGestureRecognizer()..onTap = () => onLostCheckedChanged(!lostChecked),
+                          style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.onBackground),
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -77,7 +87,7 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
                 child: showError && !foundChecked && !lostChecked
                     ? Text(
                         errorText,
-                        style: TextStyle(color: Colors.redAccent.shade700, fontSize: 12),
+                        style: TextStyle(color: Theme.of(context).colorScheme.error, fontSize: 12),
                       )
                     : Container(),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lost_and_found/utils/colors.dart';
+
+import 'package:lost_and_found/utils/colors/custom_color.dart';
 
 class CategoryItem extends StatelessWidget {
   final String categoryName;
@@ -24,10 +25,10 @@ class CategoryItem extends StatelessWidget {
     return Column(
       children: [
         Material(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.background,
           child: InkWell(
             onTap: onTap,
-            splashColor: PersonalizedColor.splashGreyColor,
+            splashColor: Theme.of(context).extension<CustomColors>()!.splashGreyColor,
             child: SizedBox(
               height: 80,
               child: Row(
@@ -57,7 +58,7 @@ class CategoryItem extends StatelessWidget {
                               ),
                               Text(
                                 description,
-                                style: const TextStyle(color: Colors.black54),
+                                style: TextStyle(color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ],

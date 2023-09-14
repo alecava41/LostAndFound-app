@@ -15,17 +15,18 @@ class LoginButton extends StatelessWidget {
           context.read<LoginBloc>().add(const LoginEvent.loginSubmitted());
         },
         style: ElevatedButton.styleFrom(
+          backgroundColor: Theme.of(context).colorScheme.primary,
           shape: const StadiumBorder(),
           padding: const EdgeInsets.symmetric(vertical: 16),
         ),
         child: state.isSubmitting
-            ? const CustomCircularProgress(
+            ? CustomCircularProgress(
                 size: 25,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onPrimary,
               )
             : Text(
                 AppLocalizations.of(context)!.singIn,
-                style: const TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onPrimary),
               ),
       );
     });

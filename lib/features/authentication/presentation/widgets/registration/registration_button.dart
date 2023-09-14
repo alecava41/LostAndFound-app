@@ -34,15 +34,16 @@ class RegistrationButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
           padding: const EdgeInsets.symmetric(vertical: 16),
+          backgroundColor: Theme.of(context).colorScheme.primary
         ),
         child: state.isSubmitting
-            ? const CustomCircularProgress(
+            ? CustomCircularProgress(
                 size: 25,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onPrimary,
               )
             : Text(
                 AppLocalizations.of(context)!.signUp,
-                style: const TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onPrimary),
               ),
       );
     });

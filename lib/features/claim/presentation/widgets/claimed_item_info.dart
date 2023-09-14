@@ -7,7 +7,6 @@ import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../core/presentation/widgets/image_dialog.dart';
-import '../../../../utils/colors.dart';
 import '../../../item/domain/entities/item.dart';
 import '../../../item/presentation/widgets/notifications/circular_image_avatar.dart';
 import '../bloc/answer_claim/answer_claim_bloc.dart';
@@ -18,7 +17,6 @@ class ClaimedItemInfo extends StatelessWidget {
   final String token;
   final String subject; // either the owner of the object or the user that claimed it
   final int otherUserId;
-  final bool hasOtherUserImage;
   final String otherUserUsername;
   final bool isQuestionScreen;
   final int? claimIdx;
@@ -32,7 +30,6 @@ class ClaimedItemInfo extends StatelessWidget {
     required this.otherUserUsername,
     required this.isQuestionScreen,
     required this.claimIdx,
-    required this.hasOtherUserImage,
   });
 
   @override
@@ -47,38 +44,30 @@ class ClaimedItemInfo extends StatelessWidget {
             SizedBox(
               width: 150,
               height: 150,
-              child: item.hasImage
-                  ? ImageDialogWidget(
-                      imageUrl: itemUrl,
-                      token: token,
-                      errorImage: Image.asset(
-                        noItemImagePath,
-                        fit: BoxFit.cover,
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          itemUrl,
-                          fit: BoxFit.cover,
-                          headers: {"Authorization": "Bearer $token"},
-                          errorBuilder: (ctx, error, trace) => Image.asset(
-                            noItemImagePath,
-                            fit: BoxFit.cover,
-                          ),
-                          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return const CustomCircularProgress(size: 75);
-                          },
-                        ),
-                      ),
-                    )
-                  : ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        noItemImagePath,
-                        fit: BoxFit.cover,
-                      ),
+              child: ImageDialogWidget(
+                imageUrl: itemUrl,
+                token: token,
+                errorImage: Image.asset(
+                  noItemImagePath,
+                  fit: BoxFit.cover,
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    itemUrl,
+                    fit: BoxFit.cover,
+                    headers: {"Authorization": "Bearer $token"},
+                    errorBuilder: (ctx, error, trace) => Image.asset(
+                      noItemImagePath,
+                      fit: BoxFit.cover,
                     ),
+                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return const CustomCircularProgress(size: 75);
+                    },
+                  ),
+                ),
+              ),
             ),
             Expanded(
               child: SizedBox(
@@ -100,7 +89,7 @@ class ClaimedItemInfo extends StatelessWidget {
                       PersonalizedLargeGreenButton(
                         onPressed: () =>
                             Navigator.of(context).push(MaterialPageRoute(builder: (_) => ItemScreen(itemId: item.id))),
-                        text: Text(AppLocalizations.of(context)!.seeDetails),
+                        text: Text(AppLocalizations.of(context)!.seeDetails, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),),
                       ),
                     ],
                   ),
@@ -109,9 +98,9 @@ class ClaimedItemInfo extends StatelessWidget {
             ),
           ],
         ),
-        const Divider(
+        Divider(
           thickness: 1,
-          color: PersonalizedColor.mainColor,
+          color: Theme.of(context).colorScheme.primary,
         ),
         const SizedBox(
           height: 10,
@@ -123,7 +112,6 @@ class ClaimedItemInfo extends StatelessWidget {
               child: Row(
                 children: [
                   CircularImage(
-                    hasImage: hasOtherUserImage,
                     imageUrl: "$baseUrl/api/users/$otherUserId/image",
                     radius: 25,
                     token: token,
@@ -148,15 +136,15 @@ class ClaimedItemInfo extends StatelessWidget {
             const SizedBox(width: 10),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                side: const BorderSide(color: PersonalizedColor.mainColor, width: 0.4),
+                backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                side: BorderSide(color: Theme.of(context).colorScheme.primary, width: 0.4),
                 shape: const StadiumBorder(),
                 padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
               ).copyWith(
                 overlayColor: MaterialStateProperty.resolveWith<Color>(
                   (Set<MaterialState> states) {
                     if (states.contains(MaterialState.pressed)) {
-                      return PersonalizedColor.primarySwatch.shade50;
+                      return Theme.of(context).colorScheme.onTertiaryContainer.withOpacity(0.2);
                     }
                     return Colors.transparent;
                   },
@@ -177,7 +165,7 @@ class ClaimedItemInfo extends StatelessWidget {
               },
               child: Text(
                 AppLocalizations.of(context)!.sendMessage,
-                style: const TextStyle(fontSize: 14, color: PersonalizedColor.mainColor),
+                style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onTertiaryContainer),
               ),
             ),
           ],

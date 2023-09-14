@@ -7,7 +7,6 @@ class SearchItem {
   final double distance;
   final DateTime date;
   final ItemType type;
-  final bool hasImage;
 
   SearchItem({
     required this.id,
@@ -16,7 +15,6 @@ class SearchItem {
     required this.date,
     required this.user,
     required this.type,
-    required this.hasImage
   });
 }
 

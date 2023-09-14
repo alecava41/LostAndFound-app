@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
+import 'package:lost_and_found/utils/colors/custom_color.dart';
 
-import '../../../../../utils/colors.dart';
 import '../../../../../utils/screen_size.dart';
 
 class NoItemMessage extends StatelessWidget {
@@ -25,11 +25,12 @@ class NoItemMessage extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
+        color: Theme.of(context).extension<CustomColors>()!.background2,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          // TODO replace with image!
           Icon(
             icon,
             size: ScreenSize.isBigSmartphoneDevice(context)
@@ -37,7 +38,7 @@ class NoItemMessage extends StatelessWidget {
                 : ScreenSize.isMediumSmartphoneDevice(context)
                     ? 70
                     : 50,
-            color: PersonalizedColor.mainColor,
+            color: Theme.of(context).colorScheme.primary,
           ),
           Text(
             message,
@@ -48,7 +49,7 @@ class NoItemMessage extends StatelessWidget {
                   : ScreenSize.isMediumSmartphoneDevice(context)
                       ? 17
                       : 16,
-              color: PersonalizedColor.mainColor,
+              color: Theme.of(context).colorScheme.primary,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -61,7 +62,9 @@ class NoItemMessage extends StatelessWidget {
                         ? 20
                         : ScreenSize.isMediumSmartphoneDevice(context)
                             ? 18
-                            : 16),
+                            : 16,
+
+                color: Theme.of(context).colorScheme.onPrimary),
               ))
         ],
       ),

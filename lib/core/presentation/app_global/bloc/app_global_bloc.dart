@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/domain/entities/current_country.dart';
@@ -39,9 +39,15 @@ class AppGlobalBloc extends Bloc<AppGlobalEvent, AppGlobalState> {
         await event.when<FutureOr<void>>(
           appCreated: () => _onAppCreated(emit),
           localeChanged: (locale) => _onLocaleChanged(emit, locale),
+          themeChanged: (theme) => _onThemeChanged(emit, theme),
         );
       },
     );
+  }
+
+  Future<void> _onThemeChanged(Emitter<AppGlobalState> emit, ThemeMode theme) async {
+    await _storage.setTheme(theme.name);
+    emit(state.copyWith(theme: theme));
   }
 
   Future<void> _onLocaleChanged(Emitter<AppGlobalState> emit, Locale newLocale) async {
@@ -54,10 +60,18 @@ class AppGlobalBloc extends Bloc<AppGlobalEvent, AppGlobalState> {
 
   Future<void> _onAppCreated(Emitter<AppGlobalState> emit) async {
     final lastLocale = await _storage.getLastSetLocale();
+    final savedTheme = await _storage.getSavedTheme();
     final currentCountryResponse = await _getCurrentCountryUseCase(NoParams());
 
     emit(state.copyWith(
       locale: lastLocale != null ? Locale(lastLocale) : const Locale("en"),
+      theme: savedTheme != null
+          ? (savedTheme == ThemeMode.system.name
+              ? ThemeMode.system
+              : savedTheme == ThemeMode.dark.name
+                  ? ThemeMode.dark
+                  : ThemeMode.light)
+          : ThemeMode.system,
       defaultPosition: getCenterPositionBasedOnLocale(currentCountryResponse
           .getOrElse(
               () => lastLocale != null ? CurrentCountry(countryCode: lastLocale) : CurrentCountry(countryCode: "en"))

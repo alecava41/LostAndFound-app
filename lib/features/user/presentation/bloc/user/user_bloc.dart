@@ -107,8 +107,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             ? null
             : User(
                 id: state.user!.id,
-                username: state.user!.username,
-                hasImage: imgFailureOrSuccess != null ? imgFailureOrSuccess.isRight() : state.user!.hasImage)));
+                username: state.user!.username,)));
     emit(state.copyWith(imageUploadFailureOrSuccess: null));
   }
 }

@@ -12,7 +12,7 @@ _$$ItemDto _$$$ItemDtoFromJson(Map<String, dynamic> json) => _$$ItemDto(
       title: json['title'] as String,
       type: json['type'] as String,
       address: json['address'] as String,
-      image: json['image'] as bool,
+      image: json['image'] as bool?,
       date: DateTime.parse(json['date'] as String),
       user: UserDto.fromJson(json['user'] as Map<String, dynamic>),
       category: CategoryDto.fromJson(json['category'] as Map<String, dynamic>),

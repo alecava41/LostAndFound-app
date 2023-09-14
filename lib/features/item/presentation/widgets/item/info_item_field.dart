@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lost_and_found/utils/colors/custom_color.dart';
 
-import '../../../../../utils/colors.dart';
 
 class InfoItemField extends StatelessWidget {
   final IconData icon;
@@ -16,8 +16,9 @@ class InfoItemField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        color: Theme.of(context).extension<CustomColors>()!.background2,
         border: Border.all(
-          color: PersonalizedColor.mainColor,
+          color: Theme.of(context).colorScheme.primary,
           width: 1,
         ),
         borderRadius: BorderRadius.circular(10.0),
@@ -26,9 +27,9 @@ class InfoItemField extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(4),
-            decoration: const BoxDecoration(
-              color: PersonalizedColor.mainColor,
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(8.0),
                 topRight: Radius.circular(8.0),
               ),
@@ -39,14 +40,14 @@ class InfoItemField extends StatelessWidget {
                 Icon(
                   icon,
                   size: 22,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 const SizedBox(
                   width: 5,
                 ),
                 Text(
                   title,
-                  style: const TextStyle(fontSize: 16, color: Colors.white),
+                  style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onPrimary),
                 ),
               ],
             ),
@@ -59,20 +60,20 @@ class InfoItemField extends StatelessWidget {
                   child: RichText(
                     text: TextSpan(
                       text: content,
-                      style: const TextStyle(fontSize: 16, color: Colors.black),
+                      style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onBackground),
                       children: onTapField != null
                           ? <TextSpan>[
-                              const TextSpan(text: " (", style: TextStyle(fontSize: 16, color: Colors.black)),
+                              TextSpan(text: " (", style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onBackground)),
                               TextSpan(
                                 text: AppLocalizations.of(context)!.openMap,
                                 recognizer: TapGestureRecognizer()..onTap = onTapField,
                                 style: TextStyle(
                                   fontSize: 16,
-                                  color: onTapField != null ? Colors.blueAccent : Colors.black,
+                                  color: onTapField != null ? Colors.blueAccent : Theme.of(context).colorScheme.onBackground,
                                   decoration: onTapField != null ? TextDecoration.underline : null,
                                 ),
                               ),
-                              const TextSpan(text: ")", style: TextStyle(fontSize: 16, color: Colors.black))
+                              TextSpan(text: ")", style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onBackground))
                             ]
                           : [],
                     ),

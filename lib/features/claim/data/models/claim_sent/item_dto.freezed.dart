@@ -22,7 +22,7 @@ ItemDto _$ItemDtoFromJson(Map<String, dynamic> json) {
 mixin _$ItemDto {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  bool get image => throw _privateConstructorUsedError;
+  bool? get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $ItemDtoCopyWith<$Res> {
   factory $ItemDtoCopyWith(ItemDto value, $Res Function(ItemDto) then) =
       _$ItemDtoCopyWithImpl<$Res, ItemDto>;
   @useResult
-  $Res call({int id, String title, bool image});
+  $Res call({int id, String title, bool? image});
 }
 
 /// @nodoc
@@ -52,7 +52,7 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? image = null,
+    Object? image = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -63,10 +63,10 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ) as $Val);
   }
 }
@@ -78,7 +78,7 @@ abstract class _$$$ItemDtoCopyWith<$Res> implements $ItemDtoCopyWith<$Res> {
       __$$$ItemDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title, bool image});
+  $Res call({int id, String title, bool? image});
 }
 
 /// @nodoc
@@ -93,7 +93,7 @@ class __$$$ItemDtoCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? title = null,
-    Object? image = null,
+    Object? image = freezed,
   }) {
     return _then(_$$ItemDto(
       id: null == id
@@ -104,10 +104,10 @@ class __$$$ItemDtoCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ));
   }
 }
@@ -115,8 +115,7 @@ class __$$$ItemDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$$ItemDto implements $ItemDto {
-  const _$$ItemDto(
-      {required this.id, required this.title, required this.image});
+  const _$$ItemDto({required this.id, required this.title, this.image});
 
   factory _$$ItemDto.fromJson(Map<String, dynamic> json) =>
       _$$$ItemDtoFromJson(json);
@@ -126,7 +125,7 @@ class _$$ItemDto implements $ItemDto {
   @override
   final String title;
   @override
-  final bool image;
+  final bool? image;
 
   @override
   String toString() {
@@ -165,7 +164,7 @@ abstract class $ItemDto implements ItemDto {
   const factory $ItemDto(
       {required final int id,
       required final String title,
-      required final bool image}) = _$$ItemDto;
+      final bool? image}) = _$$ItemDto;
 
   factory $ItemDto.fromJson(Map<String, dynamic> json) = _$$ItemDto.fromJson;
 
@@ -174,7 +173,7 @@ abstract class $ItemDto implements ItemDto {
   @override
   String get title;
   @override
-  bool get image;
+  bool? get image;
   @override
   @JsonKey(ignore: true)
   _$$$ItemDtoCopyWith<_$$ItemDto> get copyWith =>

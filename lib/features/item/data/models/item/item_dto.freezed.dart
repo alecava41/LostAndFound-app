@@ -25,7 +25,7 @@ mixin _$ItemDto {
   String get title => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
-  bool get image => throw _privateConstructorUsedError;
+  bool? get image => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   UserDto get user => throw _privateConstructorUsedError;
   CategoryDto get category => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $ItemDtoCopyWith<$Res> {
       String title,
       String type,
       String address,
-      bool image,
+      bool? image,
       DateTime date,
       UserDto user,
       CategoryDto category,
@@ -83,7 +83,7 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
     Object? title = null,
     Object? type = null,
     Object? address = null,
-    Object? image = null,
+    Object? image = freezed,
     Object? date = null,
     Object? user = null,
     Object? category = null,
@@ -113,10 +113,10 @@ class _$ItemDtoCopyWithImpl<$Res, $Val extends ItemDto>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -198,7 +198,7 @@ abstract class _$$$ItemDtoCopyWith<$Res> implements $ItemDtoCopyWith<$Res> {
       String title,
       String type,
       String address,
-      bool image,
+      bool? image,
       DateTime date,
       UserDto user,
       CategoryDto category,
@@ -232,7 +232,7 @@ class __$$$ItemDtoCopyWithImpl<$Res>
     Object? title = null,
     Object? type = null,
     Object? address = null,
-    Object? image = null,
+    Object? image = freezed,
     Object? date = null,
     Object? user = null,
     Object? category = null,
@@ -262,10 +262,10 @@ class __$$$ItemDtoCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -307,7 +307,7 @@ class _$$ItemDto implements $ItemDto {
       required this.title,
       required this.type,
       required this.address,
-      required this.image,
+      this.image,
       required this.date,
       required this.user,
       required this.category,
@@ -331,7 +331,7 @@ class _$$ItemDto implements $ItemDto {
   @override
   final String address;
   @override
-  final bool image;
+  final bool? image;
   @override
   final DateTime date;
   @override
@@ -424,7 +424,7 @@ abstract class $ItemDto implements ItemDto {
       required final String title,
       required final String type,
       required final String address,
-      required final bool image,
+      final bool? image,
       required final DateTime date,
       required final UserDto user,
       required final CategoryDto category,
@@ -446,7 +446,7 @@ abstract class $ItemDto implements ItemDto {
   @override
   String get address;
   @override
-  bool get image;
+  bool? get image;
   @override
   DateTime get date;
   @override

@@ -23,7 +23,7 @@ mixin _$SearchItemDto {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
-  bool get image => throw _privateConstructorUsedError;
+  bool? get image => throw _privateConstructorUsedError;
   UserDto get user => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   double get distance => throw _privateConstructorUsedError;
@@ -44,7 +44,7 @@ abstract class $SearchItemDtoCopyWith<$Res> {
       {int id,
       String title,
       String type,
-      bool image,
+      bool? image,
       UserDto user,
       DateTime date,
       double distance});
@@ -68,7 +68,7 @@ class _$SearchItemDtoCopyWithImpl<$Res, $Val extends SearchItemDto>
     Object? id = null,
     Object? title = null,
     Object? type = null,
-    Object? image = null,
+    Object? image = freezed,
     Object? user = null,
     Object? date = null,
     Object? distance = null,
@@ -86,10 +86,10 @@ class _$SearchItemDtoCopyWithImpl<$Res, $Val extends SearchItemDto>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -126,7 +126,7 @@ abstract class _$$$SearchItemDtoCopyWith<$Res>
       {int id,
       String title,
       String type,
-      bool image,
+      bool? image,
       UserDto user,
       DateTime date,
       double distance});
@@ -149,7 +149,7 @@ class __$$$SearchItemDtoCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? type = null,
-    Object? image = null,
+    Object? image = freezed,
     Object? user = null,
     Object? date = null,
     Object? distance = null,
@@ -167,10 +167,10 @@ class __$$$SearchItemDtoCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -194,7 +194,7 @@ class _$$SearchItemDto implements $SearchItemDto {
       {required this.id,
       required this.title,
       required this.type,
-      required this.image,
+      this.image,
       required this.user,
       required this.date,
       required this.distance});
@@ -209,7 +209,7 @@ class _$$SearchItemDto implements $SearchItemDto {
   @override
   final String type;
   @override
-  final bool image;
+  final bool? image;
   @override
   final UserDto user;
   @override
@@ -261,7 +261,7 @@ abstract class $SearchItemDto implements SearchItemDto {
       {required final int id,
       required final String title,
       required final String type,
-      required final bool image,
+      final bool? image,
       required final UserDto user,
       required final DateTime date,
       required final double distance}) = _$$SearchItemDto;
@@ -276,7 +276,7 @@ abstract class $SearchItemDto implements SearchItemDto {
   @override
   String get type;
   @override
-  bool get image;
+  bool? get image;
   @override
   UserDto get user;
   @override

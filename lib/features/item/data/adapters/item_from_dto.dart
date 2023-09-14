@@ -12,7 +12,7 @@ extension ItemFromDto on ItemDto {
       resolved: resolved,
       title: title,
       insertion: date,
-      user: User(id: user.id, username: user.username, hasImage: user.image),
+      user: User(id: user.id, username: user.username),
       type: type == "lost" ? ItemType.lost : ItemType.found,
       address: address,
       question: question,
@@ -23,7 +23,7 @@ extension ItemFromDto on ItemDto {
               status: claim.status == ClaimStatus.pending.name
                   ? ClaimStatus.pending
                   : (claim.status == ClaimStatus.rejected.name ? ClaimStatus.rejected : ClaimStatus.approved),
-          user: User(id: claim.user.id, username: claim.user.username, hasImage: claim.user.image),
+          user: User(id: claim.user.id, username: claim.user.username),
           opened: false))
           .toList(),
       userClaim: userClaim != null
@@ -35,7 +35,6 @@ extension ItemFromDto on ItemDto {
           : null,
       category: Category(id: category.id, icon: category.icon, name: category.name, description: category.description),
       position: Position(X: position.X, Y: position.Y),
-      hasImage: image,
     );
   }
 }

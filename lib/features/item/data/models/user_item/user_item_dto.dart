@@ -11,7 +11,7 @@ class UserItemDto with _$UserItemDto {
     required String title,
     required int claims,
     required int approvedClaims,
-    required bool image,
+    bool? image,
   }) = $UserItemDto;
 
   factory UserItemDto.fromJson(Map<String, dynamic> data) => _$UserItemDtoFromJson(data);

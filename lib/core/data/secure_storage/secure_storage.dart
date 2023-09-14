@@ -1,5 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
+import 'dart:io';
+
 import 'package:dartx/dartx.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -17,6 +19,8 @@ const String EMAIL = "email";
 const String USERNAME = "username";
 
 const String LOCALE = "locale";
+
+const String THEME = "theme";
 
 abstract class SecureStorage {
   Future<bool> hasValidSession();
@@ -41,6 +45,9 @@ abstract class SecureStorage {
 
   Future<String?> getLastSetLocale();
   Future<void> setLocale(String locale);
+
+  Future<void> setTheme(String theme);
+  Future<String?> getSavedTheme();
 }
 
 class SecureStorageImpl extends SecureStorage {
@@ -90,7 +97,7 @@ class SecureStorageImpl extends SecureStorage {
     final user = await _storage.read(key: USER);
     final password = await _storage.read(key: PASSWORD);
 
-    return LoginParams(password: password!, user: user!, token: await FirebaseMessaging.instance.getToken());
+    return LoginParams(password: password!, user: user!, token: Platform.isAndroid ? await FirebaseMessaging.instance.getToken() : null);
   }
 
   @override
@@ -140,5 +147,15 @@ class SecureStorageImpl extends SecureStorage {
   @override
   Future<void> setLocale(String locale) async {
     await _storage.write(key: LOCALE, value: locale);
+  }
+
+  @override
+  Future<String?> getSavedTheme() async {
+    return await _storage.read(key: THEME);
+  }
+
+  @override
+  Future<void> setTheme(String theme) async {
+    await _storage.write(key: THEME, value: theme);
   }
 }

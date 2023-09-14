@@ -28,7 +28,7 @@
   "email": "Indirizzo Email",
   "username": "Username",
   "send": "Invia",
-  "claim": "{count, plural, =0{Richiesta} other{Richiesta}}",
+  "claim": "{count, plural, =0{Richiesta} other{Richieste}}",
   "@claim": {
     "placeholders": {
       "count": {
@@ -347,5 +347,12 @@
   "yesSeeMaps":"Sì, visualizza in mappe",
   "next": "Avanti",
   "itemAlreadySolvedToast": "Impossibile mostrare i dettagli dell'oggetto, esso non è più visibile.",
-  "tutorialCompleted" : "Tutorial completato!"
+  "tutorialCompleted" : "Tutorial completato!",
+  "changeTheme": "Cambia Tema",
+  "themeSystem": "Default di sistema",
+  "themeDark": "Scuro",
+  "themeLight": "Chiaro",
+  "selectThemeDialogTitle": "Seleziona Tema",
+  "login": "Login",
+  "registration": "Registrazione"
 }

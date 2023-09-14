@@ -9,7 +9,7 @@ class UserDto with _$UserDto {
   const factory UserDto({
     required int id,
     required String username,
-    required bool image
+    bool? image
   }) = $UserDto;
 
   factory UserDto.fromJson(Map<String, dynamic> data) => _$UserDtoFromJson(data);

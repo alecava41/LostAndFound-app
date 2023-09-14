@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/presentation/tutorial/widgets/large_white_button.dart';
@@ -20,7 +19,7 @@ import '../../../../core/domain/entities/claim_status.dart';
 import '../../../../core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import '../../../../core/presentation/widgets/image_dialog.dart';
 import '../../../../injection_container.dart';
-import '../../../../utils/colors.dart';
+import '../../../../utils/colors/custom_color.dart';
 import '../../domain/entities/item.dart';
 import '../bloc/home/home_bloc.dart';
 import '../bloc/item/item_bloc.dart';
@@ -42,135 +41,98 @@ class ItemScreen extends StatelessWidget {
         listener: (ctx, state) {
           final solveFailureOrSuccess = state.solveFailureOrSuccess;
           final deleteFailureOrSuccess = state.deleteFailureOrSuccess;
-          final roomCreationFailureOrSuccess =
-              state.roomCreationFailureOrSuccess;
+          final roomCreationFailureOrSuccess = state.roomCreationFailureOrSuccess;
 
           if (roomCreationFailureOrSuccess != null) {
-            roomCreationFailureOrSuccess.fold(
-                (failure) => showBasicErrorSnackbar(context, failure), (room) {
-              Navigator.of(ctx).push(MaterialPageRoute(
-                  builder: (_) => ChatScreen(roomId: room.id, itemId: itemId)));
+            roomCreationFailureOrSuccess.fold((failure) => showBasicErrorSnackbar(context, failure), (room) {
+              Navigator.of(ctx).push(MaterialPageRoute(builder: (_) => ChatScreen(roomId: room.id, itemId: itemId)));
             });
           }
 
           if (solveFailureOrSuccess != null) {
-            solveFailureOrSuccess.fold(
-                (failure) => showBasicErrorSnackbar(context, failure), (_) {
-              showBasicSuccessSnackbar(
-                  context, AppLocalizations.of(context)!.successSolveItem);
+            solveFailureOrSuccess.fold((failure) => showBasicErrorSnackbar(context, failure), (_) {
+              showBasicSuccessSnackbar(context, AppLocalizations.of(context)!.successSolveItem);
 
               // Navigate back to HP + update HP
-              ctx
-                  .read<HomeBloc>()
-                  .add(HomeEvent.homeSectionRefreshed(state.item!.type));
-              context
-                  .read<HomeControllerBloc>()
-                  .add(const HomeControllerEvent.tabChanged(0));
+              ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.item!.type));
+              context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
               Navigator.pop(context);
               Navigator.pop(context);
             });
           }
 
           if (deleteFailureOrSuccess != null) {
-            deleteFailureOrSuccess.fold(
-                (failure) => showBasicErrorSnackbar(context, failure), (_) {
-              showBasicSuccessSnackbar(
-                  context, AppLocalizations.of(context)!.successDeleteItem);
+            deleteFailureOrSuccess.fold((failure) => showBasicErrorSnackbar(context, failure), (_) {
+              showBasicSuccessSnackbar(context, AppLocalizations.of(context)!.successDeleteItem);
 
               // Navigate back to HP + update HP
-              ctx
-                  .read<HomeBloc>()
-                  .add(HomeEvent.homeSectionRefreshed(state.item!.type));
-              context
-                  .read<HomeControllerBloc>()
-                  .add(const HomeControllerEvent.tabChanged(0));
+              ctx.read<HomeBloc>().add(HomeEvent.homeSectionRefreshed(state.item!.type));
+              context.read<HomeControllerBloc>().add(const HomeControllerEvent.tabChanged(0));
               Navigator.pop(context);
               Navigator.pop(context);
             });
           }
         },
         builder: (ctx, state) {
-          final isCurrentUserOwner = state.isLoading || state.hasLoadingError
-              ? null
-              : state.item!.user.id == state.userId;
+          final isCurrentUserOwner =
+              state.isLoading || state.hasLoadingError ? null : state.item!.user.id == state.userId;
 
-          return AnnotatedRegion(
-            value: const SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
-              statusBarBrightness: Brightness.light,
-              statusBarIconBrightness: Brightness.dark,
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(AppLocalizations.of(context)!.itemPageTitle,
+                  style: TextStyle(color: Theme.of(context).colorScheme.onBackground)),
+              backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
+              elevation: 0,
+              surfaceTintColor: Theme.of(context).colorScheme.outline,
+              shadowColor: Theme.of(context).colorScheme.outline,
+              iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
+              actions: state.isLoading || state.hasLoadingError ? null : _showOwnerMenu(ctx, isCurrentUserOwner!),
             ),
-            child: SafeArea(
-              child: Scaffold(
-                backgroundColor: Colors.white,
-                appBar: AppBar(
-                  title: Text(AppLocalizations.of(context)!.itemPageTitle,
-                      style: const TextStyle(color: Colors.black)),
-                  backgroundColor: Colors.white,
-                  iconTheme: const IconThemeData(color: Colors.black),
-                  actions: state.isLoading || state.hasLoadingError
-                      ? null
-                      : _showOwnerMenu(ctx, isCurrentUserOwner!),
-                ),
-                body: state.hasLoadingError
-                    ? ErrorPage(
-                        onRetry: () => ctx
-                            .read<ItemBloc>()
-                            .add(ItemEvent.itemCreated(itemId)))
-                    : state.isLoading
-                        ? const CustomCircularProgress(size: 100)
-                        : SingleChildScrollView(
-                            child: Column(
-                              children: () {
-                                var widgetList = <Widget>[
-                                  ImageItem(
-                                    token: state.token,
-                                    itemId: state.item!.id,
-                                    hasImage: state.item!.hasImage,
-                                  ),
-                                  const Divider(
-                                    height: 0,
-                                  ),
-                                  InfoItem(
-                                    title: state.item!.title,
-                                    position: state.item!.address,
-                                    date: state.item!.insertion,
-                                    category: state.item!.category.name,
-                                    question: state.item!.question,
-                                    type: state.item!.type,
-                                    coordinates: state.item!.position,
-                                  ),
-                                ];
+            body: SafeArea(
+              child: state.hasLoadingError
+                  ? ErrorPage(onRetry: () => ctx.read<ItemBloc>().add(ItemEvent.itemCreated(itemId)))
+                  : state.isLoading
+                      ? const CustomCircularProgress(size: 100)
+                      : SingleChildScrollView(
+                          child: Column(
+                            children: () {
+                              var widgetList = <Widget>[
+                                ImageItem(
+                                  token: state.token,
+                                  itemId: state.item!.id,
+                                ),
+                                const Divider(
+                                  height: 0,
+                                ),
+                                InfoItem(
+                                  title: state.item!.title,
+                                  position: state.item!.address,
+                                  date: state.item!.insertion,
+                                  category: state.item!.category.name,
+                                  question: state.item!.question,
+                                  type: state.item!.type,
+                                  coordinates: state.item!.position,
+                                ),
+                              ];
 
-                                if (isCurrentUserOwner!) {
-                                  if (state.item!.type == ItemType.found) {
-                                    widgetList += _showOwnerFoundItemWidgets(
-                                        ctx,
-                                        state.item!.claims != null
-                                            ? state.item!.claims!
-                                            : [],
-                                        state.token,
-                                        itemId);
-                                  }
-                                } else {
-                                  if (state.item!.type == ItemType.lost) {
-                                    widgetList += _showGenericLostItemWidgets(
-                                        ctx, state.token, state.item!.user);
-                                  } else {
-                                    widgetList += _showGenericFoundItemWidgets(
-                                        ctx,
-                                        state.item!.userClaim,
-                                        state.token,
-                                        state.item!.user,
-                                        itemId);
-                                  }
+                              if (isCurrentUserOwner!) {
+                                if (state.item!.type == ItemType.found) {
+                                  widgetList += _showOwnerFoundItemWidgets(
+                                      ctx, state.item!.claims != null ? state.item!.claims! : [], state.token, itemId);
                                 }
+                              } else {
+                                if (state.item!.type == ItemType.lost) {
+                                  widgetList += _showGenericLostItemWidgets(ctx, state.token, state.item!.user);
+                                } else {
+                                  widgetList += _showGenericFoundItemWidgets(
+                                      ctx, state.item!.userClaim, state.token, state.item!.user, itemId);
+                                }
+                              }
 
-                                return widgetList;
-                              }(),
-                            ),
+                              return widgetList;
+                            }(),
                           ),
-              ),
+                        ),
             ),
           );
         },
@@ -182,6 +144,7 @@ class ItemScreen extends StatelessWidget {
     if (isCurrentUserOwner) {
       return [
         PopupMenuButton<String>(
+          surfaceTintColor: Theme.of(ctx).extension<CustomColors>()!.background2,
           iconSize: 30,
           itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
             PopupMenuItem<String>(
@@ -196,7 +159,7 @@ class ItemScreen extends StatelessWidget {
               value: 'opt3',
               child: Text(
                 AppLocalizations.of(context)!.itemMenu3,
-                style: const TextStyle(color: Colors.red),
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
               ),
             ),
           ],
@@ -207,6 +170,8 @@ class ItemScreen extends StatelessWidget {
                   context: ctx,
                   builder: (BuildContext context) {
                     return AlertDialog(
+                      surfaceTintColor: Theme.of(context).extension<CustomColors>()!.background2,
+                      backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
                       title: Text(AppLocalizations.of(context)!.itemMenu1),
                       content: SingleChildScrollView(
                         child: ListBody(
@@ -220,14 +185,19 @@ class ItemScreen extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            text: Text(AppLocalizations.of(context)!.notMarkAsSolved)),
+                            text: Text(
+                              AppLocalizations.of(context)!.notMarkAsSolved,
+                              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+                            )),
                         PersonalizedLargeWhiteButton(
-                            onPressed: () {
-                              ctx
-                                  .read<ItemBloc>()
-                                  .add(const ItemEvent.itemSolved());
-                            },
-                            text: Text(AppLocalizations.of(context)!.itemMenu1, style: const TextStyle(color: PersonalizedColor.mainColor,)),)
+                          onPressed: () {
+                            ctx.read<ItemBloc>().add(const ItemEvent.itemSolved());
+                          },
+                          text: Text(AppLocalizations.of(context)!.itemMenu1,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                              )),
+                        )
                       ],
                     );
                   },
@@ -238,15 +208,16 @@ class ItemScreen extends StatelessWidget {
                   context: ctx,
                   builder: (BuildContext context) {
                     return AlertDialog(
+                      surfaceTintColor: Theme.of(context).extension<CustomColors>()!.background2,
+                      backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
                       title: Text(
-                AppLocalizations.of(context)!.itemMenu3,
-                style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-              ),
+                        AppLocalizations.of(context)!.itemMenu3,
+                        style: TextStyle(color: Theme.of(context).colorScheme.error, fontWeight: FontWeight.bold),
+                      ),
                       content: SingleChildScrollView(
                         child: ListBody(
                           children: <Widget>[
-                            Text(
-                                AppLocalizations.of(context)!.deleteReportDialogDescription),
+                            Text(AppLocalizations.of(context)!.deleteReportDialogDescription),
                           ],
                         ),
                       ),
@@ -255,7 +226,10 @@ class ItemScreen extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            text: Text(AppLocalizations.of(context)!.noDeleteReport)),
+                            text: Text(
+                              AppLocalizations.of(context)!.noDeleteReport,
+                              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+                            )),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -266,28 +240,23 @@ class ItemScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
                                   border: Border.all(
-                                    color: Colors.red,
+                                    color: Theme.of(context).colorScheme.error,
                                     width: 0.5,
                                   ),
                                 ),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    ctx
-                                        .read<ItemBloc>()
-                                        .add(const ItemEvent.itemDeleted());
+                                    ctx.read<ItemBloc>().add(const ItemEvent.itemDeleted());
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.white,
+                                    backgroundColor: Theme.of(context).colorScheme.errorContainer,
                                     shape: const StadiumBorder(),
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 16),
+                                    padding: const EdgeInsets.symmetric(vertical: 16),
                                   ).copyWith(
-                                    overlayColor: MaterialStateProperty
-                                        .resolveWith<Color>(
+                                    overlayColor: MaterialStateProperty.resolveWith<Color>(
                                       (Set<MaterialState> states) {
-                                        if (states
-                                            .contains(MaterialState.pressed)) {
-                                          return Colors.red.shade50;
+                                        if (states.contains(MaterialState.pressed)) {
+                                          return Theme.of(context).colorScheme.onErrorContainer;
                                         }
                                         return Colors.transparent;
                                       },
@@ -295,7 +264,7 @@ class ItemScreen extends StatelessWidget {
                                   ),
                                   child: Text(
                                     AppLocalizations.of(context)!.itemMenu3,
-                                    style: const TextStyle(color: Colors.red),
+                                    style: TextStyle(color: Theme.of(context).colorScheme.error),
                                   ),
                                 ),
                               ),
@@ -308,10 +277,8 @@ class ItemScreen extends StatelessWidget {
                 );
                 break;
               case 'opt2':
-                final changes = await Navigator.push<bool>(
-                    ctx,
-                    MaterialPageRoute(
-                        builder: (_) => UpdateItemScreen(itemId: itemId)));
+                final changes =
+                    await Navigator.push<bool>(ctx, MaterialPageRoute(builder: (_) => UpdateItemScreen(itemId: itemId)));
                 if (changes != null && changes && ctx.mounted) {
                   ctx.read<ItemBloc>().add(ItemEvent.itemCreated(itemId));
                 }
@@ -325,13 +292,11 @@ class ItemScreen extends StatelessWidget {
     }
   }
 
-  List<Widget> _showGenericLostItemWidgets(
-      BuildContext context, String token, User owner) {
+  List<Widget> _showGenericLostItemWidgets(BuildContext context, String token, User owner) {
     final userUrl = "$baseUrl/api/users/${owner.id}/image";
 
     return [
-      Container(
-        color: Colors.white,
+      SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
@@ -352,31 +317,25 @@ class ItemScreen extends StatelessWidget {
                           Flexible(
                             child: Row(
                               children: [
-                                owner.hasImage
-                                    ? ImageDialogWidget(
-                                        token: token,
-                                        imageUrl: userUrl,
-                                        errorImage: Image.asset(noUserImagePath, fit: BoxFit.cover,),
-                                        child: CircularImage(
-                                          hasImage: owner.hasImage,
-                                          imageUrl: userUrl,
-                                          radius: 25,
-                                          token: token,
-                                        ),
-                                      )
-                                    : CircularImage(
-                                        hasImage: owner.hasImage,
-                                        imageUrl: userUrl,
-                                        radius: 25,
-                                        token: token,
-                                      ),
+                                ImageDialogWidget(
+                                  token: token,
+                                  imageUrl: userUrl,
+                                  errorImage: Image.asset(
+                                    noUserImagePath,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  child: CircularImage(
+                                    imageUrl: userUrl,
+                                    radius: 25,
+                                    token: token,
+                                  ),
+                                ),
                                 const SizedBox(
                                   width: 5,
                                 ),
                                 Expanded(
                                   child: Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                                     child: Text(
                                       owner.username,
                                       maxLines: 1,
@@ -391,27 +350,29 @@ class ItemScreen extends StatelessWidget {
                           const SizedBox(width: 10),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              side: const BorderSide(
-                                  color: PersonalizedColor.mainColor,
-                                  width: 1.5),
+                              backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                              side: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1.5),
                               shape: const StadiumBorder(),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 16, horizontal: 15),
+                              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
+                            ).copyWith(
+                              overlayColor: MaterialStateProperty.resolveWith<Color>(
+                                (Set<MaterialState> states) {
+                                  if (states.contains(MaterialState.pressed)) {
+                                    return Theme.of(context).colorScheme.onTertiaryContainer.withOpacity(0.2);
+                                  }
+                                  return Colors.transparent;
+                                },
+                              ),
                             ),
                             onPressed: () {
-                              context
-                                  .read<ItemBloc>()
-                                  .add(ItemEvent.createChatRoom(
+                              context.read<ItemBloc>().add(ItemEvent.createChatRoom(
                                     owner.id,
                                     owner.username,
                                   ));
                             },
                             child: Text(
                               AppLocalizations.of(context)!.sendMessage,
-                              style: const TextStyle(
-                                  fontSize: 14,
-                                  color: PersonalizedColor.mainColor),
+                              style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onTertiaryContainer),
                             ),
                           ),
                         ],
@@ -428,11 +389,9 @@ class ItemScreen extends StatelessWidget {
     ];
   }
 
-  List<Widget> _showOwnerFoundItemWidgets(BuildContext context,
-      List<ClaimReceived> claims, String token, int itemId) {
+  List<Widget> _showOwnerFoundItemWidgets(BuildContext context, List<ClaimReceived> claims, String token, int itemId) {
     return [
       Container(
-        color: Colors.white,
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.all(10),
         child: Column(
@@ -467,32 +426,24 @@ class ItemScreen extends StatelessWidget {
                             token: token,
                             opened: claim.opened,
                             userId: claim.user.id,
-                            hasImage: claim.user.hasImage,
                             username: claim.user.username,
                             onTap: () async {
-                              context
-                                  .read<ItemBloc>()
-                                  .add(ItemEvent.claimRead(claim.id));
+                              context.read<ItemBloc>().add(ItemEvent.claimRead(claim.id));
                               final updatedItem = await Navigator.push<Item?>(
                                 context,
                                 MaterialPageRoute(
                                   builder: (ctx) => AnswerClaimScreen(
                                     itemId: itemId,
                                     claimId: claim.id,
-                                    isClaimAlreadyManaged:
-                                        claim.status != ClaimStatus.pending,
+                                    isClaimAlreadyManaged: claim.status != ClaimStatus.pending,
                                   ),
                                 ),
                               );
 
                               if (updatedItem != null && context.mounted) {
-                                context
-                                    .read<ItemBloc>()
-                                    .add(ItemEvent.claimUpdated(updatedItem));
+                                context.read<ItemBloc>().add(ItemEvent.claimUpdated(updatedItem));
 
-                                context.read<HomeBloc>().add(
-                                    const HomeEvent.homeSectionRefreshed(
-                                        ItemType.found));
+                                context.read<HomeBloc>().add(const HomeEvent.homeSectionRefreshed(ItemType.found));
                               }
                             },
                             status: claim.status,
@@ -510,157 +461,151 @@ class ItemScreen extends StatelessWidget {
     ];
   }
 
-  List<Widget> _showGenericFoundItemWidgets(BuildContext context,
-      ClaimSent? claim, String token, User owner, int itemId) {
+  List<Widget> _showGenericFoundItemWidgets(
+      BuildContext context, ClaimSent? claim, String token, User owner, int itemId) {
     final userUrl = "$baseUrl/api/users/${owner.id}/image";
 
     return [
-      Container(
-        color: Colors.white,
-        child: Column(
-          children: [
-            claim != null
-                ? Container(
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(8),
-                    child: ClaimStatusButton(
-                      owner: owner.username,
-                      status: claim.status,
-                      itemId: itemId,
-                      isClickable: false,
-                    ),
-                  )
-                : Container(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: const StadiumBorder(),
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 18,
+      Column(
+        children: [
+          claim != null
+              ? Container(
+                  padding: const EdgeInsets.all(8),
+                  child: ClaimStatusButton(
+                    owner: owner.username,
+                    status: claim.status,
+                    itemId: itemId,
+                    isClickable: false,
+                  ),
+                )
+              : Container(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Theme.of(context).colorScheme.primary,
+                            shape: const StadiumBorder(),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 18,
+                            ),
+                          ),
+                          onPressed: () async {
+                            final updatedItem = await Navigator.push<Item?>(
+                              context,
+                              MaterialPageRoute(
+                                builder: (ctx) => AnswerQuestionScreen(
+                                  itemId: itemId,
+                                  isClaimAlreadyTaken: claim?.answer != null,
+                                ),
                               ),
-                            ),
-                            onPressed: () async {
-                              final updatedItem = await Navigator.push<Item?>(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (ctx) => AnswerQuestionScreen(
-                                    itemId: itemId,
-                                    isClaimAlreadyTaken: claim?.answer != null,
-                                  ),
-                                ),
-                              );
+                            );
 
-                              if (updatedItem != null && context.mounted) {
-                                context
-                                    .read<ItemBloc>()
-                                    .add(ItemEvent.claimUpdated(updatedItem));
-                              }
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.connect_without_contact,
-                                  size: 18.5,
-                                ),
-                                const SizedBox(
-                                  width: 3,
-                                ),
-                                Text(
-                                    AppLocalizations.of(context)!
-                                        .claimItemButton,
-                                    style: const TextStyle(fontSize: 20)),
-                              ],
-                            ),
+                            if (updatedItem != null && context.mounted) {
+                              context.read<ItemBloc>().add(ItemEvent.claimUpdated(updatedItem));
+                            }
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.connect_without_contact,
+                                size: 18.5,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                              const SizedBox(
+                                width: 3,
+                              ),
+                              Text(AppLocalizations.of(context)!.claimItemButton,
+                                  style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onPrimary)),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: CustomFieldContainer(
-                  title: AppLocalizations.of(context)!.foundBy,
-                  content: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Flexible(
-                            child: Row(
-                              children: [
-                                CircularImage(
-                                  hasImage: owner.hasImage,
-                                  imageUrl: userUrl,
-                                  radius: 25,
-                                  token: token,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                    child: Text(
-                                      owner.username,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(fontSize: 16),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              side: const BorderSide(
-                                  color: PersonalizedColor.mainColor,
-                                  width: 1.5),
-                              shape: const StadiumBorder(),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 16, horizontal: 15),
-                            ),
-                            onPressed: () {
-                              context
-                                  .read<ItemBloc>()
-                                  .add(ItemEvent.createChatRoom(
-                                    owner.id,
-                                    owner.username,
-                                  ));
-                            },
-                            child: Text(
-                              AppLocalizations.of(context)!.sendMessage,
-                              style: const TextStyle(
-                                  fontSize: 14,
-                                  color: PersonalizedColor.mainColor),
-                            ),
-                          ),
-                        ],
                       ),
                     ],
                   ),
                 ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: CustomFieldContainer(
+                title: AppLocalizations.of(context)!.foundBy,
+                content: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Row(
+                            children: [
+                              CircularImage(
+                                imageUrl: userUrl,
+                                radius: 25,
+                                token: token,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                  child: Text(
+                                    owner.username,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                            side: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1.5),
+                            shape: const StadiumBorder(),
+                            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
+                          ).copyWith(
+                            overlayColor: MaterialStateProperty.resolveWith<Color>(
+                              (Set<MaterialState> states) {
+                                if (states.contains(MaterialState.pressed)) {
+                                  return Theme.of(context).colorScheme.onTertiaryContainer.withOpacity(0.2);
+                                }
+                                return Colors.transparent;
+                              },
+                            ),
+                          ),
+                          onPressed: () {
+                            context.read<ItemBloc>().add(ItemEvent.createChatRoom(
+                                  owner.id,
+                                  owner.username,
+                                ));
+                          },
+                          child: Text(
+                            AppLocalizations.of(context)!.sendMessage,
+                            style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onTertiaryContainer),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+        ],
       ),
     ];
   }

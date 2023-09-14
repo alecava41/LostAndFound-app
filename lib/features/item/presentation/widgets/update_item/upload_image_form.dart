@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/presentation/widgets/custom_circular_progress.dart';
-import '../../../../../utils/colors.dart';
+import '../../../../../utils/colors/custom_color.dart';
 import '../../../../../utils/constants.dart';
 
 class UploadImageForm extends StatelessWidget {
@@ -13,7 +13,6 @@ class UploadImageForm extends StatelessWidget {
   final VoidCallback onSelectUploadMethod;
   final VoidCallback onDeletePhoto;
   final String? imagePath;
-  final bool hasImage;
   final bool hasDeletedOriginalImage;
 
   const UploadImageForm({
@@ -24,7 +23,6 @@ class UploadImageForm extends StatelessWidget {
     required this.onDeletePhoto,
     required this.imagePath,
     required this.hasDeletedOriginalImage,
-    required this.hasImage,
   });
 
   @override
@@ -40,10 +38,10 @@ class UploadImageForm extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 children: [
                   Container(
-                    color: Colors.white,
+                    color: Theme.of(context).extension<CustomColors>()!.background2,
                     height: 300,
                     width: MediaQuery.of(context).size.width,
-                    child: hasImage && !hasDeletedOriginalImage
+                    child: !hasDeletedOriginalImage
                         ? Image.network(
                             "$baseUrl/api/items/$itemId/image",
                             fit: BoxFit.cover,
@@ -63,12 +61,12 @@ class UploadImageForm extends StatelessWidget {
                                 child: ElevatedButton(
                                   onPressed: onSelectUploadMethod,
                                   style: ElevatedButton.styleFrom(
-                                    surfaceTintColor: PersonalizedColor.mainColor,
-                                    backgroundColor: Colors.white,
+                                    surfaceTintColor: Theme.of(context).colorScheme.primary,
+                                    backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
                                     shape: const StadiumBorder(),
                                     padding: const EdgeInsets.all(20),
-                                    side: const BorderSide(
-                                      color: PersonalizedColor.mainColor,
+                                    side: BorderSide(
+                                      color: Theme.of(context).colorScheme.primary,
                                       width: 0.4,
                                     ),
                                     elevation: 0,
@@ -76,7 +74,7 @@ class UploadImageForm extends StatelessWidget {
                                     overlayColor: MaterialStateProperty.resolveWith<Color>(
                                       (Set<MaterialState> states) {
                                         if (states.contains(MaterialState.pressed)) {
-                                          return PersonalizedColor.primarySwatch.shade50;
+                                          return Theme.of(context).extension<CustomColors>()!.buttonPressed!;
                                         }
                                         return Colors.transparent;
                                       },
@@ -84,9 +82,9 @@ class UploadImageForm extends StatelessWidget {
                                   ),
                                   child: Text(
                                     AppLocalizations.of(context)!.uploadImageButton,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 20,
-                                      color: PersonalizedColor.mainColor,
+                                      color: Theme.of(context).colorScheme.primary,
                                     ),
                                   ),
                                 ),
@@ -96,7 +94,7 @@ class UploadImageForm extends StatelessWidget {
                             }
                           }(),
                   ),
-                  if (imagePath != null || (hasImage && !hasDeletedOriginalImage))
+                  if (imagePath != null || !hasDeletedOriginalImage)
                     Positioned(
                       right: 16,
                       bottom: 10,
@@ -105,10 +103,11 @@ class UploadImageForm extends StatelessWidget {
                         height: 60,
                         child: FloatingActionButton(
                           onPressed: onDeletePhoto,
-                          backgroundColor: Colors.red,
-                          child: const Icon(
+                          backgroundColor: Theme.of(context).colorScheme.error,
+                          child: Icon(
                             Icons.delete,
                             size: 30,
+                            color: Theme.of(context).colorScheme.onError,
                           ),
                         ),
                       ),

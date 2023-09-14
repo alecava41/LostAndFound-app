@@ -21,7 +21,6 @@ class RegistrationForm extends StatelessWidget {
     return Center(
       child: SingleChildScrollView(
         child: Container(
-          //color: Colors.amber,
           margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
           child: BlocListener<RegistrationBloc, RegistrationState>(
             listener: (ctx, state) {

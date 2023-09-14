@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
-import 'package:lost_and_found/utils/colors.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../../core/presentation/widgets/media_selection_dialog.dart';
@@ -9,7 +8,6 @@ import '../../../../../core/presentation/widgets/media_selection_dialog.dart';
 class EditableCircularImage extends StatelessWidget {
   final ImagePicker picker = ImagePicker();
 
-  final bool hasImage;
   final String token;
   final int userId;
 
@@ -17,12 +15,7 @@ class EditableCircularImage extends StatelessWidget {
   final double radius;
 
   EditableCircularImage(
-      {super.key,
-      required this.hasImage,
-      required this.token,
-      required this.userId,
-      required this.onImageChange,
-      required this.radius});
+      {super.key, required this.token, required this.userId, required this.onImageChange, required this.radius});
 
   @override
   Widget build(BuildContext context) {
@@ -37,33 +30,25 @@ class EditableCircularImage extends StatelessWidget {
       },
       child: Center(
         child: Stack(children: <Widget>[
-          hasImage
-              ? CircleAvatar(
-                  radius: radius,
-                  backgroundImage: Image.network(
-                    "$baseUrl/api/users/$userId/image",
-                    headers: {"Authorization": "Bearer $token"},
-                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return SizedBox(
-                        height: radius * 2,
-                        width: radius * 2,
-                        child: CustomCircularProgress(size: radius),
-                      );
-                    },
-                    errorBuilder: (context, error, stackTrace) => Image.asset(
-                      noUserImagePath,
-                      fit: BoxFit.cover,
-                    ),
-                  ).image,
-                )
-              : CircleAvatar(
-                  radius: radius,
-                  backgroundImage: Image.asset(
-                    noUserImagePath,
-                    fit: BoxFit.cover,
-                  ).image,
-                ),
+          CircleAvatar(
+            radius: radius,
+            backgroundImage: Image.network(
+              "$baseUrl/api/users/$userId/image",
+              headers: {"Authorization": "Bearer $token"},
+              loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                if (loadingProgress == null) return child;
+                return SizedBox(
+                  height: radius * 2,
+                  width: radius * 2,
+                  child: CustomCircularProgress(size: radius),
+                );
+              },
+              errorBuilder: (context, error, stackTrace) => Image.asset(
+                noUserImagePath,
+                fit: BoxFit.cover,
+              ),
+            ).image,
+          ),
           Positioned(
             bottom: 2.0,
             right: 5.0,
@@ -76,12 +61,12 @@ class EditableCircularImage extends StatelessWidget {
                           onTapGallery: () => onTapGallery(context), onTapCamera: () => onTapCamera(context));
                     });
               },
-              child: const CircleAvatar(
+              child: CircleAvatar(
                 radius: 16,
-                backgroundColor: PersonalizedColor.mainColor,
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 child: Icon(
                   Icons.camera_alt,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimary,
                   size: 20.0,
                 ),
               ),

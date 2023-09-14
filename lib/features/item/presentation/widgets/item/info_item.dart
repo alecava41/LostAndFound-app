@@ -5,7 +5,8 @@ import 'package:lost_and_found/core/presentation/tutorial/widgets/large_white_bu
 import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/item/info_item_field.dart';
-import 'package:lost_and_found/utils/colors.dart';
+import 'package:lost_and_found/utils/colors/custom_color.dart';
+
 import 'package:map_launcher/map_launcher.dart';
 
 import '../../../domain/entities/item.dart';
@@ -33,7 +34,7 @@ class InfoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.background,
       width: double.infinity,
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -59,6 +60,8 @@ class InfoItem extends StatelessWidget {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
+                      surfaceTintColor: Theme.of(context).extension<CustomColors>()!.background2,
+                      backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
                       title: Text(AppLocalizations.of(context)!.goToMapTitle),
                       content: SingleChildScrollView(
                         child: ListBody(
@@ -72,22 +75,20 @@ class InfoItem extends StatelessWidget {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          text: Text(AppLocalizations.of(context)!.noStayInApp),
+                          text: Text(AppLocalizations.of(context)!.noStayInApp, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),),
                         ),
                         PersonalizedLargeWhiteButton(
                             onPressed: () async {
+                              Navigator.of(context).pop();
+
                               await availableMaps.first.showMarker(
                                 coords: Coords(coordinates.X, coordinates.Y),
                                 title: title,
                               );
-
-                              if (context.mounted) {
-                                Navigator.of(context).pop();
-                              }
                             },
                             text: Text(
                               AppLocalizations.of(context)!.yesSeeMaps,
-                              style: const TextStyle(color: PersonalizedColor.mainColor),
+                              style: TextStyle(color: Theme.of(context).colorScheme.primary),
                             ))
                       ],
                     );
