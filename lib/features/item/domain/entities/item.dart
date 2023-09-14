@@ -16,10 +16,12 @@ class Item {
   final Category category;
   final List<ClaimReceived>? claims;
   final ClaimSent? userClaim;
+  final List<News>? news;
 
   const Item(
       {required this.id,
       required this.resolved,
+      required this.news,
       required this.title,
       required this.type,
       required this.address,
@@ -30,6 +32,13 @@ class Item {
       required this.category,
       required this.claims,
       required this.userClaim});
+}
+
+class News {
+  final int itemId;
+  final String title;
+
+  News({required this.itemId, required this.title});
 }
 
 class Position {

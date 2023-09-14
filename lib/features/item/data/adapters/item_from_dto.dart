@@ -23,18 +23,20 @@ extension ItemFromDto on ItemDto {
               status: claim.status == ClaimStatus.pending.name
                   ? ClaimStatus.pending
                   : (claim.status == ClaimStatus.rejected.name ? ClaimStatus.rejected : ClaimStatus.approved),
-          user: User(id: claim.user.id, username: claim.user.username),
-          opened: false))
+              user: User(id: claim.user.id, username: claim.user.username),
+              opened: false))
           .toList(),
       userClaim: userClaim != null
           ? ClaimSent(
               id: userClaim!.id,
               status: userClaim!.status == ClaimStatus.pending.name
                   ? ClaimStatus.pending
-                  : (userClaim!.status == ClaimStatus.rejected.name ? ClaimStatus.rejected : ClaimStatus.approved), answer: userClaim!.answer)
+                  : (userClaim!.status == ClaimStatus.rejected.name ? ClaimStatus.rejected : ClaimStatus.approved),
+              answer: userClaim!.answer)
           : null,
       category: Category(id: category.id, icon: category.icon, name: category.name, description: category.description),
       position: Position(X: position.X, Y: position.Y),
+      news: news?.map((news) => News(title: news.target.title, itemId: news.target.id)).toList(),
     );
   }
 }

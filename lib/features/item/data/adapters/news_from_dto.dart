@@ -1,6 +1,8 @@
-import 'package:lost_and_found/features/item/data/models/news/news_dto.dart';
 import 'package:lost_and_found/features/item/domain/entities/news.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
+
+import '../models/news/news_dto.dart';
+
 
 extension NewsFromDto on NewsDto {
   News toDomain() {

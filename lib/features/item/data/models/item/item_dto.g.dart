@@ -24,6 +24,9 @@ _$$ItemDto _$$$ItemDtoFromJson(Map<String, dynamic> json) => _$$ItemDto(
       userClaim: json['userClaim'] == null
           ? null
           : ClaimSentDto.fromJson(json['userClaim'] as Map<String, dynamic>),
+      news: (json['news'] as List<dynamic>?)
+          ?.map((e) => NewsDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$$ItemDtoToJson(_$$ItemDto instance) =>
@@ -41,4 +44,5 @@ Map<String, dynamic> _$$$ItemDtoToJson(_$$ItemDto instance) =>
       'position': instance.position,
       'claims': instance.claims,
       'userClaim': instance.userClaim,
+      'news': instance.news,
     };

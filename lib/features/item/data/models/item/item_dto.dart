@@ -5,6 +5,8 @@ import 'package:lost_and_found/features/item/data/models/item/claim_sent_dto.dar
 import 'package:lost_and_found/features/item/data/models/item/position_dto.dart';
 import 'package:lost_and_found/features/item/data/models/item/user_dto.dart';
 
+import 'news_dto.dart';
+
 part 'item_dto.freezed.dart';
 
 part 'item_dto.g.dart';
@@ -25,6 +27,7 @@ class ItemDto with _$ItemDto {
     required PositionDto position,
     List<ClaimReceivedDto>? claims,
     ClaimSentDto? userClaim,
+    List<NewsDto>? news,
   }) = $ItemDto;
 
   factory ItemDto.fromJson(Map<String, dynamic> data) => _$ItemDtoFromJson(data);
