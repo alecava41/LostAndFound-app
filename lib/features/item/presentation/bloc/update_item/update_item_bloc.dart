@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/domain/usecases/get_address_from_position_usecase.dart';
 import 'package:lost_and_found/features/chat/domain/usecases/update_item_title_room_usecase.dart';
@@ -14,6 +15,7 @@ import 'package:lost_and_found/features/item/domain/fields/update_item/position.
 import '../../../../../core/data/secure_storage/secure_storage.dart';
 import '../../../../../core/status/failures.dart';
 import '../../../../../core/status/success.dart';
+import '../../../../../utils/constants.dart';
 import '../../../domain/entities/item.dart' as item_entity;
 import '../../../domain/fields/insert_item/question.dart';
 import '../../../domain/fields/insert_item/title.dart';
@@ -35,7 +37,6 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
   final UploadItemImageUseCase _uploadItemImageUseCase;
   final DeleteItemImageUseCase _deleteItemImageUseCase;
   final GetAddressFromPositionUseCase _getAddressFromPositionUseCase;
-
   final SecureStorage _secureStorage;
 
   UpdateItemBloc(
@@ -64,9 +65,15 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
             questionChanged: (input) => _onQuestionChanged(emit, input),
             positionSelected: (pos) => _onPositionSelected(emit, pos),
             categorySelected: (catId, category) => _onCategoryChanged(emit, catId, category),
-            updateSubmitted: () => _onUpdateSubmitted(emit));
+            updateSubmitted: () => _onUpdateSubmitted(emit),
+            onImagePicking: () => _onImagePicking(),
+        );
       },
     );
+  }
+
+  Future<void> _onImagePicking() async {
+    await _secureStorage.saveLastPickingOperation(ImagePick.updateItem.name);
   }
 
   Future<void> _onContentCreated(Emitter<UpdateItemState> emit, int id) async {
@@ -84,6 +91,12 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
     });
 
     final session = await _secureStorage.getSessionInformation();
+    final lastPickedImageAction = await _secureStorage.getLastPickingOperation();
+    final lastPickedData = await ImagePicker().retrieveLostData();
+
+    if(lastPickedImageAction != null && lastPickedImageAction == ImagePick.updateItem.name && lastPickedData.file != null) {
+      emit(state.copyWith(imagePath: lastPickedData.file!.path));
+    }
 
     emit(
       state.copyWith(

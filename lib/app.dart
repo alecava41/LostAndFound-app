@@ -18,8 +18,8 @@ import 'package:lost_and_found/features/claim/presentation/pages/claims_screen.d
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 import 'package:lost_and_found/features/item/presentation/pages/notifications_page.dart';
 import 'package:lost_and_found/utils/colors/color_schemes.dart';
-import 'package:lost_and_found/utils/constants.dart';
 import 'package:lost_and_found/utils/colors/custom_color.dart';
+import 'package:lost_and_found/utils/constants.dart';
 import 'package:sizer/sizer.dart';
 
 import 'features/badges/presentation/bloc/badge_bloc.dart';
@@ -160,12 +160,16 @@ class _Application extends State<App> {
                   useMaterial3: true,
                   colorScheme: lightScheme,
                   extensions: [lightCustomColors],
+                  dialogTheme: DialogTheme(
+                      backgroundColor: lightCustomColors.background2, surfaceTintColor: lightCustomColors.background2),
                 ),
                 darkTheme: ThemeData(
                   fontFamily: GoogleFonts.roboto().fontFamily,
                   useMaterial3: true,
                   colorScheme: darkScheme,
                   extensions: [darkCustomColors],
+                  dialogTheme: DialogTheme(
+                      backgroundColor: darkCustomColors.background2, surfaceTintColor: darkCustomColors.background2),
                 ),
                 initialRoute: initialRoute,
                 onGenerateInitialRoutes: (route) {

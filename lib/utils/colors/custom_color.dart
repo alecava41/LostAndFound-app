@@ -6,16 +6,12 @@ CustomColors lightCustomColors = const CustomColors(
   claimAcceptedStatusColor: Color.fromRGBO(28, 136, 111, 0.3),
   claimWaitingStatusColor: Color.fromRGBO(255, 213, 79, 1),
   claimDeniedStatusColor: Color.fromRGBO(240, 66, 63, 0.637),
-  infoColor: Color.fromRGBO(187, 222, 251, 1),
   nClaimsColor: Color.fromRGBO(255, 213, 79, 1),
   notOpenedColor: Color.fromRGBO(28, 136, 111, 0.3),
-  openedColor: Colors.white,
+  openedColor: Color.fromRGBO(230, 232, 235, 1),
   splashGreenColor: Color.fromRGBO(28, 136, 111, 0.6),
-  // removed opacity 0.4 to let it be constant
   splashGreyColor: Color.fromARGB(255, 158, 158, 158),
   secondaryTextColor: Colors.black54,
-  buttonPressed: Color.fromRGBO(28, 136, 111, 0.1),
-  statusBarDefaultColor: Colors.white,
   background2: Colors.white,
 );
 
@@ -25,15 +21,12 @@ CustomColors darkCustomColors = const CustomColors(
   claimAcceptedStatusColor: Color.fromRGBO(0, 135, 23, 0.8),
   claimWaitingStatusColor: Color.fromRGBO(219, 115, 24, 1),
   claimDeniedStatusColor: Color.fromRGBO(240, 66, 63, 0.637),
-  infoColor: Color.fromRGBO(187, 222, 251, 1),
   nClaimsColor: Color.fromRGBO(219, 115, 24, 1),
   notOpenedColor: Color.fromRGBO(28, 136, 111, 0.3),
-  openedColor: Color.fromRGBO(42, 46, 44, 1),
+  openedColor: Colors.black26,
   splashGreenColor: Color.fromRGBO(28, 136, 111, 0.6),
   splashGreyColor: Color.fromARGB(255, 158, 158, 158),
   secondaryTextColor: Colors.white70,
-  buttonPressed: Color.fromRGBO(28, 136, 111, 0.1),
-  statusBarDefaultColor: Color(0xFF191C1B),
   background2: Color.fromRGBO(42, 46, 44, 1)
 );
 
@@ -52,11 +45,8 @@ class CustomColors extends ThemeExtension<CustomColors> {
   final Color? notOpenedColor;
   final Color? openedColor;
   final Color? borderColorOpened;
-  final Color? infoColor;
   final Color? secondaryTextColor;
   final Color? borderColorNotOpened;
-  final Color? buttonPressed;
-  final Color? statusBarDefaultColor;
   final Color? background2;
 
   const CustomColors({
@@ -69,11 +59,8 @@ class CustomColors extends ThemeExtension<CustomColors> {
     required this.notOpenedColor,
     required this.openedColor,
     required this.borderColorOpened,
-    required this.infoColor,
     required this.secondaryTextColor,
     required this.borderColorNotOpened,
-    required this.buttonPressed,
-    required this.statusBarDefaultColor,
     required this.background2,
   });
 
@@ -88,7 +75,6 @@ class CustomColors extends ThemeExtension<CustomColors> {
     Color? notOpenedColor,
     Color? openedColor,
     Color? borderColorOpened,
-    Color? infoColor,
     Color? secondaryTextColor,
     Color? borderColorNotOpened,
     Color? buttonPressed,
@@ -105,11 +91,8 @@ class CustomColors extends ThemeExtension<CustomColors> {
       notOpenedColor: notOpenedColor ?? this.notOpenedColor,
       openedColor: openedColor ?? this.openedColor,
       borderColorOpened: borderColorOpened ?? this.borderColorOpened,
-      infoColor: infoColor ?? this.infoColor,
       secondaryTextColor: secondaryTextColor ?? this.secondaryTextColor,
       borderColorNotOpened: borderColorNotOpened ?? this.borderColorNotOpened,
-      buttonPressed: buttonPressed ?? this.buttonPressed,
-      statusBarDefaultColor: statusBarDefaultColor ?? this.statusBarDefaultColor,
       background2: background2 ?? this.background2,
     );
   }
@@ -129,11 +112,8 @@ class CustomColors extends ThemeExtension<CustomColors> {
       notOpenedColor: Color.lerp(notOpenedColor, other.notOpenedColor, t),
       openedColor: Color.lerp(openedColor, other.openedColor, t),
       borderColorOpened: Color.lerp(borderColorOpened, other.borderColorOpened, t),
-      infoColor: Color.lerp(infoColor, other.infoColor, t),
       secondaryTextColor: Color.lerp(secondaryTextColor, other.secondaryTextColor, t),
       borderColorNotOpened: Color.lerp(borderColorNotOpened, other.borderColorNotOpened, t),
-      buttonPressed: Color.lerp(buttonPressed, other.buttonPressed, t),
-      statusBarDefaultColor: Color.lerp(statusBarDefaultColor, other.statusBarDefaultColor, t),
       background2: Color.lerp(background2, other.background2, t),
     );
   }

@@ -185,7 +185,7 @@ class AnswerClaimScreen extends StatelessWidget {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                !isClaimAlreadyManaged
+                                isClaimAlreadyManaged
                                     ? ClaimInfoField(
                                         title: AppLocalizations.of(context)!.claimStatus,
                                         content: Container(

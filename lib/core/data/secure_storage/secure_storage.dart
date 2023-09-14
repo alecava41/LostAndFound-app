@@ -22,6 +22,8 @@ const String LOCALE = "locale";
 
 const String THEME = "theme";
 
+const String LAST_PICK = "lastPick";
+
 abstract class SecureStorage {
   Future<bool> hasValidSession();
 
@@ -48,6 +50,9 @@ abstract class SecureStorage {
 
   Future<void> setTheme(String theme);
   Future<String?> getSavedTheme();
+
+  Future<void> saveLastPickingOperation(String lastPick);
+  Future<String?> getLastPickingOperation();
 }
 
 class SecureStorageImpl extends SecureStorage {
@@ -157,5 +162,15 @@ class SecureStorageImpl extends SecureStorage {
   @override
   Future<void> setTheme(String theme) async {
     await _storage.write(key: THEME, value: theme);
+  }
+
+  @override
+  Future<String?> getLastPickingOperation() async {
+    return await _storage.read(key: LAST_PICK);
+  }
+
+  @override
+  Future<void> saveLastPickingOperation(String lastPick) async {
+    await _storage.write(key: LAST_PICK, value: lastPick);
   }
 }

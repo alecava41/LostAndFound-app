@@ -358,7 +358,7 @@ class ItemScreen extends StatelessWidget {
                           const SizedBox(width: 10),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                              backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
                               side: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1.5),
                               shape: const StadiumBorder(),
                               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
@@ -366,7 +366,7 @@ class ItemScreen extends StatelessWidget {
                               overlayColor: MaterialStateProperty.resolveWith<Color>(
                                 (Set<MaterialState> states) {
                                   if (states.contains(MaterialState.pressed)) {
-                                    return Theme.of(context).colorScheme.onTertiaryContainer.withOpacity(0.2);
+                                    return Theme.of(context).colorScheme.onBackground.withOpacity(0.2);
                                   }
                                   return Colors.transparent;
                                 },
@@ -380,7 +380,7 @@ class ItemScreen extends StatelessWidget {
                             },
                             child: Text(
                               AppLocalizations.of(context)!.sendMessage,
-                              style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onTertiaryContainer),
+                              style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onBackground),
                             ),
                           ),
                         ],
@@ -656,7 +656,7 @@ class ItemScreen extends StatelessWidget {
                         const SizedBox(width: 10),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                            backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
                             side: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1.5),
                             shape: const StadiumBorder(),
                             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
@@ -664,7 +664,7 @@ class ItemScreen extends StatelessWidget {
                             overlayColor: MaterialStateProperty.resolveWith<Color>(
                               (Set<MaterialState> states) {
                                 if (states.contains(MaterialState.pressed)) {
-                                  return Theme.of(context).colorScheme.onTertiaryContainer.withOpacity(0.2);
+                                  return Theme.of(context).colorScheme.onBackground.withOpacity(0.2);
                                 }
                                 return Colors.transparent;
                               },
@@ -678,7 +678,7 @@ class ItemScreen extends StatelessWidget {
                           },
                           child: Text(
                             AppLocalizations.of(context)!.sendMessage,
-                            style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onTertiaryContainer),
+                            style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onBackground),
                           ),
                         ),
                       ],

@@ -56,19 +56,21 @@ class InsertItemScreen extends StatelessWidget {
     }
 
     if (hasPermission) {
-      var img = await picker.pickImage(source: media);
+      var img = await picker.pickImage(source: media, requestFullMetadata: true);
       callback(img?.path);
     }
   }
 
   Future<void> onTapGallery(BuildContext ctx) async {
     Navigator.pop(ctx);
+    ctx.read<InsertItemBloc>().add(const InsertItemEvent.onImagePicking());
     await getImage(ImageSource.gallery,
         (path) => path != null ? ctx.read<InsertItemBloc>().add(InsertItemEvent.imageSelected(path)) : {}, ctx);
   }
 
   Future<void> onTapCamera(BuildContext ctx) async {
     Navigator.pop(ctx);
+    ctx.read<InsertItemBloc>().add(const InsertItemEvent.onImagePicking());
     await getImage(ImageSource.camera,
         (path) => path != null ? ctx.read<InsertItemBloc>().add(InsertItemEvent.imageSelected(path)) : {}, ctx);
   }

@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
+import 'package:lost_and_found/utils/colors/custom_color.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../core/presentation/widgets/image_dialog.dart';
@@ -136,7 +137,7 @@ class ClaimedItemInfo extends StatelessWidget {
             const SizedBox(width: 10),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
                 side: BorderSide(color: Theme.of(context).colorScheme.primary, width: 0.4),
                 shape: const StadiumBorder(),
                 padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 15),
@@ -144,7 +145,7 @@ class ClaimedItemInfo extends StatelessWidget {
                 overlayColor: MaterialStateProperty.resolveWith<Color>(
                   (Set<MaterialState> states) {
                     if (states.contains(MaterialState.pressed)) {
-                      return Theme.of(context).colorScheme.onTertiaryContainer.withOpacity(0.2);
+                      return Theme.of(context).colorScheme.onBackground.withOpacity(0.2);
                     }
                     return Colors.transparent;
                   },
@@ -165,7 +166,7 @@ class ClaimedItemInfo extends StatelessWidget {
               },
               child: Text(
                 AppLocalizations.of(context)!.sendMessage,
-                style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onTertiaryContainer),
+                style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onBackground),
               ),
             ),
           ],
