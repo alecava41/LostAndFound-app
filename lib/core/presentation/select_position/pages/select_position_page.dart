@@ -92,6 +92,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                   child: Row(
                     children: [
                       const Icon(Icons.search),
+                      const SizedBox(width: 8,),
                       Expanded(
                         child: Text(
                           state.address.value.getOrElse(() => "").isEmpty
@@ -183,7 +184,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                     urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                                     userAgentPackageName: 'it.fabc.lostandfound',
                                   ),
-                                  MarkerLayer(
+                                  !state.isContainerExpanded? MarkerLayer(
                                     markers: [
                                       Marker(
                                         width: 200.0,
@@ -200,7 +201,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                         ),
                                       ),
                                     ],
-                                  ),
+                                  ): Container(),
                                 ],
                               ),
                             ),
@@ -239,9 +240,10 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                             Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Container(
+                                AnimatedContainer(
+                                  duration: const Duration(milliseconds: 250),
                                   width: MediaQuery.of(context).size.width,
-                                  height: 245.0,
+                                  height: state.isContainerExpanded? 260 : 240.0,
                                   decoration: BoxDecoration(
                                     color: Theme.of(context).extension<CustomColors>()!.background2,
                                     borderRadius: const BorderRadius.only(
@@ -250,33 +252,36 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                     ),
                                   ),
                                   child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.fromLTRB(12, 12, 12, 6),
+                                        padding: const EdgeInsets.fromLTRB(12, 6, 12, 6),
                                         child: state.isContainerExpanded ? textFormField : fakeButton,
                                       ),
                                       state.isContainerExpanded
-                                          ? PersonalizedLargeGreenButton(
-                                              onPressed: () {
-                                                if (!state.isSearchingCurrentPosition &&
-                                                    !state.isSearchingAddressPosition) {
-                                                  ctx
-                                                      .read<SelectPositionBloc>()
-                                                      .add(const SelectPositionEvent.searchPosition());
-                                                }
-                                              },
-                                              text: state.isSearchingCurrentPosition || state.isSearchingAddressPosition
-                                                  ? CustomCircularProgress(
-                                                      size: 25,
-                                                      color: Theme.of(context).colorScheme.onPrimary,
-                                                    )
-                                                  : Text(
-                                                      AppLocalizations.of(context)!.search,
-                                                      style: TextStyle(
-                                                          fontSize: 20, color: Theme.of(context).colorScheme.onPrimary),
-                                                    ))
+                                          ? Padding(
+                                            padding: const EdgeInsets.fromLTRB(16, 6, 16, 6),
+                                            child: PersonalizedLargeGreenButton(
+                                                onPressed: () {
+                                                  if (!state.isSearchingCurrentPosition &&
+                                                      !state.isSearchingAddressPosition) {
+                                                    ctx
+                                                        .read<SelectPositionBloc>()
+                                                        .add(const SelectPositionEvent.searchPosition());
+                                                  }
+                                                },
+                                                text: state.isSearchingCurrentPosition || state.isSearchingAddressPosition
+                                                    ? CustomCircularProgress(
+                                                        size: 25,
+                                                        color: Theme.of(context).colorScheme.onPrimary,
+                                                      )
+                                                    : Text(
+                                                        AppLocalizations.of(context)!.search,
+                                                        style: TextStyle(
+                                                            fontSize: 16, color: Theme.of(context).colorScheme.onPrimary),
+                                                      )),
+                                          )
                                           : Container(),
                                       TextButton(
                                         onPressed: () {
@@ -299,7 +304,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                                 ? Container()
                                                 : const Icon(
                                                     Icons.navigation,
-                                                    size: 30,
+                                                    size: 28,
                                                   ),
                                             const SizedBox(width: 8.0),
                                             state.isSearchingAddressPosition || state.isSearchingCurrentPosition
@@ -308,7 +313,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                                   )
                                                 : Text(
                                                     AppLocalizations.of(context)!.positionUseCurrentLocation,
-                                                    style: const TextStyle(fontSize: 20),
+                                                    style: const TextStyle(fontSize: 16),
                                                   ),
                                           ],
                                         ),
@@ -316,7 +321,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                       state.isContainerExpanded
                                           ? Container()
                                           : Padding(
-                                              padding: const EdgeInsets.all(18),
+                                              padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
                                               child: Row(
                                                 children: [
                                                   Expanded(
@@ -327,7 +332,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                                       style: ElevatedButton.styleFrom(
                                                         backgroundColor: Theme.of(context).colorScheme.primary,
                                                         shape: const StadiumBorder(),
-                                                        padding: const EdgeInsets.symmetric(vertical: 18),
+                                                        padding: const EdgeInsets.symmetric(vertical: 16),
                                                       ),
                                                       child: state.isSearchingAddressPosition ||
                                                               state.isSearchingCurrentPosition
@@ -338,7 +343,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen> with Ticker
                                                           : Text(
                                                               AppLocalizations.of(context)!.positionUseSelected,
                                                               style: TextStyle(
-                                                                  fontSize: 20,
+                                                                  fontSize: 18,
                                                                   color: Theme.of(context).colorScheme.onPrimary),
                                                             ),
                                                     ),
