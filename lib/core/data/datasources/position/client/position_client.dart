@@ -3,6 +3,7 @@ import 'package:lost_and_found/core/data/datasources/position/models/address_dto
 import 'package:lost_and_found/utils/constants.dart';
 import 'package:retrofit/http.dart';
 
+import '../models/position_dto.dart';
 
 part 'position_client.g.dart';
 
@@ -11,8 +12,8 @@ abstract class PositionClient {
   factory PositionClient(Dio dio, {String baseUrl}) = _PositionClient;
 
   @GET('')
-  Future<AddressDto> getAddressFromPosition(
-    @Query("lat") double lat,
-    @Query("lon") double lon,
-  );
+  Future<AddressDto> getAddressFromPosition(@Query("lat") double lat, @Query("lon") double lon);
+
+  @GET('')
+  Future<PositionDto> getPositionFromAddress(@Query("address") String address);
 }

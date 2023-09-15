@@ -29,4 +29,4 @@ class Failure with _$Failure {
   const factory Failure.geolocationFailure(GeolocationError reason) = _GeolocationFailure;
 }
 
-enum GeolocationError { serviceNotAvailable, permissionDenied, permissionPermanentlyDenied }
+enum GeolocationError { serviceNotAvailable, permissionDenied, permissionPermanentlyDenied, addressNotResolved }

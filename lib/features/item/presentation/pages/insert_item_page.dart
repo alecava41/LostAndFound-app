@@ -147,21 +147,22 @@ class InsertItemScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: ElevatedButton(
-                        onPressed: () => ctx.read<InsertItemBloc>().add(const InsertItemEvent.insertSubmitted()),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(context).colorScheme.primary,
-                          shape: const StadiumBorder(),
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                        ),
-                        child: state.isSubmitting
-                            ? CustomCircularProgress(
-                                size: 25,
-                                color: Theme.of(context).colorScheme.onPrimary,
-                              )
-                            : Text(
-                                AppLocalizations.of(context)!.create,
-                                style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onPrimary),
-                              )),
+                      onPressed: () => ctx.read<InsertItemBloc>().add(const InsertItemEvent.insertSubmitted()),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        shape: const StadiumBorder(),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                      ),
+                      child: state.isSubmitting
+                          ? CustomCircularProgress(
+                              size: 25,
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            )
+                          : Text(
+                              AppLocalizations.of(context)!.create,
+                              style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onPrimary),
+                            ),
+                    ),
                   ),
                 )
               ],

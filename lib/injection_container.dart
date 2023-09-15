@@ -16,6 +16,7 @@ import 'package:lost_and_found/core/domain/repositories/position_repository.dart
 import 'package:lost_and_found/core/domain/usecases/get_address_from_position_usecase.dart';
 import 'package:lost_and_found/core/domain/usecases/get_categories_usecase.dart';
 import 'package:lost_and_found/core/domain/usecases/get_current_country_usecase.dart';
+import 'package:lost_and_found/core/domain/usecases/get_position_from_address_usecase.dart';
 import 'package:lost_and_found/core/network/network_info.dart';
 import 'package:lost_and_found/core/presentation/home_controller/bloc/home_controller_bloc.dart';
 import 'package:lost_and_found/core/presentation/select_category/bloc/category_bloc.dart';
@@ -267,6 +268,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetAddressFromPositionUseCase(sl()));
   sl.registerLazySingleton(() => GetCategoriesUseCase(sl()));
   sl.registerLazySingleton(() => GetCurrentCountryUseCase(sl()));
+  sl.registerLazySingleton(() => GetPositionFromAddressUseCase(sl()));
 
   // Repositories
   sl.registerLazySingleton<PositionRepository>(() => PositionRepositoryImpl(dataSource: sl(), networkInfo: sl()));
@@ -313,7 +315,7 @@ Future<void> init() async {
 
   // Global BLoCs
   sl.registerFactory(() => HomeControllerBloc());
-  sl.registerFactory(() => SelectPositionBloc(networkInfo: sl()));
+  sl.registerFactory(() => SelectPositionBloc(networkInfo: sl(), getPositionFromAddressUseCase: sl()));
   sl.registerFactory(() => CategoryBloc(getCategoriesUseCase: sl()));
   sl.registerFactory(() => AppGlobalBloc(storage: sl(), updateLocaleUseCase: sl(), getCurrentCountryUseCase: sl()));
 }

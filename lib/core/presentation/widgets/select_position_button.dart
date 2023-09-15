@@ -44,7 +44,7 @@ class SelectPositionButton extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => SelectPositionScreen(
-                            startingPosition: startingPosition,
+                            startingPosition: startingPosition, address: address,
                           )),
                 );
 

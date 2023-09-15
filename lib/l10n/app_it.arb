@@ -359,5 +359,7 @@
   "newsForLostItem": "Oggetti trovati simili",
   "noNewsForItem": "Non ci sono ancora novità",
   "searchPosition": "Cerca una posizione",
-  "insertCityOrAddress" : "Inserisci una città o un indirizzo" 
+  "insertCityOrAddress" : "Inserisci una città o un indirizzo",
+  "failureInvalidAddress": "L'indirizzo è richiesto, solo lettere e numeri sono consentiti.",
+  "positionNotFound": "Impossibile trovare la posizione di questo indirizzo."
 }

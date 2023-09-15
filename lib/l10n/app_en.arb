@@ -361,5 +361,7 @@
   "newsForLostItem": "Matching found items",
   "noNewsForItem": "No news received yet",
   "searchPosition": "Cerca una posizione",
-  "insertCityOrAddress": "Insert a city or an address"
+  "insertCityOrAddress": "Insert a city or an address",
+  "failureInvalidAddress": "Address is required, only letters and numbers are allowed.",
+  "positionNotFound": "Unable to find the position of this address."
 }

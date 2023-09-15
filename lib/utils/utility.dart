@@ -15,6 +15,7 @@ showBasicErrorSnackbar(BuildContext context, Failure failure) {
                   requestFailure: () => AppLocalizations.of(context)!.failureInvalidCredentials,
                   genericFailure: () => AppLocalizations.of(context)!.failureGeneric,
                   networkFailure: () => AppLocalizations.of(context)!.failureNetwork,
+                  geolocationFailure: (_) => AppLocalizations.of(context)!.positionNotFound,
                   orElse: () => AppLocalizations.of(context)!.failureUnknown,
                 ),
                 style: TextStyle(color: Theme.of(context).colorScheme.onErrorContainer),

@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/domain/usecases/get_address_from_position_usecase.dart';
+import 'package:lost_and_found/core/domain/usecases/get_position_from_address_usecase.dart';
 import 'package:lost_and_found/core/status/failures.dart';
 
 import '../../../../core/data/repositories/utils.dart';
@@ -24,6 +26,21 @@ class PositionRepositoryImpl implements PositionRepository {
         final address = await _dataSource.getAddressFromPosition(params);
 
         return Right(address.address);
+      } else {
+        return const Left(Failure.networkFailure());
+      }
+    } on Exception catch (e) {
+      return Left(mapExceptionToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, LatLng>> getPositionFromAddress(GetPositionFromAddressParams params) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        final position = await _dataSource.getPositionFromAddress(params);
+
+        return Right(LatLng(position.lat, position.lon));
       } else {
         return const Left(Failure.networkFailure());
       }

@@ -35,6 +35,10 @@ class App extends StatefulWidget {
 
   const App({super.key, required this.initialRoute});
 
+  // TODO fix color of "send a message" button
+  // TODO fix chat loading screen color
+  // TODO fix color of item card on chat (see photo on whatsapp)
+
   @override
   State<StatefulWidget> createState() => _Application();
 }
