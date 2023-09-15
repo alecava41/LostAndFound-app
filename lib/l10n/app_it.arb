@@ -357,5 +357,6 @@
   "registration": "Registrazione",
   "newsForFoundItem": "Oggetti persi simili",
   "newsForLostItem": "Oggetti trovati simili",
-  "noNewsForItem": "Non ci sono ancora novità"
+  "noNewsForItem": "Non ci sono ancora novità",
+  "searchPosition": "Search a position"
 }
