@@ -76,7 +76,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
                 });
               },
               child: Container(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   width: double
                       .infinity, // Puoi personalizzare la larghezza come desideri
                   decoration: BoxDecoration(
@@ -102,7 +102,7 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
               autofocus: true,
               decoration: InputDecoration(
                 errorMaxLines: 3,
-                hintText: "Insert an address",
+                hintText: AppLocalizations.of(context)!.insertCityOrAddress,
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(18),
                     borderSide: BorderSide.none),
@@ -265,7 +265,6 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
                                           if (state.hasPermissions) {
                                             mapController.animatedZoomOut();
                                           }
-
                                           ctx.read<SelectPositionBloc>().add(
                                               const SelectPositionEvent
                                                   .selectCurrentPosition());
