@@ -86,12 +86,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     final session = await _secureStorage.getSessionInformation();
 
-    final lastPickedImageAction = await _secureStorage.getLastPickingOperation();
-    final lastPickedData = await ImagePicker().retrieveLostData();
+    if(Platform.isAndroid) {
+      final lastPickedImageAction = await _secureStorage.getLastPickingOperation();
+      final lastPickedData = await ImagePicker().retrieveLostData();
 
-    if(lastPickedImageAction != null && lastPickedImageAction == ImagePick.user.name && lastPickedData.file != null) {
-      // Try to directly upload the image
-      _onImageChanged(emit, lastPickedData.file!.path);
+      if(lastPickedImageAction != null && lastPickedImageAction == ImagePick.user.name && lastPickedData.file != null) {
+        // Try to directly upload the image
+        _onImageChanged(emit, lastPickedData.file!.path);
+      }
     }
 
     emit(state.copyWith(
@@ -113,6 +115,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         path = null;
         return Right(success);
       });
+
+      if (imgFailureOrSuccess!.isRight()) {
+        _secureStorage.saveLastPickingOperation(ImagePick.nothing.name);
+      }
     }
 
     emit(state.copyWith(

@@ -66,11 +66,13 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
   }
 
   Future<void> _onContentCreated(Emitter<InsertItemState> emit, bool isNewItemLost) async {
-    final lastPickedImageAction = await _storage.getLastPickingOperation();
-    final lastPickedData = await ImagePicker().retrieveLostData();
+    if (Platform.isAndroid) {
+      final lastPickedImageAction = await _storage.getLastPickingOperation();
+      final lastPickedData = await ImagePicker().retrieveLostData();
 
-    if(lastPickedImageAction != null && lastPickedImageAction == ImagePick.insertItem.name && lastPickedData.file != null) {
-      emit(state.copyWith(imagePath: lastPickedData.file!.path));
+      if(lastPickedImageAction != null && lastPickedImageAction == ImagePick.insertItem.name && lastPickedData.file != null) {
+        emit(state.copyWith(imagePath: lastPickedData.file!.path));
+      }
     }
 
     emit(state.copyWith(type: isNewItemLost ? ItemType.lost : ItemType.found));
@@ -134,6 +136,10 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
         final imgFailureOrSuccess = await _uploadItemImageUseCase(params);
         imgFailureOrSuccess.fold(
             (failure) => imageFailureOrSuccess = Left(failure), (success) => imageFailureOrSuccess = Right(success));
+      }
+
+      if (imageFailureOrSuccess!.isRight()) {
+        _storage.saveLastPickingOperation(ImagePick.nothing.name);
       }
     }
 
