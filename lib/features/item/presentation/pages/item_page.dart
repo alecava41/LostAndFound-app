@@ -380,7 +380,7 @@ class ItemScreen extends StatelessWidget {
                             },
                             child: Text(
                               AppLocalizations.of(context)!.sendMessage,
-                              style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onBackground),
+                              style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.primary),
                             ),
                           ),
                         ],
@@ -678,7 +678,7 @@ class ItemScreen extends StatelessWidget {
                           },
                           child: Text(
                             AppLocalizations.of(context)!.sendMessage,
-                            style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onBackground),
+                            style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.primary),
                           ),
                         ),
                       ],

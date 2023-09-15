@@ -23,7 +23,7 @@ CustomColors darkCustomColors = const CustomColors(
   claimDeniedStatusColor: Color.fromRGBO(240, 66, 63, 0.637),
   nClaimsColor: Color.fromRGBO(219, 115, 24, 1),
   notOpenedColor: Color.fromRGBO(28, 136, 111, 0.3),
-  openedColor: Colors.black26,
+  openedColor: Color.fromRGBO(41, 43, 41, 1),
   splashGreenColor: Color.fromRGBO(28, 136, 111, 0.6),
   splashGreyColor: Color.fromARGB(255, 158, 158, 158),
   secondaryTextColor: Colors.white70,

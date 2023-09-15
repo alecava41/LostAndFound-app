@@ -54,7 +54,18 @@ class ChatScreen extends StatelessWidget {
           }
 
           if (state.isLoading || state.room == null) {
-            return const CustomCircularProgress(size: 100);
+            return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
+                elevation: 0,
+                surfaceTintColor: Theme.of(context).colorScheme.outline,
+                shadowColor: Theme.of(context).colorScheme.outline,
+                iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
+              ),
+              body: const SafeArea(
+                child: CustomCircularProgress(size: 100),
+              ),
+            );
           }
 
           final room = state.room!;
