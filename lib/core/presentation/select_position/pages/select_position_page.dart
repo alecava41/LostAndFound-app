@@ -94,11 +94,21 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
                           style: const TextStyle(fontSize: 18),
                         ),
                       ),
-                      SizedBox(width: 4.2.w,)
+                      SizedBox(
+                        width: 4.2.w,
+                      )
                     ],
                   )),
             );
             var textFormField = TextFormField(
+              onTapOutside: (event) => setState(() {
+                isContainerExpanded = false;
+              }),
+              onFieldSubmitted: (a) {
+                setState(() {
+                  isContainerExpanded = false;
+                });
+              },
               autofocus: true,
               decoration: InputDecoration(
                 errorMaxLines: 3,
@@ -206,32 +216,36 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8),
-                              child: isContainerExpanded? Container(
-                                        width:
-                                            50.0,
-                                        height:
-                                            50.0,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape
-                                              .circle,
-                                          color: Theme.of(context).colorScheme.primary,
-                                        ),
-                                        child: InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              isContainerExpanded = !isContainerExpanded;
-                                            });
-                                          },
-                                          borderRadius: BorderRadius.circular(
-                                              24.0),
-                                          child: Center(
-                                            child: Icon(
-                                              Icons.arrow_downward,
-                                              color:Theme.of(context).colorScheme.surface,
-                                            ),
+                              child: isContainerExpanded
+                                  ? Container(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                      ),
+                                      child: InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            isContainerExpanded =
+                                                !isContainerExpanded;
+                                          });
+                                        },
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.arrow_downward,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .surface,
                                           ),
                                         ),
-                                      ) : Container(),
+                                      ),
+                                    )
+                                  : Container(),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
@@ -254,9 +268,28 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(12.0),
-                                        child: isContainerExpanded ? textFormField : fakeButton,
+                                        child: isContainerExpanded
+                                            ? textFormField
+                                            : fakeButton,
                                       ),
-                                      isContainerExpanded? const SizedBox(height: 10,):const SizedBox(height: 0,),
+                                      isContainerExpanded
+                                          ? const SizedBox(
+                                              height: 10,
+                                            )
+                                          : const SizedBox(
+                                              height: 0,
+                                            ),
+                                      isContainerExpanded
+                                          ? PersonalizedLargeGreenButton(
+                                              onPressed: () {},
+                                              text: Text(
+                                                AppLocalizations.of(context)!.search,
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .onPrimary),
+                                              ))
+                                          : Container(),
                                       TextButton(
                                         onPressed: () async {
                                           setState(() {
@@ -290,39 +323,46 @@ class _SelectPositionScreenState extends State<SelectPositionScreen>
                                           ],
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(18),
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: isContainerExpanded? Container() : ElevatedButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(
-                                                        context, markerPos);
-                                                  },
-                                                  style: ElevatedButton.styleFrom(
-                                                    backgroundColor:
-                                                        Theme.of(context)
-                                                            .colorScheme
-                                                            .primary,
-                                                    shape: const StadiumBorder(),
-                                                    padding:
-                                                        const EdgeInsets.symmetric(
-                                                            vertical: 18),
+                                      isContainerExpanded
+                                          ? Container()
+                                          : Padding(
+                                              padding: const EdgeInsets.all(18),
+                                              child: Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: ElevatedButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(context,
+                                                              markerPos);
+                                                        },
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                          backgroundColor:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .primary,
+                                                          shape:
+                                                              const StadiumBorder(),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .symmetric(
+                                                                  vertical: 18),
+                                                        ),
+                                                        child: Text(
+                                                          AppLocalizations.of(
+                                                                  context)!
+                                                              .positionUseSelected,
+                                                          style: TextStyle(
+                                                              fontSize: 20,
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .colorScheme
+                                                                  .onPrimary),
+                                                        )),
                                                   ),
-                                                  child: Text(
-                                                    AppLocalizations.of(context)!
-                                                        .positionUseSelected,
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        color: Theme.of(context)
-                                                            .colorScheme
-                                                            .onPrimary),
-                                                  )),
+                                                ],
+                                              ),
                                             ),
-                                          ],
-                                        ),
-                                      ),
                                     ],
                                   ),
                                 ),
