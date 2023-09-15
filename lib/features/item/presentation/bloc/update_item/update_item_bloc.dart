@@ -91,11 +91,14 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
     });
 
     final session = await _secureStorage.getSessionInformation();
-    final lastPickedImageAction = await _secureStorage.getLastPickingOperation();
-    final lastPickedData = await ImagePicker().retrieveLostData();
 
-    if(lastPickedImageAction != null && lastPickedImageAction == ImagePick.updateItem.name && lastPickedData.file != null) {
-      emit(state.copyWith(imagePath: lastPickedData.file!.path));
+    if (Platform.isAndroid) {
+      final lastPickedImageAction = await _secureStorage.getLastPickingOperation();
+      final lastPickedData = await ImagePicker().retrieveLostData();
+
+      if(lastPickedImageAction != null && lastPickedImageAction == ImagePick.updateItem.name && lastPickedData.file != null) {
+        emit(state.copyWith(imagePath: lastPickedData.file!.path));
+      }
     }
 
     emit(
@@ -166,6 +169,11 @@ class UpdateItemBloc extends Bloc<UpdateItemEvent, UpdateItemState> {
         final imgFailureOrSuccess = await _uploadItemImageUseCase(params);
         imgFailureOrSuccess.fold(
             (failure) => imageFailureOrSuccess = Left(failure), (success) => imageFailureOrSuccess = Right(success));
+
+        if (imgFailureOrSuccess.isRight()) {
+          _secureStorage.saveLastPickingOperation(ImagePick.nothing.name);
+        }
+
       } else if (state.hasDeletedOriginalImage) {
         final params = DeleteItemImageParams(itemId: state.item!.id);
 

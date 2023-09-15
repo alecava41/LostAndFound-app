@@ -15,7 +15,8 @@ enum NotificationType {
 enum ImagePick {
   user,
   insertItem,
-  updateItem
+  updateItem,
+  nothing
 }
 
 // Global Navigator
