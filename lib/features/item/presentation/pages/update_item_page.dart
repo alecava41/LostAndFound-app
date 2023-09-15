@@ -56,19 +56,21 @@ class UpdateItemScreen extends StatelessWidget {
     }
 
     if (hasPermission) {
-      var img = await picker.pickImage(source: media);
+      var img = await picker.pickImage(source: media, requestFullMetadata: true);
       callback(img?.path);
     }
   }
 
   Future<void> onTapGallery(BuildContext ctx) async {
     Navigator.pop(ctx);
+    ctx.read<UpdateItemBloc>().add(const UpdateItemEvent.onImagePicking());
     await getImage(ImageSource.gallery,
         (path) => path != null ? ctx.read<UpdateItemBloc>().add(UpdateItemEvent.imageSelected(path)) : {}, ctx);
   }
 
   Future<void> onTapCamera(BuildContext ctx) async {
     Navigator.pop(ctx);
+    ctx.read<UpdateItemBloc>().add(const UpdateItemEvent.onImagePicking());
     await getImage(ImageSource.camera,
         (path) => path != null ? ctx.read<UpdateItemBloc>().add(UpdateItemEvent.imageSelected(path)) : {}, ctx);
   }

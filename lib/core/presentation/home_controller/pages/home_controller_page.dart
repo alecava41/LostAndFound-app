@@ -41,8 +41,8 @@ class HomeControllerScreen extends StatelessWidget {
                     state.tabIndex == 4 || (state.tabIndex == 1 && searchState.pageState == SearchPageState.resultPage)
                         ? Theme.of(context).extension<CustomColors>()!.background2
                         : Theme.of(context).colorScheme.background,
-                statusBarBrightness: WidgetsBinding.instance.platformDispatcher.platformBrightness,
-                statusBarIconBrightness: WidgetsBinding.instance.platformDispatcher.platformBrightness,
+                statusBarBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
+                statusBarIconBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
               ),
               child: SafeArea(
                 child: Scaffold(

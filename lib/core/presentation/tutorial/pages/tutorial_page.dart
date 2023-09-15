@@ -25,8 +25,8 @@ class _InfoScreenState extends State<InfoScreen> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarColor: Theme.of(context).colorScheme.background,
-        statusBarBrightness: WidgetsBinding.instance.platformDispatcher.platformBrightness,
-        statusBarIconBrightness: WidgetsBinding.instance.platformDispatcher.platformBrightness,
+        statusBarBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
+        statusBarIconBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
       ),
       child: Scaffold(
         body: SafeArea(

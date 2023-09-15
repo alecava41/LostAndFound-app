@@ -53,7 +53,7 @@ class DateSelectionForm extends StatelessWidget {
                       children: [
                         if (date != null)
                           Text(
-                            AppLocalizations.of(context)!.dateFormEntryValue(DateFormat.yMMMM().format(date!)),
+                            AppLocalizations.of(context)!.dateFormEntryValue(DateFormat.yMMMM(AppLocalizations.of(context)?.localeName).format(date!)),
                             style: TextStyle(
                               fontSize: 15,
                               color: Theme.of(context).colorScheme.primary,
@@ -81,15 +81,20 @@ class DateSelectionForm extends StatelessWidget {
   void onButtonTap(context) async {
     var pickedDate = await DatePicker.showSimpleDatePicker(
       context,
+      backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
       titleText: AppLocalizations.of(context)!.selectDate,
+      textColor: Theme.of(context).colorScheme.onBackground,
       initialDate: date ?? DateTime.now(),
       firstDate: DateTime(1984),
       lastDate: DateTime.now(),
+      cancelText: AppLocalizations.of(context)!.cancel,
+      confirmText: AppLocalizations.of(context)!.ok,
       dateFormat: "MMMM-yyyy",
       locale: AppLocalizations.of(context)!.localeName == "it" ? DateTimePickerLocale.it : DateTimePickerLocale.en_us,
       looping: false,
       reverse: true,
     );
+
     if (pickedDate != null) {
       onTap(pickedDate);
     }

@@ -101,7 +101,7 @@ class UserScreen extends StatelessWidget {
                                                 userId: state.user!.id,
                                                 onImageChange: (String? path) =>
                                                     ctx.read<UserBloc>().add(UserEvent.imageChanged(path)),
-                                                radius: 50,
+                                                radius: 50, onImagePicking: () => ctx.read<UserBloc>().add(const UserEvent.onImagePicking()),
                                               ),
                                               const SizedBox(
                                                 width: 10,

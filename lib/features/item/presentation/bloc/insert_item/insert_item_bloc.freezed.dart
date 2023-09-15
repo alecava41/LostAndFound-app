@@ -27,6 +27,7 @@ mixin _$InsertItemEvent {
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
     required TResult Function(bool isNewItemLost) contentCreated,
+    required TResult Function() onImagePicking,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,6 +41,7 @@ mixin _$InsertItemEvent {
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
     TResult? Function(bool isNewItemLost)? contentCreated,
+    TResult? Function()? onImagePicking,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +55,7 @@ mixin _$InsertItemEvent {
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     TResult Function(bool isNewItemLost)? contentCreated,
+    TResult Function()? onImagePicking,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -67,6 +70,7 @@ mixin _$InsertItemEvent {
     required TResult Function(_ImageDeleted value) imageDeleted,
     required TResult Function(_InsertSubmitted value) insertSubmitted,
     required TResult Function(_ContentCreated value) contentCreated,
+    required TResult Function(_onImagePicking value) onImagePicking,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -80,6 +84,7 @@ mixin _$InsertItemEvent {
     TResult? Function(_ImageDeleted value)? imageDeleted,
     TResult? Function(_InsertSubmitted value)? insertSubmitted,
     TResult? Function(_ContentCreated value)? contentCreated,
+    TResult? Function(_onImagePicking value)? onImagePicking,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -93,6 +98,7 @@ mixin _$InsertItemEvent {
     TResult Function(_ImageDeleted value)? imageDeleted,
     TResult Function(_InsertSubmitted value)? insertSubmitted,
     TResult Function(_ContentCreated value)? contentCreated,
+    TResult Function(_onImagePicking value)? onImagePicking,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -189,6 +195,7 @@ class _$_TypeChanged implements _TypeChanged {
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
     required TResult Function(bool isNewItemLost) contentCreated,
+    required TResult Function() onImagePicking,
   }) {
     return typeChanged(type);
   }
@@ -205,6 +212,7 @@ class _$_TypeChanged implements _TypeChanged {
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
     TResult? Function(bool isNewItemLost)? contentCreated,
+    TResult? Function()? onImagePicking,
   }) {
     return typeChanged?.call(type);
   }
@@ -221,6 +229,7 @@ class _$_TypeChanged implements _TypeChanged {
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     TResult Function(bool isNewItemLost)? contentCreated,
+    TResult Function()? onImagePicking,
     required TResult orElse(),
   }) {
     if (typeChanged != null) {
@@ -241,6 +250,7 @@ class _$_TypeChanged implements _TypeChanged {
     required TResult Function(_ImageDeleted value) imageDeleted,
     required TResult Function(_InsertSubmitted value) insertSubmitted,
     required TResult Function(_ContentCreated value) contentCreated,
+    required TResult Function(_onImagePicking value) onImagePicking,
   }) {
     return typeChanged(this);
   }
@@ -257,6 +267,7 @@ class _$_TypeChanged implements _TypeChanged {
     TResult? Function(_ImageDeleted value)? imageDeleted,
     TResult? Function(_InsertSubmitted value)? insertSubmitted,
     TResult? Function(_ContentCreated value)? contentCreated,
+    TResult? Function(_onImagePicking value)? onImagePicking,
   }) {
     return typeChanged?.call(this);
   }
@@ -273,6 +284,7 @@ class _$_TypeChanged implements _TypeChanged {
     TResult Function(_ImageDeleted value)? imageDeleted,
     TResult Function(_InsertSubmitted value)? insertSubmitted,
     TResult Function(_ContentCreated value)? contentCreated,
+    TResult Function(_onImagePicking value)? onImagePicking,
     required TResult orElse(),
   }) {
     if (typeChanged != null) {
@@ -364,6 +376,7 @@ class _$_TitleChanged implements _TitleChanged {
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
     required TResult Function(bool isNewItemLost) contentCreated,
+    required TResult Function() onImagePicking,
   }) {
     return titleChanged(input);
   }
@@ -380,6 +393,7 @@ class _$_TitleChanged implements _TitleChanged {
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
     TResult? Function(bool isNewItemLost)? contentCreated,
+    TResult? Function()? onImagePicking,
   }) {
     return titleChanged?.call(input);
   }
@@ -396,6 +410,7 @@ class _$_TitleChanged implements _TitleChanged {
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     TResult Function(bool isNewItemLost)? contentCreated,
+    TResult Function()? onImagePicking,
     required TResult orElse(),
   }) {
     if (titleChanged != null) {
@@ -416,6 +431,7 @@ class _$_TitleChanged implements _TitleChanged {
     required TResult Function(_ImageDeleted value) imageDeleted,
     required TResult Function(_InsertSubmitted value) insertSubmitted,
     required TResult Function(_ContentCreated value) contentCreated,
+    required TResult Function(_onImagePicking value) onImagePicking,
   }) {
     return titleChanged(this);
   }
@@ -432,6 +448,7 @@ class _$_TitleChanged implements _TitleChanged {
     TResult? Function(_ImageDeleted value)? imageDeleted,
     TResult? Function(_InsertSubmitted value)? insertSubmitted,
     TResult? Function(_ContentCreated value)? contentCreated,
+    TResult? Function(_onImagePicking value)? onImagePicking,
   }) {
     return titleChanged?.call(this);
   }
@@ -448,6 +465,7 @@ class _$_TitleChanged implements _TitleChanged {
     TResult Function(_ImageDeleted value)? imageDeleted,
     TResult Function(_InsertSubmitted value)? insertSubmitted,
     TResult Function(_ContentCreated value)? contentCreated,
+    TResult Function(_onImagePicking value)? onImagePicking,
     required TResult orElse(),
   }) {
     if (titleChanged != null) {
@@ -539,6 +557,7 @@ class _$_QuestionChanged implements _QuestionChanged {
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
     required TResult Function(bool isNewItemLost) contentCreated,
+    required TResult Function() onImagePicking,
   }) {
     return questionChanged(input);
   }
@@ -555,6 +574,7 @@ class _$_QuestionChanged implements _QuestionChanged {
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
     TResult? Function(bool isNewItemLost)? contentCreated,
+    TResult? Function()? onImagePicking,
   }) {
     return questionChanged?.call(input);
   }
@@ -571,6 +591,7 @@ class _$_QuestionChanged implements _QuestionChanged {
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     TResult Function(bool isNewItemLost)? contentCreated,
+    TResult Function()? onImagePicking,
     required TResult orElse(),
   }) {
     if (questionChanged != null) {
@@ -591,6 +612,7 @@ class _$_QuestionChanged implements _QuestionChanged {
     required TResult Function(_ImageDeleted value) imageDeleted,
     required TResult Function(_InsertSubmitted value) insertSubmitted,
     required TResult Function(_ContentCreated value) contentCreated,
+    required TResult Function(_onImagePicking value) onImagePicking,
   }) {
     return questionChanged(this);
   }
@@ -607,6 +629,7 @@ class _$_QuestionChanged implements _QuestionChanged {
     TResult? Function(_ImageDeleted value)? imageDeleted,
     TResult? Function(_InsertSubmitted value)? insertSubmitted,
     TResult? Function(_ContentCreated value)? contentCreated,
+    TResult? Function(_onImagePicking value)? onImagePicking,
   }) {
     return questionChanged?.call(this);
   }
@@ -623,6 +646,7 @@ class _$_QuestionChanged implements _QuestionChanged {
     TResult Function(_ImageDeleted value)? imageDeleted,
     TResult Function(_InsertSubmitted value)? insertSubmitted,
     TResult Function(_ContentCreated value)? contentCreated,
+    TResult Function(_onImagePicking value)? onImagePicking,
     required TResult orElse(),
   }) {
     if (questionChanged != null) {
@@ -714,6 +738,7 @@ class _$_PositionSelected implements _PositionSelected {
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
     required TResult Function(bool isNewItemLost) contentCreated,
+    required TResult Function() onImagePicking,
   }) {
     return positionSelected(pos);
   }
@@ -730,6 +755,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
     TResult? Function(bool isNewItemLost)? contentCreated,
+    TResult? Function()? onImagePicking,
   }) {
     return positionSelected?.call(pos);
   }
@@ -746,6 +772,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     TResult Function(bool isNewItemLost)? contentCreated,
+    TResult Function()? onImagePicking,
     required TResult orElse(),
   }) {
     if (positionSelected != null) {
@@ -766,6 +793,7 @@ class _$_PositionSelected implements _PositionSelected {
     required TResult Function(_ImageDeleted value) imageDeleted,
     required TResult Function(_InsertSubmitted value) insertSubmitted,
     required TResult Function(_ContentCreated value) contentCreated,
+    required TResult Function(_onImagePicking value) onImagePicking,
   }) {
     return positionSelected(this);
   }
@@ -782,6 +810,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult? Function(_ImageDeleted value)? imageDeleted,
     TResult? Function(_InsertSubmitted value)? insertSubmitted,
     TResult? Function(_ContentCreated value)? contentCreated,
+    TResult? Function(_onImagePicking value)? onImagePicking,
   }) {
     return positionSelected?.call(this);
   }
@@ -798,6 +827,7 @@ class _$_PositionSelected implements _PositionSelected {
     TResult Function(_ImageDeleted value)? imageDeleted,
     TResult Function(_InsertSubmitted value)? insertSubmitted,
     TResult Function(_ContentCreated value)? contentCreated,
+    TResult Function(_onImagePicking value)? onImagePicking,
     required TResult orElse(),
   }) {
     if (positionSelected != null) {
@@ -898,6 +928,7 @@ class _$_CategorySelected implements _CategorySelected {
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
     required TResult Function(bool isNewItemLost) contentCreated,
+    required TResult Function() onImagePicking,
   }) {
     return categorySelected(id, category);
   }
@@ -914,6 +945,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
     TResult? Function(bool isNewItemLost)? contentCreated,
+    TResult? Function()? onImagePicking,
   }) {
     return categorySelected?.call(id, category);
   }
@@ -930,6 +962,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     TResult Function(bool isNewItemLost)? contentCreated,
+    TResult Function()? onImagePicking,
     required TResult orElse(),
   }) {
     if (categorySelected != null) {
@@ -950,6 +983,7 @@ class _$_CategorySelected implements _CategorySelected {
     required TResult Function(_ImageDeleted value) imageDeleted,
     required TResult Function(_InsertSubmitted value) insertSubmitted,
     required TResult Function(_ContentCreated value) contentCreated,
+    required TResult Function(_onImagePicking value) onImagePicking,
   }) {
     return categorySelected(this);
   }
@@ -966,6 +1000,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult? Function(_ImageDeleted value)? imageDeleted,
     TResult? Function(_InsertSubmitted value)? insertSubmitted,
     TResult? Function(_ContentCreated value)? contentCreated,
+    TResult? Function(_onImagePicking value)? onImagePicking,
   }) {
     return categorySelected?.call(this);
   }
@@ -982,6 +1017,7 @@ class _$_CategorySelected implements _CategorySelected {
     TResult Function(_ImageDeleted value)? imageDeleted,
     TResult Function(_InsertSubmitted value)? insertSubmitted,
     TResult Function(_ContentCreated value)? contentCreated,
+    TResult Function(_onImagePicking value)? onImagePicking,
     required TResult orElse(),
   }) {
     if (categorySelected != null) {
@@ -1076,6 +1112,7 @@ class _$_ImageSelected implements _ImageSelected {
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
     required TResult Function(bool isNewItemLost) contentCreated,
+    required TResult Function() onImagePicking,
   }) {
     return imageSelected(imagePath);
   }
@@ -1092,6 +1129,7 @@ class _$_ImageSelected implements _ImageSelected {
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
     TResult? Function(bool isNewItemLost)? contentCreated,
+    TResult? Function()? onImagePicking,
   }) {
     return imageSelected?.call(imagePath);
   }
@@ -1108,6 +1146,7 @@ class _$_ImageSelected implements _ImageSelected {
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     TResult Function(bool isNewItemLost)? contentCreated,
+    TResult Function()? onImagePicking,
     required TResult orElse(),
   }) {
     if (imageSelected != null) {
@@ -1128,6 +1167,7 @@ class _$_ImageSelected implements _ImageSelected {
     required TResult Function(_ImageDeleted value) imageDeleted,
     required TResult Function(_InsertSubmitted value) insertSubmitted,
     required TResult Function(_ContentCreated value) contentCreated,
+    required TResult Function(_onImagePicking value) onImagePicking,
   }) {
     return imageSelected(this);
   }
@@ -1144,6 +1184,7 @@ class _$_ImageSelected implements _ImageSelected {
     TResult? Function(_ImageDeleted value)? imageDeleted,
     TResult? Function(_InsertSubmitted value)? insertSubmitted,
     TResult? Function(_ContentCreated value)? contentCreated,
+    TResult? Function(_onImagePicking value)? onImagePicking,
   }) {
     return imageSelected?.call(this);
   }
@@ -1160,6 +1201,7 @@ class _$_ImageSelected implements _ImageSelected {
     TResult Function(_ImageDeleted value)? imageDeleted,
     TResult Function(_InsertSubmitted value)? insertSubmitted,
     TResult Function(_ContentCreated value)? contentCreated,
+    TResult Function(_onImagePicking value)? onImagePicking,
     required TResult orElse(),
   }) {
     if (imageSelected != null) {
@@ -1225,6 +1267,7 @@ class _$_ImageDeleted implements _ImageDeleted {
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
     required TResult Function(bool isNewItemLost) contentCreated,
+    required TResult Function() onImagePicking,
   }) {
     return imageDeleted();
   }
@@ -1241,6 +1284,7 @@ class _$_ImageDeleted implements _ImageDeleted {
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
     TResult? Function(bool isNewItemLost)? contentCreated,
+    TResult? Function()? onImagePicking,
   }) {
     return imageDeleted?.call();
   }
@@ -1257,6 +1301,7 @@ class _$_ImageDeleted implements _ImageDeleted {
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     TResult Function(bool isNewItemLost)? contentCreated,
+    TResult Function()? onImagePicking,
     required TResult orElse(),
   }) {
     if (imageDeleted != null) {
@@ -1277,6 +1322,7 @@ class _$_ImageDeleted implements _ImageDeleted {
     required TResult Function(_ImageDeleted value) imageDeleted,
     required TResult Function(_InsertSubmitted value) insertSubmitted,
     required TResult Function(_ContentCreated value) contentCreated,
+    required TResult Function(_onImagePicking value) onImagePicking,
   }) {
     return imageDeleted(this);
   }
@@ -1293,6 +1339,7 @@ class _$_ImageDeleted implements _ImageDeleted {
     TResult? Function(_ImageDeleted value)? imageDeleted,
     TResult? Function(_InsertSubmitted value)? insertSubmitted,
     TResult? Function(_ContentCreated value)? contentCreated,
+    TResult? Function(_onImagePicking value)? onImagePicking,
   }) {
     return imageDeleted?.call(this);
   }
@@ -1309,6 +1356,7 @@ class _$_ImageDeleted implements _ImageDeleted {
     TResult Function(_ImageDeleted value)? imageDeleted,
     TResult Function(_InsertSubmitted value)? insertSubmitted,
     TResult Function(_ContentCreated value)? contentCreated,
+    TResult Function(_onImagePicking value)? onImagePicking,
     required TResult orElse(),
   }) {
     if (imageDeleted != null) {
@@ -1369,6 +1417,7 @@ class _$_InsertSubmitted implements _InsertSubmitted {
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
     required TResult Function(bool isNewItemLost) contentCreated,
+    required TResult Function() onImagePicking,
   }) {
     return insertSubmitted();
   }
@@ -1385,6 +1434,7 @@ class _$_InsertSubmitted implements _InsertSubmitted {
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
     TResult? Function(bool isNewItemLost)? contentCreated,
+    TResult? Function()? onImagePicking,
   }) {
     return insertSubmitted?.call();
   }
@@ -1401,6 +1451,7 @@ class _$_InsertSubmitted implements _InsertSubmitted {
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     TResult Function(bool isNewItemLost)? contentCreated,
+    TResult Function()? onImagePicking,
     required TResult orElse(),
   }) {
     if (insertSubmitted != null) {
@@ -1421,6 +1472,7 @@ class _$_InsertSubmitted implements _InsertSubmitted {
     required TResult Function(_ImageDeleted value) imageDeleted,
     required TResult Function(_InsertSubmitted value) insertSubmitted,
     required TResult Function(_ContentCreated value) contentCreated,
+    required TResult Function(_onImagePicking value) onImagePicking,
   }) {
     return insertSubmitted(this);
   }
@@ -1437,6 +1489,7 @@ class _$_InsertSubmitted implements _InsertSubmitted {
     TResult? Function(_ImageDeleted value)? imageDeleted,
     TResult? Function(_InsertSubmitted value)? insertSubmitted,
     TResult? Function(_ContentCreated value)? contentCreated,
+    TResult? Function(_onImagePicking value)? onImagePicking,
   }) {
     return insertSubmitted?.call(this);
   }
@@ -1453,6 +1506,7 @@ class _$_InsertSubmitted implements _InsertSubmitted {
     TResult Function(_ImageDeleted value)? imageDeleted,
     TResult Function(_InsertSubmitted value)? insertSubmitted,
     TResult Function(_ContentCreated value)? contentCreated,
+    TResult Function(_onImagePicking value)? onImagePicking,
     required TResult orElse(),
   }) {
     if (insertSubmitted != null) {
@@ -1540,6 +1594,7 @@ class _$_ContentCreated implements _ContentCreated {
     required TResult Function() imageDeleted,
     required TResult Function() insertSubmitted,
     required TResult Function(bool isNewItemLost) contentCreated,
+    required TResult Function() onImagePicking,
   }) {
     return contentCreated(isNewItemLost);
   }
@@ -1556,6 +1611,7 @@ class _$_ContentCreated implements _ContentCreated {
     TResult? Function()? imageDeleted,
     TResult? Function()? insertSubmitted,
     TResult? Function(bool isNewItemLost)? contentCreated,
+    TResult? Function()? onImagePicking,
   }) {
     return contentCreated?.call(isNewItemLost);
   }
@@ -1572,6 +1628,7 @@ class _$_ContentCreated implements _ContentCreated {
     TResult Function()? imageDeleted,
     TResult Function()? insertSubmitted,
     TResult Function(bool isNewItemLost)? contentCreated,
+    TResult Function()? onImagePicking,
     required TResult orElse(),
   }) {
     if (contentCreated != null) {
@@ -1592,6 +1649,7 @@ class _$_ContentCreated implements _ContentCreated {
     required TResult Function(_ImageDeleted value) imageDeleted,
     required TResult Function(_InsertSubmitted value) insertSubmitted,
     required TResult Function(_ContentCreated value) contentCreated,
+    required TResult Function(_onImagePicking value) onImagePicking,
   }) {
     return contentCreated(this);
   }
@@ -1608,6 +1666,7 @@ class _$_ContentCreated implements _ContentCreated {
     TResult? Function(_ImageDeleted value)? imageDeleted,
     TResult? Function(_InsertSubmitted value)? insertSubmitted,
     TResult? Function(_ContentCreated value)? contentCreated,
+    TResult? Function(_onImagePicking value)? onImagePicking,
   }) {
     return contentCreated?.call(this);
   }
@@ -1624,6 +1683,7 @@ class _$_ContentCreated implements _ContentCreated {
     TResult Function(_ImageDeleted value)? imageDeleted,
     TResult Function(_InsertSubmitted value)? insertSubmitted,
     TResult Function(_ContentCreated value)? contentCreated,
+    TResult Function(_onImagePicking value)? onImagePicking,
     required TResult orElse(),
   }) {
     if (contentCreated != null) {
@@ -1640,6 +1700,156 @@ abstract class _ContentCreated implements InsertItemEvent {
   @JsonKey(ignore: true)
   _$$_ContentCreatedCopyWith<_$_ContentCreated> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_onImagePickingCopyWith<$Res> {
+  factory _$$_onImagePickingCopyWith(
+          _$_onImagePicking value, $Res Function(_$_onImagePicking) then) =
+      __$$_onImagePickingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_onImagePickingCopyWithImpl<$Res>
+    extends _$InsertItemEventCopyWithImpl<$Res, _$_onImagePicking>
+    implements _$$_onImagePickingCopyWith<$Res> {
+  __$$_onImagePickingCopyWithImpl(
+      _$_onImagePicking _value, $Res Function(_$_onImagePicking) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_onImagePicking implements _onImagePicking {
+  const _$_onImagePicking();
+
+  @override
+  String toString() {
+    return 'InsertItemEvent.onImagePicking()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_onImagePicking);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ItemType? type) typeChanged,
+    required TResult Function(String input) titleChanged,
+    required TResult Function(String input) questionChanged,
+    required TResult Function(LatLng pos) positionSelected,
+    required TResult Function(int id, String category) categorySelected,
+    required TResult Function(String imagePath) imageSelected,
+    required TResult Function() imageDeleted,
+    required TResult Function() insertSubmitted,
+    required TResult Function(bool isNewItemLost) contentCreated,
+    required TResult Function() onImagePicking,
+  }) {
+    return onImagePicking();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ItemType? type)? typeChanged,
+    TResult? Function(String input)? titleChanged,
+    TResult? Function(String input)? questionChanged,
+    TResult? Function(LatLng pos)? positionSelected,
+    TResult? Function(int id, String category)? categorySelected,
+    TResult? Function(String imagePath)? imageSelected,
+    TResult? Function()? imageDeleted,
+    TResult? Function()? insertSubmitted,
+    TResult? Function(bool isNewItemLost)? contentCreated,
+    TResult? Function()? onImagePicking,
+  }) {
+    return onImagePicking?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ItemType? type)? typeChanged,
+    TResult Function(String input)? titleChanged,
+    TResult Function(String input)? questionChanged,
+    TResult Function(LatLng pos)? positionSelected,
+    TResult Function(int id, String category)? categorySelected,
+    TResult Function(String imagePath)? imageSelected,
+    TResult Function()? imageDeleted,
+    TResult Function()? insertSubmitted,
+    TResult Function(bool isNewItemLost)? contentCreated,
+    TResult Function()? onImagePicking,
+    required TResult orElse(),
+  }) {
+    if (onImagePicking != null) {
+      return onImagePicking();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_TypeChanged value) typeChanged,
+    required TResult Function(_TitleChanged value) titleChanged,
+    required TResult Function(_QuestionChanged value) questionChanged,
+    required TResult Function(_PositionSelected value) positionSelected,
+    required TResult Function(_CategorySelected value) categorySelected,
+    required TResult Function(_ImageSelected value) imageSelected,
+    required TResult Function(_ImageDeleted value) imageDeleted,
+    required TResult Function(_InsertSubmitted value) insertSubmitted,
+    required TResult Function(_ContentCreated value) contentCreated,
+    required TResult Function(_onImagePicking value) onImagePicking,
+  }) {
+    return onImagePicking(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_TypeChanged value)? typeChanged,
+    TResult? Function(_TitleChanged value)? titleChanged,
+    TResult? Function(_QuestionChanged value)? questionChanged,
+    TResult? Function(_PositionSelected value)? positionSelected,
+    TResult? Function(_CategorySelected value)? categorySelected,
+    TResult? Function(_ImageSelected value)? imageSelected,
+    TResult? Function(_ImageDeleted value)? imageDeleted,
+    TResult? Function(_InsertSubmitted value)? insertSubmitted,
+    TResult? Function(_ContentCreated value)? contentCreated,
+    TResult? Function(_onImagePicking value)? onImagePicking,
+  }) {
+    return onImagePicking?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_TypeChanged value)? typeChanged,
+    TResult Function(_TitleChanged value)? titleChanged,
+    TResult Function(_QuestionChanged value)? questionChanged,
+    TResult Function(_PositionSelected value)? positionSelected,
+    TResult Function(_CategorySelected value)? categorySelected,
+    TResult Function(_ImageSelected value)? imageSelected,
+    TResult Function(_ImageDeleted value)? imageDeleted,
+    TResult Function(_InsertSubmitted value)? insertSubmitted,
+    TResult Function(_ContentCreated value)? contentCreated,
+    TResult Function(_onImagePicking value)? onImagePicking,
+    required TResult orElse(),
+  }) {
+    if (onImagePicking != null) {
+      return onImagePicking(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _onImagePicking implements InsertItemEvent {
+  const factory _onImagePicking() = _$_onImagePicking;
 }
 
 /// @nodoc

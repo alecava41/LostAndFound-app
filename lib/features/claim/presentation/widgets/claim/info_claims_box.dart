@@ -13,13 +13,13 @@ class InfoClaimsBox extends StatelessWidget {
     return Container(
       height: 65,
       width: MediaQuery.of(context).size.width,
-      color: Theme.of(context).colorScheme.tertiaryContainer,
+      color: Theme.of(context).colorScheme.primary,
       padding: const EdgeInsets.all(8),
       child: Row(
         children: [
           Icon(
             Icons.info,
-            color: Theme.of(context).colorScheme.onTertiaryContainer,
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
           const SizedBox(
             width: 5,
@@ -30,7 +30,7 @@ class InfoClaimsBox extends StatelessWidget {
               children: [
                 Text(
                   text,
-                  style: TextStyle(color: Theme.of(context).colorScheme.onTertiaryContainer),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
                 ),
               ],
             ),

@@ -26,8 +26,11 @@ showBasicErrorSnackbar(BuildContext context, Failure failure) {
 showBasicSuccessSnackbar(BuildContext context, String text) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      backgroundColor: Colors.green,
-      content: Text(text),
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      content: Text(
+        text,
+        style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+      ),
     ),
   );
 }

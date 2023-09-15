@@ -6,4 +6,5 @@ class UserEvent with _$UserEvent {
   const factory UserEvent.logout() = _Logout;
   const factory UserEvent.imageChanged(String? image) = _ImageSelected;
   const factory UserEvent.restoreInitial() = _RestoreInitial;
+  const factory UserEvent.onImagePicking() = _onImagePicking;
 }

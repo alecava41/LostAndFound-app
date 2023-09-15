@@ -12,10 +12,11 @@ class EditableCircularImage extends StatelessWidget {
   final int userId;
 
   final Function onImageChange;
+  final Function onImagePicking;
   final double radius;
 
   EditableCircularImage(
-      {super.key, required this.token, required this.userId, required this.onImageChange, required this.radius});
+      {super.key, required this.token, required this.userId, required this.onImageChange, required this.radius, required this.onImagePicking});
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +78,6 @@ class EditableCircularImage extends StatelessWidget {
     );
   }
 
-  // Upload image from camera or from gallery based on parameter
   Future getImage(ImageSource media) async {
     var img = await picker.pickImage(source: media);
     onImageChange(img?.path);
@@ -85,11 +85,13 @@ class EditableCircularImage extends StatelessWidget {
 
   void onTapGallery(context) {
     Navigator.pop(context);
+    onImagePicking();
     getImage(ImageSource.gallery);
   }
 
   void onTapCamera(context) {
     Navigator.pop(context);
+    onImagePicking();
     getImage(ImageSource.camera);
   }
 }

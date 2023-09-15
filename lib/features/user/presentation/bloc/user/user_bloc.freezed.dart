@@ -22,6 +22,7 @@ mixin _$UserEvent {
     required TResult Function() logout,
     required TResult Function(String? image) imageChanged,
     required TResult Function() restoreInitial,
+    required TResult Function() onImagePicking,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$UserEvent {
     TResult? Function()? logout,
     TResult? Function(String? image)? imageChanged,
     TResult? Function()? restoreInitial,
+    TResult? Function()? onImagePicking,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$UserEvent {
     TResult Function()? logout,
     TResult Function(String? image)? imageChanged,
     TResult Function()? restoreInitial,
+    TResult Function()? onImagePicking,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,7 @@ mixin _$UserEvent {
     required TResult Function(_Logout value) logout,
     required TResult Function(_ImageSelected value) imageChanged,
     required TResult Function(_RestoreInitial value) restoreInitial,
+    required TResult Function(_onImagePicking value) onImagePicking,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +59,7 @@ mixin _$UserEvent {
     TResult? Function(_Logout value)? logout,
     TResult? Function(_ImageSelected value)? imageChanged,
     TResult? Function(_RestoreInitial value)? restoreInitial,
+    TResult? Function(_onImagePicking value)? onImagePicking,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$UserEvent {
     TResult Function(_Logout value)? logout,
     TResult Function(_ImageSelected value)? imageChanged,
     TResult Function(_RestoreInitial value)? restoreInitial,
+    TResult Function(_onImagePicking value)? onImagePicking,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,6 +133,7 @@ class _$_ContentCreated implements _ContentCreated {
     required TResult Function() logout,
     required TResult Function(String? image) imageChanged,
     required TResult Function() restoreInitial,
+    required TResult Function() onImagePicking,
   }) {
     return contentCreated();
   }
@@ -138,6 +145,7 @@ class _$_ContentCreated implements _ContentCreated {
     TResult? Function()? logout,
     TResult? Function(String? image)? imageChanged,
     TResult? Function()? restoreInitial,
+    TResult? Function()? onImagePicking,
   }) {
     return contentCreated?.call();
   }
@@ -149,6 +157,7 @@ class _$_ContentCreated implements _ContentCreated {
     TResult Function()? logout,
     TResult Function(String? image)? imageChanged,
     TResult Function()? restoreInitial,
+    TResult Function()? onImagePicking,
     required TResult orElse(),
   }) {
     if (contentCreated != null) {
@@ -164,6 +173,7 @@ class _$_ContentCreated implements _ContentCreated {
     required TResult Function(_Logout value) logout,
     required TResult Function(_ImageSelected value) imageChanged,
     required TResult Function(_RestoreInitial value) restoreInitial,
+    required TResult Function(_onImagePicking value) onImagePicking,
   }) {
     return contentCreated(this);
   }
@@ -175,6 +185,7 @@ class _$_ContentCreated implements _ContentCreated {
     TResult? Function(_Logout value)? logout,
     TResult? Function(_ImageSelected value)? imageChanged,
     TResult? Function(_RestoreInitial value)? restoreInitial,
+    TResult? Function(_onImagePicking value)? onImagePicking,
   }) {
     return contentCreated?.call(this);
   }
@@ -186,6 +197,7 @@ class _$_ContentCreated implements _ContentCreated {
     TResult Function(_Logout value)? logout,
     TResult Function(_ImageSelected value)? imageChanged,
     TResult Function(_RestoreInitial value)? restoreInitial,
+    TResult Function(_onImagePicking value)? onImagePicking,
     required TResult orElse(),
   }) {
     if (contentCreated != null) {
@@ -239,6 +251,7 @@ class _$_Logout implements _Logout {
     required TResult Function() logout,
     required TResult Function(String? image) imageChanged,
     required TResult Function() restoreInitial,
+    required TResult Function() onImagePicking,
   }) {
     return logout();
   }
@@ -250,6 +263,7 @@ class _$_Logout implements _Logout {
     TResult? Function()? logout,
     TResult? Function(String? image)? imageChanged,
     TResult? Function()? restoreInitial,
+    TResult? Function()? onImagePicking,
   }) {
     return logout?.call();
   }
@@ -261,6 +275,7 @@ class _$_Logout implements _Logout {
     TResult Function()? logout,
     TResult Function(String? image)? imageChanged,
     TResult Function()? restoreInitial,
+    TResult Function()? onImagePicking,
     required TResult orElse(),
   }) {
     if (logout != null) {
@@ -276,6 +291,7 @@ class _$_Logout implements _Logout {
     required TResult Function(_Logout value) logout,
     required TResult Function(_ImageSelected value) imageChanged,
     required TResult Function(_RestoreInitial value) restoreInitial,
+    required TResult Function(_onImagePicking value) onImagePicking,
   }) {
     return logout(this);
   }
@@ -287,6 +303,7 @@ class _$_Logout implements _Logout {
     TResult? Function(_Logout value)? logout,
     TResult? Function(_ImageSelected value)? imageChanged,
     TResult? Function(_RestoreInitial value)? restoreInitial,
+    TResult? Function(_onImagePicking value)? onImagePicking,
   }) {
     return logout?.call(this);
   }
@@ -298,6 +315,7 @@ class _$_Logout implements _Logout {
     TResult Function(_Logout value)? logout,
     TResult Function(_ImageSelected value)? imageChanged,
     TResult Function(_RestoreInitial value)? restoreInitial,
+    TResult Function(_onImagePicking value)? onImagePicking,
     required TResult orElse(),
   }) {
     if (logout != null) {
@@ -379,6 +397,7 @@ class _$_ImageSelected implements _ImageSelected {
     required TResult Function() logout,
     required TResult Function(String? image) imageChanged,
     required TResult Function() restoreInitial,
+    required TResult Function() onImagePicking,
   }) {
     return imageChanged(image);
   }
@@ -390,6 +409,7 @@ class _$_ImageSelected implements _ImageSelected {
     TResult? Function()? logout,
     TResult? Function(String? image)? imageChanged,
     TResult? Function()? restoreInitial,
+    TResult? Function()? onImagePicking,
   }) {
     return imageChanged?.call(image);
   }
@@ -401,6 +421,7 @@ class _$_ImageSelected implements _ImageSelected {
     TResult Function()? logout,
     TResult Function(String? image)? imageChanged,
     TResult Function()? restoreInitial,
+    TResult Function()? onImagePicking,
     required TResult orElse(),
   }) {
     if (imageChanged != null) {
@@ -416,6 +437,7 @@ class _$_ImageSelected implements _ImageSelected {
     required TResult Function(_Logout value) logout,
     required TResult Function(_ImageSelected value) imageChanged,
     required TResult Function(_RestoreInitial value) restoreInitial,
+    required TResult Function(_onImagePicking value) onImagePicking,
   }) {
     return imageChanged(this);
   }
@@ -427,6 +449,7 @@ class _$_ImageSelected implements _ImageSelected {
     TResult? Function(_Logout value)? logout,
     TResult? Function(_ImageSelected value)? imageChanged,
     TResult? Function(_RestoreInitial value)? restoreInitial,
+    TResult? Function(_onImagePicking value)? onImagePicking,
   }) {
     return imageChanged?.call(this);
   }
@@ -438,6 +461,7 @@ class _$_ImageSelected implements _ImageSelected {
     TResult Function(_Logout value)? logout,
     TResult Function(_ImageSelected value)? imageChanged,
     TResult Function(_RestoreInitial value)? restoreInitial,
+    TResult Function(_onImagePicking value)? onImagePicking,
     required TResult orElse(),
   }) {
     if (imageChanged != null) {
@@ -498,6 +522,7 @@ class _$_RestoreInitial implements _RestoreInitial {
     required TResult Function() logout,
     required TResult Function(String? image) imageChanged,
     required TResult Function() restoreInitial,
+    required TResult Function() onImagePicking,
   }) {
     return restoreInitial();
   }
@@ -509,6 +534,7 @@ class _$_RestoreInitial implements _RestoreInitial {
     TResult? Function()? logout,
     TResult? Function(String? image)? imageChanged,
     TResult? Function()? restoreInitial,
+    TResult? Function()? onImagePicking,
   }) {
     return restoreInitial?.call();
   }
@@ -520,6 +546,7 @@ class _$_RestoreInitial implements _RestoreInitial {
     TResult Function()? logout,
     TResult Function(String? image)? imageChanged,
     TResult Function()? restoreInitial,
+    TResult Function()? onImagePicking,
     required TResult orElse(),
   }) {
     if (restoreInitial != null) {
@@ -535,6 +562,7 @@ class _$_RestoreInitial implements _RestoreInitial {
     required TResult Function(_Logout value) logout,
     required TResult Function(_ImageSelected value) imageChanged,
     required TResult Function(_RestoreInitial value) restoreInitial,
+    required TResult Function(_onImagePicking value) onImagePicking,
   }) {
     return restoreInitial(this);
   }
@@ -546,6 +574,7 @@ class _$_RestoreInitial implements _RestoreInitial {
     TResult? Function(_Logout value)? logout,
     TResult? Function(_ImageSelected value)? imageChanged,
     TResult? Function(_RestoreInitial value)? restoreInitial,
+    TResult? Function(_onImagePicking value)? onImagePicking,
   }) {
     return restoreInitial?.call(this);
   }
@@ -557,6 +586,7 @@ class _$_RestoreInitial implements _RestoreInitial {
     TResult Function(_Logout value)? logout,
     TResult Function(_ImageSelected value)? imageChanged,
     TResult Function(_RestoreInitial value)? restoreInitial,
+    TResult Function(_onImagePicking value)? onImagePicking,
     required TResult orElse(),
   }) {
     if (restoreInitial != null) {
@@ -568,6 +598,126 @@ class _$_RestoreInitial implements _RestoreInitial {
 
 abstract class _RestoreInitial implements UserEvent {
   const factory _RestoreInitial() = _$_RestoreInitial;
+}
+
+/// @nodoc
+abstract class _$$_onImagePickingCopyWith<$Res> {
+  factory _$$_onImagePickingCopyWith(
+          _$_onImagePicking value, $Res Function(_$_onImagePicking) then) =
+      __$$_onImagePickingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_onImagePickingCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$_onImagePicking>
+    implements _$$_onImagePickingCopyWith<$Res> {
+  __$$_onImagePickingCopyWithImpl(
+      _$_onImagePicking _value, $Res Function(_$_onImagePicking) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_onImagePicking implements _onImagePicking {
+  const _$_onImagePicking();
+
+  @override
+  String toString() {
+    return 'UserEvent.onImagePicking()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_onImagePicking);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() contentCreated,
+    required TResult Function() logout,
+    required TResult Function(String? image) imageChanged,
+    required TResult Function() restoreInitial,
+    required TResult Function() onImagePicking,
+  }) {
+    return onImagePicking();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? contentCreated,
+    TResult? Function()? logout,
+    TResult? Function(String? image)? imageChanged,
+    TResult? Function()? restoreInitial,
+    TResult? Function()? onImagePicking,
+  }) {
+    return onImagePicking?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? contentCreated,
+    TResult Function()? logout,
+    TResult Function(String? image)? imageChanged,
+    TResult Function()? restoreInitial,
+    TResult Function()? onImagePicking,
+    required TResult orElse(),
+  }) {
+    if (onImagePicking != null) {
+      return onImagePicking();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ContentCreated value) contentCreated,
+    required TResult Function(_Logout value) logout,
+    required TResult Function(_ImageSelected value) imageChanged,
+    required TResult Function(_RestoreInitial value) restoreInitial,
+    required TResult Function(_onImagePicking value) onImagePicking,
+  }) {
+    return onImagePicking(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ContentCreated value)? contentCreated,
+    TResult? Function(_Logout value)? logout,
+    TResult? Function(_ImageSelected value)? imageChanged,
+    TResult? Function(_RestoreInitial value)? restoreInitial,
+    TResult? Function(_onImagePicking value)? onImagePicking,
+  }) {
+    return onImagePicking?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ContentCreated value)? contentCreated,
+    TResult Function(_Logout value)? logout,
+    TResult Function(_ImageSelected value)? imageChanged,
+    TResult Function(_RestoreInitial value)? restoreInitial,
+    TResult Function(_onImagePicking value)? onImagePicking,
+    required TResult orElse(),
+  }) {
+    if (onImagePicking != null) {
+      return onImagePicking(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _onImagePicking implements UserEvent {
+  const factory _onImagePicking() = _$_onImagePicking;
 }
 
 /// @nodoc

@@ -135,7 +135,7 @@ Future<void> init() async {
         deleteRoomsUseCase: sl(),
       ));
   sl.registerFactory(
-      () => InsertItemBloc(createItemUseCase: sl(), getAddressFromPositionUseCase: sl(), uploadItemImageUseCase: sl()));
+      () => InsertItemBloc(createItemUseCase: sl(), getAddressFromPositionUseCase: sl(), uploadItemImageUseCase: sl(), storage: sl()));
   sl.registerFactory(() => UpdateItemBloc(
       getItemUseCase: sl(),
       uploadItemImageUseCase: sl(),

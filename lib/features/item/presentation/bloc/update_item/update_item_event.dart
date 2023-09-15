@@ -10,4 +10,5 @@ class UpdateItemEvent with _$UpdateItemEvent {
   const factory UpdateItemEvent.imageSelected(String imagePath) = _ImageSelected;
   const factory UpdateItemEvent.imageDeleted() = _ImageDeleted;
   const factory UpdateItemEvent.updateSubmitted() = _UpdateSubmitted;
+  const factory UpdateItemEvent.onImagePicking() = _onImagePicking;
 }

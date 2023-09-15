@@ -12,6 +12,12 @@ enum NotificationType {
   chat
 }
 
+enum ImagePick {
+  user,
+  insertItem,
+  updateItem
+}
+
 // Global Navigator
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: "Main Navigator");
 

@@ -3,14 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
+import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/features/chat/presentation/bloc/chat/chat_bloc.dart' as chat;
 import 'package:lost_and_found/features/claim/domain/entities/claim_received.dart';
 import 'package:lost_and_found/features/claim/domain/entities/claim_sent.dart' as sent;
-import 'package:lost_and_found/core/presentation/widgets/error_page.dart';
 import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/widgets/claim/not_claimed_item_card.dart';
 import 'package:lost_and_found/features/item/presentation/widgets/notifications/circular_image_avatar.dart';
-
 import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../injection_container.dart';
@@ -39,16 +38,16 @@ class ChatScreen extends StatelessWidget {
       child: BlocBuilder<chat.ChatBloc, chat.ChatState>(
         builder: (ctx, state) {
           if (state.hasLoadingError) {
-            return SafeArea(
-              child: Scaffold(
-                appBar: AppBar(
-                  backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
-                  elevation: 0,
-                  surfaceTintColor: Theme.of(context).colorScheme.outline,
-                  shadowColor: Theme.of(context).colorScheme.outline,
-                  iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
-                ),
-                body: ErrorPage(
+            return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
+                elevation: 0,
+                surfaceTintColor: Theme.of(context).colorScheme.outline,
+                shadowColor: Theme.of(context).colorScheme.outline,
+                iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
+              ),
+              body: SafeArea(
+                child: ErrorPage(
                     onRetry: () => ctx.read<chat.ChatBloc>().add(chat.ChatEvent.chatContentCreated(roomId, itemId))),
               ),
             );
@@ -78,17 +77,18 @@ class ChatScreen extends StatelessWidget {
               ctx.read<chat.ChatBloc>().add(const chat.ChatEvent.chatRead());
               return true;
             },
-            child: SafeArea(
-              child: Scaffold(
-                appBar: AppBar(
-                  backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
-                  elevation: 0,
-                  surfaceTintColor: Theme.of(context).colorScheme.outline,
-                  shadowColor: Theme.of(context).colorScheme.outline,
-                  title: Text(otherUser.firstName!, style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 18)),
-                  iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
-                ),
-                body: Column(
+            child: Scaffold(
+              appBar: AppBar(
+                backgroundColor: Theme.of(context).extension<CustomColors>()!.background2,
+                elevation: 0,
+                surfaceTintColor: Theme.of(context).colorScheme.outline,
+                shadowColor: Theme.of(context).colorScheme.outline,
+                title: Text(otherUser.firstName!,
+                    style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 18)),
+                iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
+              ),
+              body: SafeArea(
+                child: Column(
                   children: [
                     receivedClaim != null
                         ? Container(
@@ -145,18 +145,21 @@ class ChatScreen extends StatelessWidget {
                           theme: DefaultChatTheme(
                             inputBorderRadius: const BorderRadius.all(Radius.circular(60)),
                             inputContainerDecoration: BoxDecoration(
-                                border: Border.all(width: 0.1, color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor!),
+                              color: Theme.of(context).extension<CustomColors>()!.background2,
+                                border: Border.all(
+                                    width: 0.1, color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor!),
                                 borderRadius: const BorderRadius.all(Radius.circular(60))),
-                            primaryColor: Theme.of(context).colorScheme.primary,
-                            secondaryColor: Theme.of(context).colorScheme.secondary,
+                            primaryColor: Theme.of(context).colorScheme.onTertiary,
+                            secondaryColor: Theme.of(context).colorScheme.tertiaryContainer,
+                            receivedMessageBodyTextStyle: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onBackground),
+                            sentMessageBodyTextStyle: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onBackground),
                             inputBackgroundColor: Theme.of(context).colorScheme.background,
                             inputTextColor: Theme.of(context).colorScheme.onBackground,
                             backgroundColor: Theme.of(context).colorScheme.background,
                             inputMargin: const EdgeInsets.fromLTRB(5, 5, 5, 10),
                           ),
                           messages: snapshot.data ?? [],
-                          onSendPressed: (message) =>
-                              ctx.read<chat.ChatBloc>().add(chat.ChatEvent.messageSent(message)),
+                          onSendPressed: (message) => ctx.read<chat.ChatBloc>().add(chat.ChatEvent.messageSent(message)),
                           user: currentUser,
                           //showUserAvatars: true,
                         ),

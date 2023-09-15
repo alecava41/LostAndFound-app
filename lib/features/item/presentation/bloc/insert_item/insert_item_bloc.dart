@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:lost_and_found/core/data/secure_storage/secure_storage.dart';
 import 'package:lost_and_found/core/domain/usecases/get_address_from_position_usecase.dart';
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/domain/fields/insert_item/position.dart';
@@ -12,6 +14,7 @@ import 'package:lost_and_found/features/item/domain/usecases/create_item_usecase
 
 import '../../../../../core/status/failures.dart';
 import '../../../../../core/status/success.dart';
+import '../../../../../utils/constants.dart';
 import '../../../domain/fields/insert_item/category.dart';
 import '../../../domain/fields/insert_item/question.dart';
 import '../../../domain/fields/insert_item/title.dart';
@@ -27,14 +30,18 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
   final CreateItemUseCase _createItemUseCase;
   final UploadItemImageUseCase _uploadItemImageUseCase;
   final GetAddressFromPositionUseCase _getAddressFromPositionUseCase;
+  final SecureStorage _storage;
 
   InsertItemBloc(
       {required CreateItemUseCase createItemUseCase,
       required UploadItemImageUseCase uploadItemImageUseCase,
-      required GetAddressFromPositionUseCase getAddressFromPositionUseCase})
+      required GetAddressFromPositionUseCase getAddressFromPositionUseCase,
+      required SecureStorage storage,
+      })
       : _createItemUseCase = createItemUseCase,
         _uploadItemImageUseCase = uploadItemImageUseCase,
         _getAddressFromPositionUseCase = getAddressFromPositionUseCase,
+  _storage = storage,
         super(InsertItemState.initial()) {
     on<InsertItemEvent>(
       (event, emit) async {
@@ -48,12 +55,24 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
           categorySelected: (catId, category) => _onCategoryChanged(emit, catId, category),
           insertSubmitted: () => _onInsertSubmitted(emit),
           contentCreated: (isNewItemLost) => _onContentCreated(emit, isNewItemLost),
+          onImagePicking: () => _onImagePicking(),
         );
       },
     );
   }
 
-  void _onContentCreated(Emitter<InsertItemState> emit, bool isNewItemLost) {
+  Future<void> _onImagePicking() async {
+    await _storage.saveLastPickingOperation(ImagePick.insertItem.name);
+  }
+
+  Future<void> _onContentCreated(Emitter<InsertItemState> emit, bool isNewItemLost) async {
+    final lastPickedImageAction = await _storage.getLastPickingOperation();
+    final lastPickedData = await ImagePicker().retrieveLostData();
+
+    if(lastPickedImageAction != null && lastPickedImageAction == ImagePick.insertItem.name && lastPickedData.file != null) {
+      emit(state.copyWith(imagePath: lastPickedData.file!.path));
+    }
+
     emit(state.copyWith(type: isNewItemLost ? ItemType.lost : ItemType.found));
   }
 

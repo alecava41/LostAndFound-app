@@ -37,7 +37,7 @@ class PersonalizedLargeWhiteButton extends StatelessWidget {
                     overlayColor: MaterialStateProperty.resolveWith<Color>(
                       (Set<MaterialState> states) {
                         if (states.contains(MaterialState.pressed)) {
-                          return Theme.of(context).extension<CustomColors>()!.buttonPressed!;
+                          return Theme.of(context).colorScheme.onBackground.withOpacity(0.3);
                         }
                         return Colors.transparent;
                       },

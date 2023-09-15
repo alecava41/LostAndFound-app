@@ -244,11 +244,11 @@ class AnswerQuestionScreen extends StatelessWidget {
                                       text: state.isSubmitting
                                           ? CustomCircularProgress(
                                               size: 25,
-                                              color: Theme.of(context).extension<CustomColors>()!.statusBarDefaultColor,
+                                              color: Theme.of(context).colorScheme.onPrimary,
                                             )
                                           : Text(
                                               AppLocalizations.of(context)!.send,
-                                              style: const TextStyle(fontSize: 20),
+                                              style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.onPrimary),
                                             ))
                             ],
                           ),

@@ -4,9 +4,11 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lost_and_found/core/data/secure_storage/secure_storage.dart';
 import 'package:lost_and_found/core/domain/usecases/usecase.dart';
 import 'package:lost_and_found/features/user/domain/usecases/logout_usecase.dart';
+import 'package:lost_and_found/utils/constants.dart';
 
 import '../../../../../core/status/failures.dart';
 import '../../../../../core/status/success.dart';
@@ -47,9 +49,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           imageChanged: (path) => _onImageChanged(emit, path),
           logout: () => _onLogout(emit),
           restoreInitial: () => emit(UserState.initial()),
+          onImagePicking: () => _onImagePicking(),
         );
       },
     );
+  }
+
+  Future<void> _onImagePicking() async {
+    await _secureStorage.saveLastPickingOperation(ImagePick.user.name);
   }
 
   Future<void> _onLogout(Emitter<UserState> emit) async {
@@ -78,6 +85,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     });
 
     final session = await _secureStorage.getSessionInformation();
+
+    final lastPickedImageAction = await _secureStorage.getLastPickingOperation();
+    final lastPickedData = await ImagePicker().retrieveLostData();
+
+    if(lastPickedImageAction != null && lastPickedImageAction == ImagePick.user.name && lastPickedData.file != null) {
+      // Try to directly upload the image
+      _onImageChanged(emit, lastPickedData.file!.path);
+    }
 
     emit(state.copyWith(
       isLoading: false,

@@ -67,11 +67,11 @@ class ClaimStatusButton extends StatelessWidget {
                               children: [
                                 TextSpan(
                                   text: AppLocalizations.of(context)!.claimStatusSpaced,
-                                  style: TextStyle(fontSize: 18, color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
+                                  style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.onBackground),
                                 ),
                                 TextSpan(
                                   text: status.getTranslatedName(context).toUpperCase(),
-                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Theme.of(context).extension<CustomColors>()!.secondaryTextColor),
+                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onBackground),
                                 ),
                               ],
                             ),
