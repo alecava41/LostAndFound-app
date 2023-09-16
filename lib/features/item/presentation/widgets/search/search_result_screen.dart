@@ -126,6 +126,7 @@ class SearchResultScreen extends StatelessWidget {
 
   void onOrderMenuButtonClick(BuildContext ctx, ResultOrder selectedOrder) {
     showModalBottomSheet<void>(
+      backgroundColor: Theme.of(ctx).extension<CustomColors>()!.background2,
       context: ctx,
       builder: (BuildContext context) {
         return Column(
