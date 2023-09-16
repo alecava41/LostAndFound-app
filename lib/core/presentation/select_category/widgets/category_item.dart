@@ -29,8 +29,8 @@ class CategoryItem extends StatelessWidget {
           child: InkWell(
             onTap: onTap,
             splashColor: Theme.of(context).extension<CustomColors>()!.splashGreyColor,
-            child: SizedBox(
-              height: 80,
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(8, 12, 0, 12),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

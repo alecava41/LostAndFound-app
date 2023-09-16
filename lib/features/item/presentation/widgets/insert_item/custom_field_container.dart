@@ -37,9 +37,12 @@ class CustomFieldContainer extends StatelessWidget {
                       const SizedBox(
                         width: 5,
                       ),
-                      Text(
-                        title,
-                        style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onPrimary),
+                      Expanded(
+                        child: Text(
+                          title,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onPrimary),
+                        ),
                       ),
                     ],
                   ),

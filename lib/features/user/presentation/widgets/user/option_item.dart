@@ -29,23 +29,28 @@ class OptionItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Icon(
-                        icon,
-                        size: 25,
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        optionName,
-                        style: const TextStyle(fontSize: 20),
-                      ),
-                    ],
+                  Expanded(
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Icon(
+                          icon,
+                          size: 25,
+                        ),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        Expanded(
+                          child: Text(
+                            optionName,
+                            style: const TextStyle(fontSize: 20),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   showArrow
                       ? const Icon(

@@ -303,7 +303,7 @@
   "profile": "Profilo",
   "logout": "Logout",
   "logoutDialogContent": "Sei sicuro di voler uscire?",
-  "logoutDialogNo": "No, rimani collecato",
+  "logoutDialogNo": "No, rimani collegato",
   "logoutDialogYes": "Si, esci",
   "tutorialFoundItemTitle1": "Inserisci un Oggetto Trovato",
   "tutorialFoundItemContent1": "Inserisci i dettagli dell'oggetto trovato come titolo, posizione, categoria, domanda di verifica e crea il report. Questo avviserà tutti gli utenti che hanno inserito un oggetto perso simile a quello che hai appena inserito.",

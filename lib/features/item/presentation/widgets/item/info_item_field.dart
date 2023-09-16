@@ -35,7 +35,7 @@ class InfoItemField extends StatelessWidget {
               ),
             ),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Icon(
                   icon,
@@ -45,9 +45,12 @@ class InfoItemField extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                Text(
-                  title,
-                  style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onPrimary),
+                Expanded(
+                  child: Text(
+                    title,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onPrimary),
+                  ),
                 ),
               ],
             ),
@@ -58,6 +61,7 @@ class InfoItemField extends StatelessWidget {
               children: [
                 Expanded(
                   child: RichText(
+                    textScaleFactor: MediaQuery.of(context).textScaleFactor,
                     text: TextSpan(
                       text: content,
                       style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onBackground),

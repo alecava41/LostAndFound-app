@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                           Row(
                             children: [
                               badges.Badge(
-                                badgeContent: Text("${badgeState.unreadNews}"),
+                                badgeContent: Text("${badgeState.unreadNews}", textScaleFactor: 1,),
                                 showBadge: badgeState.unreadNews > 0,
                                 position: badges.BadgePosition.topEnd(top: 6, end: 8),
                                 child: ClickableCircularButton(
@@ -63,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                               ),
                               badges.Badge(
                                 badgeContent:
-                                    Text("${badgeState.unreadReceivedClaims + (badgeState.hasUnreadSentClaims ? 1 : 0)}"),
+                                    Text("${badgeState.unreadReceivedClaims + (badgeState.hasUnreadSentClaims ? 1 : 0)}", textScaleFactor: 1),
                                 showBadge: badgeState.unreadReceivedClaims > 0,
                                 position: badges.BadgePosition.topEnd(top: 6, end: 8),
                                 child: ClickableCircularButton(

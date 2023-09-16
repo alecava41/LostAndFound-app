@@ -17,7 +17,9 @@ class ClaimReceivedContent extends StatelessWidget {
       builder: (ctx, state) => RefreshIndicator(
         onRefresh: () async {
           Future block = ctx.read<ClaimBloc>().stream.first;
-          ctx.read<ClaimBloc>().add(const ClaimEvent.receivedClaimsRefreshed(null));
+          ctx
+              .read<ClaimBloc>()
+              .add(const ClaimEvent.receivedClaimsRefreshed(null));
           await block;
         },
         child: state.isLoadingReceived
@@ -29,8 +31,10 @@ class ClaimReceivedContent extends StatelessWidget {
                       physics: const AlwaysScrollableScrollPhysics(),
                       child: NoContentPage(
                         image: 'assets/images/no-received-claims.png',
-                        title: AppLocalizations.of(context)!.noContentClaimReceivedTitle,
-                        subtitle: AppLocalizations.of(context)!.noContentClaimReceivedSubtitle,
+                        title: AppLocalizations.of(context)!
+                            .noContentClaimReceivedTitle,
+                        subtitle: AppLocalizations.of(context)!
+                            .noContentClaimReceivedSubtitle,
                       ),
                     ),
                   )
@@ -38,6 +42,7 @@ class ClaimReceivedContent extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ListView.builder(
+                          shrinkWrap: true,
                           itemCount: state.claimsReceived.length,
                           itemBuilder: (context, index) {
                             final claim = state.claimsReceived[index];
@@ -52,7 +57,9 @@ class ClaimReceivedContent extends StatelessWidget {
                           },
                         ),
                       ),
-                      InfoClaimsBox(text: AppLocalizations.of(context)!.claimReceivedTutorial),
+                      InfoClaimsBox(
+                          text: AppLocalizations.of(context)!
+                              .claimReceivedTutorial),
                     ],
                   ),
       ),

@@ -91,20 +91,17 @@ class ClaimedItemCard extends StatelessWidget {
                   ),
                   Expanded(
                     child: SizedBox(
-                      height: 70,
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Flexible(
-                              child: Text(
-                                claim.item.title,
-                                style: const TextStyle(fontSize: 17),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                              ),
+                            Text(
+                              claim.item.title,
+                              style: const TextStyle(fontSize: 17),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                             ),
                             Text(
                               AppLocalizations.of(context)!.claimedBy(claim.user.username),

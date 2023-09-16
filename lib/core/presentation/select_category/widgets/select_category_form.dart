@@ -45,9 +45,8 @@ class CategorySelectionForm extends StatelessWidget {
                 {FocusManager.instance.primaryFocus?.unfocus(), await navigateToCategorySelection(context)},
             borderRadius: BorderRadius.circular(0),
             child: SizedBox(
-              height: showError && errorText != "" ? 80 : 65,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(15, 8, 0, 8),
                 child: Row(
                   children: [
                     Expanded(

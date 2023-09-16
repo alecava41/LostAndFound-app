@@ -51,14 +51,13 @@ class SelectPositionButton extends StatelessWidget {
                 onPositionSelected(selectedPos);
               },
               child: SizedBox(
-                height: showError && errorText != "" ? 170 : 151,
                 width: MediaQuery.of(context).size.width,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                        padding: const EdgeInsets.fromLTRB(15, 8, 0, 8),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,

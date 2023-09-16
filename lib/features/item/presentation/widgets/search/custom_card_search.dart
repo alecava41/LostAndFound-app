@@ -30,7 +30,6 @@ class CustomCardSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 270,
       width: 165,
       child: Stack(
         children: [
@@ -96,8 +95,6 @@ class CustomCardSearch extends StatelessWidget {
               top: 25,
               child: Container(
                 padding: const EdgeInsets.all(5),
-                width: 65,
-                height: 30,
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.primary,
                   borderRadius: const BorderRadius.only(
@@ -115,7 +112,7 @@ class CustomCardSearch extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    "${type[0].toUpperCase()}${type.substring(1)}",
+                    "${type[0].toUpperCase()}${type.substring(1)}", overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Theme.of(context).colorScheme.onPrimary, fontSize: 16),
                   ),
                 ),

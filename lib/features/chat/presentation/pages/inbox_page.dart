@@ -22,7 +22,6 @@ class InboxScreen extends StatelessWidget {
         children: [
           SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: 90,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(15, 25, 0, 10),
               child: Text(

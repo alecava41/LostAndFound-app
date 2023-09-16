@@ -10,17 +10,20 @@ class SignUpText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(AppLocalizations.of(context)!.signUpText),
-        TextButton(
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.zero
-          ),
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, '/register');
-          },
-          child: Text(
-            AppLocalizations.of(context)!.signUp,
-            style: const TextStyle(
-              decoration: TextDecoration.underline,
+        Expanded(
+          child: TextButton(
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.zero
+            ),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/register');
+            },
+            child: Text(
+              AppLocalizations.of(context)!.signUp,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                decoration: TextDecoration.underline,
+              ),
             ),
           ),
         ),

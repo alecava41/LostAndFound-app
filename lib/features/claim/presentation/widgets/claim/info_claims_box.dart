@@ -11,7 +11,6 @@ class InfoClaimsBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 65,
       width: MediaQuery.of(context).size.width,
       color: Theme.of(context).colorScheme.primary,
       padding: const EdgeInsets.all(8),

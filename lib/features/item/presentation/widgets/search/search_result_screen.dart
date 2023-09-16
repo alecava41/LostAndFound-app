@@ -73,6 +73,7 @@ class SearchResultScreen extends StatelessWidget {
                                   state.order.getTranslatedName(context),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ],
                             ),
@@ -128,74 +129,76 @@ class SearchResultScreen extends StatelessWidget {
     showModalBottomSheet<void>(
       context: ctx,
       builder: (BuildContext context) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                AppLocalizations.of(context)!.selectSortingDialogTitle,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        return SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  AppLocalizations.of(context)!.selectSortingDialogTitle,
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            const Divider(
-              height: 0,
-            ),
-            ModalSheetOptionButton(
-              text: ResultOrder.alphabeticAscending.getTranslatedName(context),
-              isSelected: selectedOrder == ResultOrder.alphabeticAscending,
-              onClick: () =>
-                  ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.alphabeticAscending)),
-            ),
-            const Divider(
-              height: 0,
-            ),
-            ModalSheetOptionButton(
-              text: ResultOrder.alphabeticDescending.getTranslatedName(context),
-              isSelected: selectedOrder == ResultOrder.alphabeticDescending,
-              onClick: () =>
-                  ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.alphabeticDescending)),
-            ),
-            const Divider(
-              height: 0,
-            ),
-            ModalSheetOptionButton(
-              text: ResultOrder.dateAscending.getTranslatedName(context),
-              isSelected: selectedOrder == ResultOrder.dateAscending,
-              onClick: () =>
-                  ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.dateAscending)),
-            ),
-            const Divider(
-              height: 0,
-            ),
-            ModalSheetOptionButton(
-              text: ResultOrder.dateDescending.getTranslatedName(context),
-              isSelected: selectedOrder == ResultOrder.dateDescending,
-              onClick: () =>
-                  ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.dateDescending)),
-            ),
-            const Divider(
-              height: 0,
-            ),
-            ModalSheetOptionButton(
-              text: ResultOrder.distanceAscending.getTranslatedName(context),
-              isSelected: selectedOrder == ResultOrder.distanceAscending,
-              onClick: () =>
-                  ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.distanceAscending)),
-            ),
-            const Divider(
-              height: 0,
-            ),
-            ModalSheetOptionButton(
-              text: ResultOrder.distanceDescending.getTranslatedName(context),
-              isSelected: selectedOrder == ResultOrder.distanceDescending,
-              onClick: () =>
-                  ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.distanceDescending)),
-            ),
-            const SizedBox(
-              height: 5,
-            )
-          ],
+              const Divider(
+                height: 0,
+              ),
+              ModalSheetOptionButton(
+                text: ResultOrder.alphabeticAscending.getTranslatedName(context),
+                isSelected: selectedOrder == ResultOrder.alphabeticAscending,
+                onClick: () =>
+                    ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.alphabeticAscending)),
+              ),
+              const Divider(
+                height: 0,
+              ),
+              ModalSheetOptionButton(
+                text: ResultOrder.alphabeticDescending.getTranslatedName(context),
+                isSelected: selectedOrder == ResultOrder.alphabeticDescending,
+                onClick: () =>
+                    ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.alphabeticDescending)),
+              ),
+              const Divider(
+                height: 0,
+              ),
+              ModalSheetOptionButton(
+                text: ResultOrder.dateAscending.getTranslatedName(context),
+                isSelected: selectedOrder == ResultOrder.dateAscending,
+                onClick: () =>
+                    ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.dateAscending)),
+              ),
+              const Divider(
+                height: 0,
+              ),
+              ModalSheetOptionButton(
+                text: ResultOrder.dateDescending.getTranslatedName(context),
+                isSelected: selectedOrder == ResultOrder.dateDescending,
+                onClick: () =>
+                    ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.dateDescending)),
+              ),
+              const Divider(
+                height: 0,
+              ),
+              ModalSheetOptionButton(
+                text: ResultOrder.distanceAscending.getTranslatedName(context),
+                isSelected: selectedOrder == ResultOrder.distanceAscending,
+                onClick: () =>
+                    ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.distanceAscending)),
+              ),
+              const Divider(
+                height: 0,
+              ),
+              ModalSheetOptionButton(
+                text: ResultOrder.distanceDescending.getTranslatedName(context),
+                isSelected: selectedOrder == ResultOrder.distanceDescending,
+                onClick: () =>
+                    ctx.read<SearchBloc>().add(const SearchEvent.sortParameterChanged(ResultOrder.distanceDescending)),
+              ),
+              const SizedBox(
+                height: 5,
+              )
+            ],
+          ),
         );
       },
     );

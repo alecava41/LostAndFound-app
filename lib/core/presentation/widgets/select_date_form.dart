@@ -29,9 +29,8 @@ class DateSelectionForm extends StatelessWidget {
             onTap: () => onButtonTap(context),
             borderRadius: BorderRadius.circular(0),
             child: SizedBox(
-              height: 65,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(15, 8, 0, 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

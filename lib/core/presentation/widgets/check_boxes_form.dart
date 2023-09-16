@@ -30,7 +30,6 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
           height: 0,
         ),
         Container(
-          height: showError && errorText != "" ? 123 : 92,
           color: Theme.of(context).extension<CustomColors>()!.background2,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

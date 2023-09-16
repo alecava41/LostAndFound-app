@@ -51,9 +51,12 @@ class ClaimsScreen extends StatelessWidget {
                       const SizedBox(
                         width: 4,
                       ),
-                      Text(
-                        AppLocalizations.of(context)!.receivedClaims,
-                        style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                      Expanded(
+                        child: Text(
+                          AppLocalizations.of(context)!.receivedClaims,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                        ),
                       ),
                     ],
                   ),
@@ -68,9 +71,12 @@ class ClaimsScreen extends StatelessWidget {
                       const SizedBox(
                         width: 4,
                       ),
-                      Text(
-                        AppLocalizations.of(context)!.yourClaims,
-                        style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                      Expanded(
+                        child: Text(
+                          AppLocalizations.of(context)!.yourClaims,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                        ),
                       ),
                     ],
                   ),

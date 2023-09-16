@@ -38,6 +38,7 @@ class ClaimSentContent extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ListView.builder(
+                          shrinkWrap: true,
                           itemCount: state.claimsSent.length,
                           itemBuilder: (context, index) {
                             final claim = state.claimsSent[index];

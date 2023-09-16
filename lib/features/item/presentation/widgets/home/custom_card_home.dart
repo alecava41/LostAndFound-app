@@ -27,166 +27,176 @@ class CustomCardHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ItemScreen(
+                      itemId: id,
+                    )));
+      },
       child: SizedBox(
-        height: ScreenSize.isBigSmartphoneDevice(context)
-            ? (hasAdditionalInfo ? 245 : 220)
-            : ScreenSize.isMediumSmartphoneDevice(context)
-                ? (hasAdditionalInfo ? 215 : 190)
-                : (hasAdditionalInfo ? 180: 160),
         width: ScreenSize.isBigSmartphoneDevice(context)
             ? 165
             : ScreenSize.isMediumSmartphoneDevice(context)
                 ? 150
                 : 130,
-        child: Stack(
-          children: [
-            Card(
-              surfaceTintColor: Theme.of(context).extension<CustomColors>()!.background2,
-              color: Theme.of(context).extension<CustomColors>()!.background2,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(24.0),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(24.0),
-                        child: SizedBox(
-                          height: ScreenSize.isBigSmartphoneDevice(context)
-                              ? 150
-                              : ScreenSize.isMediumSmartphoneDevice(context)
-                                  ? 130
-                                  : 100,
-                          width: ScreenSize.isBigSmartphoneDevice(context)
-                              ? 150
-                              : ScreenSize.isMediumSmartphoneDevice(context)
-                                  ? 130
-                                  : 100,
-                          child: Image.network(
-                            "$baseUrl/api/items/$id/image",
-                            fit: BoxFit.cover,
-                            headers: {"Authorization": "Bearer $token"},
-                            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return const CustomCircularProgress(size: 75);
-                            },
-                            errorBuilder: (context, error, stackTrace) => Image.asset(
-                              noItemImagePath,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+        child: Card(
+          surfaceTintColor:
+              Theme.of(context).extension<CustomColors>()!.background2,
+          color: Theme.of(context).extension<CustomColors>()!.background2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24.0),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(24.0),
+                    child: SizedBox(
+                      height: ScreenSize.isBigSmartphoneDevice(context)
+                          ? 150
+                          : ScreenSize.isMediumSmartphoneDevice(context)
+                              ? 130
+                              : 100,
+                      width: ScreenSize.isBigSmartphoneDevice(context)
+                          ? 150
+                          : ScreenSize.isMediumSmartphoneDevice(context)
+                              ? 130
+                              : 100,
+                      child: Image.network(
+                        "$baseUrl/api/items/$id/image",
+                        fit: BoxFit.cover,
+                        headers: {"Authorization": "Bearer $token"},
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return const CustomCircularProgress(size: 75);
+                        },
+                        errorBuilder: (context, error, stackTrace) =>
+                            Image.asset(
+                          noItemImagePath,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(text,
-                            style: TextStyle(
-                              fontSize: ScreenSize.isBigSmartphoneDevice(context)
-                                  ? 18
-                                  : ScreenSize.isMediumSmartphoneDevice(context)
-                                      ? 16
-                                      : 15,
-                            ),
-                            overflow: TextOverflow.ellipsis),
-                        const SizedBox(
-                          height: 5,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(text,
+                    textScaleFactor: 1.0,
+                        style: TextStyle(
+                          fontSize: ScreenSize.isBigSmartphoneDevice(context)
+                              ? 18
+                              : ScreenSize.isMediumSmartphoneDevice(context)
+                                  ? 16
+                                  : 15,
                         ),
-                        if (claims > 0)
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(1),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).extension<CustomColors>()!.nClaimsColor,
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        Icons.connect_without_contact,
-                                        size: 12.5,
-                                      ),
-                                      const SizedBox(
-                                        width: 2,
-                                      ),
-                                      Text(
-                                        AppLocalizations.of(context)!.openClaims(claims),
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        else if (approvedClaims > 0)
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(1),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).extension<CustomColors>()!.claimAcceptedStatusColor,
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        Icons.connect_without_contact,
-                                        size: 12.5,
-                                      ),
-                                      const SizedBox(
-                                        width: 2,
-                                      ),
-                                      Text(
-                                        AppLocalizations.of(context)!.resolved,
-                                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                      ],
+                        overflow: TextOverflow.ellipsis),
+                    const SizedBox(
+                      height: 5,
                     ),
-                  ),
-                ],
+                    if (claims > 0)
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.all(1),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .extension<CustomColors>()!
+                                    .nClaimsColor,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Expanded(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    const Icon(
+                                      Icons.connect_without_contact,
+                                      size: 14,
+                                    ),
+                                    const SizedBox(
+                                      width: 2,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        AppLocalizations.of(context)!
+                                            .openClaims(claims),
+                                        textScaleFactor: 1.0,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    else if (approvedClaims > 0)
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.all(1),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .extension<CustomColors>()!
+                                    .claimAcceptedStatusColor,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  const Icon(
+                                    Icons.connect_without_contact,
+                                    size: 14,
+                                  ),
+                                  const SizedBox(
+                                    width: 2,
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      AppLocalizations.of(context)!.resolved,
+                                      textScaleFactor: 1.0,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                  ],
+                ),
               ),
-            ),
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                splashColor: Theme.of(context).extension<CustomColors>()!.splashGreyColor!.withOpacity(0.3),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ItemScreen(
-                                itemId: id,
-                              )));
-                },
-                borderRadius: BorderRadius.circular(24.0),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

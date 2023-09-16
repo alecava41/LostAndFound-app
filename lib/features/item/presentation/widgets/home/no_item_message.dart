@@ -16,11 +16,6 @@ class NoItemMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenSize.isBigSmartphoneDevice(context)
-          ? 230
-          : ScreenSize.isMediumSmartphoneDevice(context)
-              ? 200
-              : 170,
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
       decoration: BoxDecoration(

@@ -10,17 +10,20 @@ class SignInText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(AppLocalizations.of(context)!.signInText),
-        TextButton(
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, '/login');
-          },
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.zero
-          ),
-          child: Text(
-            AppLocalizations.of(context)!.singIn,
-            style: const TextStyle(
-              decoration: TextDecoration.underline,
+        Expanded(
+          child: TextButton(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/login');
+            },
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.zero
+            ),
+            child: Text(
+              AppLocalizations.of(context)!.singIn,
+              style: const TextStyle(
+                overflow: TextOverflow.ellipsis,
+                decoration: TextDecoration.underline,
+              ),
             ),
           ),
         ),

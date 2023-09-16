@@ -46,38 +46,40 @@ class LostItemsContainer extends StatelessWidget {
                     ? Padding(
                         padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                         child: SizedBox(
-                          height: ScreenSize.isBigSmartphoneDevice(context)
-                              ? 230
-                              : ScreenSize.isMediumSmartphoneDevice(context)
-                                  ? 200
-                                  : 170,
-                          width: MediaQuery.of(context).size.width,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: state.lostItems
-                                .map(
-                                  (item) => CustomCardHome(
-                                    id: item.id,
-                                    text: item.title,
-                                    claims: item.claims,
-                                    token: state.token,
-                                    approvedClaims: item.approvedClaims,
-                                    hasAdditionalInfo: false,
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                        ),
-                      )
+                            height: ScreenSize.isBigSmartphoneDevice(context)
+                                ? 230
+                                : ScreenSize.isMediumSmartphoneDevice(context)
+                                    ? 200
+                                    : 170,
+                            width: MediaQuery.of(context).size.width,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: state.lostItems.length,
+                              itemBuilder: (context, index) {
+                                return CustomCardHome(
+                                  id: state.lostItems[index].id,
+                                  text: state.lostItems[index].title,
+                                  claims: state.lostItems[index].claims,
+                                  token: state.token,
+                                  approvedClaims:
+                                      state.lostItems[index].approvedClaims,
+                                  hasAdditionalInfo: false,
+                                );
+                              },
+                            )))
                     : Padding(
                         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: NoItemMessage(
                           icon: Icons.sentiment_very_satisfied_rounded,
-                          message: AppLocalizations.of(context)!.noLostItemContent,
-                          buttonText: AppLocalizations.of(context)!.noLostItemButton,
+                          message:
+                              AppLocalizations.of(context)!.noLostItemContent,
+                          buttonText:
+                              AppLocalizations.of(context)!.noLostItemButton,
                           callback: () {
-                            Navigator.of(ctx)
-                                .pushNamed("/insert", arguments: InsertItemScreenArguments(isNewItemLost: true));
+                            Navigator.of(ctx).pushNamed("/insert",
+                                arguments: InsertItemScreenArguments(
+                                    isNewItemLost: true));
                           },
                         ),
                       ),

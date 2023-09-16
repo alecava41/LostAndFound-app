@@ -49,18 +49,22 @@ class FoundItemsContainer extends StatelessWidget {
                               : ScreenSize.isMediumSmartphoneDevice(context)
                                   ? 210
                                   : 180,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: state.foundItems
-                                .map((item) => CustomCardHome(
-                                      id: item.id,
-                                      text: item.title,
-                                      claims: item.claims,
-                                      token: state.token,
-                                      approvedClaims: item.approvedClaims, hasAdditionalInfo: true,
-                                    ))
-                                .toList(),
-                          )),
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: state.foundItems.length,
+                              itemBuilder: (context, index) {
+                                return CustomCardHome(
+                                  id: state.foundItems[index].id,
+                                  text: state.foundItems[index].title,
+                                  claims: state.foundItems[index].claims,
+                                  token: state.token,
+                                  approvedClaims:
+                                      state.foundItems[index].approvedClaims,
+                                  hasAdditionalInfo: true,
+                                );
+                              },
+                            )),
                     )
                   : Padding(
                       padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),

@@ -48,7 +48,6 @@ class CustomNotification extends StatelessWidget {
               },
               splashColor: opened ? Theme.of(context).extension<CustomColors>()!.splashGreyColor : Theme.of(context).extension<CustomColors>()!.splashGreenColor,
               child: SizedBox(
-                height: 100,
                 child: Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: Row(
@@ -67,29 +66,30 @@ class CustomNotification extends StatelessWidget {
                                 : AppLocalizations.of(context)!.mightLost;
 
                             return RichText(
+                              textScaleFactor: MediaQuery.of(context).textScaleFactor,
                               text: TextSpan(
                                 children: [
                                   TextSpan(
                                     text: AppLocalizations.of(context)!.hey,
-                                    style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.onBackground),
+                                    style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onBackground),
                                   ),
                                   TextSpan(
                                     text: targetUsername,
                                     style:
-                                        TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold),
+                                        TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold),
                                   ),
                                   TextSpan(
                                     text: " $sentence ",
-                                    style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.onBackground),
+                                    style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onBackground),
                                   ),
                                   TextSpan(
                                     text: subjectItemTitle,
                                     style:
-                                        TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold),
+                                        TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.bold),
                                   ),
                                   TextSpan(
                                     text: "!",
-                                    style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.onBackground),
+                                    style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onBackground),
                                   ),
                                 ],
                               ),
