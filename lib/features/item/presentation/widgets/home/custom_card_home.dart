@@ -27,22 +27,14 @@ class CustomCardHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ItemScreen(
-                      itemId: id,
-                    )));
-      },
-      child: SizedBox(
-        width: ScreenSize.isBigSmartphoneDevice(context)
-            ? 165
-            : ScreenSize.isMediumSmartphoneDevice(context)
-                ? 150
-                : 130,
-        child: Card(
+    return SizedBox(
+      width: ScreenSize.isBigSmartphoneDevice(context)
+          ? 165
+          : ScreenSize.isMediumSmartphoneDevice(context)
+              ? 150
+              : 130,
+      child: Stack(
+        children:[ Card(
           surfaceTintColor:
               Theme.of(context).extension<CustomColors>()!.background2,
           color: Theme.of(context).extension<CustomColors>()!.background2,
@@ -125,14 +117,18 @@ class CustomCardHome extends StatelessWidget {
                                     const SizedBox(
                                       width: 5,
                                     ),
-                                    const Icon(
-                                      Icons.connect_without_contact,
-                                      size: 14,
+                                    const Flexible(
+                                      flex: 1,
+                                      child: Icon(
+                                        Icons.connect_without_contact,
+                                        size: 14,
+                                      ),
                                     ),
                                     const SizedBox(
                                       width: 2,
                                     ),
-                                    Expanded(
+                                    Flexible(
+                                      flex: 3,
                                       child: Text(
                                         AppLocalizations.of(context)!
                                             .openClaims(claims),
@@ -169,14 +165,18 @@ class CustomCardHome extends StatelessWidget {
                                   const SizedBox(
                                     width: 5,
                                   ),
-                                  const Icon(
-                                    Icons.connect_without_contact,
-                                    size: 14,
+                                  const Flexible(
+                                    flex: 1,
+                                    child: Icon(
+                                      Icons.connect_without_contact,
+                                      size: 14,
+                                    ),
                                   ),
                                   const SizedBox(
                                     width: 2,
                                   ),
-                                  Expanded(
+                                  Flexible(
+                                    flex: 3,
                                     child: Text(
                                       AppLocalizations.of(context)!.resolved,
                                       textScaleFactor: 1.0,
@@ -198,6 +198,22 @@ class CustomCardHome extends StatelessWidget {
             ],
           ),
         ),
+        Material(
+            color: Colors.transparent,
+            child: InkWell(
+              splashColor: Theme.of(context).extension<CustomColors>()!.splashGreyColor!.withOpacity(0.3),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ItemScreen(
+                              itemId: id,
+                            )));
+              },
+              borderRadius: BorderRadius.circular(24.0),
+            ),
+          ),
+        ]
       ),
     );
   }
