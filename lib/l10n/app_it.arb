@@ -16,8 +16,24 @@
     }
   },
   "lostAndFound": "Lost&Found",
-  "found": "Trovato",
-  "lost": "Perso",
+  "found": "{count, plural, =0{Trovato} other{Trovati}}",
+  "@found": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "lost": "{count, plural, =0{Perso} other{Persi}}",
+  "@lost": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "retry": "Riprova",
   "gallery": "Galleria",
   "camera": "Fotocamera",

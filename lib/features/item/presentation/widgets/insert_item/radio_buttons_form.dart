@@ -29,7 +29,7 @@ class PersonalizedRadioButtonsForm extends StatelessWidget {
             ),
             RichText(
               text: TextSpan(
-                text: AppLocalizations.of(context)!.lost,
+                text: AppLocalizations.of(context)!.lost(0),
                 recognizer: TapGestureRecognizer()..onTap = () => onChanged!(ItemType.lost),
                 style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.onBackground),
               ),
@@ -43,7 +43,7 @@ class PersonalizedRadioButtonsForm extends StatelessWidget {
             ),
             RichText(
               text: TextSpan(
-                text: AppLocalizations.of(context)!.found,
+                text: AppLocalizations.of(context)!.found(0),
                 recognizer: TapGestureRecognizer()..onTap = () => onChanged!(ItemType.found),
                 style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.onBackground),
               ),
