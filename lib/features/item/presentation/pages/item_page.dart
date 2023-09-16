@@ -248,7 +248,7 @@ class ItemScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
                                   border: Border.all(
-                                    color: Theme.of(context).colorScheme.error,
+                                    color: Theme.of(context).colorScheme.onError,
                                     width: 0.5,
                                   ),
                                 ),
@@ -257,14 +257,14 @@ class ItemScreen extends StatelessWidget {
                                     ctx.read<ItemBloc>().add(const ItemEvent.itemDeleted());
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Theme.of(context).colorScheme.errorContainer,
+                                    backgroundColor: Theme.of(context).colorScheme.error,
                                     shape: const StadiumBorder(),
                                     padding: const EdgeInsets.symmetric(vertical: 16),
                                   ).copyWith(
                                     overlayColor: MaterialStateProperty.resolveWith<Color>(
                                       (Set<MaterialState> states) {
                                         if (states.contains(MaterialState.pressed)) {
-                                          return Theme.of(context).colorScheme.onErrorContainer;
+                                          return Theme.of(context).colorScheme.onError;
                                         }
                                         return Colors.transparent;
                                       },
