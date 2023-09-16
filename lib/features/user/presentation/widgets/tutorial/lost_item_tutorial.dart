@@ -115,6 +115,8 @@ class _LostItemTutorialState extends State<LostItemTutorial> {
                           );
                         },
                   style: ElevatedButton.styleFrom(
+                    disabledForegroundColor: Theme.of(context).colorScheme.surfaceVariant,
+                    disabledBackgroundColor: Theme.of(context).colorScheme.surfaceVariant,
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     shape: const StadiumBorder(),
                     padding: const EdgeInsets.symmetric(vertical: 16),

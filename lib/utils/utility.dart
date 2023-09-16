@@ -8,7 +8,9 @@ showBasicErrorSnackbar(BuildContext context, Failure failure) {
       validationFailure: () => null,
       orElse: () => ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor: Theme.of(context).colorScheme.errorContainer,
+              backgroundColor: Theme.of(context).colorScheme.error,
+              showCloseIcon: true,
+              closeIconColor: Theme.of(context).colorScheme.onError,
               content: Text(
                 failure.maybeWhen<String>(
                   passwordMismatchFailure: () => AppLocalizations.of(context)!.failureInvalidCredentials,
@@ -16,9 +18,10 @@ showBasicErrorSnackbar(BuildContext context, Failure failure) {
                   genericFailure: () => AppLocalizations.of(context)!.failureGeneric,
                   networkFailure: () => AppLocalizations.of(context)!.failureNetwork,
                   geolocationFailure: (_) => AppLocalizations.of(context)!.positionNotFound,
+                  recordNotFoundFailure: () => AppLocalizations.of(context)!.failureInvalidCredentials,
                   orElse: () => AppLocalizations.of(context)!.failureUnknown,
                 ),
-                style: TextStyle(color: Theme.of(context).colorScheme.onErrorContainer),
+                style: TextStyle(color: Theme.of(context).colorScheme.onError),
               ),
             ),
           ));
@@ -27,10 +30,12 @@ showBasicErrorSnackbar(BuildContext context, Failure failure) {
 showBasicSuccessSnackbar(BuildContext context, String text) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      showCloseIcon: true,
+      closeIconColor: Theme.of(context).colorScheme.onPrimaryContainer,
+      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       content: Text(
         text,
-        style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+        style: TextStyle(color: Theme.of(context).colorScheme.onPrimaryContainer),
       ),
     ),
   );

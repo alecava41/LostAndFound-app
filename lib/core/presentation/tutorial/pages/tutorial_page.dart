@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lost_and_found/core/presentation/widgets/large_green_button.dart';
 import 'package:sizer/sizer.dart';
@@ -22,29 +21,32 @@ class _InfoScreenState extends State<InfoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(
-        statusBarColor: Theme.of(context).colorScheme.background,
-        statusBarBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
-        statusBarIconBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(0),
+        child: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          elevation: 0,
+          surfaceTintColor: Theme.of(context).colorScheme.outline,
+          shadowColor: Theme.of(context).colorScheme.outline,
+          iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
+        ),
       ),
-      child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(mainAxisAlignment: MainAxisAlignment.center, mainAxisSize: MainAxisSize.max, children: [
-              SizedBox(
-                height: 2.5.h,
-              ),
-              titleLogoHorizontal(context),
-              _carouselSlider(),
-              SizedBox(
-                height: 3.h,
-              ),
-              _loginButton(),
-              SizedBox(height: 1.h),
-              _registerButton()
-            ]),
-          ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, mainAxisSize: MainAxisSize.max, children: [
+            SizedBox(
+              height: 2.5.h,
+            ),
+            titleLogoHorizontal(context),
+            _carouselSlider(),
+            SizedBox(
+              height: 3.h,
+            ),
+            _loginButton(),
+            SizedBox(height: 1.h),
+            _registerButton()
+          ]),
         ),
       ),
     );
