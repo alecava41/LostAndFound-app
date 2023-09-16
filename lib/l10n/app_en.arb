@@ -16,8 +16,24 @@
     }
   },
   "lostAndFound": "Lost&Found",
-  "found": "Found",
-  "lost": "Lost",
+  "found": "{count, plural, =0{Found} other{Found}}",
+  "@found": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "lost": "{count, plural, =0{Lost} other{Lost}}",
+  "@lost": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "retry": "Retry",
   "gallery": "Gallery",
   "camera": "Camera",

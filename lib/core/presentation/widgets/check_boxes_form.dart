@@ -54,7 +54,7 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
                       ),
                       RichText(
                         text: TextSpan(
-                          text: AppLocalizations.of(context)!.found,
+                          text: AppLocalizations.of(context)!.found(1),
                           recognizer: TapGestureRecognizer()..onTap = () => onFoundCheckedChanged(!foundChecked),
                           style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.onBackground),
                         ),
@@ -72,7 +72,7 @@ class PersonalizedCheckBoxesForm extends StatelessWidget {
                       ),
                       RichText(
                         text: TextSpan(
-                          text: AppLocalizations.of(context)!.lost,
+                          text: AppLocalizations.of(context)!.lost(1),
                           recognizer: TapGestureRecognizer()..onTap = () => onLostCheckedChanged(!lostChecked),
                           style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.onBackground),
                         ),
