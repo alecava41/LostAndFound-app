@@ -110,6 +110,8 @@ class SelectPositionBloc extends Bloc<SelectPositionEvent, SelectPositionState> 
       isPermissionPermanentlyNegated: isPermissionPermanentlyDeniedFailure,
       positionFailureOrSuccess: positionFailureOrSuccess,
     ));
+
+    emit(state.copyWith(positionFailureOrSuccess: null));
   }
 
   Future<void> _onSelectPositionCreated(Emitter<SelectPositionState> emit, LatLng pos, address) async {

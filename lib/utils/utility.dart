@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lost_and_found/core/status/failures.dart';
+import 'package:lost_and_found/utils/colors/custom_color.dart';
 
 showBasicErrorSnackbar(BuildContext context, Failure failure) {
   failure.maybeWhen(
@@ -31,11 +32,9 @@ showBasicSuccessSnackbar(BuildContext context, String text) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       showCloseIcon: true,
-      closeIconColor: Theme.of(context).colorScheme.onPrimaryContainer,
-      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+      backgroundColor: Theme.of(context).extension<CustomColors>()!.successSnackbar,
       content: Text(
         text,
-        style: TextStyle(color: Theme.of(context).colorScheme.onPrimaryContainer),
       ),
     ),
   );

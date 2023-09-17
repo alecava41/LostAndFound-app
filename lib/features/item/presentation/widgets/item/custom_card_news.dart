@@ -20,7 +20,7 @@ class CustomCardNews extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 220,
-      width: 165,
+      width: 145,
       child: Stack(
         children: [
           Card(
