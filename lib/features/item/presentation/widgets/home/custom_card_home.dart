@@ -109,38 +109,30 @@ class CustomCardHome extends StatelessWidget {
                                     .nClaimsColor,
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: Expanded(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    const Flexible(
-                                      flex: 1,
-                                      child: Icon(
-                                        Icons.connect_without_contact,
-                                        size: 14,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 2,
-                                    ),
-                                    Flexible(
-                                      flex: 3,
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .openClaims(claims),
-                                        textScaleFactor: 1.0,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  const Icon(
+                                    Icons.connect_without_contact,
+                                    size: 14,
+                                  ),
+                                  const SizedBox(
+                                    width: 2,
+                                  ),
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .openClaims(claims),
+                                    textScaleFactor: 1.0,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -165,26 +157,20 @@ class CustomCardHome extends StatelessWidget {
                                   const SizedBox(
                                     width: 5,
                                   ),
-                                  const Flexible(
-                                    flex: 1,
-                                    child: Icon(
-                                      Icons.connect_without_contact,
-                                      size: 14,
-                                    ),
+                                  const Icon(
+                                    Icons.connect_without_contact,
+                                    size: 14,
                                   ),
                                   const SizedBox(
                                     width: 2,
                                   ),
-                                  Flexible(
-                                    flex: 3,
-                                    child: Text(
-                                      AppLocalizations.of(context)!.resolved,
-                                      textScaleFactor: 1.0,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                  Text(
+                                    AppLocalizations.of(context)!.resolved,
+                                    textScaleFactor: 1.0,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
