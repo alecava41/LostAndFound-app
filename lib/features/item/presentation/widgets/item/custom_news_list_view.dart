@@ -35,7 +35,7 @@ class CustomScrollableNewsListView extends StatelessWidget {
             if (!hasTwoItems)
               const Padding(
                 padding: EdgeInsets.all(7.0),
-                child: SizedBox(width: 165),
+                child: SizedBox(width: 145),
               ),
           ],
         );
