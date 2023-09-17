@@ -49,6 +49,7 @@ class HomeScreen extends StatelessWidget {
                           Row(
                             children: [
                               badges.Badge(
+                                onTap: () => Navigator.of(context).pushNamed('/notifications'),
                                 badgeContent: Text("${badgeState.unreadNews}", textScaleFactor: 1,),
                                 showBadge: badgeState.unreadNews > 0,
                                 position: badges.BadgePosition.topEnd(top: 6, end: 8),
@@ -62,6 +63,7 @@ class HomeScreen extends StatelessWidget {
                                 width: 25,
                               ),
                               badges.Badge(
+                                onTap: () => Navigator.of(context).pushNamed('/claims'),
                                 badgeContent:
                                     Text("${badgeState.unreadReceivedClaims + (badgeState.hasUnreadSentClaims ? 1 : 0)}", textScaleFactor: 1),
                                 showBadge: badgeState.unreadReceivedClaims > 0,
