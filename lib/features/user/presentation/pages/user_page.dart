@@ -102,6 +102,7 @@ class UserScreen extends StatelessWidget {
                                                 onImageChange: (String? path) =>
                                                     ctx.read<UserBloc>().add(UserEvent.imageChanged(path)),
                                                 radius: 50, onImagePicking: () => ctx.read<UserBloc>().add(const UserEvent.onImagePicking()),
+                                                isLoading: state.isLoadingImage,
                                               ),
                                               const SizedBox(
                                                 width: 10,

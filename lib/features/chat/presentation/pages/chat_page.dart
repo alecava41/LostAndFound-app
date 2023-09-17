@@ -9,9 +9,9 @@ import 'package:lost_and_found/features/claim/domain/entities/claim_received.dar
 import 'package:lost_and_found/features/claim/domain/entities/claim_sent.dart' as sent;
 import 'package:lost_and_found/features/claim/presentation/bloc/claim/claim_bloc.dart';
 import 'package:lost_and_found/features/claim/presentation/widgets/claim/not_claimed_item_card.dart';
-import 'package:lost_and_found/features/item/presentation/widgets/notifications/circular_image_avatar.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
+import '../../../../core/presentation/widgets/circular_image_avatar.dart';
 import '../../../../injection_container.dart';
 import '../../../../utils/colors/custom_color.dart';
 import '../../../claim/presentation/widgets/claim/claimed_item_card.dart';
@@ -147,6 +147,7 @@ class ChatScreen extends StatelessWidget {
                             return Padding(
                               padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                               child: CircularImage(
+                                errorImage: noUserImagePath,
                                 token: state.token,
                                 imageUrl: "$baseUrl/api/users/$id/image",
                                 radius: 20,

@@ -5,10 +5,10 @@ import 'package:lost_and_found/features/badges/presentation/bloc/badge_bloc.dart
 import 'package:lost_and_found/features/item/domain/entities/user_item.dart';
 import 'package:lost_and_found/features/item/presentation/bloc/notification/news_bloc.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
-import 'package:lost_and_found/features/item/presentation/widgets/notifications/circular_image_avatar.dart';
 
 import 'package:lost_and_found/utils/constants.dart';
 
+import '../../../../../core/presentation/widgets/circular_image_avatar.dart';
 import '../../../../../utils/colors/custom_color.dart';
 
 class CustomNotification extends StatelessWidget {
@@ -56,6 +56,7 @@ class CustomNotification extends StatelessWidget {
                         imageUrl: "$baseUrl/api/users/$targetUserId/image",
                         token: token,
                         radius: 35,
+                        errorImage: noUserImagePath,
                       ),
                       const SizedBox(width: 10),
                       Expanded(

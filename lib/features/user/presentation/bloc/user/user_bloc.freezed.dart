@@ -726,7 +726,8 @@ mixin _$UserState {
   User? get user => throw _privateConstructorUsedError;
   String? get userEmail => throw _privateConstructorUsedError;
   String? get imagePath => throw _privateConstructorUsedError; // UI fields
-  dynamic get isLoading => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  bool get isLoadingImage => throw _privateConstructorUsedError;
   String get token => throw _privateConstructorUsedError;
   bool get hasLoadingError => throw _privateConstructorUsedError;
   Either<Failure, Success>? get logoutFailureOrSuccess =>
@@ -748,7 +749,8 @@ abstract class $UserStateCopyWith<$Res> {
       {User? user,
       String? userEmail,
       String? imagePath,
-      dynamic isLoading,
+      bool isLoading,
+      bool isLoadingImage,
       String token,
       bool hasLoadingError,
       Either<Failure, Success>? logoutFailureOrSuccess,
@@ -771,7 +773,8 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
     Object? user = freezed,
     Object? userEmail = freezed,
     Object? imagePath = freezed,
-    Object? isLoading = freezed,
+    Object? isLoading = null,
+    Object? isLoadingImage = null,
     Object? token = null,
     Object? hasLoadingError = null,
     Object? logoutFailureOrSuccess = freezed,
@@ -790,10 +793,14 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
               as String?,
-      isLoading: freezed == isLoading
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as bool,
+      isLoadingImage: null == isLoadingImage
+          ? _value.isLoadingImage
+          : isLoadingImage // ignore: cast_nullable_to_non_nullable
+              as bool,
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -825,7 +832,8 @@ abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
       {User? user,
       String? userEmail,
       String? imagePath,
-      dynamic isLoading,
+      bool isLoading,
+      bool isLoadingImage,
       String token,
       bool hasLoadingError,
       Either<Failure, Success>? logoutFailureOrSuccess,
@@ -846,7 +854,8 @@ class __$$_UserStateCopyWithImpl<$Res>
     Object? user = freezed,
     Object? userEmail = freezed,
     Object? imagePath = freezed,
-    Object? isLoading = freezed,
+    Object? isLoading = null,
+    Object? isLoadingImage = null,
     Object? token = null,
     Object? hasLoadingError = null,
     Object? logoutFailureOrSuccess = freezed,
@@ -865,7 +874,14 @@ class __$$_UserStateCopyWithImpl<$Res>
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
               as String?,
-      isLoading: freezed == isLoading ? _value.isLoading! : isLoading,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingImage: null == isLoadingImage
+          ? _value.isLoadingImage
+          : isLoadingImage // ignore: cast_nullable_to_non_nullable
+              as bool,
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -894,6 +910,7 @@ class _$_UserState implements _UserState {
       required this.userEmail,
       required this.imagePath,
       this.isLoading = false,
+      this.isLoadingImage = false,
       this.token = "",
       this.hasLoadingError = false,
       this.logoutFailureOrSuccess,
@@ -909,7 +926,10 @@ class _$_UserState implements _UserState {
 // UI fields
   @override
   @JsonKey()
-  final dynamic isLoading;
+  final bool isLoading;
+  @override
+  @JsonKey()
+  final bool isLoadingImage;
   @override
   @JsonKey()
   final String token;
@@ -923,7 +943,7 @@ class _$_UserState implements _UserState {
 
   @override
   String toString() {
-    return 'UserState(user: $user, userEmail: $userEmail, imagePath: $imagePath, isLoading: $isLoading, token: $token, hasLoadingError: $hasLoadingError, logoutFailureOrSuccess: $logoutFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
+    return 'UserState(user: $user, userEmail: $userEmail, imagePath: $imagePath, isLoading: $isLoading, isLoadingImage: $isLoadingImage, token: $token, hasLoadingError: $hasLoadingError, logoutFailureOrSuccess: $logoutFailureOrSuccess, imageUploadFailureOrSuccess: $imageUploadFailureOrSuccess)';
   }
 
   @override
@@ -936,7 +956,10 @@ class _$_UserState implements _UserState {
                 other.userEmail == userEmail) &&
             (identical(other.imagePath, imagePath) ||
                 other.imagePath == imagePath) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.isLoadingImage, isLoadingImage) ||
+                other.isLoadingImage == isLoadingImage) &&
             (identical(other.token, token) || other.token == token) &&
             (identical(other.hasLoadingError, hasLoadingError) ||
                 other.hasLoadingError == hasLoadingError) &&
@@ -954,7 +977,8 @@ class _$_UserState implements _UserState {
       user,
       userEmail,
       imagePath,
-      const DeepCollectionEquality().hash(isLoading),
+      isLoading,
+      isLoadingImage,
       token,
       hasLoadingError,
       logoutFailureOrSuccess,
@@ -972,7 +996,8 @@ abstract class _UserState implements UserState {
           {required final User? user,
           required final String? userEmail,
           required final String? imagePath,
-          final dynamic isLoading,
+          final bool isLoading,
+          final bool isLoadingImage,
           final String token,
           final bool hasLoadingError,
           final Either<Failure, Success>? logoutFailureOrSuccess,
@@ -986,7 +1011,9 @@ abstract class _UserState implements UserState {
   @override
   String? get imagePath;
   @override // UI fields
-  dynamic get isLoading;
+  bool get isLoading;
+  @override
+  bool get isLoadingImage;
   @override
   String get token;
   @override

@@ -18,10 +18,7 @@ class ImageItem extends StatelessWidget {
     return ImageDialogWidget(
       imageUrl: imageUrl,
       token: token,
-      errorImage: Image.asset(
-        noItemImagePath,
-        fit: BoxFit.cover,
-      ),
+      errorImage: noItemImagePath,
       child: Container(
         color: Theme.of(context).extension<CustomColors>()!.background2,
         width: MediaQuery.of(context).size.width,

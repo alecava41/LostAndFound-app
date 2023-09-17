@@ -9,7 +9,8 @@ class UserState with _$UserState {
     required String? imagePath,
 
     // UI fields
-    @Default(false) isLoading,
+    @Default(false) bool isLoading,
+    @Default(false) bool isLoadingImage,
     @Default("") String token,
     @Default(false) bool hasLoadingError,
     Either<Failure, Success>? logoutFailureOrSuccess,
