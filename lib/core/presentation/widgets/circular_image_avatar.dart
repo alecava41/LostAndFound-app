@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 
 class CircularImage extends StatelessWidget {
   final String token;
   final String imageUrl;
   final double radius;
-  final Image errorImage;
+  final String errorImage;
 
   const CircularImage({
     super.key,
@@ -19,17 +18,11 @@ class CircularImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: radius,
-      backgroundImage: Image.network(
+      backgroundImage: AssetImage(errorImage),
+      foregroundImage: NetworkImage(
         imageUrl,
-        fit: BoxFit.cover,
         headers: {"Authorization": "Bearer $token"},
-        errorBuilder: (ctx, error, trace) => CircleAvatar(
-          radius: radius,
-          backgroundImage: errorImage.image,
-        ),
-        loadingBuilder: (ctx, error, trace) =>
-            SizedBox(height: radius * 2, width: radius * 2, child: CustomCircularProgress(size: radius)),
-      ).image,
+      ),
     );
   }
 }

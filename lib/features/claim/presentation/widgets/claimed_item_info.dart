@@ -7,9 +7,9 @@ import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 import 'package:lost_and_found/utils/colors/custom_color.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
+import '../../../../core/presentation/widgets/circular_image_avatar.dart';
 import '../../../../core/presentation/widgets/image_dialog.dart';
 import '../../../item/domain/entities/item.dart';
-import '../../../item/presentation/widgets/notifications/circular_image_avatar.dart';
 import '../bloc/answer_claim/answer_claim_bloc.dart';
 import '../bloc/answer_question/answer_question_bloc.dart';
 
@@ -48,10 +48,7 @@ class ClaimedItemInfo extends StatelessWidget {
               child: ImageDialogWidget(
                 imageUrl: itemUrl,
                 token: token,
-                errorImage: Image.asset(
-                  noItemImagePath,
-                  fit: BoxFit.cover,
-                ),
+                errorImage: noItemImagePath,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
@@ -90,7 +87,10 @@ class ClaimedItemInfo extends StatelessWidget {
                       PersonalizedLargeGreenButton(
                         onPressed: () =>
                             Navigator.of(context).push(MaterialPageRoute(builder: (_) => ItemScreen(itemId: item.id))),
-                        text: Text(AppLocalizations.of(context)!.seeDetails, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),),
+                        text: Text(
+                          AppLocalizations.of(context)!.seeDetails,
+                          style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+                        ),
                       ),
                     ],
                   ),
@@ -116,6 +116,7 @@ class ClaimedItemInfo extends StatelessWidget {
                     imageUrl: "$baseUrl/api/users/$otherUserId/image",
                     radius: 25,
                     token: token,
+                    errorImage: noUserImagePath,
                   ),
                   const SizedBox(
                     width: 5,

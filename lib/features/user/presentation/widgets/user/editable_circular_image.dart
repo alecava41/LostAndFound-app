@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lost_and_found/core/presentation/widgets/circular_image_avatar.dart';
 import 'package:lost_and_found/core/presentation/widgets/custom_circular_progress.dart';
 import 'package:lost_and_found/utils/constants.dart';
 
@@ -10,13 +11,20 @@ class EditableCircularImage extends StatelessWidget {
 
   final String token;
   final int userId;
+  final bool isLoading;
 
   final Function onImageChange;
   final Function onImagePicking;
   final double radius;
 
   EditableCircularImage(
-      {super.key, required this.token, required this.userId, required this.onImageChange, required this.radius, required this.onImagePicking});
+      {super.key,
+      required this.token,
+      required this.userId,
+      required this.onImageChange,
+      required this.radius,
+      required this.onImagePicking,
+      required this.isLoading});
 
   @override
   Widget build(BuildContext context) {
@@ -30,50 +38,43 @@ class EditableCircularImage extends StatelessWidget {
             });
       },
       child: Center(
-        child: Stack(children: <Widget>[
-          CircleAvatar(
-            radius: radius,
-            backgroundImage: Image.network(
-              "$baseUrl/api/users/$userId/image",
-              headers: {"Authorization": "Bearer $token"},
-              loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                if (loadingProgress == null) return child;
-                return SizedBox(
-                  height: radius * 2,
-                  width: radius * 2,
-                  child: CustomCircularProgress(size: radius),
-                );
-              },
-              errorBuilder: (context, error, stackTrace) => Image.asset(
-                noUserImagePath,
-                fit: BoxFit.cover,
-              ),
-            ).image,
-          ),
-          Positioned(
-            bottom: 2.0,
-            right: 5.0,
-            child: InkWell(
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext ctx) {
-                      return MediaSelectionDialog(
-                          onTapGallery: () => onTapGallery(context), onTapCamera: () => onTapCamera(context));
-                    });
-              },
-              child: CircleAvatar(
-                radius: 16,
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                child: Icon(
-                  Icons.camera_alt,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  size: 20.0,
-                ),
-              ),
-            ),
-          ),
-        ]),
+        child: Stack(
+          children: <Widget>[
+            isLoading
+                ? CustomCircularProgress(size: radius * 2)
+                : CircularImage(
+                    errorImage: noUserImagePath,
+                    token: token,
+                    imageUrl: "$baseUrl/api/users/$userId/image?t=${DateTime.now().millisecond}",
+                    radius: radius,
+                  ),
+            isLoading
+                ? Container()
+                : Positioned(
+                    bottom: 2.0,
+                    right: 5.0,
+                    child: InkWell(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext ctx) {
+                              return MediaSelectionDialog(
+                                  onTapGallery: () => onTapGallery(context), onTapCamera: () => onTapCamera(context));
+                            });
+                      },
+                      child: CircleAvatar(
+                        radius: 16,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        child: Icon(
+                          Icons.camera_alt,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                          size: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+          ],
+        ),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lost_and_found/features/item/presentation/pages/item_page.dart';
 
 import '../../../../../core/presentation/widgets/custom_circular_progress.dart';
@@ -65,28 +65,19 @@ class NotClaimedItemCard extends StatelessWidget {
                   height: 70,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: () {
-                      try {
-                        return Image.network(
-                          "$baseUrl/api/items/$itemId/image",
-                          fit: BoxFit.cover,
-                          headers: {"Authorization": "Bearer $token"},
-                          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return const CustomCircularProgress(size: 35);
-                          },
-                          errorBuilder: (context, error, stackTrace) => Image.asset(
-                            noItemImagePath,
-                            fit: BoxFit.cover,
-                          ),
-                        );
-                      } catch (_) {
-                        return Image.asset(
-                          noItemImagePath,
-                          fit: BoxFit.cover,
-                        );
-                      }
-                    }(),
+                    child: Image.network(
+                      "$baseUrl/api/items/$itemId/image",
+                      fit: BoxFit.cover,
+                      headers: {"Authorization": "Bearer $token"},
+                      loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return const CustomCircularProgress(size: 35);
+                      },
+                      errorBuilder: (context, error, stackTrace) => Image.asset(
+                        noItemImagePath,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
                 Expanded(

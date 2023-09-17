@@ -19,6 +19,7 @@ import 'package:lost_and_found/utils/utility.dart';
 
 import '../../../../core/domain/entities/claim_status.dart';
 import '../../../../core/presentation/home_controller/bloc/home_controller_bloc.dart';
+import '../../../../core/presentation/widgets/circular_image_avatar.dart';
 import '../../../../core/presentation/widgets/image_dialog.dart';
 import '../../../../injection_container.dart';
 import '../../../../utils/colors/custom_color.dart';
@@ -28,7 +29,6 @@ import '../bloc/item/item_bloc.dart';
 import '../widgets/item/claim_status_button.dart';
 import '../widgets/item/image_item.dart';
 import '../widgets/item/info_item.dart';
-import '../widgets/notifications/circular_image_avatar.dart';
 
 class ItemScreen extends StatelessWidget {
   final int itemId;
@@ -328,11 +328,9 @@ class ItemScreen extends StatelessWidget {
                                 ImageDialogWidget(
                                   token: token,
                                   imageUrl: userUrl,
-                                  errorImage: Image.asset(
-                                    noUserImagePath,
-                                    fit: BoxFit.cover,
-                                  ),
+                                  errorImage: noUserImagePath,
                                   child: CircularImage(
+                                    errorImage: noUserImagePath,
                                     imageUrl: userUrl,
                                     radius: 25,
                                     token: token,
@@ -629,6 +627,7 @@ class ItemScreen extends StatelessWidget {
                                 imageUrl: userUrl,
                                 radius: 25,
                                 token: token,
+                                errorImage: noUserImagePath,
                               ),
                               const SizedBox(
                                 width: 5,

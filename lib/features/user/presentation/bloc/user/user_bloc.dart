@@ -30,13 +30,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   final SecureStorage _secureStorage;
   final UploadUserImageUseCase _uploadUserImageUseCase;
 
-  UserBloc(
-      {required GetUserInfoUseCase getUserInfoUseCase,
-      required UploadUserImageUseCase uploadUserImageUseCase,
-      required LogoutUseCase logoutUseCase,
-      required LogoutChatUseCase logoutChatUseCase,
-      required SecureStorage secureStorage})
-      : _getUserInfoUseCase = getUserInfoUseCase,
+  UserBloc({
+    required GetUserInfoUseCase getUserInfoUseCase,
+    required UploadUserImageUseCase uploadUserImageUseCase,
+    required LogoutUseCase logoutUseCase,
+    required LogoutChatUseCase logoutChatUseCase,
+    required SecureStorage secureStorage,
+  })  : _getUserInfoUseCase = getUserInfoUseCase,
         _logoutUseCase = logoutUseCase,
         _uploadUserImageUseCase = uploadUserImageUseCase,
         _logoutChatUseCase = logoutChatUseCase,
@@ -86,11 +86,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     final session = await _secureStorage.getSessionInformation();
 
-    if(Platform.isAndroid) {
+    if (Platform.isAndroid) {
       final lastPickedImageAction = await _secureStorage.getLastPickingOperation();
       final lastPickedData = await ImagePicker().retrieveLostData();
 
-      if(lastPickedImageAction != null && lastPickedImageAction == ImagePick.user.name && lastPickedData.file != null) {
+      if (lastPickedImageAction != null && lastPickedImageAction == ImagePick.user.name && lastPickedData.file != null) {
         // Try to directly upload the image
         _onImageChanged(emit, lastPickedData.file!.path);
       }
@@ -106,6 +106,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   Future<void> _onImageChanged(Emitter<UserState> emit, String? path) async {
+    emit(state.copyWith(isLoadingImage: true));
+
     Either<Failure, Success>? imgFailureOrSuccess;
 
     if (path != null) {
@@ -124,11 +126,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     emit(state.copyWith(
         imageUploadFailureOrSuccess: imgFailureOrSuccess,
         imagePath: imgFailureOrSuccess != null && imgFailureOrSuccess.isLeft() ? null : path,
+        isLoadingImage: false,
         user: state.user == null
             ? null
             : User(
                 id: state.user!.id,
-                username: state.user!.username,)));
+                username: state.user!.username,
+              )));
     emit(state.copyWith(imageUploadFailureOrSuccess: null));
   }
 }

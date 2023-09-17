@@ -136,10 +136,10 @@ class InsertItemBloc extends Bloc<InsertItemEvent, InsertItemState> {
         final imgFailureOrSuccess = await _uploadItemImageUseCase(params);
         imgFailureOrSuccess.fold(
             (failure) => imageFailureOrSuccess = Left(failure), (success) => imageFailureOrSuccess = Right(success));
-      }
 
-      if (imageFailureOrSuccess!.isRight()) {
-        _storage.saveLastPickingOperation(ImagePick.nothing.name);
+        if (imgFailureOrSuccess.isRight()) {
+          _storage.saveLastPickingOperation(ImagePick.nothing.name);
+        }
       }
     }
 
