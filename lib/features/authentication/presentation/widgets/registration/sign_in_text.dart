@@ -9,8 +9,10 @@ class SignInText extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(AppLocalizations.of(context)!.signInText),
-        Expanded(
+        Flexible(
+          flex: 2,
+          child: Text(AppLocalizations.of(context)!.signInText)),
+        Flexible(
           child: TextButton(
             onPressed: () {
               Navigator.pushReplacementNamed(context, '/login');

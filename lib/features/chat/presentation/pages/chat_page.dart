@@ -167,7 +167,7 @@ class ChatScreen extends StatelessWidget {
                             inputBackgroundColor: Theme.of(context).colorScheme.background,
                             inputTextColor: Theme.of(context).colorScheme.onBackground,
                             backgroundColor: Theme.of(context).colorScheme.background,
-                            inputMargin: const EdgeInsets.fromLTRB(5, 5, 5, 10),
+                            inputMargin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                           ),
                           messages: snapshot.data ?? [],
                           onSendPressed: (message) => ctx.read<chat.ChatBloc>().add(chat.ChatEvent.messageSent(message)),

@@ -154,6 +154,7 @@ class _Application extends State<App> {
               ColorScheme darkScheme = darkColorScheme;
 
               return MaterialApp(
+                debugShowCheckedModeBanner: false,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: AppLocalizations.supportedLocales,
                 locale: state.locale,

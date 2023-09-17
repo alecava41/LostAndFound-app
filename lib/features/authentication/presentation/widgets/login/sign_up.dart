@@ -9,8 +9,8 @@ class SignUpText extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(AppLocalizations.of(context)!.signUpText),
-        Expanded(
+        Flexible(child: Text(AppLocalizations.of(context)!.signUpText)),
+        Flexible(
           child: TextButton(
             style: TextButton.styleFrom(
               padding: EdgeInsets.zero
