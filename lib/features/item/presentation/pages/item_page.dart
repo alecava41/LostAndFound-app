@@ -423,7 +423,7 @@ class ItemScreen extends StatelessWidget {
                       ),
                     )
                   : CustomScrollableNewsListView(
-                      newsList: (news + news + news)
+                      newsList: news
                           .map(
                             (news) => CustomCardNews(
                               token: token,

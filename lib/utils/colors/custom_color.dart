@@ -13,21 +13,23 @@ CustomColors lightCustomColors = const CustomColors(
   splashGreyColor: Color.fromARGB(255, 158, 158, 158),
   secondaryTextColor: Colors.black54,
   background2: Colors.white,
+  successSnackbar: Colors.green,
 );
 
 CustomColors darkCustomColors = const CustomColors(
-  borderColorNotOpened: Color.fromRGBO(28, 136, 111, 1),
-  borderColorOpened: Colors.black26,
-  claimAcceptedStatusColor: Color.fromRGBO(0, 135, 23, 0.8),
-  claimWaitingStatusColor: Color.fromRGBO(219, 115, 24, 1),
-  claimDeniedStatusColor: Color.fromRGBO(240, 66, 63, 0.637),
-  nClaimsColor: Color.fromRGBO(219, 115, 24, 1),
-  notOpenedColor: Color.fromRGBO(28, 136, 111, 0.3),
-  openedColor: Color.fromRGBO(41, 43, 41, 1),
-  splashGreenColor: Color.fromRGBO(28, 136, 111, 0.6),
-  splashGreyColor: Color.fromARGB(255, 158, 158, 158),
-  secondaryTextColor: Colors.white70,
-  background2: Color.fromRGBO(42, 46, 44, 1)
+    borderColorNotOpened: Color.fromRGBO(28, 136, 111, 1),
+    borderColorOpened: Colors.black26,
+    claimAcceptedStatusColor: Color.fromRGBO(0, 135, 23, 0.8),
+    claimWaitingStatusColor: Color.fromRGBO(219, 115, 24, 1),
+    claimDeniedStatusColor: Color.fromRGBO(240, 66, 63, 0.637),
+    nClaimsColor: Color.fromRGBO(219, 115, 24, 1),
+    notOpenedColor: Color.fromRGBO(28, 136, 111, 0.3),
+    openedColor: Color.fromRGBO(41, 43, 41, 1),
+    splashGreenColor: Color.fromRGBO(28, 136, 111, 0.6),
+    splashGreyColor: Color.fromARGB(255, 158, 158, 158),
+    secondaryTextColor: Colors.white70,
+    background2: Color.fromRGBO(42, 46, 44, 1),
+    successSnackbar: Colors.green,
 );
 
 /// Defines a set of custom colors, each comprised of 4 complementary tones.
@@ -48,39 +50,40 @@ class CustomColors extends ThemeExtension<CustomColors> {
   final Color? secondaryTextColor;
   final Color? borderColorNotOpened;
   final Color? background2;
+  final Color? successSnackbar;
 
-  const CustomColors({
-    required this.nClaimsColor,
-    required this.claimWaitingStatusColor,
-    required this.claimAcceptedStatusColor,
-    required this.claimDeniedStatusColor,
-    required this.splashGreyColor,
-    required this.splashGreenColor,
-    required this.notOpenedColor,
-    required this.openedColor,
-    required this.borderColorOpened,
-    required this.secondaryTextColor,
-    required this.borderColorNotOpened,
-    required this.background2,
-  });
+  const CustomColors(
+      {required this.nClaimsColor,
+      required this.claimWaitingStatusColor,
+      required this.claimAcceptedStatusColor,
+      required this.claimDeniedStatusColor,
+      required this.splashGreyColor,
+      required this.splashGreenColor,
+      required this.notOpenedColor,
+      required this.openedColor,
+      required this.borderColorOpened,
+      required this.secondaryTextColor,
+      required this.borderColorNotOpened,
+      required this.background2,
+      required this.successSnackbar});
 
   @override
-  CustomColors copyWith({
-    Color? nClaimsColor,
-    Color? claimWaitingStatusColor,
-    Color? claimAcceptedStatusColor,
-    Color? claimDeniedStatusColor,
-    Color? splashGreyColor,
-    Color? splashGreenColor,
-    Color? notOpenedColor,
-    Color? openedColor,
-    Color? borderColorOpened,
-    Color? secondaryTextColor,
-    Color? borderColorNotOpened,
-    Color? buttonPressed,
-    Color? statusBarDefaultColor,
-    Color? background2
-  }) {
+  CustomColors copyWith(
+      {Color? nClaimsColor,
+      Color? claimWaitingStatusColor,
+      Color? claimAcceptedStatusColor,
+      Color? claimDeniedStatusColor,
+      Color? splashGreyColor,
+      Color? splashGreenColor,
+      Color? notOpenedColor,
+      Color? openedColor,
+      Color? borderColorOpened,
+      Color? secondaryTextColor,
+      Color? borderColorNotOpened,
+      Color? buttonPressed,
+      Color? statusBarDefaultColor,
+      Color? background2,
+      Color? successSnackbar}) {
     return CustomColors(
       nClaimsColor: nClaimsColor ?? this.nClaimsColor,
       claimWaitingStatusColor: claimWaitingStatusColor ?? this.claimWaitingStatusColor,
@@ -94,6 +97,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
       secondaryTextColor: secondaryTextColor ?? this.secondaryTextColor,
       borderColorNotOpened: borderColorNotOpened ?? this.borderColorNotOpened,
       background2: background2 ?? this.background2,
+      successSnackbar: successSnackbar ?? this.successSnackbar,
     );
   }
 
@@ -115,6 +119,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
       secondaryTextColor: Color.lerp(secondaryTextColor, other.secondaryTextColor, t),
       borderColorNotOpened: Color.lerp(borderColorNotOpened, other.borderColorNotOpened, t),
       background2: Color.lerp(background2, other.background2, t),
+      successSnackbar: Color.lerp(successSnackbar, other.successSnackbar, t),
     );
   }
 
