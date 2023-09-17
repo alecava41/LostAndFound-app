@@ -55,6 +55,7 @@ class ClaimsScreen extends StatelessWidget {
                         child: Text(
                           AppLocalizations.of(context)!.receivedClaims,
                           overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
                           style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
                         ),
                       ),
@@ -75,7 +76,10 @@ class ClaimsScreen extends StatelessWidget {
                         child: Text(
                           AppLocalizations.of(context)!.yourClaims,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onBackground,
+                          ),
                         ),
                       ),
                     ],
