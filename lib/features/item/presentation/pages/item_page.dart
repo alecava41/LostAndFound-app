@@ -272,7 +272,7 @@ class ItemScreen extends StatelessWidget {
                                   ),
                                   child: Text(
                                     AppLocalizations.of(context)!.itemMenu3,
-                                    style: TextStyle(color: Theme.of(context).colorScheme.error),
+                                    style: TextStyle(color: Theme.of(context).colorScheme.onError),
                                   ),
                                 ),
                               ),
